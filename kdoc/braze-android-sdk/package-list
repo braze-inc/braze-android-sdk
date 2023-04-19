@@ -535,6 +535,7 @@ $dokka.location:com.braze.events/FeedUpdatedEvent/lastUpdatedInSecondsFromEpoch/
 $dokka.location:com.braze.events/FeedUpdatedEvent/toString/#/PointingToDeclaration/braze-android-sdk/com.braze.events/-feed-updated-event/to-string.html
 $dokka.location:com.braze.events/IEventSubscriber///PointingToDeclaration/braze-android-sdk/com.braze.events/-i-event-subscriber/index.html
 $dokka.location:com.braze.events/IEventSubscriber/trigger/#TypeParam(bounds=[kotlin.Any?])/PointingToDeclaration/braze-android-sdk/com.braze.events/-i-event-subscriber/trigger.html
+$dokka.location:com.braze.events/IFireOnceEventSubscriber///PointingToDeclaration/braze-android-sdk/com.braze.events/-i-fire-once-event-subscriber/index.html
 $dokka.location:com.braze.events/IValueCallback///PointingToDeclaration/braze-android-sdk/com.braze.events/-i-value-callback/index.html
 $dokka.location:com.braze.events/IValueCallback/onError/#/PointingToDeclaration/braze-android-sdk/com.braze.events/-i-value-callback/on-error.html
 $dokka.location:com.braze.events/IValueCallback/onSuccess/#TypeParam(bounds=[kotlin.Any?])/PointingToDeclaration/braze-android-sdk/com.braze.events/-i-value-callback/on-success.html
@@ -1291,6 +1292,7 @@ $dokka.location:com.braze.support/BrazeLogger/brazelog/kotlin.Any#com.braze.supp
 $dokka.location:com.braze.support/BrazeLogger/checkForSystemLogLevelProperty/#kotlin.Boolean/PointingToDeclaration/braze-android-sdk/com.braze.support/-braze-logger/check-for-system-log-level-property.html
 $dokka.location:com.braze.support/BrazeLogger/d/#kotlin.String#kotlin.String#kotlin.Throwable?/PointingToDeclaration/braze-android-sdk/com.braze.support/-braze-logger/d.html
 $dokka.location:com.braze.support/BrazeLogger/e/#kotlin.String#kotlin.String#kotlin.Throwable/PointingToDeclaration/braze-android-sdk/com.braze.support/-braze-logger/e.html
+$dokka.location:com.braze.support/BrazeLogger/enableVerboseLogging/#/PointingToDeclaration/braze-android-sdk/com.braze.support/-braze-logger/enable-verbose-logging.html
 $dokka.location:com.braze.support/BrazeLogger/getBrazeLogTag/#java.lang.Class[*]/PointingToDeclaration/braze-android-sdk/com.braze.support/-braze-logger/get-braze-log-tag.html
 $dokka.location:com.braze.support/BrazeLogger/getBrazeLogTag/kotlin.String#/PointingToDeclaration/braze-android-sdk/com.braze.support/-braze-logger/get-braze-log-tag.html
 $dokka.location:com.braze.support/BrazeLogger/i/#kotlin.String#kotlin.String#kotlin.Throwable?/PointingToDeclaration/braze-android-sdk/com.braze.support/-braze-logger/i.html
@@ -2077,6 +2079,7 @@ $dokka.location:com.braze/Braze/getContentCardCount/#/PointingToDeclaration/bra
 $dokka.location:com.braze/Braze/getContentCardUnviewedCount/#/PointingToDeclaration/braze-android-sdk/com.braze/-braze/get-content-card-unviewed-count.html
 $dokka.location:com.braze/Braze/getContentCardsLastUpdatedInSecondsFromEpoch/#/PointingToDeclaration/braze-android-sdk/com.braze/-braze/get-content-cards-last-updated-in-seconds-from-epoch.html
 $dokka.location:com.braze/Braze/getCurrentUser/#com.braze.events.IValueCallback[com.braze.BrazeUser]/PointingToDeclaration/braze-android-sdk/com.braze/-braze/get-current-user.html
+$dokka.location:com.braze/Braze/getDeviceIdAsync/#com.braze.events.IValueCallback[kotlin.String]/PointingToDeclaration/braze-android-sdk/com.braze/-braze/get-device-id-async.html
 $dokka.location:com.braze/Braze/getFeatureFlag/#kotlin.String/PointingToDeclaration/braze-android-sdk/com.braze/-braze/get-feature-flag.html
 $dokka.location:com.braze/Braze/imageLoader/#/PointingToDeclaration/braze-android-sdk/com.braze/-braze/image-loader.html
 $dokka.location:com.braze/Braze/logCustomEvent/#kotlin.String?#com.braze.models.outgoing.BrazeProperties?/PointingToDeclaration/braze-android-sdk/com.braze/-braze/log-custom-event.html
@@ -2293,6 +2296,7 @@ $dokka.location:com.braze/IBraze/getContentCardCount/#/PointingToDeclaration/br
 $dokka.location:com.braze/IBraze/getContentCardUnviewedCount/#/PointingToDeclaration/braze-android-sdk/com.braze/-i-braze/get-content-card-unviewed-count.html
 $dokka.location:com.braze/IBraze/getContentCardsLastUpdatedInSecondsFromEpoch/#/PointingToDeclaration/braze-android-sdk/com.braze/-i-braze/get-content-cards-last-updated-in-seconds-from-epoch.html
 $dokka.location:com.braze/IBraze/getCurrentUser/#com.braze.events.IValueCallback[com.braze.BrazeUser]/PointingToDeclaration/braze-android-sdk/com.braze/-i-braze/get-current-user.html
+$dokka.location:com.braze/IBraze/getDeviceIdAsync/#com.braze.events.IValueCallback[kotlin.String]/PointingToDeclaration/braze-android-sdk/com.braze/-i-braze/get-device-id-async.html
 $dokka.location:com.braze/IBraze/getFeatureFlag/#kotlin.String/PointingToDeclaration/braze-android-sdk/com.braze/-i-braze/get-feature-flag.html
 $dokka.location:com.braze/IBraze/getInstallTrackingId/#/PointingToDeclaration/braze-android-sdk/com.braze/-i-braze/get-install-tracking-id.html
 $dokka.location:com.braze/IBraze/imageLoader/#/PointingToDeclaration/braze-android-sdk/com.braze/-i-braze/image-loader.html
