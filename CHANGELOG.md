@@ -15,6 +15,7 @@ Our SDK is now hosted in Maven Central. You can remove `https://braze-inc.github
       // Only fires once
   })
   ```
+- Updated `BrazeUser.setCustomUserAttribute()` to now accept nested custom attributes and arrays of objects. Please see our [public docs](https://www.braze.com/docs/user_guide/data_and_analytics/custom_data/custom_attributes/array_of_objects/#usage-examples) for more information.
 
 ## 24.3.0
 
