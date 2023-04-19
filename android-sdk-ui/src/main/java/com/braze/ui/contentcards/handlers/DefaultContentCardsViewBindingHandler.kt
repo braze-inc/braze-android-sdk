@@ -17,7 +17,7 @@ import com.braze.ui.contentcards.view.ShortNewsContentCardView
 import com.braze.ui.contentcards.view.TextAnnouncementContentCardView
 import java.util.*
 
-class DefaultContentCardsViewBindingHandler : IContentCardsViewBindingHandler {
+open class DefaultContentCardsViewBindingHandler : IContentCardsViewBindingHandler {
     /**
      * A cache for the views used in binding the items in the [RecyclerView].
      */

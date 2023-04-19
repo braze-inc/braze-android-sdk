@@ -329,7 +329,7 @@ class DroidboyApplication : Application() {
 
             if (specialTabFlag.enabled) {
                 val imageUrl = specialTabFlag.getStringProperty("image_url")
-                    ?: "https://raw.githubusercontent.com/Appboy/appboy-android-sdk/master/braze-logo.png"
+                    ?: "https://raw.githubusercontent.com/Appboy/braze-android-sdk/master/braze-logo.png"
                 val title = specialTabFlag.getStringProperty("helpful_title") ?: "title"
                 val desc = specialTabFlag.getStringProperty("helpful_description") ?: "description"
                 val card = ContentCardsTestingUtil.createCaptionedImageCardJson(specialTabFlag.id, title, desc, imageUrl)

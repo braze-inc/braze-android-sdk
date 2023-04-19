@@ -90,6 +90,12 @@
       android:key="data_flush"
       android:title="@string/data_flush_title" />
     <Preference
+      android:key="request_cc_sync"
+      android:title="Request Content Card Sync" />
+    <Preference
+      android:key="request_ff_sync"
+      android:title="Request Feature Flag Sync" />
+    <Preference
       android:key="enable_outbound_network_requests"
       android:title="Re-Enable Outbound Network Requests" />
     <Preference

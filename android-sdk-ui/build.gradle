@@ -2,7 +2,7 @@ apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 
 dependencies {
-  api "com.appboy:android-sdk-base:${BRAZE_SDK_VERSION}"
+  api "com.braze:android-sdk-base:${BRAZE_SDK_VERSION}"
   compileOnly "com.google.android.material:material:${GOOGLE_MATERIAL_VERSION}"
 
   implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:${KOTLIN_COROUTINES_VERSION}"

@@ -6,8 +6,6 @@
 #
 # For more details, see
 #   http://developer.android.com/guide/developing/tools/proguard.html
-#
-# See https://github.com/Appboy/appboy-android-sdk/issues/49
 -keepnames class com.braze.ui.** { *; }
 -keepnames class com.braze.** { *; }
 -keepnames class bo.app.** { *; }

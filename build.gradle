@@ -22,17 +22,17 @@ ext {
   buildToolsVersion = '33.0.0'
   minSdkVersion = 16
   targetSdkVersion = 33
-  appVersionName = '24.3.0'
+  appVersionName = '25.0.0'
 }
 
 subprojects {
   repositories {
-    maven { url "https://appboy.github.io/appboy-android-sdk/sdk" }
+    maven { url "https://braze-inc.github.io/braze-android-sdk/sdk" }
     mavenLocal()
     google()
     mavenCentral()
   }
 
-  group = 'com.appboy'
-  version = '24.3.0'
+  group = 'com.braze'
+  version = '25.0.0'
 }

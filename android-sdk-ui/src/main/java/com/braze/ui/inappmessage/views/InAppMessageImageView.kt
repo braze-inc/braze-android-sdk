@@ -18,7 +18,7 @@ import kotlin.math.min
  * types.
  */
 @SuppressLint("AppCompatCustomView")
-class InAppMessageImageView(context: Context?, attrs: AttributeSet?) :
+open class InAppMessageImageView(context: Context?, attrs: AttributeSet?) :
     ImageView(context, attrs),
     IInAppMessageImageView {
     /**

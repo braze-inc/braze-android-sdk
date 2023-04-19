@@ -19,7 +19,7 @@ import kotlin.math.max
 import kotlin.math.min
 
 @Suppress("TooManyFunctions")
-class ContentCardAdapter(
+open class ContentCardAdapter(
     private val context: Context,
     private val layoutManager: LinearLayoutManager,
     private val cardData: MutableList<Card>,

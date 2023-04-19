@@ -6,7 +6,7 @@ import com.braze.events.ContentCardsUpdatedEvent
 import com.braze.models.cards.Card
 import com.braze.ui.actions.brazeactions.containsInvalidBrazeAction
 
-class DefaultContentCardsUpdateHandler : IContentCardsUpdateHandler {
+open class DefaultContentCardsUpdateHandler : IContentCardsUpdateHandler {
     override fun handleCardUpdate(event: ContentCardsUpdatedEvent): List<Card> {
         // Sort by pinned, then by the 'updated' timestamp descending
         // Pinned before non-pinned

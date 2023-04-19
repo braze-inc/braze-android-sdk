@@ -1,4 +1,4 @@
-![Braze Logo](https://github.com/Appboy/appboy-android-sdk/blob/master/braze-logo.png)
+![Braze Logo](https://github.com/braze-inc/braze-android-sdk/blob/master/braze-logo.png)
 
 # Android SDK
 
@@ -6,8 +6,7 @@ Successful marketing automation is essential to the future of your mobile app. B
 
 - [Braze User Guide](https://www.braze.com/docs/user_guide/introduction/ "Braze User Guide")
 - [Braze Developer Guide](https://www.braze.com/docs/developer_guide/platform_integration_guides/android/initial_sdk_setup/android_sdk_integration/ "Braze Developer Guide")
-- [KDoc](https://appboy.github.io/appboy-android-sdk/kdoc/ "Braze Android SDK Class Documentation")
-- [Javadoc(old)](https://appboy.github.io/appboy-android-sdk/javadocs/ "Braze Android SDK Class Documentation"). This Javadoc is discontinued. For up-to-date documentation, please visit the Kotlin Doc (KDoc) instead.
+- [KDoc](https://braze-inc.github.io/braze-android-sdk/kdoc/ "Braze Android SDK Class Documentation")
 
 ## Version Information
 
@@ -29,26 +28,19 @@ Successful marketing automation is essential to the future of your mobile app. B
 ## Remote repository for gradle
 The version should match the git version tag, or the most recent version noted in the changelog. An example dependency declaration is:
 
-```
-allprojects {
-  repositories {
-    maven { url "https://appboy.github.io/appboy-android-sdk/sdk" }
-    ...
-  }
-}
-```
+Our SDK is now hosted in Maven Central. You can remove `https://braze-inc.github.io/braze-android-sdk/sdk` from your build.gradle and make sure you have `mavenCentral()` as a repository.
 
 ```
 dependencies {
-  implementation 'com.appboy:android-sdk-ui:24.3.+'
-  implementation 'com.appboy:android-sdk-location:24.3.+'
+  implementation 'com.braze:android-sdk-ui:25.0.+'
+  implementation 'com.braze:android-sdk-location:25.0.+'
   ...
 }
 ```
 
 ## Installing android-sdk-ui to Your Local Maven Repository
 To install the UI library as an AAR file to your local maven repository, run the `install` task with
-`./gradlew install`. You can reference it with groupId `com.appboy` and artifactId `android-sdk-ui`. The version should
+`./gradlew install`. You can reference it with groupId `com.braze` and artifactId `android-sdk-ui`. The version should
 match the git version tag, or the most recent version noted in the changelog. An example dependency declaration is:
 
 ```
@@ -60,7 +52,7 @@ repositories {
 
 ```
 dependencies {
-  implementation 'com.appboy:android-sdk-ui:24.3.+'
+  implementation 'com.braze:android-sdk-ui:25.0.+'
 }
 ```
 

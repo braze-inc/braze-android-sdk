@@ -316,6 +316,14 @@ class SettingsFragment : PreferenceFragmentCompat() {
             Braze.getInstance(context).requestImmediateDataFlush()
             showToast(getString(R.string.data_flush_toast))
         }
+        setClickPreference("request_cc_sync") {
+            Braze.getInstance(context).requestContentCardsRefresh(fromCache = false)
+            showToast(getString(R.string.data_flush_toast))
+        }
+        setClickPreference("request_ff_sync") {
+            Braze.getInstance(context).refreshFeatureFlags()
+            showToast(getString(R.string.data_flush_toast))
+        }
     }
 
     private fun setGdprPrefs(context: Context) {

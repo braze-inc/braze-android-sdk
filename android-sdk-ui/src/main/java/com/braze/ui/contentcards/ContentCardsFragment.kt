@@ -13,7 +13,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.SimpleItemAnimator
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-import com.braze.ui.R
 import com.braze.Braze
 import com.braze.coroutine.BrazeCoroutineScope
 import com.braze.events.ContentCardsUpdatedEvent
@@ -23,6 +22,7 @@ import com.braze.events.SdkDataWipeEvent
 import com.braze.support.BrazeLogger.Priority.I
 import com.braze.support.BrazeLogger.Priority.V
 import com.braze.support.BrazeLogger.brazelog
+import com.braze.ui.R
 import com.braze.ui.contentcards.adapters.ContentCardAdapter
 import com.braze.ui.contentcards.adapters.EmptyContentCardsAdapter
 import com.braze.ui.contentcards.handlers.DefaultContentCardsUpdateHandler

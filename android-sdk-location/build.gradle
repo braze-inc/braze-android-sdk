@@ -2,7 +2,7 @@ apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 
 dependencies {
-    api "com.appboy:android-sdk-base:${BRAZE_SDK_VERSION}"
+    api "com.braze:android-sdk-base:${BRAZE_SDK_VERSION}"
     compileOnly "androidx.annotation:annotation:${ANDROIDX_ANNOTATIONS_VERSION}"
     implementation "org.jetbrains.kotlin:kotlin-stdlib:${KOTLIN_VERSION}"
     implementation "com.google.android.gms:play-services-location:${PLAY_SERVICES_LOCATION_VERSION}"

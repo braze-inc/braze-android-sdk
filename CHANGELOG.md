@@ -1,6 +1,24 @@
+## 25.0.0
+
+[Release Date](https://github.com/braze-inc/braze-android-sdk/releases/tag/v25.0.0)
+
+### Important
+
+Our SDK is now hosted in Maven Central. You can remove `https://braze-inc.github.io/braze-android-sdk/sdk` from your build.gradle and make sure you have `mavenCentral()` as a repository.
+
+##### Added
+- Added `BrazeLogger.enableVerboseLogging()` to more easily enable verbose logs.
+- Added `Braze.getDeviceIdAsync()` which allows for asynchronously retrieving the Braze device identifier.
+- Added `com.braze.events.IFireOnceEventSubscriber` to provide the ability to listen to Braze updates with a fire-only-once guarantee.
+  ```kotlin
+  Braze.getInstance(context).subscribeToContentCardsUpdates(IFireOnceEventSubscriber {
+      // Only fires once
+  })
+  ```
+
 ## 24.3.0
 
-[Release Date](https://github.com/Appboy/appboy-android-sdk/releases/tag/v24.3.0)
+[Release Date](https://github.com/braze-inc/braze-android-sdk/releases/tag/v24.3.0)
 
 ##### Fixed
 - Fixed an issue where the SDK would attempt to to access the visual service WindowManager from non-visual contexts, resulting in benign StrictMode errors.
@@ -13,7 +31,7 @@
 
 ## 24.2.0
 
-[Release Date](https://github.com/Appboy/appboy-android-sdk/releases/tag/v24.2.0)
+[Release Date](https://github.com/braze-inc/braze-android-sdk/releases/tag/v24.2.0)
 
 ##### Added
 - Added support for the upcoming Braze Feature Flags product.
@@ -26,14 +44,14 @@
 
 ## 24.1.0
 
-[Release Date](https://github.com/Appboy/appboy-android-sdk/releases/tag/v24.1.0)
+[Release Date](https://github.com/braze-inc/braze-android-sdk/releases/tag/v24.1.0)
 
 ##### Added
 - Added `BrazeActivityLifecycleCallbackListener.registerOnApplication()` which allows for registering the lifecycle callback listener from any `Context`.
 
 ## 24.0.0
 
-[Release Date](https://github.com/Appboy/appboy-android-sdk/releases/tag/v24.0.0)
+[Release Date](https://github.com/braze-inc/braze-android-sdk/releases/tag/v24.0.0)
 
 #### Breaking
 - Location and geofence functionality has moved to a new module called `com.braze:android-sdk-location`. Add this module to your `build.gradle` if you are using Braze location functionality.
@@ -67,7 +85,7 @@
 
 ## 23.3.0
 
-[Release Date](https://github.com/Appboy/appboy-android-sdk/releases/tag/v23.3.0)
+[Release Date](https://github.com/braze-inc/braze-android-sdk/releases/tag/v23.3.0)
 
 ##### Fixed
 - Fixed the behavior of the Braze HTML In-App Message bridge method `requestPushPermission()` to not cause the in-app message to reload.
@@ -79,14 +97,14 @@
 
 ## 23.2.1
 
-[Release Date](https://github.com/Appboy/appboy-android-sdk/releases/tag/v23.2.1)
+[Release Date](https://github.com/braze-inc/braze-android-sdk/releases/tag/v23.2.1)
 
 ##### Fixed
 - Fixed the fields of `DefaultInAppMessageViewWrapper` to be `open`, allowing them to be subclassed in Kotlin properly.
 
 ## 23.2.0
 
-[Release Date](https://github.com/Appboy/appboy-android-sdk/releases/tag/v23.2.0)
+[Release Date](https://github.com/braze-inc/braze-android-sdk/releases/tag/v23.2.0)
 
 ##### Fixed
 - Fixed the fields of `DefaultInAppMessageViewWrapper` to be `protected`, allowing them to be subclassed.
@@ -95,7 +113,7 @@
 ##### Added
 - Added a config field `BrazeConfig.setIsHtmlInAppMessageApplyWindowInsetsEnabled()` to configure the SDK to automatically apply window insets to HTML In-App messages.
   - By default, this value is false.
-- Added [`subscribeToNoMatchingTriggerForEvent`](https://appboy.github.io/appboy-android-sdk/kdoc/braze-android-sdk/com.braze/-braze/subscribe-to-no-matching-trigger-for-event.html) which is called if no Braze in-app message was triggered for a given event.
+- Added [`subscribeToNoMatchingTriggerForEvent`](https://braze-inc.github.io/braze-android-sdk/kdoc/braze-android-sdk/com.braze/-braze/subscribe-to-no-matching-trigger-for-event.html) which is called if no Braze in-app message was triggered for a given event.
 
 ##### Changed
 - Removed `com.appboy.ui.inappmessage.listeners.IInAppMessageWebViewClientListener`. Please use `com.braze.ui.inappmessage.listeners.IInAppMessageWebViewClientListener`.
@@ -103,21 +121,21 @@
 
 ## 23.1.2
 
-[Release Date](https://github.com/Appboy/appboy-android-sdk/releases/tag/v23.1.2)
+[Release Date](https://github.com/braze-inc/braze-android-sdk/releases/tag/v23.1.2)
 
 ##### Changed
 - Removed the use of the Kotlin Coroutines method `limitedParallelism()`.
 
 ## 23.1.1
 
-[Release Date](https://github.com/Appboy/appboy-android-sdk/releases/tag/v23.1.1)
+[Release Date](https://github.com/braze-inc/braze-android-sdk/releases/tag/v23.1.1)
 
 ##### Fixed
 - Fixed the `DefaultInAppMessageViewWrapper` to be Kotlin open, allowing it to be subclassed.
 
 ## 23.1.0
 
-[Release Date](https://github.com/Appboy/appboy-android-sdk/releases/tag/v23.1.0)
+[Release Date](https://github.com/braze-inc/braze-android-sdk/releases/tag/v23.1.0)
 
 ##### Added
 - Added more reliable HTML In-App Message focusing specifically for TV environments. To use this behavior please set `com.braze.configuration.BrazeConfig.Builder.setIsTouchModeRequiredForHtmlInAppMessages` to `false`.
@@ -126,7 +144,7 @@
 
 ## 23.0.1
 
-[Release Date](https://github.com/Appboy/appboy-android-sdk/releases/tag/v23.0.1)
+[Release Date](https://github.com/braze-inc/braze-android-sdk/releases/tag/v23.0.1)
 
 ##### Fixed
 - Fixed an issue where `BaseCardView` would sometimes have the wrong size for a given image.
@@ -136,7 +154,7 @@
 
 ## 23.0.0
 
-[Release Date](https://github.com/Appboy/appboy-android-sdk/releases/tag/v23.0.0)
+[Release Date](https://github.com/braze-inc/braze-android-sdk/releases/tag/v23.0.0)
 
 #### Breaking
 - `BaseContentCardView.bindViewHolder()` now takes `Card` instead of generic type.
@@ -149,7 +167,7 @@
 
 ## 22.0.0
 
-[Release Date](https://github.com/Appboy/appboy-android-sdk/releases/tag/v22.0.0)
+[Release Date](https://github.com/braze-inc/braze-android-sdk/releases/tag/v22.0.0)
 
 #### Breaking
 - `Appboy.java` is now `Braze.kt`. Kotlin clients will need to update their code to support the use of Kotlin properties on the Braze singleton where needed.
@@ -179,7 +197,7 @@
 
 ## 21.0.0
 
-[Release Date](https://github.com/Appboy/appboy-android-sdk/releases/tag/v21.0.0)
+[Release Date](https://github.com/braze-inc/braze-android-sdk/releases/tag/v21.0.0)
 
 ##### Important
 - This release includes support for Android 13 (Tiramisu / API 33).
@@ -192,7 +210,7 @@
 
 ## 20.0.0
 
-[Release Date](https://github.com/Appboy/appboy-android-sdk/releases/tag/v20.0.0)
+[Release Date](https://github.com/braze-inc/braze-android-sdk/releases/tag/v20.0.0)
 
 #### Breaking
 - Changed `BrazeNotificationStyleFactory` to remove deprecated functions.
@@ -234,7 +252,7 @@
   }
 ```
 
-[Release Date](https://github.com/Appboy/appboy-android-sdk/releases/tag/v19.0.0)
+[Release Date](https://github.com/braze-inc/braze-android-sdk/releases/tag/v19.0.0)
 
 ##### ⚠ Breaking
 - Modified behavior of `BrazeProperties(JSONObject)` when `Date` is part of JSONObject.
@@ -268,11 +286,11 @@
 - Deprecated `APPBOY_WEBVIEW_URL_EXTRA`. Please use `BRAZE_WEBVIEW_URL_EXTRA` instead.
 - Changed the SDK to not wake the screens of `Configuration.UI_MODE_TYPE_TELEVISION` devices when receiving push notifications.
   - These screen types will not be awoken even if `isPushWakeScreenForNotificationEnabled()` is true and the permission `Manifest.permission.WAKE_LOCK` is granted.
-  - Special thanks to @IanGClifton for https://github.com/Appboy/appboy-android-sdk/pull/213.
+  - Special thanks to @IanGClifton for https://github.com/braze-inc/braze-android-sdk/pull/213.
 
 ## 18.0.1
 
-[Release Date](https://github.com/Appboy/appboy-android-sdk/releases/tag/v18.0.1)
+[Release Date](https://github.com/braze-inc/braze-android-sdk/releases/tag/v18.0.1)
 
 ##### Fixed
 - Fixed an issue introduced in 17.0.0 where some HTML In-App Message zip asset files containing hidden `__MACOSX` folders without a corresponding entry for that folder would cause the in-app message to fail to display.
@@ -291,7 +309,7 @@
   }
 ```
 
-[Release Date](https://github.com/Appboy/appboy-android-sdk/releases/tag/v18.0.0)
+[Release Date](https://github.com/braze-inc/braze-android-sdk/releases/tag/v18.0.0)
 
 > This version has a known issue with HTML In-App Message which was fixed in v18.0.1
  
@@ -322,7 +340,7 @@
 
 ## 17.0.0
 
-[Release Date](https://github.com/Appboy/appboy-android-sdk/releases/tag/v17.0.0)
+[Release Date](https://github.com/braze-inc/braze-android-sdk/releases/tag/v17.0.0)
 
 > This version has a known issue with HTML In-App Message which was fixed in v18.0.1
 
@@ -344,7 +362,7 @@
 
 ## 16.0.0
 
-[Release Date](https://github.com/Appboy/appboy-android-sdk/releases/tag/v16.0.0)
+[Release Date](https://github.com/braze-inc/braze-android-sdk/releases/tag/v16.0.0)
 
 ##### ⚠ Breaking
 - Removed `AppboyConfigurationProvider` in favor of `BrazeConfigurationProvider`.
@@ -365,7 +383,7 @@
 
 ## 15.0.0
 
-[Release Date](https://github.com/Appboy/appboy-android-sdk/releases/tag/v15.0.0)
+[Release Date](https://github.com/braze-inc/braze-android-sdk/releases/tag/v15.0.0)
 
 ##### Important
 - It is highly recommended to do extensive QA after updating to this release, especially for clients doing any amount of Content Card or In-App Message customizations.
@@ -425,7 +443,7 @@
 
 ## 14.0.1
 
-[Release Date](https://github.com/Appboy/appboy-android-sdk/releases/tag/v14.0.1)
+[Release Date](https://github.com/braze-inc/braze-android-sdk/releases/tag/v14.0.1)
 
 ##### Fixed
 - Fixed an issue with `BrazeProperties` not being kept via proguard rules.
@@ -436,7 +454,7 @@
 
 ## 14.0.0
 
-[Release Date](https://github.com/Appboy/appboy-android-sdk/releases/tag/v14.0.0)
+[Release Date](https://github.com/braze-inc/braze-android-sdk/releases/tag/v14.0.0)
 
 ##### ⚠ Breaking
 - Interface `IInAppMessageViewWrapperFactory` changed to use `BrazeConfigurationProvider`.
@@ -480,21 +498,21 @@
 
 ## 13.1.2
 
-[Release Date](https://github.com/Appboy/appboy-android-sdk/releases/tag/v13.1.2)
+[Release Date](https://github.com/braze-inc/braze-android-sdk/releases/tag/v13.1.2)
 
 ##### Changed
 - Changed the `NotificationTrampolineActivity` to always call `finish()` regardless of any eventual deeplink handling by the host app or SDK.
 
 ## 13.1.1
 
-[Release Date](https://github.com/Appboy/appboy-android-sdk/releases/tag/v13.1.1)
+[Release Date](https://github.com/braze-inc/braze-android-sdk/releases/tag/v13.1.1)
 
 ##### Fixed
 - Fixed an issue with the `NotificationTrampolineActivity` being opened on notification delete intents.
 
 ## 13.1.0
 
-[Release Date](https://github.com/Appboy/appboy-android-sdk/releases/tag/v13.1.0)
+[Release Date](https://github.com/braze-inc/braze-android-sdk/releases/tag/v13.1.0)
 
 ##### Changed
 - All notifications now route through `NotificationTrampolineActivity` to comply with Android 12 notification trampoline restrictions.
@@ -507,7 +525,7 @@
 
 ## 13.0.0
 
-[Release Date](https://github.com/Appboy/appboy-android-sdk/releases/tag/v13.0.0)
+[Release Date](https://github.com/braze-inc/braze-android-sdk/releases/tag/v13.0.0)
 
 ##### ⚠ Breaking
 - Moved all In-App Message buttons from `Button` to `com.appboy.ui.inappmessage.views.InAppMessageButton`.
@@ -527,7 +545,7 @@
 
 ## 12.0.0
 
-[Release Date](https://github.com/Appboy/appboy-android-sdk/releases/tag/v12.0.0)
+[Release Date](https://github.com/braze-inc/braze-android-sdk/releases/tag/v12.0.0)
 
 ##### ⚠ Breaking
 - Added `getIntentFlags` to the `IAppboyNavigator` interface to more easily allow for customizing Activity launch behavior.
@@ -549,7 +567,7 @@
 
 ## 11.0.0
 
-[Release Date](https://github.com/Appboy/appboy-android-sdk/releases/tag/v11.0.0)
+[Release Date](https://github.com/braze-inc/braze-android-sdk/releases/tag/v11.0.0)
 
 ##### ⚠ Breaking
 - Changed the behavior of new beta HTML In-App Messages with dashboard preview support (i.e. those with `MessageType.HTML` and not `MessageType.HTML_FULL`) to not automatically log analytics clicks on url follows in `IInAppMessageWebViewClientListener`.
@@ -577,7 +595,7 @@
 
 ## 10.1.0
 
-[Release Date](https://github.com/Appboy/appboy-android-sdk/releases/tag/v10.1.0)
+[Release Date](https://github.com/braze-inc/braze-android-sdk/releases/tag/v10.1.0)
 
 ##### Changed
 - Changed `AppboyWebViewActivity` to extend `FragmentActivity` for better fragment management.
@@ -593,7 +611,7 @@
 
 ## 10.0.0
 
-[Release Date](https://github.com/Appboy/appboy-android-sdk/releases/tag/v10.0.0)
+[Release Date](https://github.com/braze-inc/braze-android-sdk/releases/tag/v10.0.0)
 
 ##### ⚠ Breaking
 - The Android SDK has now fully migrated to AndroidX dependencies. No backwards compatibility is possible with the no longer maintained Android Support Library.
@@ -617,7 +635,7 @@
 
 ## 9.0.0
 
-[Release Date](https://github.com/Appboy/appboy-android-sdk/releases/tag/v9.0.0)
+[Release Date](https://github.com/braze-inc/braze-android-sdk/releases/tag/v9.0.0)
 
 ##### ⚠ Breaking
 - The Android SDK now has a source and target build compatibility set to Java 8.
@@ -640,7 +658,7 @@
 
 ## 8.1.0
 
-[Release Date](https://github.com/Appboy/appboy-android-sdk/releases/tag/v8.1.0)
+[Release Date](https://github.com/braze-inc/braze-android-sdk/releases/tag/v8.1.0)
 
 ##### Added support for Android 11 R (API 30).
 - Note that apps targeting API 30 should update to this SDK version.
@@ -695,7 +713,7 @@
 
 ## 8.0.1
 
-[Release Date](https://github.com/Appboy/appboy-android-sdk/releases/tag/v8.0.1)
+[Release Date](https://github.com/braze-inc/braze-android-sdk/releases/tag/v8.0.1)
 
 ##### Fixed
 - Fixed an Activity resolution issue in `com.appboy.ui.AppboyWebViewActivity` by removing a call to `setDownloadListener()`.
@@ -703,7 +721,7 @@
 
 ## 8.0.0
 
-[Release Date](https://github.com/Appboy/appboy-android-sdk/releases/tag/v8.0.0)
+[Release Date](https://github.com/braze-inc/braze-android-sdk/releases/tag/v8.0.0)
 
 ##### ⚠ Breaking
 * Integrators note: most of the changes listed below are on lightly used interfaces that do no affect most clients.
@@ -764,7 +782,7 @@
 
 ## 7.0.0
 
-[Release Date](https://github.com/Appboy/appboy-android-sdk/releases/tag/v7.0.0)
+[Release Date](https://github.com/braze-inc/braze-android-sdk/releases/tag/v7.0.0)
 
 ##### ⚠ Breaking
 - Made several changes to the default Content Card views to more easily customize and apply ImageView styling.
@@ -804,7 +822,7 @@
 
 ## 6.0.0
 
-[Release Date](https://github.com/Appboy/appboy-android-sdk/releases/tag/v6.0.0)
+[Release Date](https://github.com/braze-inc/braze-android-sdk/releases/tag/v6.0.0)
 
 ##### ⚠ Breaking
 - Slideup and HTML Full In-App Messages now require the device to be in touch mode at the time of display. This is enforced in their respective `IInAppMessageViewFactory` default implementations.
@@ -828,7 +846,7 @@
 
 ## 5.0.0
 
-[Release Date](https://github.com/Appboy/appboy-android-sdk/releases/tag/v5.0.0)
+[Release Date](https://github.com/braze-inc/braze-android-sdk/releases/tag/v5.0.0)
 
 ##### ⚠ Breaking
 - Added `IInAppMessageView.hasAppliedWindowInsets()`.
@@ -848,7 +866,7 @@
 
 ## 4.0.2
 
-[Release Date](https://github.com/Appboy/appboy-android-sdk/releases/tag/v4.0.2)
+[Release Date](https://github.com/braze-inc/braze-android-sdk/releases/tag/v4.0.2)
 
 ##### Fixed
 - Fixed an issue introduced in 4.0.0 where Content Card clicks wouldn't get forwarded to the parent RecyclerView based on its View's `clickable` status.
@@ -856,14 +874,14 @@
 
 ## 4.0.1
 
-[Release Date](https://github.com/Appboy/appboy-android-sdk/releases/tag/v4.0.1)
+[Release Date](https://github.com/braze-inc/braze-android-sdk/releases/tag/v4.0.1)
 
 ##### Fixed
 - Fixed an issue where in-app messages could display behind translucent status and navigation bars.
 
 ## 4.0.0
 
-[Release Date](https://github.com/Appboy/appboy-android-sdk/releases/tag/v4.0.0)
+[Release Date](https://github.com/braze-inc/braze-android-sdk/releases/tag/v4.0.0)
 
 ##### Known Issues with version 4.0.0
 - Content Card clicks are not handled or logged for Content Cards due to the `"Appboy.ContentCards"` style containing the `"clickable=true"` style. This is fixed in SDK version 4.0.2.
@@ -881,7 +899,7 @@
 - Added the ability to customize how In-App Messages views are added to the view hierarchy with a custom `IInAppMessageViewWrapperFactory`.
   - See `AppboyInAppMessageManager.setCustomInAppMessageViewWrapperFactory()`.
   - For lightweight customizations, consider extending `DefaultInAppMessageViewWrapper` and overriding `getParentViewGroup()`, `getLayoutParams()`, and `addInAppMessageViewToViewGroup()`.
-  - Addresses https://github.com/Appboy/appboy-android-sdk/issues/138.
+  - Addresses https://github.com/braze-inc/braze-android-sdk/issues/138.
 - Added `Card.setIsDismissibleByUser()` to allow for integrators to disable the default swipe-to-dismiss behavior on a per-card basis.
 - Added the ability to set the initial `AppboyLogger` log level via `appboy.xml`.
   - In your `appboy.xml`, set an integer value for `com_appboy_logger_initial_log_level`. The integer should correspond to a constant in `Log`, such as `Log.VERBOSE` which is 2.
@@ -920,13 +938,13 @@
 
 ## 3.8.0
 
-[Release Date](https://github.com/Appboy/appboy-android-sdk/releases/tag/v3.8.0)
+[Release Date](https://github.com/braze-inc/braze-android-sdk/releases/tag/v3.8.0)
 
 ##### ⚠ Breaking
 - Added `renderUrlIntoInAppMessageView()`, `renderUrlIntoCardView()`, `getPushBitmapFromUrl()`, and `getInAppMessageBitmapFromUrl()` to the `IAppboyImageLoader` interface. These methods provide more information about the rendered object. For example, `renderUrlIntoCardView()` provides the `Card` object being rendered in the feed.
   - `IAppboyImageLoader.renderUrlIntoView()` and `IAppboyImageLoader.getBitmapFromUrl()` have been removed.
   - For maintaining behavioral parity, `renderUrlIntoInAppMessageView()` and `renderUrlIntoCardView()` can reuse your previous `IAppboyImageLoader.renderUrlIntoView()` implementation while `getPushBitmapFromUrl()` and `getInAppMessageBitmapFromUrl()` can reuse your previous `IAppboyImageLoader.getBitmapFromUrl()` implementation.
-  - The Glide `IAppboyImageLoader` implementation has been updated and can be found [here](https://github.com/Appboy/appboy-android-sdk/blob/master/samples/glide-image-integration/src/main/java/com/appboy/glideimageintegration/GlideAppboyImageLoader.java).
+  - The Glide `IAppboyImageLoader` implementation has been updated and can be found [here](https://github.com/braze-inc/braze-android-sdk/blob/master/samples/glide-image-integration/src/main/java/com/appboy/glideimageintegration/GlideAppboyImageLoader.java).
 - Removed `MessageButton#getIsSecondaryButton()` and `MessageButton#setIsSecondaryButton()`.
 
 ##### Added
@@ -952,7 +970,7 @@
 
 ## 3.7.1
 
-[Release Date](https://github.com/Appboy/appboy-android-sdk/releases/tag/v3.7.1)
+[Release Date](https://github.com/braze-inc/braze-android-sdk/releases/tag/v3.7.1)
 
 ##### Added
 - Added `IInAppMessage.setExtras()` to set extras on In-App Messages.
@@ -963,7 +981,7 @@
 
 ## 3.7.0
 
-[Release Date](https://github.com/Appboy/appboy-android-sdk/releases/tag/v3.7.0)
+[Release Date](https://github.com/braze-inc/braze-android-sdk/releases/tag/v3.7.0)
 
 ##### Known Issues
 - This release introduced issues with in-app message unregistration (`AppboyInAppMessageManager.unregisterInAppMessageManager()`) and fullscreen in-app messages. These issues have been fixed in version 3.8.0 of the SDK.
@@ -982,7 +1000,7 @@
 
 ## 3.6.0
 
-[Release Date](https://github.com/Appboy/appboy-android-sdk/releases/tag/v3.6.0)
+[Release Date](https://github.com/braze-inc/braze-android-sdk/releases/tag/v3.6.0)
 
 ##### Breaking
 - External user ids (provided via `Appboy.changeUser()`), are now limited to 997 bytes in UTF-8 encoding.
@@ -1319,7 +1337,7 @@
 - The Braze SDK may now optionally record when the user has disabled notifications at the app level.
   - Enabled via `appboy.xml` using the `com_appboy_notifications_enabled_tracking_on` boolean attribute or via `AppboyConfig.Builder.setNotificationsEnabledTrackingOn()`.
   - If using proguard in your app and Braze SDK v2.2.2 or below, please add `-keep class android.support.v4.app.NotificationManagerCompat { *; }` to your proguard rules.
-  - (Update) Note that starting with Braze Android SDK Version [`2.5.1`](https://github.com/Appboy/appboy-android-sdk/blob/master/CHANGELOG.md#251), this feature is now automatically enabled.
+  - (Update) Note that starting with Braze Android SDK Version [`2.5.1`](https://github.com/braze-inc/braze-android-sdk/blob/master/CHANGELOG.md#251), this feature is now automatically enabled.
 
 ## 2.2.1
 
@@ -1417,7 +1435,7 @@
 
 ##### Added
 - Added `Double` as a valid value type on `AppboyUser.setCustomUserAttribute()`.
-- Added user aliasing capability. Aliases can be used in the API and dashboard to identify users in addition to their ID.  See the `addAlias` method on [`AppboyUser`](https://appboy.github.io/appboy-android-sdk/javadocs/com/appboy/AppboyUser.html) for more information.
+- Added user aliasing capability. Aliases can be used in the API and dashboard to identify users in addition to their ID.  See the `addAlias` method on [`AppboyUser`](https://braze-inc.github.io/braze-android-sdk/javadocs/com/appboy/AppboyUser.html) for more information.
 
 ## 2.0.4
 
@@ -1476,7 +1494,7 @@
 ##### Added
 - Added a javascript interface to HTML in-app messages	with ability to	log custom events, purchases, user attributes, navigate users, and close the messaage.
 - Added the ability to set a single delegate object to custom handle all Uris opened by Braze across in-app messages, push, and the news feed. Your delegate object should implement the `IAppboyNavigator` interface and be set using `AppboyNavigator.setAppboyNavigator()`.
-  - See https://github.com/Appboy/appboy-android-sdk/blob/master/droidboy/src/main/java/com/appboy/sample/CustomAppboyNavigator.java for an example implementation.
+  - See https://github.com/braze-inc/braze-android-sdk/blob/master/droidboy/src/main/java/com/appboy/sample/CustomAppboyNavigator.java for an example implementation.
   - You must also provide instructions for Braze to navigate to your app's (optional) news feed implementation. To use Braze's default handling, call `AppboyNavigator.executeNewsFeedAction(context, uriAction);`.
   - Note: Previously, `AppboyNavigator` was only used when opening in-app messages.
 
@@ -1495,7 +1513,7 @@
 ##### Changed
 - Push deep links that can be handled by the current app are automatically opened using the current app. Previously, if another app could handle the deep link as well, a chooser dialog would open.
   - Thanks to [catacom](https://github.com/catacom)
-  - See https://github.com/Appboy/appboy-android-sdk/pull/71
+  - See https://github.com/braze-inc/braze-android-sdk/pull/71
 - `AppboyImageUtils.storePushBitmapInExternalStorage()` has been deprecated.
 
 ## 1.18.0
@@ -1510,9 +1528,9 @@
 - Added a sample app for manual session integration. See `/samples/manual-session-integration`.
 
 ##### Removed
-- Removed the `-dontoptimize` flag from Braze's UI consumer proguard rules. See https://github.com/Appboy/appboy-android-sdk/blob/master/android-sdk-ui/appboy-proguard-rules.pro for the latest Proguard config.
+- Removed the `-dontoptimize` flag from Braze's UI consumer proguard rules. See https://github.com/braze-inc/braze-android-sdk/blob/master/android-sdk-ui/appboy-proguard-rules.pro for the latest Proguard config.
   - Thanks to [mnonnenmacher](https://github.com/mnonnenmacher)
-  - See https://github.com/Appboy/appboy-android-sdk/pull/69
+  - See https://github.com/braze-inc/braze-android-sdk/pull/69
 
 ##### Changed
 - Updated the Droidboy project to use the conventional Android Build System folder structure.
@@ -1520,7 +1538,7 @@
 ## 1.17.0
 
 ##### Breaking
-- Added the ability to configure Braze completely at runtime using `Appboy.configure()`. Values set at runtime take precedence over their counterparts in `appboy.xml`. A complete example of Braze runtime configuration is available in our Hello Appboy sample app's [application class](https://github.com/Appboy/appboy-android-sdk/blob/master/hello-appboy/src/main/java/com/appboy/helloworld/HelloAppboyApplication.java).
+- Added the ability to configure Braze completely at runtime using `Appboy.configure()`. Values set at runtime take precedence over their counterparts in `appboy.xml`. A complete example of Braze runtime configuration is available in our Hello Appboy sample app's [application class](https://github.com/braze-inc/braze-android-sdk/blob/master/hello-appboy/src/main/java/com/appboy/helloworld/HelloAppboyApplication.java).
   - Renamed `com.appboy.configuration.XmlAppConfigurationProvider` to `com.appboy.configuration.AppboyConfigurationProvider`.
   - `Appboy.configure(String)` changed to `Appboy.configure(Context, AppboyConfig)`.  To maintain parity, replace your current usage with the following equivalent snippit:
   ```
@@ -1575,7 +1593,7 @@
 - Deprecated `AppboyInAppMessageManager.hideCurrentInAppMessage()`. Please use `AppboyInAppMessageManager.hideCurrentlyDisplayingInAppMessage()` instead.
 
 ##### Added
-- Added the option to handle session tracking and `InAppMessageManager` registration automatically on apps with a minimum supported SDK of API level 14 or above. This is done by registering an `AppboyLifecycleCallbackListener` instance using [`Application.registerActivityLifecycleCallbacks()`](https://developer.android.com/reference/android/app/Application.html#registerActivityLifecycleCallbacks(android.app.Application.ActivityLifecycleCallbacks)). See the Hello Appboy sample app's [application class](https://github.com/Appboy/appboy-android-sdk/blob/master/hello-appboy/src/main/java/com/appboy/helloworld/HelloAppboyApplication.java) for an example.
+- Added the option to handle session tracking and `InAppMessageManager` registration automatically on apps with a minimum supported SDK of API level 14 or above. This is done by registering an `AppboyLifecycleCallbackListener` instance using [`Application.registerActivityLifecycleCallbacks()`](https://developer.android.com/reference/android/app/Application.html#registerActivityLifecycleCallbacks(android.app.Application.ActivityLifecycleCallbacks)). See the Hello Appboy sample app's [application class](https://github.com/braze-inc/braze-android-sdk/blob/master/hello-appboy/src/main/java/com/appboy/helloworld/HelloAppboyApplication.java) for an example.
 - Added support for upgraded in-app messages including image-only messages, improved image sizing/cropping, text scrolling, text alignment, configurable orientation, and configurable frame color.
 - Added support for in-app messages triggered on custom event properties, purchase properties, and in-app message clicks.
 - Added support for templating event properties within in-app messages.
@@ -1605,7 +1623,7 @@
 
 ##### Removed
 - Removed `keep` rules from `consumerProguardFiles` automatic Proguard configuration for potentially improved optimization for client apps. Note that client apps that Proguard Braze code must now store release mapping files for Braze to interpret stack traces. If you would like to continue to `keep` all Braze code, add `-keep class bo.app.** { *; }` and `-keep class com.appboy.** { *; }` to your Proguard configuration.
-  - See https://github.com/Appboy/appboy-android-sdk/issues/54
+  - See https://github.com/braze-inc/braze-android-sdk/issues/54
 - Removed `onRetainInstance()` from the Braze News Feed fragment. As a result, the News Feed may be used in nested fragments.
 
 ## 1.13.5
@@ -1616,7 +1634,7 @@
 
 ##### Fixed
 - Fixed a database access race condition in changeUser code.
-  - See https://github.com/Appboy/appboy-android-sdk/issues/52 and https://github.com/Appboy/appboy-android-sdk/issues/39
+  - See https://github.com/braze-inc/braze-android-sdk/issues/52 and https://github.com/braze-inc/braze-android-sdk/issues/39
 
 ##### Removed
 - Removed optimizations from the private library's Proguard configuration to allow dexing Braze with Jack and Android Gradle Plugin 2.2.0+.
@@ -1700,7 +1718,7 @@
 ##### Changed
 - Makes the WebView background for HTML in-app messages transparent.  Ensure your HTML in-app messages expect a transparent background.
 - Updated Google Play Services from to 7.5.0 to 8.3.0 and Play Services Support from 1.2.0 to 1.3.0.
-  - See https://github.com/Appboy/appboy-android-sdk/issues/45
+  - See https://github.com/braze-inc/braze-android-sdk/issues/45
 - Updated Braze WebView to support redirects to deep links and enables DOM storage.
 
 ## 1.10.3
@@ -1737,7 +1755,7 @@
 
 ##### Breaking
 - All users must add the line `-dontwarn com.google.android.gms.**` to their proguard config file if using proguard.
-  - See https://github.com/Appboy/appboy-android-sdk/issues/43
+  - See https://github.com/braze-inc/braze-android-sdk/issues/43
 
 ##### Added
 - Added support for analytics from Android Wear devices.
@@ -1756,7 +1774,7 @@
 
 ##### Added
 - Added the ability to specify custom fonts for in-app message ui elements via the `appboyInAppMessageCustomFontFile` custom xml attribute.
-- Increases the number of supported currency codes from 22 to 171.  All common currency codes are now supported. The full list of supported codes is available at our <a href="https://appboy.github.io/appboy-android-sdk/javadocs/com/appboy/IAppboy.html#logPurchase(java.lang.String,%20java.lang.String,%20java.math.BigDecimal,%20int,%20com.appboy.models.outgoing.AppboyProperties)">Javadoc</a>.
+- Increases the number of supported currency codes from 22 to 171.  All common currency codes are now supported. The full list of supported codes is available at our <a href="https://braze-inc.github.io/braze-android-sdk/javadocs/com/appboy/IAppboy.html#logPurchase(java.lang.String,%20java.lang.String,%20java.math.BigDecimal,%20int,%20com.appboy.models.outgoing.AppboyProperties)">Javadoc</a>.
 - Added the method `isUninstallTrackingPush()` to AppboyNotificationUtils to be able to detect background push sent for Braze uninstall tracking.
 
 ##### Changed
@@ -1780,7 +1798,7 @@
 
 ##### Added
 - Added Braze logging configurability by setting the AppboyLogger.LogLevel.  This is intended to be used in development environments and should not be set in a released application as logging statements are essential for debugging.
-  - See https://github.com/Appboy/appboy-android-sdk/issues/38
+  - See https://github.com/braze-inc/braze-android-sdk/issues/38
 - Added `getAppboyPushMessageRegistrationId()` to the Braze interface to enable retrieval of the GCM/ADM/Baidu registration ID Braze has set for the device.
 
 ##### Changed
