@@ -1,6 +1,6 @@
 ## 26.0.0
 
-[Release Date](https://github.com/Appboy/appboy-android-sdk/releases/tag/v26.0.0)
+[Release Date](https://github.com/braze-inc/braze-android-sdk/releases/tag/v26.0.0)
 
 #### Breaking
 - Added the ability to configure link target behavior for HTML In-App Messages through `BrazeConfig.setIsHtmlInAppMessageHtmlLinkTargetEnabled()` or via adding `<bool name="com_braze_html_in_app_message_enable_html_link_target">true</bool>` to your `braze.xml`. Defaults to enabled.
