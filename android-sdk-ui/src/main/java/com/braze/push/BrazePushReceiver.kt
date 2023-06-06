@@ -6,15 +6,16 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.annotation.VisibleForTesting
 import androidx.core.app.NotificationManagerCompat
-import com.braze.models.push.BrazeNotificationPayload
-import com.braze.models.push.BrazeNotificationPayload.Companion.getAttachedBrazeExtras
 import com.braze.Braze
+import com.braze.BrazeInternal
 import com.braze.BrazeInternal.applyPendingRuntimeConfiguration
 import com.braze.BrazeInternal.handleInAppMessageTestPush
 import com.braze.Constants
 import com.braze.Constants.isAmazonDevice
 import com.braze.configuration.BrazeConfigurationProvider
 import com.braze.coroutine.BrazeCoroutineScope
+import com.braze.models.push.BrazeNotificationPayload
+import com.braze.models.push.BrazeNotificationPayload.Companion.getAttachedBrazeExtras
 import com.braze.push.BrazeNotificationActionUtils.handleNotificationActionClicked
 import com.braze.push.BrazeNotificationUtils.activeNotificationFactory
 import com.braze.push.BrazeNotificationUtils.getNotificationId
@@ -24,8 +25,8 @@ import com.braze.push.BrazeNotificationUtils.handleNotificationOpened
 import com.braze.push.BrazeNotificationUtils.handlePushStoryPageClicked
 import com.braze.push.BrazeNotificationUtils.isBrazePushMessage
 import com.braze.push.BrazeNotificationUtils.isNotificationMessage
-import com.braze.push.BrazeNotificationUtils.requestGeofenceRefreshIfAppropriate
 import com.braze.push.BrazeNotificationUtils.refreshFeatureFlagsIfAppropriate
+import com.braze.push.BrazeNotificationUtils.requestGeofenceRefreshIfAppropriate
 import com.braze.push.BrazeNotificationUtils.sendPushMessageReceivedBroadcast
 import com.braze.push.BrazeNotificationUtils.setNotificationDurationAlarm
 import com.braze.push.BrazeNotificationUtils.wakeScreenIfAppropriate
@@ -36,6 +37,8 @@ import com.braze.support.BrazeLogger.Priority.W
 import com.braze.support.BrazeLogger.brazelog
 import com.braze.ui.inappmessage.BrazeInAppMessageManager
 import kotlinx.coroutines.launch
+import java.util.concurrent.TimeUnit
+import kotlin.random.Random
 
 open class BrazePushReceiver : BroadcastReceiver() {
     override fun onReceive(context: Context, intent: Intent) {
@@ -312,6 +315,9 @@ open class BrazePushReceiver : BroadcastReceiver() {
                         duration
                     )
                 }
+
+                logNotificationMetadata(context, payload)
+
                 return true
             } else {
                 brazelog { "Received silent push notification" }
@@ -346,6 +352,39 @@ open class BrazePushReceiver : BroadcastReceiver() {
                     context,
                     appConfigurationProvider
                 )
+            }
+        }
+
+        /**
+         * Log information from the push for Push Max support.
+         */
+        @VisibleForTesting
+        internal fun logNotificationMetadata(context: Context, payload: BrazeNotificationPayload) {
+            if (payload.isPushDeliveryEnabled) {
+                payload.campaignId?.let {
+                    val min = payload.flushMinMinutes.coerceAtLeast(0)
+                    val max = payload.flushMaxMinutes.coerceAtLeast(min)
+                    val minToMillis = TimeUnit.MINUTES.toMillis(min)
+                    val waitTimeMs = if (max > min) {
+                        Random.nextLong(
+                            minToMillis,
+                            TimeUnit.MINUTES.toMillis(max)
+                        )
+                    } else {
+                        minToMillis
+                    }
+
+                    BrazeInternal.logPushDelivery(
+                        context,
+                        it,
+                        waitTimeMs
+                    )
+                }
+            }
+
+            // Log all campaigns
+            payload.campaignId?.let {
+                BrazeInternal.logPushCampaign(context, it)
             }
         }
     }

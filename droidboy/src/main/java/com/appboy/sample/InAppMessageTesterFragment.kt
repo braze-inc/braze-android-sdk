@@ -53,7 +53,8 @@ class InAppMessageTesterFragment : Fragment(), AdapterView.OnItemSelectedListene
             "https://appboy-staging-dashboard-uploads.s3.amazonaws.com/zip_uploads/files/" +
                 "585c1776bf5cea3cbe1b36b2/124fae83d6ba4023d4ede28e9177980e6373747c/original.zip?1482430326"
         ),
-        INLINE_JS("html_inapp_message_body_inline_js.html", null), EXTERNAL_JS(
+        INLINE_JS("html_inapp_message_body_inline_js.html", null),
+        EXTERNAL_JS(
             "html_inapp_message_body_external_js.html",
             "https://appboy-staging-dashboard-uploads.s3.amazonaws.com/zip_uploads/files/" +
                 "585c18c3bf5cea3c861b36ba/b0c7e536230b34ef800c8e0ef0747eaac53545a5/original.zip?1482430659"
@@ -62,7 +63,8 @@ class InAppMessageTesterFragment : Fragment(), AdapterView.OnItemSelectedListene
             "html_inapp_message_body_star_wars.html",
             null
         ),
-        YOUTUBE("html_inapp_message_body_youtube_iframe.html", null), BRIDGE_TESTER(
+        YOUTUBE("html_inapp_message_body_youtube_iframe.html", null),
+        BRIDGE_TESTER(
             "html_in_app_message_bridge_tester.html",
             "https://appboy-images.com/HTML_ZIP_STOPWATCH.zip"
         ),
@@ -78,7 +80,8 @@ class InAppMessageTesterFragment : Fragment(), AdapterView.OnItemSelectedListene
             "html_in_app_message_unified_bootstrap_album.html",
             null
         ),
-        SHARK_HTML("html_shark_unified.html", null);
+        SHARK_HTML("html_shark_unified.html", null),
+        DND_TEXT_TARGET_HTML("html_inapp_dnd_tester.html", null),
     }
 
     private var messageType: String? = null
@@ -107,6 +110,7 @@ class InAppMessageTesterFragment : Fragment(), AdapterView.OnItemSelectedListene
     private var animateIn: String? = null
     private var animateOut: String? = null
     private var useInWebView: String? = null
+    private var shouldSetPushPrimerInHtml: Boolean = false
 
     private val settingsPreferences: SharedPreferences
         get() = requireActivity().getPreferences(Context.MODE_PRIVATE)
@@ -220,6 +224,11 @@ class InAppMessageTesterFragment : Fragment(), AdapterView.OnItemSelectedListene
                 BrazeInAppMessageManager.getInstance().setCustomHtmlInAppMessageActionListener(null)
             }
         }
+        setupCheckbox(
+            view.findViewById(R.id.enable_push_primer_in_html)
+        ) { _: CompoundButton, isChecked: Boolean ->
+            shouldSetPushPrimerInHtml = isChecked
+        }
         val createAndAddInAppMessageButton =
             view.findViewById<Button>(R.id.create_and_add_inappmessage_button)
         createAndAddInAppMessageButton.setOnClickListener {
@@ -239,43 +248,53 @@ class InAppMessageTesterFragment : Fragment(), AdapterView.OnItemSelectedListene
                         inAppMessageModal.cropType = CropType.CENTER_CROP
                         addInAppMessage(inAppMessageModal)
                     }
+
                     "full" -> addInAppMessage(InAppMessageFull())
                     "full_graphic" -> {
                         val inAppMessageFull = InAppMessageFull()
                         inAppMessageFull.imageStyle = ImageStyle.GRAPHIC
                         addInAppMessage(inAppMessageFull)
                     }
+
                     "html_full_no_js" -> addInAppMessage(InAppMessageHtmlFull(), HtmlMessageType.NO_JS)
                     "html_full_inline_js" -> addInAppMessage(
                         InAppMessageHtmlFull(),
                         HtmlMessageType.INLINE_JS
                     )
+
                     "html_full_external_js" -> addInAppMessage(
                         InAppMessageHtmlFull(),
                         HtmlMessageType.EXTERNAL_JS
                     )
+
                     "html_full_star_wars" -> addInAppMessage(
                         InAppMessageHtmlFull(),
                         HtmlMessageType.STAR_WARS
                     )
+
                     "html_full_youtube" -> addInAppMessage(InAppMessageHtmlFull(), HtmlMessageType.YOUTUBE)
                     "html_full_bridge_tester" -> addInAppMessage(
                         InAppMessageHtmlFull(),
                         HtmlMessageType.BRIDGE_TESTER
                     )
+
                     "html_full_slow_loading" -> addInAppMessage(
                         InAppMessageHtmlFull(),
                         HtmlMessageType.SLOW_LOADING
                     )
+
                     "html_full_unified_bootstrap" -> addInAppMessage(
                         InAppMessageHtml(),
                         HtmlMessageType.UNIFIED_HTML_BOOTSTRAP_ALBUM
                     )
+
                     "html_shark_unified" -> addInAppMessage(InAppMessageHtml(), HtmlMessageType.SHARK_HTML)
+                    "html_dnd_target_text_link" -> addInAppMessage(InAppMessageHtml(), HtmlMessageType.DND_TEXT_TARGET_HTML)
                     "html_full_dark_mode" -> addInAppMessage(
                         InAppMessageHtmlFull(),
                         HtmlMessageType.DARK_MODE
                     )
+
                     "modal_dark_theme" -> {
                         val darkModeJson = context?.let { context ->
                             getStringFromAssets(
@@ -284,6 +303,7 @@ class InAppMessageTesterFragment : Fragment(), AdapterView.OnItemSelectedListene
                         }
                         darkModeJson?.let { json -> addInAppMessageFromString(json) }
                     }
+
                     "slideup" -> addInAppMessage(InAppMessageSlideup())
                     else -> addInAppMessage(InAppMessageSlideup())
                 }
@@ -370,12 +390,15 @@ class InAppMessageTesterFragment : Fragment(), AdapterView.OnItemSelectedListene
     }
 
     private fun addInAppMessageHtml(
-        inAppMessage: IInAppMessageHtml,
+        inAppMessage: InAppMessageHtml,
         htmlMessageType: HtmlMessageType
     ) {
         inAppMessage.message = context?.let { getStringFromAssets(it, htmlMessageType.fileName) }
         if (htmlMessageType.zippedAssetUrl != null && inAppMessage is IInAppMessageZippedAssetHtml) {
             inAppMessage.assetsZipRemoteUrl = htmlMessageType.zippedAssetUrl
+        }
+        if (shouldSetPushPrimerInHtml) {
+            inAppMessage.messageFields?.put("is_push_primer", true)
         }
     }
 
@@ -387,10 +410,11 @@ class InAppMessageTesterFragment : Fragment(), AdapterView.OnItemSelectedListene
             MessageType.MODAL, MessageType.FULL -> addInAppMessageImmersive(inAppMessage as IInAppMessageImmersive)
             MessageType.HTML, MessageType.HTML_FULL -> messageType?.let {
                 addInAppMessageHtml(
-                    inAppMessage as IInAppMessageHtml,
+                    inAppMessage as InAppMessageHtml,
                     it
                 )
             }
+
             else -> addInAppMessageCustom(inAppMessage)
         }
         if (!addClickAction(inAppMessage)) {
@@ -442,13 +466,16 @@ class InAppMessageTesterFragment : Fragment(), AdapterView.OnItemSelectedListene
             "auto" -> {
                 inAppMessage.dismissType = DismissType.AUTO_DISMISS
             }
+
             "auto-short" -> {
                 inAppMessage.dismissType = DismissType.AUTO_DISMISS
                 inAppMessage.durationInMilliseconds = 1000
             }
+
             "manual" -> {
                 inAppMessage.dismissType = DismissType.MANUAL
             }
+
             else -> {
                 inAppMessage.dismissType = DismissType.MANUAL
             }
@@ -615,11 +642,13 @@ class InAppMessageTesterFragment : Fragment(), AdapterView.OnItemSelectedListene
                     buttonOne.text = "News Feed"
                     messageButtons.add(buttonOne)
                 }
+
                 "one_long" -> {
                     buttonOne.setClickBehavior(ClickAction.NEWS_FEED)
                     buttonOne.text = getString(R.string.message_2400)
                     messageButtons.add(buttonOne)
                 }
+
                 "push_prompt_one" -> {
                     val pushPromptBrazeActionUri = Uri.parse(getStringFromAssets(requireContext(), "braze_actions/show_push_prompt.txt"))
                     buttonOne.setClickBehavior(ClickAction.URI, pushPromptBrazeActionUri)
@@ -647,6 +676,7 @@ class InAppMessageTesterFragment : Fragment(), AdapterView.OnItemSelectedListene
                     messageButtons.add(buttonOne)
                     messageButtons.add(buttonTwo)
                 }
+
                 "deeplink" -> {
                     buttonOne.text = "TELEPHONE"
                     buttonOne.setClickBehavior(
@@ -687,81 +717,107 @@ class InAppMessageTesterFragment : Fragment(), AdapterView.OnItemSelectedListene
             R.id.inapp_set_message_type_spinner ->
                 messageType =
                     SpinnerUtils.handleSpinnerItemSelected(parent, R.array.inapp_message_type_values)
+
             R.id.inapp_click_action_spinner ->
                 clickAction =
                     SpinnerUtils.handleSpinnerItemSelected(parent, R.array.inapp_click_action_values)
+
             R.id.inapp_dismiss_type_spinner ->
                 dismissType =
                     SpinnerUtils.handleSpinnerItemSelected(parent, R.array.inapp_dismiss_type_values)
+
             R.id.inapp_slide_from_spinner ->
                 slideFrom =
                     SpinnerUtils.handleSpinnerItemSelected(parent, R.array.inapp_slide_from_values)
+
             R.id.inapp_uri_spinner ->
                 uri =
                     SpinnerUtils.handleSpinnerItemSelected(parent, R.array.inapp_uri_values)
+
             R.id.inapp_header_spinner ->
                 header =
                     SpinnerUtils.handleSpinnerItemSelected(parent, R.array.inapp_header_values)
+
             R.id.inapp_message_spinner ->
                 message =
                     SpinnerUtils.handleSpinnerItemSelected(parent, R.array.inapp_message_values)
+
             R.id.inapp_background_color_spinner ->
                 backgroundColor =
                     SpinnerUtils.handleSpinnerItemSelected(parent, R.array.inapp_color_values)
+
             R.id.inapp_icon_color_spinner ->
                 iconColor =
                     SpinnerUtils.handleSpinnerItemSelected(parent, R.array.inapp_color_values)
+
             R.id.inapp_icon_background_color_spinner ->
                 iconBackgroundColor =
                     SpinnerUtils.handleSpinnerItemSelected(parent, R.array.inapp_color_values)
+
             R.id.inapp_close_button_color_spinner ->
                 closeButtonColor =
                     SpinnerUtils.handleSpinnerItemSelected(parent, R.array.inapp_color_values)
+
             R.id.inapp_text_color_spinner ->
                 textColor =
                     SpinnerUtils.handleSpinnerItemSelected(parent, R.array.inapp_color_values)
+
             R.id.inapp_header_text_color_spinner ->
                 headerTextColor =
                     SpinnerUtils.handleSpinnerItemSelected(parent, R.array.inapp_color_values)
+
             R.id.inapp_button_color_spinner ->
                 buttonColor =
                     SpinnerUtils.handleSpinnerItemSelected(parent, R.array.inapp_color_values)
+
             R.id.inapp_button_border_color_spinner ->
                 buttonBorderColor =
                     SpinnerUtils.handleSpinnerItemSelected(parent, R.array.inapp_color_values)
+
             R.id.inapp_button_text_color_spinner ->
                 buttonTextColor =
                     SpinnerUtils.handleSpinnerItemSelected(parent, R.array.inapp_color_values)
+
             R.id.inapp_frame_spinner ->
                 frameColor =
                     SpinnerUtils.handleSpinnerItemSelected(parent, R.array.inapp_frame_values)
+
             R.id.inapp_icon_spinner ->
                 icon =
                     SpinnerUtils.handleSpinnerItemSelected(parent, R.array.inapp_icon_values)
+
             R.id.inapp_image_spinner ->
                 image =
                     SpinnerUtils.handleSpinnerItemSelected(parent, R.array.inapp_image_values)
+
             R.id.inapp_button_spinner ->
                 buttons =
                     SpinnerUtils.handleSpinnerItemSelected(parent, R.array.inapp_button_values)
+
             R.id.inapp_orientation_spinner ->
                 orientation =
                     SpinnerUtils.handleSpinnerItemSelected(parent, R.array.inapp_orientation_values)
+
             R.id.inapp_header_align_spinner ->
                 headerTextAlign =
                     SpinnerUtils.handleSpinnerItemSelected(parent, R.array.inapp_align_values)
+
             R.id.inapp_message_align_spinner ->
                 messageTextAlign =
                     SpinnerUtils.handleSpinnerItemSelected(parent, R.array.inapp_align_values)
+
             R.id.inapp_animate_in_spinner ->
                 animateIn =
                     SpinnerUtils.handleSpinnerItemSelected(parent, R.array.inapp_boolean_values)
+
             R.id.inapp_animate_out_spinner ->
                 animateOut =
                     SpinnerUtils.handleSpinnerItemSelected(parent, R.array.inapp_boolean_values)
+
             R.id.inapp_open_uri_in_webview_spinner ->
                 useInWebView =
                     SpinnerUtils.handleSpinnerItemSelected(parent, R.array.inapp_boolean_values)
+
             else -> brazelog(E) { "Item selected for unknown spinner" }
         }
     }

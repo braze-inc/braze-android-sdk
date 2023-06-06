@@ -13,10 +13,10 @@ import android.widget.CheckBox;
 
 import androidx.fragment.app.Fragment;
 
-import com.braze.Braze;
-import com.braze.models.push.BrazeNotificationPayload;
 import com.appboy.sample.util.SpinnerUtils;
+import com.braze.Braze;
 import com.braze.Constants;
+import com.braze.models.push.BrazeNotificationPayload;
 import com.braze.push.BrazeNotificationUtils;
 import com.braze.push.BrazePushReceiver;
 import com.braze.support.BrazeLogger;
@@ -75,6 +75,7 @@ public class PushTesterFragment extends Fragment implements AdapterView.OnItemSe
   private boolean mInlineImagePushEnabled = false;
   private boolean mConversationPushEnabled = false;
   private boolean mSetHtmlText = false;
+  private boolean mTestPushDeliveryEvents = false;
   static final String EXAMPLE_APPBOY_EXTRA_KEY_1 = "Entree";
   static final String EXAMPLE_APPBOY_EXTRA_KEY_2 = "Side";
   static final String EXAMPLE_APPBOY_EXTRA_KEY_3 = "Drink";
@@ -111,6 +112,7 @@ public class PushTesterFragment extends Fragment implements AdapterView.OnItemSe
     ((CheckBox) view.findViewById(R.id.push_tester_inline_image_push_enabled)).setOnCheckedChangeListener((buttonView, isChecked) -> mInlineImagePushEnabled = isChecked);
     ((CheckBox) view.findViewById(R.id.push_tester_conversational_push_enabled)).setOnCheckedChangeListener((buttonView, isChecked) -> mConversationPushEnabled = isChecked);
     ((CheckBox) view.findViewById(R.id.push_tester_html)).setOnCheckedChangeListener((buttonView, isChecked) -> mSetHtmlText = isChecked);
+    ((CheckBox) view.findViewById(R.id.test_push_delivery_events)).setOnCheckedChangeListener((buttonView, isChecked) -> mTestPushDeliveryEvents = isChecked);
 
     // Creates the push image spinner.
     SpinnerUtils.setUpSpinner(view.findViewById(R.id.push_image_spinner), this, R.array.push_image_options);
@@ -229,6 +231,12 @@ public class PushTesterFragment extends Fragment implements AdapterView.OnItemSe
       if (mConversationPushEnabled) {
         notificationExtras.putString(Constants.BRAZE_CONVERSATIONAL_PUSH_STYLE_KEY, "1");
         addConversationPush(notificationExtras);
+      }
+      if (mTestPushDeliveryEvents) {
+        notificationExtras.putString(Constants.BRAZE_PUSH_DELIVERY_ENABLED_KEY, "1");
+        notificationExtras.putString(Constants.BRAZE_PUSH_CAMPAIGN_ID_KEY, "test-fake-campaign-id-" + System.currentTimeMillis());
+        notificationExtras.putString(Constants.BRAZE_PUSH_DELIVERY_FLUSH_MIN_KEY, "0");
+        notificationExtras.putString(Constants.BRAZE_PUSH_DELIVERY_FLUSH_MAX_KEY, "1");
       }
 
       // Manually build the Braze extras bundle.

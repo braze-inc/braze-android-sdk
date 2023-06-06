@@ -98,6 +98,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/set_html_push_text"/>
+        <CheckBox
+            android:id="@+id/test_push_delivery_events"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/test_push_delivery_events"/>
         <Spinner
           android:id="@+id/push_image_spinner"
           android:layout_width="fill_parent"

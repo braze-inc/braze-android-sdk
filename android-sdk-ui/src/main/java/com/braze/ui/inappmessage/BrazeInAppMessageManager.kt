@@ -14,6 +14,7 @@ import com.braze.events.IEventSubscriber
 import com.braze.events.InAppMessageEvent
 import com.braze.events.SdkDataWipeEvent
 import com.braze.models.inappmessage.IInAppMessage
+import com.braze.models.inappmessage.InAppMessageHtml
 import com.braze.models.inappmessage.InAppMessageImmersiveBase
 import com.braze.support.BrazeLogger.Priority.E
 import com.braze.support.BrazeLogger.Priority.I
@@ -331,6 +332,7 @@ open class BrazeInAppMessageManager : InAppMessageManagerBase() {
                     "The IInAppMessageManagerListener method beforeInAppMessageDisplayed returned DISPLAY_NOW. The " +
                         "in-app message will be displayed."
                 }
+
                 InAppMessageOperation.DISPLAY_LATER -> {
                     brazelog {
                         "The IInAppMessageManagerListener method beforeInAppMessageDisplayed returned DISPLAY_LATER. The " +
@@ -339,6 +341,7 @@ open class BrazeInAppMessageManager : InAppMessageManagerBase() {
                     inAppMessageStack.push(inAppMessage)
                     return false
                 }
+
                 InAppMessageOperation.DISCARD -> {
                     brazelog {
                         "The IInAppMessageManagerListener method beforeInAppMessageDisplayed returned DISCARD. The " +
@@ -477,12 +480,12 @@ open class BrazeInAppMessageManager : InAppMessageManagerBase() {
                 resetAfterInAppMessageClose()
                 return
             }
-            if (inAppMessage.containsAnyPushPermissionBrazeActions()
+            if (inAppMessage.containsPushPermissionPrompt()
                 && !activity.wouldPushPermissionPromptDisplay()
             ) {
                 val inAppMessageEvent = inAppMessageEventMap[inAppMessage]
                 brazelog(I) {
-                    "Cannot show message containing a Braze Actions Push Prompt due to existing " +
+                    "Cannot show message containing a Push Prompt due to existing " +
                         "push prompt status, Android API version, or Target SDK level."
                 }
                 if (inAppMessageEvent != null) {
@@ -543,6 +546,7 @@ open class BrazeInAppMessageManager : InAppMessageManagerBase() {
                         inAppMessageViewImmersive.messageCloseButtonView
                     )
                 }
+
                 is IInAppMessageView -> {
                     brazelog { "Creating view wrapper for base in-app message." }
                     val inAppMessageViewBase = inAppMessageView as IInAppMessageView
@@ -556,6 +560,7 @@ open class BrazeInAppMessageManager : InAppMessageManagerBase() {
                         inAppMessageViewBase.messageClickableView
                     )
                 }
+
                 else -> {
                     brazelog { "Creating view wrapper for in-app message." }
                     viewWrapperFactory.createInAppMessageViewWrapper(
@@ -663,6 +668,14 @@ open class BrazeInAppMessageManager : InAppMessageManagerBase() {
                 }
             }
             return instance as BrazeInAppMessageManager
+        }
+
+        private fun IInAppMessage.containsPushPermissionPrompt(): Boolean {
+            if (this is InAppMessageHtml) {
+                return this.isPushPrimer
+            }
+
+            return this.containsAnyPushPermissionBrazeActions()
         }
     }
 }

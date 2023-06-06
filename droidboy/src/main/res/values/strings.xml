@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="ExtraTranslation">
+<resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="ExtraTranslation, MissingTranslation">
   <string name="app_name">Droidboy</string>
   <string name="feed">News Feed</string>
   <string name="inappmessage">In-App Messages</string>
@@ -86,6 +86,7 @@
   <string name="custom_inappmessage_image_radius">Custom Image Radius (remove radius)</string>
   <string name="disable_back_button_dismiss_behavior">Disable back button IAM dismissal</string>
   <string name="enable_tap_outside_modal_dismiss_behavior">Enable tapping outside Modal to dismiss</string>
+  <string name="enable_push_primer_in_html">Enable Push Primer in HTML</string>
   <string name="inappmessage_activity">In-App Messages</string>
   <string name="custom_iinappmessage_view_factory">Custom IInAppMessageViewFactory</string>
   <string name="push_testing">Push</string>
@@ -107,6 +108,7 @@
   <string name="story_toggle_title">Toggle Story Title</string>
   <string name="story_toggle_subtitle">Toggle Story Subtitle</string>
   <string name="set_html_push_text">Test HTML Push</string>
+  <string name="test_push_delivery_events">Test Push Delivery Events</string>
   <!--'#' characters at the end of headers and messages are used to verify that the entire message was displayed.-->
   <string name="header_10">Hey there#</string>
   <string name="header_20">Hey hey from Braze!#</string>

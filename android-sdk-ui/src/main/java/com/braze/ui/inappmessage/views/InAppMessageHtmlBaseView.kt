@@ -2,19 +2,24 @@ package com.braze.ui.inappmessage.views
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.Color
+import android.net.Uri
+import android.os.Message
 import android.util.AttributeSet
 import android.view.KeyEvent
 import android.view.View
 import android.webkit.ConsoleMessage
 import android.webkit.WebChromeClient
 import android.webkit.WebView
+import android.webkit.WebView.HitTestResult
 import android.widget.RelativeLayout
 import androidx.core.view.WindowInsetsCompat
 import androidx.webkit.WebSettingsCompat
 import androidx.webkit.WebViewFeature
 import com.braze.configuration.BrazeConfigurationProvider
+import com.braze.support.BrazeLogger.Priority.V
 import com.braze.support.BrazeLogger.Priority.E
 import com.braze.support.BrazeLogger.Priority.W
 import com.braze.support.BrazeLogger.brazelog
@@ -99,6 +104,13 @@ abstract class InAppMessageHtmlBaseView(context: Context?, attrs: AttributeSet?)
                 brazelog(E, e) { "Failed to set dark mode WebView settings" }
             }
 
+            val isLinkTargetSupported = BrazeConfigurationProvider(this.context).isHtmlInAppMessageHtmlLinkTargetEnabled
+            if (isLinkTargetSupported) {
+                webView.settings.setSupportMultipleWindows(true)
+                brazelog(V) { "HtmlInAppMessageHtmlLinkTarget enabled" }
+            } else {
+                brazelog(V) { "HtmlInAppMessageHtmlLinkTarget not enabled" }
+            }
             // Set the client for console logging. See https://developer.android.com/guide/webapps/debugging.html
             webView.webChromeClient = object : WebChromeClient() {
                 override fun onConsoleMessage(cm: ConsoleMessage): Boolean {
@@ -111,6 +123,48 @@ abstract class InAppMessageHtmlBaseView(context: Context?, attrs: AttributeSet?)
                             )
                     }
                     return true
+                }
+
+                override fun onCreateWindow(
+                    view: WebView?,
+                    isDialog: Boolean,
+                    isUserGesture: Boolean,
+                    resultMsg: Message?
+                ): Boolean {
+                    return if (!isLinkTargetSupported) {
+                        brazelog(V) { "linkTargetSupport not enabled, passing to super.onCreateWindow()" }
+                        super.onCreateWindow(view, isDialog, isUserGesture, resultMsg)
+                    } else if (view == null) {
+                        brazelog(V) { "onCreateWindow webView is null, not opening link" }
+                        false
+                    } else {
+                        val result = view.hitTestResult
+                        brazelog(V) { "onCreateWindow HitTestResult is $result" }
+                        when (result.type) {
+                            HitTestResult.SRC_ANCHOR_TYPE -> {
+                                val data = result.extra
+                                val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse(data))
+                                context.startActivity(browserIntent)
+                            }
+                            HitTestResult.EMAIL_TYPE -> {
+                                val data = WebView.SCHEME_MAILTO + result.extra
+                                val emailIntent = Intent(Intent.ACTION_VIEW, Uri.parse(data))
+                                context.startActivity(emailIntent)
+                            }
+                            HitTestResult.PHONE_TYPE -> {
+                                val data = WebView.SCHEME_TEL + result.extra
+                                val telIntent = Intent(Intent.ACTION_VIEW, Uri.parse(data))
+                                context.startActivity(telIntent)
+                            }
+                            else -> {
+                                brazelog(V) {
+                                    "onCreateWindow: hitTestResult type was ${result.type}. " +
+                                        "Not doing anything."
+                                }
+                            }
+                        }
+                        false
+                    }
                 }
 
                 override fun getDefaultVideoPoster() =

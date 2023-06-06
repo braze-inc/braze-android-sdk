@@ -31,7 +31,6 @@ import com.appboy.sample.InAppMessageTesterFragment
 import com.appboy.sample.MainFragment
 import com.appboy.sample.PushTesterFragment
 import com.appboy.sample.R
-import com.appboy.sample.activity.settings.SettingsFragment
 import com.appboy.sample.util.RuntimePermissionUtils.requestLocationPermissions
 import com.appboy.sample.util.ViewUtils
 import com.braze.Braze
@@ -110,7 +109,6 @@ class DroidBoyActivity : AppCompatActivity(), NoticeDialogListener {
         drawerLayout = findViewById(R.id.root)
         setupNewsFeedListener()
         setupNoInAppMessageTriggeredListener()
-        brazelog(I) { "Braze device id is ${Braze.getInstance(applicationContext).deviceId}" }
     }
 
     private fun setupNewsFeedListener() {
@@ -381,10 +379,6 @@ class DroidBoyActivity : AppCompatActivity(), NoticeDialogListener {
             FragmentInfo(
                 { PushTesterFragment() },
                 "Push"
-            ),
-            FragmentInfo(
-                { SettingsFragment() },
-                context.getString(R.string.settings_fragment_tab_title)
             )
         )
 

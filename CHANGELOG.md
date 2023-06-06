@@ -1,3 +1,15 @@
+## 26.0.0
+
+[Release Date](https://github.com/Appboy/appboy-android-sdk/releases/tag/v26.0.0)
+
+#### Breaking
+- Added the ability to configure link target behavior for HTML In-App Messages through `BrazeConfig.setIsHtmlInAppMessageHtmlLinkTargetEnabled()` or via adding `<bool name="com_braze_html_in_app_message_enable_html_link_target">true</bool>` to your `braze.xml`. Defaults to enabled.
+  - When enabled, a link in an In-App Message that has the link target set (e.g. `<a HREF="https://www.braze.com" target="_blank">Please Read</a>`) will open the link in a browser, but will not close the In-App Message.
+
+##### Fixed
+- Fixed an issue where a slideup In-App Message would not be auto-dismissed if the user interacted with it.
+- Fixed an issue where a user's push subscription state changed to "subscribed" instead of "opted in" upon accepting the Android 13+ push prompt.
+
 ## 25.0.0
 
 [Release Date](https://github.com/braze-inc/braze-android-sdk/releases/tag/v25.0.0)
@@ -26,7 +38,6 @@ Our SDK is now hosted in Maven Central. You can remove `https://braze-inc.github
 - Added `@JvmStatic` to `com.braze.push.BrazeHuaweiPushHandler.handleHmsRemoteMessageData()`.
 - Fixed an issue where notification extra data was not being passed along in Push Story main image clicks.
 - Fixed an issue where ContentCardAdapter was not properly handling bad indexes being passed in.
-- Fixed an issue where a user's push subscription state would not change to "opted in" upon accepting the Android 13+ push prompt.
 
 ##### Added
 - Added the ability to configure dismissal of Push Stories on click by adding `BrazeConfig.setDoesPushStoryDismissOnClick()` or `<bool name="com_braze_does_push_story_dismiss_on_click">true</bool>` to your `braze.xml`. Defaults to true.

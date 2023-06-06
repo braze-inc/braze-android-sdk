@@ -88,8 +88,9 @@ open class DefaultInAppMessageViewWrapper @JvmOverloads constructor(
             val touchAwareSwipeListener = TouchAwareSwipeDismissTouchListener(
                 inAppMessageView, dismissCallbacks
             )
-            // We set a custom touch listener that cancel the auto close runnable when touched and adds
-            // a new runnable when the touch ends.
+            // We no longer set a custom touch listener that cancels the auto close runnable when
+            // touched and adds a new runnable when the touch ends. However, this code should be
+            // left here in case any clients have overridden [createTouchAwareListener]
             touchAwareSwipeListener.setTouchListener(createTouchAwareListener())
             clickableInAppMessageView?.setOnTouchListener(touchAwareSwipeListener)
         }
@@ -423,15 +424,9 @@ open class DefaultInAppMessageViewWrapper @JvmOverloads constructor(
 
     open fun createTouchAwareListener(): ITouchListener {
         return object : ITouchListener {
-            override fun onTouchStartedOrContinued() {
-                inAppMessageView.removeCallbacks(dismissRunnable)
-            }
+            override fun onTouchStartedOrContinued() {}
 
-            override fun onTouchEnded() {
-                if (inAppMessage.dismissType === DismissType.AUTO_DISMISS) {
-                    addDismissRunnable()
-                }
-            }
+            override fun onTouchEnded() {}
         }
     }
 

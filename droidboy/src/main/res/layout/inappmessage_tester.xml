@@ -282,6 +282,10 @@
           android:id="@+id/enable_tap_outside_modal_dismiss_behavior"
           style="@style/BaseWidget.InAppMessageTesterCheckBox"
           android:text="@string/enable_tap_outside_modal_dismiss_behavior" />
+        <CheckBox
+          android:id="@+id/enable_push_primer_in_html"
+          style="@style/BaseWidget.InAppMessageTesterCheckBox"
+          android:text="@string/enable_push_primer_in_html" />
       </LinearLayout>
     </LinearLayout>
   </ScrollView>

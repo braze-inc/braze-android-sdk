@@ -98,6 +98,13 @@
         <action android:name="android.intent.action.BOOT_COMPLETED" />
       </intent-filter>
     </receiver>
+    <receiver
+      android:name="com.braze.BrazeFlushPushDeliveryReceiver"
+      android:exported="false">
+        <intent-filter>
+            <action android:name="com.braze.FLUSH_EVENTS" />
+        </intent-filter>
+    </receiver>
     <service
       android:name="com.braze.push.BrazeFirebaseMessagingService"
       android:exported="false">
