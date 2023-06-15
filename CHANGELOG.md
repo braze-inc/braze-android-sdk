@@ -1,3 +1,18 @@
+## 26.1.0
+
+[Release Date](https://github.com/braze-inc/braze-android-sdk/releases/tag/v26.1.0)
+
+##### Important
+- This release includes support for Android 14 (Upside Down Cake / API 34).
+
+##### Added
+- Added `verticalAccuracy` to location information.
+  - `BrazeUser.setLastKnownLocation` now accepts verticalAccuracy.
+  - Updates through Braze location APIs will automatically include verticalAccuracy if the device supports it.
+
+##### Changed
+- Changed target API for the SDK to 34.
+
 ## 26.0.0
 
 [Release Date](https://github.com/braze-inc/braze-android-sdk/releases/tag/v26.0.0)
