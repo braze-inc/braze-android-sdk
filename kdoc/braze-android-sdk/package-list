@@ -289,6 +289,7 @@ $dokka.location:com.braze.enums/BrazeSdkMetadata.NUGET///PointingToDeclaration/{
 $dokka.location:com.braze.enums/BrazeSdkMetadata.PUB///PointingToDeclaration/{"org.jetbrains.dokka.links.EnumEntryDRIExtra":{"key":"org.jetbrains.dokka.links.EnumEntryDRIExtra"}}braze-android-sdk/com.braze.enums/-braze-sdk-metadata/-p-u-b/index.html
 $dokka.location:com.braze.enums/BrazeSdkMetadata.RADAR///PointingToDeclaration/{"org.jetbrains.dokka.links.EnumEntryDRIExtra":{"key":"org.jetbrains.dokka.links.EnumEntryDRIExtra"}}braze-android-sdk/com.braze.enums/-braze-sdk-metadata/-r-a-d-a-r/index.html
 $dokka.location:com.braze.enums/BrazeSdkMetadata.REACTNATIVE///PointingToDeclaration/{"org.jetbrains.dokka.links.EnumEntryDRIExtra":{"key":"org.jetbrains.dokka.links.EnumEntryDRIExtra"}}braze-android-sdk/com.braze.enums/-braze-sdk-metadata/-r-e-a-c-t-n-a-t-i-v-e/index.html
+$dokka.location:com.braze.enums/BrazeSdkMetadata.REACTNATIVENEWARCH///PointingToDeclaration/{"org.jetbrains.dokka.links.EnumEntryDRIExtra":{"key":"org.jetbrains.dokka.links.EnumEntryDRIExtra"}}braze-android-sdk/com.braze.enums/-braze-sdk-metadata/-r-e-a-c-t-n-a-t-i-v-e-n-e-w-a-r-c-h/index.html
 $dokka.location:com.braze.enums/BrazeSdkMetadata.SEGMENT///PointingToDeclaration/{"org.jetbrains.dokka.links.EnumEntryDRIExtra":{"key":"org.jetbrains.dokka.links.EnumEntryDRIExtra"}}braze-android-sdk/com.braze.enums/-braze-sdk-metadata/-s-e-g-m-e-n-t/index.html
 $dokka.location:com.braze.enums/BrazeSdkMetadata.SINGULAR///PointingToDeclaration/{"org.jetbrains.dokka.links.EnumEntryDRIExtra":{"key":"org.jetbrains.dokka.links.EnumEntryDRIExtra"}}braze-android-sdk/com.braze.enums/-braze-sdk-metadata/-s-i-n-g-u-l-a-r/index.html
 $dokka.location:com.braze.enums/BrazeSdkMetadata.SPM///PointingToDeclaration/{"org.jetbrains.dokka.links.EnumEntryDRIExtra":{"key":"org.jetbrains.dokka.links.EnumEntryDRIExtra"}}braze-android-sdk/com.braze.enums/-braze-sdk-metadata/-s-p-m/index.html
@@ -932,13 +933,14 @@ $dokka.location:com.braze.models.outgoing/AttributionData/AttributionData/#kotli
 $dokka.location:com.braze.models.outgoing/AttributionData/forJsonPut/#/PointingToDeclaration/braze-android-sdk/com.braze.models.outgoing/-attribution-data/for-json-put.html
 $dokka.location:com.braze.models.outgoing/BrazeLocation///PointingToDeclaration/braze-android-sdk/com.braze.models.outgoing/-braze-location/index.html
 $dokka.location:com.braze.models.outgoing/BrazeLocation/BrazeLocation/#android.location.Location/PointingToDeclaration/braze-android-sdk/com.braze.models.outgoing/-braze-location/-braze-location.html
-$dokka.location:com.braze.models.outgoing/BrazeLocation/BrazeLocation/#kotlin.Double#kotlin.Double#kotlin.Double?#kotlin.Double?/PointingToDeclaration/braze-android-sdk/com.braze.models.outgoing/-braze-location/-braze-location.html
+$dokka.location:com.braze.models.outgoing/BrazeLocation/BrazeLocation/#kotlin.Double#kotlin.Double#kotlin.Double?#kotlin.Double?#kotlin.Double?/PointingToDeclaration/braze-android-sdk/com.braze.models.outgoing/-braze-location/-braze-location.html
 $dokka.location:com.braze.models.outgoing/BrazeLocation/BrazeLocation/#org.json.JSONObject/PointingToDeclaration/braze-android-sdk/com.braze.models.outgoing/-braze-location/-braze-location.html
 $dokka.location:com.braze.models.outgoing/BrazeLocation/accuracy/#/PointingToDeclaration/braze-android-sdk/com.braze.models.outgoing/-braze-location/accuracy.html
 $dokka.location:com.braze.models.outgoing/BrazeLocation/altitude/#/PointingToDeclaration/braze-android-sdk/com.braze.models.outgoing/-braze-location/altitude.html
 $dokka.location:com.braze.models.outgoing/BrazeLocation/forJsonPut/#/PointingToDeclaration/braze-android-sdk/com.braze.models.outgoing/-braze-location/for-json-put.html
 $dokka.location:com.braze.models.outgoing/BrazeLocation/latitude/#/PointingToDeclaration/braze-android-sdk/com.braze.models.outgoing/-braze-location/latitude.html
 $dokka.location:com.braze.models.outgoing/BrazeLocation/longitude/#/PointingToDeclaration/braze-android-sdk/com.braze.models.outgoing/-braze-location/longitude.html
+$dokka.location:com.braze.models.outgoing/BrazeLocation/verticalAccuracy/#/PointingToDeclaration/braze-android-sdk/com.braze.models.outgoing/-braze-location/vertical-accuracy.html
 $dokka.location:com.braze.models.outgoing/BrazeProperties.Companion///PointingToDeclaration/braze-android-sdk/com.braze.models.outgoing/-braze-properties/-companion/index.html
 $dokka.location:com.braze.models.outgoing/BrazeProperties.Companion/isValidKey/#kotlin.String/PointingToDeclaration/braze-android-sdk/com.braze.models.outgoing/-braze-properties/-companion/is-valid-key.html
 $dokka.location:com.braze.models.outgoing/BrazeProperties///PointingToDeclaration/braze-android-sdk/com.braze.models.outgoing/-braze-properties/index.html
@@ -1102,11 +1104,13 @@ $dokka.location:com.braze.models/IBrazeLocation.Companion/ACCURACY/#/PointingToD
 $dokka.location:com.braze.models/IBrazeLocation.Companion/ALTITUDE/#/PointingToDeclaration/braze-android-sdk/com.braze.models/-i-braze-location/-companion/-a-l-t-i-t-u-d-e.html
 $dokka.location:com.braze.models/IBrazeLocation.Companion/LATITUDE/#/PointingToDeclaration/braze-android-sdk/com.braze.models/-i-braze-location/-companion/-l-a-t-i-t-u-d-e.html
 $dokka.location:com.braze.models/IBrazeLocation.Companion/LONGITUDE/#/PointingToDeclaration/braze-android-sdk/com.braze.models/-i-braze-location/-companion/-l-o-n-g-i-t-u-d-e.html
+$dokka.location:com.braze.models/IBrazeLocation.Companion/VERTICAL_ACCURACY/#/PointingToDeclaration/braze-android-sdk/com.braze.models/-i-braze-location/-companion/-v-e-r-t-i-c-a-l_-a-c-c-u-r-a-c-y.html
 $dokka.location:com.braze.models/IBrazeLocation///PointingToDeclaration/braze-android-sdk/com.braze.models/-i-braze-location/index.html
 $dokka.location:com.braze.models/IBrazeLocation/accuracy/#/PointingToDeclaration/braze-android-sdk/com.braze.models/-i-braze-location/accuracy.html
 $dokka.location:com.braze.models/IBrazeLocation/altitude/#/PointingToDeclaration/braze-android-sdk/com.braze.models/-i-braze-location/altitude.html
 $dokka.location:com.braze.models/IBrazeLocation/latitude/#/PointingToDeclaration/braze-android-sdk/com.braze.models/-i-braze-location/latitude.html
 $dokka.location:com.braze.models/IBrazeLocation/longitude/#/PointingToDeclaration/braze-android-sdk/com.braze.models/-i-braze-location/longitude.html
+$dokka.location:com.braze.models/IBrazeLocation/verticalAccuracy/#/PointingToDeclaration/braze-android-sdk/com.braze.models/-i-braze-location/vertical-accuracy.html
 $dokka.location:com.braze.models/IPutIntoJson///PointingToDeclaration/braze-android-sdk/com.braze.models/-i-put-into-json/index.html
 $dokka.location:com.braze.models/IPutIntoJson/forJsonPut/#/PointingToDeclaration/braze-android-sdk/com.braze.models/-i-put-into-json/for-json-put.html
 $dokka.location:com.braze.push.support////PointingToDeclaration/braze-android-sdk/com.braze.push.support/index.html
@@ -2191,7 +2195,7 @@ $dokka.location:com.braze/BrazeUser/setFirstName/#kotlin.String?/PointingToDecla
 $dokka.location:com.braze/BrazeUser/setGender/#com.braze.enums.Gender/PointingToDeclaration/braze-android-sdk/com.braze/-braze-user/set-gender.html
 $dokka.location:com.braze/BrazeUser/setHomeCity/#kotlin.String?/PointingToDeclaration/braze-android-sdk/com.braze/-braze-user/set-home-city.html
 $dokka.location:com.braze/BrazeUser/setLanguage/#kotlin.String?/PointingToDeclaration/braze-android-sdk/com.braze/-braze-user/set-language.html
-$dokka.location:com.braze/BrazeUser/setLastKnownLocation/#kotlin.Double#kotlin.Double#kotlin.Double?#kotlin.Double?/PointingToDeclaration/braze-android-sdk/com.braze/-braze-user/set-last-known-location.html
+$dokka.location:com.braze/BrazeUser/setLastKnownLocation/#kotlin.Double#kotlin.Double#kotlin.Double?#kotlin.Double?#kotlin.Double?/PointingToDeclaration/braze-android-sdk/com.braze/-braze-user/set-last-known-location.html
 $dokka.location:com.braze/BrazeUser/setLastName/#kotlin.String?/PointingToDeclaration/braze-android-sdk/com.braze/-braze-user/set-last-name.html
 $dokka.location:com.braze/BrazeUser/setLocationCustomAttribute/#kotlin.String#kotlin.Double#kotlin.Double/PointingToDeclaration/braze-android-sdk/com.braze/-braze-user/set-location-custom-attribute.html
 $dokka.location:com.braze/BrazeUser/setPhoneNumber/#kotlin.String?/PointingToDeclaration/braze-android-sdk/com.braze/-braze-user/set-phone-number.html
