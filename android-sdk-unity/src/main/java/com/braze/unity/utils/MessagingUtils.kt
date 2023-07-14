@@ -1,12 +1,13 @@
 package com.braze.unity.utils
 
 import android.os.Bundle
-import com.braze.events.FeedUpdatedEvent
 import com.braze.events.BrazePushEvent
 import com.braze.events.BrazeSdkAuthenticationErrorEvent
 import com.braze.events.ContentCardsUpdatedEvent
 import com.braze.events.FeatureFlagsUpdatedEvent
+import com.braze.events.FeedUpdatedEvent
 import com.braze.models.inappmessage.IInAppMessage
+import com.braze.support.BrazeLogger.Priority.V
 import com.braze.support.BrazeLogger.brazelog
 import com.braze.support.BrazeLogger.getBrazeLogTag
 import com.braze.support.constructJsonArray
@@ -15,7 +16,7 @@ import org.json.JSONObject
 
 object MessagingUtils {
     private val TAG = getBrazeLogTag(MessagingUtils::class.java)
-    private const val BRAZE_INTERNAL_GAME_OBJECT = "BrazeInternalComponent"
+    private const val BRAZE_INTERNAL_GAME_OBJECT = "BrazeInternalCallback"
 
     enum class BrazeInternalComponentMethod(val methodName: String) {
         BEFORE_IAM_DISPLAYED("beforeInAppMessageDisplayed"),
@@ -191,6 +192,7 @@ object MessagingUtils {
      * Sends some structured data to the BrazeInternalComponent in C# in the Unity binding.
      */
     fun sendToBrazeInternalComponent(method: BrazeInternalComponentMethod, json: String) {
+        brazelog(TAG, V) { "Sending a Braze Internal Component message to $BRAZE_INTERNAL_GAME_OBJECT:${method.methodName} with json: $json" }
         UnityPlayer.UnitySendMessage(BRAZE_INTERNAL_GAME_OBJECT, method.methodName, json)
     }
 

@@ -4,10 +4,6 @@ import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import com.braze.unity.configuration.UnityConfigurationProvider
-import com.braze.unity.enums.UnityInAppMessageManagerAction
-import com.braze.unity.utils.MessagingUtils
-import com.braze.unity.utils.MessagingUtils.BrazeInternalComponentMethod
 import com.braze.Braze
 import com.braze.models.inappmessage.IInAppMessage
 import com.braze.models.inappmessage.MessageButton
@@ -19,6 +15,10 @@ import com.braze.ui.inappmessage.BrazeInAppMessageManager
 import com.braze.ui.inappmessage.InAppMessageOperation
 import com.braze.ui.inappmessage.listeners.DefaultHtmlInAppMessageActionListener
 import com.braze.ui.inappmessage.listeners.DefaultInAppMessageManagerListener
+import com.braze.unity.configuration.UnityConfigurationProvider
+import com.braze.unity.enums.UnityInAppMessageManagerAction
+import com.braze.unity.utils.MessagingUtils
+import com.braze.unity.utils.MessagingUtils.BrazeInternalComponentMethod
 import org.json.JSONArray
 
 /**
@@ -142,6 +142,7 @@ class BrazeUnityActivityWrapper {
             object : DefaultInAppMessageManagerListener() {
                 override fun beforeInAppMessageDisplayed(inAppMessage: IInAppMessage): InAppMessageOperation {
                     super.beforeInAppMessageDisplayed(inAppMessage)
+                    brazelog(V) { "Unity custom IAM listener method beforeInAppMessageDisplayed called." }
                     MessagingUtils.sendToBrazeInternalComponent(
                         BrazeInternalComponentMethod.BEFORE_IAM_DISPLAYED,
                         inAppMessage.forJsonPut().toString()
@@ -161,6 +162,7 @@ class BrazeUnityActivityWrapper {
 
                 override fun onInAppMessageDismissed(inAppMessage: IInAppMessage) {
                     super.onInAppMessageDismissed(inAppMessage)
+                    brazelog(V) { "Unity custom IAM listener method onInAppMessageDismissed called." }
                     MessagingUtils.sendToBrazeInternalComponent(
                         BrazeInternalComponentMethod.ON_IAM_DISMISSED,
                         inAppMessage.forJsonPut().toString()
@@ -170,6 +172,7 @@ class BrazeUnityActivityWrapper {
                 override fun onInAppMessageClicked(
                     inAppMessage: IInAppMessage,
                 ): Boolean {
+                    brazelog(V) { "Unity custom IAM listener method onInAppMessageClicked called." }
                     MessagingUtils.sendToBrazeInternalComponent(
                         BrazeInternalComponentMethod.ON_IAM_CLICKED,
                         inAppMessage.forJsonPut().toString()
@@ -181,9 +184,10 @@ class BrazeUnityActivityWrapper {
                     inAppMessage: IInAppMessage,
                     button: MessageButton
                 ): Boolean {
+                    brazelog(V) { "Unity custom IAM listener method onInAppMessageButtonClicked called." }
                     val jsonArray = JSONArray()
-                        .put(inAppMessage.forJsonPut())
-                        .put(button.forJsonPut())
+                        .put(inAppMessage.forJsonPut().toString())
+                        .put(button.id)
                     MessagingUtils.sendToBrazeInternalComponent(
                         BrazeInternalComponentMethod.ON_IAM_BUTTON_CLICKED,
                         jsonArray.toString()

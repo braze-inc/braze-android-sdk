@@ -24,13 +24,13 @@ import androidx.lifecycle.Lifecycle
 import androidx.preference.PreferenceManager
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import androidx.viewpager2.widget.ViewPager2
-import com.appboy.sample.featureflag.view.FeatureFlagFragment
 import com.appboy.sample.FeedCategoriesFragment
 import com.appboy.sample.FeedCategoriesFragment.NoticeDialogListener
 import com.appboy.sample.InAppMessageTesterFragment
 import com.appboy.sample.MainFragment
 import com.appboy.sample.PushTesterFragment
 import com.appboy.sample.R
+import com.appboy.sample.featureflag.view.FeatureFlagFragment
 import com.appboy.sample.util.RuntimePermissionUtils.requestLocationPermissions
 import com.appboy.sample.util.ViewUtils
 import com.braze.Braze
@@ -267,7 +267,7 @@ class DroidBoyActivity : AppCompatActivity(), NoticeDialogListener {
                 }
             }
             R.id.action_flush -> {
-                Braze.getInstance(this).requestContentCardsRefresh(false)
+                Braze.getInstance(this).requestContentCardsRefresh()
                 Braze.getInstance(this).requestImmediateDataFlush()
                 showToast("Requested data flush and content card sync.")
             }

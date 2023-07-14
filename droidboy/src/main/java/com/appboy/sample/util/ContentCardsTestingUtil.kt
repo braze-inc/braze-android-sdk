@@ -18,9 +18,7 @@ class ContentCardsTestingUtil private constructor() {
          * https://effigis.com/en/solutions/satellite-images/satellite-image-samples/
          */
         private val SUPER_HIGH_RESOLUTION_IMAGES = listOf(
-            "https://effigis.com/wp-content/uploads/2015/02/Airbus_Pleiades_50cm_8bit_RGB_Yogyakarta.jpg",
-            "https://effigis.com/wp-content/uploads/2015/02/DigitalGlobe_WorldView2_50cm_8bit_Pansharpened_RGB_DRA_Rome_Italy_2009DEC10_8bits_sub_r_1.jpg",
-            "https://effigis.com/wp-content/uploads/2015/02/GeoEye_Ikonos_1m_8bit_RGB_DRA_Oil_2005NOV25_8bits_r_1.jpg"
+            "https://images.unsplash.com/photo-1543314444-26a64fa5efe1"
         )
         private val random = Random()
 

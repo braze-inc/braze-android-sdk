@@ -317,7 +317,7 @@ class SettingsFragment : PreferenceFragmentCompat() {
             showToast(getString(R.string.data_flush_toast))
         }
         setClickPreference("request_cc_sync") {
-            Braze.getInstance(context).requestContentCardsRefresh(fromCache = false)
+            Braze.getInstance(context).requestContentCardsRefresh()
             showToast(getString(R.string.data_flush_toast))
         }
         setClickPreference("request_ff_sync") {

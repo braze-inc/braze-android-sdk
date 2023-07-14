@@ -129,7 +129,7 @@ open class ContentCardsFragment : Fragment(), SwipeRefreshLayout.OnRefreshListen
      * Called when the user swipes down and requests a feed refresh.
      */
     override fun onRefresh() {
-        Braze.getInstance(requireContext()).requestContentCardsRefresh(false)
+        Braze.getInstance(requireContext()).requestContentCardsRefresh()
         BrazeCoroutineScope.launchDelayed(AUTO_HIDE_REFRESH_INDICATOR_DELAY_MS) { contentCardsSwipeLayout?.isRefreshing = false }
     }
 
@@ -143,7 +143,7 @@ open class ContentCardsFragment : Fragment(), SwipeRefreshLayout.OnRefreshListen
         contentCardsUpdatedSubscriber?.let {
             Braze.getInstance(requireContext()).subscribeToContentCardsUpdates(it)
         }
-        Braze.getInstance(requireContext()).requestContentCardsRefresh(true)
+        Braze.getInstance(requireContext()).requestContentCardsRefreshFromCache()
         Braze.getInstance(requireContext()).removeSingleSubscription(sdkDataWipeEventSubscriber, SdkDataWipeEvent::class.java)
         if (sdkDataWipeEventSubscriber == null) {
             // If the SDK data is wiped, then we want to clear any cached Content Cards
@@ -289,7 +289,7 @@ open class ContentCardsFragment : Fragment(), SwipeRefreshLayout.OnRefreshListen
                     "$MAX_CONTENT_CARDS_TTL_SECONDS seconds, displaying it for now, but " +
                     "requesting an updated view from the server."
             }
-            Braze.getInstance(requireContext()).requestContentCardsRefresh(false)
+            Braze.getInstance(requireContext()).requestContentCardsRefresh()
 
             // If we don't have any cards to display, we put up the spinner while
             // we wait for the network to return.

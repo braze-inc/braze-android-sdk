@@ -1,3 +1,14 @@
+## 26.2.0
+
+[Release Date](https://github.com/braze-inc/braze-android-sdk/releases/tag/v26.2.0)
+
+##### Fixed
+- Fixed an issue with Unity not properly forwarding messages to the Braze Unity internal layer for In-App Message events.
+- Fixed an issue on Android 13+ devices where push subscriptions would be set to `OPTED_IN` on every session after the user granted push permissions. Now, the SDK sets the user to `OPTED_IN` only once immediately after the user grants push permissions.
+
+##### Changed
+- Deprecated `IBraze.requestContentCardsRefresh(boolean)` in favor of `IBraze.requestContentCardsRefresh()` and `IBraze.requestContentCardsRefreshFromCache()`.
+
 ## 26.1.0
 
 [Release Date](https://github.com/braze-inc/braze-android-sdk/releases/tag/v26.1.0)
