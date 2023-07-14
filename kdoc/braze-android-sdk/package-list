@@ -2111,7 +2111,9 @@ $dokka.location:com.braze/Braze/openSession/#android.app.Activity?/PointingToDec
 $dokka.location:com.braze/Braze/refreshFeatureFlags/#/PointingToDeclaration/braze-android-sdk/com.braze/-braze/refresh-feature-flags.html
 $dokka.location:com.braze/Braze/registeredPushToken/#/PointingToDeclaration/braze-android-sdk/com.braze/-braze/registered-push-token.html
 $dokka.location:com.braze/Braze/removeSingleSubscription/#com.braze.events.IEventSubscriber[TypeParam(bounds=[kotlin.Any?])]?#java.lang.Class[TypeParam(bounds=[kotlin.Any?])]/PointingToDeclaration/braze-android-sdk/com.braze/-braze/remove-single-subscription.html
+$dokka.location:com.braze/Braze/requestContentCardsRefresh/#/PointingToDeclaration/braze-android-sdk/com.braze/-braze/request-content-cards-refresh.html
 $dokka.location:com.braze/Braze/requestContentCardsRefresh/#kotlin.Boolean/PointingToDeclaration/braze-android-sdk/com.braze/-braze/request-content-cards-refresh.html
+$dokka.location:com.braze/Braze/requestContentCardsRefreshFromCache/#/PointingToDeclaration/braze-android-sdk/com.braze/-braze/request-content-cards-refresh-from-cache.html
 $dokka.location:com.braze/Braze/requestFeedRefresh/#/PointingToDeclaration/braze-android-sdk/com.braze/-braze/request-feed-refresh.html
 $dokka.location:com.braze/Braze/requestFeedRefreshFromCache/#/PointingToDeclaration/braze-android-sdk/com.braze/-braze/request-feed-refresh-from-cache.html
 $dokka.location:com.braze/Braze/requestGeofences/#kotlin.Double#kotlin.Double/PointingToDeclaration/braze-android-sdk/com.braze/-braze/request-geofences.html
@@ -2340,7 +2342,9 @@ $dokka.location:com.braze/IBraze/openSession/#android.app.Activity?/PointingToDe
 $dokka.location:com.braze/IBraze/refreshFeatureFlags/#/PointingToDeclaration/braze-android-sdk/com.braze/-i-braze/refresh-feature-flags.html
 $dokka.location:com.braze/IBraze/registeredPushToken/#/PointingToDeclaration/braze-android-sdk/com.braze/-i-braze/registered-push-token.html
 $dokka.location:com.braze/IBraze/removeSingleSubscription/#com.braze.events.IEventSubscriber[TypeParam(bounds=[kotlin.Any?])]?#java.lang.Class[TypeParam(bounds=[kotlin.Any?])]/PointingToDeclaration/braze-android-sdk/com.braze/-i-braze/remove-single-subscription.html
+$dokka.location:com.braze/IBraze/requestContentCardsRefresh/#/PointingToDeclaration/braze-android-sdk/com.braze/-i-braze/request-content-cards-refresh.html
 $dokka.location:com.braze/IBraze/requestContentCardsRefresh/#kotlin.Boolean/PointingToDeclaration/braze-android-sdk/com.braze/-i-braze/request-content-cards-refresh.html
+$dokka.location:com.braze/IBraze/requestContentCardsRefreshFromCache/#/PointingToDeclaration/braze-android-sdk/com.braze/-i-braze/request-content-cards-refresh-from-cache.html
 $dokka.location:com.braze/IBraze/requestFeedRefresh/#/PointingToDeclaration/braze-android-sdk/com.braze/-i-braze/request-feed-refresh.html
 $dokka.location:com.braze/IBraze/requestFeedRefreshFromCache/#/PointingToDeclaration/braze-android-sdk/com.braze/-i-braze/request-feed-refresh-from-cache.html
 $dokka.location:com.braze/IBraze/requestGeofences/#kotlin.Double#kotlin.Double/PointingToDeclaration/braze-android-sdk/com.braze/-i-braze/request-geofences.html
