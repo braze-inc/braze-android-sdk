@@ -1,3 +1,13 @@
+## 26.3.0
+
+[Release Date](https://github.com/braze-inc/braze-android-sdk/releases/tag/v26.3.0)
+
+##### Added
+- Added the ability to forward Firebase push notifications to `FirebaseMessagingService` implementations if that push notification is not a Braze notification.
+  - Configured via runtime configuration through `BrazeConfig.setFallbackFirebaseMessagingServiceEnabled()` and `BrazeConfig.setFallbackFirebaseMessagingServiceClasspath()`
+  - Can also be configured via `braze.xml` through `<bool name="com_braze_fallback_firebase_cloud_messaging_service_enabled">true</bool>` and `<string name="com_braze_fallback_firebase_cloud_messaging_service_classpath">com.company.OurFirebaseMessagingService</string>`.
+  - Defaults to false.
+
 ## 26.2.0
 
 [Release Date](https://github.com/braze-inc/braze-android-sdk/releases/tag/v26.2.0)

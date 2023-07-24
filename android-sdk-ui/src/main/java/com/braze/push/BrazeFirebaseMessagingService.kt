@@ -10,6 +10,9 @@ import com.braze.configuration.BrazeConfigurationProvider
 import com.braze.support.BrazeLogger.Priority.I
 import com.braze.support.BrazeLogger.Priority.V
 import com.braze.support.BrazeLogger.brazelog
+import com.braze.support.ReflectionUtils.constructObjectQuietly
+import com.braze.support.ReflectionUtils.getMethodQuietly
+import com.braze.support.ReflectionUtils.invokeMethodQuietly
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
 
@@ -41,17 +44,44 @@ open class BrazeFirebaseMessagingService : FirebaseMessagingService() {
 
     companion object {
         /**
+         * The [onMessageReceived] method for a [FirebaseMessagingService] class with
+         * the expected signature of `fun onMessageReceived(remoteMessage: RemoteMessage)`.
+         */
+        private const val FCM_SERVICE_OMR_METHOD = "onMessageReceived"
+
+        /**
          * Consumes an incoming [RemoteMessage] if it originated from Braze. If the [RemoteMessage] did
          * not originate from Braze, then this method does nothing and returns false.
          *
          * @param remoteMessage The [RemoteMessage] from Firebase.
          * @return true iff the [RemoteMessage] originated from Braze and was consumed. Returns false
-         * if the [RemoteMessage] did not originate from Braze or otherwise could not be forwarded.
+         * if the [RemoteMessage] did not originate from Braze or otherwise could not be handled by Braze.
          */
         @JvmStatic
         fun handleBrazeRemoteMessage(context: Context, remoteMessage: RemoteMessage): Boolean {
             if (!isBrazePushNotification(remoteMessage)) {
-                brazelog(I) { "Remote message did not originate from Braze. Not consuming remote message: $remoteMessage" }
+                brazelog(I) {
+                    "Remote message did not originate from Braze. Not " +
+                        "consuming remote message: $remoteMessage"
+                }
+
+                val configurationProvider = BrazeConfigurationProvider(context)
+                if (configurationProvider.isFallbackFirebaseMessagingServiceEnabled) {
+                    val fallbackClassPath = configurationProvider.fallbackFirebaseMessagingServiceClasspath
+                    if (fallbackClassPath != null) {
+                        brazelog(I) {
+                            "Fallback FCM service enabled. Attempting to use " +
+                                "fallback class at $fallbackClassPath"
+                        }
+                        invokeFallbackFirebaseService(fallbackClassPath, remoteMessage)
+                    } else {
+                        brazelog {
+                            "Fallback FCM service enabled but classpath " +
+                                "is null. Not routing to any fallback service."
+                        }
+                    }
+                }
+
                 return false
             }
             val remoteMessageData = remoteMessage.data
@@ -79,6 +109,28 @@ open class BrazeFirebaseMessagingService : FirebaseMessagingService() {
         fun isBrazePushNotification(remoteMessage: RemoteMessage): Boolean {
             val remoteMessageData = remoteMessage.data
             return "true" == remoteMessageData[Constants.BRAZE_PUSH_BRAZE_KEY]
+        }
+
+        /**
+         * Invokes the [FCM_SERVICE_OMR_METHOD] method of the argument class with the provided
+         * [RemoteMessage].
+         */
+        internal fun invokeFallbackFirebaseService(classpath: String, remoteMessage: RemoteMessage) {
+            val fallbackObject = constructObjectQuietly(classpath)
+            if (fallbackObject == null) {
+                brazelog { "Fallback firebase messaging service $classpath could not be constructed. Not routing fallback RemoteMessage." }
+                return
+            }
+            val method = getMethodQuietly(classpath, FCM_SERVICE_OMR_METHOD, RemoteMessage::class.java)
+            if (method == null) {
+                brazelog {
+                    "Fallback firebase messaging service method $classpath.$FCM_SERVICE_OMR_METHOD " +
+                        "could not be retrieved. Not routing fallback RemoteMessage."
+                }
+                return
+            }
+            brazelog { "Attempting to invoke firebase messaging fallback service $classpath.$FCM_SERVICE_OMR_METHOD" }
+            invokeMethodQuietly(fallbackObject, method, remoteMessage)
         }
     }
 }
