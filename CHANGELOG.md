@@ -1,3 +1,10 @@
+## 26.3.1
+
+[Release Date](https://github.com/braze-inc/braze-android-sdk/releases/tag/v26.3.1)
+
+##### Fixed
+- Internal bug fixes for an upcoming Braze push feature.
+
 ## 26.3.0
 
 [Release Date](https://github.com/braze-inc/braze-android-sdk/releases/tag/v26.3.0)
