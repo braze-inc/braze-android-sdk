@@ -14,7 +14,7 @@ project.tasks.whenTaskAdded { task ->
   var tn = task.name.toLowerCase()
   if (tn.contains("kotlin")) {
     kotlinOptions {
-      allWarningsAsErrors = !tn.contains("debug")
+      allWarningsAsErrors = !tn.contains("debug") && !tn.contains("unittest")
     }
   }
 }

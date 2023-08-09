@@ -4,14 +4,10 @@ import android.app.Application;
 import android.content.res.Resources;
 import android.util.Log;
 
-import com.appboy.helloworld.R;
 import com.braze.Braze;
 import com.braze.BrazeActivityLifecycleCallbackListener;
 import com.braze.configuration.BrazeConfig;
 import com.braze.support.BrazeLogger;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class CustomApplication extends Application {
 

@@ -58,15 +58,15 @@ object RuntimePermissionUtils {
     @JvmStatic
     fun requestLocationPermissions(
         activity: Activity,
-        permissions: Array<String?>,
-        multiplePermissionLauncher: ActivityResultLauncher<Array<String?>?>
+        permissions: Array<String>,
+        multiplePermissionLauncher: ActivityResultLauncher<Array<String>>
     ) {
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M || permissions.size <= 1) {
             return
         }
         var isExplanationNeeded = false
         for (permission in permissions) {
-            if (permission != null && activity.shouldShowRequestPermissionRationale(permission)) {
+            if (activity.shouldShowRequestPermissionRationale(permission)) {
                 isExplanationNeeded = true
                 break
             }

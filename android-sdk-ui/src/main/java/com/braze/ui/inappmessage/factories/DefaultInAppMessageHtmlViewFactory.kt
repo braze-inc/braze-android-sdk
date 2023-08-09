@@ -2,12 +2,12 @@ package com.braze.ui.inappmessage.factories
 
 import android.annotation.SuppressLint
 import android.app.Activity
-import com.braze.ui.R
 import com.braze.configuration.BrazeConfigurationProvider
 import com.braze.models.inappmessage.IInAppMessage
 import com.braze.models.inappmessage.InAppMessageHtml
 import com.braze.support.BrazeLogger.Priority.W
 import com.braze.support.BrazeLogger.brazelog
+import com.braze.ui.R
 import com.braze.ui.inappmessage.IInAppMessageViewFactory
 import com.braze.ui.inappmessage.jsinterface.InAppMessageJavascriptInterface
 import com.braze.ui.inappmessage.listeners.IInAppMessageWebViewClientListener
@@ -52,6 +52,7 @@ open class DefaultInAppMessageHtmlViewFactory(private val inAppMessageWebViewCli
             javascriptInterface,
             InAppMessageHtmlBaseView.BRAZE_BRIDGE_PREFIX
         )
+        view.setupDirectionalNavigation()
         return view
     }
 }

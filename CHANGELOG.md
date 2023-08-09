@@ -1,3 +1,13 @@
+## 27.0.0
+
+[Release Date](https://github.com/braze-inc/braze-android-sdk/releases/tag/v27.0.0)
+
+#### Breaking
+- Removed `IInAppMessage.logDisplayFailure()`.
+
+##### Fixed
+- Fixed the behavior of HTML In-App messages to restrict remote navigation inputs to their display WebView during message display on non touch-mode devices.
+
 ## 26.3.1
 
 [Release Date](https://github.com/braze-inc/braze-android-sdk/releases/tag/v26.3.1)

@@ -20,10 +20,10 @@ import android.widget.RelativeLayout;
 import androidx.core.view.GestureDetectorCompat;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
-import com.braze.events.FeedUpdatedEvent;
 import com.braze.Braze;
 import com.braze.IBraze;
 import com.braze.enums.CardCategory;
+import com.braze.events.FeedUpdatedEvent;
 import com.braze.events.IEventSubscriber;
 import com.braze.support.BrazeLogger;
 import com.braze.ui.adapters.BrazeListAdapter;
@@ -31,7 +31,7 @@ import com.braze.ui.adapters.BrazeListAdapter;
 import java.util.ArrayList;
 import java.util.EnumSet;
 
-@SuppressWarnings({"PMD.UnnecessaryConstructor", "deprecation"})
+@SuppressWarnings({"deprecation"})
 public class BrazeXamarinFormsFeedFragment extends android.app.ListFragment implements SwipeRefreshLayout.OnRefreshListener {
   private static final String TAG = BrazeLogger.getBrazeLogTag(BrazeXamarinFormsFeedFragment.class);
   private static final int NETWORK_PROBLEM_WARNING_MS = 5000;

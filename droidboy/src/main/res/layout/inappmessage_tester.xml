@@ -23,6 +23,8 @@
       android:text="@string/hide_current_inappmessage" />
   </LinearLayout>
   <ScrollView
+    android:layout_marginLeft="20dp"
+    android:layout_marginRight="20dp"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_above="@id/inappmessage_buttons"

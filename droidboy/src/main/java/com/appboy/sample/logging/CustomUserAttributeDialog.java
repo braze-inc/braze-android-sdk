@@ -115,22 +115,18 @@ public class CustomUserAttributeDialog extends CustomDialogBase {
         customAttributeArrayValue = EMPTY_STRING;
       }
       BrazeUser brazeUser = Braze.getInstance(getContext()).getCurrentUser();
-      switch (attributeArrayResourceId) {
-        case R.id.custom_attribute_array_set:
-          String[] attributeArray = {customAttributeArrayValue};
-          notifyResult(brazeUser.setCustomAttributeArray(customAttributeArrayKey, attributeArray),
-              "setCustomAttributeArray! Setting new array key=" + customAttributeArrayKey + ", values={" + customAttributeArrayValue + "}");
-          break;
-        case R.id.custom_attribute_array_add:
-          notifyResult(brazeUser.addToCustomAttributeArray(customAttributeArrayKey, customAttributeArrayValue),
-              "addToCustomAttributeArray! Adding value=" + customAttributeArrayValue + " to array with key=" + customAttributeArrayKey + ".");
-          break;
-        case R.id.custom_attribute_array_remove:
-          notifyResult(brazeUser.removeFromCustomAttributeArray(customAttributeArrayKey, customAttributeArrayValue),
-              "removeFromCustomAttributeArray! Will remove value=" + customAttributeArrayValue + " from array with key=" + customAttributeArrayKey + ".");
-          break;
-        default:
-          notifyResult(false, "Error parsing attribute array radio button: " + attributeArrayResourceId);
+      if (attributeArrayResourceId == R.id.custom_attribute_array_set) {
+        String[] attributeArray = {customAttributeArrayValue};
+        notifyResult(brazeUser.setCustomAttributeArray(customAttributeArrayKey, attributeArray),
+            "setCustomAttributeArray! Setting new array key=" + customAttributeArrayKey + ", values={" + customAttributeArrayValue + "}");
+      } else if (attributeArrayResourceId == R.id.custom_attribute_array_add) {
+        notifyResult(brazeUser.addToCustomAttributeArray(customAttributeArrayKey, customAttributeArrayValue),
+            "addToCustomAttributeArray! Adding value=" + customAttributeArrayValue + " to array with key=" + customAttributeArrayKey + ".");
+      } else if (attributeArrayResourceId == R.id.custom_attribute_array_remove) {
+        notifyResult(brazeUser.removeFromCustomAttributeArray(customAttributeArrayKey, customAttributeArrayValue),
+            "removeFromCustomAttributeArray! Will remove value=" + customAttributeArrayValue + " from array with key=" + customAttributeArrayKey + ".");
+      } else {
+        notifyResult(false, "Error parsing attribute array radio button: " + attributeArrayResourceId);
       }
     }
 

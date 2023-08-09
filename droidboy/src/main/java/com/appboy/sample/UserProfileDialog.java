@@ -16,12 +16,12 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import com.braze.enums.Gender;
-import com.braze.enums.Month;
 import com.appboy.sample.dialog.CustomDialogBase;
 import com.appboy.sample.util.ButtonUtils;
 import com.braze.Braze;
 import com.braze.BrazeUser;
+import com.braze.enums.Gender;
+import com.braze.enums.Month;
 import com.braze.support.BrazeLogger;
 import com.braze.support.StringUtils;
 
@@ -115,18 +115,13 @@ public class UserProfileDialog extends CustomDialogBase implements View.OnClickL
 
   @Override
   public void onClick(View view) {
-    switch (view.getId()) {
-      case R.id.user_dialog_button_clear:
-        clear();
-        break;
-      case R.id.user_dialog_button_populate:
-        populate();
-        break;
-      case R.id.birthday_button:
-        mDatePickerDialog.show();
-        break;
-      default:
-        break;
+    int id = view.getId();
+    if (id == R.id.user_dialog_button_clear) {
+      clear();
+    } else if (id == R.id.user_dialog_button_populate) {
+      populate();
+    } else if (id == R.id.birthday_button) {
+      mDatePickerDialog.show();
     }
   }
 

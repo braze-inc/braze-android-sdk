@@ -2,6 +2,7 @@ apply plugin: 'com.android.application'
 apply from: rootProject.file("config/buildscript/break-compile-on-deprecations.gradle")
 
 android {
+  namespace "com.braze.firebasepush"
   compileSdkVersion rootProject.ext.compileSdkVersion
   buildToolsVersion rootProject.ext.buildToolsVersion
 
@@ -13,10 +14,15 @@ android {
     versionName "1.0"
   }
   buildTypes {
+    debug {
+      multiDexEnabled true
+      debuggable true
+    }
     release {
       minifyEnabled true
       signingConfig signingConfigs.debug
       debuggable true
+      multiDexEnabled true
     }
   }
 

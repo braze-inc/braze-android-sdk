@@ -6,6 +6,7 @@ import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.Color
 import android.net.Uri
+import android.os.Build
 import android.os.Message
 import android.util.AttributeSet
 import android.view.KeyEvent
@@ -19,8 +20,8 @@ import androidx.core.view.WindowInsetsCompat
 import androidx.webkit.WebSettingsCompat
 import androidx.webkit.WebViewFeature
 import com.braze.configuration.BrazeConfigurationProvider
-import com.braze.support.BrazeLogger.Priority.V
 import com.braze.support.BrazeLogger.Priority.E
+import com.braze.support.BrazeLogger.Priority.V
 import com.braze.support.BrazeLogger.Priority.W
 import com.braze.support.BrazeLogger.brazelog
 import com.braze.ui.inappmessage.BrazeInAppMessageManager
@@ -146,16 +147,19 @@ abstract class InAppMessageHtmlBaseView(context: Context?, attrs: AttributeSet?)
                                 val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse(data))
                                 context.startActivity(browserIntent)
                             }
+
                             HitTestResult.EMAIL_TYPE -> {
                                 val data = WebView.SCHEME_MAILTO + result.extra
                                 val emailIntent = Intent(Intent.ACTION_VIEW, Uri.parse(data))
                                 context.startActivity(emailIntent)
                             }
+
                             HitTestResult.PHONE_TYPE -> {
                                 val data = WebView.SCHEME_TEL + result.extra
                                 val telIntent = Intent(Intent.ACTION_VIEW, Uri.parse(data))
                                 context.startActivity(telIntent)
                             }
+
                             else -> {
                                 brazelog(V) {
                                     "onCreateWindow: hitTestResult type was ${result.type}. " +
@@ -167,9 +171,9 @@ abstract class InAppMessageHtmlBaseView(context: Context?, attrs: AttributeSet?)
                     }
                 }
 
+                // This bitmap is used to eliminate the default black & white
+                // play icon used as the default poster.
                 override fun getDefaultVideoPoster() =
-                    // This bitmap is used to eliminate the default black & white
-                    // play icon used as the default poster.
                     Bitmap.createBitmap(1, 1, Bitmap.Config.ARGB_8888)
             }
             configuredMessageWebView = webView
@@ -287,6 +291,31 @@ abstract class InAppMessageHtmlBaseView(context: Context?, attrs: AttributeSet?)
             getMaxSafeRightInset(insets) + layoutParams.rightMargin,
             getMaxSafeBottomInset(insets) + layoutParams.bottomMargin
         )
+    }
+
+    /**
+     * Sets up the directional navigation pointers needed to support d-pad/TV-remote
+     * navigation of the in-app message.
+     *
+     * See https://developer.android.com/training/keyboard-input/navigation#Direction
+     */
+    fun setupDirectionalNavigation() {
+        val webView = messageWebView ?: return
+        // If a remote control or keyboard is used to try and leave the webview,
+        // keep focus on it. This does not prevent focus from moving around
+        // within the webview
+        webView.nextFocusDownId = webView.id
+        webView.nextFocusLeftId = webView.id
+        webView.nextFocusRightId = webView.id
+        webView.nextFocusUpId = webView.id
+
+        webView.requestFocus()
+
+        // Request focus for the default view
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            webView.isFocusedByDefault = true
+        }
+        webView.post { webView.requestFocus() }
     }
 
     companion object {

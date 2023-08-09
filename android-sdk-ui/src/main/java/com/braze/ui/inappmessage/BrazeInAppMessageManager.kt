@@ -8,7 +8,6 @@ import androidx.annotation.VisibleForTesting
 import com.braze.Braze.Companion.getInstance
 import com.braze.BrazeInternal.retryInAppMessage
 import com.braze.configuration.BrazeConfigurationProvider
-import com.braze.enums.inappmessage.InAppMessageFailureType
 import com.braze.enums.inappmessage.Orientation
 import com.braze.events.IEventSubscriber
 import com.braze.events.InAppMessageEvent
@@ -497,21 +496,18 @@ open class BrazeInAppMessageManager : InAppMessageManagerBase() {
             }
             val inAppMessageViewFactory = getInAppMessageViewFactory(inAppMessage)
             if (inAppMessageViewFactory == null) {
-                inAppMessage.logDisplayFailure(InAppMessageFailureType.DISPLAY_VIEW_GENERATION)
                 throw Exception("ViewFactory from getInAppMessageViewFactory was null.")
             }
             val inAppMessageView = inAppMessageViewFactory.createInAppMessageView(
                 activity, inAppMessage
             )
             if (inAppMessageView == null) {
-                inAppMessage.logDisplayFailure(InAppMessageFailureType.DISPLAY_VIEW_GENERATION)
                 throw Exception(
                     "The in-app message view returned from the IInAppMessageViewFactory was null. " +
                         "The in-app message will not be displayed and will not be put back on the stack."
                 )
             }
             if (inAppMessageView.parent != null) {
-                inAppMessage.logDisplayFailure(InAppMessageFailureType.DISPLAY_VIEW_GENERATION)
                 throw Exception(
                     "The in-app message view returned from the IInAppMessageViewFactory already has a parent. This " +
                         "is a sign that the view is being reused. The IInAppMessageViewFactory method createInAppMessageView" +

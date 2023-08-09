@@ -5,7 +5,6 @@ import androidx.annotation.VisibleForTesting
 import com.braze.Braze
 import com.braze.coroutine.BrazeCoroutineScope
 import com.braze.enums.BrazeViewBounds
-import com.braze.enums.inappmessage.InAppMessageFailureType
 import com.braze.enums.inappmessage.MessageType
 import com.braze.images.IBrazeImageLoader
 import com.braze.models.inappmessage.IInAppMessage
@@ -59,8 +58,7 @@ object BackgroundInAppMessagePreparer {
                     inAppMessageToPrepare as IInAppMessageZippedAssetHtml
                 )
             ) {
-                brazelog(W) { "Logging html in-app message zip asset download failure" }
-                inAppMessageToPrepare.logDisplayFailure(InAppMessageFailureType.ZIP_ASSET_DOWNLOAD)
+                brazelog(W) { "Html in-app message zip asset download failed. Cannot display in-app message." }
                 return null
             }
             MessageType.HTML -> prepareInAppMessageWithHtml(inAppMessageToPrepare as InAppMessageHtml)
@@ -68,8 +66,7 @@ object BackgroundInAppMessagePreparer {
                 val didImageDownloadSucceed =
                     prepareInAppMessageWithBitmapDownload(inAppMessageToPrepare)
                 if (!didImageDownloadSucceed) {
-                    brazelog(W) { "Logging in-app message image download failure" }
-                    inAppMessageToPrepare.logDisplayFailure(InAppMessageFailureType.IMAGE_DOWNLOAD)
+                    brazelog(W) { "In-app message image download failed. Cannot display in-app message." }
                     return null
                 }
             }

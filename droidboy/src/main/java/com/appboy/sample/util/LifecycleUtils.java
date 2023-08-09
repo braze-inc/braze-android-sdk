@@ -10,7 +10,6 @@ import com.appboy.sample.activity.DroidBoyActivity;
 import com.braze.support.BrazeLogger;
 import com.braze.support.IntentUtils;
 
-@SuppressWarnings("PMD.DoNotCallSystemExit")
 public class LifecycleUtils {
   private static final String TAG = BrazeLogger.getBrazeLogTag(LifecycleUtils.class);
 

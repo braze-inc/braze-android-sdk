@@ -225,7 +225,7 @@ open class DefaultInAppMessageViewWrapper @JvmOverloads constructor(
             ViewCompat.setOnApplyWindowInsetsListener(parentViewGroup) { _: View?, insets: WindowInsetsCompat? ->
                 if (insets == null) {
                     // No margin fixing can be done with a null window inset
-                    return@setOnApplyWindowInsetsListener insets
+                    return@setOnApplyWindowInsetsListener WindowInsetsCompat(insets)
                 }
                 val castInAppMessageView = inAppMessageView as IInAppMessageView
                 if (!castInAppMessageView.hasAppliedWindowInsets) {
@@ -401,7 +401,10 @@ open class DefaultInAppMessageViewWrapper @JvmOverloads constructor(
             // For views with defined directional
             // behavior, don't steal focus from them
             when (inAppMessage.messageType) {
-                MessageType.MODAL, MessageType.FULL -> {}
+                MessageType.MODAL,
+                MessageType.FULL,
+                MessageType.HTML_FULL,
+                MessageType.HTML -> {}
                 else -> inAppMessageView.setFocusableInTouchModeAndRequestFocus()
             }
         } else {

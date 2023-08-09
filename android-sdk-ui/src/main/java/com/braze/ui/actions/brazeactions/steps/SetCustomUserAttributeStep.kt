@@ -13,6 +13,7 @@ internal object SetCustomUserAttributeStep : BaseBrazeActionStep() {
             && secondArg != null
     }
 
+    @Suppress("UnreachableCode")
     override fun run(context: Context, data: StepData) {
         // This value was already checked
         // for nullity in `isValid()`

@@ -7,10 +7,11 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.appboy.sample.R
 import com.braze.enums.inappmessage.DismissType
+import com.braze.models.inappmessage.InAppMessageHtml
 import com.braze.models.inappmessage.InAppMessageModal
 import com.braze.models.inappmessage.MessageButton
 import com.braze.ui.inappmessage.BrazeInAppMessageManager
-import java.util.*
+import java.util.Random
 
 /**
  * Activity whose sole purpose is to host a button that shows a basic IAM on screen.
@@ -25,6 +26,8 @@ class InAppMessageSandboxActivity : AppCompatActivity() {
         findViewById<View>(R.id.bSandboxDisplayMessage1).setOnClickListener { this.displayMessage(1) }
         findViewById<View>(R.id.bSandboxDisplayMessage0).setOnClickListener { this.displayMessage(0) }
         findViewById<View>(R.id.bSandboxDummyButton).setOnClickListener { Toast.makeText(this, "dummy button pressed!", Toast.LENGTH_SHORT).show() }
+
+        findViewById<View>(R.id.bSandboxHtmlInApp).setOnClickListener { displayHtmlMessage() }
     }
 
     private fun displayMessage(numButtons: Int) {
@@ -55,5 +58,21 @@ class InAppMessageSandboxActivity : AppCompatActivity() {
         }
         BrazeInAppMessageManager.getInstance().addInAppMessage(modal)
         BrazeInAppMessageManager.getInstance().requestDisplayInAppMessage()
+    }
+
+    private fun displayHtmlMessage() {
+        val htmlString = this.assets.open(THE_WAY_HTML).bufferedReader().use {
+            it.readText()
+        }
+        val htmlMessage = InAppMessageHtml().apply {
+            message = htmlString
+            dismissType = DismissType.MANUAL
+        }
+        BrazeInAppMessageManager.getInstance().addInAppMessage(htmlMessage)
+        BrazeInAppMessageManager.getInstance().requestDisplayInAppMessage()
+    }
+
+    companion object {
+        const val THE_WAY_HTML = "html_inapp_this_is_the_way.html"
     }
 }

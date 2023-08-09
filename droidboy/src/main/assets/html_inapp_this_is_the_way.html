@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://braze-images.com/appboy/communication/assets/code_assets/files/634907397effc55735edb24c/original.css?1665730361"/>
+</head>
+
+<body id="fadeTarget">
+
+<div class="cms" style="visibility:hidden; display:none;">
+    <!-- ----------------- Content Management ----------------- -->
+
+    <!-- --------------------- Default CMS -------------------- -->
+
+
+    <picture>https://raw.githubusercontent.com/braze-inc/braze-android-sdk/master/braze-logo.png</picture>
+    <titletext>Header ipsum dolor line two header text</titletext>
+    <description>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse cursus ligula nec ligula pulvinar porttitor. Cras at quam.</description>
+    <legalcopy>Maximum 2 lines. Some potential legal copy goes here, lorem ipsum dolor sit consectuetuer.</legalcopy>
+    <buttontext>CTA button maxlength</buttontext>
+    <buttonlink>https://www.braze.com</buttonlink>
+    <newTab>no</newTab>
+    <dismiss>Dismiss</dismiss>
+    <descriptionlength>140</descriptionlength>
+    <titlelength>39</titlelength>
+
+    <!-- ---------------- Content Management End ---------------- -->
+</div>
+<div class="closeForBraze" style="display:none;"><a href="#" onclick="appboyBridge.closeMessage()">X</a><a href="appboy://close">X</a></div>
+<div class="overlay">
+    <div id="fadeTrigger" style="width:100%;height:100vh;position:fixed; z-index:0;"></div>
+    <div class="modal-wrap">
+        <div class="modal">
+            <div class="modal__image image-1" data-button-id=""></div>
+            <div class="modal__content">
+                <h1 class="modal__title" data-button-id=""></h1>
+                <p id="modal__text-01" class="modal__text" data-button-id=""></p>
+                <div class="modal__button-wrap">
+                    <a style="cursor:pointer;" class="modal__btn modal__btn--main" data-button-id="0"></a>
+                </div>
+            </div>
+        </div>
+        <a style="cursor:pointer;" class="modal__btn modal__btn--secondary" data-button-id="1">Dismiss</a>
+    </div>
+    <p id="legalcopy" class="modal__text"></p>
+
+</div>
+<script type="text/javascript" src="https://braze-images.com/appboy/communication/assets/code_assets/files/634954bc7effc5584aeda296/original.js?1665750204"></script>
+<script>
+        document.querySelectorAll('[data-button-id]').forEach(function (node) {
+            node.addEventListener('click', function () {
+            if(node.dataset.buttonId == ""){
+            appboyBridge.logClick(node.dataset.buttonId);
+            }else{
+            appboyBridge.logClick(node.dataset.buttonId);
+            fadeOutEffect();
+            }
+
+            });
+        });
+
+        /* execute functions & delete cms*/
+          (function(){
+          loadContent();
+          setTimeout(function(){
+
+          /* START ERROR HANDLING: if two elements are overlapping or viewport height is too small, the message is closing*/
+          const el1 = document.querySelector('.modal__btn--secondary');
+          const el2 = document.getElementById('legalcopy');
+          function elementsOverlap(el1, el2) {
+            const domRect1 = el1.getBoundingClientRect();
+            const domRect2 = el2.getBoundingClientRect();
+            return !(
+                domRect1.top > domRect2.bottom ||
+                domRect1.bottom < domRect2.top
+            );
+          }
+          (elementsOverlap(el1, el2)) ? errorClose() : console.log("message delivered");
+          function errorClose(){
+            window.addEventListener("ab.BridgeReady", function(){
+              appboyBridge.logCustomEvent("message_error","message was not delivered due to a to small viewport height");
+              appboyBridge.closeMessage();
+            })
+          }
+          /* END ERROR HANDLING */
+
+          document.querySelector('.cms').innerHTML = "";
+          },500)
+          } ())
+          document.getElementById('fadeTrigger').addEventListener('click', function () {
+          fadeOutEffect();
+          });
+          function fadeOutEffect() {
+            var fadeTarget = document.getElementById('fadeTarget');
+            var fadeEffect = setInterval(function () {
+              if (!fadeTarget.style.opacity) {
+                fadeTarget.style.opacity = 1;
+              }
+              if (fadeTarget.style.opacity > 0) {
+                fadeTarget.style.opacity -= 0.1;
+              } else {
+                clearInterval(fadeEffect);
+              }
+              }, 25);
+            setTimeout(function(){
+              appboyBridge.closeMessage();
+            },1000)
+          }
+    </script>
+</body>
+
+</html>

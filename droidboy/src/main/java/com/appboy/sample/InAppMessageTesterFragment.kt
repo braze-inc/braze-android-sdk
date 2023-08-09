@@ -390,7 +390,7 @@ class InAppMessageTesterFragment : Fragment(), AdapterView.OnItemSelectedListene
     }
 
     private fun addInAppMessageHtml(
-        inAppMessage: InAppMessageHtml,
+        inAppMessage: IInAppMessageHtml,
         htmlMessageType: HtmlMessageType
     ) {
         inAppMessage.message = context?.let { getStringFromAssets(it, htmlMessageType.fileName) }
@@ -398,7 +398,9 @@ class InAppMessageTesterFragment : Fragment(), AdapterView.OnItemSelectedListene
             inAppMessage.assetsZipRemoteUrl = htmlMessageType.zippedAssetUrl
         }
         if (shouldSetPushPrimerInHtml) {
-            inAppMessage.messageFields?.put("is_push_primer", true)
+            if (inAppMessage is InAppMessageHtml) {
+                inAppMessage.messageFields?.put("is_push_primer", true)
+            }
         }
     }
 
@@ -410,7 +412,7 @@ class InAppMessageTesterFragment : Fragment(), AdapterView.OnItemSelectedListene
             MessageType.MODAL, MessageType.FULL -> addInAppMessageImmersive(inAppMessage as IInAppMessageImmersive)
             MessageType.HTML, MessageType.HTML_FULL -> messageType?.let {
                 addInAppMessageHtml(
-                    inAppMessage as InAppMessageHtml,
+                    inAppMessage as IInAppMessageHtml,
                     it
                 )
             }
