@@ -762,7 +762,6 @@ $dokka.location:com.braze.models.inappmessage/IInAppMessage/iconBackgroundColor/
 $dokka.location:com.braze.models.inappmessage/IInAppMessage/iconColor/#/PointingToDeclaration/braze-android-sdk/com.braze.models.inappmessage/-i-in-app-message/icon-color.html
 $dokka.location:com.braze.models.inappmessage/IInAppMessage/isControl/#/PointingToDeclaration/braze-android-sdk/com.braze.models.inappmessage/-i-in-app-message/is-control.html
 $dokka.location:com.braze.models.inappmessage/IInAppMessage/logClick/#/PointingToDeclaration/braze-android-sdk/com.braze.models.inappmessage/-i-in-app-message/log-click.html
-$dokka.location:com.braze.models.inappmessage/IInAppMessage/logDisplayFailure/#com.braze.enums.inappmessage.InAppMessageFailureType/PointingToDeclaration/braze-android-sdk/com.braze.models.inappmessage/-i-in-app-message/log-display-failure.html
 $dokka.location:com.braze.models.inappmessage/IInAppMessage/logImpression/#/PointingToDeclaration/braze-android-sdk/com.braze.models.inappmessage/-i-in-app-message/log-impression.html
 $dokka.location:com.braze.models.inappmessage/IInAppMessage/message/#/PointingToDeclaration/braze-android-sdk/com.braze.models.inappmessage/-i-in-app-message/message.html
 $dokka.location:com.braze.models.inappmessage/IInAppMessage/messageTextAlign/#/PointingToDeclaration/braze-android-sdk/com.braze.models.inappmessage/-i-in-app-message/message-text-align.html
@@ -824,7 +823,6 @@ $dokka.location:com.braze.models.inappmessage/InAppMessageBase/inAppMessageDarkT
 $dokka.location:com.braze.models.inappmessage/InAppMessageBase/isControl/#/PointingToDeclaration/braze-android-sdk/com.braze.models.inappmessage/-in-app-message-base/is-control.html
 $dokka.location:com.braze.models.inappmessage/InAppMessageBase/jsonObject/#/PointingToDeclaration/braze-android-sdk/com.braze.models.inappmessage/-in-app-message-base/json-object.html
 $dokka.location:com.braze.models.inappmessage/InAppMessageBase/logClick/#/PointingToDeclaration/braze-android-sdk/com.braze.models.inappmessage/-in-app-message-base/log-click.html
-$dokka.location:com.braze.models.inappmessage/InAppMessageBase/logDisplayFailure/#com.braze.enums.inappmessage.InAppMessageFailureType/PointingToDeclaration/braze-android-sdk/com.braze.models.inappmessage/-in-app-message-base/log-display-failure.html
 $dokka.location:com.braze.models.inappmessage/InAppMessageBase/logImpression/#/PointingToDeclaration/braze-android-sdk/com.braze.models.inappmessage/-in-app-message-base/log-impression.html
 $dokka.location:com.braze.models.inappmessage/InAppMessageBase/message/#/PointingToDeclaration/braze-android-sdk/com.braze.models.inappmessage/-in-app-message-base/message.html
 $dokka.location:com.braze.models.inappmessage/InAppMessageBase/messageTextAlign/#/PointingToDeclaration/braze-android-sdk/com.braze.models.inappmessage/-in-app-message-base/message-text-align.html
@@ -1089,14 +1087,6 @@ $dokka.location:com.braze.models/BrazeGeofence/radiusMeter/#/PointingToDeclarati
 $dokka.location:com.braze.models/BrazeGeofence/radiusMeters/#/PointingToDeclaration/braze-android-sdk/com.braze.models/-braze-geofence/radius-meters.html
 $dokka.location:com.braze.models/BrazeGeofence/toString/#/PointingToDeclaration/braze-android-sdk/com.braze.models/-braze-geofence/to-string.html
 $dokka.location:com.braze.models/FeatureFlag.Companion///PointingToDeclaration/braze-android-sdk/com.braze.models/-feature-flag/-companion/index.html
-$dokka.location:com.braze.models/FeatureFlag.Companion/ENABLED/#/PointingToDeclaration/braze-android-sdk/com.braze.models/-feature-flag/-companion/-e-n-a-b-l-e-d.html
-$dokka.location:com.braze.models/FeatureFlag.Companion/ID/#/PointingToDeclaration/braze-android-sdk/com.braze.models/-feature-flag/-companion/-i-d.html
-$dokka.location:com.braze.models/FeatureFlag.Companion/PROPERTIES/#/PointingToDeclaration/braze-android-sdk/com.braze.models/-feature-flag/-companion/-p-r-o-p-e-r-t-i-e-s.html
-$dokka.location:com.braze.models/FeatureFlag.Companion/PROPERTIES_TYPE/#/PointingToDeclaration/braze-android-sdk/com.braze.models/-feature-flag/-companion/-p-r-o-p-e-r-t-i-e-s_-t-y-p-e.html
-$dokka.location:com.braze.models/FeatureFlag.Companion/PROPERTIES_TYPE_BOOLEAN/#/PointingToDeclaration/braze-android-sdk/com.braze.models/-feature-flag/-companion/-p-r-o-p-e-r-t-i-e-s_-t-y-p-e_-b-o-o-l-e-a-n.html
-$dokka.location:com.braze.models/FeatureFlag.Companion/PROPERTIES_TYPE_NUMBER/#/PointingToDeclaration/braze-android-sdk/com.braze.models/-feature-flag/-companion/-p-r-o-p-e-r-t-i-e-s_-t-y-p-e_-n-u-m-b-e-r.html
-$dokka.location:com.braze.models/FeatureFlag.Companion/PROPERTIES_TYPE_STRING/#/PointingToDeclaration/braze-android-sdk/com.braze.models/-feature-flag/-companion/-p-r-o-p-e-r-t-i-e-s_-t-y-p-e_-s-t-r-i-n-g.html
-$dokka.location:com.braze.models/FeatureFlag.Companion/PROPERTIES_VALUE/#/PointingToDeclaration/braze-android-sdk/com.braze.models/-feature-flag/-companion/-p-r-o-p-e-r-t-i-e-s_-v-a-l-u-e.html
 $dokka.location:com.braze.models/FeatureFlag///PointingToDeclaration/braze-android-sdk/com.braze.models/-feature-flag/index.html
 $dokka.location:com.braze.models/FeatureFlag/enabled/#/PointingToDeclaration/braze-android-sdk/com.braze.models/-feature-flag/enabled.html
 $dokka.location:com.braze.models/FeatureFlag/forJsonPut/#/PointingToDeclaration/braze-android-sdk/com.braze.models/-feature-flag/for-json-put.html
@@ -1799,6 +1789,7 @@ $dokka.location:com.braze.ui.inappmessage.views/InAppMessageHtmlBaseView/onKeyDo
 $dokka.location:com.braze.ui.inappmessage.views/InAppMessageHtmlBaseView/setHtmlPageFinishedListener/#com.braze.ui.inappmessage.listeners.IWebViewClientStateListener?/PointingToDeclaration/braze-android-sdk/com.braze.ui.inappmessage.views/-in-app-message-html-base-view/set-html-page-finished-listener.html
 $dokka.location:com.braze.ui.inappmessage.views/InAppMessageHtmlBaseView/setInAppMessageWebViewClient/#com.braze.ui.inappmessage.utils.InAppMessageWebViewClient/PointingToDeclaration/braze-android-sdk/com.braze.ui.inappmessage.views/-in-app-message-html-base-view/set-in-app-message-web-view-client.html
 $dokka.location:com.braze.ui.inappmessage.views/InAppMessageHtmlBaseView/setWebViewContent/#kotlin.String?#kotlin.String?/PointingToDeclaration/braze-android-sdk/com.braze.ui.inappmessage.views/-in-app-message-html-base-view/set-web-view-content.html
+$dokka.location:com.braze.ui.inappmessage.views/InAppMessageHtmlBaseView/setupDirectionalNavigation/#/PointingToDeclaration/braze-android-sdk/com.braze.ui.inappmessage.views/-in-app-message-html-base-view/setup-directional-navigation.html
 $dokka.location:com.braze.ui.inappmessage.views/InAppMessageHtmlFullView///PointingToDeclaration/braze-android-sdk/com.braze.ui.inappmessage.views/-in-app-message-html-full-view/index.html
 $dokka.location:com.braze.ui.inappmessage.views/InAppMessageHtmlFullView/InAppMessageHtmlFullView/#android.content.Context?#android.util.AttributeSet?/PointingToDeclaration/braze-android-sdk/com.braze.ui.inappmessage.views/-in-app-message-html-full-view/-in-app-message-html-full-view.html
 $dokka.location:com.braze.ui.inappmessage.views/InAppMessageHtmlFullView/getWebViewViewId/#/PointingToDeclaration/braze-android-sdk/com.braze.ui.inappmessage.views/-in-app-message-html-full-view/get-web-view-view-id.html
@@ -2108,6 +2099,7 @@ $dokka.location:com.braze/Braze/getFeatureFlag/#kotlin.String/PointingToDeclarat
 $dokka.location:com.braze/Braze/imageLoader/#/PointingToDeclaration/braze-android-sdk/com.braze/-braze/image-loader.html
 $dokka.location:com.braze/Braze/logCustomEvent/#kotlin.String?#com.braze.models.outgoing.BrazeProperties?/PointingToDeclaration/braze-android-sdk/com.braze/-braze/log-custom-event.html
 $dokka.location:com.braze/Braze/logCustomEvent/#kotlin.String?/PointingToDeclaration/braze-android-sdk/com.braze/-braze/log-custom-event.html
+$dokka.location:com.braze/Braze/logFeatureFlagImpression/#kotlin.String/PointingToDeclaration/braze-android-sdk/com.braze/-braze/log-feature-flag-impression.html
 $dokka.location:com.braze/Braze/logFeedCardClick/#kotlin.String?/PointingToDeclaration/braze-android-sdk/com.braze/-braze/log-feed-card-click.html
 $dokka.location:com.braze/Braze/logFeedCardImpression/#kotlin.String?/PointingToDeclaration/braze-android-sdk/com.braze/-braze/log-feed-card-impression.html
 $dokka.location:com.braze/Braze/logFeedDisplayed/#/PointingToDeclaration/braze-android-sdk/com.braze/-braze/log-feed-displayed.html
@@ -2339,6 +2331,7 @@ $dokka.location:com.braze/IBraze/getInstallTrackingId/#/PointingToDeclaration/b
 $dokka.location:com.braze/IBraze/imageLoader/#/PointingToDeclaration/braze-android-sdk/com.braze/-i-braze/image-loader.html
 $dokka.location:com.braze/IBraze/logCustomEvent/#kotlin.String?#com.braze.models.outgoing.BrazeProperties?/PointingToDeclaration/braze-android-sdk/com.braze/-i-braze/log-custom-event.html
 $dokka.location:com.braze/IBraze/logCustomEvent/#kotlin.String?/PointingToDeclaration/braze-android-sdk/com.braze/-i-braze/log-custom-event.html
+$dokka.location:com.braze/IBraze/logFeatureFlagImpression/#kotlin.String/PointingToDeclaration/braze-android-sdk/com.braze/-i-braze/log-feature-flag-impression.html
 $dokka.location:com.braze/IBraze/logFeedCardClick/#kotlin.String?/PointingToDeclaration/braze-android-sdk/com.braze/-i-braze/log-feed-card-click.html
 $dokka.location:com.braze/IBraze/logFeedCardImpression/#kotlin.String?/PointingToDeclaration/braze-android-sdk/com.braze/-i-braze/log-feed-card-impression.html
 $dokka.location:com.braze/IBraze/logFeedDisplayed/#/PointingToDeclaration/braze-android-sdk/com.braze/-i-braze/log-feed-displayed.html
