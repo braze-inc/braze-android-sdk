@@ -1,6 +1,13 @@
+## 27.0.1
+
+##### Fixed
+- Fixed a bug introduced in version 26.1.0 where additional empty network requests were sent on `openSession` calls. Customers on v27.0.0 are strongly encouraged to upgrade.
+
 ## 27.0.0
 
 [Release Date](https://github.com/braze-inc/braze-android-sdk/releases/tag/v27.0.0)
+
+⚠️ This version has a known issue. Please upgrade to v27.0.1.
 
 #### Breaking
 - Removed `IInAppMessage.logDisplayFailure()`.
@@ -8,9 +15,16 @@
 ##### Fixed
 - Fixed the behavior of HTML In-App messages to restrict remote navigation inputs to their display WebView during message display on non touch-mode devices.
 
+## 26.3.2
+
+##### Fixed
+- Fixed a bug introduced in version 26.1.0 where additional empty network requests were sent on `openSession` calls. Customers on v26.3.0 and v26.3.1 are strongly encouraged to upgrade.
+
 ## 26.3.1
 
 [Release Date](https://github.com/braze-inc/braze-android-sdk/releases/tag/v26.3.1)
+
+⚠️ This version has a known issue. Please upgrade to v26.3.2.
 
 ##### Fixed
 - Internal bug fixes for an upcoming Braze push feature.
@@ -19,15 +33,24 @@
 
 [Release Date](https://github.com/braze-inc/braze-android-sdk/releases/tag/v26.3.0)
 
+⚠️ This version has a known issue. Please upgrade to v26.3.2.
+
 ##### Added
 - Added the ability to forward Firebase push notifications to `FirebaseMessagingService` implementations if that push notification is not a Braze notification.
   - Configured via runtime configuration through `BrazeConfig.setFallbackFirebaseMessagingServiceEnabled()` and `BrazeConfig.setFallbackFirebaseMessagingServiceClasspath()`
   - Can also be configured via `braze.xml` through `<bool name="com_braze_fallback_firebase_cloud_messaging_service_enabled">true</bool>` and `<string name="com_braze_fallback_firebase_cloud_messaging_service_classpath">com.company.OurFirebaseMessagingService</string>`.
   - Defaults to false.
 
+## 26.2.1
+
+##### Fixed
+- Fixed a bug introduced in version 26.1.0 where additional empty network requests were sent on `openSession` calls. Customers on v26.2.0 are strongly encouraged to upgrade.
+
 ## 26.2.0
 
 [Release Date](https://github.com/braze-inc/braze-android-sdk/releases/tag/v26.2.0)
+
+⚠️ This version has a known issue. Please upgrade to v26.2.1.
 
 ##### Fixed
 - Fixed an issue with Unity not properly forwarding messages to the Braze Unity internal layer for In-App Message events.
@@ -36,9 +59,16 @@
 ##### Changed
 - Deprecated `IBraze.requestContentCardsRefresh(boolean)` in favor of `IBraze.requestContentCardsRefresh()` and `IBraze.requestContentCardsRefreshFromCache()`.
 
+## 26.1.1
+
+##### Fixed
+- Fixed a bug introduced in version 26.1.0 where additional empty network requests were sent on `openSession` calls. Customers on v26.1.0 are strongly encouraged to upgrade.
+
 ## 26.1.0
 
 [Release Date](https://github.com/braze-inc/braze-android-sdk/releases/tag/v26.1.0)
+
+⚠️ This version has a known issue. Please upgrade to v26.1.1.
 
 ##### Important
 - This release includes support for Android 14 (Upside Down Cake / API 34).
@@ -408,7 +438,7 @@ Our SDK is now hosted in Maven Central. You can remove `https://braze-inc.github
 
 [Release Date](https://github.com/braze-inc/braze-android-sdk/releases/tag/v17.0.0)
 
-> This version has a known issue with HTML In-App Message which was fixed in v18.0.1
+:warning: This version has a known issue with HTML In-App Message which was fixed in v18.0.1
 
 ##### ⚠ Breaking
 - `BrazeLogger.setLogLevel()` replaced with direct property setter `BrazeLogger.logLevel` for Kotlin.
