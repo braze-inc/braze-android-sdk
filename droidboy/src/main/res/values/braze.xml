@@ -55,6 +55,9 @@
 
   <bool name="com_braze_push_notification_html_rendering_enabled">true</bool>
 
+    <bool name="com_braze_fallback_firebase_cloud_messaging_service_enabled">true</bool>
+    <string translatable="false" name="com_braze_fallback_firebase_cloud_messaging_service_classpath">com.google.firebase.messaging.FirebaseMessagingService</string>
+
   <string-array name="com_braze_internal_sdk_metadata">
    <item>GRADLE</item>
   </string-array>

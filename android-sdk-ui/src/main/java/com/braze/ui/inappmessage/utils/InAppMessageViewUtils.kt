@@ -81,17 +81,15 @@ object InAppMessageViewUtils {
 
     @JvmStatic
     fun setDrawableColor(drawable: Drawable, @ColorInt color: Int) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            if (drawable is LayerDrawable) {
-                // This layer drawable should have the GradientDrawable as the
-                // 0th layer and the RippleDrawable as the 1st layer
-                if (drawable.numberOfLayers > 0 && drawable.getDrawable(0) is GradientDrawable) {
-                    setDrawableColor(drawable.getDrawable(0), color)
-                } else {
-                    brazelog {
-                        "LayerDrawable for button background did not have the expected " +
-                            "number of layers or the 0th layer was not a GradientDrawable."
-                    }
+        if (drawable is LayerDrawable) {
+            // This layer drawable should have the GradientDrawable as the
+            // 0th layer and the RippleDrawable as the 1st layer
+            if (drawable.numberOfLayers > 0 && drawable.getDrawable(0) is GradientDrawable) {
+                setDrawableColor(drawable.getDrawable(0), color)
+            } else {
+                brazelog {
+                    "LayerDrawable for button background did not have the expected " +
+                        "number of layers or the 0th layer was not a GradientDrawable."
                 }
             }
         }

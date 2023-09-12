@@ -5,11 +5,10 @@ import android.graphics.drawable.Drawable
 import android.graphics.drawable.GradientDrawable
 import android.graphics.drawable.RippleDrawable
 import android.graphics.drawable.StateListDrawable
-import android.os.Build
 import android.view.View
 import android.widget.Button
-import com.braze.ui.R
 import com.braze.models.inappmessage.MessageButton
+import com.braze.ui.R
 
 object InAppMessageButtonViewUtils {
     /**
@@ -55,11 +54,9 @@ object InAppMessageButtonViewUtils {
 
         // StateListDrawable is the background, holding everything else
         val stateListDrawableBackground = StateListDrawable()
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            // The rounded corners in the background give a "shadow" that's actually a state list animator
-            // See https://stackoverflow.com/questions/44527700/android-button-with-rounded-corners-ripple-effect-and-no-shadow
-            button.stateListAnimator = null
-        }
+        // The rounded corners in the background give a "shadow" that's actually a state list animator
+        // See https://stackoverflow.com/questions/44527700/android-button-with-rounded-corners-ripple-effect-and-no-shadow
+        button.stateListAnimator = null
         val defaultButtonDrawable =
             getButtonDrawable(button.context, messageButton, strokeWidth, strokeFocusedWidth, false)
         val focusedButtonDrawable =
@@ -77,14 +74,12 @@ object InAppMessageButtonViewUtils {
         button.background = stateListDrawableBackground
     }
 
-    // getDrawable() is deprecated but the alternatives are above our min SDK version of Build.VERSION_CODES.JELLY_BEAN
     @JvmStatic
     fun getDrawable(
         context: Context,
         drawableId: Int
     ): Drawable =
-        @Suppress("deprecation")
-        context.resources.getDrawable(drawableId)
+        context.resources.getDrawable(drawableId, null)
 
     @JvmStatic
     fun getButtonDrawable(
@@ -96,15 +91,10 @@ object InAppMessageButtonViewUtils {
     ): Drawable {
         val buttonDrawable = getDrawable(context, R.drawable.com_braze_inappmessage_button_background)
         buttonDrawable.mutate()
-        val backgroundFillGradientDrawable = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+        val backgroundFillGradientDrawable =
             // The drawable pulled from resources is a ripple drawable
-            val rippleDrawable = buttonDrawable as RippleDrawable
-            rippleDrawable
+            (buttonDrawable as RippleDrawable)
                 .findDrawableByLayerId(R.id.com_braze_inappmessage_button_background_ripple_internal_gradient) as GradientDrawable
-        } else {
-            // It's just the GradientDrawable as the only element since no ripple exists
-            buttonDrawable as GradientDrawable
-        }
         var strokeWidth = newStrokeWidth
         if (isFocused) {
             strokeWidth = strokeFocusedWidth

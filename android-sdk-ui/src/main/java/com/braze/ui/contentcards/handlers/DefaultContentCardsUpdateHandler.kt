@@ -21,7 +21,10 @@ open class DefaultContentCardsUpdateHandler : IContentCardsUpdateHandler {
                 cardA.created > cardB.created -> -1
                 // B displays above A if B is newer
                 cardA.created < cardB.created -> 1
-                // They're considered equal at this point
+                // Last chance with the card IDs
+                cardA.id > cardB.id -> -1
+                cardA.id < cardB.id -> 1
+                // They're considered equal at this point (although ID's should never match)
                 else -> 0
             }
         }

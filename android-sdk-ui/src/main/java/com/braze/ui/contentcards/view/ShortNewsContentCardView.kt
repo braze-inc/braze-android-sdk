@@ -1,7 +1,6 @@
 package com.braze.ui.contentcards.view
 
 import android.content.Context
-import android.os.Build
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -43,9 +42,7 @@ open class ShortNewsContentCardView(context: Context) : BaseContentCardView<Shor
                 card.imageUrl,
                 card
             )
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                safeSetClipToOutline(shortNewsCardViewHolder.imageView)
-            }
+            safeSetClipToOutline(shortNewsCardViewHolder.imageView)
             viewHolder.itemView.contentDescription = "${card.title} . ${card.description}"
         }
     }

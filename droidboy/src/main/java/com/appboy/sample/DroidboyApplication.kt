@@ -21,7 +21,6 @@ import android.os.StrictMode.VmPolicy
 import android.util.Log
 import android.webkit.WebView
 import androidx.annotation.RequiresApi
-import androidx.multidex.MultiDex
 import com.appboy.sample.util.BrazeActionTestingUtil
 import com.appboy.sample.util.ContentCardsTestingUtil
 import com.braze.Braze
@@ -56,9 +55,7 @@ class DroidboyApplication : Application() {
         if (BuildConfig.DEBUG && BuildConfig.STRICTMODE_ENABLED) {
             activateStrictMode()
         }
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-            WebView.setWebContentsDebuggingEnabled(true)
-        }
+        WebView.setWebContentsDebuggingEnabled(true)
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N_MR1) {
             setupChatDynamicShortcut()
         }
@@ -116,9 +113,6 @@ class DroidboyApplication : Application() {
 
     override fun attachBaseContext(context: Context?) {
         super.attachBaseContext(context)
-        if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.KITKAT_WATCH) {
-            MultiDex.install(this)
-        }
     }
 
     /**
@@ -263,9 +257,7 @@ class DroidboyApplication : Application() {
 
         // Note that some detections require a specific sdk version or higher to enable.
         vmPolicyBuilder.detectLeakedRegistrationObjects()
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR2) {
-            vmPolicyBuilder.detectFileUriExposure()
-        }
+        vmPolicyBuilder.detectFileUriExposure()
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             vmPolicyBuilder.detectCleartextNetwork()
         }
@@ -327,7 +319,7 @@ class DroidboyApplication : Application() {
             val specialTabFeatureFlagId = "helpful_office_tool_droidboy_tab"
             val specialTabFlag = Braze.getInstance(applicationContext).getFeatureFlag(specialTabFeatureFlagId)
 
-            if (specialTabFlag.enabled) {
+            if (specialTabFlag?.enabled == true) {
                 val imageUrl = specialTabFlag.getStringProperty("image_url")
                     ?: "https://raw.githubusercontent.com/Appboy/braze-android-sdk/master/braze-logo.png"
                 val title = specialTabFlag.getStringProperty("helpful_title") ?: "title"
@@ -340,7 +332,7 @@ class DroidboyApplication : Application() {
                 }
             } else {
                 // Remove the card if disabled
-                val card = ContentCardsTestingUtil.getRemovedCardJson(specialTabFlag.id)
+                val card = ContentCardsTestingUtil.getRemovedCardJson(specialTabFeatureFlagId)
                 Braze.getInstance(applicationContext).getCurrentUser { brazeUser ->
                     BrazeInternal.addSerializedContentCardToStorage(applicationContext, card.toString(), brazeUser.userId)
                 }

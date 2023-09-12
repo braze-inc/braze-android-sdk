@@ -613,9 +613,6 @@ object BrazeNotificationUtils {
      */
     @JvmStatic
     fun setAccentColorIfPresentAndSupported(notificationBuilder: NotificationCompat.Builder, payload: BrazeNotificationPayload) {
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
-            return
-        }
         val accentColor = payload.accentColor
         if (accentColor != null) {
             brazelog { "Using accent color for notification from extras bundle" }
@@ -640,13 +637,6 @@ object BrazeNotificationUtils {
         notificationBuilder: NotificationCompat.Builder,
         payload: BrazeNotificationPayload
     ) {
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
-            brazelog {
-                "Notification category not supported on this " +
-                    "android version. Not setting category for notification."
-            }
-            return
-        }
         val notificationCategory = payload.notificationCategory
         if (notificationCategory != null) {
             brazelog { "Setting category for notification" }
@@ -671,13 +661,6 @@ object BrazeNotificationUtils {
      */
     @JvmStatic
     fun setVisibilityIfPresentAndSupported(notificationBuilder: NotificationCompat.Builder, payload: BrazeNotificationPayload) {
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
-            brazelog {
-                "Notification visibility not supported on " +
-                    "this android version. Not setting visibility for notification."
-            }
-            return
-        }
         val visibility = payload.notificationVisibility
         if (visibility != null) {
             if (isValidNotificationVisibility(visibility)) {

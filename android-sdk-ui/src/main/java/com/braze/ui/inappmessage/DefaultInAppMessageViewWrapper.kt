@@ -15,7 +15,6 @@ import com.braze.enums.inappmessage.SlideFrom
 import com.braze.models.inappmessage.IInAppMessage
 import com.braze.models.inappmessage.IInAppMessageImmersive
 import com.braze.models.inappmessage.InAppMessageSlideup
-import com.braze.models.inappmessage.MessageButton
 import com.braze.support.BrazeLogger.Priority.V
 import com.braze.support.BrazeLogger.Priority.W
 import com.braze.support.BrazeLogger.brazelog
@@ -99,7 +98,7 @@ open class DefaultInAppMessageViewWrapper @JvmOverloads constructor(
         inAppMessageCloser = InAppMessageCloser(this)
 
         this.closeButton?.setOnClickListener(createCloseInAppMessageClickListener())
-        this.buttonViews?.forEach { it.setOnClickListener(createButtonClickListener()) }
+        createButtonClickListeners()
     }
 
     override fun open(activity: Activity) {
@@ -179,10 +178,11 @@ open class DefaultInAppMessageViewWrapper @JvmOverloads constructor(
      * [DefaultInAppMessageViewWrapper.getLayoutParams] should
      * also most likely be overridden to match the [ViewGroup] subclass
      * returned here.
+     *
+     * The android.R.id.content {@link FrameLayout} contains the
+     * {@link Activity}'s top-level layout as its first child.
      */
     open fun getParentViewGroup(activity: Activity): ViewGroup =
-        // The android.R.id.content {@link FrameLayout} contains the
-        // {@link Activity}'s top-level layout as its first child.
         activity.window.decorView.findViewById(android.R.id.content)
 
     /**
@@ -295,32 +295,28 @@ open class DefaultInAppMessageViewWrapper @JvmOverloads constructor(
     }
 
     /**
-     * @return A click listener that calls [IInAppMessageViewLifecycleListener.onButtonClicked]
-     * if the clicked [View.getId] matches that of a [MessageButton]'s [View].
+     * Sets [IInAppMessageViewLifecycleListener.onButtonClicked] click listeners for all message buttons
+     * on this in-app message.
      */
-    open fun createButtonClickListener(): View.OnClickListener {
-        return View.OnClickListener { view: View ->
-            // The onClicked lifecycle method is called and it can be used to turn off the close animation.
-            val inAppMessageImmersive = inAppMessage as IInAppMessageImmersive
-            if (inAppMessageImmersive.messageButtons.isEmpty()) {
+    open fun createButtonClickListeners() {
+        // The onClicked lifecycle method is called and it can be used to turn off the close animation.
+        (inAppMessage as? IInAppMessageImmersive)?.let { immersiveMessage ->
+            if (immersiveMessage.messageButtons.isEmpty()) {
                 brazelog {
                     "Cannot create button click listener since this in-app message does not have message buttons."
                 }
-                return@OnClickListener
+                return
             }
-            var index = 0
-            buttonViews?.let {
-                while (index < it.size) {
-                    if (view.id == it[index].id) {
-                        val messageButton = inAppMessageImmersive.messageButtons[index]
+            this.buttonViews?.forEachIndexed { index, view ->
+                val messageButton = immersiveMessage.messageButtons.getOrNull(index)
+                messageButton?.let { button ->
+                    view.setOnClickListener {
                         inAppMessageViewLifecycleListener.onButtonClicked(
                             inAppMessageCloser,
-                            messageButton,
-                            inAppMessageImmersive
+                            button,
+                            immersiveMessage
                         )
-                        return@OnClickListener
                     }
-                    index++
                 }
             }
         }
@@ -404,7 +400,9 @@ open class DefaultInAppMessageViewWrapper @JvmOverloads constructor(
                 MessageType.MODAL,
                 MessageType.FULL,
                 MessageType.HTML_FULL,
-                MessageType.HTML -> {}
+                MessageType.HTML -> {
+                }
+
                 else -> inAppMessageView.setFocusableInTouchModeAndRequestFocus()
             }
         } else {

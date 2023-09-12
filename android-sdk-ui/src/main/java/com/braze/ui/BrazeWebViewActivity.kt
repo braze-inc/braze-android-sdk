@@ -15,7 +15,6 @@ import android.webkit.WebResourceRequest
 import android.webkit.WebSettings
 import android.webkit.WebView
 import android.webkit.WebViewClient
-import androidx.annotation.RequiresApi
 import androidx.fragment.app.FragmentActivity
 import com.braze.Constants
 import com.braze.enums.Channel
@@ -96,7 +95,6 @@ open class BrazeWebViewActivity : FragmentActivity() {
 
     open fun createWebViewClient(): WebViewClient {
         return object : WebViewClient() {
-            @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
             override fun shouldOverrideUrlLoading(view: WebView, request: WebResourceRequest): Boolean {
                 val didHandleUrl = handleUrlOverride(view.context, request.url.toString())
                 return didHandleUrl ?: super.shouldOverrideUrlLoading(view, request)

@@ -4,12 +4,16 @@ import android.content.Context
 import android.webkit.JavascriptInterface
 import androidx.annotation.VisibleForTesting
 import com.braze.Braze
+import com.braze.coroutine.BrazeCoroutineScope
 import com.braze.models.inappmessage.IInAppMessageHtml
 import com.braze.models.outgoing.BrazeProperties
 import com.braze.support.BrazeLogger.Priority.E
+import com.braze.support.BrazeLogger.Priority.V
 import com.braze.support.BrazeLogger.brazelog
 import com.braze.support.requestPushPermissionPrompt
 import com.braze.ui.inappmessage.BrazeInAppMessageManager
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.withTimeout
 import org.json.JSONObject
 import java.math.BigDecimal
 
@@ -22,6 +26,12 @@ class InAppMessageJavascriptInterface(
 ) {
     @get:JavascriptInterface
     val user: InAppMessageUserJavascriptInterface = InAppMessageUserJavascriptInterface(context)
+
+    /**
+     * Tracks whether `brazeBridge.closeMessage()` was called on this interface via
+     * `onCloseMessageCalled()`.
+     */
+    var wasCloseMessageCalled = false
 
     @JavascriptInterface
     fun changeUser(userId: String, sdkAuthSignature: String?) {
@@ -68,9 +78,26 @@ class InAppMessageJavascriptInterface(
     }
 
     @JavascriptInterface
+    fun beforeMessageClosed() {
+        wasCloseMessageCalled = true
+    }
+
+    @JavascriptInterface
     fun requestPushPermission() {
         BrazeInAppMessageManager.getInstance().shouldNextUnregisterBeSkipped = true
-        BrazeInAppMessageManager.getInstance().activity.requestPushPermissionPrompt()
+        BrazeCoroutineScope.launchDelayed(PUSH_PROMPT_INITIAL_DELAY_MS) {
+            if (wasCloseMessageCalled) {
+                withTimeout(PUSH_PROMPT_WAIT_FOR_DISPLAY_TIMEOUT_MS) {
+                    brazelog(V) { "Waiting for IAM to be fully closed before requesting push prompt" }
+                    while (BrazeInAppMessageManager.getInstance().isCurrentlyDisplayingInAppMessage) {
+                        delay(PUSH_PROMPT_WAIT_DELAY_TIMEOUT_MS)
+                    }
+                }
+            }
+
+            brazelog(V) { "Requesting push prompt from Braze bridge html interface" }
+            BrazeInAppMessageManager.getInstance().activity.requestPushPermissionPrompt()
+        }
     }
 
     @VisibleForTesting
@@ -85,5 +112,11 @@ class InAppMessageJavascriptInterface(
             brazelog(E, e) { "Failed to parse properties JSON String: $propertiesJSON" }
         }
         return null
+    }
+
+    companion object {
+        private const val PUSH_PROMPT_INITIAL_DELAY_MS = 75L
+        private const val PUSH_PROMPT_WAIT_FOR_DISPLAY_TIMEOUT_MS = 2500L
+        private const val PUSH_PROMPT_WAIT_DELAY_TIMEOUT_MS = 25L
     }
 }

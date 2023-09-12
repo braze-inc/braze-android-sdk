@@ -1,6 +1,5 @@
 package com.appboy.sample.util;
 
-import android.os.Build;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -31,9 +30,7 @@ public class ViewUtils {
         | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
         | View.SYSTEM_UI_FLAG_FULLSCREEN;
 
-    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-      visibilityFlags |= View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY;
-    }
+    visibilityFlags |= View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY;
     return visibilityFlags;
   }
 }

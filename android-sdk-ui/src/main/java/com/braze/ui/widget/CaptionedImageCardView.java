@@ -26,7 +26,6 @@ public class CaptionedImageCardView extends BaseFeedCardView<CaptionedImageCard>
     this(context, null);
   }
 
-  @SuppressWarnings("deprecation") // getDrawable() until Build.VERSION_CODES.LOLLIPOP
   public CaptionedImageCardView(final Context context, CaptionedImageCard card) {
     super(context);
     mImage = (ImageView) getProperViewFromInflatedStub(R.id.com_braze_captioned_image_card_imageview_stub);
@@ -41,7 +40,7 @@ public class CaptionedImageCardView extends BaseFeedCardView<CaptionedImageCard>
       setCard(card);
     }
 
-    setBackground(getResources().getDrawable(R.drawable.com_braze_card_background));
+    setBackground(getResources().getDrawable(R.drawable.com_braze_card_background, null));
   }
 
   @Override

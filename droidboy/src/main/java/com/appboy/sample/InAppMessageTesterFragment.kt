@@ -81,6 +81,7 @@ class InAppMessageTesterFragment : Fragment(), AdapterView.OnItemSelectedListene
             null
         ),
         SHARK_HTML("html_shark_unified.html", null),
+        PUSH_PROMPT_HTML("html_request_push_prompt.html", null),
         DND_TEXT_TARGET_HTML("html_inapp_dnd_tester.html", null),
     }
 
@@ -289,6 +290,7 @@ class InAppMessageTesterFragment : Fragment(), AdapterView.OnItemSelectedListene
                     )
 
                     "html_shark_unified" -> addInAppMessage(InAppMessageHtml(), HtmlMessageType.SHARK_HTML)
+                    "html_push_prompt" -> addInAppMessage(InAppMessageHtml(), HtmlMessageType.PUSH_PROMPT_HTML)
                     "html_dnd_target_text_link" -> addInAppMessage(InAppMessageHtml(), HtmlMessageType.DND_TEXT_TARGET_HTML)
                     "html_full_dark_mode" -> addInAppMessage(
                         InAppMessageHtmlFull(),

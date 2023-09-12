@@ -11,6 +11,7 @@ import com.braze.support.BrazeLogger.Priority.I
 import com.braze.support.BrazeLogger.Priority.V
 import com.braze.support.BrazeLogger.brazelog
 import com.braze.support.ReflectionUtils.constructObjectQuietly
+import com.braze.support.ReflectionUtils.getDeclaredMethodQuietly
 import com.braze.support.ReflectionUtils.getMethodQuietly
 import com.braze.support.ReflectionUtils.invokeMethodQuietly
 import com.google.firebase.messaging.FirebaseMessagingService
@@ -48,6 +49,7 @@ open class BrazeFirebaseMessagingService : FirebaseMessagingService() {
          * the expected signature of `fun onMessageReceived(remoteMessage: RemoteMessage)`.
          */
         private const val FCM_SERVICE_OMR_METHOD = "onMessageReceived"
+        private const val CONTEXT_ATTACH_METHOD = "attachBaseContext"
 
         /**
          * Consumes an incoming [RemoteMessage] if it originated from Braze. If the [RemoteMessage] did
@@ -73,7 +75,7 @@ open class BrazeFirebaseMessagingService : FirebaseMessagingService() {
                             "Fallback FCM service enabled. Attempting to use " +
                                 "fallback class at $fallbackClassPath"
                         }
-                        invokeFallbackFirebaseService(fallbackClassPath, remoteMessage)
+                        invokeFallbackFirebaseService(fallbackClassPath, remoteMessage, context)
                     } else {
                         brazelog {
                             "Fallback FCM service enabled but classpath " +
@@ -115,12 +117,32 @@ open class BrazeFirebaseMessagingService : FirebaseMessagingService() {
          * Invokes the [FCM_SERVICE_OMR_METHOD] method of the argument class with the provided
          * [RemoteMessage].
          */
-        internal fun invokeFallbackFirebaseService(classpath: String, remoteMessage: RemoteMessage) {
+        internal fun invokeFallbackFirebaseService(classpath: String, remoteMessage: RemoteMessage, context: Context) {
             val fallbackObject = constructObjectQuietly(classpath)
             if (fallbackObject == null) {
                 brazelog { "Fallback firebase messaging service $classpath could not be constructed. Not routing fallback RemoteMessage." }
                 return
             }
+
+            val attachMethod = getDeclaredMethodQuietly(classpath, CONTEXT_ATTACH_METHOD, Context::class.java)
+            if (attachMethod != null) {
+                // Since this is protected, we must make it accessible before calling it
+                attachMethod.isAccessible = true
+                brazelog { "Attempting to call $classpath $CONTEXT_ATTACH_METHOD" }
+                val invokeReturn = invokeMethodQuietly(fallbackObject, attachMethod, context)
+                if (!invokeReturn.first) {
+                    brazelog {
+                        "Failure invoking $classpath.$CONTEXT_ATTACH_METHOD. Not doing anything."
+                    }
+                    return
+                }
+            } else {
+                brazelog {
+                    "Could not find $CONTEXT_ATTACH_METHOD. Not doing anything."
+                }
+                return
+            }
+
             val method = getMethodQuietly(classpath, FCM_SERVICE_OMR_METHOD, RemoteMessage::class.java)
             if (method == null) {
                 brazelog {
@@ -130,7 +152,10 @@ open class BrazeFirebaseMessagingService : FirebaseMessagingService() {
                 return
             }
             brazelog { "Attempting to invoke firebase messaging fallback service $classpath.$FCM_SERVICE_OMR_METHOD" }
-            invokeMethodQuietly(fallbackObject, method, remoteMessage)
+            val omrReturn = invokeMethodQuietly(fallbackObject, method, remoteMessage)
+            if (!omrReturn.first) {
+                "Failure invoking $classpath.$FCM_SERVICE_OMR_METHOD."
+            }
         }
     }
 }

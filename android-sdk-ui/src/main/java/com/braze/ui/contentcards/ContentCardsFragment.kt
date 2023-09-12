@@ -156,6 +156,7 @@ open class ContentCardsFragment : Fragment(), SwipeRefreshLayout.OnRefreshListen
 
     override fun onPause() {
         super.onPause()
+        brazelog(V) { "Invoked com.braze.ui.contentcards.ContentCardsFragment.onPause()" }
         // If the view is going away, we don't care about updating it anymore. Remove the subscription immediately.
         Braze.getInstance(requireContext()).removeSingleSubscription(contentCardsUpdatedSubscriber, ContentCardsUpdatedEvent::class.java)
         Braze.getInstance(requireContext()).removeSingleSubscription(sdkDataWipeEventSubscriber, SdkDataWipeEvent::class.java)

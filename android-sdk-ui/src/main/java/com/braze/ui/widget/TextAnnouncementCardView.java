@@ -20,7 +20,6 @@ public class TextAnnouncementCardView extends BaseFeedCardView<TextAnnouncementC
     this(context, null);
   }
 
-  @SuppressWarnings("deprecation") // getDrawable() until Build.VERSION_CODES.LOLLIPOP
   public TextAnnouncementCardView(final Context context, TextAnnouncementCard card) {
     super(context);
     mTitle = findViewById(R.id.com_braze_text_announcement_card_title);
@@ -31,7 +30,7 @@ public class TextAnnouncementCardView extends BaseFeedCardView<TextAnnouncementC
       setCard(card);
     }
 
-    setBackground(getResources().getDrawable(R.drawable.com_braze_card_background));
+    setBackground(getResources().getDrawable(R.drawable.com_braze_card_background, null));
   }
 
   @Override

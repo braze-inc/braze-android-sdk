@@ -3,7 +3,7 @@ var brazeBridge = {
   logPurchase: function (productId, price, currencyCode, quantity, purchaseProperties) {
     brazeInternalBridge.logPurchaseWithJSON(productId, price, currencyCode, quantity != null ? quantity : 1, JSON.stringify(purchaseProperties));
   },
-  closeMessage: function () { window.location = 'appboy://close'; },
+  closeMessage: function () { brazeInternalBridge.beforeMessageClosed();window.location = 'appboy://close'; },
   requestImmediateDataFlush: function () { brazeInternalBridge.requestImmediateDataFlush(); },
   display: { showFeed: function () { window.open('appboy://feed'); } },
   logClick: function(buttonId) {

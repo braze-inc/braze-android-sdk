@@ -37,7 +37,6 @@
               android:layout_weight="1"
               android:hint="Enter UserId"
               android:layout_marginEnd="10dp"
-              android:layout_marginRight="10dp"
               android:paddingBottom="5dp">
 
                 <com.google.android.material.textfield.TextInputEditText
@@ -84,7 +83,6 @@
               android:layout_width="match_parent"
               android:layout_height="wrap_content"
               android:layout_marginEnd="10dp"
-              android:layout_marginRight="10dp"
               android:layout_weight="1"
               android:hint="Enter Custom Event">
 
@@ -133,7 +131,6 @@
               android:layout_width="match_parent"
               android:layout_height="match_parent"
               android:layout_marginEnd="10dp"
-              android:layout_marginRight="10dp"
               android:layout_weight="1"
               android:hint="Enter Purchase">
 
@@ -184,7 +181,6 @@
               android:id="@+id/com_appboy_sample_set_user_attributes_button"
               style="@style/DroidboyOutlinedButton"
               android:layout_marginEnd="10dp"
-              android:layout_marginRight="10dp"
               android:layout_weight="1"
               android:text="Set User Attributes" />
 

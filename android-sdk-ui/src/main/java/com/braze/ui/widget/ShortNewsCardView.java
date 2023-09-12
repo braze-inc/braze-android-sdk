@@ -23,7 +23,6 @@ public class ShortNewsCardView extends BaseFeedCardView<ShortNewsCard> {
     this(context, null);
   }
 
-  @SuppressWarnings("deprecation") // getDrawable() until Build.VERSION_CODES.LOLLIPOP
   public ShortNewsCardView(final Context context, ShortNewsCard card) {
     super(context);
     mDescription = findViewById(R.id.com_braze_short_news_card_description);
@@ -38,7 +37,7 @@ public class ShortNewsCardView extends BaseFeedCardView<ShortNewsCard> {
       setCard(card);
     }
 
-    setBackground(getResources().getDrawable(R.drawable.com_braze_card_background));
+    setBackground(getResources().getDrawable(R.drawable.com_braze_card_background, null));
   }
 
   @Override

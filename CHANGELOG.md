@@ -1,3 +1,23 @@
+## 28.0.0
+
+[Release Date](https://github.com/braze-inc/braze-android-sdk/releases/tag/v28.0.0)
+
+#### Breaking
+- Updated minimum SDK version to 21 (Lollipop).
+- Feature Flags functions have been modified.
+  - `Braze.getFeatureFlag(id)` will now return null if the feature flag doesn't exist.
+  - `Braze.subscribeToFeatureFlagsUpdates()` will only callback when a refresh request completes, and initially if previously cached data exists. It will also be called with cached feature flags for any refresh failures.
+    - If you want the cached value immediately at app startup, use `Braze.getFeatureFlag(id)`.
+- Refactored `DefaultInAppMessageViewWrapper.createButtonClickListener()` into `DefaultInAppMessageViewWrapper.createButtonClickListeners()`.
+
+##### Fixed
+- Fixed an issue where Firebase fallback service had a null `Context`. 
+- Fixed an issue where calling `requestPushPermission()` before `closeMessage()` in the HTML bridge could result in the HTML IAM remaining in the view hierarchy.
+- Fixed an issue where `Braze.removeSingleSubscription()` wouldn't remove synchronous subscriptions, resulting in memory leaks with `ContentCardsFragment`.
+
+##### Changed
+- `DefaultContentCardHandler` will sort by `Card.id` if both `Card.isPinned` and `Card.created` are equal.
+
 ## 27.0.1
 
 ##### Fixed

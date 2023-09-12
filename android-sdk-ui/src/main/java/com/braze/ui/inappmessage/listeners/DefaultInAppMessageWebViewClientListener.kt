@@ -2,21 +2,21 @@ package com.braze.ui.inappmessage.listeners
 
 import android.os.Bundle
 import androidx.annotation.VisibleForTesting
-import com.braze.enums.Channel
 import com.braze.Braze.Companion.getInstance
+import com.braze.enums.Channel
 import com.braze.enums.inappmessage.MessageType
 import com.braze.models.inappmessage.IInAppMessage
 import com.braze.models.inappmessage.IInAppMessageHtml
 import com.braze.models.outgoing.BrazeProperties
+import com.braze.support.BrazeLogger.Priority.V
+import com.braze.support.BrazeLogger.Priority.W
 import com.braze.support.BrazeLogger.brazelog
 import com.braze.support.isLocalUri
 import com.braze.support.toBundle
-import com.braze.ui.BrazeDeeplinkHandler.Companion.getInstance as getDeeplinkHandlerInstance
 import com.braze.ui.actions.NewsfeedAction
 import com.braze.ui.inappmessage.BrazeInAppMessageManager
 import com.braze.ui.inappmessage.utils.InAppMessageWebViewClient
-import com.braze.support.BrazeLogger.Priority.V
-import com.braze.support.BrazeLogger.Priority.W
+import com.braze.ui.BrazeDeeplinkHandler.Companion.getInstance as getDeeplinkHandlerInstance
 
 open class DefaultInAppMessageWebViewClientListener : IInAppMessageWebViewClientListener {
     private val inAppMessageManager: BrazeInAppMessageManager
@@ -33,6 +33,7 @@ open class DefaultInAppMessageWebViewClientListener : IInAppMessageWebViewClient
             url,
             queryBundle
         )
+        brazelog { "IInAppMessageWebViewClientListener.onCloseAction finished." }
     }
 
     override fun onNewsfeedAction(inAppMessage: IInAppMessage, url: String, queryBundle: Bundle) {

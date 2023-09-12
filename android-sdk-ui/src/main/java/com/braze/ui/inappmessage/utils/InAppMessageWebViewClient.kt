@@ -2,13 +2,11 @@ package com.braze.ui.inappmessage.utils
 
 import android.content.Context
 import android.net.Uri
-import android.os.Build
 import android.os.Bundle
 import android.webkit.RenderProcessGoneDetail
 import android.webkit.WebResourceRequest
 import android.webkit.WebView
 import android.webkit.WebViewClient
-import androidx.annotation.RequiresApi
 import androidx.annotation.VisibleForTesting
 import com.braze.configuration.BrazeConfigurationProvider
 import com.braze.coroutine.BrazeCoroutineScope
@@ -88,7 +86,6 @@ open class InAppMessageWebViewClient(
      *
      * @return true since all actions in Html In-App Messages are handled outside of the In-App Message itself.
      */
-    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     override fun shouldOverrideUrlLoading(view: WebView, request: WebResourceRequest) =
         handleUrlOverride(request.url.toString())
 

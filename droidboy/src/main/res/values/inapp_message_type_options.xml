@@ -18,6 +18,7 @@
     <item>Message Type: HTML Dark Mode</item>
     <item>Message Type: HTML Slow Loading</item>
     <item>Message Type: HTML DnD Target Text Link</item>
+    <item>Message Type: HTML Push Prompt</item>
   </string-array>
   <string-array name="inapp_message_type_values">
     <item>slideup</item>
@@ -37,5 +38,6 @@
     <item>html_full_dark_mode</item>
     <item>html_full_slow_loading</item>
     <item>html_dnd_target_text_link</item>
+    <item>html_push_prompt</item>
   </string-array>
 </resources>

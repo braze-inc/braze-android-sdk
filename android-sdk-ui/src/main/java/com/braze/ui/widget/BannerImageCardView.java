@@ -22,7 +22,6 @@ public class BannerImageCardView extends BaseFeedCardView<BannerImageCard> {
     this(context, null);
   }
 
-  @SuppressWarnings("deprecation") // getDrawable() until Build.VERSION_CODES.LOLLIPOP
   public BannerImageCardView(final Context context, BannerImageCard card) {
     super(context);
     mImage = (ImageView) getProperViewFromInflatedStub(R.id.com_braze_banner_image_card_imageview_stub);
@@ -33,7 +32,7 @@ public class BannerImageCardView extends BaseFeedCardView<BannerImageCard> {
       setCard(card);
     }
 
-    setBackground(getResources().getDrawable(R.drawable.com_braze_card_background));
+    setBackground(getResources().getDrawable(R.drawable.com_braze_card_background, null));
   }
 
   @Override
