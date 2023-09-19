@@ -1,0 +1,158 @@
+{
+  "formatVersion": "1.1",
+  "component": {
+    "group": "com.braze",
+    "module": "braze-segment-android",
+    "version": "16.0.0",
+    "attributes": {
+      "org.gradle.status": "release"
+    }
+  },
+  "createdBy": {
+    "gradle": {
+      "version": "8.2"
+    }
+  },
+  "variants": [
+    {
+      "name": "releaseVariantReleaseApiPublication",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.libraryelements": "aar",
+        "org.gradle.usage": "java-api"
+      },
+      "dependencies": [
+        {
+          "group": "org.jetbrains.kotlin",
+          "module": "kotlin-stdlib-jdk8",
+          "version": {
+            "requires": "1.7.10"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "braze-segment-android-16.0.0.aar",
+          "url": "braze-segment-android-16.0.0.aar",
+          "size": 9309,
+          "sha512": "7f890dda829b64717a21a8809f43550a614dcf982563df0309c5fe68f05a1f20d3589dddcccbc5c8bcb3c26806d94a45dfbbe8aa471c3c021c0b4af174cc4fc4",
+          "sha256": "e0717b15898e58c5a1809ba120d32a9e1c20256295c6c3822314b7b53c106fdd",
+          "sha1": "f45f44c4407db3f8f7dd74794229ac59d82221eb",
+          "md5": "edc7c5feeed1fdc125aa9d1ed6baa2ac"
+        }
+      ]
+    },
+    {
+      "name": "releaseVariantReleaseRuntimePublication",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.libraryelements": "aar",
+        "org.gradle.usage": "java-runtime"
+      },
+      "dependencies": [
+        {
+          "group": "org.jetbrains.kotlin",
+          "module": "kotlin-stdlib-jdk8",
+          "version": {
+            "requires": "1.7.10"
+          }
+        },
+        {
+          "group": "com.braze",
+          "module": "android-sdk-ui",
+          "version": {
+            "requires": "28.0.0"
+          }
+        },
+        {
+          "group": "com.segment.analytics.android",
+          "module": "analytics",
+          "version": {
+            "requires": "4.3.1"
+          }
+        },
+        {
+          "group": "androidx.core",
+          "module": "core-ktx",
+          "version": {
+            "requires": "1.9.0"
+          }
+        },
+        {
+          "group": "androidx.appcompat",
+          "module": "appcompat",
+          "version": {
+            "requires": "1.5.1"
+          }
+        },
+        {
+          "group": "com.google.android.material",
+          "module": "material",
+          "version": {
+            "requires": "1.7.0"
+          }
+        },
+        {
+          "group": "androidx.test",
+          "module": "core-ktx",
+          "version": {
+            "requires": "1.5.0"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "braze-segment-android-16.0.0.aar",
+          "url": "braze-segment-android-16.0.0.aar",
+          "size": 9309,
+          "sha512": "7f890dda829b64717a21a8809f43550a614dcf982563df0309c5fe68f05a1f20d3589dddcccbc5c8bcb3c26806d94a45dfbbe8aa471c3c021c0b4af174cc4fc4",
+          "sha256": "e0717b15898e58c5a1809ba120d32a9e1c20256295c6c3822314b7b53c106fdd",
+          "sha1": "f45f44c4407db3f8f7dd74794229ac59d82221eb",
+          "md5": "edc7c5feeed1fdc125aa9d1ed6baa2ac"
+        }
+      ]
+    },
+    {
+      "name": "releaseVariantReleaseSourcePublication",
+      "attributes": {
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.docstype": "sources",
+        "org.gradle.usage": "java-runtime"
+      },
+      "files": [
+        {
+          "name": "braze-segment-android-16.0.0-sources.jar",
+          "url": "braze-segment-android-16.0.0-sources.jar",
+          "size": 4892,
+          "sha512": "2aed4a77e00a3e160eb76000adf6a8f8f88b66735887a5a9d151f5722708de667cb12eca2d64ba1d2d10ea7c9e8911a49ead9f1ac094de6d754b9db710e3c23c",
+          "sha256": "ae0c3d8d11fbf16ba9b538a31402172580a2eea305e479360969915a72f4ab7a",
+          "sha1": "68a57268c7b09d08cfa56b6fffc410b0c62fdcea",
+          "md5": "d9f857977d254f56d3d2d03771bdcb74"
+        }
+      ]
+    },
+    {
+      "name": "releaseVariantReleaseJavaDocPublication",
+      "attributes": {
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.docstype": "javadoc",
+        "org.gradle.usage": "java-runtime"
+      },
+      "files": [
+        {
+          "name": "braze-segment-android-16.0.0-javadoc.jar",
+          "url": "braze-segment-android-16.0.0-javadoc.jar",
+          "size": 278240,
+          "sha512": "e14750f4941b3f2179ea826dc0fc91e8c83880e7a3a8fbd3d1058b57d5db8faa8eacf6d8f0da877c5125f8fd76c9f1b111e425ca4d87c308b752126beef6f506",
+          "sha256": "3ad03fa333bcfed45e39bf2d71b463a6719deb46bd559f2c851b17ba414f1e68",
+          "sha1": "2395ae65fed79f1e04489ca4c0383d37910fb11c",
+          "md5": "daaef88cce7957c926c1dfa3a3d285e1"
+        }
+      ]
+    }
+  ]
+}
