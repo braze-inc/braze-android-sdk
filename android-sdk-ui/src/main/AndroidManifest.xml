@@ -17,6 +17,8 @@
     <activity
       android:name="com.braze.push.NotificationTrampolineActivity"
       android:exported="false"
+      android:excludeFromRecents="true"
+      android:taskAffinity=".NotificationTrampolineActivity"
       android:launchMode="singleInstance"
       android:theme="@style/Braze.PushTrampoline.Transparent" />
 
