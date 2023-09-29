@@ -1,5 +1,6 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
+apply plugin: 'maven-publish'
 
 dependencies {
   api "com.braze:android-sdk-base:${BRAZE_SDK_VERSION}"
@@ -36,4 +37,12 @@ android {
     sourceCompatibility JavaVersion.VERSION_1_8
     targetCompatibility JavaVersion.VERSION_1_8
   }
+
+  lintOptions {
+    checkReleaseBuilds false
+    //If you want to continue even if errors found use following line
+    abortOnError false
+  }
 }
+
+apply from: "publish.gradle"
