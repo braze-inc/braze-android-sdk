@@ -126,9 +126,9 @@ class InAppMessageUserJavascriptInterface(private val context: Context) {
     }
 
     @JavascriptInterface
-    fun setCustomUserAttributeJSON(key: String, jsonStringValue: String) {
+    fun setCustomUserAttributeJSON(key: String, jsonStringValue: String, merge: Boolean) {
         Braze.getInstance(context).runOnUser {
-            setCustomAttribute(it, key, jsonStringValue)
+            setCustomAttribute(it, key, jsonStringValue, merge)
         }
     }
 
@@ -206,7 +206,7 @@ class InAppMessageUserJavascriptInterface(private val context: Context) {
         fromValue(subscriptionType)
 
     @VisibleForTesting
-    fun setCustomAttribute(user: BrazeUser, key: String, jsonStringValue: String) {
+    fun setCustomAttribute(user: BrazeUser, key: String, jsonStringValue: String, merge: Boolean) {
         try {
             val jsonObject = JSONObject(jsonStringValue)
             // JSONObject in Android never deals with float values, which
@@ -223,6 +223,9 @@ class InAppMessageUserJavascriptInterface(private val context: Context) {
                 }
                 is Double -> {
                     user.setCustomUserAttribute(key, valueObject)
+                }
+                is JSONObject -> {
+                    user.setCustomUserAttribute(key, valueObject, merge)
                 }
                 else -> {
                     brazelog(W) {

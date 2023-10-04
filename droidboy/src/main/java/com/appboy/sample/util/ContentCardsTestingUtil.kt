@@ -100,12 +100,12 @@ class ContentCardsTestingUtil private constructor() {
             val randomImage = getRandomImageUrl()
 
             when (cardType) {
-                CardType.BANNER -> {
+                CardType.IMAGE -> {
                     defaultMapping.mergeWith(
                         mapOf(
-                            ccp.getKey(CardKey.BANNER_IMAGE_IMAGE) to randomImage.first,
-                            ccp.getKey(CardKey.BANNER_IMAGE_ASPECT_RATIO) to randomImage.second,
-                            ccp.getKey(CardKey.BANNER_IMAGE_URL) to CARD_URL
+                            ccp.getKey(CardKey.IMAGE_ONLY_IMAGE) to randomImage.first,
+                            ccp.getKey(CardKey.IMAGE_ONLY_ASPECT_RATIO) to randomImage.second,
+                            ccp.getKey(CardKey.IMAGE_ONLY_URL) to CARD_URL
                         )
                     )
                 }

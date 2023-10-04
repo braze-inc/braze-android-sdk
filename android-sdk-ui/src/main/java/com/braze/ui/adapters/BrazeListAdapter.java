@@ -7,18 +7,18 @@ import android.widget.ArrayAdapter;
 
 import androidx.annotation.NonNull;
 
-import com.braze.models.cards.BannerImageCard;
 import com.braze.models.cards.CaptionedImageCard;
 import com.braze.models.cards.Card;
+import com.braze.models.cards.ImageOnlyCard;
 import com.braze.models.cards.ShortNewsCard;
 import com.braze.models.cards.TextAnnouncementCard;
+import com.braze.support.BrazeLogger;
 import com.braze.ui.feed.view.BaseFeedCardView;
-import com.braze.ui.widget.BannerImageCardView;
 import com.braze.ui.widget.CaptionedImageCardView;
 import com.braze.ui.widget.DefaultCardView;
+import com.braze.ui.widget.ImageOnlyCardView;
 import com.braze.ui.widget.ShortNewsCardView;
 import com.braze.ui.widget.TextAnnouncementCardView;
-import com.braze.support.BrazeLogger;
 
 import java.util.HashSet;
 import java.util.List;
@@ -68,7 +68,7 @@ public class BrazeListAdapter extends ArrayAdapter<Card> {
   @Override
   public int getItemViewType(int position) {
     Card card = getItem(position);
-    if (card instanceof BannerImageCard) {
+    if (card instanceof ImageOnlyCard) {
       return 1;
     } else if (card instanceof CaptionedImageCard) {
       return 2;
@@ -92,8 +92,8 @@ public class BrazeListAdapter extends ArrayAdapter<Card> {
     Card card = getItem(position);
 
     if (convertView == null) {
-      if (card instanceof BannerImageCard) {
-        view = new BannerImageCardView(mContext);
+      if (card instanceof ImageOnlyCard) {
+        view = new ImageOnlyCardView(mContext);
       } else if (card instanceof CaptionedImageCard) {
         view = new CaptionedImageCardView(mContext);
       } else if (card instanceof ShortNewsCard) {

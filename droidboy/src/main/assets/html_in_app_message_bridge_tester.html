@@ -14,6 +14,10 @@
         brazeBridge.getUser().setCustomUserAttribute('abBoolAttribute', true);
         brazeBridge.getUser().setCustomUserAttribute('abArrayAttribute', ['a', 'b']);
         brazeBridge.getUser().setLocationCustomUserAttribute('Dutch Restaurant', 52.369838, 4.875981);
+        brazeBridge.getUser().setCustomUserAttribute('abObjectAttribute', {a: 1, b: 'customStringValueFromJS'});
+      };
+      function setCustomAttributesWithMerge() {
+        brazeBridge.getUser().setCustomUserAttribute('abObjectAttribute', {c: 'mergedC'}, true);
       };
       function logCustomEvents() {
         brazeBridge.logCustomEvent('abEvent');
@@ -86,6 +90,7 @@
     <button onClick="brazeBridge.getUser().setCountry('USA')" />ab: setCountry</button>
     <button onClick="brazeBridge.getUser().setPhoneNumber('9084894848')" />ab: setPhone</button>
     <button onClick="setCustomAttributes()" />ab: setCustomAttributes</button>
+    <button onClick="setCustomAttributesWithMerge()" />ab: setCustomAttributes w/ merge</button>
     <button onClick="brazeBridge.getUser().setGender('m')" />ab: setGender Male</button>
     <button onClick="brazeBridge.getUser().setGender('f')" />ab: setGender Female</button>
     <button onClick="brazeBridge.getUser().setGender('o')" />ab: setGender Other</button>

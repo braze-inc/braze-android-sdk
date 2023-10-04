@@ -10,6 +10,7 @@ import com.braze.ui.inappmessage.InAppMessageCloser;
 import com.braze.ui.inappmessage.InAppMessageOperation;
 import com.braze.ui.inappmessage.listeners.IInAppMessageManagerListener;
 
+import java.util.ArrayList;
 import java.util.Map;
 
 public class CustomInAppMessageManagerListener implements IInAppMessageManagerListener {
@@ -19,9 +20,17 @@ public class CustomInAppMessageManagerListener implements IInAppMessageManagerLi
     mActivity = activity;
   }
 
+  private Boolean shouldDrop = true;
+
   @Override
   public InAppMessageOperation beforeInAppMessageDisplayed(IInAppMessage inAppMessage) {
-    return InAppMessageOperation.DISPLAY_NOW;
+    if (shouldDrop) {
+      shouldDrop = false;
+      return InAppMessageOperation.REENQUEUE;
+    } else {
+      shouldDrop = true;
+      return InAppMessageOperation.DISPLAY_NOW;
+    }
   }
 
   @Override

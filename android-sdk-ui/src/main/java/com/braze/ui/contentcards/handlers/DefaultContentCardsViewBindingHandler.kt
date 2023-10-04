@@ -8,11 +8,11 @@ import androidx.annotation.VisibleForTesting
 import com.braze.enums.CardType
 import com.braze.enums.CardType.Companion.fromValue
 import com.braze.models.cards.Card
-import com.braze.ui.contentcards.view.BannerImageContentCardView
 import com.braze.ui.contentcards.view.BaseContentCardView
 import com.braze.ui.contentcards.view.CaptionedImageContentCardView
 import com.braze.ui.contentcards.view.ContentCardViewHolder
 import com.braze.ui.contentcards.view.DefaultContentCardView
+import com.braze.ui.contentcards.view.ImageOnlyContentCardView
 import com.braze.ui.contentcards.view.ShortNewsContentCardView
 import com.braze.ui.contentcards.view.TextAnnouncementContentCardView
 import java.util.*
@@ -72,7 +72,7 @@ open class DefaultContentCardsViewBindingHandler : IContentCardsViewBindingHandl
         if (!contentCardViewCache.containsKey(cardType) || contentCardViewCache[cardType] == null) {
             // Create the view here
             val contentCardView: BaseContentCardView<*> = when (cardType) {
-                CardType.BANNER -> BannerImageContentCardView(context)
+                CardType.IMAGE -> ImageOnlyContentCardView(context)
                 CardType.CAPTIONED_IMAGE -> CaptionedImageContentCardView(context)
                 CardType.SHORT_NEWS -> ShortNewsContentCardView(context)
                 CardType.TEXT_ANNOUNCEMENT -> TextAnnouncementContentCardView(context)

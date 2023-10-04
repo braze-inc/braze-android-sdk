@@ -16,10 +16,12 @@
       android:exported="false" />
     <activity
       android:name="com.braze.push.NotificationTrampolineActivity"
+      android:excludeFromRecents="true"
+      android:autoRemoveFromRecents="true"
+      android:taskAffinity=".NotificationTrampolineActivity"
       android:exported="false"
       android:launchMode="singleInstance"
       android:theme="@style/Braze.PushTrampoline.Transparent" />
-
     <receiver
       android:name="com.braze.push.BrazePushReceiver"
       android:exported="false" />

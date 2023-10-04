@@ -1,3 +1,22 @@
+## 29.0.0
+
+[Release Date](https://github.com/braze-inc/braze-android-sdk/releases/tag/v29.0.0)
+
+##### Breaking
+- Renamed `BannerImageCard`, `BannerImageCardView`, and `BannerImageContentCardView` to `ImageOnlyCard`, `ImageOnlyCardView`, and `ImageOnlyContentCardView`.
+- All styles used for Banner Cards have been updated to Image Only Cards. All keys with the word `banner` should be replaced with `image_only`.
+- Device brand information is now sent. If you want to block this, see [Blocking data collection](https://www.braze.com/docs/developer_guide/platform_integration_guides/sdk_primer#blocking-data-collection).
+
+##### Fixed
+- Fixed an issue where `NotificationTrampolineActivity` would sometimes appear in the list of recent tasks.
+
+##### Added
+- Braze HTML In-App Message bridge method `setCustomUserAttribute()` will now accept a JSON Object as the value.
+  - When passing a JSON Object, you can pass a third parameter of 'true' that will merge the JSON Object with the existing value.
+- Adds a new option `REENQUEUE` to enum `InAppMessageOperation`.
+  - Return this option in `IInAppMessageManagerListener.beforeInAppMessageDisplayed` to ensure that an in-app message is not displayed and is simply re-enqueued.
+  - This option will reset any trigger times and re-eligibility rules as if it was never triggered. It will not add the message to the In-App Message stack.
+
 ## 28.0.0
 
 [Release Date](https://github.com/braze-inc/braze-android-sdk/releases/tag/v28.0.0)

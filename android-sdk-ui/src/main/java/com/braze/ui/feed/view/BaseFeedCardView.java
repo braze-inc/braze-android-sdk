@@ -25,7 +25,7 @@ public abstract class BaseFeedCardView<T extends Card> extends BaseCardView<T> {
     LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     inflater.inflate(getLayoutResource(), this);
     // All implementing views of BaseCardView must include this switcher view in order to have the
-    // read/unread functionality. Views that don't have the indicator (like banner views) won't have the image switcher
+    // read/unread functionality. Views that don't have the indicator (like ImageOnlyCardViews) won't have the image switcher
     // in them and thus we do the null-check below.
     imageSwitcher = findViewById(R.id.com_braze_newsfeed_item_read_indicator_image_switcher);
     if (imageSwitcher != null) {

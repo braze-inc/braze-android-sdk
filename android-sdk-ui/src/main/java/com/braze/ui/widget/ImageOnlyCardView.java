@@ -3,14 +3,14 @@ package com.braze.ui.widget;
 import android.content.Context;
 import android.widget.ImageView;
 
-import com.braze.models.cards.BannerImageCard;
-import com.braze.ui.R;
-import com.braze.ui.feed.view.BaseFeedCardView;
+import com.braze.models.cards.ImageOnlyCard;
 import com.braze.support.BrazeLogger;
+import com.braze.ui.R;
 import com.braze.ui.actions.IAction;
+import com.braze.ui.feed.view.BaseFeedCardView;
 
-public class BannerImageCardView extends BaseFeedCardView<BannerImageCard> {
-  private static final String TAG = BrazeLogger.getBrazeLogTag(BannerImageCardView.class);
+public class ImageOnlyCardView extends BaseFeedCardView<ImageOnlyCard> {
+  private static final String TAG = BrazeLogger.getBrazeLogTag(ImageOnlyCardView.class);
   private final ImageView mImage;
   private IAction mCardAction;
 
@@ -18,13 +18,13 @@ public class BannerImageCardView extends BaseFeedCardView<BannerImageCard> {
   // aspect ratio, then this value will be the aspect ratio of the card on render.
   private float mAspectRatio = 6f;
 
-  public BannerImageCardView(Context context) {
+  public ImageOnlyCardView(Context context) {
     this(context, null);
   }
 
-  public BannerImageCardView(final Context context, BannerImageCard card) {
+  public ImageOnlyCardView(final Context context, ImageOnlyCard card) {
     super(context);
-    mImage = (ImageView) getProperViewFromInflatedStub(R.id.com_braze_banner_image_card_imageview_stub);
+    mImage = (ImageView) getProperViewFromInflatedStub(R.id.com_braze_image_only_card_imageview_stub);
     mImage.setScaleType(ImageView.ScaleType.CENTER_CROP);
     mImage.setAdjustViewBounds(true);
 
@@ -37,11 +37,11 @@ public class BannerImageCardView extends BaseFeedCardView<BannerImageCard> {
 
   @Override
   protected int getLayoutResource() {
-    return R.layout.com_braze_banner_image_card;
+    return R.layout.com_braze_image_only_card;
   }
 
   @Override
-  public void onSetCard(final BannerImageCard card) {
+  public void onSetCard(final ImageOnlyCard card) {
     if (card.getAspectRatio() != 0f) {
       mAspectRatio = card.getAspectRatio();
     }

@@ -417,9 +417,9 @@
     <item name="android:gravity">right|top</item>
   </style>
 
-  <!-- Banner Card -->
-  <style name="Braze.Cards.BannerImage"/>
-  <style name="Braze.Cards.BannerImage.Image">
+  <!-- Image Only Card -->
+  <style name="Braze.Cards.ImageOnly"/>
+  <style name="Braze.Cards.ImageOnly.Image">
   </style>
 
   <!-- Captioned Image Card -->
@@ -617,13 +617,13 @@
   <style name="Braze.ContentCards.PinnedIcon.CaptionedImage"/>
   <style name="Braze.ContentCards.UnreadBar.CaptionedImage"/>
 
-  <!-- Banner Content Card -->
-  <style name="Braze.ContentCards.BannerImage"/>
-  <style name="Braze.ContentCards.BannerImage.Root">
+  <!-- Image Only Content Card -->
+  <style name="Braze.ContentCards.ImageOnly"/>
+  <style name="Braze.ContentCards.ImageOnly.Root">
     <item name="android:layout_marginLeft">@dimen/com_braze_content_cards_divider_left_margin</item>
     <item name="android:layout_marginRight">@dimen/com_braze_content_cards_divider_right_margin</item>
   </style>
-  <style name="Braze.ContentCards.BannerImage.Image">
+  <style name="Braze.ContentCards.ImageOnly.Image">
     <item name="android:layout_width">match_parent</item>
     <item name="android:layout_height">250dp</item>
     <item name="android:scaleType">centerCrop</item>
@@ -631,8 +631,8 @@
     <item name="android:contentDescription">@null</item>
     <item name="android:importantForAccessibility">no</item>
   </style>
-  <style name="Braze.ContentCards.PinnedIcon.Banner"/>
-  <style name="Braze.ContentCards.UnreadBar.Banner"/>
+  <style name="Braze.ContentCards.PinnedIcon.ImageOnly"/>
+  <style name="Braze.ContentCards.UnreadBar.ImageOnly"/>
 
   <!-- Short News Content Card -->
   <style name="Braze.ContentCards.ShortNews"/>

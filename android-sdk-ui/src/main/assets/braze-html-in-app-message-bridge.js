@@ -32,7 +32,7 @@ var brazeBridge = {
     setDateOfBirth: function(year, month, day) { brazeInternalBridge.getUser().setDateOfBirth(year, month, day); },
     setCountry: function(country) { brazeInternalBridge.getUser().setCountry(country); },
     setPhoneNumber: function(phone) { brazeInternalBridge.getUser().setPhoneNumber(phone); },
-    setCustomUserAttribute: function(key, value) {
+    setCustomUserAttribute: function(key, value, merge = false) {
       var isArray = function(value) {
           if (Array.isArray) {
             return Array.isArray(value);
@@ -42,7 +42,7 @@ var brazeBridge = {
       if (isArray(value)) {
         brazeInternalBridge.getUser().setCustomUserAttributeArray(key, JSON.stringify(value));
       } else {
-        brazeInternalBridge.getUser().setCustomUserAttributeJSON(key, JSON.stringify({"value":value}));
+        brazeInternalBridge.getUser().setCustomUserAttributeJSON(key, JSON.stringify({"value":value}), merge);
       }
     },
     setLocationCustomUserAttribute: function(key, latitude, longitude) {

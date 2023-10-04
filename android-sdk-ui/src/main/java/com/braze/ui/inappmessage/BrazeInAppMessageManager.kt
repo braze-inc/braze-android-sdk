@@ -6,6 +6,7 @@ import android.content.Context
 import android.content.pm.ActivityInfo
 import androidx.annotation.VisibleForTesting
 import com.braze.Braze.Companion.getInstance
+import com.braze.BrazeInternal
 import com.braze.BrazeInternal.retryInAppMessage
 import com.braze.configuration.BrazeConfigurationProvider
 import com.braze.enums.inappmessage.Orientation
@@ -295,7 +296,8 @@ open class BrazeInAppMessageManager : InAppMessageManagerBase() {
     @Suppress("LongMethod", "ReturnCount")
     open fun requestDisplayInAppMessage(): Boolean {
         return try {
-            if (mActivity == null) {
+            val activity = mActivity
+            if (activity == null) {
                 if (!inAppMessageStack.empty()) {
                     brazelog(W) {
                         "No activity is currently registered to receive in-app messages. Saving in-app " +
@@ -345,6 +347,23 @@ open class BrazeInAppMessageManager : InAppMessageManagerBase() {
                     brazelog {
                         "The IInAppMessageManagerListener method beforeInAppMessageDisplayed returned DISCARD. The " +
                             "in-app message will not be displayed and will not be put back on the stack."
+                    }
+                    return false
+                }
+
+                InAppMessageOperation.REENQUEUE -> {
+                    val event = inAppMessageEventMap[inAppMessage]
+                    if (event != null) {
+                        BrazeInternal.reenqueueInAppMessage(activity.applicationContext, event)
+                        brazelog {
+                            "The IInAppMessageManagerListener method beforeInAppMessageDisplayed returned REENQUEUE. The " +
+                                "in-app message will not be displayed and will be marked as eligible for next time."
+                        }
+                    } else {
+                        brazelog {
+                            "An in-app message was requested to be re-enqueued, but it was not found. Discarding instead. " +
+                                "In-app message = $inAppMessage"
+                        }
                     }
                     return false
                 }

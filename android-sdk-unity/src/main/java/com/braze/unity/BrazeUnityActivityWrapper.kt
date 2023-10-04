@@ -118,7 +118,8 @@ class BrazeUnityActivityWrapper {
         when (val action = UnityInAppMessageManagerAction.getTypeFromValue(actionEnumValue)) {
             UnityInAppMessageManagerAction.IAM_DISPLAY_NOW,
             UnityInAppMessageManagerAction.IAM_DISPLAY_LATER,
-            UnityInAppMessageManagerAction.IAM_DISCARD ->
+            UnityInAppMessageManagerAction.IAM_DISCARD,
+            UnityInAppMessageManagerAction.IAM_REENQUEUE ->
                 action.inAppMessageOperation?.let { nextInAppMessageDisplayOperation = it }
             else -> {
                 brazelog(V) { "Failed to map unity IAM manager action value: $action" }

@@ -2,6 +2,7 @@ package com.braze.unity.enums
 
 import com.braze.ui.inappmessage.InAppMessageOperation
 
+@Suppress("MagicNumber")
 enum class UnityInAppMessageManagerAction(
     private val value: Int,
     val inAppMessageOperation: InAppMessageOperation?
@@ -21,7 +22,12 @@ enum class UnityInAppMessageManagerAction(
     /**
      * Maps to [InAppMessageOperation.DISCARD].
      */
-    IAM_DISCARD(2, InAppMessageOperation.DISCARD);
+    IAM_DISCARD(2, InAppMessageOperation.DISCARD),
+
+    /**
+     * Maps to [InAppMessageOperation.REENQUEUE].
+     */
+    IAM_REENQUEUE(3, InAppMessageOperation.REENQUEUE);
 
     companion object {
         fun getTypeFromValue(value: Int): UnityInAppMessageManagerAction? =
