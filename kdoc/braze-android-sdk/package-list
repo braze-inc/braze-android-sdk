@@ -1047,6 +1047,7 @@ $dokka.location:com.braze.models.push/BrazeNotificationPayload/publicNotificatio
 $dokka.location:com.braze.models.push/BrazeNotificationPayload/pushDuration/#/PointingToDeclaration/braze-android-sdk/com.braze.models.push/-braze-notification-payload/push-duration.html
 $dokka.location:com.braze.models.push/BrazeNotificationPayload/pushStoryPageIndex/#/PointingToDeclaration/braze-android-sdk/com.braze.models.push/-braze-notification-payload/push-story-page-index.html
 $dokka.location:com.braze.models.push/BrazeNotificationPayload/pushStoryPages/#/PointingToDeclaration/braze-android-sdk/com.braze.models.push/-braze-notification-payload/push-story-pages.html
+$dokka.location:com.braze.models.push/BrazeNotificationPayload/pushUniqueId/#/PointingToDeclaration/braze-android-sdk/com.braze.models.push/-braze-notification-payload/push-unique-id.html
 $dokka.location:com.braze.models.push/BrazeNotificationPayload/setActionButtons/#kotlin.collections.MutableList[com.braze.models.push.BrazeNotificationPayload.ActionButton]/PointingToDeclaration/braze-android-sdk/com.braze.models.push/-braze-notification-payload/set-action-buttons.html
 $dokka.location:com.braze.models.push/BrazeNotificationPayload/setIsInlineImagePush/#kotlin.Boolean/PointingToDeclaration/braze-android-sdk/com.braze.models.push/-braze-notification-payload/set-is-inline-image-push.html
 $dokka.location:com.braze.models.push/BrazeNotificationPayload/setPushStoryPages/#kotlin.collections.MutableList[com.braze.models.push.BrazeNotificationPayload.PushStoryPage]/PointingToDeclaration/braze-android-sdk/com.braze.models.push/-braze-notification-payload/set-push-story-pages.html
@@ -2169,6 +2170,7 @@ $dokka.location:com.braze/BrazeInternal/refreshFeatureFlags/#android.content.Con
 $dokka.location:com.braze/BrazeInternal/requestGeofenceRefresh/#android.content.Context#com.braze.models.IBrazeLocation/PointingToDeclaration/braze-android-sdk/com.braze/-braze-internal/request-geofence-refresh.html
 $dokka.location:com.braze/BrazeInternal/requestGeofenceRefresh/#android.content.Context#kotlin.Boolean/PointingToDeclaration/braze-android-sdk/com.braze/-braze-internal/request-geofence-refresh.html
 $dokka.location:com.braze/BrazeInternal/retryInAppMessage/#android.content.Context#com.braze.events.InAppMessageEvent/PointingToDeclaration/braze-android-sdk/com.braze/-braze-internal/retry-in-app-message.html
+$dokka.location:com.braze/BrazeInternal/validateAndStorePushId/#android.content.Context#kotlin.String/PointingToDeclaration/braze-android-sdk/com.braze/-braze-internal/validate-and-store-push-id.html
 $dokka.location:com.braze/BrazeUser///PointingToDeclaration/braze-android-sdk/com.braze/-braze-user/index.html
 $dokka.location:com.braze/BrazeUser/addAlias/#kotlin.String#kotlin.String/PointingToDeclaration/braze-android-sdk/com.braze/-braze-user/add-alias.html
 $dokka.location:com.braze/BrazeUser/addToCustomAttributeArray/#kotlin.String#kotlin.String/PointingToDeclaration/braze-android-sdk/com.braze/-braze-user/add-to-custom-attribute-array.html
@@ -2293,6 +2295,7 @@ $dokka.location:com.braze/Constants/BRAZE_PUSH_SUMMARY_TEXT_KEY/#/PointingToDecl
 $dokka.location:com.braze/Constants/BRAZE_PUSH_SYNC_GEOFENCES_KEY/#/PointingToDeclaration/braze-android-sdk/com.braze/-constants/-b-r-a-z-e_-p-u-s-h_-s-y-n-c_-g-e-o-f-e-n-c-e-s_-k-e-y.html
 $dokka.location:com.braze/Constants/BRAZE_PUSH_TITLE_KEY/#/PointingToDeclaration/braze-android-sdk/com.braze/-constants/-b-r-a-z-e_-p-u-s-h_-t-i-t-l-e_-k-e-y.html
 $dokka.location:com.braze/Constants/BRAZE_PUSH_UNINSTALL_TRACKING_KEY/#/PointingToDeclaration/braze-android-sdk/com.braze/-constants/-b-r-a-z-e_-p-u-s-h_-u-n-i-n-s-t-a-l-l_-t-r-a-c-k-i-n-g_-k-e-y.html
+$dokka.location:com.braze/Constants/BRAZE_PUSH_UNIQUE_ID/#/PointingToDeclaration/braze-android-sdk/com.braze/-constants/-b-r-a-z-e_-p-u-s-h_-u-n-i-q-u-e_-i-d.html
 $dokka.location:com.braze/Constants/BRAZE_PUSH_VISIBILITY_KEY/#/PointingToDeclaration/braze-android-sdk/com.braze/-constants/-b-r-a-z-e_-p-u-s-h_-v-i-s-i-b-i-l-i-t-y_-k-e-y.html
 $dokka.location:com.braze/Constants/BRAZE_SDK_VERSION/#/PointingToDeclaration/braze-android-sdk/com.braze/-constants/-b-r-a-z-e_-s-d-k_-v-e-r-s-i-o-n.html
 $dokka.location:com.braze/Constants/BRAZE_STORY_CLICKED_ACTION/#/PointingToDeclaration/braze-android-sdk/com.braze/-constants/-b-r-a-z-e_-s-t-o-r-y_-c-l-i-c-k-e-d_-a-c-t-i-o-n.html
