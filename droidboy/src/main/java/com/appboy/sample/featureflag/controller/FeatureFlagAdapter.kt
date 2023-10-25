@@ -20,19 +20,20 @@ class FeatureFlagAdapter(
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         private var areDetailsVisible = false
         val tvIdentifier: TextView
-        val tvNumProperties: TextView
-        val tvEnabled: TextView
+        val tvInfo: TextView
+        val tvTracking: TextView
         val tvPropertyDetails: TextView
 
         init {
             // Define click listener for the ViewHolder's View
             tvIdentifier = view.findViewById(R.id.tvFlagId)
-            tvNumProperties = view.findViewById(R.id.tvFlagNumProperties)
-            tvEnabled = view.findViewById(R.id.tvFlagEnabled)
+            tvInfo = view.findViewById(R.id.tvFlagInfo)
+            tvTracking = view.findViewById(R.id.tvFlagTrackingInfo)
             tvPropertyDetails = view.findViewById(R.id.tvFlagProperties)
 
             itemView.setOnClickListener {
                 areDetailsVisible = !areDetailsVisible
+                tvTracking.visibility = if (areDetailsVisible) View.VISIBLE else View.GONE
                 tvPropertyDetails.visibility = if (areDetailsVisible) View.VISIBLE else View.GONE
             }
         }
@@ -54,8 +55,18 @@ class FeatureFlagAdapter(
         val featureFlag = featureFlags[position]
         viewHolder.run {
             tvIdentifier.text = featureFlag.id
-            tvEnabled.text = if (featureFlag.enabled) "ON" else "OFF"
-            tvNumProperties.text = featureFlag.properties.length().toString()
+            var trackingId = featureFlag.forJsonPut().optString("fts")
+            var infoText = ""
+            if (trackingId.isNotEmpty()) {
+                infoText += "[T] "
+            } else {
+                trackingId = "None"
+            }
+            infoText += if (featureFlag.enabled) "ON" else "OFF"
+            infoText += " ${featureFlag.properties.length()}"
+
+            tvInfo.text = infoText
+            tvTracking.text = "Tracking ID: $trackingId"
             tvPropertyDetails.text = featureFlag.properties.getPrettyPrintedString()
         }
     }

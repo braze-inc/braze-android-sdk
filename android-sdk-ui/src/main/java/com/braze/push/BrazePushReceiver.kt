@@ -251,6 +251,13 @@ open class BrazePushReceiver : BroadcastReceiver() {
                 return false
             }
 
+            payload.pushUniqueId?.let {
+                if (!BrazeInternal.validateAndStorePushId(context, it)) {
+                    brazelog(I) { "Push with identifier '$it' has already been seen. Not displaying or forwarding push." }
+                    return false
+                }
+            }
+
             // Parse the notification for any associated ContentCard
             BrazeNotificationUtils.handleContentCardsSerializedCardIfPresent(payload)
 

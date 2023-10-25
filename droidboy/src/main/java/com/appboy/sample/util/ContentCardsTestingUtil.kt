@@ -12,8 +12,6 @@ import java.util.concurrent.TimeUnit
 @Suppress("UnsafeCallOnNullableType")
 class ContentCardsTestingUtil private constructor() {
     companion object {
-        private const val CARD_URL = "https://braze.com"
-
         /**
          * https://effigis.com/en/solutions/satellite-images/satellite-image-samples/
          */
@@ -105,7 +103,7 @@ class ContentCardsTestingUtil private constructor() {
                         mapOf(
                             ccp.getKey(CardKey.IMAGE_ONLY_IMAGE) to randomImage.first,
                             ccp.getKey(CardKey.IMAGE_ONLY_ASPECT_RATIO) to randomImage.second,
-                            ccp.getKey(CardKey.IMAGE_ONLY_URL) to CARD_URL
+                            ccp.getKey(CardKey.IMAGE_ONLY_URL) to randomImage.first
                         )
                     )
                 }
@@ -115,47 +113,30 @@ class ContentCardsTestingUtil private constructor() {
                             ccp.getKey(CardKey.CAPTIONED_IMAGE_IMAGE) to randomImage.first,
                             ccp.getKey(CardKey.CAPTIONED_IMAGE_ASPECT_RATIO) to randomImage.second,
                             ccp.getKey(CardKey.CAPTIONED_IMAGE_TITLE) to title,
-                            ccp.getKey(CardKey.CAPTIONED_IMAGE_DESCRIPTION) to description
+                            ccp.getKey(CardKey.CAPTIONED_IMAGE_DESCRIPTION) to description,
+                            ccp.getKey(CardKey.CAPTIONED_IMAGE_URL) to randomImage.first
                         )
                     )
-                    if (random.nextBoolean()) {
-                        defaultMapping.mergeWith(
-                            mapOf(
-                                ccp.getKey(CardKey.CAPTIONED_IMAGE_URL) to CARD_URL
-                            )
-                        )
-                    }
                 }
                 CardType.SHORT_NEWS -> {
                     defaultMapping.mergeWith(
                         mapOf(
                             ccp.getKey(CardKey.SHORT_NEWS_IMAGE) to randomImage.first,
                             ccp.getKey(CardKey.SHORT_NEWS_TITLE) to title,
-                            ccp.getKey(CardKey.SHORT_NEWS_DESCRIPTION) to description
+                            ccp.getKey(CardKey.SHORT_NEWS_DESCRIPTION) to description,
+                            ccp.getKey(CardKey.SHORT_NEWS_URL) to randomImage.first
                         )
                     )
-                    if (random.nextBoolean()) {
-                        defaultMapping.mergeWith(
-                            mapOf(
-                                ccp.getKey(CardKey.SHORT_NEWS_URL) to CARD_URL
-                            )
-                        )
-                    }
                 }
                 CardType.TEXT_ANNOUNCEMENT -> {
                     defaultMapping.mergeWith(
                         mapOf(
                             ccp.getKey(CardKey.TEXT_ANNOUNCEMENT_DESCRIPTION) to description,
-                            ccp.getKey(CardKey.TEXT_ANNOUNCEMENT_TITLE) to title
+                            ccp.getKey(CardKey.TEXT_ANNOUNCEMENT_URL) to randomImage.first,
+                            ccp.getKey(CardKey.TEXT_ANNOUNCEMENT_TITLE) to title,
+                            ccp.getKey(CardKey.TEXT_ANNOUNCEMENT_URL) to randomImage.first
                         )
                     )
-                    if (random.nextBoolean()) {
-                        defaultMapping.mergeWith(
-                            mapOf(
-                                ccp.getKey(CardKey.TEXT_ANNOUNCEMENT_URL) to CARD_URL
-                            )
-                        )
-                    }
                 }
                 else -> {
                     // Do nothing!

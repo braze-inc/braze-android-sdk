@@ -1,3 +1,11 @@
+## 29.0.1
+
+[Release Date](https://github.com/braze-inc/braze-android-sdk/releases/tag/v29.0.1)
+
+##### Fixed
+- Fixed an issue where Content Cards saved directly to storage via API triggered campaigns could be purged after syncs.
+- Fixed an issue with the default Content Card feed where images provided without default aspect ratios would display with the wrong dynamic aspect ratio.
+
 ## 29.0.0
 
 [Release Date](https://github.com/braze-inc/braze-android-sdk/releases/tag/v29.0.0)
