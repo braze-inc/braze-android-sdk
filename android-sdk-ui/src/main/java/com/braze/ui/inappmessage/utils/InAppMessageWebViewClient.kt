@@ -5,16 +5,20 @@ import android.net.Uri
 import android.os.Bundle
 import android.webkit.RenderProcessGoneDetail
 import android.webkit.WebResourceRequest
+import android.webkit.WebResourceResponse
 import android.webkit.WebView
-import android.webkit.WebViewClient
 import androidx.annotation.VisibleForTesting
-import com.braze.configuration.BrazeConfigurationProvider
+import com.braze.BrazeInternal
+import androidx.webkit.WebViewAssetLoader
+import androidx.webkit.WebViewClientCompat
+import com.braze.Constants.TRIGGERS_ASSETS_FOLDER
 import com.braze.coroutine.BrazeCoroutineScope
 import com.braze.models.inappmessage.IInAppMessage
 import com.braze.support.BrazeLogger.Priority.E
 import com.braze.support.BrazeLogger.Priority.I
 import com.braze.support.BrazeLogger.Priority.V
 import com.braze.support.BrazeLogger.brazelog
+import com.braze.support.WebContentUtils.ASSET_LOADER_DUMMY_DOMAIN
 import com.braze.support.getAssetFileStringContents
 import com.braze.ui.inappmessage.BrazeInAppMessageManager
 import com.braze.ui.inappmessage.listeners.IInAppMessageWebViewClientListener
@@ -23,20 +27,64 @@ import com.braze.ui.support.getQueryParameters
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.withContext
+import java.io.File
 import java.util.concurrent.atomic.AtomicBoolean
 
+/**
+ * InAppMessageWebViewClient.
+ *
+ * @param context
+ * @param inAppMessage The in-app message being displayed.
+ * @param inAppMessageWebViewClientListener
+ * @param assetDirectoryUrl The directory that preloaded assets are loaded in. Required when inAppMessage.messageType is
+ * HTML_FULL. For all other message types, this must be null.
+ */
 open class InAppMessageWebViewClient(
     private val context: Context,
     private val inAppMessage: IInAppMessage,
-    private val inAppMessageWebViewClientListener: IInAppMessageWebViewClientListener?
-) : WebViewClient() {
+    private val inAppMessageWebViewClientListener: IInAppMessageWebViewClientListener?,
+    assetDirectoryUrl: String? = null
+) : WebViewClientCompat() {
     private var webViewClientStateListener: IWebViewClientStateListener? = null
     private var hasPageFinishedLoading = false
     private val hasCalledPageFinishedOnListener = AtomicBoolean(false)
     private var markPageFinishedJob: Job? = null
 
     private val maxOnPageFinishedWaitTimeMs: Int =
-        BrazeConfigurationProvider(context).inAppMessageWebViewClientOnPageFinishedMaxWaitMs
+        BrazeInternal.getConfigurationProvider(context).inAppMessageWebViewClientOnPageFinishedMaxWaitMs
+
+    private val assetLoader =
+        if (assetDirectoryUrl != null) {
+            WebViewAssetLoader.Builder()
+                .setDomain(ASSET_LOADER_DUMMY_DOMAIN)
+                .addPathHandler(
+                    "/",
+                    WebViewAssetLoader.InternalStoragePathHandler(this.context, File(assetDirectoryUrl))
+                )
+                .build()
+        } else {
+            val triggerAssetsDir = File(context.cacheDir, TRIGGERS_ASSETS_FOLDER)
+
+            WebViewAssetLoader.Builder()
+                .setDomain(ASSET_LOADER_DUMMY_DOMAIN)
+                .addPathHandler(
+                    "/$TRIGGERS_ASSETS_FOLDER/",
+                    WebViewAssetLoader.InternalStoragePathHandler(this.context, triggerAssetsDir)
+                )
+                .build()
+        }
+
+    override fun shouldInterceptRequest(
+        view: WebView?,
+        request: WebResourceRequest?
+    ): WebResourceResponse? =
+        request?.let {
+            assetLoader.shouldInterceptRequest(request.url)
+        }
+
+    @Deprecated("Use shouldInterceptRequest(WebView, WebResourceRequest)")
+    override fun shouldInterceptRequest(view: WebView?, url: String?): WebResourceResponse? =
+        assetLoader.shouldInterceptRequest(Uri.parse(url))
 
     override fun onPageFinished(view: WebView, url: String) {
         appendBridgeJavascript(view)

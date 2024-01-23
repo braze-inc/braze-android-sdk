@@ -45,7 +45,8 @@ open class DefaultInAppMessageHtmlFullViewFactory(private val inAppMessageWebVie
             InAppMessageWebViewClient(
                 context,
                 inAppMessage,
-                inAppMessageWebViewClientListener
+                inAppMessageWebViewClientListener,
+                inAppMessageHtmlFull.localAssetsDirectoryUrl
             )
         )
         view.messageWebView?.addJavascriptInterface(

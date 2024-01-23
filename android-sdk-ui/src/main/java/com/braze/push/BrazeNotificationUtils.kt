@@ -34,6 +34,7 @@ import com.braze.enums.BrazePushEventType.NOTIFICATION_OPENED
 import com.braze.enums.BrazePushEventType.NOTIFICATION_RECEIVED
 import com.braze.enums.BrazeViewBounds
 import com.braze.enums.Channel
+import com.braze.events.BrazePushEvent
 import com.braze.models.push.BrazeNotificationPayload
 import com.braze.push.support.getHtmlSpannedTextIfEnabled
 import com.braze.support.BrazeLogger.Priority.E
@@ -98,7 +99,7 @@ object BrazeNotificationUtils {
         try {
             Braze.getInstance(context).logPushNotificationOpened(intent)
             sendNotificationOpenedBroadcast(context, intent)
-            val appConfigurationProvider = BrazeConfigurationProvider(context)
+            val appConfigurationProvider = BrazeInternal.getConfigurationProvider(context)
             if (appConfigurationProvider.doesHandlePushDeepLinksAutomatically) {
                 routeUserWithNotificationOpenedIntent(context, intent)
             } else {
@@ -144,7 +145,7 @@ object BrazeNotificationUtils {
      */
     @JvmStatic
     fun routeUserWithNotificationOpenedIntent(context: Context, intent: Intent) {
-        // get extras bundle.
+        brazelog { "routeUserWithNotificationOpenedIntent called with Intent" }
         var extras = intent.getBundleExtra(Constants.BRAZE_PUSH_EXTRAS_KEY)
         if (extras == null) {
             extras = Bundle()
@@ -155,12 +156,43 @@ object BrazeNotificationUtils {
         )
         extras.putString(SOURCE_KEY, Constants.BRAZE)
 
+        val deepLink = intent.getStringExtra(Constants.BRAZE_PUSH_DEEP_LINK_KEY)
+        val useWebView = "true".equals(intent.getStringExtra(Constants.BRAZE_PUSH_OPEN_URI_IN_WEBVIEW_KEY), ignoreCase = true)
+
+        routeUserWithNotificationOpenedIntent(context, extras, deepLink, useWebView)
+    }
+
+    /**
+     * Opens any available deep links with an Intent.ACTION_VIEW intent, placing the main activity
+     * on the back stack. If no deep link is available, opens the main activity.
+     *
+     * @param context
+     * @param brazePush the BrazePushEvent
+     */
+    @JvmStatic
+    fun routeUserWithNotificationOpenedIntent(context: Context, brazePush: BrazePushEvent) {
+        brazelog { "routeUserWithNotificationOpenedIntent called with BrazePushEvent" }
+        val extras = brazePush.notificationPayload.brazeExtras
+        extras.putString(
+            Constants.BRAZE_PUSH_CAMPAIGN_ID_KEY,
+            brazePush.notificationPayload.campaignId
+        )
+        extras.putString(SOURCE_KEY, Constants.BRAZE)
+
         // If a deep link exists, start an ACTION_VIEW intent pointing at the deep link.
         // The intent returned from getStartActivityIntent() is placed on the back stack.
         // Otherwise, start the intent defined in getStartActivityIntent().
-        val deepLink = intent.getStringExtra(Constants.BRAZE_PUSH_DEEP_LINK_KEY)
+        val deepLink = brazePush.notificationPayload.deeplink
+
+        val useWebView = brazePush.notificationPayload.useWebView ?: false
+        routeUserWithNotificationOpenedIntent(context, extras, deepLink, useWebView)
+    }
+
+    private fun routeUserWithNotificationOpenedIntent(context: Context, extras: Bundle, deepLink: String?, useWebView: Boolean) {
+        // If a deep link exists, start an ACTION_VIEW intent pointing at the deep link.
+        // The intent returned from getStartActivityIntent() is placed on the back stack.
+        // Otherwise, start the intent defined in getStartActivityIntent().
         if (!deepLink.isNullOrBlank()) {
-            val useWebView = "true".equals(intent.getStringExtra(Constants.BRAZE_PUSH_OPEN_URI_IN_WEBVIEW_KEY), ignoreCase = true)
             brazelog { "Found a deep link: $deepLink. Use webview set to: $useWebView" }
 
             // Pass deeplink and use webview values to target activity.
@@ -912,7 +944,7 @@ object BrazeNotificationUtils {
                     intent.getStringExtra(Constants.BRAZE_STORY_PAGE_ID)
                 )
 
-            val appConfigurationProvider = BrazeConfigurationProvider(context)
+            val appConfigurationProvider = BrazeInternal.getConfigurationProvider(context)
 
             val notificationId = intent.getIntExtra(Constants.BRAZE_PUSH_NOTIFICATION_ID, 0)
             if (appConfigurationProvider.doesPushStoryDismissOnClick && notificationId != 0) {

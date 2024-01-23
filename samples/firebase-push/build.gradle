@@ -30,12 +30,18 @@ android {
     sourceCompatibility JavaVersion.VERSION_1_8
     targetCompatibility JavaVersion.VERSION_1_8
   }
+
+  kotlinOptions {
+    freeCompilerArgs = ['-Xjvm-default=all']
+    jvmTarget = "1.8"
+  }
 }
 
 dependencies {
   implementation project(':android-sdk-ui')
   implementation "androidx.appcompat:appcompat:${ANDROIDX_APPCOMPAT_VERSION}"
   implementation "com.google.firebase:firebase-messaging:${FIREBASE_PUSH_MESSAGING_VERSION}"
+  implementation "org.jetbrains.kotlin:kotlin-stdlib:${KOTLIN_VERSION}"
 }
 
 apply plugin: 'com.google.gms.google-services'

@@ -8,9 +8,9 @@ import androidx.core.app.NotificationCompat
 import com.braze.models.push.BrazeNotificationPayload
 import com.braze.models.push.BrazeNotificationPayload.ActionButton
 import com.braze.Braze
+import com.braze.BrazeInternal
 import com.braze.Constants
 import com.braze.IBrazeDeeplinkHandler.IntentFlagPurpose
-import com.braze.configuration.BrazeConfigurationProvider
 import com.braze.push.BrazeNotificationUtils.cancelNotification
 import com.braze.push.BrazeNotificationUtils.notificationReceiverClass
 import com.braze.push.BrazeNotificationUtils.routeUserWithNotificationOpenedIntent
@@ -94,7 +94,7 @@ object BrazeNotificationActionUtils {
                     intent.removeExtra(Constants.BRAZE_PUSH_DEEP_LINK_KEY)
                 }
                 sendNotificationOpenedBroadcast(context, intent)
-                val appConfigurationProvider = BrazeConfigurationProvider(context)
+                val appConfigurationProvider = BrazeInternal.getConfigurationProvider(context)
                 if (appConfigurationProvider.doesHandlePushDeepLinksAutomatically) {
                     routeUserWithNotificationOpenedIntent(context, intent)
                 } else {

@@ -10,7 +10,7 @@ import com.braze.models.cards.Card
 import com.braze.ui.R
 import com.braze.ui.feed.BrazeImageSwitcher
 import com.braze.Braze
-import com.braze.configuration.BrazeConfigurationProvider
+import com.braze.BrazeInternal
 import com.braze.enums.BrazeViewBounds
 import com.braze.support.BrazeLogger.Priority.V
 import com.braze.support.BrazeLogger.Priority.W
@@ -32,7 +32,7 @@ abstract class BaseCardView<T : Card>(context: Context) : RelativeLayout(context
     @JvmField
     var imageSwitcher: BrazeImageSwitcher? = null
     @JvmField
-    protected var configurationProvider = BrazeConfigurationProvider(context)
+    protected var configurationProvider = BrazeInternal.getConfigurationProvider(context)
 
     private val isUnreadCardVisualIndicatorEnabled: Boolean = configurationProvider.isNewsfeedVisualIndicatorOn
 

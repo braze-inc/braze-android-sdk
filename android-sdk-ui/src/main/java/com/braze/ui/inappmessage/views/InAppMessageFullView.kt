@@ -27,9 +27,9 @@ open class InAppMessageFullView(context: Context?, attrs: AttributeSet?) :
     private var inAppMessageImageView: InAppMessageImageView? = null
     private var isGraphic = false
 
-    override val messageTextView: TextView
+    override val messageTextView: TextView?
         get() = findViewById(R.id.com_braze_inappmessage_full_message)
-    override val messageHeaderTextView: TextView
+    override val messageHeaderTextView: TextView?
         get() = findViewById(R.id.com_braze_inappmessage_full_header_text)
     override val frameView: View?
         get() = findViewById(R.id.com_braze_inappmessage_full_frame)

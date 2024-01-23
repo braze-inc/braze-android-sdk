@@ -4,9 +4,9 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import com.braze.Braze
+import com.braze.BrazeInternal
 import com.braze.BrazeInternal.applyPendingRuntimeConfiguration
 import com.braze.Constants
-import com.braze.configuration.BrazeConfigurationProvider
 import com.braze.support.BrazeLogger.Priority.I
 import com.braze.support.BrazeLogger.Priority.V
 import com.braze.support.BrazeLogger.brazelog
@@ -22,7 +22,7 @@ open class BrazeFirebaseMessagingService : FirebaseMessagingService() {
     override fun onNewToken(newToken: String) {
         super.onNewToken(newToken)
         applyPendingRuntimeConfiguration(this)
-        val configurationProvider = BrazeConfigurationProvider(this)
+        val configurationProvider = BrazeInternal.getConfigurationProvider(this)
         if (Braze.getConfiguredApiKey(configurationProvider).isNullOrEmpty()) {
             brazelog(V) { "No configured API key, not registering token in onNewToken. Token: $newToken" }
             return
@@ -67,7 +67,7 @@ open class BrazeFirebaseMessagingService : FirebaseMessagingService() {
                         "consuming remote message: $remoteMessage"
                 }
 
-                val configurationProvider = BrazeConfigurationProvider(context)
+                val configurationProvider = BrazeInternal.getConfigurationProvider(context)
                 if (configurationProvider.isFallbackFirebaseMessagingServiceEnabled) {
                     val fallbackClassPath = configurationProvider.fallbackFirebaseMessagingServiceClasspath
                     if (fallbackClassPath != null) {
@@ -82,6 +82,8 @@ open class BrazeFirebaseMessagingService : FirebaseMessagingService() {
                                 "is null. Not routing to any fallback service."
                         }
                     }
+                } else {
+                    brazelog { "FallbackFirebaseMessagingService is not enabled" }
                 }
 
                 return false

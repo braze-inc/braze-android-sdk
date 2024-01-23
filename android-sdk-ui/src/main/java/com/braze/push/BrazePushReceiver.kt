@@ -238,7 +238,7 @@ open class BrazePushReceiver : BroadcastReceiver() {
                 )
             }
 
-            val appConfigurationProvider = BrazeConfigurationProvider(context)
+            val appConfigurationProvider = BrazeInternal.getConfigurationProvider(context)
             val payload = createPayload(context, appConfigurationProvider, notificationExtras, brazeExtras)
 
             if (payload.isUninstallTrackingPush) {

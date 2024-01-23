@@ -16,12 +16,7 @@ class CustomPushService : HmsMessageService() {
     override fun onNewToken(token: String?) {
         super.onNewToken(token)
 
-        @Suppress("DEPRECATION")
-        val appId = com.huawei.agconnect.config
-            .AGConnectServicesConfig
-            .fromContext(applicationContext)
-            .getString("client/app_id")
-        val pushToken = HmsInstanceId.getInstance(applicationContext).getToken(appId, "HCM")
+        val pushToken = HmsInstanceId.getInstance(applicationContext).getToken("102077259", "HCM")
         Log.i(TAG, "Got Huawei push token $pushToken")
         Braze.getInstance(applicationContext).registeredPushToken = token
     }

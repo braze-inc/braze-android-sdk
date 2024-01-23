@@ -13,7 +13,6 @@ import androidx.appcompat.app.AppCompatActivity
 import com.braze.Braze
 import com.braze.support.BrazeLogger
 import com.braze.support.IntentUtils
-import com.huawei.agconnect.AGConnectOptionsBuilder
 import com.huawei.hms.aaid.HmsInstanceId
 import kotlin.concurrent.thread
 
@@ -81,8 +80,7 @@ class MainActivity : AppCompatActivity() {
     private fun getToken(context: Context) {
         thread(start = true) {
             try {
-                val appId = AGConnectOptionsBuilder().build(context).getString("client/app_id")
-                val pushToken = HmsInstanceId.getInstance(context).getToken(appId, "HCM")
+                val pushToken = HmsInstanceId.getInstance(context).getToken("102077259", "HCM")
                 Braze.getInstance(context).registeredPushToken = pushToken!!
                 Log.i(TAG, "Got HMS push token $pushToken")
             } catch (e: Exception) {

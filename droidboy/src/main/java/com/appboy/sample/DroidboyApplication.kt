@@ -144,6 +144,7 @@ class DroidboyApplication : Application() {
             return withContext(BrazeCoroutineScope.coroutineContext) {
                 brazelog(TAG) { "Making new SDK Auth token request for user: '$userId'" }
 
+                // See https://github.com/braze-inc/firebase-functions-jwt-responder
                 val url = URL(BuildConfig.SDK_AUTH_ENDPOINT)
                 val payload = JSONObject()
                     .put(

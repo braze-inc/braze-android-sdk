@@ -1,3 +1,25 @@
+## 30.0.0
+
+[Release Date](https://github.com/braze-inc/braze-android-sdk/releases/tag/v30.0.0)
+
+#### Breaking
+- WebViews used for In-App Messages have been updated to use `WebViewAssetLoader`.
+  - `WebSettings.allowFileAccess` is now set to `false` in `InAppMessageHtmlBaseView` and `BrazeWebViewActivity`.
+  - If you are using your own `InAppMessageWebViewClient` or `InAppMessageHtmlBaseView`, please compare them against the original classes to make sure you're implementation is correctly loading the assets.
+  - If you are not using custom classes, everything will work as before.
+
+##### Fixed
+- Fixed an issue where `ImageView.setBitmap` was being called on a non-UI thread, causing `CalledFromWrongThreadException`.
+- Fixed an issue where a StrictMode `DiskReadViolation` would occur when displaying an In-app Message. Thanks to @auxDK for finding the issue.
+
+##### Added
+- Added `BrazeNotificationUtils.routeUserWithNotificationOpenedIntent(Context, BrazePushEvent)` to process events when using `Braze.subscribeToPushNotificationEvents`.
+  - See `/samples/firebase-push`.
+- Added the ability to configure whether a user's notification subscription state should automatically be set to `OPTED_IN` when push permissions are granted.
+    - Configured via `braze.xml` through `<bool name="com_braze_optin_when_push_authorized">true</bool>`.
+    - Can also be configured via runtime configuration through `BrazeConfig.setOptInWhenPushAuthorized()`.
+    - Defaults to true. This was the previous behavior.
+
 ## 29.0.1
 
 [Release Date](https://github.com/braze-inc/braze-android-sdk/releases/tag/v29.0.1)

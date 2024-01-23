@@ -18,6 +18,7 @@ import com.braze.ui.actions.brazeactions.steps.NoOpStep
 import com.braze.ui.actions.brazeactions.steps.OpenLinkExternallyStep
 import com.braze.ui.actions.brazeactions.steps.OpenLinkInWebViewStep
 import com.braze.ui.actions.brazeactions.steps.RemoveFromCustomAttributeArrayStep
+import com.braze.ui.actions.brazeactions.steps.RemoveFromSubscriptionGroupStep
 import com.braze.ui.actions.brazeactions.steps.RequestPushPermissionStep
 import com.braze.ui.actions.brazeactions.steps.SetCustomUserAttributeStep
 import com.braze.ui.actions.brazeactions.steps.SetEmailSubscriptionStep
@@ -36,7 +37,7 @@ object BrazeActionParser {
         SET_CUSTOM_ATTRIBUTE("setCustomUserAttribute", SetCustomUserAttributeStep),
         REQUEST_PUSH_PERMISSION("requestPushPermission", RequestPushPermissionStep),
         ADD_TO_SUBSCRIPTION_GROUP("addToSubscriptionGroup", AddToSubscriptionGroupStep),
-        REMOVE_FROM_SUBSCRIPTION_GROUP("removeFromSubscriptionGroup", AddToSubscriptionGroupStep),
+        REMOVE_FROM_SUBSCRIPTION_GROUP("removeFromSubscriptionGroup", RemoveFromSubscriptionGroupStep),
         ADD_TO_CUSTOM_ATTRIBUTE_ARRAY("addToCustomAttributeArray", AddToCustomAttributeArrayStep),
         REMOVE_FROM_CUSTOM_ATTRIBUTE_ARRAY("removeFromCustomAttributeArray", RemoveFromCustomAttributeArrayStep),
         SET_EMAIL_SUBSCRIPTION("setEmailNotificationSubscriptionType", SetEmailSubscriptionStep),

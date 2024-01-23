@@ -15,9 +15,9 @@ import androidx.annotation.RequiresApi
 import androidx.annotation.VisibleForTesting
 import androidx.core.app.NotificationCompat
 import com.braze.Braze
+import com.braze.BrazeInternal
 import com.braze.Constants
 import com.braze.IBrazeDeeplinkHandler.IntentFlagPurpose
-import com.braze.configuration.BrazeConfigurationProvider
 import com.braze.enums.BrazeDateFormat
 import com.braze.enums.BrazeViewBounds
 import com.braze.models.push.BrazeNotificationPayload
@@ -240,7 +240,7 @@ open class BrazeNotificationStyleFactory {
                 context.packageName,
                 if (isNotificationSpaceConstrained) R.layout.com_braze_push_inline_image_constrained else R.layout.com_braze_notification_inline_image
             )
-            val configurationProvider = BrazeConfigurationProvider(context)
+            val configurationProvider = BrazeInternal.getConfigurationProvider(context)
 
             // Set the app icon drawable
             val appIcon = Icon.createWithResource(

@@ -2,7 +2,7 @@ package com.braze.ui.inappmessage.factories
 
 import android.annotation.SuppressLint
 import android.app.Activity
-import com.braze.configuration.BrazeConfigurationProvider
+import com.braze.BrazeInternal
 import com.braze.models.inappmessage.IInAppMessage
 import com.braze.models.inappmessage.InAppMessageHtml
 import com.braze.support.BrazeLogger.Priority.W
@@ -29,7 +29,7 @@ open class DefaultInAppMessageHtmlViewFactory(private val inAppMessageWebViewCli
         val context = activity.applicationContext
         val view = activity.layoutInflater
             .inflate(R.layout.com_braze_inappmessage_html, null) as InAppMessageHtmlView
-        val config = BrazeConfigurationProvider(context)
+        val config = BrazeInternal.getConfigurationProvider(context)
         if (config.isTouchModeRequiredForHtmlInAppMessages && isDeviceNotInTouchMode(view)) {
             brazelog(W) {
                 "The device is not currently in touch mode. " +

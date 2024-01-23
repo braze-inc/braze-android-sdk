@@ -7,6 +7,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.appboy.sample.R
+import com.braze.Braze
 import com.braze.models.FeatureFlag
 import com.braze.support.getPrettyPrintedString
 
@@ -35,6 +36,7 @@ class FeatureFlagAdapter(
                 areDetailsVisible = !areDetailsVisible
                 tvTracking.visibility = if (areDetailsVisible) View.VISIBLE else View.GONE
                 tvPropertyDetails.visibility = if (areDetailsVisible) View.VISIBLE else View.GONE
+                Braze.getInstance(itemView.context).logFeatureFlagImpression(tvIdentifier.text.toString())
             }
         }
     }
