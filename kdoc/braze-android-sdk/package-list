@@ -49,6 +49,7 @@ $dokka.location:com.braze.configuration/BrazeConfig.Builder/setSdkFlavor/#com.br
 $dokka.location:com.braze.configuration/BrazeConfig.Builder/setSdkMetadata/#java.util.EnumSet[com.braze.enums.BrazeSdkMetadata]?/PointingToDeclaration/braze-android-sdk/com.braze.configuration/-braze-config/-builder/set-sdk-metadata.html
 $dokka.location:com.braze.configuration/BrazeConfig.Builder/setServerTarget/#kotlin.String/PointingToDeclaration/braze-android-sdk/com.braze.configuration/-braze-config/-builder/set-server-target.html
 $dokka.location:com.braze.configuration/BrazeConfig.Builder/setSessionTimeout/#kotlin.Int/PointingToDeclaration/braze-android-sdk/com.braze.configuration/-braze-config/-builder/set-session-timeout.html
+$dokka.location:com.braze.configuration/BrazeConfig.Builder/setShouldUseWindowFlagSecureInActivities/#kotlin.Boolean/PointingToDeclaration/braze-android-sdk/com.braze.configuration/-braze-config/-builder/set-should-use-window-flag-secure-in-activities.html
 $dokka.location:com.braze.configuration/BrazeConfig.Builder/setSmallNotificationIcon/#kotlin.String/PointingToDeclaration/braze-android-sdk/com.braze.configuration/-braze-config/-builder/set-small-notification-icon.html
 $dokka.location:com.braze.configuration/BrazeConfig.Builder/setTriggerActionMinimumTimeIntervalSeconds/#kotlin.Int/PointingToDeclaration/braze-android-sdk/com.braze.configuration/-braze-config/-builder/set-trigger-action-minimum-time-interval-seconds.html
 $dokka.location:com.braze.configuration/BrazeConfig///PointingToDeclaration/braze-android-sdk/com.braze.configuration/-braze-config/index.html
@@ -94,6 +95,7 @@ $dokka.location:com.braze.configuration/BrazeConfig/sdkFlavor/#/PointingToDeclar
 $dokka.location:com.braze.configuration/BrazeConfig/serverTarget/#/PointingToDeclaration/braze-android-sdk/com.braze.configuration/-braze-config/server-target.html
 $dokka.location:com.braze.configuration/BrazeConfig/sessionTimeout/#/PointingToDeclaration/braze-android-sdk/com.braze.configuration/-braze-config/session-timeout.html
 $dokka.location:com.braze.configuration/BrazeConfig/shouldOptInWhenPushAuthorized/#/PointingToDeclaration/braze-android-sdk/com.braze.configuration/-braze-config/should-opt-in-when-push-authorized.html
+$dokka.location:com.braze.configuration/BrazeConfig/shouldUseWindowFlagSecureInActivities/#/PointingToDeclaration/braze-android-sdk/com.braze.configuration/-braze-config/should-use-window-flag-secure-in-activities.html
 $dokka.location:com.braze.configuration/BrazeConfig/smallNotificationIcon/#/PointingToDeclaration/braze-android-sdk/com.braze.configuration/-braze-config/small-notification-icon.html
 $dokka.location:com.braze.configuration/BrazeConfig/toString/#/PointingToDeclaration/braze-android-sdk/com.braze.configuration/-braze-config/to-string.html
 $dokka.location:com.braze.configuration/BrazeConfig/triggerActionMinimumTimeIntervalSeconds/#/PointingToDeclaration/braze-android-sdk/com.braze.configuration/-braze-config/trigger-action-minimum-time-interval-seconds.html
@@ -152,6 +154,7 @@ $dokka.location:com.braze.configuration/BrazeConfigurationProvider/sdkFlavor/#/P
 $dokka.location:com.braze.configuration/BrazeConfigurationProvider/sdkMetadata/#/PointingToDeclaration/braze-android-sdk/com.braze.configuration/-braze-configuration-provider/sdk-metadata.html
 $dokka.location:com.braze.configuration/BrazeConfigurationProvider/sessionTimeoutSeconds/#/PointingToDeclaration/braze-android-sdk/com.braze.configuration/-braze-configuration-provider/session-timeout-seconds.html
 $dokka.location:com.braze.configuration/BrazeConfigurationProvider/shouldOptInWhenPushAuthorized/#/PointingToDeclaration/braze-android-sdk/com.braze.configuration/-braze-configuration-provider/should-opt-in-when-push-authorized.html
+$dokka.location:com.braze.configuration/BrazeConfigurationProvider/shouldUseWindowFlagSecureInActivities/#/PointingToDeclaration/braze-android-sdk/com.braze.configuration/-braze-configuration-provider/should-use-window-flag-secure-in-activities.html
 $dokka.location:com.braze.configuration/BrazeConfigurationProvider/smallNotificationIconResourceId/#/PointingToDeclaration/braze-android-sdk/com.braze.configuration/-braze-configuration-provider/small-notification-icon-resource-id.html
 $dokka.location:com.braze.configuration/BrazeConfigurationProvider/triggerActionMinimumTimeIntervalInSeconds/#/PointingToDeclaration/braze-android-sdk/com.braze.configuration/-braze-configuration-provider/trigger-action-minimum-time-interval-in-seconds.html
 $dokka.location:com.braze.configuration/BrazeConfigurationProvider/versionCode/#/PointingToDeclaration/braze-android-sdk/com.braze.configuration/-braze-configuration-provider/version-code.html
@@ -1377,7 +1380,8 @@ $dokka.location:com.braze.ui.activities/BrazeBaseFragmentActivity/onResume/#/Poi
 $dokka.location:com.braze.ui.activities/BrazeBaseFragmentActivity/onStart/#/PointingToDeclaration/braze-android-sdk/com.braze.ui.activities/-braze-base-fragment-activity/on-start.html
 $dokka.location:com.braze.ui.activities/BrazeBaseFragmentActivity/onStop/#/PointingToDeclaration/braze-android-sdk/com.braze.ui.activities/-braze-base-fragment-activity/on-stop.html
 $dokka.location:com.braze.ui.activities/BrazeFeedActivity///PointingToDeclaration/braze-android-sdk/com.braze.ui.activities/-braze-feed-activity/index.html
-$dokka.location:com.braze.ui.activities/BrazeFeedActivity/onCreate/#android.os.Bundle/PointingToDeclaration/braze-android-sdk/com.braze.ui.activities/-braze-feed-activity/on-create.html
+$dokka.location:com.braze.ui.activities/BrazeFeedActivity/BrazeFeedActivity/#/PointingToDeclaration/braze-android-sdk/com.braze.ui.activities/-braze-feed-activity/-braze-feed-activity.html
+$dokka.location:com.braze.ui.activities/BrazeFeedActivity/onCreate/#android.os.Bundle?/PointingToDeclaration/braze-android-sdk/com.braze.ui.activities/-braze-feed-activity/on-create.html
 $dokka.location:com.braze.ui.activities/ContentCardsActivity///PointingToDeclaration/braze-android-sdk/com.braze.ui.activities/-content-cards-activity/index.html
 $dokka.location:com.braze.ui.activities/ContentCardsActivity/ContentCardsActivity/#/PointingToDeclaration/braze-android-sdk/com.braze.ui.activities/-content-cards-activity/-content-cards-activity.html
 $dokka.location:com.braze.ui.activities/ContentCardsActivity/onCreate/#android.os.Bundle?/PointingToDeclaration/braze-android-sdk/com.braze.ui.activities/-content-cards-activity/on-create.html
