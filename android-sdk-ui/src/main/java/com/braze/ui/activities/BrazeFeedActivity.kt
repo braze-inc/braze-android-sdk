@@ -6,13 +6,13 @@ import com.braze.BrazeInternal
 import com.braze.ui.R
 
 /**
- * The [ContentCardsActivity] in an Activity class that displays the Braze Content Cards
- * Fragment. This class can be used to integrate Content Cards as an Activity.
+ * The BrazeFeedActivity in an Activity class that displays the Braze News Feed Fragment. This
+ * class can be used to integrate the Braze News Feed as an Activity.
  *
- * Note: To integrate Braze Content Cards as a Fragment instead of an Activity, use the
- * [ContentCardsFragment] class.
+ * Note: To integrate the Braze News Feed as a Fragment instead of an Activity, use the
+ * [BrazeFeedFragment] class.
  */
-open class ContentCardsActivity : BrazeBaseFragmentActivity() {
+open class BrazeFeedActivity : BrazeBaseFragmentActivity() {
     public override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         if (BrazeInternal.getConfigurationProvider(this).shouldUseWindowFlagSecureInActivities) {
@@ -21,6 +21,6 @@ open class ContentCardsActivity : BrazeBaseFragmentActivity() {
                 WindowManager.LayoutParams.FLAG_SECURE
             )
         }
-        setContentView(R.layout.com_braze_content_cards_activity)
+        setContentView(R.layout.com_braze_feed_activity)
     }
 }

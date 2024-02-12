@@ -218,7 +218,9 @@ class DroidBoyActivity : AppCompatActivity(), NoticeDialogListener {
     }
 
     private fun setupViewPager(viewPager: ViewPager2) {
-        viewPager.adapter = Adapter(supportFragmentManager, lifecycle, applicationContext)
+        val adapter = Adapter(supportFragmentManager, lifecycle, applicationContext)
+        viewPager.adapter = adapter
+        viewPager.offscreenPageLimit = adapter.itemCount + 1
     }
 
     public override fun onNewIntent(intent: Intent) {
@@ -365,21 +367,22 @@ class DroidBoyActivity : AppCompatActivity(), NoticeDialogListener {
                 "Main"
             ),
             FragmentInfo(
-                { FeatureFlagFragment() },
-                "Flags"
+                { ContentCardsFragment() },
+                "Cards"
             ),
             FragmentInfo(
                 { InAppMessageTesterFragment() },
                 context.getString(R.string.inappmessage_tester_tab_title)
             ),
             FragmentInfo(
-                { ContentCardsFragment() },
-                "Content Cards"
-            ),
-            FragmentInfo(
                 { PushTesterFragment() },
                 "Push"
-            )
+            ),
+            FragmentInfo(
+                { FeatureFlagFragment() },
+                "Flags"
+            ),
+
         )
 
         override fun getItemCount() = fragmentInfo.size

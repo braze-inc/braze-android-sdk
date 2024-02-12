@@ -15,12 +15,11 @@ public class CustomApplication extends Application {
   public void onCreate() {
     super.onCreate();
     BrazeLogger.setLogLevel(Log.VERBOSE);
-    configureAppboyAtRuntime();
+    configureBrazeAtRuntime();
     registerActivityLifecycleCallbacks(new BrazeActivityLifecycleCallbackListener());
   }
 
-  private void configureAppboyAtRuntime() {
-
+  private void configureBrazeAtRuntime() {
     Resources resources = getResources();
     BrazeConfig brazeConfig = new BrazeConfig.Builder()
         .setApiKey("dd162bff-b14e-4d87-9bf0-fec609a77ca4")

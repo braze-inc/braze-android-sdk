@@ -1,7 +1,9 @@
 package com.braze.ui.activities
 
+import android.view.WindowManager
 import androidx.fragment.app.FragmentActivity
 import com.braze.Braze
+import com.braze.BrazeInternal
 import com.braze.ui.inappmessage.BrazeInAppMessageManager
 
 /**
@@ -11,6 +13,12 @@ import com.braze.ui.inappmessage.BrazeInAppMessageManager
 open class BrazeBaseFragmentActivity : FragmentActivity() {
     public override fun onStart() {
         super.onStart()
+        if (BrazeInternal.getConfigurationProvider(this).shouldUseWindowFlagSecureInActivities) {
+            window.setFlags(
+                WindowManager.LayoutParams.FLAG_SECURE,
+                WindowManager.LayoutParams.FLAG_SECURE
+            )
+        }
         // Opens (or reopens) a Braze session.
         // Note: This must be called in the onStart lifecycle method of EVERY Activity. Failure to do so
         // will result in incomplete and/or erroneous analytics.

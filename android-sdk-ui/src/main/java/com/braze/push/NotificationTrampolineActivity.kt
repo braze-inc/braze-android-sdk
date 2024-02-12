@@ -3,6 +3,8 @@ package com.braze.push
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
+import android.view.WindowManager
+import com.braze.BrazeInternal
 import com.braze.Constants.isAmazonDevice
 import com.braze.coroutine.BrazeCoroutineScope
 import com.braze.push.BrazeNotificationUtils.notificationReceiverClass
@@ -13,6 +15,12 @@ import com.braze.support.BrazeLogger.brazelog
 class NotificationTrampolineActivity : Activity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        if (BrazeInternal.getConfigurationProvider(this).shouldUseWindowFlagSecureInActivities) {
+            window.setFlags(
+                WindowManager.LayoutParams.FLAG_SECURE,
+                WindowManager.LayoutParams.FLAG_SECURE
+            )
+        }
         brazelog(V) { "NotificationTrampolineActivity created" }
     }
 

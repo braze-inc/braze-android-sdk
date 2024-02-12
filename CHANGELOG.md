@@ -1,3 +1,13 @@
+## 30.1.0
+
+[Release Date](https://github.com/braze-inc/braze-android-sdk/releases/tag/v30.1.0)
+
+##### Added
+- Added the ability to configure whether SDK created Activities (such as `ContentCardsActivity`, `BrazeWebViewActivity`, etc.) use the `WindowManager.LayoutParams.FLAG_SECURE` to prevent screen capturing.
+    - Configured via `braze.xml` through `<bool name="com_braze_use_activity_window_flag_secure">true</bool>`.
+    - Can also be configured via runtime configuration through `BrazeConfig.setShouldUseWindowFlagSecureInActivities()`.
+    - Defaults to false.
+
 ## 30.0.0
 
 [Release Date](https://github.com/braze-inc/braze-android-sdk/releases/tag/v30.0.0)
@@ -5,7 +15,8 @@
 #### Breaking
 - WebViews used for In-App Messages have been updated to use `WebViewAssetLoader`.
   - `WebSettings.allowFileAccess` is now set to `false` in `InAppMessageHtmlBaseView` and `BrazeWebViewActivity`.
-  - If you are using your own `InAppMessageWebViewClient` or `InAppMessageHtmlBaseView`, please compare them against the original classes to make sure you're implementation is correctly loading the assets.
+  - If you are overriding `InAppMessageWebViewClient` and/or `InAppMessageHtmlBaseView`, please compare against the original classes to make sure your implementation is correctly loading the assets.
+  - If you are not overriding `InAppMessageWebViewClient` or `InAppMessageHtmlBaseView`, everything will work as before.
   - If you are not using custom classes, everything will work as before.
 
 ##### Fixed

@@ -16,6 +16,7 @@ import android.webkit.WebSettings
 import android.webkit.WebView
 import android.webkit.WebViewClient
 import androidx.fragment.app.FragmentActivity
+import com.braze.BrazeInternal
 import com.braze.Constants
 import com.braze.enums.Channel
 import com.braze.support.BrazeLogger.Priority.E
@@ -47,6 +48,12 @@ open class BrazeWebViewActivity : FragmentActivity() {
             WindowManager.LayoutParams.FLAG_HARDWARE_ACCELERATED,
             WindowManager.LayoutParams.FLAG_HARDWARE_ACCELERATED
         )
+        if (BrazeInternal.getConfigurationProvider(this).shouldUseWindowFlagSecureInActivities) {
+            window.setFlags(
+                WindowManager.LayoutParams.FLAG_SECURE,
+                WindowManager.LayoutParams.FLAG_SECURE
+            )
+        }
         setContentView(R.layout.com_braze_webview_activity)
         val webView = findViewById<WebView>(R.id.com_braze_webview_activity_webview)
         webView.setLayerType(View.LAYER_TYPE_HARDWARE, null)
@@ -85,7 +92,7 @@ open class BrazeWebViewActivity : FragmentActivity() {
                 return true
             }
 
-            override fun getDefaultVideoPoster(): Bitmap? {
+            override fun getDefaultVideoPoster(): Bitmap {
                 // This bitmap is used to eliminate the default black & white
                 // play icon used as the default poster.
                 return Bitmap.createBitmap(1, 1, Bitmap.Config.ARGB_8888)

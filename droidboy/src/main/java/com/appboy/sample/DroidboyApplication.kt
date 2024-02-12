@@ -81,7 +81,7 @@ class DroidboyApplication : Application() {
         val sharedPreferences = applicationContext.getSharedPreferences(getString(R.string.shared_prefs_location), Context.MODE_PRIVATE)
 
         Braze.configure(this, null)
-        val brazeConfigBuilder = BrazeConfig.Builder()
+        val brazeConfigBuilder = BrazeConfig.Builder().setShouldUseWindowFlagSecureInActivities(true)
         brazeConfigBuilder.setSdkMetadata(EnumSet.of(BrazeSdkMetadata.MANUAL))
         setOverrideApiKeyIfConfigured(sharedPreferences, brazeConfigBuilder)
         setOverrideEndpointIfConfigured(sharedPreferences, brazeConfigBuilder)
