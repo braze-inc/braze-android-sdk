@@ -1,3 +1,11 @@
+## 30.1.1
+
+[Release Date](https://github.com/braze-inc/braze-android-sdk/releases/tag/v30.1.1)
+
+##### Fixed
+- Fixed an issue where the SDK would fail to unregister session seal broadcast receivers.
+  - The intent action is suffixed with `.intent.BRAZE_SESSION_SHOULD_SEAL`.
+
 ## 30.1.0
 
 [Release Date](https://github.com/braze-inc/braze-android-sdk/releases/tag/v30.1.0)
