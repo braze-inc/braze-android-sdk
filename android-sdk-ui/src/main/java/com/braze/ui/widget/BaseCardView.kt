@@ -1,7 +1,6 @@
 package com.braze.ui.widget
 
 import android.content.Context
-import android.os.Bundle
 import android.view.ViewTreeObserver
 import android.widget.ImageView
 import android.widget.RelativeLayout
@@ -19,6 +18,7 @@ import com.braze.support.BrazeLogger.getBrazeLogTag
 import com.braze.ui.BrazeDeeplinkHandler.Companion.getInstance
 import com.braze.ui.actions.IAction
 import com.braze.ui.actions.UriAction
+import com.braze.ui.contentcards.BrazeContentCardUtils
 
 /**
  * Base class for Braze feed card views.
@@ -176,22 +176,6 @@ abstract class BaseCardView<T : Card>(context: Context) : RelativeLayout(context
         private const val ICON_UNREAD_TAG = "icon_unread"
 
         @JvmStatic
-        protected fun getUriActionForCard(card: Card): UriAction? {
-            val extras = Bundle()
-            for (key in card.extras.keys) {
-                extras.putString(key, card.extras[key])
-            }
-            val url = card.url
-            if (url == null) {
-                brazelog(V) { "Card URL is null, returning null for getUriActionForCard" }
-                return null
-            }
-            return getInstance().createUriActionFromUrlString(
-                url,
-                extras,
-                card.openUriInWebView,
-                card.channel
-            )
-        }
+        protected fun getUriActionForCard(card: Card): UriAction? = BrazeContentCardUtils.getUriActionForCard(card)
     }
 }

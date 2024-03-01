@@ -3,6 +3,9 @@ apply plugin: 'kotlin-android'
 
 dependencies {
   implementation project(':android-sdk-ui')
+  implementation project(':android-sdk-location')
+  implementation project(':android-sdk-jetpack-compose')
+
   implementation "androidx.appcompat:appcompat:${ANDROIDX_APPCOMPAT_VERSION}"
   implementation "androidx.preference:preference:${ANDROIDX_PREFERENCE_VERSION}"
   implementation "com.google.android.material:material:${GOOGLE_MATERIAL_VERSION}"
@@ -23,6 +26,13 @@ dependencies {
   implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:${KOTLIN_COROUTINES_VERSION}")
   implementation "androidx.lifecycle:lifecycle-runtime-ktx:${KOTLIN_LIFECYCLE_RUNTIME_KTX_VERSION}"
   implementation "androidx.multidex:multidex:${ANDROIDX_MULTIDEX_VERSION}"
+
+  implementation "androidx.activity:activity-compose:${ANDROIDX_ACTIVITY_COMPOSE_VERSION}"
+  implementation platform("androidx.compose:compose-bom:${ANDROIDX_COMPOSE_BOM_VERSION}")
+  implementation "androidx.compose.ui:ui"
+  implementation "androidx.compose.ui:ui-graphics:"
+  implementation "androidx.compose.ui:ui-tooling-preview:"
+  implementation "androidx.compose.material3:material3"
 }
 
 android {
@@ -53,6 +63,14 @@ android {
   compileOptions {
     sourceCompatibility JavaVersion.VERSION_1_8
     targetCompatibility JavaVersion.VERSION_1_8
+  }
+
+  buildFeatures {
+    compose true
+  }
+
+  composeOptions {
+    kotlinCompilerExtensionVersion "${KOTLIN_COMPILER_EXTENSION_VERSION}"
   }
 
   kotlinOptions {

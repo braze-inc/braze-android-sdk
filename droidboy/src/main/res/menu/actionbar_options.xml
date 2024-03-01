@@ -6,6 +6,10 @@
       android:title="@string/settings"
       app:showAsAction="ifRoom" />
     <item
+      android:id="@+id/action_compose"
+      android:title="Compose Activity"
+      app:showAsAction="never" />
+    <item
       android:id="@+id/action_flush"
       android:title="@string/data_flush_title"
       app:showAsAction="never" />

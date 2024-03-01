@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                style="@style/Braze.ContentCards.ImageOnly.Root">
+  style="@style/Braze.ContentCards.ImageOnly.Root">
     <ImageView
       android:id="@+id/com_braze_content_cards_image_only_card_image"
       style="@style/Braze.ContentCards.ImageOnly.Image"/>

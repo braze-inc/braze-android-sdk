@@ -10,6 +10,7 @@ import com.braze.models.cards.Card
 import com.braze.ui.R
 import com.braze.ui.widget.BaseCardView
 import com.braze.ui.actions.IAction
+import com.braze.ui.contentcards.BrazeContentCardUtils
 import com.braze.ui.contentcards.managers.BrazeContentCardsManager.Companion.instance
 
 /**
@@ -26,7 +27,7 @@ abstract class BaseContentCardView<T : Card>(context: Context) : BaseCardView<T>
             configurationProvider.isContentCardsUnreadVisualIndicatorEnabled
                 && !card.isIndicatorHighlighted
         )
-        val cardAction = getUriActionForCard(card)
+        val cardAction = BrazeContentCardUtils.getUriActionForCard(card)
         viewHolder.itemView.setOnClickListener {
             handleCardClick(
                 applicationContext,

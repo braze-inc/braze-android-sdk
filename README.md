@@ -21,6 +21,7 @@ Successful marketing automation is essential to the future of your mobile app. B
 - `android-sdk-base` - the Braze SDK base analytics library.
 - `android-sdk-ui` - the Braze SDK user interface library for in-app messages, push, and the news feed.
 - `android-sdk-location` - the Braze SDK location library for location and geofences.
+- `android-sdk-jetpack-compose` - the Braze SDK location library for Jetpack Compose support.
 - `droidboy` - a sample app demonstrating how to use Braze in-depth.
 - `android-sdk-unity` - a library that enables Braze SDK integrations on Unity.
 - `samples` - a folder containing several sample apps for various integration options.
@@ -32,8 +33,8 @@ Our SDK is now hosted in Maven Central. You can remove `https://braze-inc.github
 
 ```
 dependencies {
-  implementation 'com.braze:android-sdk-ui:30.1.+'
-  implementation 'com.braze:android-sdk-location:30.1.+'
+  implementation 'com.braze:android-sdk-ui:30.2.+'
+  implementation 'com.braze:android-sdk-location:30.2.+'
   ...
 }
 ```
@@ -52,7 +53,7 @@ repositories {
 
 ```
 dependencies {
-  implementation 'com.braze:android-sdk-ui:30.1.+'
+  implementation 'com.braze:android-sdk-ui:30.2.+'
 }
 ```
 

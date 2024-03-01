@@ -20,7 +20,7 @@ class ContentCardsTestingUtil private constructor() {
         )
         private val random = Random()
 
-        fun createRandomCards(context: Context, numCardsOfEachType: Int): List<Card> {
+        fun createRandomCards(context: Context? = null, numCardsOfEachType: Int): List<Card> {
             val cards = mutableListOf<Card>()
 
             for (cardType in CardType.values()) {
@@ -28,7 +28,7 @@ class ContentCardsTestingUtil private constructor() {
                     continue
                 }
                 repeat((0..numCardsOfEachType).count()) {
-                    createRandomCard(context, cardType)?.let { card -> cards.add(card) }
+                    createRandomCard(context, cardType).let { card -> cards.add(card) }
                 }
             }
 
@@ -86,7 +86,7 @@ class ContentCardsTestingUtil private constructor() {
             ccp.getKey(CardKey.IS_TEST) to true
         )
 
-        private fun createRandomCard(context: Context, cardType: CardType): Card? {
+        fun createRandomCard(context: Context? = null, cardType: CardType): Card {
             val ccp = CardKey.Provider(true)
 
             // Set the default fields
@@ -107,6 +107,7 @@ class ContentCardsTestingUtil private constructor() {
                         )
                     )
                 }
+
                 CardType.CAPTIONED_IMAGE -> {
                     defaultMapping.mergeWith(
                         mapOf(
@@ -118,6 +119,7 @@ class ContentCardsTestingUtil private constructor() {
                         )
                     )
                 }
+
                 CardType.SHORT_NEWS -> {
                     defaultMapping.mergeWith(
                         mapOf(
@@ -128,6 +130,7 @@ class ContentCardsTestingUtil private constructor() {
                         )
                     )
                 }
+
                 CardType.TEXT_ANNOUNCEMENT -> {
                     defaultMapping.mergeWith(
                         mapOf(
@@ -138,13 +141,18 @@ class ContentCardsTestingUtil private constructor() {
                         )
                     )
                 }
+
                 else -> {
                     // Do nothing!
                 }
             }
 
             val json = JSONObject(defaultMapping.toMap())
-            return Braze.getInstance(context).deserializeContentCard(json)
+            return if (context != null) {
+                Braze.getInstance(context).deserializeContentCard(json) ?: throw RuntimeException("Failed to deserialize test card json")
+            } else {
+                Card(json, ccp)
+            }
         }
 
         private fun getRandomString(): String = UUID.randomUUID().toString()

@@ -1,0 +1,48 @@
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+
+dependencies {
+    api "com.braze:android-sdk-base:${BRAZE_SDK_VERSION}"
+    api "com.braze:android-sdk-ui:${BRAZE_SDK_VERSION}"
+    compileOnly "androidx.annotation:annotation:${ANDROIDX_ANNOTATIONS_VERSION}"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:${KOTLIN_VERSION}"
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:${KOTLIN_COROUTINES_VERSION}")
+    implementation "androidx.core:core:${ANDROIDX_CORE_VERSION}"
+    implementation platform("androidx.compose:compose-bom:${ANDROIDX_COMPOSE_BOM_VERSION}")
+    implementation "androidx.compose.foundation:foundation"
+    implementation "androidx.compose.material:material"
+    implementation "androidx.compose.ui:ui-tooling"
+    implementation "androidx.compose.runtime:runtime"
+    implementation "io.coil-kt:coil:${COIL_VERSION}"
+    implementation "io.coil-kt:coil-compose:${COIL_VERSION}"
+    implementation "io.coil-kt:coil-gif:${COIL_VERSION}"
+}
+
+android {
+    namespace "com.braze.jetpackcompose"
+    compileSdkVersion rootProject.ext.compileSdkVersion
+    buildToolsVersion rootProject.ext.buildToolsVersion
+
+    defaultConfig {
+        minSdkVersion rootProject.ext.minSdkVersion
+        targetSdkVersion rootProject.ext.targetSdkVersion
+    }
+
+    kotlinOptions {
+        freeCompilerArgs = ['-Xjvm-default=all', '-Xopt-in=kotlin.RequiresOptIn']
+        jvmTarget = "1.8"
+    }
+
+    buildFeatures {
+        compose true
+    }
+
+    composeOptions {
+        kotlinCompilerExtensionVersion "${KOTLIN_COMPILER_EXTENSION_VERSION}"
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+}

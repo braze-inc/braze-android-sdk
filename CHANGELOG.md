@@ -1,3 +1,10 @@
+## 30.2.0
+
+[Release Date](https://github.com/braze-inc/braze-android-sdk/releases/tag/v30.2.0)
+
+##### Added
+- Introduces out-of-the-box [Jetpack Compose support](https://www.braze.com/docs/developer_guide/platform_integration_guides/android/content_cards/jetpackcompose/) for Content Cards. Add the `com.braze:android-sdk-jetpack-compose` module to your `build.gradle` if you would like to use this feature.
+
 ## 30.1.1
 
 [Release Date](https://github.com/braze-inc/braze-android-sdk/releases/tag/v30.1.1)

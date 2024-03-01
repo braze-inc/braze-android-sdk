@@ -4,33 +4,11 @@ import android.os.Parcel
 import android.os.Parcelable
 import com.braze.events.ContentCardsUpdatedEvent
 import com.braze.models.cards.Card
-import com.braze.ui.actions.brazeactions.containsInvalidBrazeAction
+import com.braze.ui.contentcards.BrazeContentCardUtils
 
 open class DefaultContentCardsUpdateHandler : IContentCardsUpdateHandler {
-    override fun handleCardUpdate(event: ContentCardsUpdatedEvent): List<Card> {
-        // Sort by pinned, then by the 'updated' timestamp descending
-        // Pinned before non-pinned
-        val cardComparator = Comparator { cardA: Card, cardB: Card ->
-            when {
-                // A displays above B since A is pinned and B isn't
-                cardA.isPinned && !cardB.isPinned -> -1
-                // B displays above A since B is pinned and A isn't
-                !cardA.isPinned && cardB.isPinned -> 1
-                // At this point, both A & B are pinned or both A & B are non-pinned
-                // A displays above B if A is newer
-                cardA.created > cardB.created -> -1
-                // B displays above A if B is newer
-                cardA.created < cardB.created -> 1
-                // Last chance with the card IDs
-                cardA.id > cardB.id -> -1
-                cardA.id < cardB.id -> 1
-                // They're considered equal at this point (although ID's should never match)
-                else -> 0
-            }
-        }
-        return event.allCards.filter { card -> !card.containsInvalidBrazeAction() }
-            .sortedWith(cardComparator)
-    }
+    override fun handleCardUpdate(event: ContentCardsUpdatedEvent): List<Card> =
+        BrazeContentCardUtils.defaultCardHandling(event.allCards)
 
     // Parcelable interface method
     override fun describeContents() = 0

@@ -254,6 +254,7 @@ class DroidBoyActivity : AppCompatActivity(), NoticeDialogListener {
         when (item.itemId) {
             R.id.feed_activity_launch -> startActivity(Intent(this, FeedFragmentActivity::class.java))
             R.id.action_settings -> startActivity(Intent(this, SettingsActivity::class.java))
+            R.id.action_compose -> startActivity(Intent(this, ComposeActivity::class.java))
             R.id.geofences_map -> {
                 drawerLayout?.closeDrawers()
                 startActivity(Intent(applicationContext, GeofencesMapActivity::class.java))

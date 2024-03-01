@@ -1,5 +1,6 @@
 include ':android-sdk-location'
 include ':android-sdk-ui'
+include ':android-sdk-jetpack-compose'
 include ':android-sdk-unity'
 include ':droidboy'
 include ':samples:hello-braze'

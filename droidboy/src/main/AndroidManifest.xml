@@ -30,6 +30,12 @@
       </intent-filter>
     </activity>
     <activity
+      android:name=".activity.ComposeActivity"
+      android:exported="true"
+      android:label="Compose Activity"
+      android:theme="@style/Theme.Droidboy">
+    </activity>
+    <activity
       android:name=".activity.SettingsActivity"
       android:exported="true"
       android:label="Preferences"
