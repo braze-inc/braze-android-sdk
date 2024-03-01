@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" charset="UTF-8">
+    <title>ContentCardsList</title>
+    <link href="../../images/logo-icon.svg" rel="icon" type="image/svg">
+    <script>var pathToRoot = "../../";</script>
+    <script>const storage = localStorage.getItem("dokka-dark-mode")
+    if (storage == null) {
+        const osDarkSchemePreferred = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
+        if (osDarkSchemePreferred === true) {
+            document.getElementsByTagName("html")[0].classList.add("theme-dark")
+        }
+    } else {
+        const savedDarkMode = JSON.parse(storage)
+        if(savedDarkMode === true) {
+            document.getElementsByTagName("html")[0].classList.add("theme-dark")
+        }
+    }
+    </script>
+<script type="text/javascript" src="../../scripts/sourceset_dependencies.js" async="async"></script>
+<link href="../../styles/style.css" rel="Stylesheet">
+<link href="../../styles/jetbrains-mono.css" rel="Stylesheet">
+<link href="../../styles/main.css" rel="Stylesheet">
+<link href="../../styles/prism.css" rel="Stylesheet">
+<link href="../../styles/logo-styles.css" rel="Stylesheet">
+<script type="text/javascript" src="../../scripts/clipboard.js" async="async"></script>
+<script type="text/javascript" src="../../scripts/navigation-loader.js" async="async"></script>
+<script type="text/javascript" src="../../scripts/platform-content-handler.js" async="async"></script>
+<script type="text/javascript" src="../../scripts/main.js" defer="defer"></script>
+<script type="text/javascript" src="../../scripts/prism.js" async="async"></script>
+<script type="text/javascript" src="../../scripts/symbol-parameters-wrapper_deferred.js" defer="defer"></script>
+</head>
+<body>
+<div class="navigation-wrapper" id="navigation-wrapper">
+    <div id="leftToggler"><span class="icon-toggler"></span></div>
+    <div class="library-name">
+            <a href="../../index.html">
+                    <span>braze-android-sdk</span>
+            </a>
+    </div>
+    <div>
+30.2.0    </div>
+    <div class="pull-right d-flex">
+        <button id="theme-toggle-button"><span id="theme-toggle"></span></button>
+        <div id="searchBar"></div>
+    </div>
+</div>
+<div id="container">
+    <div id="leftColumn">
+        <div id="sideMenu"></div>
+    </div>
+    <div id="main">
+<div class="main-content" id="content" pageIds="braze-android-sdk::com.braze.jetpackcompose.contentcards//ContentCardsList/#kotlin.collections.List[com.braze.models.cards.Card]?#kotlin.Function0[kotlin.Unit]?#kotlin.String?#kotlin.Function1[kotlin.collections.List[com.braze.models.cards.Card],kotlin.collections.List[com.braze.models.cards.Card]]?#kotlin.Function1[com.braze.models.cards.Card,kotlin.Boolean]?#kotlin.Function1[com.braze.models.cards.Card,kotlin.Unit]?#kotlin.Function1[com.braze.models.cards.Card,kotlin.Boolean]?#com.braze.jetpackcompose.contentcards.styling.ContentCardListStyling#com.braze.jetpackcompose.contentcards.styling.ContentCardStyling/PointingToDeclaration//-1725759721">
+  <div class="breadcrumbs"><a href="../../index.html">braze-android-sdk</a><span class="delimiter">/</span><a href="index.html">com.braze.jetpackcompose.contentcards</a><span class="delimiter">/</span><span class="current">ContentCardsList</span></div>
+  <div class="cover ">
+    <h1 class="cover"><span>Content</span><wbr></wbr><span>Cards</span><wbr></wbr><span><span>List</span></span></h1>
+  </div>
+  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">fun </span><a href="-content-cards-list.html"><span class="token function">ContentCardsList</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">cards<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html">List</a><span class="token operator">&lt;</span><span class="token keyword"></span><a href="../com.braze.models.cards/-card/index.html">Card</a><span class="token operator">&gt;</span><span class="token operator">?</span><span class="token operator"> = </span>null<span class="token punctuation">, </span></span><span class="parameter ">emptyComposable<span class="token operator">: </span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><span class="token keyword"></span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a><span class="token operator">?</span><span class="token operator"> = </span>null<span class="token punctuation">, </span></span><span class="parameter ">emptyString<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="token operator">?</span><span class="token operator"> = </span>null<span class="token punctuation">, </span></span><span class="parameter ">cardUpdateHandler<span class="token operator">: </span><span class="token punctuation">(</span><span class="token keyword"></span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html">List</a><span class="token operator">&lt;</span><span class="token keyword"></span><a href="../com.braze.models.cards/-card/index.html">Card</a><span class="token operator">&gt;</span><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><span class="token keyword"></span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html">List</a><span class="token operator">&lt;</span><span class="token keyword"></span><a href="../com.braze.models.cards/-card/index.html">Card</a><span class="token operator">&gt;</span><span class="token operator">?</span><span class="token operator"> = </span>null<span class="token punctuation">, </span></span><span class="parameter ">onCardClicked<span class="token operator">: </span><span class="token punctuation">(</span><span class="token keyword"></span><a href="../com.braze.models.cards/-card/index.html">Card</a><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><span class="token keyword"></span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a><span class="token operator">?</span><span class="token operator"> = </span>null<span class="token punctuation">, </span></span><span class="parameter ">onCardDismissed<span class="token operator">: </span><span class="token punctuation">(</span><span class="token keyword"></span><a href="../com.braze.models.cards/-card/index.html">Card</a><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><span class="token keyword"></span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a><span class="token operator">?</span><span class="token operator"> = </span>null<span class="token punctuation">, </span></span><span class="parameter ">customCardComposer<span class="token operator">: </span><span class="token punctuation">(</span><span class="token keyword"></span><a href="../com.braze.models.cards/-card/index.html">Card</a><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><span class="token keyword"></span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a><span class="token operator">?</span><span class="token operator"> = </span>null<span class="token punctuation">, </span></span><span class="parameter ">style<span class="token operator">: </span><a href="../com.braze.jetpackcompose.contentcards.styling/-content-card-list-styling/index.html">ContentCardListStyling</a><span class="token operator"> = </span>LocalContentCardListStyling.current<span class="token punctuation">, </span></span><span class="parameter ">cardStyle<span class="token operator">: </span><a href="../com.braze.jetpackcompose.contentcards.styling/-content-card-styling/index.html">ContentCardStyling</a><span class="token operator"> = </span>LocalContentCardStyling.current</span></span><span class="token punctuation">)</span></div><p class="paragraph">BrazeContentCardsList displays a list of Content Cards.</p><h4 class="">Parameters</h4><div data-togglable="Parameters"><div class="table" data-togglable="Parameters"><div class="table-row" data-filterable-current=":android-sdk-ui:dokkaHtml/release" data-filterable-set=":android-sdk-ui:dokkaHtml/release"><div class="main-subrow keyValue WithExtraAttributes"><div class=""><span class="inline-flex"><div><u><span><span>cards</span></span></u></div></span></div><div><div class="title"><div data-togglable="Parameters"><p class="paragraph">List of <a href="../com.braze.models.cards/-card/index.html">Card</a> to render. If null, all content cards will be retrieved and displayed.</p></div></div></div></div></div><div class="table-row" data-filterable-current=":android-sdk-ui:dokkaHtml/release" data-filterable-set=":android-sdk-ui:dokkaHtml/release"><div class="main-subrow keyValue WithExtraAttributes"><div class=""><span class="inline-flex"><div><u><span>empty</span><wbr></wbr><span><span>Composable</span></span></u></div></span></div><div><div class="title"><div data-togglable="Parameters"><p class="paragraph">The composable to render if there are no content cards.</p></div></div></div></div></div><div class="table-row" data-filterable-current=":android-sdk-ui:dokkaHtml/release" data-filterable-set=":android-sdk-ui:dokkaHtml/release"><div class="main-subrow keyValue WithExtraAttributes"><div class=""><span class="inline-flex"><div><u><span>empty</span><wbr></wbr><span><span>String</span></span></u></div></span></div><div><div class="title"><div data-togglable="Parameters"><p class="paragraph">The string to display when there are no content cards. Will not display if <a href="-content-cards-list.html">emptyComposable</a> is present.</p></div></div></div></div></div><div class="table-row" data-filterable-current=":android-sdk-ui:dokkaHtml/release" data-filterable-set=":android-sdk-ui:dokkaHtml/release"><div class="main-subrow keyValue WithExtraAttributes"><div class=""><span class="inline-flex"><div><u><span>card</span><wbr></wbr><span>Update</span><wbr></wbr><span><span>Handler</span></span></u></div></span></div><div><div class="title"><div data-togglable="Parameters"><p class="paragraph">The function to filter and sort the list of cards. If null, all cards will be passed with a default sort.</p></div></div></div></div></div><div class="table-row" data-filterable-current=":android-sdk-ui:dokkaHtml/release" data-filterable-set=":android-sdk-ui:dokkaHtml/release"><div class="main-subrow keyValue WithExtraAttributes"><div class=""><span class="inline-flex"><div><u><span>on</span><wbr></wbr><span>Card</span><wbr></wbr><span><span>Clicked</span></span></u></div></span></div><div><div class="title"><div data-togglable="Parameters"><p class="paragraph">Will be called when a card is clicked. Returns <code class="lang-kotlin">false</code> if Braze should handle the click.</p></div></div></div></div></div><div class="table-row" data-filterable-current=":android-sdk-ui:dokkaHtml/release" data-filterable-set=":android-sdk-ui:dokkaHtml/release"><div class="main-subrow keyValue WithExtraAttributes"><div class=""><span class="inline-flex"><div><u><span>on</span><wbr></wbr><span>Card</span><wbr></wbr><span><span>Dismissed</span></span></u></div></span></div><div><div class="title"><div data-togglable="Parameters"><p class="paragraph">Will be called when a card is dismissed.</p></div></div></div></div></div><div class="table-row" data-filterable-current=":android-sdk-ui:dokkaHtml/release" data-filterable-set=":android-sdk-ui:dokkaHtml/release"><div class="main-subrow keyValue WithExtraAttributes"><div class=""><span class="inline-flex"><div><u><span>custom</span><wbr></wbr><span>Card</span><wbr></wbr><span><span>Composer</span></span></u></div></span></div><div><div class="title"><div data-togglable="Parameters"><p class="paragraph">A function that can take a card and then either compose it and return <code class="lang-kotlin">true</code>,     or return <code class="lang-kotlin">false</code> and have the card rendered by default.     If you use this, you are responsible for handling all aspects of card rendering (unread, pinned, etc.).     You also need to handle card clicks (See <code class="lang-kotlin">BrazeContentCardUtils.handleCardClick</code>).</p></div></div></div></div></div></div></div></div></div>
+</div>
+      <div class="footer">
+        <span class="go-to-top-icon"><a href="#content" id="go-to-top-link"></a></span><span>© 2024 Copyright</span><span
+                class="pull-right"><span>Generated by </span><a
+                href="https://github.com/Kotlin/dokka"><span>dokka</span><span class="padded-icon"></span></a></span>
+      </div>
+    </div>
+</div>
+</body>
+</html>
