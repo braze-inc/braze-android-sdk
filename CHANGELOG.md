@@ -1,3 +1,10 @@
+## 30.3.0
+
+[Release Date](https://github.com/braze-inc/braze-android-sdk/releases/tag/v30.3.0)
+
+##### Added
+- Added the fields `responseCode, responseHeaders, requestUrl` to `BrazeNetworkFailureEvent`.
+
 ## 30.2.0
 
 [Release Date](https://github.com/braze-inc/braze-android-sdk/releases/tag/v30.2.0)

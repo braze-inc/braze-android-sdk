@@ -99,6 +99,10 @@ class DroidboyApplication : Application() {
             Braze.getInstance(applicationContext).currentUser?.userId?.let { setNewSdkAuthToken(it) }
         }
 
+        Braze.getInstance(applicationContext).subscribeToNetworkFailures { event ->
+            brazelog { "Got braze network error event $event" }
+        }
+
         Braze.getInstance(applicationContext).subscribeToPushNotificationEvents { event ->
             brazelog {
                 """
