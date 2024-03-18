@@ -486,9 +486,12 @@ $dokka.location:com.braze.events/BrazeNetworkFailureEvent.RequestType///Pointing
 $dokka.location:com.braze.events/BrazeNetworkFailureEvent.RequestType/valueOf/#kotlin.String/PointingToDeclaration/braze-android-sdk/com.braze.events/-braze-network-failure-event/-request-type/value-of.html
 $dokka.location:com.braze.events/BrazeNetworkFailureEvent.RequestType/values/#/PointingToDeclaration/braze-android-sdk/com.braze.events/-braze-network-failure-event/-request-type/values.html
 $dokka.location:com.braze.events/BrazeNetworkFailureEvent///PointingToDeclaration/braze-android-sdk/com.braze.events/-braze-network-failure-event/index.html
-$dokka.location:com.braze.events/BrazeNetworkFailureEvent/BrazeNetworkFailureEvent/#com.braze.requests.IBrazeRequest/PointingToDeclaration/braze-android-sdk/com.braze.events/-braze-network-failure-event/-braze-network-failure-event.html
+$dokka.location:com.braze.events/BrazeNetworkFailureEvent/BrazeNetworkFailureEvent/#com.braze.requests.IBrazeRequest#com.braze.communication.IHttpConnector.HttpConnectorResult/PointingToDeclaration/braze-android-sdk/com.braze.events/-braze-network-failure-event/-braze-network-failure-event.html
 $dokka.location:com.braze.events/BrazeNetworkFailureEvent/requestInitiationTime/#/PointingToDeclaration/braze-android-sdk/com.braze.events/-braze-network-failure-event/request-initiation-time.html
 $dokka.location:com.braze.events/BrazeNetworkFailureEvent/requestType/#/PointingToDeclaration/braze-android-sdk/com.braze.events/-braze-network-failure-event/request-type.html
+$dokka.location:com.braze.events/BrazeNetworkFailureEvent/requestUrl/#/PointingToDeclaration/braze-android-sdk/com.braze.events/-braze-network-failure-event/request-url.html
+$dokka.location:com.braze.events/BrazeNetworkFailureEvent/responseCode/#/PointingToDeclaration/braze-android-sdk/com.braze.events/-braze-network-failure-event/response-code.html
+$dokka.location:com.braze.events/BrazeNetworkFailureEvent/responseHeaders/#/PointingToDeclaration/braze-android-sdk/com.braze.events/-braze-network-failure-event/response-headers.html
 $dokka.location:com.braze.events/BrazePushEvent///PointingToDeclaration/braze-android-sdk/com.braze.events/-braze-push-event/index.html
 $dokka.location:com.braze.events/BrazePushEvent/BrazePushEvent/#com.braze.enums.BrazePushEventType#com.braze.models.push.BrazeNotificationPayload/PointingToDeclaration/braze-android-sdk/com.braze.events/-braze-push-event/-braze-push-event.html
 $dokka.location:com.braze.events/BrazePushEvent/eventType/#/PointingToDeclaration/braze-android-sdk/com.braze.events/-braze-push-event/event-type.html
