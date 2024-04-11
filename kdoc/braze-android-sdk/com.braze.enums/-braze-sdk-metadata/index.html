@@ -1,10 +1,11 @@
 <!DOCTYPE html>
-<html>
+<html class="no-js">
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1" charset="UTF-8">
     <title>BrazeSdkMetadata</title>
     <link href="../../../images/logo-icon.svg" rel="icon" type="image/svg">
     <script>var pathToRoot = "../../../";</script>
+    <script>document.documentElement.classList.replace("no-js","js");</script>
     <script>const storage = localStorage.getItem("dokka-dark-mode")
     if (storage == null) {
         const osDarkSchemePreferred = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
@@ -18,12 +19,13 @@
         }
     }
     </script>
+<script type="text/javascript" src="https://unpkg.com/kotlin-playground@1/dist/playground.min.js" async="async"></script>
 <script type="text/javascript" src="../../../scripts/sourceset_dependencies.js" async="async"></script>
 <link href="../../../styles/style.css" rel="Stylesheet">
-<link href="../../../styles/jetbrains-mono.css" rel="Stylesheet">
 <link href="../../../styles/main.css" rel="Stylesheet">
 <link href="../../../styles/prism.css" rel="Stylesheet">
 <link href="../../../styles/logo-styles.css" rel="Stylesheet">
+<link href="../../../styles/font-jb-sans-auto.css" rel="Stylesheet">
 <script type="text/javascript" src="../../../scripts/clipboard.js" async="async"></script>
 <script type="text/javascript" src="../../../scripts/navigation-loader.js" async="async"></script>
 <script type="text/javascript" src="../../../scripts/platform-content-handler.js" async="async"></script>
@@ -32,637 +34,668 @@
 <script type="text/javascript" src="../../../scripts/symbol-parameters-wrapper_deferred.js" defer="defer"></script>
 </head>
 <body>
-<div class="navigation-wrapper" id="navigation-wrapper">
-    <div id="leftToggler"><span class="icon-toggler"></span></div>
-    <div class="library-name">
-            <a href="../../../index.html">
-                    <span>braze-android-sdk</span>
-            </a>
+    <div class="root">
+<nav class="navigation" id="navigation-wrapper">
+    <div class="navigation--inner">
+        <div class="navigation-title">
+            <button class="menu-toggle" id="menu-toggle" type="button">toggle menu</button>
+            <div class="library-name">
+                    <a class="library-name--link" href="../../../index.html">
+                            braze-android-sdk
+                    </a>
+            </div>
+            <div class="library-version">
+30.4.0            </div>
+        </div>
+        <div class="filter-section" id="filter-section">
+                <button class="platform-tag platform-selector jvm-like" data-active="" data-filter=":android-sdk-ui:dokkaHtml/release">androidJvm</button>
+        </div>
     </div>
-    <div>
-30.3.0    </div>
-    <div class="pull-right d-flex">
-        <button id="theme-toggle-button"><span id="theme-toggle"></span></button>
-        <div id="searchBar"></div>
+    <div class="navigation-controls">
+        <button class="navigation-controls--btn navigation-controls--theme" id="theme-toggle-button" type="button">switch theme</button>
+        <div class="navigation-controls--btn navigation-controls--search" id="searchBar" role="button">search in API</div>
     </div>
-</div>
-<div id="container">
-    <div id="leftColumn">
-        <div id="sideMenu"></div>
-    </div>
-    <div id="main">
-<div class="main-content" id="content" pageIds="braze-android-sdk::com.braze.enums/BrazeSdkMetadata///PointingToDeclaration//-1725759721">
+</nav>
+        <div id="container">
+            <div class="sidebar" id="leftColumn">
+                <div class="sidebar--inner" id="sideMenu"></div>
+            </div>
+            <div id="main">
+<div class="main-content" data-page-type="classlike" id="content" pageIds="braze-android-sdk::com.braze.enums/BrazeSdkMetadata///PointingToDeclaration//-1725759721">
   <div class="breadcrumbs"><a href="../../../index.html">braze-android-sdk</a><span class="delimiter">/</span><a href="../index.html">com.braze.enums</a><span class="delimiter">/</span><span class="current">BrazeSdkMetadata</span></div>
   <div class="cover ">
     <h1 class="cover"><span>Braze</span><wbr></wbr><span>Sdk</span><wbr></wbr><span><span>Metadata</span></span></h1>
-    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><span class="token keyword">enum </span><a href="index.html">BrazeSdkMetadata</a> : <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-enum/index.html">Enum</a><span class="token operator">&lt;</span><span class="token keyword"></span><a href="index.html">BrazeSdkMetadata</a><span class="token operator">&gt; </span>, <a href="../../com.braze.models/-i-put-into-json/index.html">IPutIntoJson</a><span class="token operator">&lt;</span><span class="token keyword"></span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="token operator">&gt; </span></div></div></div>
+    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><span class="token keyword">enum </span><a href="index.html">BrazeSdkMetadata</a> : <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-enum/index.html">Enum</a><span class="token operator">&lt;</span><a href="index.html">BrazeSdkMetadata</a><span class="token operator">&gt; </span>, <a href="../../com.braze.models/-i-put-into-json/index.html">IPutIntoJson</a><span class="token operator">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="token operator">&gt; </span></div></div></div>
   </div>
   <div class="tabbedcontent">
-    <div class="tabs-section" tabs-section="tabs-section"><button class="section-tab" data-active="" data-togglable="Entries">Entries</button><button class="section-tab" data-togglable="Types">Types</button><button class="section-tab" data-togglable="Functions">Functions</button><button class="section-tab" data-togglable="Properties">Properties</button></div>
+    <div class="tabs-section" tabs-section="tabs-section"><button class="section-tab" data-active="" data-togglable="CONSTRUCTOR,TYPE,PROPERTY,FUNCTION">Members</button><button class="section-tab" data-togglable="ENTRY">Entries</button></div>
     <div class="tabs-section-body">
-      <h2 class="tabbedcontent">Entries</h2>
-      <div class="table" data-togglable="Entries"><a data-name="1075860296%2FClasslikes%2F-1725759721" anchor-label="ADJUST" id="1075860296%2FClasslikes%2F-1725759721" data-filterable-set=":android-sdk-ui:dokkaHtml/release"></a>
-        <div class="table-row" data-filterable-current=":android-sdk-ui:dokkaHtml/release" data-filterable-set=":android-sdk-ui:dokkaHtml/release">
-          <div class="main-subrow keyValue ">
-            <div class=""><span class="inline-flex">
-                <div><a href="-a-d-j-u-s-t/index.html">ADJUST</a></div>
+      <div data-togglable="ENTRY">
+        <h2 class="">Entries</h2>
+        <div class="table"><a data-name="1075860296%2FClasslikes%2F-1725759721" anchor-label="ADJUST" id="1075860296%2FClasslikes%2F-1725759721" data-filterable-set=":android-sdk-ui:dokkaHtml/release"></a>
+          <div class="table-row" data-togglable="ENTRY" data-filterable-current=":android-sdk-ui:dokkaHtml/release" data-filterable-set=":android-sdk-ui:dokkaHtml/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-a-d-j-u-s-t/index.html">ADJUST</a></div>
 <span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1075860296%2FClasslikes%2F-1725759721"></span>
-                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
-                </span></span></div>
-            <div>
-              <div class="title">
-                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><div class="block"><a href="-a-d-j-u-s-t/index.html">ADJUST</a></div></div></div></div>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><div class="block"><a href="-a-d-j-u-s-t/index.html">ADJUST</a></div></div></div></div>
+                </div>
               </div>
             </div>
           </div>
-        </div>
 <a data-name="-322308350%2FClasslikes%2F-1725759721" anchor-label="AIRBRIDGE" id="-322308350%2FClasslikes%2F-1725759721" data-filterable-set=":android-sdk-ui:dokkaHtml/release"></a>
-        <div class="table-row" data-filterable-current=":android-sdk-ui:dokkaHtml/release" data-filterable-set=":android-sdk-ui:dokkaHtml/release">
-          <div class="main-subrow keyValue ">
-            <div class=""><span class="inline-flex">
-                <div><a href="-a-i-r-b-r-i-d-g-e/index.html">AIRBRIDGE</a></div>
+          <div class="table-row" data-togglable="ENTRY" data-filterable-current=":android-sdk-ui:dokkaHtml/release" data-filterable-set=":android-sdk-ui:dokkaHtml/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-a-i-r-b-r-i-d-g-e/index.html">AIRBRIDGE</a></div>
 <span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-322308350%2FClasslikes%2F-1725759721"></span>
-                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
-                </span></span></div>
-            <div>
-              <div class="title">
-                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><div class="block"><a href="-a-i-r-b-r-i-d-g-e/index.html">AIRBRIDGE</a></div></div></div></div>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><div class="block"><a href="-a-i-r-b-r-i-d-g-e/index.html">AIRBRIDGE</a></div></div></div></div>
+                </div>
               </div>
             </div>
           </div>
-        </div>
 <a data-name="-1066518115%2FClasslikes%2F-1725759721" anchor-label="APPSFLYER" id="-1066518115%2FClasslikes%2F-1725759721" data-filterable-set=":android-sdk-ui:dokkaHtml/release"></a>
-        <div class="table-row" data-filterable-current=":android-sdk-ui:dokkaHtml/release" data-filterable-set=":android-sdk-ui:dokkaHtml/release">
-          <div class="main-subrow keyValue ">
-            <div class=""><span class="inline-flex">
-                <div><a href="-a-p-p-s-f-l-y-e-r/index.html">APPSFLYER</a></div>
+          <div class="table-row" data-togglable="ENTRY" data-filterable-current=":android-sdk-ui:dokkaHtml/release" data-filterable-set=":android-sdk-ui:dokkaHtml/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-a-p-p-s-f-l-y-e-r/index.html">APPSFLYER</a></div>
 <span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1066518115%2FClasslikes%2F-1725759721"></span>
-                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
-                </span></span></div>
-            <div>
-              <div class="title">
-                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><div class="block"><a href="-a-p-p-s-f-l-y-e-r/index.html">APPSFLYER</a></div></div></div></div>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><div class="block"><a href="-a-p-p-s-f-l-y-e-r/index.html">APPSFLYER</a></div></div></div></div>
+                </div>
               </div>
             </div>
           </div>
-        </div>
 <a data-name="-1202635234%2FClasslikes%2F-1725759721" anchor-label="BLUEDOT" id="-1202635234%2FClasslikes%2F-1725759721" data-filterable-set=":android-sdk-ui:dokkaHtml/release"></a>
-        <div class="table-row" data-filterable-current=":android-sdk-ui:dokkaHtml/release" data-filterable-set=":android-sdk-ui:dokkaHtml/release">
-          <div class="main-subrow keyValue ">
-            <div class=""><span class="inline-flex">
-                <div><a href="-b-l-u-e-d-o-t/index.html">BLUEDOT</a></div>
+          <div class="table-row" data-togglable="ENTRY" data-filterable-current=":android-sdk-ui:dokkaHtml/release" data-filterable-set=":android-sdk-ui:dokkaHtml/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-b-l-u-e-d-o-t/index.html">BLUEDOT</a></div>
 <span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1202635234%2FClasslikes%2F-1725759721"></span>
-                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
-                </span></span></div>
-            <div>
-              <div class="title">
-                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><div class="block"><a href="-b-l-u-e-d-o-t/index.html">BLUEDOT</a></div></div></div></div>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><div class="block"><a href="-b-l-u-e-d-o-t/index.html">BLUEDOT</a></div></div></div></div>
+                </div>
               </div>
             </div>
           </div>
-        </div>
 <a data-name="-1471120869%2FClasslikes%2F-1725759721" anchor-label="BRANCH" id="-1471120869%2FClasslikes%2F-1725759721" data-filterable-set=":android-sdk-ui:dokkaHtml/release"></a>
-        <div class="table-row" data-filterable-current=":android-sdk-ui:dokkaHtml/release" data-filterable-set=":android-sdk-ui:dokkaHtml/release">
-          <div class="main-subrow keyValue ">
-            <div class=""><span class="inline-flex">
-                <div><a href="-b-r-a-n-c-h/index.html">BRANCH</a></div>
+          <div class="table-row" data-togglable="ENTRY" data-filterable-current=":android-sdk-ui:dokkaHtml/release" data-filterable-set=":android-sdk-ui:dokkaHtml/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-b-r-a-n-c-h/index.html">BRANCH</a></div>
 <span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1471120869%2FClasslikes%2F-1725759721"></span>
-                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
-                </span></span></div>
-            <div>
-              <div class="title">
-                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><div class="block"><a href="-b-r-a-n-c-h/index.html">BRANCH</a></div></div></div></div>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><div class="block"><a href="-b-r-a-n-c-h/index.html">BRANCH</a></div></div></div></div>
+                </div>
               </div>
             </div>
           </div>
-        </div>
 <a data-name="1053839787%2FClasslikes%2F-1725759721" anchor-label="CORDOVA" id="1053839787%2FClasslikes%2F-1725759721" data-filterable-set=":android-sdk-ui:dokkaHtml/release"></a>
-        <div class="table-row" data-filterable-current=":android-sdk-ui:dokkaHtml/release" data-filterable-set=":android-sdk-ui:dokkaHtml/release">
-          <div class="main-subrow keyValue ">
-            <div class=""><span class="inline-flex">
-                <div><a href="-c-o-r-d-o-v-a/index.html">CORDOVA</a></div>
+          <div class="table-row" data-togglable="ENTRY" data-filterable-current=":android-sdk-ui:dokkaHtml/release" data-filterable-set=":android-sdk-ui:dokkaHtml/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-c-o-r-d-o-v-a/index.html">CORDOVA</a></div>
 <span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1053839787%2FClasslikes%2F-1725759721"></span>
-                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
-                </span></span></div>
-            <div>
-              <div class="title">
-                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><div class="block"><a href="-c-o-r-d-o-v-a/index.html">CORDOVA</a></div></div></div></div>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><div class="block"><a href="-c-o-r-d-o-v-a/index.html">CORDOVA</a></div></div></div></div>
+                </div>
               </div>
             </div>
           </div>
-        </div>
 <a data-name="-1779254357%2FClasslikes%2F-1725759721" anchor-label="EXPO" id="-1779254357%2FClasslikes%2F-1725759721" data-filterable-set=":android-sdk-ui:dokkaHtml/release"></a>
-        <div class="table-row" data-filterable-current=":android-sdk-ui:dokkaHtml/release" data-filterable-set=":android-sdk-ui:dokkaHtml/release">
-          <div class="main-subrow keyValue ">
-            <div class=""><span class="inline-flex">
-                <div><a href="-e-x-p-o/index.html">EXPO</a></div>
+          <div class="table-row" data-togglable="ENTRY" data-filterable-current=":android-sdk-ui:dokkaHtml/release" data-filterable-set=":android-sdk-ui:dokkaHtml/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-e-x-p-o/index.html">EXPO</a></div>
 <span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1779254357%2FClasslikes%2F-1725759721"></span>
-                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
-                </span></span></div>
-            <div>
-              <div class="title">
-                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><div class="block"><a href="-e-x-p-o/index.html">EXPO</a></div></div></div></div>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><div class="block"><a href="-e-x-p-o/index.html">EXPO</a></div></div></div></div>
+                </div>
               </div>
             </div>
           </div>
-        </div>
 <a data-name="-766123485%2FClasslikes%2F-1725759721" anchor-label="FACTUAL" id="-766123485%2FClasslikes%2F-1725759721" data-filterable-set=":android-sdk-ui:dokkaHtml/release"></a>
-        <div class="table-row" data-filterable-current=":android-sdk-ui:dokkaHtml/release" data-filterable-set=":android-sdk-ui:dokkaHtml/release">
-          <div class="main-subrow keyValue ">
-            <div class=""><span class="inline-flex">
-                <div><a href="-f-a-c-t-u-a-l/index.html">FACTUAL</a></div>
+          <div class="table-row" data-togglable="ENTRY" data-filterable-current=":android-sdk-ui:dokkaHtml/release" data-filterable-set=":android-sdk-ui:dokkaHtml/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-f-a-c-t-u-a-l/index.html">FACTUAL</a></div>
 <span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-766123485%2FClasslikes%2F-1725759721"></span>
-                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
-                </span></span></div>
-            <div>
-              <div class="title">
-                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><div class="block"><a href="-f-a-c-t-u-a-l/index.html">FACTUAL</a></div></div></div></div>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><div class="block"><a href="-f-a-c-t-u-a-l/index.html">FACTUAL</a></div></div></div></div>
+                </div>
               </div>
             </div>
           </div>
-        </div>
 <a data-name="31492092%2FClasslikes%2F-1725759721" anchor-label="FOURSQUARE" id="31492092%2FClasslikes%2F-1725759721" data-filterable-set=":android-sdk-ui:dokkaHtml/release"></a>
-        <div class="table-row" data-filterable-current=":android-sdk-ui:dokkaHtml/release" data-filterable-set=":android-sdk-ui:dokkaHtml/release">
-          <div class="main-subrow keyValue ">
-            <div class=""><span class="inline-flex">
-                <div><a href="-f-o-u-r-s-q-u-a-r-e/index.html">FOURSQUARE</a></div>
+          <div class="table-row" data-togglable="ENTRY" data-filterable-current=":android-sdk-ui:dokkaHtml/release" data-filterable-set=":android-sdk-ui:dokkaHtml/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-f-o-u-r-s-q-u-a-r-e/index.html">FOURSQUARE</a></div>
 <span class="anchor-wrapper"><span class="anchor-icon" pointing-to="31492092%2FClasslikes%2F-1725759721"></span>
-                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
-                </span></span></div>
-            <div>
-              <div class="title">
-                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><div class="block"><a href="-f-o-u-r-s-q-u-a-r-e/index.html">FOURSQUARE</a></div></div></div></div>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><div class="block"><a href="-f-o-u-r-s-q-u-a-r-e/index.html">FOURSQUARE</a></div></div></div></div>
+                </div>
               </div>
             </div>
           </div>
-        </div>
 <a data-name="-1785536821%2FClasslikes%2F-1725759721" anchor-label="FLUTTER" id="-1785536821%2FClasslikes%2F-1725759721" data-filterable-set=":android-sdk-ui:dokkaHtml/release"></a>
-        <div class="table-row" data-filterable-current=":android-sdk-ui:dokkaHtml/release" data-filterable-set=":android-sdk-ui:dokkaHtml/release">
-          <div class="main-subrow keyValue ">
-            <div class=""><span class="inline-flex">
-                <div><a href="-f-l-u-t-t-e-r/index.html">FLUTTER</a></div>
+          <div class="table-row" data-togglable="ENTRY" data-filterable-current=":android-sdk-ui:dokkaHtml/release" data-filterable-set=":android-sdk-ui:dokkaHtml/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-f-l-u-t-t-e-r/index.html">FLUTTER</a></div>
 <span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1785536821%2FClasslikes%2F-1725759721"></span>
-                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
-                </span></span></div>
-            <div>
-              <div class="title">
-                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><div class="block"><a href="-f-l-u-t-t-e-r/index.html">FLUTTER</a></div></div></div></div>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><div class="block"><a href="-f-l-u-t-t-e-r/index.html">FLUTTER</a></div></div></div></div>
+                </div>
               </div>
             </div>
           </div>
-        </div>
 <a data-name="-136010240%2FClasslikes%2F-1725759721" anchor-label="GRADLE" id="-136010240%2FClasslikes%2F-1725759721" data-filterable-set=":android-sdk-ui:dokkaHtml/release"></a>
-        <div class="table-row" data-filterable-current=":android-sdk-ui:dokkaHtml/release" data-filterable-set=":android-sdk-ui:dokkaHtml/release">
-          <div class="main-subrow keyValue ">
-            <div class=""><span class="inline-flex">
-                <div><a href="-g-r-a-d-l-e/index.html">GRADLE</a></div>
+          <div class="table-row" data-togglable="ENTRY" data-filterable-current=":android-sdk-ui:dokkaHtml/release" data-filterable-set=":android-sdk-ui:dokkaHtml/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-g-r-a-d-l-e/index.html">GRADLE</a></div>
 <span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-136010240%2FClasslikes%2F-1725759721"></span>
-                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
-                </span></span></div>
-            <div>
-              <div class="title">
-                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><div class="block"><a href="-g-r-a-d-l-e/index.html">GRADLE</a></div></div></div></div>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><div class="block"><a href="-g-r-a-d-l-e/index.html">GRADLE</a></div></div></div></div>
+                </div>
               </div>
             </div>
           </div>
-        </div>
 <a data-name="-309625742%2FClasslikes%2F-1725759721" anchor-label="GOOGLE" id="-309625742%2FClasslikes%2F-1725759721" data-filterable-set=":android-sdk-ui:dokkaHtml/release"></a>
-        <div class="table-row" data-filterable-current=":android-sdk-ui:dokkaHtml/release" data-filterable-set=":android-sdk-ui:dokkaHtml/release">
-          <div class="main-subrow keyValue ">
-            <div class=""><span class="inline-flex">
-                <div><a href="-g-o-o-g-l-e/index.html">GOOGLE</a></div>
+          <div class="table-row" data-togglable="ENTRY" data-filterable-current=":android-sdk-ui:dokkaHtml/release" data-filterable-set=":android-sdk-ui:dokkaHtml/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-g-o-o-g-l-e/index.html">GOOGLE</a></div>
 <span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-309625742%2FClasslikes%2F-1725759721"></span>
-                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
-                </span></span></div>
-            <div>
-              <div class="title">
-                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><div class="block"><a href="-g-o-o-g-l-e/index.html">GOOGLE</a></div></div></div></div>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><div class="block"><a href="-g-o-o-g-l-e/index.html">GOOGLE</a></div></div></div></div>
+                </div>
               </div>
             </div>
           </div>
-        </div>
 <a data-name="-1727014693%2FClasslikes%2F-1725759721" anchor-label="GIMBAL" id="-1727014693%2FClasslikes%2F-1725759721" data-filterable-set=":android-sdk-ui:dokkaHtml/release"></a>
-        <div class="table-row" data-filterable-current=":android-sdk-ui:dokkaHtml/release" data-filterable-set=":android-sdk-ui:dokkaHtml/release">
-          <div class="main-subrow keyValue ">
-            <div class=""><span class="inline-flex">
-                <div><a href="-g-i-m-b-a-l/index.html">GIMBAL</a></div>
+          <div class="table-row" data-togglable="ENTRY" data-filterable-current=":android-sdk-ui:dokkaHtml/release" data-filterable-set=":android-sdk-ui:dokkaHtml/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-g-i-m-b-a-l/index.html">GIMBAL</a></div>
 <span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1727014693%2FClasslikes%2F-1725759721"></span>
-                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
-                </span></span></div>
-            <div>
-              <div class="title">
-                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><div class="block"><a href="-g-i-m-b-a-l/index.html">GIMBAL</a></div></div></div></div>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><div class="block"><a href="-g-i-m-b-a-l/index.html">GIMBAL</a></div></div></div></div>
+                </div>
               </div>
             </div>
           </div>
-        </div>
 <a data-name="1239573009%2FClasslikes%2F-1725759721" anchor-label="IONIC" id="1239573009%2FClasslikes%2F-1725759721" data-filterable-set=":android-sdk-ui:dokkaHtml/release"></a>
-        <div class="table-row" data-filterable-current=":android-sdk-ui:dokkaHtml/release" data-filterable-set=":android-sdk-ui:dokkaHtml/release">
-          <div class="main-subrow keyValue ">
-            <div class=""><span class="inline-flex">
-                <div><a href="-i-o-n-i-c/index.html">IONIC</a></div>
+          <div class="table-row" data-togglable="ENTRY" data-filterable-current=":android-sdk-ui:dokkaHtml/release" data-filterable-set=":android-sdk-ui:dokkaHtml/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-i-o-n-i-c/index.html">IONIC</a></div>
 <span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1239573009%2FClasslikes%2F-1725759721"></span>
-                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
-                </span></span></div>
-            <div>
-              <div class="title">
-                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><div class="block"><a href="-i-o-n-i-c/index.html">IONIC</a></div></div></div></div>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><div class="block"><a href="-i-o-n-i-c/index.html">IONIC</a></div></div></div></div>
+                </div>
               </div>
             </div>
           </div>
-        </div>
 <a data-name="1696032210%2FClasslikes%2F-1725759721" anchor-label="KOCHAVA" id="1696032210%2FClasslikes%2F-1725759721" data-filterable-set=":android-sdk-ui:dokkaHtml/release"></a>
-        <div class="table-row" data-filterable-current=":android-sdk-ui:dokkaHtml/release" data-filterable-set=":android-sdk-ui:dokkaHtml/release">
-          <div class="main-subrow keyValue ">
-            <div class=""><span class="inline-flex">
-                <div><a href="-k-o-c-h-a-v-a/index.html">KOCHAVA</a></div>
+          <div class="table-row" data-togglable="ENTRY" data-filterable-current=":android-sdk-ui:dokkaHtml/release" data-filterable-set=":android-sdk-ui:dokkaHtml/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-k-o-c-h-a-v-a/index.html">KOCHAVA</a></div>
 <span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1696032210%2FClasslikes%2F-1725759721"></span>
-                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
-                </span></span></div>
-            <div>
-              <div class="title">
-                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><div class="block"><a href="-k-o-c-h-a-v-a/index.html">KOCHAVA</a></div></div></div></div>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><div class="block"><a href="-k-o-c-h-a-v-a/index.html">KOCHAVA</a></div></div></div></div>
+                </div>
               </div>
             </div>
           </div>
-        </div>
 <a data-name="-907528897%2FClasslikes%2F-1725759721" anchor-label="MANUAL" id="-907528897%2FClasslikes%2F-1725759721" data-filterable-set=":android-sdk-ui:dokkaHtml/release"></a>
-        <div class="table-row" data-filterable-current=":android-sdk-ui:dokkaHtml/release" data-filterable-set=":android-sdk-ui:dokkaHtml/release">
-          <div class="main-subrow keyValue ">
-            <div class=""><span class="inline-flex">
-                <div><a href="-m-a-n-u-a-l/index.html">MANUAL</a></div>
+          <div class="table-row" data-togglable="ENTRY" data-filterable-current=":android-sdk-ui:dokkaHtml/release" data-filterable-set=":android-sdk-ui:dokkaHtml/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-m-a-n-u-a-l/index.html">MANUAL</a></div>
 <span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-907528897%2FClasslikes%2F-1725759721"></span>
-                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
-                </span></span></div>
-            <div>
-              <div class="title">
-                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><div class="block"><a href="-m-a-n-u-a-l/index.html">MANUAL</a></div></div></div></div>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><div class="block"><a href="-m-a-n-u-a-l/index.html">MANUAL</a></div></div></div></div>
+                </div>
               </div>
             </div>
           </div>
-        </div>
 <a data-name="-2048797790%2FClasslikes%2F-1725759721" anchor-label="MPARTICLE" id="-2048797790%2FClasslikes%2F-1725759721" data-filterable-set=":android-sdk-ui:dokkaHtml/release"></a>
-        <div class="table-row" data-filterable-current=":android-sdk-ui:dokkaHtml/release" data-filterable-set=":android-sdk-ui:dokkaHtml/release">
-          <div class="main-subrow keyValue ">
-            <div class=""><span class="inline-flex">
-                <div><a href="-m-p-a-r-t-i-c-l-e/index.html">MPARTICLE</a></div>
+          <div class="table-row" data-togglable="ENTRY" data-filterable-current=":android-sdk-ui:dokkaHtml/release" data-filterable-set=":android-sdk-ui:dokkaHtml/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-m-p-a-r-t-i-c-l-e/index.html">MPARTICLE</a></div>
 <span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-2048797790%2FClasslikes%2F-1725759721"></span>
-                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
-                </span></span></div>
-            <div>
-              <div class="title">
-                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><div class="block"><a href="-m-p-a-r-t-i-c-l-e/index.html">MPARTICLE</a></div></div></div></div>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><div class="block"><a href="-m-p-a-r-t-i-c-l-e/index.html">MPARTICLE</a></div></div></div></div>
+                </div>
               </div>
             </div>
           </div>
-        </div>
 <a data-name="-1728440614%2FClasslikes%2F-1725759721" anchor-label="NPM" id="-1728440614%2FClasslikes%2F-1725759721" data-filterable-set=":android-sdk-ui:dokkaHtml/release"></a>
-        <div class="table-row" data-filterable-current=":android-sdk-ui:dokkaHtml/release" data-filterable-set=":android-sdk-ui:dokkaHtml/release">
-          <div class="main-subrow keyValue ">
-            <div class=""><span class="inline-flex">
-                <div><a href="-n-p-m/index.html">NPM</a></div>
+          <div class="table-row" data-togglable="ENTRY" data-filterable-current=":android-sdk-ui:dokkaHtml/release" data-filterable-set=":android-sdk-ui:dokkaHtml/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-n-p-m/index.html">NPM</a></div>
 <span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1728440614%2FClasslikes%2F-1725759721"></span>
-                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
-                </span></span></div>
-            <div>
-              <div class="title">
-                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><div class="block"><a href="-n-p-m/index.html">NPM</a></div></div></div></div>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><div class="block"><a href="-n-p-m/index.html">NPM</a></div></div></div></div>
+                </div>
               </div>
             </div>
           </div>
-        </div>
 <a data-name="-927556517%2FClasslikes%2F-1725759721" anchor-label="NATIVESCRIPT" id="-927556517%2FClasslikes%2F-1725759721" data-filterable-set=":android-sdk-ui:dokkaHtml/release"></a>
-        <div class="table-row" data-filterable-current=":android-sdk-ui:dokkaHtml/release" data-filterable-set=":android-sdk-ui:dokkaHtml/release">
-          <div class="main-subrow keyValue ">
-            <div class=""><span class="inline-flex">
-                <div><a href="-n-a-t-i-v-e-s-c-r-i-p-t/index.html">NATIVESCRIPT</a></div>
+          <div class="table-row" data-togglable="ENTRY" data-filterable-current=":android-sdk-ui:dokkaHtml/release" data-filterable-set=":android-sdk-ui:dokkaHtml/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-n-a-t-i-v-e-s-c-r-i-p-t/index.html">NATIVESCRIPT</a></div>
 <span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-927556517%2FClasslikes%2F-1725759721"></span>
-                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
-                </span></span></div>
-            <div>
-              <div class="title">
-                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><div class="block"><a href="-n-a-t-i-v-e-s-c-r-i-p-t/index.html">NATIVESCRIPT</a></div></div></div></div>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><div class="block"><a href="-n-a-t-i-v-e-s-c-r-i-p-t/index.html">NATIVESCRIPT</a></div></div></div></div>
+                </div>
               </div>
             </div>
           </div>
-        </div>
 <a data-name="549815902%2FClasslikes%2F-1725759721" anchor-label="NUGET" id="549815902%2FClasslikes%2F-1725759721" data-filterable-set=":android-sdk-ui:dokkaHtml/release"></a>
-        <div class="table-row" data-filterable-current=":android-sdk-ui:dokkaHtml/release" data-filterable-set=":android-sdk-ui:dokkaHtml/release">
-          <div class="main-subrow keyValue ">
-            <div class=""><span class="inline-flex">
-                <div><a href="-n-u-g-e-t/index.html">NUGET</a></div>
+          <div class="table-row" data-togglable="ENTRY" data-filterable-current=":android-sdk-ui:dokkaHtml/release" data-filterable-set=":android-sdk-ui:dokkaHtml/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-n-u-g-e-t/index.html">NUGET</a></div>
 <span class="anchor-wrapper"><span class="anchor-icon" pointing-to="549815902%2FClasslikes%2F-1725759721"></span>
-                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
-                </span></span></div>
-            <div>
-              <div class="title">
-                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><div class="block"><a href="-n-u-g-e-t/index.html">NUGET</a></div></div></div></div>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><div class="block"><a href="-n-u-g-e-t/index.html">NUGET</a></div></div></div></div>
+                </div>
               </div>
             </div>
           </div>
-        </div>
 <a data-name="398842732%2FClasslikes%2F-1725759721" anchor-label="PUB" id="398842732%2FClasslikes%2F-1725759721" data-filterable-set=":android-sdk-ui:dokkaHtml/release"></a>
-        <div class="table-row" data-filterable-current=":android-sdk-ui:dokkaHtml/release" data-filterable-set=":android-sdk-ui:dokkaHtml/release">
-          <div class="main-subrow keyValue ">
-            <div class=""><span class="inline-flex">
-                <div><a href="-p-u-b/index.html">PUB</a></div>
+          <div class="table-row" data-togglable="ENTRY" data-filterable-current=":android-sdk-ui:dokkaHtml/release" data-filterable-set=":android-sdk-ui:dokkaHtml/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-p-u-b/index.html">PUB</a></div>
 <span class="anchor-wrapper"><span class="anchor-icon" pointing-to="398842732%2FClasslikes%2F-1725759721"></span>
-                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
-                </span></span></div>
-            <div>
-              <div class="title">
-                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><div class="block"><a href="-p-u-b/index.html">PUB</a></div></div></div></div>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><div class="block"><a href="-p-u-b/index.html">PUB</a></div></div></div></div>
+                </div>
               </div>
             </div>
           </div>
-        </div>
 <a data-name="29563637%2FClasslikes%2F-1725759721" anchor-label="RADAR" id="29563637%2FClasslikes%2F-1725759721" data-filterable-set=":android-sdk-ui:dokkaHtml/release"></a>
-        <div class="table-row" data-filterable-current=":android-sdk-ui:dokkaHtml/release" data-filterable-set=":android-sdk-ui:dokkaHtml/release">
-          <div class="main-subrow keyValue ">
-            <div class=""><span class="inline-flex">
-                <div><a href="-r-a-d-a-r/index.html">RADAR</a></div>
+          <div class="table-row" data-togglable="ENTRY" data-filterable-current=":android-sdk-ui:dokkaHtml/release" data-filterable-set=":android-sdk-ui:dokkaHtml/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-r-a-d-a-r/index.html">RADAR</a></div>
 <span class="anchor-wrapper"><span class="anchor-icon" pointing-to="29563637%2FClasslikes%2F-1725759721"></span>
-                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
-                </span></span></div>
-            <div>
-              <div class="title">
-                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><div class="block"><a href="-r-a-d-a-r/index.html">RADAR</a></div></div></div></div>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><div class="block"><a href="-r-a-d-a-r/index.html">RADAR</a></div></div></div></div>
+                </div>
               </div>
             </div>
           </div>
-        </div>
 <a data-name="-831549947%2FClasslikes%2F-1725759721" anchor-label="REACTNATIVE" id="-831549947%2FClasslikes%2F-1725759721" data-filterable-set=":android-sdk-ui:dokkaHtml/release"></a>
-        <div class="table-row" data-filterable-current=":android-sdk-ui:dokkaHtml/release" data-filterable-set=":android-sdk-ui:dokkaHtml/release">
-          <div class="main-subrow keyValue ">
-            <div class=""><span class="inline-flex">
-                <div><a href="-r-e-a-c-t-n-a-t-i-v-e/index.html">REACTNATIVE</a></div>
+          <div class="table-row" data-togglable="ENTRY" data-filterable-current=":android-sdk-ui:dokkaHtml/release" data-filterable-set=":android-sdk-ui:dokkaHtml/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-r-e-a-c-t-n-a-t-i-v-e/index.html">REACTNATIVE</a></div>
 <span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-831549947%2FClasslikes%2F-1725759721"></span>
-                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
-                </span></span></div>
-            <div>
-              <div class="title">
-                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><div class="block"><a href="-r-e-a-c-t-n-a-t-i-v-e/index.html">REACTNATIVE</a></div></div></div></div>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><div class="block"><a href="-r-e-a-c-t-n-a-t-i-v-e/index.html">REACTNATIVE</a></div></div></div></div>
+                </div>
               </div>
             </div>
           </div>
-        </div>
 <a data-name="1123767129%2FClasslikes%2F-1725759721" anchor-label="REACTNATIVENEWARCH" id="1123767129%2FClasslikes%2F-1725759721" data-filterable-set=":android-sdk-ui:dokkaHtml/release"></a>
-        <div class="table-row" data-filterable-current=":android-sdk-ui:dokkaHtml/release" data-filterable-set=":android-sdk-ui:dokkaHtml/release">
-          <div class="main-subrow keyValue ">
-            <div class=""><span class="inline-flex">
-                <div><a href="-r-e-a-c-t-n-a-t-i-v-e-n-e-w-a-r-c-h/index.html">REACTNATIVENEWARCH</a></div>
+          <div class="table-row" data-togglable="ENTRY" data-filterable-current=":android-sdk-ui:dokkaHtml/release" data-filterable-set=":android-sdk-ui:dokkaHtml/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-r-e-a-c-t-n-a-t-i-v-e-n-e-w-a-r-c-h/index.html">REACTNATIVENEWARCH</a></div>
 <span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1123767129%2FClasslikes%2F-1725759721"></span>
-                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
-                </span></span></div>
-            <div>
-              <div class="title">
-                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><div class="block"><a href="-r-e-a-c-t-n-a-t-i-v-e-n-e-w-a-r-c-h/index.html">REACTNATIVENEWARCH</a></div></div></div></div>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><div class="block"><a href="-r-e-a-c-t-n-a-t-i-v-e-n-e-w-a-r-c-h/index.html">REACTNATIVENEWARCH</a></div></div></div></div>
+                </div>
               </div>
             </div>
           </div>
-        </div>
 <a data-name="-1380864094%2FClasslikes%2F-1725759721" anchor-label="SEGMENT" id="-1380864094%2FClasslikes%2F-1725759721" data-filterable-set=":android-sdk-ui:dokkaHtml/release"></a>
-        <div class="table-row" data-filterable-current=":android-sdk-ui:dokkaHtml/release" data-filterable-set=":android-sdk-ui:dokkaHtml/release">
-          <div class="main-subrow keyValue ">
-            <div class=""><span class="inline-flex">
-                <div><a href="-s-e-g-m-e-n-t/index.html">SEGMENT</a></div>
+          <div class="table-row" data-togglable="ENTRY" data-filterable-current=":android-sdk-ui:dokkaHtml/release" data-filterable-set=":android-sdk-ui:dokkaHtml/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-s-e-g-m-e-n-t/index.html">SEGMENT</a></div>
 <span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1380864094%2FClasslikes%2F-1725759721"></span>
-                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
-                </span></span></div>
-            <div>
-              <div class="title">
-                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><div class="block"><a href="-s-e-g-m-e-n-t/index.html">SEGMENT</a></div></div></div></div>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><div class="block"><a href="-s-e-g-m-e-n-t/index.html">SEGMENT</a></div></div></div></div>
+                </div>
               </div>
             </div>
           </div>
-        </div>
 <a data-name="1263756432%2FClasslikes%2F-1725759721" anchor-label="SINGULAR" id="1263756432%2FClasslikes%2F-1725759721" data-filterable-set=":android-sdk-ui:dokkaHtml/release"></a>
-        <div class="table-row" data-filterable-current=":android-sdk-ui:dokkaHtml/release" data-filterable-set=":android-sdk-ui:dokkaHtml/release">
-          <div class="main-subrow keyValue ">
-            <div class=""><span class="inline-flex">
-                <div><a href="-s-i-n-g-u-l-a-r/index.html">SINGULAR</a></div>
+          <div class="table-row" data-togglable="ENTRY" data-filterable-current=":android-sdk-ui:dokkaHtml/release" data-filterable-set=":android-sdk-ui:dokkaHtml/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-s-i-n-g-u-l-a-r/index.html">SINGULAR</a></div>
 <span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1263756432%2FClasslikes%2F-1725759721"></span>
-                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
-                </span></span></div>
-            <div>
-              <div class="title">
-                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><div class="block"><a href="-s-i-n-g-u-l-a-r/index.html">SINGULAR</a></div></div></div></div>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><div class="block"><a href="-s-i-n-g-u-l-a-r/index.html">SINGULAR</a></div></div></div></div>
+                </div>
               </div>
             </div>
           </div>
-        </div>
 <a data-name="196396767%2FClasslikes%2F-1725759721" anchor-label="SPM" id="196396767%2FClasslikes%2F-1725759721" data-filterable-set=":android-sdk-ui:dokkaHtml/release"></a>
-        <div class="table-row" data-filterable-current=":android-sdk-ui:dokkaHtml/release" data-filterable-set=":android-sdk-ui:dokkaHtml/release">
-          <div class="main-subrow keyValue ">
-            <div class=""><span class="inline-flex">
-                <div><a href="-s-p-m/index.html">SPM</a></div>
+          <div class="table-row" data-togglable="ENTRY" data-filterable-current=":android-sdk-ui:dokkaHtml/release" data-filterable-set=":android-sdk-ui:dokkaHtml/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-s-p-m/index.html">SPM</a></div>
 <span class="anchor-wrapper"><span class="anchor-icon" pointing-to="196396767%2FClasslikes%2F-1725759721"></span>
-                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
-                </span></span></div>
-            <div>
-              <div class="title">
-                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><div class="block"><a href="-s-p-m/index.html">SPM</a></div></div></div></div>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><div class="block"><a href="-s-p-m/index.html">SPM</a></div></div></div></div>
+                </div>
               </div>
             </div>
           </div>
-        </div>
 <a data-name="1970838996%2FClasslikes%2F-1725759721" anchor-label="TEALIUM" id="1970838996%2FClasslikes%2F-1725759721" data-filterable-set=":android-sdk-ui:dokkaHtml/release"></a>
-        <div class="table-row" data-filterable-current=":android-sdk-ui:dokkaHtml/release" data-filterable-set=":android-sdk-ui:dokkaHtml/release">
-          <div class="main-subrow keyValue ">
-            <div class=""><span class="inline-flex">
-                <div><a href="-t-e-a-l-i-u-m/index.html">TEALIUM</a></div>
+          <div class="table-row" data-togglable="ENTRY" data-filterable-current=":android-sdk-ui:dokkaHtml/release" data-filterable-set=":android-sdk-ui:dokkaHtml/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-t-e-a-l-i-u-m/index.html">TEALIUM</a></div>
 <span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1970838996%2FClasslikes%2F-1725759721"></span>
-                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
-                </span></span></div>
-            <div>
-              <div class="title">
-                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><div class="block"><a href="-t-e-a-l-i-u-m/index.html">TEALIUM</a></div></div></div></div>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><div class="block"><a href="-t-e-a-l-i-u-m/index.html">TEALIUM</a></div></div></div></div>
+                </div>
               </div>
             </div>
           </div>
-        </div>
 <a data-name="1345845616%2FClasslikes%2F-1725759721" anchor-label="UNREAL" id="1345845616%2FClasslikes%2F-1725759721" data-filterable-set=":android-sdk-ui:dokkaHtml/release"></a>
-        <div class="table-row" data-filterable-current=":android-sdk-ui:dokkaHtml/release" data-filterable-set=":android-sdk-ui:dokkaHtml/release">
-          <div class="main-subrow keyValue ">
-            <div class=""><span class="inline-flex">
-                <div><a href="-u-n-r-e-a-l/index.html">UNREAL</a></div>
+          <div class="table-row" data-togglable="ENTRY" data-filterable-current=":android-sdk-ui:dokkaHtml/release" data-filterable-set=":android-sdk-ui:dokkaHtml/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-u-n-r-e-a-l/index.html">UNREAL</a></div>
 <span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1345845616%2FClasslikes%2F-1725759721"></span>
-                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
-                </span></span></div>
-            <div>
-              <div class="title">
-                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><div class="block"><a href="-u-n-r-e-a-l/index.html">UNREAL</a></div></div></div></div>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><div class="block"><a href="-u-n-r-e-a-l/index.html">UNREAL</a></div></div></div></div>
+                </div>
               </div>
             </div>
           </div>
-        </div>
 <a data-name="1824533145%2FClasslikes%2F-1725759721" anchor-label="UNITY_PACKAGE_MANAGER" id="1824533145%2FClasslikes%2F-1725759721" data-filterable-set=":android-sdk-ui:dokkaHtml/release"></a>
-        <div class="table-row" data-filterable-current=":android-sdk-ui:dokkaHtml/release" data-filterable-set=":android-sdk-ui:dokkaHtml/release">
-          <div class="main-subrow keyValue ">
-            <div class=""><span class="inline-flex">
-                <div><a href="-u-n-i-t-y_-p-a-c-k-a-g-e_-m-a-n-a-g-e-r/index.html">UNITY_PACKAGE_MANAGER</a></div>
+          <div class="table-row" data-togglable="ENTRY" data-filterable-current=":android-sdk-ui:dokkaHtml/release" data-filterable-set=":android-sdk-ui:dokkaHtml/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-u-n-i-t-y_-p-a-c-k-a-g-e_-m-a-n-a-g-e-r/index.html">UNITY_PACKAGE_MANAGER</a></div>
 <span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1824533145%2FClasslikes%2F-1725759721"></span>
-                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
-                </span></span></div>
-            <div>
-              <div class="title">
-                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><div class="block"><a href="-u-n-i-t-y_-p-a-c-k-a-g-e_-m-a-n-a-g-e-r/index.html">UNITY_PACKAGE_MANAGER</a></div></div></div></div>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><div class="block"><a href="-u-n-i-t-y_-p-a-c-k-a-g-e_-m-a-n-a-g-e-r/index.html">UNITY_PACKAGE_MANAGER</a></div></div></div></div>
+                </div>
               </div>
             </div>
           </div>
-        </div>
 <a data-name="-1550467292%2FClasslikes%2F-1725759721" anchor-label="UNITY" id="-1550467292%2FClasslikes%2F-1725759721" data-filterable-set=":android-sdk-ui:dokkaHtml/release"></a>
-        <div class="table-row" data-filterable-current=":android-sdk-ui:dokkaHtml/release" data-filterable-set=":android-sdk-ui:dokkaHtml/release">
-          <div class="main-subrow keyValue ">
-            <div class=""><span class="inline-flex">
-                <div><a href="-u-n-i-t-y/index.html">UNITY</a></div>
+          <div class="table-row" data-togglable="ENTRY" data-filterable-current=":android-sdk-ui:dokkaHtml/release" data-filterable-set=":android-sdk-ui:dokkaHtml/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-u-n-i-t-y/index.html">UNITY</a></div>
 <span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1550467292%2FClasslikes%2F-1725759721"></span>
-                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
-                </span></span></div>
-            <div>
-              <div class="title">
-                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><div class="block"><a href="-u-n-i-t-y/index.html">UNITY</a></div></div></div></div>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><div class="block"><a href="-u-n-i-t-y/index.html">UNITY</a></div></div></div></div>
+                </div>
               </div>
             </div>
           </div>
-        </div>
 <a data-name="883930548%2FClasslikes%2F-1725759721" anchor-label="VIZBEE" id="883930548%2FClasslikes%2F-1725759721" data-filterable-set=":android-sdk-ui:dokkaHtml/release"></a>
-        <div class="table-row" data-filterable-current=":android-sdk-ui:dokkaHtml/release" data-filterable-set=":android-sdk-ui:dokkaHtml/release">
-          <div class="main-subrow keyValue ">
-            <div class=""><span class="inline-flex">
-                <div><a href="-v-i-z-b-e-e/index.html">VIZBEE</a></div>
+          <div class="table-row" data-togglable="ENTRY" data-filterable-current=":android-sdk-ui:dokkaHtml/release" data-filterable-set=":android-sdk-ui:dokkaHtml/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-v-i-z-b-e-e/index.html">VIZBEE</a></div>
 <span class="anchor-wrapper"><span class="anchor-icon" pointing-to="883930548%2FClasslikes%2F-1725759721"></span>
-                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
-                </span></span></div>
-            <div>
-              <div class="title">
-                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><div class="block"><a href="-v-i-z-b-e-e/index.html">VIZBEE</a></div></div></div></div>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><div class="block"><a href="-v-i-z-b-e-e/index.html">VIZBEE</a></div></div></div></div>
+                </div>
               </div>
             </div>
           </div>
-        </div>
 <a data-name="-1678300526%2FClasslikes%2F-1725759721" anchor-label="WEBCDN" id="-1678300526%2FClasslikes%2F-1725759721" data-filterable-set=":android-sdk-ui:dokkaHtml/release"></a>
-        <div class="table-row" data-filterable-current=":android-sdk-ui:dokkaHtml/release" data-filterable-set=":android-sdk-ui:dokkaHtml/release">
-          <div class="main-subrow keyValue ">
-            <div class=""><span class="inline-flex">
-                <div><a href="-w-e-b-c-d-n/index.html">WEBCDN</a></div>
+          <div class="table-row" data-togglable="ENTRY" data-filterable-current=":android-sdk-ui:dokkaHtml/release" data-filterable-set=":android-sdk-ui:dokkaHtml/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-w-e-b-c-d-n/index.html">WEBCDN</a></div>
 <span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1678300526%2FClasslikes%2F-1725759721"></span>
-                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
-                </span></span></div>
-            <div>
-              <div class="title">
-                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><div class="block"><a href="-w-e-b-c-d-n/index.html">WEBCDN</a></div></div></div></div>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><div class="block"><a href="-w-e-b-c-d-n/index.html">WEBCDN</a></div></div></div></div>
+                </div>
               </div>
             </div>
           </div>
-        </div>
 <a data-name="-1542372375%2FClasslikes%2F-1725759721" anchor-label="XAMARIN" id="-1542372375%2FClasslikes%2F-1725759721" data-filterable-set=":android-sdk-ui:dokkaHtml/release"></a>
-        <div class="table-row" data-filterable-current=":android-sdk-ui:dokkaHtml/release" data-filterable-set=":android-sdk-ui:dokkaHtml/release">
-          <div class="main-subrow keyValue ">
-            <div class=""><span class="inline-flex">
-                <div><a href="-x-a-m-a-r-i-n/index.html">XAMARIN</a></div>
+          <div class="table-row" data-togglable="ENTRY" data-filterable-current=":android-sdk-ui:dokkaHtml/release" data-filterable-set=":android-sdk-ui:dokkaHtml/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-x-a-m-a-r-i-n/index.html">XAMARIN</a></div>
 <span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1542372375%2FClasslikes%2F-1725759721"></span>
-                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
-                </span></span></div>
-            <div>
-              <div class="title">
-                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><div class="block"><a href="-x-a-m-a-r-i-n/index.html">XAMARIN</a></div></div></div></div>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><div class="block"><a href="-x-a-m-a-r-i-n/index.html">XAMARIN</a></div></div></div></div>
+                </div>
               </div>
             </div>
           </div>
         </div>
       </div>
-      <h2 class="">Types</h2>
-      <div class="table" data-togglable="Types"><a data-name="989578858%2FClasslikes%2F-1725759721" anchor-label="Companion" id="989578858%2FClasslikes%2F-1725759721" data-filterable-set=":android-sdk-ui:dokkaHtml/release"></a>
-        <div class="table-row" data-filterable-current=":android-sdk-ui:dokkaHtml/release" data-filterable-set=":android-sdk-ui:dokkaHtml/release">
-          <div class="main-subrow keyValue ">
-            <div class=""><span class="inline-flex">
-                <div><a href="-companion/index.html"><span><span>Companion</span></span></a></div>
+      <div data-togglable="TYPE">
+        <h2 class="">Types</h2>
+        <div class="table"><a data-name="989578858%2FClasslikes%2F-1725759721" anchor-label="Companion" id="989578858%2FClasslikes%2F-1725759721" data-filterable-set=":android-sdk-ui:dokkaHtml/release"></a>
+          <div class="table-row" data-filterable-current=":android-sdk-ui:dokkaHtml/release" data-filterable-set=":android-sdk-ui:dokkaHtml/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-companion/index.html"><span><span>Companion</span></span></a></div>
 <span class="anchor-wrapper"><span class="anchor-icon" pointing-to="989578858%2FClasslikes%2F-1725759721"></span>
-                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
-                </span></span></div>
-            <div>
-              <div class="title">
-                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><span class="token keyword">object </span><a href="-companion/index.html">Companion</a></div></div></div>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><span class="token keyword">object </span><a href="-companion/index.html">Companion</a></div></div></div>
+                </div>
               </div>
             </div>
           </div>
         </div>
       </div>
-      <h2 class="">Functions</h2>
-      <div class="table" data-togglable="Functions"><a data-name="-1025618727%2FFunctions%2F-1725759721" anchor-label="forJsonPut" id="-1025618727%2FFunctions%2F-1725759721" data-filterable-set=":android-sdk-ui:dokkaHtml/release"></a>
-        <div class="table-row" data-filterable-current=":android-sdk-ui:dokkaHtml/release" data-filterable-set=":android-sdk-ui:dokkaHtml/release">
-          <div class="main-subrow keyValue ">
-            <div class=""><span class="inline-flex">
-                <div><a href="for-json-put.html"><span>for</span><wbr></wbr><span>Json</span><wbr></wbr><span><span>Put</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1025618727%2FFunctions%2F-1725759721"></span>
-                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
-                </span></span></div>
-            <div>
-              <div class="title">
-                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="for-json-put.html"><span class="token function">forJsonPut</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a></div></div></div>
+      <div data-togglable="PROPERTY">
+        <h2 class="">Properties</h2>
+        <div class="table"><a data-name="-1324821485%2FProperties%2F-1725759721" anchor-label="entries" id="-1324821485%2FProperties%2F-1725759721" data-filterable-set=":android-sdk-ui:dokkaHtml/release"></a>
+          <div class="table-row" data-filterable-current=":android-sdk-ui:dokkaHtml/release" data-filterable-set=":android-sdk-ui:dokkaHtml/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="entries.html"><span><span>entries</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1324821485%2FProperties%2F-1725759721"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><span class="token keyword">val </span><a href="entries.html">entries</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.enums/-enum-entries/index.html">EnumEntries</a><span class="token operator">&lt;</span><a href="index.html">BrazeSdkMetadata</a><span class="token operator">&gt;</span></div><div class="brief "><p class="paragraph">Returns a representation of an immutable list of all enum entries, in the order they're declared.</p></div></div></div>
+                </div>
               </div>
             </div>
           </div>
-        </div>
-<a data-name="-1473150871%2FFunctions%2F-1725759721" anchor-label="valueOf" id="-1473150871%2FFunctions%2F-1725759721" data-filterable-set=":android-sdk-ui:dokkaHtml/release"></a>
-        <div class="table-row" data-filterable-current=":android-sdk-ui:dokkaHtml/release" data-filterable-set=":android-sdk-ui:dokkaHtml/release">
-          <div class="main-subrow keyValue ">
-            <div class=""><span class="inline-flex">
-                <div><a href="value-of.html"><span>value</span><wbr></wbr><span><span>Of</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1473150871%2FFunctions%2F-1725759721"></span>
-                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
-                </span></span></div>
-            <div>
-              <div class="title">
-                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">fun </span><a href="value-of.html"><span class="token function">valueOf</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">value<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">BrazeSdkMetadata</a></div><div class="brief "><p class="paragraph">Returns the enum constant of this type with the specified name. The string must match exactly an identifier used to declare an enum constant in this type. (Extraneous whitespace characters are not permitted.)</p></div></div></div>
-              </div>
-            </div>
-          </div>
-        </div>
-<a data-name="1405372725%2FFunctions%2F-1725759721" anchor-label="values" id="1405372725%2FFunctions%2F-1725759721" data-filterable-set=":android-sdk-ui:dokkaHtml/release"></a>
-        <div class="table-row" data-filterable-current=":android-sdk-ui:dokkaHtml/release" data-filterable-set=":android-sdk-ui:dokkaHtml/release">
-          <div class="main-subrow keyValue ">
-            <div class=""><span class="inline-flex">
-                <div><a href="values.html"><span><span>values</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1405372725%2FFunctions%2F-1725759721"></span>
-                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
-                </span></span></div>
-            <div>
-              <div class="title">
-                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">fun </span><a href="values.html"><span class="token function">values</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-array/index.html">Array</a><span class="token operator">&lt;</span><span class="token keyword"></span><a href="index.html">BrazeSdkMetadata</a><span class="token operator">&gt;</span></div><div class="brief "><p class="paragraph">Returns an array containing the constants of this enum type, in the order they're declared.</p></div></div></div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <h2 class="">Properties</h2>
-      <div class="table" data-togglable="Properties"><a data-name="-372974862%2FProperties%2F-1725759721" anchor-label="name" id="-372974862%2FProperties%2F-1725759721" data-filterable-set=":android-sdk-ui:dokkaHtml/release"></a>
-        <div class="table-row" data-filterable-current=":android-sdk-ui:dokkaHtml/release" data-filterable-set=":android-sdk-ui:dokkaHtml/release">
-          <div class="main-subrow keyValue ">
-            <div class=""><span class="inline-flex">
-                <div><a href="../../com.braze.support/-braze-logger/-priority/-w/index.html#-372974862%2FProperties%2F-1725759721"><span><span>name</span></span></a></div>
+<a data-name="-372974862%2FProperties%2F-1725759721" anchor-label="name" id="-372974862%2FProperties%2F-1725759721" data-filterable-set=":android-sdk-ui:dokkaHtml/release"></a>
+          <div class="table-row" data-filterable-current=":android-sdk-ui:dokkaHtml/release" data-filterable-set=":android-sdk-ui:dokkaHtml/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="../../com.braze.support/-braze-logger/-priority/-w/index.html#-372974862%2FProperties%2F-1725759721"><span><span>name</span></span></a></div>
 <span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-372974862%2FProperties%2F-1725759721"></span>
-                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
-                </span></span></div>
-            <div>
-              <div class="title">
-                <div class="platform-hinted " data-platform-hinted="data-platform-hinted" data-togglable="Properties"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><a data-name="-372974862%2FProperties%2F-1725759721" anchor-label="name" id="-372974862%2FProperties%2F-1725759721" data-filterable-set=":android-sdk-ui:dokkaHtml/release"></a><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">val </span><a href="../../com.braze.support/-braze-logger/-priority/-w/index.html#-372974862%2FProperties%2F-1725759721">name</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a></div></div></div>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><span class="token keyword">val </span><a href="../../com.braze.support/-braze-logger/-priority/-w/index.html#-372974862%2FProperties%2F-1725759721">name</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-739389684%2FProperties%2F-1725759721" anchor-label="ordinal" id="-739389684%2FProperties%2F-1725759721" data-filterable-set=":android-sdk-ui:dokkaHtml/release"></a>
+          <div class="table-row" data-filterable-current=":android-sdk-ui:dokkaHtml/release" data-filterable-set=":android-sdk-ui:dokkaHtml/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="../../com.braze.support/-braze-logger/-priority/-w/index.html#-739389684%2FProperties%2F-1725759721"><span><span>ordinal</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-739389684%2FProperties%2F-1725759721"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><span class="token keyword">val </span><a href="../../com.braze.support/-braze-logger/-priority/-w/index.html#-739389684%2FProperties%2F-1725759721">ordinal</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></div></div></div>
+                </div>
               </div>
             </div>
           </div>
         </div>
-<a data-name="-739389684%2FProperties%2F-1725759721" anchor-label="ordinal" id="-739389684%2FProperties%2F-1725759721" data-filterable-set=":android-sdk-ui:dokkaHtml/release"></a>
-        <div class="table-row" data-filterable-current=":android-sdk-ui:dokkaHtml/release" data-filterable-set=":android-sdk-ui:dokkaHtml/release">
-          <div class="main-subrow keyValue ">
-            <div class=""><span class="inline-flex">
-                <div><a href="../../com.braze.support/-braze-logger/-priority/-w/index.html#-739389684%2FProperties%2F-1725759721"><span><span>ordinal</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-739389684%2FProperties%2F-1725759721"></span>
-                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
-                </span></span></div>
-            <div>
-              <div class="title">
-                <div class="platform-hinted " data-platform-hinted="data-platform-hinted" data-togglable="Properties"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><a data-name="-739389684%2FProperties%2F-1725759721" anchor-label="ordinal" id="-739389684%2FProperties%2F-1725759721" data-filterable-set=":android-sdk-ui:dokkaHtml/release"></a><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">val </span><a href="../../com.braze.support/-braze-logger/-priority/-w/index.html#-739389684%2FProperties%2F-1725759721">ordinal</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></div></div></div>
+      </div>
+      <div data-togglable="FUNCTION">
+        <h2 class="">Functions</h2>
+        <div class="table"><a data-name="-1025618727%2FFunctions%2F-1725759721" anchor-label="forJsonPut" id="-1025618727%2FFunctions%2F-1725759721" data-filterable-set=":android-sdk-ui:dokkaHtml/release"></a>
+          <div class="table-row" data-filterable-current=":android-sdk-ui:dokkaHtml/release" data-filterable-set=":android-sdk-ui:dokkaHtml/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="for-json-put.html"><span>for</span><wbr></wbr><span>Json</span><wbr></wbr><span><span>Put</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1025618727%2FFunctions%2F-1725759721"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="for-json-put.html"><span class="token function">forJsonPut</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1473150871%2FFunctions%2F-1725759721" anchor-label="valueOf" id="-1473150871%2FFunctions%2F-1725759721" data-filterable-set=":android-sdk-ui:dokkaHtml/release"></a>
+          <div class="table-row" data-filterable-current=":android-sdk-ui:dokkaHtml/release" data-filterable-set=":android-sdk-ui:dokkaHtml/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="value-of.html"><span>value</span><wbr></wbr><span><span>Of</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1473150871%2FFunctions%2F-1725759721"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><span class="token keyword">fun </span><a href="value-of.html"><span class="token function">valueOf</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">value<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">BrazeSdkMetadata</a></div><div class="brief "><p class="paragraph">Returns the enum constant of this type with the specified name. The string must match exactly an identifier used to declare an enum constant in this type. (Extraneous whitespace characters are not permitted.)</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1405372725%2FFunctions%2F-1725759721" anchor-label="values" id="1405372725%2FFunctions%2F-1725759721" data-filterable-set=":android-sdk-ui:dokkaHtml/release"></a>
+          <div class="table-row" data-filterable-current=":android-sdk-ui:dokkaHtml/release" data-filterable-set=":android-sdk-ui:dokkaHtml/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="values.html"><span><span>values</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1405372725%2FFunctions%2F-1725759721"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><span class="token keyword">fun </span><a href="values.html"><span class="token function">values</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-array/index.html">Array</a><span class="token operator">&lt;</span><a href="index.html">BrazeSdkMetadata</a><span class="token operator">&gt;</span></div><div class="brief "><p class="paragraph">Returns an array containing the constants of this enum type, in the order they're declared.</p></div></div></div>
+                </div>
               </div>
             </div>
           </div>
@@ -676,7 +709,8 @@
                 class="pull-right"><span>Generated by </span><a
                 href="https://github.com/Kotlin/dokka"><span>dokka</span><span class="padded-icon"></span></a></span>
       </div>
+            </div>
+        </div>
     </div>
-</div>
 </body>
 </html>

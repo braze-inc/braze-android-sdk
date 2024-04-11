@@ -1,10 +1,11 @@
 <!DOCTYPE html>
-<html>
+<html class="no-js">
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1" charset="UTF-8">
     <title>BrazeUser</title>
     <link href="../../../images/logo-icon.svg" rel="icon" type="image/svg">
     <script>var pathToRoot = "../../../";</script>
+    <script>document.documentElement.classList.replace("no-js","js");</script>
     <script>const storage = localStorage.getItem("dokka-dark-mode")
     if (storage == null) {
         const osDarkSchemePreferred = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
@@ -18,12 +19,13 @@
         }
     }
     </script>
+<script type="text/javascript" src="https://unpkg.com/kotlin-playground@1/dist/playground.min.js" async="async"></script>
 <script type="text/javascript" src="../../../scripts/sourceset_dependencies.js" async="async"></script>
 <link href="../../../styles/style.css" rel="Stylesheet">
-<link href="../../../styles/jetbrains-mono.css" rel="Stylesheet">
 <link href="../../../styles/main.css" rel="Stylesheet">
 <link href="../../../styles/prism.css" rel="Stylesheet">
 <link href="../../../styles/logo-styles.css" rel="Stylesheet">
+<link href="../../../styles/font-jb-sans-auto.css" rel="Stylesheet">
 <script type="text/javascript" src="../../../scripts/clipboard.js" async="async"></script>
 <script type="text/javascript" src="../../../scripts/navigation-loader.js" async="async"></script>
 <script type="text/javascript" src="../../../scripts/platform-content-handler.js" async="async"></script>
@@ -32,468 +34,480 @@
 <script type="text/javascript" src="../../../scripts/symbol-parameters-wrapper_deferred.js" defer="defer"></script>
 </head>
 <body>
-<div class="navigation-wrapper" id="navigation-wrapper">
-    <div id="leftToggler"><span class="icon-toggler"></span></div>
-    <div class="library-name">
-            <a href="../../../index.html">
-                    <span>braze-android-sdk</span>
-            </a>
+    <div class="root">
+<nav class="navigation" id="navigation-wrapper">
+    <div class="navigation--inner">
+        <div class="navigation-title">
+            <button class="menu-toggle" id="menu-toggle" type="button">toggle menu</button>
+            <div class="library-name">
+                    <a class="library-name--link" href="../../../index.html">
+                            braze-android-sdk
+                    </a>
+            </div>
+            <div class="library-version">
+30.4.0            </div>
+        </div>
+        <div class="filter-section" id="filter-section">
+                <button class="platform-tag platform-selector jvm-like" data-active="" data-filter=":android-sdk-ui:dokkaHtml/release">androidJvm</button>
+        </div>
     </div>
-    <div>
-30.3.0    </div>
-    <div class="pull-right d-flex">
-        <button id="theme-toggle-button"><span id="theme-toggle"></span></button>
-        <div id="searchBar"></div>
+    <div class="navigation-controls">
+        <button class="navigation-controls--btn navigation-controls--theme" id="theme-toggle-button" type="button">switch theme</button>
+        <div class="navigation-controls--btn navigation-controls--search" id="searchBar" role="button">search in API</div>
     </div>
-</div>
-<div id="container">
-    <div id="leftColumn">
-        <div id="sideMenu"></div>
-    </div>
-    <div id="main">
-<div class="main-content" id="content" pageIds="braze-android-sdk::com.braze/BrazeUser///PointingToDeclaration//-1725759721">
+</nav>
+        <div id="container">
+            <div class="sidebar" id="leftColumn">
+                <div class="sidebar--inner" id="sideMenu"></div>
+            </div>
+            <div id="main">
+<div class="main-content" data-page-type="classlike" id="content" pageIds="braze-android-sdk::com.braze/BrazeUser///PointingToDeclaration//-1725759721">
   <div class="breadcrumbs"><a href="../../../index.html">braze-android-sdk</a><span class="delimiter">/</span><a href="../index.html">com.braze</a><span class="delimiter">/</span><span class="current">BrazeUser</span></div>
   <div class="cover ">
     <h1 class="cover"><span>Braze</span><wbr></wbr><span><span>User</span></span></h1>
     <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><span class="token keyword">class </span><a href="index.html">BrazeUser</a></div></div></div>
   </div>
   <div class="tabbedcontent">
-    <div class="tabs-section" tabs-section="tabs-section"><button class="section-tab" data-active="" data-togglable="Functions">Functions</button><button class="section-tab" data-togglable="Properties">Properties</button></div>
+    <div class="tabs-section" tabs-section="tabs-section"><button class="section-tab" data-active="" data-togglable="CONSTRUCTOR,TYPE,PROPERTY,FUNCTION">Members</button></div>
     <div class="tabs-section-body">
-      <h2 class="">Functions</h2>
-      <div class="table" data-togglable="Functions"><a data-name="-1106019389%2FFunctions%2F-1725759721" anchor-label="addAlias" id="-1106019389%2FFunctions%2F-1725759721" data-filterable-set=":android-sdk-ui:dokkaHtml/release"></a>
-        <div class="table-row" data-filterable-current=":android-sdk-ui:dokkaHtml/release" data-filterable-set=":android-sdk-ui:dokkaHtml/release">
-          <div class="main-subrow keyValue ">
-            <div class=""><span class="inline-flex">
-                <div><a href="add-alias.html"><span>add</span><wbr></wbr><span><span>Alias</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1106019389%2FFunctions%2F-1725759721"></span>
-                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
-                </span></span></div>
-            <div>
-              <div class="title">
-                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">fun </span><a href="add-alias.html"><span class="token function">addAlias</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">alias<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span></span><span class="parameter ">label<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></div><div class="brief "><p class="paragraph">Adds an an alias for the current user. (alias, label) pairs can exist on one and only one user. If a different user already has this alias or external user id, the alias attempt will be rejected on the server (even if this method returns true).</p></div></div></div>
-              </div>
-            </div>
-          </div>
-        </div>
-<a data-name="240069390%2FFunctions%2F-1725759721" anchor-label="addToCustomAttributeArray" id="240069390%2FFunctions%2F-1725759721" data-filterable-set=":android-sdk-ui:dokkaHtml/release"></a>
-        <div class="table-row" data-filterable-current=":android-sdk-ui:dokkaHtml/release" data-filterable-set=":android-sdk-ui:dokkaHtml/release">
-          <div class="main-subrow keyValue ">
-            <div class=""><span class="inline-flex">
-                <div><a href="add-to-custom-attribute-array.html"><span>add</span><wbr></wbr><span>To</span><wbr></wbr><span>Custom</span><wbr></wbr><span>Attribute</span><wbr></wbr><span><span>Array</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="240069390%2FFunctions%2F-1725759721"></span>
-                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
-                </span></span></div>
-            <div>
-              <div class="title">
-                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">fun </span><a href="add-to-custom-attribute-array.html"><span class="token function">addToCustomAttributeArray</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">key<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span></span><span class="parameter ">value<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></div><div class="brief "><p class="paragraph">Adds a String to a custom attribute string array, or creates that array if one doesn't exist. The key and value parameters are limited to 255 characters in length. Keys and values which are too long will be truncated. Keys can only contain alphanumeric characters and underscores. Keys may not be a reserved key. See <span data-unresolved-link="com.braze.support/CustomAttributeValidationUtils/isValidCustomAttributeKey/#kotlin.String?#kotlin.collections.Set[kotlin.String]/PointingToDeclaration/">CustomAttributeValidationUtils.isValidCustomAttributeKey</span></p></div></div></div>
-              </div>
-            </div>
-          </div>
-        </div>
-<a data-name="1516955061%2FFunctions%2F-1725759721" anchor-label="addToSubscriptionGroup" id="1516955061%2FFunctions%2F-1725759721" data-filterable-set=":android-sdk-ui:dokkaHtml/release"></a>
-        <div class="table-row" data-filterable-current=":android-sdk-ui:dokkaHtml/release" data-filterable-set=":android-sdk-ui:dokkaHtml/release">
-          <div class="main-subrow keyValue ">
-            <div class=""><span class="inline-flex">
-                <div><a href="add-to-subscription-group.html"><span>add</span><wbr></wbr><span>To</span><wbr></wbr><span>Subscription</span><wbr></wbr><span><span>Group</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1516955061%2FFunctions%2F-1725759721"></span>
-                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
-                </span></span></div>
-            <div>
-              <div class="title">
-                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">fun </span><a href="add-to-subscription-group.html"><span class="token function">addToSubscriptionGroup</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">subscriptionGroupId<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></div><div class="brief "><p class="paragraph">Adds the user to the subscription group.</p></div></div></div>
-              </div>
-            </div>
-          </div>
-        </div>
-<a data-name="-1701313923%2FFunctions%2F-1725759721" anchor-label="incrementCustomUserAttribute" id="-1701313923%2FFunctions%2F-1725759721" data-filterable-set=":android-sdk-ui:dokkaHtml/release"></a>
-        <div class="table-row" data-filterable-current=":android-sdk-ui:dokkaHtml/release" data-filterable-set=":android-sdk-ui:dokkaHtml/release">
-          <div class="main-subrow keyValue ">
-            <div class=""><span class="inline-flex">
-                <div><a href="increment-custom-user-attribute.html"><span>increment</span><wbr></wbr><span>Custom</span><wbr></wbr><span>User</span><wbr></wbr><span><span>Attribute</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1701313923%2FFunctions%2F-1725759721"></span>
-                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
-                </span></span></div>
-            <div>
-              <div class="title">
-                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><div class="block"><div class="block"><span class="token annotation builtin">@</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.jvm/-jvm-overloads/index.html"><span class="token annotation builtin">JvmOverloads</span></a></div></div><span class="token keyword"></span><span class="token keyword">fun </span><a href="increment-custom-user-attribute.html"><span class="token function">incrementCustomUserAttribute</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">key<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span></span><span class="parameter ">incrementValue<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a><span class="token operator"> = </span><span class="token constant">1</span></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></div><div class="brief "><p class="paragraph">Increments the value of an custom attribute by a given amount. If no amount is given, the by default it will be incremented by 1. Only integer and long custom attributes can be incremented. Attempting to increment a custom attribute that is not an integer or a long will be ignored. If you increment a custom attribute that has not previously been set, a custom attribute will be created and assigned the value of incrementValue. To decrement the value of a custom attribute, use a negative incrementValue.</p></div></div></div>
-              </div>
-            </div>
-          </div>
-        </div>
-<a data-name="-1888269968%2FFunctions%2F-1725759721" anchor-label="removeFromCustomAttributeArray" id="-1888269968%2FFunctions%2F-1725759721" data-filterable-set=":android-sdk-ui:dokkaHtml/release"></a>
-        <div class="table-row" data-filterable-current=":android-sdk-ui:dokkaHtml/release" data-filterable-set=":android-sdk-ui:dokkaHtml/release">
-          <div class="main-subrow keyValue ">
-            <div class=""><span class="inline-flex">
-                <div><a href="remove-from-custom-attribute-array.html"><span>remove</span><wbr></wbr><span>From</span><wbr></wbr><span>Custom</span><wbr></wbr><span>Attribute</span><wbr></wbr><span><span>Array</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1888269968%2FFunctions%2F-1725759721"></span>
-                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
-                </span></span></div>
-            <div>
-              <div class="title">
-                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">fun </span><a href="remove-from-custom-attribute-array.html"><span class="token function">removeFromCustomAttributeArray</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">key<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span></span><span class="parameter ">value<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></div><div class="brief "><p class="paragraph">Removes a string element from a custom attribute string array.</p></div></div></div>
-              </div>
-            </div>
-          </div>
-        </div>
-<a data-name="332066579%2FFunctions%2F-1725759721" anchor-label="removeFromSubscriptionGroup" id="332066579%2FFunctions%2F-1725759721" data-filterable-set=":android-sdk-ui:dokkaHtml/release"></a>
-        <div class="table-row" data-filterable-current=":android-sdk-ui:dokkaHtml/release" data-filterable-set=":android-sdk-ui:dokkaHtml/release">
-          <div class="main-subrow keyValue ">
-            <div class=""><span class="inline-flex">
-                <div><a href="remove-from-subscription-group.html"><span>remove</span><wbr></wbr><span>From</span><wbr></wbr><span>Subscription</span><wbr></wbr><span><span>Group</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="332066579%2FFunctions%2F-1725759721"></span>
-                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
-                </span></span></div>
-            <div>
-              <div class="title">
-                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">fun </span><a href="remove-from-subscription-group.html"><span class="token function">removeFromSubscriptionGroup</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">subscriptionGroupId<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></div><div class="brief "><p class="paragraph">Removes the user from the subscription group.</p></div></div></div>
-              </div>
-            </div>
-          </div>
-        </div>
-<a data-name="134844603%2FFunctions%2F-1725759721" anchor-label="setAttributionData" id="134844603%2FFunctions%2F-1725759721" data-filterable-set=":android-sdk-ui:dokkaHtml/release"></a>
-        <div class="table-row" data-filterable-current=":android-sdk-ui:dokkaHtml/release" data-filterable-set=":android-sdk-ui:dokkaHtml/release">
-          <div class="main-subrow keyValue ">
-            <div class=""><span class="inline-flex">
-                <div><a href="set-attribution-data.html"><span>set</span><wbr></wbr><span>Attribution</span><wbr></wbr><span><span>Data</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="134844603%2FFunctions%2F-1725759721"></span>
-                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
-                </span></span></div>
-            <div>
-              <div class="title">
-                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">fun </span><a href="set-attribution-data.html"><span class="token function">setAttributionData</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">attributionData<span class="token operator">: </span><a href="../../com.braze.models.outgoing/-attribution-data/index.html">AttributionData</a><span class="token operator">?</span></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></div><div class="brief "><p class="paragraph">Sets attribution information for the user. For apps that have an install tracking integration.</p></div></div></div>
-              </div>
-            </div>
-          </div>
-        </div>
-<a data-name="-530032896%2FFunctions%2F-1725759721" anchor-label="setCountry" id="-530032896%2FFunctions%2F-1725759721" data-filterable-set=":android-sdk-ui:dokkaHtml/release"></a>
-        <div class="table-row" data-filterable-current=":android-sdk-ui:dokkaHtml/release" data-filterable-set=":android-sdk-ui:dokkaHtml/release">
-          <div class="main-subrow keyValue ">
-            <div class=""><span class="inline-flex">
-                <div><a href="set-country.html"><span>set</span><wbr></wbr><span><span>Country</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-530032896%2FFunctions%2F-1725759721"></span>
-                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
-                </span></span></div>
-            <div>
-              <div class="title">
-                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">fun </span><a href="set-country.html"><span class="token function">setCountry</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">country<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="token operator">?</span></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></div><div class="brief "><p class="paragraph">Sets the home country of the user. Used to collect information about the user.</p></div></div></div>
-              </div>
-            </div>
-          </div>
-        </div>
-<a data-name="619184092%2FFunctions%2F-1725759721" anchor-label="setCustomAttribute" id="619184092%2FFunctions%2F-1725759721" data-filterable-set=":android-sdk-ui:dokkaHtml/release"></a>
-        <div class="table-row" data-filterable-current=":android-sdk-ui:dokkaHtml/release" data-filterable-set=":android-sdk-ui:dokkaHtml/release">
-          <div class="main-subrow keyValue ">
-            <div class=""><span class="inline-flex">
-                <div><a href="set-custom-attribute.html"><span>set</span><wbr></wbr><span>Custom</span><wbr></wbr><span><span>Attribute</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="619184092%2FFunctions%2F-1725759721"></span>
-                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
-                </span></span></div>
-            <div>
-              <div class="title">
-                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><div class="block"><div class="block"><span class="token annotation builtin">@</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.jvm/-jvm-overloads/index.html"><span class="token annotation builtin">JvmOverloads</span></a></div></div><span class="token keyword"></span><span class="token keyword">fun </span><a href="set-custom-attribute.html"><span class="token function">setCustomAttribute</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">key<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span></span><span class="parameter ">value<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a><span class="token punctuation">, </span></span><span class="parameter ">merge<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a><span class="token operator"> = </span><span class="token boolean">false</span></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></div></div></div>
-              </div>
-            </div>
-          </div>
-        </div>
-<a data-name="1488107491%2FFunctions%2F-1725759721" anchor-label="setCustomAttributeArray" id="1488107491%2FFunctions%2F-1725759721" data-filterable-set=":android-sdk-ui:dokkaHtml/release"></a>
-        <div class="table-row" data-filterable-current=":android-sdk-ui:dokkaHtml/release" data-filterable-set=":android-sdk-ui:dokkaHtml/release">
-          <div class="main-subrow keyValue ">
-            <div class=""><span class="inline-flex">
-                <div><a href="set-custom-attribute-array.html"><span>set</span><wbr></wbr><span>Custom</span><wbr></wbr><span>Attribute</span><wbr></wbr><span><span>Array</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1488107491%2FFunctions%2F-1725759721"></span>
-                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
-                </span></span></div>
-            <div>
-              <div class="title">
-                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">fun </span><a href="set-custom-attribute-array.html"><span class="token function">setCustomAttributeArray</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">key<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span></span><span class="parameter ">values<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-array/index.html">Array</a><span class="token operator">&lt;</span><span class="token keyword"></span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="token operator">?</span><span class="token operator">&gt;</span></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></div><div class="brief "><p class="paragraph">Sets a String array of custom user attributes. This can be any array of key/value pairs and is used to collect extra information about the user. The key and value parameters are limited to 255 characters in length. Keys and values which are too long will be truncated. Keys can only contain alphanumeric characters and underscores. Keys may not be a reserved key. See <span data-unresolved-link="com.braze.support/CustomAttributeValidationUtils/isValidCustomAttributeKey/#kotlin.String?#kotlin.collections.Set[kotlin.String]/PointingToDeclaration/">CustomAttributeValidationUtils.isValidCustomAttributeKey</span> To unset a custom attribute array, call .unsetCustomUserAttribute with the key used to set the custom attribute array.</p></div></div></div>
-              </div>
-            </div>
-          </div>
-        </div>
-<a data-name="1318644077%2FFunctions%2F-1725759721" anchor-label="setCustomAttributeToSecondsFromEpoch" id="1318644077%2FFunctions%2F-1725759721" data-filterable-set=":android-sdk-ui:dokkaHtml/release"></a>
-        <div class="table-row" data-filterable-current=":android-sdk-ui:dokkaHtml/release" data-filterable-set=":android-sdk-ui:dokkaHtml/release">
-          <div class="main-subrow keyValue ">
-            <div class=""><span class="inline-flex">
-                <div><a href="set-custom-attribute-to-seconds-from-epoch.html"><span>set</span><wbr></wbr><span>Custom</span><wbr></wbr><span>Attribute</span><wbr></wbr><span>To</span><wbr></wbr><span>Seconds</span><wbr></wbr><span>From</span><wbr></wbr><span><span>Epoch</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1318644077%2FFunctions%2F-1725759721"></span>
-                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
-                </span></span></div>
-            <div>
-              <div class="title">
-                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">fun </span><a href="set-custom-attribute-to-seconds-from-epoch.html"><span class="token function">setCustomAttributeToSecondsFromEpoch</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">key<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span></span><span class="parameter ">secondsFromEpoch<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html">Long</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></div></div></div>
-              </div>
-            </div>
-          </div>
-        </div>
-<a data-name="-1432246843%2FFunctions%2F-1725759721" anchor-label="setCustomUserAttribute" id="-1432246843%2FFunctions%2F-1725759721" data-filterable-set=":android-sdk-ui:dokkaHtml/release"></a>
-        <div class="table-row" data-filterable-current=":android-sdk-ui:dokkaHtml/release" data-filterable-set=":android-sdk-ui:dokkaHtml/release">
-          <div class="main-subrow keyValue ">
-            <div class=""><span class="inline-flex">
-                <div><a href="set-custom-user-attribute.html"><span>set</span><wbr></wbr><span>Custom</span><wbr></wbr><span>User</span><wbr></wbr><span><span>Attribute</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1432246843%2FFunctions%2F-1725759721"></span>
-                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
-                </span></span></div>
-            <div>
-              <div class="title">
-                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">fun </span><a href="set-custom-user-attribute.html"><span class="token function">setCustomUserAttribute</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">key<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span></span><span class="parameter ">value<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></div><div class="brief "><p class="paragraph">Sets a boolean custom user attribute. This can be any key/value pair and is used to collect extra information about the user. The key parameter is limited to 255 characters in length and can only contain alphanumeric characters and underscores. Keys which are too long will be truncated. See <span data-unresolved-link="com.braze.support/CustomAttributeValidationUtils/isValidCustomAttributeKey/#kotlin.String?#kotlin.collections.Set[kotlin.String]/PointingToDeclaration/">CustomAttributeValidationUtils.isValidCustomAttributeKey</span>.</p></div><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">fun </span><a href="set-custom-user-attribute.html"><span class="token function">setCustomUserAttribute</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">key<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span></span><span class="parameter ">value<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-double/index.html">Double</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></div><div class="brief "><p class="paragraph">Sets a double custom user attribute. This can be any key/value pair and is used to collect extra information about the user. The key parameter is limited to 255 characters in length. Keys which are too long will be truncated. Keys can only contain alphanumeric characters and underscores. Keys may not be a reserved key. See <span data-unresolved-link="com.braze.support/CustomAttributeValidationUtils/isValidCustomAttributeKey/#kotlin.String?#kotlin.collections.Set[kotlin.String]/PointingToDeclaration/">CustomAttributeValidationUtils.isValidCustomAttributeKey</span></p></div><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">fun </span><a href="set-custom-user-attribute.html"><span class="token function">setCustomUserAttribute</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">key<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span></span><span class="parameter ">value<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></div><div class="brief "><p class="paragraph">Sets a float custom user attribute. This can be any key/value pair and is used to collect extra information about the user. The key parameter is limited to 255 characters in length and can only contain alphanumeric characters and underscores. Keys which are too long will be truncated. Keys may not be a reserved key. See <span data-unresolved-link="com.braze.support/CustomAttributeValidationUtils/isValidCustomAttributeKey/#kotlin.String?#kotlin.collections.Set[kotlin.String]/PointingToDeclaration/">CustomAttributeValidationUtils.isValidCustomAttributeKey</span></p></div><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">fun </span><a href="set-custom-user-attribute.html"><span class="token function">setCustomUserAttribute</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">key<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span></span><span class="parameter ">value<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></div><div class="brief "><p class="paragraph">Sets an int custom user attribute. This can be any key/value pair and is used to collect extra information about the user. The key parameter is limited to 255 characters in length and can only contain alphanumeric characters and underscores.  Keys which are too long will be truncated. Keys may not be a reserved key. See <span data-unresolved-link="com.braze.support/CustomAttributeValidationUtils/isValidCustomAttributeKey/#kotlin.String?#kotlin.collections.Set[kotlin.String]/PointingToDeclaration/">CustomAttributeValidationUtils.isValidCustomAttributeKey</span>.</p></div><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">fun </span><a href="set-custom-user-attribute.html"><span class="token function">setCustomUserAttribute</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">key<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span></span><span class="parameter ">value<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html">Long</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></div><div class="brief "><p class="paragraph">Sets a long custom user attribute. This can be any key/value pair and is used to collect extra information about the user.  The key parameter is limited to 255 characters in length and can only contain alphanumeric characters and underscores.  Keys which are too long will be truncated. Keys may not be a reserved key. See <span data-unresolved-link="com.braze.support/CustomAttributeValidationUtils/isValidCustomAttributeKey/#kotlin.String?#kotlin.collections.Set[kotlin.String]/PointingToDeclaration/">CustomAttributeValidationUtils.isValidCustomAttributeKey</span></p></div><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">fun </span><a href="set-custom-user-attribute.html"><span class="token function">setCustomUserAttribute</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">key<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span></span><span class="parameter ">value<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></div><div class="brief "><p class="paragraph">Sets a string custom user attribute. This can be any key/value pair and is used to collect extra information about the user. The key and value parameters are limited to 255 characters in length. Keys and values which are too long will be truncated. Keys can only contain alphanumeric characters and underscores. Keys may not be a reserved key. See <span data-unresolved-link="com.braze.support/CustomAttributeValidationUtils/isValidCustomAttributeKey/#kotlin.String?#kotlin.collections.Set[kotlin.String]/PointingToDeclaration/">CustomAttributeValidationUtils.isValidCustomAttributeKey</span></p></div><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">fun </span><a href="set-custom-user-attribute.html"><span class="token function">setCustomUserAttribute</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">key<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span></span><span class="parameter ">value<span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/org/json/JSONArray.html">JSONArray</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></div><div class="symbol monospace"><div class="block"><div class="block"><span class="token annotation builtin">@</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.jvm/-jvm-overloads/index.html"><span class="token annotation builtin">JvmOverloads</span></a></div></div><span class="token keyword"></span><span class="token keyword">fun </span><a href="set-custom-user-attribute.html"><span class="token function">setCustomUserAttribute</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">key<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span></span><span class="parameter ">value<span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/org/json/JSONObject.html">JSONObject</a><span class="token punctuation">, </span></span><span class="parameter ">merge<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a><span class="token operator"> = </span><span class="token boolean">false</span></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></div><div class="brief "><p class="paragraph">Sets a JSON custom user attribute. This can be any key/value pair and is used to collect extra information about the user. The key parameter is limited to 255 characters in length. Keys which are too long will be truncated. Keys can only contain alphanumeric characters and underscores. Keys may not be a reserved key. See <span data-unresolved-link="com.braze.support/CustomAttributeValidationUtils/isValidCustomAttributeKey/#kotlin.String?#kotlin.collections.Set[kotlin.String]/PointingToDeclaration/">CustomAttributeValidationUtils.isValidCustomAttributeKey</span></p></div></div></div>
-              </div>
-            </div>
-          </div>
-        </div>
-<a data-name="-975989956%2FFunctions%2F-1725759721" anchor-label="setCustomUserAttributeToNow" id="-975989956%2FFunctions%2F-1725759721" data-filterable-set=":android-sdk-ui:dokkaHtml/release"></a>
-        <div class="table-row" data-filterable-current=":android-sdk-ui:dokkaHtml/release" data-filterable-set=":android-sdk-ui:dokkaHtml/release">
-          <div class="main-subrow keyValue ">
-            <div class=""><span class="inline-flex">
-                <div><a href="set-custom-user-attribute-to-now.html"><span>set</span><wbr></wbr><span>Custom</span><wbr></wbr><span>User</span><wbr></wbr><span>Attribute</span><wbr></wbr><span>To</span><wbr></wbr><span><span>Now</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-975989956%2FFunctions%2F-1725759721"></span>
-                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
-                </span></span></div>
-            <div>
-              <div class="title">
-                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">fun </span><a href="set-custom-user-attribute-to-now.html"><span class="token function">setCustomUserAttributeToNow</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">key<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></div><div class="brief "><p class="paragraph">Sets a custom attribute with the given key to the current time. The key parameter is limited to 255 characters in length and can only contain alphanumeric characters and underscores. Keys which are too long will be truncated. Keys may not be a reserved key. See <span data-unresolved-link="com.braze.support/CustomAttributeValidationUtils/isValidCustomAttributeKey/#kotlin.String?#kotlin.collections.Set[kotlin.String]/PointingToDeclaration/">CustomAttributeValidationUtils.isValidCustomAttributeKey</span></p></div></div></div>
-              </div>
-            </div>
-          </div>
-        </div>
-<a data-name="1757517026%2FFunctions%2F-1725759721" anchor-label="setCustomUserAttributeToSecondsFromEpoch" id="1757517026%2FFunctions%2F-1725759721" data-filterable-set=":android-sdk-ui:dokkaHtml/release"></a>
-        <div class="table-row" data-filterable-current=":android-sdk-ui:dokkaHtml/release" data-filterable-set=":android-sdk-ui:dokkaHtml/release">
-          <div class="main-subrow keyValue ">
-            <div class=""><span class="inline-flex">
-                <div><a href="set-custom-user-attribute-to-seconds-from-epoch.html"><span>set</span><wbr></wbr><span>Custom</span><wbr></wbr><span>User</span><wbr></wbr><span>Attribute</span><wbr></wbr><span>To</span><wbr></wbr><span>Seconds</span><wbr></wbr><span>From</span><wbr></wbr><span><span>Epoch</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1757517026%2FFunctions%2F-1725759721"></span>
-                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
-                </span></span></div>
-            <div>
-              <div class="title">
-                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">fun </span><a href="set-custom-user-attribute-to-seconds-from-epoch.html"><span class="token function">setCustomUserAttributeToSecondsFromEpoch</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">key<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span></span><span class="parameter ">secondsFromEpoch<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html">Long</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></div><div class="brief "><p class="paragraph">Sets a custom attribute to the given number of seconds elapsed since the epoch. The key parameter is limited to 255 characters in length and can only contain alphanumeric characters and underscores. Keys which are too long will be truncated. Keys may not be a reserved key. See <span data-unresolved-link="com.braze.support/CustomAttributeValidationUtils/isValidCustomAttributeKey/#kotlin.String?#kotlin.collections.Set[kotlin.String]/PointingToDeclaration/">CustomAttributeValidationUtils.isValidCustomAttributeKey</span></p></div></div></div>
-              </div>
-            </div>
-          </div>
-        </div>
-<a data-name="-169737244%2FFunctions%2F-1725759721" anchor-label="setDateOfBirth" id="-169737244%2FFunctions%2F-1725759721" data-filterable-set=":android-sdk-ui:dokkaHtml/release"></a>
-        <div class="table-row" data-filterable-current=":android-sdk-ui:dokkaHtml/release" data-filterable-set=":android-sdk-ui:dokkaHtml/release">
-          <div class="main-subrow keyValue ">
-            <div class=""><span class="inline-flex">
-                <div><a href="set-date-of-birth.html"><span>set</span><wbr></wbr><span>Date</span><wbr></wbr><span>Of</span><wbr></wbr><span><span>Birth</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-169737244%2FFunctions%2F-1725759721"></span>
-                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
-                </span></span></div>
-            <div>
-              <div class="title">
-                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">fun </span><a href="set-date-of-birth.html"><span class="token function">setDateOfBirth</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">year<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a><span class="token punctuation">, </span></span><span class="parameter ">month<span class="token operator">: </span><a href="../../com.braze.enums/-month/index.html">Month</a><span class="token punctuation">, </span></span><span class="parameter ">day<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></div><div class="brief "><p class="paragraph">Sets the date of birth of the user. Used to collect information about the user.</p></div></div></div>
-              </div>
-            </div>
-          </div>
-        </div>
-<a data-name="1198931642%2FFunctions%2F-1725759721" anchor-label="setEmail" id="1198931642%2FFunctions%2F-1725759721" data-filterable-set=":android-sdk-ui:dokkaHtml/release"></a>
-        <div class="table-row" data-filterable-current=":android-sdk-ui:dokkaHtml/release" data-filterable-set=":android-sdk-ui:dokkaHtml/release">
-          <div class="main-subrow keyValue ">
-            <div class=""><span class="inline-flex">
-                <div><a href="set-email.html"><span>set</span><wbr></wbr><span><span>Email</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1198931642%2FFunctions%2F-1725759721"></span>
-                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
-                </span></span></div>
-            <div>
-              <div class="title">
-                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">fun </span><a href="set-email.html"><span class="token function">setEmail</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">email<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="token operator">?</span></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></div><div class="brief "><p class="paragraph">Sets the email address of the user. Used to collect information about the user. Provided email addresses must pass email address validation. The validation method used is available in <a href="../../com.braze.support/-validation-utils/is-valid-email-address.html">ValidationUtils.isValidEmailAddress</a></p></div></div></div>
-              </div>
-            </div>
-          </div>
-        </div>
-<a data-name="144875804%2FFunctions%2F-1725759721" anchor-label="setEmailNotificationSubscriptionType" id="144875804%2FFunctions%2F-1725759721" data-filterable-set=":android-sdk-ui:dokkaHtml/release"></a>
-        <div class="table-row" data-filterable-current=":android-sdk-ui:dokkaHtml/release" data-filterable-set=":android-sdk-ui:dokkaHtml/release">
-          <div class="main-subrow keyValue ">
-            <div class=""><span class="inline-flex">
-                <div><a href="set-email-notification-subscription-type.html"><span>set</span><wbr></wbr><span>Email</span><wbr></wbr><span>Notification</span><wbr></wbr><span>Subscription</span><wbr></wbr><span><span>Type</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="144875804%2FFunctions%2F-1725759721"></span>
-                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
-                </span></span></div>
-            <div>
-              <div class="title">
-                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">fun </span><a href="set-email-notification-subscription-type.html"><span class="token function">setEmailNotificationSubscriptionType</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">emailNotificationSubscriptionType<span class="token operator">: </span><a href="../../com.braze.enums/-notification-subscription-type/index.html">NotificationSubscriptionType</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></div><div class="brief "><p class="paragraph">Sets whether or not the user should be sent email campaigns. Setting it to unsubscribed opts the user out of an email campaign that you create through the Braze dashboard.</p></div></div></div>
-              </div>
-            </div>
-          </div>
-        </div>
-<a data-name="-1676547301%2FFunctions%2F-1725759721" anchor-label="setFirstName" id="-1676547301%2FFunctions%2F-1725759721" data-filterable-set=":android-sdk-ui:dokkaHtml/release"></a>
-        <div class="table-row" data-filterable-current=":android-sdk-ui:dokkaHtml/release" data-filterable-set=":android-sdk-ui:dokkaHtml/release">
-          <div class="main-subrow keyValue ">
-            <div class=""><span class="inline-flex">
-                <div><a href="set-first-name.html"><span>set</span><wbr></wbr><span>First</span><wbr></wbr><span><span>Name</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1676547301%2FFunctions%2F-1725759721"></span>
-                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
-                </span></span></div>
-            <div>
-              <div class="title">
-                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">fun </span><a href="set-first-name.html"><span class="token function">setFirstName</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">firstName<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="token operator">?</span></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></div><div class="brief "><p class="paragraph">Sets the first name of the user. Used to collect information about the user.</p></div></div></div>
-              </div>
-            </div>
-          </div>
-        </div>
-<a data-name="-1882735834%2FFunctions%2F-1725759721" anchor-label="setGender" id="-1882735834%2FFunctions%2F-1725759721" data-filterable-set=":android-sdk-ui:dokkaHtml/release"></a>
-        <div class="table-row" data-filterable-current=":android-sdk-ui:dokkaHtml/release" data-filterable-set=":android-sdk-ui:dokkaHtml/release">
-          <div class="main-subrow keyValue ">
-            <div class=""><span class="inline-flex">
-                <div><a href="set-gender.html"><span>set</span><wbr></wbr><span><span>Gender</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1882735834%2FFunctions%2F-1725759721"></span>
-                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
-                </span></span></div>
-            <div>
-              <div class="title">
-                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">fun </span><a href="set-gender.html"><span class="token function">setGender</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">gender<span class="token operator">: </span><a href="../../com.braze.enums/-gender/index.html">Gender</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></div><div class="brief "><p class="paragraph">Sets the gender for the user. Used to collect information about the user.</p></div></div></div>
-              </div>
-            </div>
-          </div>
-        </div>
-<a data-name="-1818821512%2FFunctions%2F-1725759721" anchor-label="setHomeCity" id="-1818821512%2FFunctions%2F-1725759721" data-filterable-set=":android-sdk-ui:dokkaHtml/release"></a>
-        <div class="table-row" data-filterable-current=":android-sdk-ui:dokkaHtml/release" data-filterable-set=":android-sdk-ui:dokkaHtml/release">
-          <div class="main-subrow keyValue ">
-            <div class=""><span class="inline-flex">
-                <div><a href="set-home-city.html"><span>set</span><wbr></wbr><span>Home</span><wbr></wbr><span><span>City</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1818821512%2FFunctions%2F-1725759721"></span>
-                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
-                </span></span></div>
-            <div>
-              <div class="title">
-                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">fun </span><a href="set-home-city.html"><span class="token function">setHomeCity</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">homeCity<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="token operator">?</span></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></div><div class="brief "><p class="paragraph">Sets the home city of the user. Used to collect information about the user.</p></div></div></div>
-              </div>
-            </div>
-          </div>
-        </div>
-<a data-name="-23829430%2FFunctions%2F-1725759721" anchor-label="setLanguage" id="-23829430%2FFunctions%2F-1725759721" data-filterable-set=":android-sdk-ui:dokkaHtml/release"></a>
-        <div class="table-row" data-filterable-current=":android-sdk-ui:dokkaHtml/release" data-filterable-set=":android-sdk-ui:dokkaHtml/release">
-          <div class="main-subrow keyValue ">
-            <div class=""><span class="inline-flex">
-                <div><a href="set-language.html"><span>set</span><wbr></wbr><span><span>Language</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-23829430%2FFunctions%2F-1725759721"></span>
-                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
-                </span></span></div>
-            <div>
-              <div class="title">
-                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">fun </span><a href="set-language.html"><span class="token function">setLanguage</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">language<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="token operator">?</span></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></div><div class="brief "><p class="paragraph">Sets the language of the user. Language Strings should be valid ISO 639-1 language codes. See https://www.loc.gov/standards/iso639-2/php/code_list.php.</p></div></div></div>
-              </div>
-            </div>
-          </div>
-        </div>
-<a data-name="1758104106%2FFunctions%2F-1725759721" anchor-label="setLastKnownLocation" id="1758104106%2FFunctions%2F-1725759721" data-filterable-set=":android-sdk-ui:dokkaHtml/release"></a>
-        <div class="table-row" data-filterable-current=":android-sdk-ui:dokkaHtml/release" data-filterable-set=":android-sdk-ui:dokkaHtml/release">
-          <div class="main-subrow keyValue ">
-            <div class=""><span class="inline-flex">
-                <div><a href="set-last-known-location.html"><span>set</span><wbr></wbr><span>Last</span><wbr></wbr><span>Known</span><wbr></wbr><span><span>Location</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1758104106%2FFunctions%2F-1725759721"></span>
-                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
-                </span></span></div>
-            <div>
-              <div class="title">
-                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><div class="block"><div class="block"><span class="token annotation builtin">@</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.jvm/-jvm-overloads/index.html"><span class="token annotation builtin">JvmOverloads</span></a></div></div><span class="token keyword"></span><span class="token keyword">fun </span><a href="set-last-known-location.html"><span class="token function">setLastKnownLocation</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">latitude<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-double/index.html">Double</a><span class="token punctuation">, </span></span><span class="parameter ">longitude<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-double/index.html">Double</a><span class="token punctuation">, </span></span><span class="parameter ">altitude<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-double/index.html">Double</a><span class="token operator">?</span><span class="token operator"> = </span>null<span class="token punctuation">, </span></span><span class="parameter ">accuracy<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-double/index.html">Double</a><span class="token operator">?</span><span class="token operator"> = </span>null<span class="token punctuation">, </span></span><span class="parameter ">verticalAccuracy<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-double/index.html">Double</a><span class="token operator">?</span><span class="token operator"> = </span>null</span></span><span class="token punctuation">)</span></div><div class="brief "><p class="paragraph">Sets the last known location for the user. Intended for use with <a href="../../com.braze.configuration/-braze-config/-builder/set-is-location-collection-enabled.html">com.braze.configuration.BrazeConfig.Builder.setIsLocationCollectionEnabled</a> set to false in the <code class="lang-kotlin">braze.xml</code> configuration file, so that the only locations being set are by the integrating app. Otherwise, calls to this method will be contending with automatic location update events. Latitude and longitude are required; altitude and accuracy may be set to null</p></div></div></div>
-              </div>
-            </div>
-          </div>
-        </div>
-<a data-name="1216523585%2FFunctions%2F-1725759721" anchor-label="setLastName" id="1216523585%2FFunctions%2F-1725759721" data-filterable-set=":android-sdk-ui:dokkaHtml/release"></a>
-        <div class="table-row" data-filterable-current=":android-sdk-ui:dokkaHtml/release" data-filterable-set=":android-sdk-ui:dokkaHtml/release">
-          <div class="main-subrow keyValue ">
-            <div class=""><span class="inline-flex">
-                <div><a href="set-last-name.html"><span>set</span><wbr></wbr><span>Last</span><wbr></wbr><span><span>Name</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1216523585%2FFunctions%2F-1725759721"></span>
-                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
-                </span></span></div>
-            <div>
-              <div class="title">
-                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">fun </span><a href="set-last-name.html"><span class="token function">setLastName</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">lastName<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="token operator">?</span></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></div><div class="brief "><p class="paragraph">Sets the last name of the user. Used to collect information about the user.</p></div></div></div>
-              </div>
-            </div>
-          </div>
-        </div>
-<a data-name="198722925%2FFunctions%2F-1725759721" anchor-label="setLocationCustomAttribute" id="198722925%2FFunctions%2F-1725759721" data-filterable-set=":android-sdk-ui:dokkaHtml/release"></a>
-        <div class="table-row" data-filterable-current=":android-sdk-ui:dokkaHtml/release" data-filterable-set=":android-sdk-ui:dokkaHtml/release">
-          <div class="main-subrow keyValue ">
-            <div class=""><span class="inline-flex">
-                <div><a href="set-location-custom-attribute.html"><span>set</span><wbr></wbr><span>Location</span><wbr></wbr><span>Custom</span><wbr></wbr><span><span>Attribute</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="198722925%2FFunctions%2F-1725759721"></span>
-                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
-                </span></span></div>
-            <div>
-              <div class="title">
-                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">fun </span><a href="set-location-custom-attribute.html"><span class="token function">setLocationCustomAttribute</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">key<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span></span><span class="parameter ">latitude<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-double/index.html">Double</a><span class="token punctuation">, </span></span><span class="parameter ">longitude<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-double/index.html">Double</a></span></span><span class="token punctuation">)</span></div></div></div>
-              </div>
-            </div>
-          </div>
-        </div>
-<a data-name="53919775%2FFunctions%2F-1725759721" anchor-label="setPhoneNumber" id="53919775%2FFunctions%2F-1725759721" data-filterable-set=":android-sdk-ui:dokkaHtml/release"></a>
-        <div class="table-row" data-filterable-current=":android-sdk-ui:dokkaHtml/release" data-filterable-set=":android-sdk-ui:dokkaHtml/release">
-          <div class="main-subrow keyValue ">
-            <div class=""><span class="inline-flex">
-                <div><a href="set-phone-number.html"><span>set</span><wbr></wbr><span>Phone</span><wbr></wbr><span><span>Number</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="53919775%2FFunctions%2F-1725759721"></span>
-                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
-                </span></span></div>
-            <div>
-              <div class="title">
-                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">fun </span><a href="set-phone-number.html"><span class="token function">setPhoneNumber</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">phoneNumber<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="token operator">?</span></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></div><div class="brief "><p class="paragraph">Sets the phone number of the user. Used to collect information about the user. Provided phone numbers must pass phone number validation. The validation methods used is available in <a href="../../com.braze.support/-validation-utils/is-valid-phone-number.html">ValidationUtils.isValidPhoneNumber</a></p></div></div></div>
-              </div>
-            </div>
-          </div>
-        </div>
-<a data-name="-1754170838%2FFunctions%2F-1725759721" anchor-label="setPushNotificationSubscriptionType" id="-1754170838%2FFunctions%2F-1725759721" data-filterable-set=":android-sdk-ui:dokkaHtml/release"></a>
-        <div class="table-row" data-filterable-current=":android-sdk-ui:dokkaHtml/release" data-filterable-set=":android-sdk-ui:dokkaHtml/release">
-          <div class="main-subrow keyValue ">
-            <div class=""><span class="inline-flex">
-                <div><a href="set-push-notification-subscription-type.html"><span>set</span><wbr></wbr><span>Push</span><wbr></wbr><span>Notification</span><wbr></wbr><span>Subscription</span><wbr></wbr><span><span>Type</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1754170838%2FFunctions%2F-1725759721"></span>
-                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
-                </span></span></div>
-            <div>
-              <div class="title">
-                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">fun </span><a href="set-push-notification-subscription-type.html"><span class="token function">setPushNotificationSubscriptionType</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">pushNotificationSubscriptionType<span class="token operator">: </span><a href="../../com.braze.enums/-notification-subscription-type/index.html">NotificationSubscriptionType</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></div><div class="brief "><p class="paragraph">Sets the push notification subscription status of the user. Used to collect information about the user.</p></div></div></div>
-              </div>
-            </div>
-          </div>
-        </div>
-<a data-name="-14446490%2FFunctions%2F-1725759721" anchor-label="unsetCustomUserAttribute" id="-14446490%2FFunctions%2F-1725759721" data-filterable-set=":android-sdk-ui:dokkaHtml/release"></a>
-        <div class="table-row" data-filterable-current=":android-sdk-ui:dokkaHtml/release" data-filterable-set=":android-sdk-ui:dokkaHtml/release">
-          <div class="main-subrow keyValue ">
-            <div class=""><span class="inline-flex">
-                <div><a href="unset-custom-user-attribute.html"><span>unset</span><wbr></wbr><span>Custom</span><wbr></wbr><span>User</span><wbr></wbr><span><span>Attribute</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-14446490%2FFunctions%2F-1725759721"></span>
-                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
-                </span></span></div>
-            <div>
-              <div class="title">
-                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">fun </span><a href="unset-custom-user-attribute.html"><span class="token function">unsetCustomUserAttribute</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">key<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></div><div class="brief "><p class="paragraph">Removes the value associated with the given custom attribute key.</p></div></div></div>
-              </div>
-            </div>
-          </div>
-        </div>
-<a data-name="-1211001092%2FFunctions%2F-1725759721" anchor-label="unsetLocationCustomAttribute" id="-1211001092%2FFunctions%2F-1725759721" data-filterable-set=":android-sdk-ui:dokkaHtml/release"></a>
-        <div class="table-row" data-filterable-current=":android-sdk-ui:dokkaHtml/release" data-filterable-set=":android-sdk-ui:dokkaHtml/release">
-          <div class="main-subrow keyValue ">
-            <div class=""><span class="inline-flex">
-                <div><a href="unset-location-custom-attribute.html"><span>unset</span><wbr></wbr><span>Location</span><wbr></wbr><span>Custom</span><wbr></wbr><span><span>Attribute</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1211001092%2FFunctions%2F-1725759721"></span>
-                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
-                </span></span></div>
-            <div>
-              <div class="title">
-                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">fun </span><a href="unset-location-custom-attribute.html"><span class="token function">unsetLocationCustomAttribute</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">key<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a></span></span><span class="token punctuation">)</span></div></div></div>
+      <div data-togglable="PROPERTY">
+        <h2 class="">Properties</h2>
+        <div class="table"><a data-name="388104495%2FProperties%2F-1725759721" anchor-label="userId" id="388104495%2FProperties%2F-1725759721" data-filterable-set=":android-sdk-ui:dokkaHtml/release"></a>
+          <div class="table-row" data-filterable-current=":android-sdk-ui:dokkaHtml/release" data-filterable-set=":android-sdk-ui:dokkaHtml/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="user-id.html"><span>user</span><wbr></wbr><span><span>Id</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="388104495%2FProperties%2F-1725759721"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><span class="token keyword">var </span><a href="user-id.html">userId</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a></div><div class="brief "><p class="paragraph">Returns the currently tracked user id.</p></div></div></div>
+                </div>
               </div>
             </div>
           </div>
         </div>
       </div>
-      <h2 class="">Properties</h2>
-      <div class="table" data-togglable="Properties"><a data-name="388104495%2FProperties%2F-1725759721" anchor-label="userId" id="388104495%2FProperties%2F-1725759721" data-filterable-set=":android-sdk-ui:dokkaHtml/release"></a>
-        <div class="table-row" data-filterable-current=":android-sdk-ui:dokkaHtml/release" data-filterable-set=":android-sdk-ui:dokkaHtml/release">
-          <div class="main-subrow keyValue ">
-            <div class=""><span class="inline-flex">
-                <div><a href="user-id.html"><span>user</span><wbr></wbr><span><span>Id</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="388104495%2FProperties%2F-1725759721"></span>
-                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
-                </span></span></div>
-            <div>
-              <div class="title">
-                <div class="platform-hinted " data-platform-hinted="data-platform-hinted" data-togglable="Properties"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><a data-name="388104495%2FProperties%2F-1725759721" anchor-label="userId" id="388104495%2FProperties%2F-1725759721" data-filterable-set=":android-sdk-ui:dokkaHtml/release"></a><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">var </span><a href="user-id.html">userId</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a></div><div class="brief "><a data-name="388104495%2FProperties%2F-1725759721" anchor-label="userId" id="388104495%2FProperties%2F-1725759721" data-filterable-set=":android-sdk-ui:dokkaHtml/release"></a><p class="paragraph">Returns the currently tracked user id.</p></div></div></div>
+      <div data-togglable="FUNCTION">
+        <h2 class="">Functions</h2>
+        <div class="table"><a data-name="-1106019389%2FFunctions%2F-1725759721" anchor-label="addAlias" id="-1106019389%2FFunctions%2F-1725759721" data-filterable-set=":android-sdk-ui:dokkaHtml/release"></a>
+          <div class="table-row" data-filterable-current=":android-sdk-ui:dokkaHtml/release" data-filterable-set=":android-sdk-ui:dokkaHtml/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="add-alias.html"><span>add</span><wbr></wbr><span><span>Alias</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1106019389%2FFunctions%2F-1725759721"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><span class="token keyword">fun </span><a href="add-alias.html"><span class="token function">addAlias</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">alias<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span></span><span class="parameter ">label<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></div><div class="brief "><p class="paragraph">Adds an an alias for the current user. (alias, label) pairs can exist on one and only one user. If a different user already has this alias or external user id, the alias attempt will be rejected on the server (even if this method returns true).</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="240069390%2FFunctions%2F-1725759721" anchor-label="addToCustomAttributeArray" id="240069390%2FFunctions%2F-1725759721" data-filterable-set=":android-sdk-ui:dokkaHtml/release"></a>
+          <div class="table-row" data-filterable-current=":android-sdk-ui:dokkaHtml/release" data-filterable-set=":android-sdk-ui:dokkaHtml/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="add-to-custom-attribute-array.html"><span>add</span><wbr></wbr><span>To</span><wbr></wbr><span>Custom</span><wbr></wbr><span>Attribute</span><wbr></wbr><span><span>Array</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="240069390%2FFunctions%2F-1725759721"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><span class="token keyword">fun </span><a href="add-to-custom-attribute-array.html"><span class="token function">addToCustomAttributeArray</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">key<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span></span><span class="parameter ">value<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></div><div class="brief "><p class="paragraph">Adds a String to a custom attribute string array, or creates that array if one doesn't exist. The key and value parameters are limited to 255 characters in length. Keys and values which are too long will be truncated. Keys can only contain alphanumeric characters and underscores. Keys may not be a reserved key. See <span data-unresolved-link="com.braze.support/CustomAttributeValidationUtils/isValidCustomAttributeKey/#kotlin.String?#kotlin.collections.Set[kotlin.String]/PointingToDeclaration/">CustomAttributeValidationUtils.isValidCustomAttributeKey</span></p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1516955061%2FFunctions%2F-1725759721" anchor-label="addToSubscriptionGroup" id="1516955061%2FFunctions%2F-1725759721" data-filterable-set=":android-sdk-ui:dokkaHtml/release"></a>
+          <div class="table-row" data-filterable-current=":android-sdk-ui:dokkaHtml/release" data-filterable-set=":android-sdk-ui:dokkaHtml/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="add-to-subscription-group.html"><span>add</span><wbr></wbr><span>To</span><wbr></wbr><span>Subscription</span><wbr></wbr><span><span>Group</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1516955061%2FFunctions%2F-1725759721"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><span class="token keyword">fun </span><a href="add-to-subscription-group.html"><span class="token function">addToSubscriptionGroup</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">subscriptionGroupId<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></div><div class="brief "><p class="paragraph">Adds the user to the subscription group.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1701313923%2FFunctions%2F-1725759721" anchor-label="incrementCustomUserAttribute" id="-1701313923%2FFunctions%2F-1725759721" data-filterable-set=":android-sdk-ui:dokkaHtml/release"></a>
+          <div class="table-row" data-filterable-current=":android-sdk-ui:dokkaHtml/release" data-filterable-set=":android-sdk-ui:dokkaHtml/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="increment-custom-user-attribute.html"><span>increment</span><wbr></wbr><span>Custom</span><wbr></wbr><span>User</span><wbr></wbr><span><span>Attribute</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1701313923%2FFunctions%2F-1725759721"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><div class="block"><div class="block"><span class="token annotation builtin">@</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.jvm/-jvm-overloads/index.html"><span class="token annotation builtin">JvmOverloads</span></a></div></div><span class="token keyword">fun </span><a href="increment-custom-user-attribute.html"><span class="token function">incrementCustomUserAttribute</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">key<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span></span><span class="parameter ">incrementValue<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a><span class="token operator"> = </span><span class="token constant">1</span></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></div><div class="brief "><p class="paragraph">Increments the value of an custom attribute by a given amount. If no amount is given, the by default it will be incremented by 1. Only integer and long custom attributes can be incremented. Attempting to increment a custom attribute that is not an integer or a long will be ignored. If you increment a custom attribute that has not previously been set, a custom attribute will be created and assigned the value of incrementValue. To decrement the value of a custom attribute, use a negative incrementValue.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1888269968%2FFunctions%2F-1725759721" anchor-label="removeFromCustomAttributeArray" id="-1888269968%2FFunctions%2F-1725759721" data-filterable-set=":android-sdk-ui:dokkaHtml/release"></a>
+          <div class="table-row" data-filterable-current=":android-sdk-ui:dokkaHtml/release" data-filterable-set=":android-sdk-ui:dokkaHtml/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="remove-from-custom-attribute-array.html"><span>remove</span><wbr></wbr><span>From</span><wbr></wbr><span>Custom</span><wbr></wbr><span>Attribute</span><wbr></wbr><span><span>Array</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1888269968%2FFunctions%2F-1725759721"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><span class="token keyword">fun </span><a href="remove-from-custom-attribute-array.html"><span class="token function">removeFromCustomAttributeArray</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">key<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span></span><span class="parameter ">value<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></div><div class="brief "><p class="paragraph">Removes a string element from a custom attribute string array.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="332066579%2FFunctions%2F-1725759721" anchor-label="removeFromSubscriptionGroup" id="332066579%2FFunctions%2F-1725759721" data-filterable-set=":android-sdk-ui:dokkaHtml/release"></a>
+          <div class="table-row" data-filterable-current=":android-sdk-ui:dokkaHtml/release" data-filterable-set=":android-sdk-ui:dokkaHtml/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="remove-from-subscription-group.html"><span>remove</span><wbr></wbr><span>From</span><wbr></wbr><span>Subscription</span><wbr></wbr><span><span>Group</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="332066579%2FFunctions%2F-1725759721"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><span class="token keyword">fun </span><a href="remove-from-subscription-group.html"><span class="token function">removeFromSubscriptionGroup</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">subscriptionGroupId<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></div><div class="brief "><p class="paragraph">Removes the user from the subscription group.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="134844603%2FFunctions%2F-1725759721" anchor-label="setAttributionData" id="134844603%2FFunctions%2F-1725759721" data-filterable-set=":android-sdk-ui:dokkaHtml/release"></a>
+          <div class="table-row" data-filterable-current=":android-sdk-ui:dokkaHtml/release" data-filterable-set=":android-sdk-ui:dokkaHtml/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="set-attribution-data.html"><span>set</span><wbr></wbr><span>Attribution</span><wbr></wbr><span><span>Data</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="134844603%2FFunctions%2F-1725759721"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><span class="token keyword">fun </span><a href="set-attribution-data.html"><span class="token function">setAttributionData</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">attributionData<span class="token operator">: </span><a href="../../com.braze.models.outgoing/-attribution-data/index.html">AttributionData</a><span class="token operator">?</span></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></div><div class="brief "><p class="paragraph">Sets attribution information for the user. For apps that have an install tracking integration.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-530032896%2FFunctions%2F-1725759721" anchor-label="setCountry" id="-530032896%2FFunctions%2F-1725759721" data-filterable-set=":android-sdk-ui:dokkaHtml/release"></a>
+          <div class="table-row" data-filterable-current=":android-sdk-ui:dokkaHtml/release" data-filterable-set=":android-sdk-ui:dokkaHtml/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="set-country.html"><span>set</span><wbr></wbr><span><span>Country</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-530032896%2FFunctions%2F-1725759721"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><span class="token keyword">fun </span><a href="set-country.html"><span class="token function">setCountry</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">country<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="token operator">?</span></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></div><div class="brief "><p class="paragraph">Sets the home country of the user. Used to collect information about the user.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="619184092%2FFunctions%2F-1725759721" anchor-label="setCustomAttribute" id="619184092%2FFunctions%2F-1725759721" data-filterable-set=":android-sdk-ui:dokkaHtml/release"></a>
+          <div class="table-row" data-filterable-current=":android-sdk-ui:dokkaHtml/release" data-filterable-set=":android-sdk-ui:dokkaHtml/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="set-custom-attribute.html"><span>set</span><wbr></wbr><span>Custom</span><wbr></wbr><span><span>Attribute</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="619184092%2FFunctions%2F-1725759721"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><div class="block"><div class="block"><span class="token annotation builtin">@</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.jvm/-jvm-overloads/index.html"><span class="token annotation builtin">JvmOverloads</span></a></div></div><span class="token keyword">fun </span><a href="set-custom-attribute.html"><span class="token function">setCustomAttribute</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">key<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span></span><span class="parameter ">value<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a><span class="token punctuation">, </span></span><span class="parameter ">merge<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a><span class="token operator"> = </span><span class="token boolean">false</span></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1488107491%2FFunctions%2F-1725759721" anchor-label="setCustomAttributeArray" id="1488107491%2FFunctions%2F-1725759721" data-filterable-set=":android-sdk-ui:dokkaHtml/release"></a>
+          <div class="table-row" data-filterable-current=":android-sdk-ui:dokkaHtml/release" data-filterable-set=":android-sdk-ui:dokkaHtml/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="set-custom-attribute-array.html"><span>set</span><wbr></wbr><span>Custom</span><wbr></wbr><span>Attribute</span><wbr></wbr><span><span>Array</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1488107491%2FFunctions%2F-1725759721"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><span class="token keyword">fun </span><a href="set-custom-attribute-array.html"><span class="token function">setCustomAttributeArray</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">key<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span></span><span class="parameter ">values<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-array/index.html">Array</a><span class="token operator">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="token operator">?</span><span class="token operator">&gt;</span></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></div><div class="brief "><p class="paragraph">Sets a String array of custom user attributes. This can be any array of key/value pairs and is used to collect extra information about the user. The key and value parameters are limited to 255 characters in length. Keys and values which are too long will be truncated. Keys can only contain alphanumeric characters and underscores. Keys may not be a reserved key. See <span data-unresolved-link="com.braze.support/CustomAttributeValidationUtils/isValidCustomAttributeKey/#kotlin.String?#kotlin.collections.Set[kotlin.String]/PointingToDeclaration/">CustomAttributeValidationUtils.isValidCustomAttributeKey</span> To unset a custom attribute array, call .unsetCustomUserAttribute with the key used to set the custom attribute array.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1318644077%2FFunctions%2F-1725759721" anchor-label="setCustomAttributeToSecondsFromEpoch" id="1318644077%2FFunctions%2F-1725759721" data-filterable-set=":android-sdk-ui:dokkaHtml/release"></a>
+          <div class="table-row" data-filterable-current=":android-sdk-ui:dokkaHtml/release" data-filterable-set=":android-sdk-ui:dokkaHtml/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="set-custom-attribute-to-seconds-from-epoch.html"><span>set</span><wbr></wbr><span>Custom</span><wbr></wbr><span>Attribute</span><wbr></wbr><span>To</span><wbr></wbr><span>Seconds</span><wbr></wbr><span>From</span><wbr></wbr><span><span>Epoch</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1318644077%2FFunctions%2F-1725759721"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><span class="token keyword">fun </span><a href="set-custom-attribute-to-seconds-from-epoch.html"><span class="token function">setCustomAttributeToSecondsFromEpoch</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">key<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span></span><span class="parameter ">secondsFromEpoch<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html">Long</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1432246843%2FFunctions%2F-1725759721" anchor-label="setCustomUserAttribute" id="-1432246843%2FFunctions%2F-1725759721" data-filterable-set=":android-sdk-ui:dokkaHtml/release"></a>
+          <div class="table-row" data-filterable-current=":android-sdk-ui:dokkaHtml/release" data-filterable-set=":android-sdk-ui:dokkaHtml/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="set-custom-user-attribute.html"><span>set</span><wbr></wbr><span>Custom</span><wbr></wbr><span>User</span><wbr></wbr><span><span>Attribute</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1432246843%2FFunctions%2F-1725759721"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><span class="token keyword">fun </span><a href="set-custom-user-attribute.html"><span class="token function">setCustomUserAttribute</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">key<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span></span><span class="parameter ">value<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></div><div class="brief "><p class="paragraph">Sets a boolean custom user attribute. This can be any key/value pair and is used to collect extra information about the user. The key parameter is limited to 255 characters in length and can only contain alphanumeric characters and underscores. Keys which are too long will be truncated. See <span data-unresolved-link="com.braze.support/CustomAttributeValidationUtils/isValidCustomAttributeKey/#kotlin.String?#kotlin.collections.Set[kotlin.String]/PointingToDeclaration/">CustomAttributeValidationUtils.isValidCustomAttributeKey</span>.</p></div><div class="symbol monospace"><span class="token keyword">fun </span><a href="set-custom-user-attribute.html"><span class="token function">setCustomUserAttribute</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">key<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span></span><span class="parameter ">value<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-double/index.html">Double</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></div><div class="brief "><p class="paragraph">Sets a double custom user attribute. This can be any key/value pair and is used to collect extra information about the user. The key parameter is limited to 255 characters in length. Keys which are too long will be truncated. Keys can only contain alphanumeric characters and underscores. Keys may not be a reserved key. See <span data-unresolved-link="com.braze.support/CustomAttributeValidationUtils/isValidCustomAttributeKey/#kotlin.String?#kotlin.collections.Set[kotlin.String]/PointingToDeclaration/">CustomAttributeValidationUtils.isValidCustomAttributeKey</span></p></div><div class="symbol monospace"><span class="token keyword">fun </span><a href="set-custom-user-attribute.html"><span class="token function">setCustomUserAttribute</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">key<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span></span><span class="parameter ">value<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></div><div class="brief "><p class="paragraph">Sets a float custom user attribute. This can be any key/value pair and is used to collect extra information about the user. The key parameter is limited to 255 characters in length and can only contain alphanumeric characters and underscores. Keys which are too long will be truncated. Keys may not be a reserved key. See <span data-unresolved-link="com.braze.support/CustomAttributeValidationUtils/isValidCustomAttributeKey/#kotlin.String?#kotlin.collections.Set[kotlin.String]/PointingToDeclaration/">CustomAttributeValidationUtils.isValidCustomAttributeKey</span></p></div><div class="symbol monospace"><span class="token keyword">fun </span><a href="set-custom-user-attribute.html"><span class="token function">setCustomUserAttribute</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">key<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span></span><span class="parameter ">value<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></div><div class="brief "><p class="paragraph">Sets an int custom user attribute. This can be any key/value pair and is used to collect extra information about the user. The key parameter is limited to 255 characters in length and can only contain alphanumeric characters and underscores.  Keys which are too long will be truncated. Keys may not be a reserved key. See <span data-unresolved-link="com.braze.support/CustomAttributeValidationUtils/isValidCustomAttributeKey/#kotlin.String?#kotlin.collections.Set[kotlin.String]/PointingToDeclaration/">CustomAttributeValidationUtils.isValidCustomAttributeKey</span>.</p></div><div class="symbol monospace"><span class="token keyword">fun </span><a href="set-custom-user-attribute.html"><span class="token function">setCustomUserAttribute</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">key<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span></span><span class="parameter ">value<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html">Long</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></div><div class="brief "><p class="paragraph">Sets a long custom user attribute. This can be any key/value pair and is used to collect extra information about the user.  The key parameter is limited to 255 characters in length and can only contain alphanumeric characters and underscores.  Keys which are too long will be truncated. Keys may not be a reserved key. See <span data-unresolved-link="com.braze.support/CustomAttributeValidationUtils/isValidCustomAttributeKey/#kotlin.String?#kotlin.collections.Set[kotlin.String]/PointingToDeclaration/">CustomAttributeValidationUtils.isValidCustomAttributeKey</span></p></div><div class="symbol monospace"><span class="token keyword">fun </span><a href="set-custom-user-attribute.html"><span class="token function">setCustomUserAttribute</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">key<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span></span><span class="parameter ">value<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></div><div class="brief "><p class="paragraph">Sets a string custom user attribute. This can be any key/value pair and is used to collect extra information about the user. The key and value parameters are limited to 255 characters in length. Keys and values which are too long will be truncated. Keys can only contain alphanumeric characters and underscores. Keys may not be a reserved key. See <span data-unresolved-link="com.braze.support/CustomAttributeValidationUtils/isValidCustomAttributeKey/#kotlin.String?#kotlin.collections.Set[kotlin.String]/PointingToDeclaration/">CustomAttributeValidationUtils.isValidCustomAttributeKey</span></p></div><div class="symbol monospace"><span class="token keyword">fun </span><a href="set-custom-user-attribute.html"><span class="token function">setCustomUserAttribute</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">key<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span></span><span class="parameter ">value<span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/org/json/JSONArray.html">JSONArray</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></div><div class="symbol monospace"><div class="block"><div class="block"><span class="token annotation builtin">@</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.jvm/-jvm-overloads/index.html"><span class="token annotation builtin">JvmOverloads</span></a></div></div><span class="token keyword">fun </span><a href="set-custom-user-attribute.html"><span class="token function">setCustomUserAttribute</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">key<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span></span><span class="parameter ">value<span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/org/json/JSONObject.html">JSONObject</a><span class="token punctuation">, </span></span><span class="parameter ">merge<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a><span class="token operator"> = </span><span class="token boolean">false</span></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></div><div class="brief "><p class="paragraph">Sets a JSON custom user attribute. This can be any key/value pair and is used to collect extra information about the user. The key parameter is limited to 255 characters in length. Keys which are too long will be truncated. Keys can only contain alphanumeric characters and underscores. Keys may not be a reserved key. See <span data-unresolved-link="com.braze.support/CustomAttributeValidationUtils/isValidCustomAttributeKey/#kotlin.String?#kotlin.collections.Set[kotlin.String]/PointingToDeclaration/">CustomAttributeValidationUtils.isValidCustomAttributeKey</span></p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-975989956%2FFunctions%2F-1725759721" anchor-label="setCustomUserAttributeToNow" id="-975989956%2FFunctions%2F-1725759721" data-filterable-set=":android-sdk-ui:dokkaHtml/release"></a>
+          <div class="table-row" data-filterable-current=":android-sdk-ui:dokkaHtml/release" data-filterable-set=":android-sdk-ui:dokkaHtml/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="set-custom-user-attribute-to-now.html"><span>set</span><wbr></wbr><span>Custom</span><wbr></wbr><span>User</span><wbr></wbr><span>Attribute</span><wbr></wbr><span>To</span><wbr></wbr><span><span>Now</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-975989956%2FFunctions%2F-1725759721"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><span class="token keyword">fun </span><a href="set-custom-user-attribute-to-now.html"><span class="token function">setCustomUserAttributeToNow</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">key<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></div><div class="brief "><p class="paragraph">Sets a custom attribute with the given key to the current time. The key parameter is limited to 255 characters in length and can only contain alphanumeric characters and underscores. Keys which are too long will be truncated. Keys may not be a reserved key. See <span data-unresolved-link="com.braze.support/CustomAttributeValidationUtils/isValidCustomAttributeKey/#kotlin.String?#kotlin.collections.Set[kotlin.String]/PointingToDeclaration/">CustomAttributeValidationUtils.isValidCustomAttributeKey</span></p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1757517026%2FFunctions%2F-1725759721" anchor-label="setCustomUserAttributeToSecondsFromEpoch" id="1757517026%2FFunctions%2F-1725759721" data-filterable-set=":android-sdk-ui:dokkaHtml/release"></a>
+          <div class="table-row" data-filterable-current=":android-sdk-ui:dokkaHtml/release" data-filterable-set=":android-sdk-ui:dokkaHtml/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="set-custom-user-attribute-to-seconds-from-epoch.html"><span>set</span><wbr></wbr><span>Custom</span><wbr></wbr><span>User</span><wbr></wbr><span>Attribute</span><wbr></wbr><span>To</span><wbr></wbr><span>Seconds</span><wbr></wbr><span>From</span><wbr></wbr><span><span>Epoch</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1757517026%2FFunctions%2F-1725759721"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><span class="token keyword">fun </span><a href="set-custom-user-attribute-to-seconds-from-epoch.html"><span class="token function">setCustomUserAttributeToSecondsFromEpoch</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">key<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span></span><span class="parameter ">secondsFromEpoch<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html">Long</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></div><div class="brief "><p class="paragraph">Sets a custom attribute to the given number of seconds elapsed since the epoch. The key parameter is limited to 255 characters in length and can only contain alphanumeric characters and underscores. Keys which are too long will be truncated. Keys may not be a reserved key. See <span data-unresolved-link="com.braze.support/CustomAttributeValidationUtils/isValidCustomAttributeKey/#kotlin.String?#kotlin.collections.Set[kotlin.String]/PointingToDeclaration/">CustomAttributeValidationUtils.isValidCustomAttributeKey</span></p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-169737244%2FFunctions%2F-1725759721" anchor-label="setDateOfBirth" id="-169737244%2FFunctions%2F-1725759721" data-filterable-set=":android-sdk-ui:dokkaHtml/release"></a>
+          <div class="table-row" data-filterable-current=":android-sdk-ui:dokkaHtml/release" data-filterable-set=":android-sdk-ui:dokkaHtml/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="set-date-of-birth.html"><span>set</span><wbr></wbr><span>Date</span><wbr></wbr><span>Of</span><wbr></wbr><span><span>Birth</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-169737244%2FFunctions%2F-1725759721"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><span class="token keyword">fun </span><a href="set-date-of-birth.html"><span class="token function">setDateOfBirth</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">year<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a><span class="token punctuation">, </span></span><span class="parameter ">month<span class="token operator">: </span><a href="../../com.braze.enums/-month/index.html">Month</a><span class="token punctuation">, </span></span><span class="parameter ">day<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></div><div class="brief "><p class="paragraph">Sets the date of birth of the user. Used to collect information about the user.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1198931642%2FFunctions%2F-1725759721" anchor-label="setEmail" id="1198931642%2FFunctions%2F-1725759721" data-filterable-set=":android-sdk-ui:dokkaHtml/release"></a>
+          <div class="table-row" data-filterable-current=":android-sdk-ui:dokkaHtml/release" data-filterable-set=":android-sdk-ui:dokkaHtml/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="set-email.html"><span>set</span><wbr></wbr><span><span>Email</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1198931642%2FFunctions%2F-1725759721"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><span class="token keyword">fun </span><a href="set-email.html"><span class="token function">setEmail</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">email<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="token operator">?</span></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></div><div class="brief "><p class="paragraph">Sets the email address of the user. Used to collect information about the user. Provided email addresses must pass email address validation. The validation method used is available in <a href="../../com.braze.support/-validation-utils/is-valid-email-address.html">ValidationUtils.isValidEmailAddress</a></p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="144875804%2FFunctions%2F-1725759721" anchor-label="setEmailNotificationSubscriptionType" id="144875804%2FFunctions%2F-1725759721" data-filterable-set=":android-sdk-ui:dokkaHtml/release"></a>
+          <div class="table-row" data-filterable-current=":android-sdk-ui:dokkaHtml/release" data-filterable-set=":android-sdk-ui:dokkaHtml/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="set-email-notification-subscription-type.html"><span>set</span><wbr></wbr><span>Email</span><wbr></wbr><span>Notification</span><wbr></wbr><span>Subscription</span><wbr></wbr><span><span>Type</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="144875804%2FFunctions%2F-1725759721"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><span class="token keyword">fun </span><a href="set-email-notification-subscription-type.html"><span class="token function">setEmailNotificationSubscriptionType</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">emailNotificationSubscriptionType<span class="token operator">: </span><a href="../../com.braze.enums/-notification-subscription-type/index.html">NotificationSubscriptionType</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></div><div class="brief "><p class="paragraph">Sets whether or not the user should be sent email campaigns. Setting it to unsubscribed opts the user out of an email campaign that you create through the Braze dashboard.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1676547301%2FFunctions%2F-1725759721" anchor-label="setFirstName" id="-1676547301%2FFunctions%2F-1725759721" data-filterable-set=":android-sdk-ui:dokkaHtml/release"></a>
+          <div class="table-row" data-filterable-current=":android-sdk-ui:dokkaHtml/release" data-filterable-set=":android-sdk-ui:dokkaHtml/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="set-first-name.html"><span>set</span><wbr></wbr><span>First</span><wbr></wbr><span><span>Name</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1676547301%2FFunctions%2F-1725759721"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><span class="token keyword">fun </span><a href="set-first-name.html"><span class="token function">setFirstName</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">firstName<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="token operator">?</span></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></div><div class="brief "><p class="paragraph">Sets the first name of the user. Used to collect information about the user.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1882735834%2FFunctions%2F-1725759721" anchor-label="setGender" id="-1882735834%2FFunctions%2F-1725759721" data-filterable-set=":android-sdk-ui:dokkaHtml/release"></a>
+          <div class="table-row" data-filterable-current=":android-sdk-ui:dokkaHtml/release" data-filterable-set=":android-sdk-ui:dokkaHtml/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="set-gender.html"><span>set</span><wbr></wbr><span><span>Gender</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1882735834%2FFunctions%2F-1725759721"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><span class="token keyword">fun </span><a href="set-gender.html"><span class="token function">setGender</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">gender<span class="token operator">: </span><a href="../../com.braze.enums/-gender/index.html">Gender</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></div><div class="brief "><p class="paragraph">Sets the gender for the user. Used to collect information about the user.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1818821512%2FFunctions%2F-1725759721" anchor-label="setHomeCity" id="-1818821512%2FFunctions%2F-1725759721" data-filterable-set=":android-sdk-ui:dokkaHtml/release"></a>
+          <div class="table-row" data-filterable-current=":android-sdk-ui:dokkaHtml/release" data-filterable-set=":android-sdk-ui:dokkaHtml/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="set-home-city.html"><span>set</span><wbr></wbr><span>Home</span><wbr></wbr><span><span>City</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1818821512%2FFunctions%2F-1725759721"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><span class="token keyword">fun </span><a href="set-home-city.html"><span class="token function">setHomeCity</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">homeCity<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="token operator">?</span></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></div><div class="brief "><p class="paragraph">Sets the home city of the user. Used to collect information about the user.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-23829430%2FFunctions%2F-1725759721" anchor-label="setLanguage" id="-23829430%2FFunctions%2F-1725759721" data-filterable-set=":android-sdk-ui:dokkaHtml/release"></a>
+          <div class="table-row" data-filterable-current=":android-sdk-ui:dokkaHtml/release" data-filterable-set=":android-sdk-ui:dokkaHtml/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="set-language.html"><span>set</span><wbr></wbr><span><span>Language</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-23829430%2FFunctions%2F-1725759721"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><span class="token keyword">fun </span><a href="set-language.html"><span class="token function">setLanguage</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">language<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="token operator">?</span></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></div><div class="brief "><p class="paragraph">Sets the language of the user. Language Strings should be valid ISO 639-1 language codes. See https://www.loc.gov/standards/iso639-2/php/code_list.php.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1758104106%2FFunctions%2F-1725759721" anchor-label="setLastKnownLocation" id="1758104106%2FFunctions%2F-1725759721" data-filterable-set=":android-sdk-ui:dokkaHtml/release"></a>
+          <div class="table-row" data-filterable-current=":android-sdk-ui:dokkaHtml/release" data-filterable-set=":android-sdk-ui:dokkaHtml/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="set-last-known-location.html"><span>set</span><wbr></wbr><span>Last</span><wbr></wbr><span>Known</span><wbr></wbr><span><span>Location</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1758104106%2FFunctions%2F-1725759721"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><div class="block"><div class="block"><span class="token annotation builtin">@</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.jvm/-jvm-overloads/index.html"><span class="token annotation builtin">JvmOverloads</span></a></div></div><span class="token keyword">fun </span><a href="set-last-known-location.html"><span class="token function">setLastKnownLocation</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">latitude<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-double/index.html">Double</a><span class="token punctuation">, </span></span><span class="parameter ">longitude<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-double/index.html">Double</a><span class="token punctuation">, </span></span><span class="parameter ">altitude<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-double/index.html">Double</a><span class="token operator">?</span><span class="token operator"> = </span>null<span class="token punctuation">, </span></span><span class="parameter ">accuracy<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-double/index.html">Double</a><span class="token operator">?</span><span class="token operator"> = </span>null<span class="token punctuation">, </span></span><span class="parameter ">verticalAccuracy<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-double/index.html">Double</a><span class="token operator">?</span><span class="token operator"> = </span>null</span></span><span class="token punctuation">)</span></div><div class="brief "><p class="paragraph">Sets the last known location for the user. Intended for use with <a href="../../com.braze.configuration/-braze-config/-builder/set-is-location-collection-enabled.html">com.braze.configuration.BrazeConfig.Builder.setIsLocationCollectionEnabled</a> set to false in the <code class="lang-kotlin">braze.xml</code> configuration file, so that the only locations being set are by the integrating app. Otherwise, calls to this method will be contending with automatic location update events. Latitude and longitude are required; altitude and accuracy may be set to null</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1216523585%2FFunctions%2F-1725759721" anchor-label="setLastName" id="1216523585%2FFunctions%2F-1725759721" data-filterable-set=":android-sdk-ui:dokkaHtml/release"></a>
+          <div class="table-row" data-filterable-current=":android-sdk-ui:dokkaHtml/release" data-filterable-set=":android-sdk-ui:dokkaHtml/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="set-last-name.html"><span>set</span><wbr></wbr><span>Last</span><wbr></wbr><span><span>Name</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1216523585%2FFunctions%2F-1725759721"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><span class="token keyword">fun </span><a href="set-last-name.html"><span class="token function">setLastName</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">lastName<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="token operator">?</span></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></div><div class="brief "><p class="paragraph">Sets the last name of the user. Used to collect information about the user.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="198722925%2FFunctions%2F-1725759721" anchor-label="setLocationCustomAttribute" id="198722925%2FFunctions%2F-1725759721" data-filterable-set=":android-sdk-ui:dokkaHtml/release"></a>
+          <div class="table-row" data-filterable-current=":android-sdk-ui:dokkaHtml/release" data-filterable-set=":android-sdk-ui:dokkaHtml/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="set-location-custom-attribute.html"><span>set</span><wbr></wbr><span>Location</span><wbr></wbr><span>Custom</span><wbr></wbr><span><span>Attribute</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="198722925%2FFunctions%2F-1725759721"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><span class="token keyword">fun </span><a href="set-location-custom-attribute.html"><span class="token function">setLocationCustomAttribute</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">key<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span></span><span class="parameter ">latitude<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-double/index.html">Double</a><span class="token punctuation">, </span></span><span class="parameter ">longitude<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-double/index.html">Double</a></span></span><span class="token punctuation">)</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="53919775%2FFunctions%2F-1725759721" anchor-label="setPhoneNumber" id="53919775%2FFunctions%2F-1725759721" data-filterable-set=":android-sdk-ui:dokkaHtml/release"></a>
+          <div class="table-row" data-filterable-current=":android-sdk-ui:dokkaHtml/release" data-filterable-set=":android-sdk-ui:dokkaHtml/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="set-phone-number.html"><span>set</span><wbr></wbr><span>Phone</span><wbr></wbr><span><span>Number</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="53919775%2FFunctions%2F-1725759721"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><span class="token keyword">fun </span><a href="set-phone-number.html"><span class="token function">setPhoneNumber</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">phoneNumber<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="token operator">?</span></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></div><div class="brief "><p class="paragraph">Sets the phone number of the user. Used to collect information about the user. Provided phone numbers must pass phone number validation. The validation methods used is available in <a href="../../com.braze.support/-validation-utils/is-valid-phone-number.html">ValidationUtils.isValidPhoneNumber</a></p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1754170838%2FFunctions%2F-1725759721" anchor-label="setPushNotificationSubscriptionType" id="-1754170838%2FFunctions%2F-1725759721" data-filterable-set=":android-sdk-ui:dokkaHtml/release"></a>
+          <div class="table-row" data-filterable-current=":android-sdk-ui:dokkaHtml/release" data-filterable-set=":android-sdk-ui:dokkaHtml/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="set-push-notification-subscription-type.html"><span>set</span><wbr></wbr><span>Push</span><wbr></wbr><span>Notification</span><wbr></wbr><span>Subscription</span><wbr></wbr><span><span>Type</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1754170838%2FFunctions%2F-1725759721"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><span class="token keyword">fun </span><a href="set-push-notification-subscription-type.html"><span class="token function">setPushNotificationSubscriptionType</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">pushNotificationSubscriptionType<span class="token operator">: </span><a href="../../com.braze.enums/-notification-subscription-type/index.html">NotificationSubscriptionType</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></div><div class="brief "><p class="paragraph">Sets the push notification subscription status of the user. Used to collect information about the user.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-14446490%2FFunctions%2F-1725759721" anchor-label="unsetCustomUserAttribute" id="-14446490%2FFunctions%2F-1725759721" data-filterable-set=":android-sdk-ui:dokkaHtml/release"></a>
+          <div class="table-row" data-filterable-current=":android-sdk-ui:dokkaHtml/release" data-filterable-set=":android-sdk-ui:dokkaHtml/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="unset-custom-user-attribute.html"><span>unset</span><wbr></wbr><span>Custom</span><wbr></wbr><span>User</span><wbr></wbr><span><span>Attribute</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-14446490%2FFunctions%2F-1725759721"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><span class="token keyword">fun </span><a href="unset-custom-user-attribute.html"><span class="token function">unsetCustomUserAttribute</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">key<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></div><div class="brief "><p class="paragraph">Removes the value associated with the given custom attribute key.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1211001092%2FFunctions%2F-1725759721" anchor-label="unsetLocationCustomAttribute" id="-1211001092%2FFunctions%2F-1725759721" data-filterable-set=":android-sdk-ui:dokkaHtml/release"></a>
+          <div class="table-row" data-filterable-current=":android-sdk-ui:dokkaHtml/release" data-filterable-set=":android-sdk-ui:dokkaHtml/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="unset-location-custom-attribute.html"><span>unset</span><wbr></wbr><span>Location</span><wbr></wbr><span>Custom</span><wbr></wbr><span><span>Attribute</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1211001092%2FFunctions%2F-1725759721"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><span class="token keyword">fun </span><a href="unset-location-custom-attribute.html"><span class="token function">unsetLocationCustomAttribute</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">key<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a></span></span><span class="token punctuation">)</span></div></div></div>
+                </div>
               </div>
             </div>
           </div>
@@ -507,7 +521,8 @@
                 class="pull-right"><span>Generated by </span><a
                 href="https://github.com/Kotlin/dokka"><span>dokka</span><span class="padded-icon"></span></a></span>
       </div>
+            </div>
+        </div>
     </div>
-</div>
 </body>
 </html>

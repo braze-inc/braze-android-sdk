@@ -1,10 +1,11 @@
 <!DOCTYPE html>
-<html>
+<html class="no-js">
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1" charset="UTF-8">
     <title>Companion</title>
     <link href="../../../../images/logo-icon.svg" rel="icon" type="image/svg">
     <script>var pathToRoot = "../../../../";</script>
+    <script>document.documentElement.classList.replace("no-js","js");</script>
     <script>const storage = localStorage.getItem("dokka-dark-mode")
     if (storage == null) {
         const osDarkSchemePreferred = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
@@ -18,12 +19,13 @@
         }
     }
     </script>
+<script type="text/javascript" src="https://unpkg.com/kotlin-playground@1/dist/playground.min.js" async="async"></script>
 <script type="text/javascript" src="../../../../scripts/sourceset_dependencies.js" async="async"></script>
 <link href="../../../../styles/style.css" rel="Stylesheet">
-<link href="../../../../styles/jetbrains-mono.css" rel="Stylesheet">
 <link href="../../../../styles/main.css" rel="Stylesheet">
 <link href="../../../../styles/prism.css" rel="Stylesheet">
 <link href="../../../../styles/logo-styles.css" rel="Stylesheet">
+<link href="../../../../styles/font-jb-sans-auto.css" rel="Stylesheet">
 <script type="text/javascript" src="../../../../scripts/clipboard.js" async="async"></script>
 <script type="text/javascript" src="../../../../scripts/navigation-loader.js" async="async"></script>
 <script type="text/javascript" src="../../../../scripts/platform-content-handler.js" async="async"></script>
@@ -32,151 +34,161 @@
 <script type="text/javascript" src="../../../../scripts/symbol-parameters-wrapper_deferred.js" defer="defer"></script>
 </head>
 <body>
-<div class="navigation-wrapper" id="navigation-wrapper">
-    <div id="leftToggler"><span class="icon-toggler"></span></div>
-    <div class="library-name">
-            <a href="../../../../index.html">
-                    <span>braze-android-sdk</span>
-            </a>
+    <div class="root">
+<nav class="navigation" id="navigation-wrapper">
+    <div class="navigation--inner">
+        <div class="navigation-title">
+            <button class="menu-toggle" id="menu-toggle" type="button">toggle menu</button>
+            <div class="library-name">
+                    <a class="library-name--link" href="../../../../index.html">
+                            braze-android-sdk
+                    </a>
+            </div>
+            <div class="library-version">
+30.4.0            </div>
+        </div>
+        <div class="filter-section" id="filter-section">
+                <button class="platform-tag platform-selector jvm-like" data-active="" data-filter=":android-sdk-ui:dokkaHtml/release">androidJvm</button>
+        </div>
     </div>
-    <div>
-30.3.0    </div>
-    <div class="pull-right d-flex">
-        <button id="theme-toggle-button"><span id="theme-toggle"></span></button>
-        <div id="searchBar"></div>
+    <div class="navigation-controls">
+        <button class="navigation-controls--btn navigation-controls--theme" id="theme-toggle-button" type="button">switch theme</button>
+        <div class="navigation-controls--btn navigation-controls--search" id="searchBar" role="button">search in API</div>
     </div>
-</div>
-<div id="container">
-    <div id="leftColumn">
-        <div id="sideMenu"></div>
-    </div>
-    <div id="main">
-<div class="main-content" id="content" pageIds="braze-android-sdk::com.braze.push/BrazeNotificationStyleFactory.Companion///PointingToDeclaration//-1725759721">
+</nav>
+        <div id="container">
+            <div class="sidebar" id="leftColumn">
+                <div class="sidebar--inner" id="sideMenu"></div>
+            </div>
+            <div id="main">
+<div class="main-content" data-page-type="classlike" id="content" pageIds="braze-android-sdk::com.braze.push/BrazeNotificationStyleFactory.Companion///PointingToDeclaration//-1725759721">
   <div class="breadcrumbs"><a href="../../../../index.html">braze-android-sdk</a><span class="delimiter">/</span><a href="../../index.html">com.braze.push</a><span class="delimiter">/</span><a href="../index.html">BrazeNotificationStyleFactory</a><span class="delimiter">/</span><span class="current">Companion</span></div>
   <div class="cover ">
     <h1 class="cover"><span><span>Companion</span></span></h1>
     <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><span class="token keyword">object </span><a href="index.html">Companion</a></div></div></div>
   </div>
   <div class="tabbedcontent">
-    <div class="tabs-section" tabs-section="tabs-section"><button class="section-tab" data-active="" data-togglable="Functions">Functions</button></div>
+    <div class="tabs-section" tabs-section="tabs-section"><button class="section-tab" data-active="" data-togglable="CONSTRUCTOR,TYPE,PROPERTY,FUNCTION">Members</button></div>
     <div class="tabs-section-body">
-      <h2 class="">Functions</h2>
-      <div class="table" data-togglable="Functions"><a data-name="-288315250%2FFunctions%2F-1725759721" anchor-label="getBigPictureNotificationStyle" id="-288315250%2FFunctions%2F-1725759721" data-filterable-set=":android-sdk-ui:dokkaHtml/release"></a>
-        <div class="table-row" data-filterable-current=":android-sdk-ui:dokkaHtml/release" data-filterable-set=":android-sdk-ui:dokkaHtml/release">
-          <div class="main-subrow keyValue ">
-            <div class=""><span class="inline-flex">
-                <div><a href="get-big-picture-notification-style.html"><span>get</span><wbr></wbr><span>Big</span><wbr></wbr><span>Picture</span><wbr></wbr><span>Notification</span><wbr></wbr><span><span>Style</span></span></a></div>
+      <div data-togglable="FUNCTION">
+        <h2 class="">Functions</h2>
+        <div class="table"><a data-name="-288315250%2FFunctions%2F-1725759721" anchor-label="getBigPictureNotificationStyle" id="-288315250%2FFunctions%2F-1725759721" data-filterable-set=":android-sdk-ui:dokkaHtml/release"></a>
+          <div class="table-row" data-filterable-current=":android-sdk-ui:dokkaHtml/release" data-filterable-set=":android-sdk-ui:dokkaHtml/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="get-big-picture-notification-style.html"><span>get</span><wbr></wbr><span>Big</span><wbr></wbr><span>Picture</span><wbr></wbr><span>Notification</span><wbr></wbr><span><span>Style</span></span></a></div>
 <span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-288315250%2FFunctions%2F-1725759721"></span>
-                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
-                </span></span></div>
-            <div>
-              <div class="title">
-                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">fun </span><a href="get-big-picture-notification-style.html"><span class="token function">getBigPictureNotificationStyle</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">payload<span class="token operator">: </span><a href="../../../com.braze.models.push/-braze-notification-payload/index.html">BrazeNotificationPayload</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/androidx/core/app/NotificationCompat.BigPictureStyle.html">NotificationCompat.BigPictureStyle</a><span class="token operator">?</span></div><div class="brief "><p class="paragraph">Returns a <a href="https://developer.android.com/reference/kotlin/androidx/core/app/NotificationCompat.BigPictureStyle.html">NotificationCompat.BigPictureStyle</a> notification style initialized with the bitmap, big title, and big summary specified in the notificationExtras and brazeExtras bundles.</p></div></div></div>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><span class="token keyword">fun </span><a href="get-big-picture-notification-style.html"><span class="token function">getBigPictureNotificationStyle</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">payload<span class="token operator">: </span><a href="../../../com.braze.models.push/-braze-notification-payload/index.html">BrazeNotificationPayload</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/androidx/core/app/NotificationCompat.BigPictureStyle.html">NotificationCompat.BigPictureStyle</a><span class="token operator">?</span></div><div class="brief "><p class="paragraph">Returns a <a href="https://developer.android.com/reference/kotlin/androidx/core/app/NotificationCompat.BigPictureStyle.html">NotificationCompat.BigPictureStyle</a> notification style initialized with the bitmap, big title, and big summary specified in the notificationExtras and brazeExtras bundles.</p></div></div></div>
+                </div>
               </div>
             </div>
           </div>
-        </div>
 <a data-name="-648888513%2FFunctions%2F-1725759721" anchor-label="getBigTextNotificationStyle" id="-648888513%2FFunctions%2F-1725759721" data-filterable-set=":android-sdk-ui:dokkaHtml/release"></a>
-        <div class="table-row" data-filterable-current=":android-sdk-ui:dokkaHtml/release" data-filterable-set=":android-sdk-ui:dokkaHtml/release">
-          <div class="main-subrow keyValue ">
-            <div class=""><span class="inline-flex">
-                <div><a href="get-big-text-notification-style.html"><span>get</span><wbr></wbr><span>Big</span><wbr></wbr><span>Text</span><wbr></wbr><span>Notification</span><wbr></wbr><span><span>Style</span></span></a></div>
+          <div class="table-row" data-filterable-current=":android-sdk-ui:dokkaHtml/release" data-filterable-set=":android-sdk-ui:dokkaHtml/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="get-big-text-notification-style.html"><span>get</span><wbr></wbr><span>Big</span><wbr></wbr><span>Text</span><wbr></wbr><span>Notification</span><wbr></wbr><span><span>Style</span></span></a></div>
 <span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-648888513%2FFunctions%2F-1725759721"></span>
-                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
-                </span></span></div>
-            <div>
-              <div class="title">
-                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">fun </span><a href="get-big-text-notification-style.html"><span class="token function">getBigTextNotificationStyle</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">payload<span class="token operator">: </span><a href="../../../com.braze.models.push/-braze-notification-payload/index.html">BrazeNotificationPayload</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/androidx/core/app/NotificationCompat.BigTextStyle.html">NotificationCompat.BigTextStyle</a></div><div class="brief "><p class="paragraph">Returns a <a href="https://developer.android.com/reference/kotlin/androidx/core/app/NotificationCompat.BigTextStyle.html">NotificationCompat.BigTextStyle</a> notification style initialized with the content, big title, and big summary specified in the notificationExtras and brazeExtras bundles.</p></div></div></div>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><span class="token keyword">fun </span><a href="get-big-text-notification-style.html"><span class="token function">getBigTextNotificationStyle</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">payload<span class="token operator">: </span><a href="../../../com.braze.models.push/-braze-notification-payload/index.html">BrazeNotificationPayload</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/androidx/core/app/NotificationCompat.BigTextStyle.html">NotificationCompat.BigTextStyle</a></div><div class="brief "><p class="paragraph">Returns a <a href="https://developer.android.com/reference/kotlin/androidx/core/app/NotificationCompat.BigTextStyle.html">NotificationCompat.BigTextStyle</a> notification style initialized with the content, big title, and big summary specified in the notificationExtras and brazeExtras bundles.</p></div></div></div>
+                </div>
               </div>
             </div>
           </div>
-        </div>
 <a data-name="-318688457%2FFunctions%2F-1725759721" anchor-label="getConversationalPushStyle" id="-318688457%2FFunctions%2F-1725759721" data-filterable-set=":android-sdk-ui:dokkaHtml/release"></a>
-        <div class="table-row" data-filterable-current=":android-sdk-ui:dokkaHtml/release" data-filterable-set=":android-sdk-ui:dokkaHtml/release">
-          <div class="main-subrow keyValue ">
-            <div class=""><span class="inline-flex">
-                <div><a href="get-conversational-push-style.html"><span>get</span><wbr></wbr><span>Conversational</span><wbr></wbr><span>Push</span><wbr></wbr><span><span>Style</span></span></a></div>
+          <div class="table-row" data-filterable-current=":android-sdk-ui:dokkaHtml/release" data-filterable-set=":android-sdk-ui:dokkaHtml/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="get-conversational-push-style.html"><span>get</span><wbr></wbr><span>Conversational</span><wbr></wbr><span>Push</span><wbr></wbr><span><span>Style</span></span></a></div>
 <span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-318688457%2FFunctions%2F-1725759721"></span>
-                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
-                </span></span></div>
-            <div>
-              <div class="title">
-                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">fun </span><a href="get-conversational-push-style.html"><span class="token function">getConversationalPushStyle</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">notificationBuilder<span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/androidx/core/app/NotificationCompat.Builder.html">NotificationCompat.Builder</a><span class="token punctuation">, </span></span><span class="parameter ">payload<span class="token operator">: </span><a href="../../../com.braze.models.push/-braze-notification-payload/index.html">BrazeNotificationPayload</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/androidx/core/app/NotificationCompat.MessagingStyle.html">NotificationCompat.MessagingStyle</a><span class="token operator">?</span></div></div></div>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><span class="token keyword">fun </span><a href="get-conversational-push-style.html"><span class="token function">getConversationalPushStyle</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">notificationBuilder<span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/androidx/core/app/NotificationCompat.Builder.html">NotificationCompat.Builder</a><span class="token punctuation">, </span></span><span class="parameter ">payload<span class="token operator">: </span><a href="../../../com.braze.models.push/-braze-notification-payload/index.html">BrazeNotificationPayload</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/androidx/core/app/NotificationCompat.MessagingStyle.html">NotificationCompat.MessagingStyle</a><span class="token operator">?</span></div></div></div>
+                </div>
               </div>
             </div>
           </div>
-        </div>
 <a data-name="-1567916603%2FFunctions%2F-1725759721" anchor-label="getInlineImageStyle" id="-1567916603%2FFunctions%2F-1725759721" data-filterable-set=":android-sdk-ui:dokkaHtml/release"></a>
-        <div class="table-row" data-filterable-current=":android-sdk-ui:dokkaHtml/release" data-filterable-set=":android-sdk-ui:dokkaHtml/release">
-          <div class="main-subrow keyValue ">
-            <div class=""><span class="inline-flex">
-                <div><a href="get-inline-image-style.html"><span>get</span><wbr></wbr><span>Inline</span><wbr></wbr><span>Image</span><wbr></wbr><span><span>Style</span></span></a></div>
+          <div class="table-row" data-filterable-current=":android-sdk-ui:dokkaHtml/release" data-filterable-set=":android-sdk-ui:dokkaHtml/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="get-inline-image-style.html"><span>get</span><wbr></wbr><span>Inline</span><wbr></wbr><span>Image</span><wbr></wbr><span><span>Style</span></span></a></div>
 <span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1567916603%2FFunctions%2F-1725759721"></span>
-                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
-                </span></span></div>
-            <div>
-              <div class="title">
-                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><div class="block"><div class="block"><span class="token annotation builtin">@</span><a href="https://developer.android.com/reference/kotlin/androidx/annotation/RequiresApi.html"><span class="token annotation builtin">RequiresApi</span></a><span class="token punctuation">(</span><span>api<span class="token operator"> = </span><span class="breakable-word"><span class="token constant">23</span></span></span><wbr></wbr><span class="token punctuation">)</span></div></div><span class="token keyword"></span><span class="token keyword">fun </span><a href="get-inline-image-style.html"><span class="token function">getInlineImageStyle</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">payload<span class="token operator">: </span><a href="../../../com.braze.models.push/-braze-notification-payload/index.html">BrazeNotificationPayload</a><span class="token punctuation">, </span></span><span class="parameter ">notificationBuilder<span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/androidx/core/app/NotificationCompat.Builder.html">NotificationCompat.Builder</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/androidx/core/app/NotificationCompat.Style.html">NotificationCompat.Style</a><span class="token operator">?</span></div><div class="brief "><p class="paragraph">This method sets a fully custom <a href="https://developer.android.com/reference/kotlin/android/widget/RemoteViews.RemoteView.html">android.widget.RemoteViews.RemoteView</a> to render the notification.</p></div></div></div>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><div class="block"><div class="block"><span class="token annotation builtin">@</span><a href="https://developer.android.com/reference/kotlin/androidx/annotation/RequiresApi.html"><span class="token annotation builtin">RequiresApi</span></a><span class="token punctuation">(</span><span>api<span class="token operator"> = </span><span class="breakable-word"><span class="token constant">23</span></span></span><wbr></wbr><span class="token punctuation">)</span></div></div><span class="token keyword">fun </span><a href="get-inline-image-style.html"><span class="token function">getInlineImageStyle</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">payload<span class="token operator">: </span><a href="../../../com.braze.models.push/-braze-notification-payload/index.html">BrazeNotificationPayload</a><span class="token punctuation">, </span></span><span class="parameter ">notificationBuilder<span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/androidx/core/app/NotificationCompat.Builder.html">NotificationCompat.Builder</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/androidx/core/app/NotificationCompat.Style.html">NotificationCompat.Style</a><span class="token operator">?</span></div><div class="brief "><p class="paragraph">This method sets a fully custom <a href="https://developer.android.com/reference/kotlin/android/widget/RemoteViews.RemoteView.html">android.widget.RemoteViews.RemoteView</a> to render the notification.</p></div></div></div>
+                </div>
               </div>
             </div>
           </div>
-        </div>
 <a data-name="1184006292%2FFunctions%2F-1725759721" anchor-label="getNotificationStyle" id="1184006292%2FFunctions%2F-1725759721" data-filterable-set=":android-sdk-ui:dokkaHtml/release"></a>
-        <div class="table-row" data-filterable-current=":android-sdk-ui:dokkaHtml/release" data-filterable-set=":android-sdk-ui:dokkaHtml/release">
-          <div class="main-subrow keyValue ">
-            <div class=""><span class="inline-flex">
-                <div><a href="get-notification-style.html"><span>get</span><wbr></wbr><span>Notification</span><wbr></wbr><span><span>Style</span></span></a></div>
+          <div class="table-row" data-filterable-current=":android-sdk-ui:dokkaHtml/release" data-filterable-set=":android-sdk-ui:dokkaHtml/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="get-notification-style.html"><span>get</span><wbr></wbr><span>Notification</span><wbr></wbr><span><span>Style</span></span></a></div>
 <span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1184006292%2FFunctions%2F-1725759721"></span>
-                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
-                </span></span></div>
-            <div>
-              <div class="title">
-                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">fun </span><a href="get-notification-style.html"><span class="token function">getNotificationStyle</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">notificationBuilder<span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/androidx/core/app/NotificationCompat.Builder.html">NotificationCompat.Builder</a><span class="token punctuation">, </span></span><span class="parameter ">payload<span class="token operator">: </span><a href="../../../com.braze.models.push/-braze-notification-payload/index.html">BrazeNotificationPayload</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/androidx/core/app/NotificationCompat.Style.html">NotificationCompat.Style</a></div><div class="brief "><p class="paragraph">Returns a big style <a href="https://developer.android.com/reference/kotlin/androidx/core/app/NotificationCompat.Style.html">NotificationCompat.Style</a>. If an image is present, this will be a <a href="https://developer.android.com/reference/kotlin/androidx/core/app/NotificationCompat.BigPictureStyle.html">NotificationCompat.BigPictureStyle</a>, otherwise it will be a <a href="https://developer.android.com/reference/kotlin/androidx/core/app/NotificationCompat.BigTextStyle.html">NotificationCompat.BigTextStyle</a>.</p></div></div></div>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><span class="token keyword">fun </span><a href="get-notification-style.html"><span class="token function">getNotificationStyle</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">notificationBuilder<span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/androidx/core/app/NotificationCompat.Builder.html">NotificationCompat.Builder</a><span class="token punctuation">, </span></span><span class="parameter ">payload<span class="token operator">: </span><a href="../../../com.braze.models.push/-braze-notification-payload/index.html">BrazeNotificationPayload</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/androidx/core/app/NotificationCompat.Style.html">NotificationCompat.Style</a></div><div class="brief "><p class="paragraph">Returns a big style <a href="https://developer.android.com/reference/kotlin/androidx/core/app/NotificationCompat.Style.html">NotificationCompat.Style</a>. If an image is present, this will be a <a href="https://developer.android.com/reference/kotlin/androidx/core/app/NotificationCompat.BigPictureStyle.html">NotificationCompat.BigPictureStyle</a>, otherwise it will be a <a href="https://developer.android.com/reference/kotlin/androidx/core/app/NotificationCompat.BigTextStyle.html">NotificationCompat.BigTextStyle</a>.</p></div></div></div>
+                </div>
               </div>
             </div>
           </div>
-        </div>
 <a data-name="-91782456%2FFunctions%2F-1725759721" anchor-label="getStoryStyle" id="-91782456%2FFunctions%2F-1725759721" data-filterable-set=":android-sdk-ui:dokkaHtml/release"></a>
-        <div class="table-row" data-filterable-current=":android-sdk-ui:dokkaHtml/release" data-filterable-set=":android-sdk-ui:dokkaHtml/release">
-          <div class="main-subrow keyValue ">
-            <div class=""><span class="inline-flex">
-                <div><a href="get-story-style.html"><span>get</span><wbr></wbr><span>Story</span><wbr></wbr><span><span>Style</span></span></a></div>
+          <div class="table-row" data-filterable-current=":android-sdk-ui:dokkaHtml/release" data-filterable-set=":android-sdk-ui:dokkaHtml/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="get-story-style.html"><span>get</span><wbr></wbr><span>Story</span><wbr></wbr><span><span>Style</span></span></a></div>
 <span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-91782456%2FFunctions%2F-1725759721"></span>
-                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
-                </span></span></div>
-            <div>
-              <div class="title">
-                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">fun </span><a href="get-story-style.html"><span class="token function">getStoryStyle</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">notificationBuilder<span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/androidx/core/app/NotificationCompat.Builder.html">NotificationCompat.Builder</a><span class="token punctuation">, </span></span><span class="parameter ">payload<span class="token operator">: </span><a href="../../../com.braze.models.push/-braze-notification-payload/index.html">BrazeNotificationPayload</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/androidx/core/app/NotificationCompat.DecoratedCustomViewStyle.html">NotificationCompat.DecoratedCustomViewStyle</a><span class="token operator">?</span></div><div class="brief "><p class="paragraph">Returns a <a href="https://developer.android.com/reference/kotlin/androidx/core/app/NotificationCompat.DecoratedCustomViewStyle.html">androidx.core.app.NotificationCompat.DecoratedCustomViewStyle</a> for push story.</p></div></div></div>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><span class="token keyword">fun </span><a href="get-story-style.html"><span class="token function">getStoryStyle</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">notificationBuilder<span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/androidx/core/app/NotificationCompat.Builder.html">NotificationCompat.Builder</a><span class="token punctuation">, </span></span><span class="parameter ">payload<span class="token operator">: </span><a href="../../../com.braze.models.push/-braze-notification-payload/index.html">BrazeNotificationPayload</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/androidx/core/app/NotificationCompat.DecoratedCustomViewStyle.html">NotificationCompat.DecoratedCustomViewStyle</a><span class="token operator">?</span></div><div class="brief "><p class="paragraph">Returns a <a href="https://developer.android.com/reference/kotlin/androidx/core/app/NotificationCompat.DecoratedCustomViewStyle.html">androidx.core.app.NotificationCompat.DecoratedCustomViewStyle</a> for push story.</p></div></div></div>
+                </div>
               </div>
             </div>
           </div>
-        </div>
 <a data-name="1568661155%2FFunctions%2F-1725759721" anchor-label="setBigPictureSummaryAndTitle" id="1568661155%2FFunctions%2F-1725759721" data-filterable-set=":android-sdk-ui:dokkaHtml/release"></a>
-        <div class="table-row" data-filterable-current=":android-sdk-ui:dokkaHtml/release" data-filterable-set=":android-sdk-ui:dokkaHtml/release">
-          <div class="main-subrow keyValue ">
-            <div class=""><span class="inline-flex">
-                <div><a href="set-big-picture-summary-and-title.html"><span>set</span><wbr></wbr><span>Big</span><wbr></wbr><span>Picture</span><wbr></wbr><span>Summary</span><wbr></wbr><span>And</span><wbr></wbr><span><span>Title</span></span></a></div>
+          <div class="table-row" data-filterable-current=":android-sdk-ui:dokkaHtml/release" data-filterable-set=":android-sdk-ui:dokkaHtml/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="set-big-picture-summary-and-title.html"><span>set</span><wbr></wbr><span>Big</span><wbr></wbr><span>Picture</span><wbr></wbr><span>Summary</span><wbr></wbr><span>And</span><wbr></wbr><span><span>Title</span></span></a></div>
 <span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1568661155%2FFunctions%2F-1725759721"></span>
-                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
-                </span></span></div>
-            <div>
-              <div class="title">
-                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><div class="block"><div class="block"><span class="token annotation builtin">@</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.jvm/-jvm-static/index.html"><span class="token annotation builtin">JvmStatic</span></a></div></div><span class="token keyword"></span><span class="token keyword">fun </span><a href="set-big-picture-summary-and-title.html"><span class="token function">setBigPictureSummaryAndTitle</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">bigPictureNotificationStyle<span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/androidx/core/app/NotificationCompat.BigPictureStyle.html">NotificationCompat.BigPictureStyle</a><span class="token punctuation">, </span></span><span class="parameter ">payload<span class="token operator">: </span><a href="../../../com.braze.models.push/-braze-notification-payload/index.html">BrazeNotificationPayload</a></span></span><span class="token punctuation">)</span></div></div></div>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><div class="block"><div class="block"><span class="token annotation builtin">@</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.jvm/-jvm-static/index.html"><span class="token annotation builtin">JvmStatic</span></a></div></div><span class="token keyword">fun </span><a href="set-big-picture-summary-and-title.html"><span class="token function">setBigPictureSummaryAndTitle</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">bigPictureNotificationStyle<span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/androidx/core/app/NotificationCompat.BigPictureStyle.html">NotificationCompat.BigPictureStyle</a><span class="token punctuation">, </span></span><span class="parameter ">payload<span class="token operator">: </span><a href="../../../com.braze.models.push/-braze-notification-payload/index.html">BrazeNotificationPayload</a></span></span><span class="token punctuation">)</span></div></div></div>
+                </div>
               </div>
             </div>
           </div>
-        </div>
 <a data-name="207129720%2FFunctions%2F-1725759721" anchor-label="setStyleIfSupported" id="207129720%2FFunctions%2F-1725759721" data-filterable-set=":android-sdk-ui:dokkaHtml/release"></a>
-        <div class="table-row" data-filterable-current=":android-sdk-ui:dokkaHtml/release" data-filterable-set=":android-sdk-ui:dokkaHtml/release">
-          <div class="main-subrow keyValue ">
-            <div class=""><span class="inline-flex">
-                <div><a href="set-style-if-supported.html"><span>set</span><wbr></wbr><span>Style</span><wbr></wbr><span>If</span><wbr></wbr><span><span>Supported</span></span></a></div>
+          <div class="table-row" data-filterable-current=":android-sdk-ui:dokkaHtml/release" data-filterable-set=":android-sdk-ui:dokkaHtml/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="set-style-if-supported.html"><span>set</span><wbr></wbr><span>Style</span><wbr></wbr><span>If</span><wbr></wbr><span><span>Supported</span></span></a></div>
 <span class="anchor-wrapper"><span class="anchor-icon" pointing-to="207129720%2FFunctions%2F-1725759721"></span>
-                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
-                </span></span></div>
-            <div>
-              <div class="title">
-                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><div class="block"><div class="block"><span class="token annotation builtin">@</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.jvm/-jvm-static/index.html"><span class="token annotation builtin">JvmStatic</span></a></div></div><span class="token keyword"></span><span class="token keyword">fun </span><a href="set-style-if-supported.html"><span class="token function">setStyleIfSupported</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">notificationBuilder<span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/androidx/core/app/NotificationCompat.Builder.html">NotificationCompat.Builder</a><span class="token punctuation">, </span></span><span class="parameter ">payload<span class="token operator">: </span><a href="../../../com.braze.models.push/-braze-notification-payload/index.html">BrazeNotificationPayload</a></span></span><span class="token punctuation">)</span></div><div class="brief "><p class="paragraph">Sets the style of the notification if supported.</p></div></div></div>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><div class="block"><div class="block"><span class="token annotation builtin">@</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.jvm/-jvm-static/index.html"><span class="token annotation builtin">JvmStatic</span></a></div></div><span class="token keyword">fun </span><a href="set-style-if-supported.html"><span class="token function">setStyleIfSupported</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">notificationBuilder<span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/androidx/core/app/NotificationCompat.Builder.html">NotificationCompat.Builder</a><span class="token punctuation">, </span></span><span class="parameter ">payload<span class="token operator">: </span><a href="../../../com.braze.models.push/-braze-notification-payload/index.html">BrazeNotificationPayload</a></span></span><span class="token punctuation">)</span></div><div class="brief "><p class="paragraph">Sets the style of the notification if supported.</p></div></div></div>
+                </div>
               </div>
             </div>
           </div>
@@ -190,7 +202,8 @@
                 class="pull-right"><span>Generated by </span><a
                 href="https://github.com/Kotlin/dokka"><span>dokka</span><span class="padded-icon"></span></a></span>
       </div>
+            </div>
+        </div>
     </div>
-</div>
 </body>
 </html>

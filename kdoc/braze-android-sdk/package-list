@@ -166,6 +166,7 @@ $dokka.location:com.braze.configuration/CachedConfigurationProvider.ResourceType
 $dokka.location:com.braze.configuration/CachedConfigurationProvider.ResourceType.STRING///PointingToDeclaration/{"org.jetbrains.dokka.links.EnumEntryDRIExtra":{"key":"org.jetbrains.dokka.links.EnumEntryDRIExtra"}}braze-android-sdk/com.braze.configuration/-cached-configuration-provider/-resource-type/-s-t-r-i-n-g/index.html
 $dokka.location:com.braze.configuration/CachedConfigurationProvider.ResourceType.STRING_ARRAY///PointingToDeclaration/{"org.jetbrains.dokka.links.EnumEntryDRIExtra":{"key":"org.jetbrains.dokka.links.EnumEntryDRIExtra"}}braze-android-sdk/com.braze.configuration/-cached-configuration-provider/-resource-type/-s-t-r-i-n-g_-a-r-r-a-y/index.html
 $dokka.location:com.braze.configuration/CachedConfigurationProvider.ResourceType///PointingToDeclaration/braze-android-sdk/com.braze.configuration/-cached-configuration-provider/-resource-type/index.html
+$dokka.location:com.braze.configuration/CachedConfigurationProvider.ResourceType/entries/#/PointingToDeclaration/braze-android-sdk/com.braze.configuration/-cached-configuration-provider/-resource-type/entries.html
 $dokka.location:com.braze.configuration/CachedConfigurationProvider.ResourceType/type/#/PointingToDeclaration/braze-android-sdk/com.braze.configuration/-cached-configuration-provider/-resource-type/type.html
 $dokka.location:com.braze.configuration/CachedConfigurationProvider.ResourceType/valueOf/#kotlin.String/PointingToDeclaration/braze-android-sdk/com.braze.configuration/-cached-configuration-provider/-resource-type/value-of.html
 $dokka.location:com.braze.configuration/CachedConfigurationProvider.ResourceType/values/#/PointingToDeclaration/braze-android-sdk/com.braze.configuration/-cached-configuration-provider/-resource-type/values.html
@@ -207,22 +208,26 @@ $dokka.location:com.braze.enums.inappmessage/ClickAction.NEWS_FEED///PointingToD
 $dokka.location:com.braze.enums.inappmessage/ClickAction.NONE///PointingToDeclaration/{"org.jetbrains.dokka.links.EnumEntryDRIExtra":{"key":"org.jetbrains.dokka.links.EnumEntryDRIExtra"}}braze-android-sdk/com.braze.enums.inappmessage/-click-action/-n-o-n-e/index.html
 $dokka.location:com.braze.enums.inappmessage/ClickAction.URI///PointingToDeclaration/{"org.jetbrains.dokka.links.EnumEntryDRIExtra":{"key":"org.jetbrains.dokka.links.EnumEntryDRIExtra"}}braze-android-sdk/com.braze.enums.inappmessage/-click-action/-u-r-i/index.html
 $dokka.location:com.braze.enums.inappmessage/ClickAction///PointingToDeclaration/braze-android-sdk/com.braze.enums.inappmessage/-click-action/index.html
+$dokka.location:com.braze.enums.inappmessage/ClickAction/entries/#/PointingToDeclaration/braze-android-sdk/com.braze.enums.inappmessage/-click-action/entries.html
 $dokka.location:com.braze.enums.inappmessage/ClickAction/valueOf/#kotlin.String/PointingToDeclaration/braze-android-sdk/com.braze.enums.inappmessage/-click-action/value-of.html
 $dokka.location:com.braze.enums.inappmessage/ClickAction/values/#/PointingToDeclaration/braze-android-sdk/com.braze.enums.inappmessage/-click-action/values.html
 $dokka.location:com.braze.enums.inappmessage/CropType.CENTER_CROP///PointingToDeclaration/{"org.jetbrains.dokka.links.EnumEntryDRIExtra":{"key":"org.jetbrains.dokka.links.EnumEntryDRIExtra"}}braze-android-sdk/com.braze.enums.inappmessage/-crop-type/-c-e-n-t-e-r_-c-r-o-p/index.html
 $dokka.location:com.braze.enums.inappmessage/CropType.FIT_CENTER///PointingToDeclaration/{"org.jetbrains.dokka.links.EnumEntryDRIExtra":{"key":"org.jetbrains.dokka.links.EnumEntryDRIExtra"}}braze-android-sdk/com.braze.enums.inappmessage/-crop-type/-f-i-t_-c-e-n-t-e-r/index.html
 $dokka.location:com.braze.enums.inappmessage/CropType///PointingToDeclaration/braze-android-sdk/com.braze.enums.inappmessage/-crop-type/index.html
+$dokka.location:com.braze.enums.inappmessage/CropType/entries/#/PointingToDeclaration/braze-android-sdk/com.braze.enums.inappmessage/-crop-type/entries.html
 $dokka.location:com.braze.enums.inappmessage/CropType/valueOf/#kotlin.String/PointingToDeclaration/braze-android-sdk/com.braze.enums.inappmessage/-crop-type/value-of.html
 $dokka.location:com.braze.enums.inappmessage/CropType/values/#/PointingToDeclaration/braze-android-sdk/com.braze.enums.inappmessage/-crop-type/values.html
 $dokka.location:com.braze.enums.inappmessage/DismissType.AUTO_DISMISS///PointingToDeclaration/{"org.jetbrains.dokka.links.EnumEntryDRIExtra":{"key":"org.jetbrains.dokka.links.EnumEntryDRIExtra"}}braze-android-sdk/com.braze.enums.inappmessage/-dismiss-type/-a-u-t-o_-d-i-s-m-i-s-s/index.html
 $dokka.location:com.braze.enums.inappmessage/DismissType.MANUAL///PointingToDeclaration/{"org.jetbrains.dokka.links.EnumEntryDRIExtra":{"key":"org.jetbrains.dokka.links.EnumEntryDRIExtra"}}braze-android-sdk/com.braze.enums.inappmessage/-dismiss-type/-m-a-n-u-a-l/index.html
 $dokka.location:com.braze.enums.inappmessage/DismissType.SWIPE///PointingToDeclaration/{"org.jetbrains.dokka.links.EnumEntryDRIExtra":{"key":"org.jetbrains.dokka.links.EnumEntryDRIExtra"}}braze-android-sdk/com.braze.enums.inappmessage/-dismiss-type/-s-w-i-p-e/index.html
 $dokka.location:com.braze.enums.inappmessage/DismissType///PointingToDeclaration/braze-android-sdk/com.braze.enums.inappmessage/-dismiss-type/index.html
+$dokka.location:com.braze.enums.inappmessage/DismissType/entries/#/PointingToDeclaration/braze-android-sdk/com.braze.enums.inappmessage/-dismiss-type/entries.html
 $dokka.location:com.braze.enums.inappmessage/DismissType/valueOf/#kotlin.String/PointingToDeclaration/braze-android-sdk/com.braze.enums.inappmessage/-dismiss-type/value-of.html
 $dokka.location:com.braze.enums.inappmessage/DismissType/values/#/PointingToDeclaration/braze-android-sdk/com.braze.enums.inappmessage/-dismiss-type/values.html
 $dokka.location:com.braze.enums.inappmessage/ImageStyle.GRAPHIC///PointingToDeclaration/{"org.jetbrains.dokka.links.EnumEntryDRIExtra":{"key":"org.jetbrains.dokka.links.EnumEntryDRIExtra"}}braze-android-sdk/com.braze.enums.inappmessage/-image-style/-g-r-a-p-h-i-c/index.html
 $dokka.location:com.braze.enums.inappmessage/ImageStyle.TOP///PointingToDeclaration/{"org.jetbrains.dokka.links.EnumEntryDRIExtra":{"key":"org.jetbrains.dokka.links.EnumEntryDRIExtra"}}braze-android-sdk/com.braze.enums.inappmessage/-image-style/-t-o-p/index.html
 $dokka.location:com.braze.enums.inappmessage/ImageStyle///PointingToDeclaration/braze-android-sdk/com.braze.enums.inappmessage/-image-style/index.html
+$dokka.location:com.braze.enums.inappmessage/ImageStyle/entries/#/PointingToDeclaration/braze-android-sdk/com.braze.enums.inappmessage/-image-style/entries.html
 $dokka.location:com.braze.enums.inappmessage/ImageStyle/valueOf/#kotlin.String/PointingToDeclaration/braze-android-sdk/com.braze.enums.inappmessage/-image-style/value-of.html
 $dokka.location:com.braze.enums.inappmessage/ImageStyle/values/#/PointingToDeclaration/braze-android-sdk/com.braze.enums.inappmessage/-image-style/values.html
 $dokka.location:com.braze.enums.inappmessage/MessageType.CONTROL///PointingToDeclaration/{"org.jetbrains.dokka.links.EnumEntryDRIExtra":{"key":"org.jetbrains.dokka.links.EnumEntryDRIExtra"}}braze-android-sdk/com.braze.enums.inappmessage/-message-type/-c-o-n-t-r-o-l/index.html
@@ -232,23 +237,27 @@ $dokka.location:com.braze.enums.inappmessage/MessageType.HTML_FULL///PointingToD
 $dokka.location:com.braze.enums.inappmessage/MessageType.MODAL///PointingToDeclaration/{"org.jetbrains.dokka.links.EnumEntryDRIExtra":{"key":"org.jetbrains.dokka.links.EnumEntryDRIExtra"}}braze-android-sdk/com.braze.enums.inappmessage/-message-type/-m-o-d-a-l/index.html
 $dokka.location:com.braze.enums.inappmessage/MessageType.SLIDEUP///PointingToDeclaration/{"org.jetbrains.dokka.links.EnumEntryDRIExtra":{"key":"org.jetbrains.dokka.links.EnumEntryDRIExtra"}}braze-android-sdk/com.braze.enums.inappmessage/-message-type/-s-l-i-d-e-u-p/index.html
 $dokka.location:com.braze.enums.inappmessage/MessageType///PointingToDeclaration/braze-android-sdk/com.braze.enums.inappmessage/-message-type/index.html
+$dokka.location:com.braze.enums.inappmessage/MessageType/entries/#/PointingToDeclaration/braze-android-sdk/com.braze.enums.inappmessage/-message-type/entries.html
 $dokka.location:com.braze.enums.inappmessage/MessageType/valueOf/#kotlin.String/PointingToDeclaration/braze-android-sdk/com.braze.enums.inappmessage/-message-type/value-of.html
 $dokka.location:com.braze.enums.inappmessage/MessageType/values/#/PointingToDeclaration/braze-android-sdk/com.braze.enums.inappmessage/-message-type/values.html
 $dokka.location:com.braze.enums.inappmessage/Orientation.ANY///PointingToDeclaration/{"org.jetbrains.dokka.links.EnumEntryDRIExtra":{"key":"org.jetbrains.dokka.links.EnumEntryDRIExtra"}}braze-android-sdk/com.braze.enums.inappmessage/-orientation/-a-n-y/index.html
 $dokka.location:com.braze.enums.inappmessage/Orientation.LANDSCAPE///PointingToDeclaration/{"org.jetbrains.dokka.links.EnumEntryDRIExtra":{"key":"org.jetbrains.dokka.links.EnumEntryDRIExtra"}}braze-android-sdk/com.braze.enums.inappmessage/-orientation/-l-a-n-d-s-c-a-p-e/index.html
 $dokka.location:com.braze.enums.inappmessage/Orientation.PORTRAIT///PointingToDeclaration/{"org.jetbrains.dokka.links.EnumEntryDRIExtra":{"key":"org.jetbrains.dokka.links.EnumEntryDRIExtra"}}braze-android-sdk/com.braze.enums.inappmessage/-orientation/-p-o-r-t-r-a-i-t/index.html
 $dokka.location:com.braze.enums.inappmessage/Orientation///PointingToDeclaration/braze-android-sdk/com.braze.enums.inappmessage/-orientation/index.html
+$dokka.location:com.braze.enums.inappmessage/Orientation/entries/#/PointingToDeclaration/braze-android-sdk/com.braze.enums.inappmessage/-orientation/entries.html
 $dokka.location:com.braze.enums.inappmessage/Orientation/valueOf/#kotlin.String/PointingToDeclaration/braze-android-sdk/com.braze.enums.inappmessage/-orientation/value-of.html
 $dokka.location:com.braze.enums.inappmessage/Orientation/values/#/PointingToDeclaration/braze-android-sdk/com.braze.enums.inappmessage/-orientation/values.html
 $dokka.location:com.braze.enums.inappmessage/SlideFrom.BOTTOM///PointingToDeclaration/{"org.jetbrains.dokka.links.EnumEntryDRIExtra":{"key":"org.jetbrains.dokka.links.EnumEntryDRIExtra"}}braze-android-sdk/com.braze.enums.inappmessage/-slide-from/-b-o-t-t-o-m/index.html
 $dokka.location:com.braze.enums.inappmessage/SlideFrom.TOP///PointingToDeclaration/{"org.jetbrains.dokka.links.EnumEntryDRIExtra":{"key":"org.jetbrains.dokka.links.EnumEntryDRIExtra"}}braze-android-sdk/com.braze.enums.inappmessage/-slide-from/-t-o-p/index.html
 $dokka.location:com.braze.enums.inappmessage/SlideFrom///PointingToDeclaration/braze-android-sdk/com.braze.enums.inappmessage/-slide-from/index.html
+$dokka.location:com.braze.enums.inappmessage/SlideFrom/entries/#/PointingToDeclaration/braze-android-sdk/com.braze.enums.inappmessage/-slide-from/entries.html
 $dokka.location:com.braze.enums.inappmessage/SlideFrom/valueOf/#kotlin.String/PointingToDeclaration/braze-android-sdk/com.braze.enums.inappmessage/-slide-from/value-of.html
 $dokka.location:com.braze.enums.inappmessage/SlideFrom/values/#/PointingToDeclaration/braze-android-sdk/com.braze.enums.inappmessage/-slide-from/values.html
 $dokka.location:com.braze.enums.inappmessage/TextAlign.CENTER///PointingToDeclaration/{"org.jetbrains.dokka.links.EnumEntryDRIExtra":{"key":"org.jetbrains.dokka.links.EnumEntryDRIExtra"}}braze-android-sdk/com.braze.enums.inappmessage/-text-align/-c-e-n-t-e-r/index.html
 $dokka.location:com.braze.enums.inappmessage/TextAlign.END///PointingToDeclaration/{"org.jetbrains.dokka.links.EnumEntryDRIExtra":{"key":"org.jetbrains.dokka.links.EnumEntryDRIExtra"}}braze-android-sdk/com.braze.enums.inappmessage/-text-align/-e-n-d/index.html
 $dokka.location:com.braze.enums.inappmessage/TextAlign.START///PointingToDeclaration/{"org.jetbrains.dokka.links.EnumEntryDRIExtra":{"key":"org.jetbrains.dokka.links.EnumEntryDRIExtra"}}braze-android-sdk/com.braze.enums.inappmessage/-text-align/-s-t-a-r-t/index.html
 $dokka.location:com.braze.enums.inappmessage/TextAlign///PointingToDeclaration/braze-android-sdk/com.braze.enums.inappmessage/-text-align/index.html
+$dokka.location:com.braze.enums.inappmessage/TextAlign/entries/#/PointingToDeclaration/braze-android-sdk/com.braze.enums.inappmessage/-text-align/entries.html
 $dokka.location:com.braze.enums.inappmessage/TextAlign/valueOf/#kotlin.String/PointingToDeclaration/braze-android-sdk/com.braze.enums.inappmessage/-text-align/value-of.html
 $dokka.location:com.braze.enums.inappmessage/TextAlign/values/#/PointingToDeclaration/braze-android-sdk/com.braze.enums.inappmessage/-text-align/values.html
 $dokka.location:com.braze.enums////PointingToDeclaration/braze-android-sdk/com.braze.enums/index.html
@@ -257,6 +266,7 @@ $dokka.location:com.braze.enums/BrazeDateFormat.CLOCK_12_HOUR///PointingToDeclar
 $dokka.location:com.braze.enums/BrazeDateFormat.LONG///PointingToDeclaration/{"org.jetbrains.dokka.links.EnumEntryDRIExtra":{"key":"org.jetbrains.dokka.links.EnumEntryDRIExtra"}}braze-android-sdk/com.braze.enums/-braze-date-format/-l-o-n-g/index.html
 $dokka.location:com.braze.enums/BrazeDateFormat.SHORT///PointingToDeclaration/{"org.jetbrains.dokka.links.EnumEntryDRIExtra":{"key":"org.jetbrains.dokka.links.EnumEntryDRIExtra"}}braze-android-sdk/com.braze.enums/-braze-date-format/-s-h-o-r-t/index.html
 $dokka.location:com.braze.enums/BrazeDateFormat///PointingToDeclaration/braze-android-sdk/com.braze.enums/-braze-date-format/index.html
+$dokka.location:com.braze.enums/BrazeDateFormat/entries/#/PointingToDeclaration/braze-android-sdk/com.braze.enums/-braze-date-format/entries.html
 $dokka.location:com.braze.enums/BrazeDateFormat/format/#/PointingToDeclaration/braze-android-sdk/com.braze.enums/-braze-date-format/format.html
 $dokka.location:com.braze.enums/BrazeDateFormat/valueOf/#kotlin.String/PointingToDeclaration/braze-android-sdk/com.braze.enums/-braze-date-format/value-of.html
 $dokka.location:com.braze.enums/BrazeDateFormat/values/#/PointingToDeclaration/braze-android-sdk/com.braze.enums/-braze-date-format/values.html
@@ -264,6 +274,7 @@ $dokka.location:com.braze.enums/BrazePushEventType.NOTIFICATION_DELETED///Pointi
 $dokka.location:com.braze.enums/BrazePushEventType.NOTIFICATION_OPENED///PointingToDeclaration/{"org.jetbrains.dokka.links.EnumEntryDRIExtra":{"key":"org.jetbrains.dokka.links.EnumEntryDRIExtra"}}braze-android-sdk/com.braze.enums/-braze-push-event-type/-n-o-t-i-f-i-c-a-t-i-o-n_-o-p-e-n-e-d/index.html
 $dokka.location:com.braze.enums/BrazePushEventType.NOTIFICATION_RECEIVED///PointingToDeclaration/{"org.jetbrains.dokka.links.EnumEntryDRIExtra":{"key":"org.jetbrains.dokka.links.EnumEntryDRIExtra"}}braze-android-sdk/com.braze.enums/-braze-push-event-type/-n-o-t-i-f-i-c-a-t-i-o-n_-r-e-c-e-i-v-e-d/index.html
 $dokka.location:com.braze.enums/BrazePushEventType///PointingToDeclaration/braze-android-sdk/com.braze.enums/-braze-push-event-type/index.html
+$dokka.location:com.braze.enums/BrazePushEventType/entries/#/PointingToDeclaration/braze-android-sdk/com.braze.enums/-braze-push-event-type/entries.html
 $dokka.location:com.braze.enums/BrazePushEventType/valueOf/#kotlin.String/PointingToDeclaration/braze-android-sdk/com.braze.enums/-braze-push-event-type/value-of.html
 $dokka.location:com.braze.enums/BrazePushEventType/values/#/PointingToDeclaration/braze-android-sdk/com.braze.enums/-braze-push-event-type/values.html
 $dokka.location:com.braze.enums/BrazeSdkMetadata.ADJUST///PointingToDeclaration/{"org.jetbrains.dokka.links.EnumEntryDRIExtra":{"key":"org.jetbrains.dokka.links.EnumEntryDRIExtra"}}braze-android-sdk/com.braze.enums/-braze-sdk-metadata/-a-d-j-u-s-t/index.html
@@ -303,6 +314,7 @@ $dokka.location:com.braze.enums/BrazeSdkMetadata.VIZBEE///PointingToDeclaration/
 $dokka.location:com.braze.enums/BrazeSdkMetadata.WEBCDN///PointingToDeclaration/{"org.jetbrains.dokka.links.EnumEntryDRIExtra":{"key":"org.jetbrains.dokka.links.EnumEntryDRIExtra"}}braze-android-sdk/com.braze.enums/-braze-sdk-metadata/-w-e-b-c-d-n/index.html
 $dokka.location:com.braze.enums/BrazeSdkMetadata.XAMARIN///PointingToDeclaration/{"org.jetbrains.dokka.links.EnumEntryDRIExtra":{"key":"org.jetbrains.dokka.links.EnumEntryDRIExtra"}}braze-android-sdk/com.braze.enums/-braze-sdk-metadata/-x-a-m-a-r-i-n/index.html
 $dokka.location:com.braze.enums/BrazeSdkMetadata///PointingToDeclaration/braze-android-sdk/com.braze.enums/-braze-sdk-metadata/index.html
+$dokka.location:com.braze.enums/BrazeSdkMetadata/entries/#/PointingToDeclaration/braze-android-sdk/com.braze.enums/-braze-sdk-metadata/entries.html
 $dokka.location:com.braze.enums/BrazeSdkMetadata/forJsonPut/#/PointingToDeclaration/braze-android-sdk/com.braze.enums/-braze-sdk-metadata/for-json-put.html
 $dokka.location:com.braze.enums/BrazeSdkMetadata/valueOf/#kotlin.String/PointingToDeclaration/braze-android-sdk/com.braze.enums/-braze-sdk-metadata/value-of.html
 $dokka.location:com.braze.enums/BrazeSdkMetadata/values/#/PointingToDeclaration/braze-android-sdk/com.braze.enums/-braze-sdk-metadata/values.html
@@ -315,6 +327,7 @@ $dokka.location:com.braze.enums/BrazeViewBounds.NOTIFICATION_LARGE_ICON///Pointi
 $dokka.location:com.braze.enums/BrazeViewBounds.NOTIFICATION_ONE_IMAGE_STORY///PointingToDeclaration/{"org.jetbrains.dokka.links.EnumEntryDRIExtra":{"key":"org.jetbrains.dokka.links.EnumEntryDRIExtra"}}braze-android-sdk/com.braze.enums/-braze-view-bounds/-n-o-t-i-f-i-c-a-t-i-o-n_-o-n-e_-i-m-a-g-e_-s-t-o-r-y/index.html
 $dokka.location:com.braze.enums/BrazeViewBounds.NO_BOUNDS///PointingToDeclaration/{"org.jetbrains.dokka.links.EnumEntryDRIExtra":{"key":"org.jetbrains.dokka.links.EnumEntryDRIExtra"}}braze-android-sdk/com.braze.enums/-braze-view-bounds/-n-o_-b-o-u-n-d-s/index.html
 $dokka.location:com.braze.enums/BrazeViewBounds///PointingToDeclaration/braze-android-sdk/com.braze.enums/-braze-view-bounds/index.html
+$dokka.location:com.braze.enums/BrazeViewBounds/entries/#/PointingToDeclaration/braze-android-sdk/com.braze.enums/-braze-view-bounds/entries.html
 $dokka.location:com.braze.enums/BrazeViewBounds/heightDp/#/PointingToDeclaration/braze-android-sdk/com.braze.enums/-braze-view-bounds/height-dp.html
 $dokka.location:com.braze.enums/BrazeViewBounds/valueOf/#kotlin.String/PointingToDeclaration/braze-android-sdk/com.braze.enums/-braze-view-bounds/value-of.html
 $dokka.location:com.braze.enums/BrazeViewBounds/values/#/PointingToDeclaration/braze-android-sdk/com.braze.enums/-braze-view-bounds/values.html
@@ -376,6 +389,7 @@ $dokka.location:com.braze.enums/CardKey.UPDATED///PointingToDeclaration/{"org.je
 $dokka.location:com.braze.enums/CardKey.VIEWED///PointingToDeclaration/{"org.jetbrains.dokka.links.EnumEntryDRIExtra":{"key":"org.jetbrains.dokka.links.EnumEntryDRIExtra"}}braze-android-sdk/com.braze.enums/-card-key/-v-i-e-w-e-d/index.html
 $dokka.location:com.braze.enums/CardKey///PointingToDeclaration/braze-android-sdk/com.braze.enums/-card-key/index.html
 $dokka.location:com.braze.enums/CardKey/contentCardsKey/#/PointingToDeclaration/braze-android-sdk/com.braze.enums/-card-key/content-cards-key.html
+$dokka.location:com.braze.enums/CardKey/entries/#/PointingToDeclaration/braze-android-sdk/com.braze.enums/-card-key/entries.html
 $dokka.location:com.braze.enums/CardKey/feedKey/#/PointingToDeclaration/braze-android-sdk/com.braze.enums/-card-key/feed-key.html
 $dokka.location:com.braze.enums/CardKey/valueOf/#kotlin.String/PointingToDeclaration/braze-android-sdk/com.braze.enums/-card-key/value-of.html
 $dokka.location:com.braze.enums/CardKey/values/#/PointingToDeclaration/braze-android-sdk/com.braze.enums/-card-key/values.html
@@ -388,6 +402,7 @@ $dokka.location:com.braze.enums/CardType.IMAGE///PointingToDeclaration/{"org.jet
 $dokka.location:com.braze.enums/CardType.SHORT_NEWS///PointingToDeclaration/{"org.jetbrains.dokka.links.EnumEntryDRIExtra":{"key":"org.jetbrains.dokka.links.EnumEntryDRIExtra"}}braze-android-sdk/com.braze.enums/-card-type/-s-h-o-r-t_-n-e-w-s/index.html
 $dokka.location:com.braze.enums/CardType.TEXT_ANNOUNCEMENT///PointingToDeclaration/{"org.jetbrains.dokka.links.EnumEntryDRIExtra":{"key":"org.jetbrains.dokka.links.EnumEntryDRIExtra"}}braze-android-sdk/com.braze.enums/-card-type/-t-e-x-t_-a-n-n-o-u-n-c-e-m-e-n-t/index.html
 $dokka.location:com.braze.enums/CardType///PointingToDeclaration/braze-android-sdk/com.braze.enums/-card-type/index.html
+$dokka.location:com.braze.enums/CardType/entries/#/PointingToDeclaration/braze-android-sdk/com.braze.enums/-card-type/entries.html
 $dokka.location:com.braze.enums/CardType/value/#/PointingToDeclaration/braze-android-sdk/com.braze.enums/-card-type/value.html
 $dokka.location:com.braze.enums/CardType/valueOf/#kotlin.String/PointingToDeclaration/braze-android-sdk/com.braze.enums/-card-type/value-of.html
 $dokka.location:com.braze.enums/CardType/values/#/PointingToDeclaration/braze-android-sdk/com.braze.enums/-card-type/values.html
@@ -397,6 +412,7 @@ $dokka.location:com.braze.enums/Channel.NEWS_FEED///PointingToDeclaration/{"org.
 $dokka.location:com.braze.enums/Channel.PUSH///PointingToDeclaration/{"org.jetbrains.dokka.links.EnumEntryDRIExtra":{"key":"org.jetbrains.dokka.links.EnumEntryDRIExtra"}}braze-android-sdk/com.braze.enums/-channel/-p-u-s-h/index.html
 $dokka.location:com.braze.enums/Channel.UNKNOWN///PointingToDeclaration/{"org.jetbrains.dokka.links.EnumEntryDRIExtra":{"key":"org.jetbrains.dokka.links.EnumEntryDRIExtra"}}braze-android-sdk/com.braze.enums/-channel/-u-n-k-n-o-w-n/index.html
 $dokka.location:com.braze.enums/Channel///PointingToDeclaration/braze-android-sdk/com.braze.enums/-channel/index.html
+$dokka.location:com.braze.enums/Channel/entries/#/PointingToDeclaration/braze-android-sdk/com.braze.enums/-channel/entries.html
 $dokka.location:com.braze.enums/Channel/valueOf/#kotlin.String/PointingToDeclaration/braze-android-sdk/com.braze.enums/-channel/value-of.html
 $dokka.location:com.braze.enums/Channel/values/#/PointingToDeclaration/braze-android-sdk/com.braze.enums/-channel/values.html
 $dokka.location:com.braze.enums/DeviceKey.AD_TRACKING_ENABLED///PointingToDeclaration/{"org.jetbrains.dokka.links.EnumEntryDRIExtra":{"key":"org.jetbrains.dokka.links.EnumEntryDRIExtra"}}braze-android-sdk/com.braze.enums/-device-key/-a-d_-t-r-a-c-k-i-n-g_-e-n-a-b-l-e-d/index.html
@@ -411,6 +427,7 @@ $dokka.location:com.braze.enums/DeviceKey.NOTIFICATIONS_ENABLED///PointingToDecl
 $dokka.location:com.braze.enums/DeviceKey.RESOLUTION///PointingToDeclaration/{"org.jetbrains.dokka.links.EnumEntryDRIExtra":{"key":"org.jetbrains.dokka.links.EnumEntryDRIExtra"}}braze-android-sdk/com.braze.enums/-device-key/-r-e-s-o-l-u-t-i-o-n/index.html
 $dokka.location:com.braze.enums/DeviceKey.TIMEZONE///PointingToDeclaration/{"org.jetbrains.dokka.links.EnumEntryDRIExtra":{"key":"org.jetbrains.dokka.links.EnumEntryDRIExtra"}}braze-android-sdk/com.braze.enums/-device-key/-t-i-m-e-z-o-n-e/index.html
 $dokka.location:com.braze.enums/DeviceKey///PointingToDeclaration/braze-android-sdk/com.braze.enums/-device-key/index.html
+$dokka.location:com.braze.enums/DeviceKey/entries/#/PointingToDeclaration/braze-android-sdk/com.braze.enums/-device-key/entries.html
 $dokka.location:com.braze.enums/DeviceKey/key/#/PointingToDeclaration/braze-android-sdk/com.braze.enums/-device-key/key.html
 $dokka.location:com.braze.enums/DeviceKey/valueOf/#kotlin.String/PointingToDeclaration/braze-android-sdk/com.braze.enums/-device-key/value-of.html
 $dokka.location:com.braze.enums/DeviceKey/values/#/PointingToDeclaration/braze-android-sdk/com.braze.enums/-device-key/values.html
@@ -423,6 +440,7 @@ $dokka.location:com.braze.enums/Gender.OTHER///PointingToDeclaration/{"org.jetbr
 $dokka.location:com.braze.enums/Gender.PREFER_NOT_TO_SAY///PointingToDeclaration/{"org.jetbrains.dokka.links.EnumEntryDRIExtra":{"key":"org.jetbrains.dokka.links.EnumEntryDRIExtra"}}braze-android-sdk/com.braze.enums/-gender/-p-r-e-f-e-r_-n-o-t_-t-o_-s-a-y/index.html
 $dokka.location:com.braze.enums/Gender.UNKNOWN///PointingToDeclaration/{"org.jetbrains.dokka.links.EnumEntryDRIExtra":{"key":"org.jetbrains.dokka.links.EnumEntryDRIExtra"}}braze-android-sdk/com.braze.enums/-gender/-u-n-k-n-o-w-n/index.html
 $dokka.location:com.braze.enums/Gender///PointingToDeclaration/braze-android-sdk/com.braze.enums/-gender/index.html
+$dokka.location:com.braze.enums/Gender/entries/#/PointingToDeclaration/braze-android-sdk/com.braze.enums/-gender/entries.html
 $dokka.location:com.braze.enums/Gender/forJsonPut/#/PointingToDeclaration/braze-android-sdk/com.braze.enums/-gender/for-json-put.html
 $dokka.location:com.braze.enums/Gender/value/#/PointingToDeclaration/braze-android-sdk/com.braze.enums/-gender/value.html
 $dokka.location:com.braze.enums/Gender/valueOf/#kotlin.String/PointingToDeclaration/braze-android-sdk/com.braze.enums/-gender/value-of.html
@@ -430,14 +448,17 @@ $dokka.location:com.braze.enums/Gender/values/#/PointingToDeclaration/braze-and
 $dokka.location:com.braze.enums/GeofenceTransitionType.ENTER///PointingToDeclaration/{"org.jetbrains.dokka.links.EnumEntryDRIExtra":{"key":"org.jetbrains.dokka.links.EnumEntryDRIExtra"}}braze-android-sdk/com.braze.enums/-geofence-transition-type/-e-n-t-e-r/index.html
 $dokka.location:com.braze.enums/GeofenceTransitionType.EXIT///PointingToDeclaration/{"org.jetbrains.dokka.links.EnumEntryDRIExtra":{"key":"org.jetbrains.dokka.links.EnumEntryDRIExtra"}}braze-android-sdk/com.braze.enums/-geofence-transition-type/-e-x-i-t/index.html
 $dokka.location:com.braze.enums/GeofenceTransitionType///PointingToDeclaration/braze-android-sdk/com.braze.enums/-geofence-transition-type/index.html
+$dokka.location:com.braze.enums/GeofenceTransitionType/entries/#/PointingToDeclaration/braze-android-sdk/com.braze.enums/-geofence-transition-type/entries.html
 $dokka.location:com.braze.enums/GeofenceTransitionType/valueOf/#kotlin.String/PointingToDeclaration/braze-android-sdk/com.braze.enums/-geofence-transition-type/value-of.html
 $dokka.location:com.braze.enums/GeofenceTransitionType/values/#/PointingToDeclaration/braze-android-sdk/com.braze.enums/-geofence-transition-type/values.html
 $dokka.location:com.braze.enums/LocationProviderName.GPS///PointingToDeclaration/{"org.jetbrains.dokka.links.EnumEntryDRIExtra":{"key":"org.jetbrains.dokka.links.EnumEntryDRIExtra"}}braze-android-sdk/com.braze.enums/-location-provider-name/-g-p-s/index.html
 $dokka.location:com.braze.enums/LocationProviderName.NETWORK///PointingToDeclaration/{"org.jetbrains.dokka.links.EnumEntryDRIExtra":{"key":"org.jetbrains.dokka.links.EnumEntryDRIExtra"}}braze-android-sdk/com.braze.enums/-location-provider-name/-n-e-t-w-o-r-k/index.html
 $dokka.location:com.braze.enums/LocationProviderName.PASSIVE///PointingToDeclaration/{"org.jetbrains.dokka.links.EnumEntryDRIExtra":{"key":"org.jetbrains.dokka.links.EnumEntryDRIExtra"}}braze-android-sdk/com.braze.enums/-location-provider-name/-p-a-s-s-i-v-e/index.html
 $dokka.location:com.braze.enums/LocationProviderName///PointingToDeclaration/braze-android-sdk/com.braze.enums/-location-provider-name/index.html
+$dokka.location:com.braze.enums/LocationProviderName/entries/#/PointingToDeclaration/braze-android-sdk/com.braze.enums/-location-provider-name/entries.html
 $dokka.location:com.braze.enums/LocationProviderName/valueOf/#kotlin.String/PointingToDeclaration/braze-android-sdk/com.braze.enums/-location-provider-name/value-of.html
 $dokka.location:com.braze.enums/LocationProviderName/values/#/PointingToDeclaration/braze-android-sdk/com.braze.enums/-location-provider-name/values.html
+$dokka.location:com.braze.enums/MetadataTags///PointingToDeclaration/braze-android-sdk/com.braze.enums/-metadata-tags/index.html
 $dokka.location:com.braze.enums/Month.APRIL///PointingToDeclaration/{"org.jetbrains.dokka.links.EnumEntryDRIExtra":{"key":"org.jetbrains.dokka.links.EnumEntryDRIExtra"}}braze-android-sdk/com.braze.enums/-month/-a-p-r-i-l/index.html
 $dokka.location:com.braze.enums/Month.AUGUST///PointingToDeclaration/{"org.jetbrains.dokka.links.EnumEntryDRIExtra":{"key":"org.jetbrains.dokka.links.EnumEntryDRIExtra"}}braze-android-sdk/com.braze.enums/-month/-a-u-g-u-s-t/index.html
 $dokka.location:com.braze.enums/Month.Companion///PointingToDeclaration/braze-android-sdk/com.braze.enums/-month/-companion/index.html
@@ -453,6 +474,7 @@ $dokka.location:com.braze.enums/Month.NOVEMBER///PointingToDeclaration/{"org.jet
 $dokka.location:com.braze.enums/Month.OCTOBER///PointingToDeclaration/{"org.jetbrains.dokka.links.EnumEntryDRIExtra":{"key":"org.jetbrains.dokka.links.EnumEntryDRIExtra"}}braze-android-sdk/com.braze.enums/-month/-o-c-t-o-b-e-r/index.html
 $dokka.location:com.braze.enums/Month.SEPTEMBER///PointingToDeclaration/{"org.jetbrains.dokka.links.EnumEntryDRIExtra":{"key":"org.jetbrains.dokka.links.EnumEntryDRIExtra"}}braze-android-sdk/com.braze.enums/-month/-s-e-p-t-e-m-b-e-r/index.html
 $dokka.location:com.braze.enums/Month///PointingToDeclaration/braze-android-sdk/com.braze.enums/-month/index.html
+$dokka.location:com.braze.enums/Month/entries/#/PointingToDeclaration/braze-android-sdk/com.braze.enums/-month/entries.html
 $dokka.location:com.braze.enums/Month/value/#/PointingToDeclaration/braze-android-sdk/com.braze.enums/-month/value.html
 $dokka.location:com.braze.enums/Month/valueOf/#kotlin.String/PointingToDeclaration/braze-android-sdk/com.braze.enums/-month/value-of.html
 $dokka.location:com.braze.enums/Month/values/#/PointingToDeclaration/braze-android-sdk/com.braze.enums/-month/values.html
@@ -462,6 +484,7 @@ $dokka.location:com.braze.enums/NotificationSubscriptionType.OPTED_IN///Pointing
 $dokka.location:com.braze.enums/NotificationSubscriptionType.SUBSCRIBED///PointingToDeclaration/{"org.jetbrains.dokka.links.EnumEntryDRIExtra":{"key":"org.jetbrains.dokka.links.EnumEntryDRIExtra"}}braze-android-sdk/com.braze.enums/-notification-subscription-type/-s-u-b-s-c-r-i-b-e-d/index.html
 $dokka.location:com.braze.enums/NotificationSubscriptionType.UNSUBSCRIBED///PointingToDeclaration/{"org.jetbrains.dokka.links.EnumEntryDRIExtra":{"key":"org.jetbrains.dokka.links.EnumEntryDRIExtra"}}braze-android-sdk/com.braze.enums/-notification-subscription-type/-u-n-s-u-b-s-c-r-i-b-e-d/index.html
 $dokka.location:com.braze.enums/NotificationSubscriptionType///PointingToDeclaration/braze-android-sdk/com.braze.enums/-notification-subscription-type/index.html
+$dokka.location:com.braze.enums/NotificationSubscriptionType/entries/#/PointingToDeclaration/braze-android-sdk/com.braze.enums/-notification-subscription-type/entries.html
 $dokka.location:com.braze.enums/NotificationSubscriptionType/forJsonPut/#/PointingToDeclaration/braze-android-sdk/com.braze.enums/-notification-subscription-type/for-json-put.html
 $dokka.location:com.braze.enums/NotificationSubscriptionType/key/#/PointingToDeclaration/braze-android-sdk/com.braze.enums/-notification-subscription-type/key.html
 $dokka.location:com.braze.enums/NotificationSubscriptionType/valueOf/#kotlin.String/PointingToDeclaration/braze-android-sdk/com.braze.enums/-notification-subscription-type/value-of.html
@@ -475,6 +498,7 @@ $dokka.location:com.braze.enums/SdkFlavor.TEALIUM///PointingToDeclaration/{"org.
 $dokka.location:com.braze.enums/SdkFlavor.UNITY///PointingToDeclaration/{"org.jetbrains.dokka.links.EnumEntryDRIExtra":{"key":"org.jetbrains.dokka.links.EnumEntryDRIExtra"}}braze-android-sdk/com.braze.enums/-sdk-flavor/-u-n-i-t-y/index.html
 $dokka.location:com.braze.enums/SdkFlavor.XAMARIN///PointingToDeclaration/{"org.jetbrains.dokka.links.EnumEntryDRIExtra":{"key":"org.jetbrains.dokka.links.EnumEntryDRIExtra"}}braze-android-sdk/com.braze.enums/-sdk-flavor/-x-a-m-a-r-i-n/index.html
 $dokka.location:com.braze.enums/SdkFlavor///PointingToDeclaration/braze-android-sdk/com.braze.enums/-sdk-flavor/index.html
+$dokka.location:com.braze.enums/SdkFlavor/entries/#/PointingToDeclaration/braze-android-sdk/com.braze.enums/-sdk-flavor/entries.html
 $dokka.location:com.braze.enums/SdkFlavor/forJsonPut/#/PointingToDeclaration/braze-android-sdk/com.braze.enums/-sdk-flavor/for-json-put.html
 $dokka.location:com.braze.enums/SdkFlavor/valueOf/#kotlin.String/PointingToDeclaration/braze-android-sdk/com.braze.enums/-sdk-flavor/value-of.html
 $dokka.location:com.braze.enums/SdkFlavor/values/#/PointingToDeclaration/braze-android-sdk/com.braze.enums/-sdk-flavor/values.html
@@ -483,6 +507,7 @@ $dokka.location:com.braze.events/BrazeNetworkFailureEvent.RequestType.CONTENT_CA
 $dokka.location:com.braze.events/BrazeNetworkFailureEvent.RequestType.NEWS_FEED_SYNC///PointingToDeclaration/{"org.jetbrains.dokka.links.EnumEntryDRIExtra":{"key":"org.jetbrains.dokka.links.EnumEntryDRIExtra"}}braze-android-sdk/com.braze.events/-braze-network-failure-event/-request-type/-n-e-w-s_-f-e-e-d_-s-y-n-c/index.html
 $dokka.location:com.braze.events/BrazeNetworkFailureEvent.RequestType.OTHER///PointingToDeclaration/{"org.jetbrains.dokka.links.EnumEntryDRIExtra":{"key":"org.jetbrains.dokka.links.EnumEntryDRIExtra"}}braze-android-sdk/com.braze.events/-braze-network-failure-event/-request-type/-o-t-h-e-r/index.html
 $dokka.location:com.braze.events/BrazeNetworkFailureEvent.RequestType///PointingToDeclaration/braze-android-sdk/com.braze.events/-braze-network-failure-event/-request-type/index.html
+$dokka.location:com.braze.events/BrazeNetworkFailureEvent.RequestType/entries/#/PointingToDeclaration/braze-android-sdk/com.braze.events/-braze-network-failure-event/-request-type/entries.html
 $dokka.location:com.braze.events/BrazeNetworkFailureEvent.RequestType/valueOf/#kotlin.String/PointingToDeclaration/braze-android-sdk/com.braze.events/-braze-network-failure-event/-request-type/value-of.html
 $dokka.location:com.braze.events/BrazeNetworkFailureEvent.RequestType/values/#/PointingToDeclaration/braze-android-sdk/com.braze.events/-braze-network-failure-event/-request-type/values.html
 $dokka.location:com.braze.events/BrazeNetworkFailureEvent///PointingToDeclaration/braze-android-sdk/com.braze.events/-braze-network-failure-event/index.html
@@ -563,6 +588,7 @@ $dokka.location:com.braze.events/SdkDataWipeEvent/SdkDataWipeEvent/#/PointingToD
 $dokka.location:com.braze.events/SessionStateChangedEvent.ChangeType.SESSION_ENDED///PointingToDeclaration/{"org.jetbrains.dokka.links.EnumEntryDRIExtra":{"key":"org.jetbrains.dokka.links.EnumEntryDRIExtra"}}braze-android-sdk/com.braze.events/-session-state-changed-event/-change-type/-s-e-s-s-i-o-n_-e-n-d-e-d/index.html
 $dokka.location:com.braze.events/SessionStateChangedEvent.ChangeType.SESSION_STARTED///PointingToDeclaration/{"org.jetbrains.dokka.links.EnumEntryDRIExtra":{"key":"org.jetbrains.dokka.links.EnumEntryDRIExtra"}}braze-android-sdk/com.braze.events/-session-state-changed-event/-change-type/-s-e-s-s-i-o-n_-s-t-a-r-t-e-d/index.html
 $dokka.location:com.braze.events/SessionStateChangedEvent.ChangeType///PointingToDeclaration/braze-android-sdk/com.braze.events/-session-state-changed-event/-change-type/index.html
+$dokka.location:com.braze.events/SessionStateChangedEvent.ChangeType/entries/#/PointingToDeclaration/braze-android-sdk/com.braze.events/-session-state-changed-event/-change-type/entries.html
 $dokka.location:com.braze.events/SessionStateChangedEvent.ChangeType/valueOf/#kotlin.String/PointingToDeclaration/braze-android-sdk/com.braze.events/-session-state-changed-event/-change-type/value-of.html
 $dokka.location:com.braze.events/SessionStateChangedEvent.ChangeType/values/#/PointingToDeclaration/braze-android-sdk/com.braze.events/-session-state-changed-event/-change-type/values.html
 $dokka.location:com.braze.events/SessionStateChangedEvent///PointingToDeclaration/braze-android-sdk/com.braze.events/-session-state-changed-event/index.html
@@ -913,6 +939,7 @@ $dokka.location:com.braze.models.inappmessage/IInAppMessage/isTestSend/#/Pointin
 $dokka.location:com.braze.models.inappmessage/IInAppMessage/logClick/#/PointingToDeclaration/braze-android-sdk/com.braze.models.inappmessage/-i-in-app-message/log-click.html
 $dokka.location:com.braze.models.inappmessage/IInAppMessage/logImpression/#/PointingToDeclaration/braze-android-sdk/com.braze.models.inappmessage/-i-in-app-message/log-impression.html
 $dokka.location:com.braze.models.inappmessage/IInAppMessage/message/#/PointingToDeclaration/braze-android-sdk/com.braze.models.inappmessage/-i-in-app-message/message.html
+$dokka.location:com.braze.models.inappmessage/IInAppMessage/messageExtras/#/PointingToDeclaration/braze-android-sdk/com.braze.models.inappmessage/-i-in-app-message/message-extras.html
 $dokka.location:com.braze.models.inappmessage/IInAppMessage/messageTextAlign/#/PointingToDeclaration/braze-android-sdk/com.braze.models.inappmessage/-i-in-app-message/message-text-align.html
 $dokka.location:com.braze.models.inappmessage/IInAppMessage/messageTextColor/#/PointingToDeclaration/braze-android-sdk/com.braze.models.inappmessage/-i-in-app-message/message-text-color.html
 $dokka.location:com.braze.models.inappmessage/IInAppMessage/messageType/#/PointingToDeclaration/braze-android-sdk/com.braze.models.inappmessage/-i-in-app-message/message-type.html
@@ -975,6 +1002,7 @@ $dokka.location:com.braze.models.inappmessage/InAppMessageBase/jsonObject/#/Poin
 $dokka.location:com.braze.models.inappmessage/InAppMessageBase/logClick/#/PointingToDeclaration/braze-android-sdk/com.braze.models.inappmessage/-in-app-message-base/log-click.html
 $dokka.location:com.braze.models.inappmessage/InAppMessageBase/logImpression/#/PointingToDeclaration/braze-android-sdk/com.braze.models.inappmessage/-in-app-message-base/log-impression.html
 $dokka.location:com.braze.models.inappmessage/InAppMessageBase/message/#/PointingToDeclaration/braze-android-sdk/com.braze.models.inappmessage/-in-app-message-base/message.html
+$dokka.location:com.braze.models.inappmessage/InAppMessageBase/messageExtras/#/PointingToDeclaration/braze-android-sdk/com.braze.models.inappmessage/-in-app-message-base/message-extras.html
 $dokka.location:com.braze.models.inappmessage/InAppMessageBase/messageTextAlign/#/PointingToDeclaration/braze-android-sdk/com.braze.models.inappmessage/-in-app-message-base/message-text-align.html
 $dokka.location:com.braze.models.inappmessage/InAppMessageBase/messageTextColor/#/PointingToDeclaration/braze-android-sdk/com.braze.models.inappmessage/-in-app-message-base/message-text-color.html
 $dokka.location:com.braze.models.inappmessage/InAppMessageBase/onAfterClosed/#/PointingToDeclaration/braze-android-sdk/com.braze.models.inappmessage/-in-app-message-base/on-after-closed.html
@@ -1441,6 +1469,7 @@ $dokka.location:com.braze.support/BrazeLogger.Priority.I///PointingToDeclaration
 $dokka.location:com.braze.support/BrazeLogger.Priority.V///PointingToDeclaration/{"org.jetbrains.dokka.links.EnumEntryDRIExtra":{"key":"org.jetbrains.dokka.links.EnumEntryDRIExtra"}}braze-android-sdk/com.braze.support/-braze-logger/-priority/-v/index.html
 $dokka.location:com.braze.support/BrazeLogger.Priority.W///PointingToDeclaration/{"org.jetbrains.dokka.links.EnumEntryDRIExtra":{"key":"org.jetbrains.dokka.links.EnumEntryDRIExtra"}}braze-android-sdk/com.braze.support/-braze-logger/-priority/-w/index.html
 $dokka.location:com.braze.support/BrazeLogger.Priority///PointingToDeclaration/braze-android-sdk/com.braze.support/-braze-logger/-priority/index.html
+$dokka.location:com.braze.support/BrazeLogger.Priority/entries/#/PointingToDeclaration/braze-android-sdk/com.braze.support/-braze-logger/-priority/entries.html
 $dokka.location:com.braze.support/BrazeLogger.Priority/logLevel/#/PointingToDeclaration/braze-android-sdk/com.braze.support/-braze-logger/-priority/log-level.html
 $dokka.location:com.braze.support/BrazeLogger.Priority/valueOf/#kotlin.String/PointingToDeclaration/braze-android-sdk/com.braze.support/-braze-logger/-priority/value-of.html
 $dokka.location:com.braze.support/BrazeLogger.Priority/values/#/PointingToDeclaration/braze-android-sdk/com.braze.support/-braze-logger/-priority/values.html
@@ -1676,6 +1705,7 @@ $dokka.location:com.braze.ui.contentcards/ContentCardsFragment/setContentCardUpd
 $dokka.location:com.braze.ui.contentcards/ContentCardsFragment/setContentCardsViewBindingHandler/#com.braze.ui.contentcards.handlers.IContentCardsViewBindingHandler?/PointingToDeclaration/braze-android-sdk/com.braze.ui.contentcards/-content-cards-fragment/set-content-cards-view-binding-handler.html
 $dokka.location:com.braze.ui.feed.listeners////PointingToDeclaration/braze-android-sdk/com.braze.ui.feed.listeners/index.html
 $dokka.location:com.braze.ui.feed.listeners/BrazeDefaultFeedClickActionListener///PointingToDeclaration/braze-android-sdk/com.braze.ui.feed.listeners/-braze-default-feed-click-action-listener/index.html
+$dokka.location:com.braze.ui.feed.listeners/BrazeDefaultFeedClickActionListener/BrazeDefaultFeedClickActionListener/#/PointingToDeclaration/braze-android-sdk/com.braze.ui.feed.listeners/-braze-default-feed-click-action-listener/-braze-default-feed-click-action-listener.html
 $dokka.location:com.braze.ui.feed.listeners/BrazeDefaultFeedClickActionListener/onFeedCardClicked/#android.content.Context#com.braze.models.cards.Card#com.braze.ui.actions.IAction/PointingToDeclaration/braze-android-sdk/com.braze.ui.feed.listeners/-braze-default-feed-click-action-listener/on-feed-card-clicked.html
 $dokka.location:com.braze.ui.feed.listeners/IFeedClickActionListener///PointingToDeclaration/braze-android-sdk/com.braze.ui.feed.listeners/-i-feed-click-action-listener/index.html
 $dokka.location:com.braze.ui.feed.listeners/IFeedClickActionListener/onFeedCardClicked/#android.content.Context#com.braze.models.cards.Card#com.braze.ui.actions.IAction/PointingToDeclaration/braze-android-sdk/com.braze.ui.feed.listeners/-i-feed-click-action-listener/on-feed-card-clicked.html
@@ -1687,6 +1717,7 @@ $dokka.location:com.braze.ui.feed.view/BaseFeedCardView/getProperViewFromInflate
 $dokka.location:com.braze.ui.feed.view/BaseFeedCardView/setCard/#T/PointingToDeclaration/braze-android-sdk/com.braze.ui.feed.view/-base-feed-card-view/set-card.html
 $dokka.location:com.braze.ui.feed////PointingToDeclaration/braze-android-sdk/com.braze.ui.feed/index.html
 $dokka.location:com.braze.ui.feed/BrazeFeedManager///PointingToDeclaration/braze-android-sdk/com.braze.ui.feed/-braze-feed-manager/index.html
+$dokka.location:com.braze.ui.feed/BrazeFeedManager/BrazeFeedManager/#/PointingToDeclaration/braze-android-sdk/com.braze.ui.feed/-braze-feed-manager/-braze-feed-manager.html
 $dokka.location:com.braze.ui.feed/BrazeFeedManager/getFeedCardClickActionListener/#/PointingToDeclaration/braze-android-sdk/com.braze.ui.feed/-braze-feed-manager/get-feed-card-click-action-listener.html
 $dokka.location:com.braze.ui.feed/BrazeFeedManager/getInstance/#/PointingToDeclaration/braze-android-sdk/com.braze.ui.feed/-braze-feed-manager/get-instance.html
 $dokka.location:com.braze.ui.feed/BrazeFeedManager/setFeedCardClickActionListener/#com.braze.ui.feed.listeners.IFeedClickActionListener/PointingToDeclaration/braze-android-sdk/com.braze.ui.feed/-braze-feed-manager/set-feed-card-click-action-listener.html
@@ -2122,6 +2153,7 @@ $dokka.location:com.braze.ui.inappmessage/InAppMessageOperation.DISPLAY_LATER///
 $dokka.location:com.braze.ui.inappmessage/InAppMessageOperation.DISPLAY_NOW///PointingToDeclaration/{"org.jetbrains.dokka.links.EnumEntryDRIExtra":{"key":"org.jetbrains.dokka.links.EnumEntryDRIExtra"}}braze-android-sdk/com.braze.ui.inappmessage/-in-app-message-operation/-d-i-s-p-l-a-y_-n-o-w/index.html
 $dokka.location:com.braze.ui.inappmessage/InAppMessageOperation.REENQUEUE///PointingToDeclaration/{"org.jetbrains.dokka.links.EnumEntryDRIExtra":{"key":"org.jetbrains.dokka.links.EnumEntryDRIExtra"}}braze-android-sdk/com.braze.ui.inappmessage/-in-app-message-operation/-r-e-e-n-q-u-e-u-e/index.html
 $dokka.location:com.braze.ui.inappmessage/InAppMessageOperation///PointingToDeclaration/braze-android-sdk/com.braze.ui.inappmessage/-in-app-message-operation/index.html
+$dokka.location:com.braze.ui.inappmessage/InAppMessageOperation/entries/#/PointingToDeclaration/braze-android-sdk/com.braze.ui.inappmessage/-in-app-message-operation/entries.html
 $dokka.location:com.braze.ui.inappmessage/InAppMessageOperation/valueOf/#kotlin.String/PointingToDeclaration/braze-android-sdk/com.braze.ui.inappmessage/-in-app-message-operation/value-of.html
 $dokka.location:com.braze.ui.inappmessage/InAppMessageOperation/values/#/PointingToDeclaration/braze-android-sdk/com.braze.ui.inappmessage/-in-app-message-operation/values.html
 $dokka.location:com.braze.ui.support////PointingToDeclaration/braze-android-sdk/com.braze.ui.support/index.html
@@ -2186,10 +2218,12 @@ $dokka.location:com.braze.ui/BrazeDeeplinkHandler/getIntentFlags/#com.braze.IBra
 $dokka.location:com.braze.ui/BrazeDeeplinkHandler/gotoNewsFeed/#android.content.Context#com.braze.ui.actions.NewsfeedAction/PointingToDeclaration/braze-android-sdk/com.braze.ui/-braze-deeplink-handler/goto-news-feed.html
 $dokka.location:com.braze.ui/BrazeDeeplinkHandler/gotoUri/#android.content.Context#com.braze.ui.actions.UriAction/PointingToDeclaration/braze-android-sdk/com.braze.ui/-braze-deeplink-handler/goto-uri.html
 $dokka.location:com.braze.ui/BrazeFeedFragment.FeedGestureListener///PointingToDeclaration/braze-android-sdk/com.braze.ui/-braze-feed-fragment/-feed-gesture-listener/index.html
+$dokka.location:com.braze.ui/BrazeFeedFragment.FeedGestureListener/FeedGestureListener/#/PointingToDeclaration/braze-android-sdk/com.braze.ui/-braze-feed-fragment/-feed-gesture-listener/-feed-gesture-listener.html
 $dokka.location:com.braze.ui/BrazeFeedFragment.FeedGestureListener/onDown/#android.view.MotionEvent/PointingToDeclaration/braze-android-sdk/com.braze.ui/-braze-feed-fragment/-feed-gesture-listener/on-down.html
 $dokka.location:com.braze.ui/BrazeFeedFragment.FeedGestureListener/onFling/#android.view.MotionEvent#android.view.MotionEvent#float#float/PointingToDeclaration/braze-android-sdk/com.braze.ui/-braze-feed-fragment/-feed-gesture-listener/on-fling.html
 $dokka.location:com.braze.ui/BrazeFeedFragment.FeedGestureListener/onScroll/#android.view.MotionEvent#android.view.MotionEvent#float#float/PointingToDeclaration/braze-android-sdk/com.braze.ui/-braze-feed-fragment/-feed-gesture-listener/on-scroll.html
 $dokka.location:com.braze.ui/BrazeFeedFragment///PointingToDeclaration/braze-android-sdk/com.braze.ui/-braze-feed-fragment/index.html
+$dokka.location:com.braze.ui/BrazeFeedFragment/BrazeFeedFragment/#/PointingToDeclaration/braze-android-sdk/com.braze.ui/-braze-feed-fragment/-braze-feed-fragment.html
 $dokka.location:com.braze.ui/BrazeFeedFragment/getCategories/#/PointingToDeclaration/braze-android-sdk/com.braze.ui/-braze-feed-fragment/get-categories.html
 $dokka.location:com.braze.ui/BrazeFeedFragment/getSortEnabled/#/PointingToDeclaration/braze-android-sdk/com.braze.ui/-braze-feed-fragment/get-sort-enabled.html
 $dokka.location:com.braze.ui/BrazeFeedFragment/onAttach/#android.content.Context/PointingToDeclaration/braze-android-sdk/com.braze.ui/-braze-feed-fragment/on-attach.html
@@ -2211,6 +2245,7 @@ $dokka.location:com.braze.ui/BrazeWebViewActivity/createWebChromeClient/#/Pointi
 $dokka.location:com.braze.ui/BrazeWebViewActivity/createWebViewClient/#/PointingToDeclaration/braze-android-sdk/com.braze.ui/-braze-web-view-activity/create-web-view-client.html
 $dokka.location:com.braze.ui/BrazeWebViewActivity/onCreate/#android.os.Bundle?/PointingToDeclaration/braze-android-sdk/com.braze.ui/-braze-web-view-activity/on-create.html
 $dokka.location:com.braze.ui/BrazeXamarinFormsFeedFragment.FeedGestureListener///PointingToDeclaration/braze-android-sdk/com.braze.ui/-braze-xamarin-forms-feed-fragment/-feed-gesture-listener/index.html
+$dokka.location:com.braze.ui/BrazeXamarinFormsFeedFragment.FeedGestureListener/FeedGestureListener/#/PointingToDeclaration/braze-android-sdk/com.braze.ui/-braze-xamarin-forms-feed-fragment/-feed-gesture-listener/-feed-gesture-listener.html
 $dokka.location:com.braze.ui/BrazeXamarinFormsFeedFragment.FeedGestureListener/onDown/#android.view.MotionEvent/PointingToDeclaration/braze-android-sdk/com.braze.ui/-braze-xamarin-forms-feed-fragment/-feed-gesture-listener/on-down.html
 $dokka.location:com.braze.ui/BrazeXamarinFormsFeedFragment.FeedGestureListener/onFling/#android.view.MotionEvent#android.view.MotionEvent#float#float/PointingToDeclaration/braze-android-sdk/com.braze.ui/-braze-xamarin-forms-feed-fragment/-feed-gesture-listener/on-fling.html
 $dokka.location:com.braze.ui/BrazeXamarinFormsFeedFragment.FeedGestureListener/onScroll/#android.view.MotionEvent#android.view.MotionEvent#float#float/PointingToDeclaration/braze-android-sdk/com.braze.ui/-braze-xamarin-forms-feed-fragment/-feed-gesture-listener/on-scroll.html
@@ -2547,6 +2582,7 @@ $dokka.location:com.braze/IBrazeDeeplinkHandler.IntentFlagPurpose.URI_ACTION_OPE
 $dokka.location:com.braze/IBrazeDeeplinkHandler.IntentFlagPurpose.URI_ACTION_OPEN_WITH_WEBVIEW_ACTIVITY///PointingToDeclaration/{"org.jetbrains.dokka.links.EnumEntryDRIExtra":{"key":"org.jetbrains.dokka.links.EnumEntryDRIExtra"}}braze-android-sdk/com.braze/-i-braze-deeplink-handler/-intent-flag-purpose/-u-r-i_-a-c-t-i-o-n_-o-p-e-n_-w-i-t-h_-w-e-b-v-i-e-w_-a-c-t-i-v-i-t-y/index.html
 $dokka.location:com.braze/IBrazeDeeplinkHandler.IntentFlagPurpose.URI_UTILS_GET_MAIN_ACTIVITY_INTENT///PointingToDeclaration/{"org.jetbrains.dokka.links.EnumEntryDRIExtra":{"key":"org.jetbrains.dokka.links.EnumEntryDRIExtra"}}braze-android-sdk/com.braze/-i-braze-deeplink-handler/-intent-flag-purpose/-u-r-i_-u-t-i-l-s_-g-e-t_-m-a-i-n_-a-c-t-i-v-i-t-y_-i-n-t-e-n-t/index.html
 $dokka.location:com.braze/IBrazeDeeplinkHandler.IntentFlagPurpose///PointingToDeclaration/braze-android-sdk/com.braze/-i-braze-deeplink-handler/-intent-flag-purpose/index.html
+$dokka.location:com.braze/IBrazeDeeplinkHandler.IntentFlagPurpose/entries/#/PointingToDeclaration/braze-android-sdk/com.braze/-i-braze-deeplink-handler/-intent-flag-purpose/entries.html
 $dokka.location:com.braze/IBrazeDeeplinkHandler.IntentFlagPurpose/valueOf/#kotlin.String/PointingToDeclaration/braze-android-sdk/com.braze/-i-braze-deeplink-handler/-intent-flag-purpose/value-of.html
 $dokka.location:com.braze/IBrazeDeeplinkHandler.IntentFlagPurpose/values/#/PointingToDeclaration/braze-android-sdk/com.braze/-i-braze-deeplink-handler/-intent-flag-purpose/values.html
 $dokka.location:com.braze/IBrazeDeeplinkHandler///PointingToDeclaration/braze-android-sdk/com.braze/-i-braze-deeplink-handler/index.html

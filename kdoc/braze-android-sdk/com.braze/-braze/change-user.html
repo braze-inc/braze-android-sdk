@@ -1,10 +1,11 @@
 <!DOCTYPE html>
-<html>
+<html class="no-js">
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1" charset="UTF-8">
     <title>changeUser</title>
     <link href="../../../images/logo-icon.svg" rel="icon" type="image/svg">
     <script>var pathToRoot = "../../../";</script>
+    <script>document.documentElement.classList.replace("no-js","js");</script>
     <script>const storage = localStorage.getItem("dokka-dark-mode")
     if (storage == null) {
         const osDarkSchemePreferred = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
@@ -18,12 +19,13 @@
         }
     }
     </script>
+<script type="text/javascript" src="https://unpkg.com/kotlin-playground@1/dist/playground.min.js" async="async"></script>
 <script type="text/javascript" src="../../../scripts/sourceset_dependencies.js" async="async"></script>
 <link href="../../../styles/style.css" rel="Stylesheet">
-<link href="../../../styles/jetbrains-mono.css" rel="Stylesheet">
 <link href="../../../styles/main.css" rel="Stylesheet">
 <link href="../../../styles/prism.css" rel="Stylesheet">
 <link href="../../../styles/logo-styles.css" rel="Stylesheet">
+<link href="../../../styles/font-jb-sans-auto.css" rel="Stylesheet">
 <script type="text/javascript" src="../../../scripts/clipboard.js" async="async"></script>
 <script type="text/javascript" src="../../../scripts/navigation-loader.js" async="async"></script>
 <script type="text/javascript" src="../../../scripts/platform-content-handler.js" async="async"></script>
@@ -32,38 +34,47 @@
 <script type="text/javascript" src="../../../scripts/symbol-parameters-wrapper_deferred.js" defer="defer"></script>
 </head>
 <body>
-<div class="navigation-wrapper" id="navigation-wrapper">
-    <div id="leftToggler"><span class="icon-toggler"></span></div>
-    <div class="library-name">
-            <a href="../../../index.html">
-                    <span>braze-android-sdk</span>
-            </a>
+    <div class="root">
+<nav class="navigation" id="navigation-wrapper">
+    <div class="navigation--inner">
+        <div class="navigation-title">
+            <button class="menu-toggle" id="menu-toggle" type="button">toggle menu</button>
+            <div class="library-name">
+                    <a class="library-name--link" href="../../../index.html">
+                            braze-android-sdk
+                    </a>
+            </div>
+            <div class="library-version">
+30.4.0            </div>
+        </div>
+        <div class="filter-section" id="filter-section">
+                <button class="platform-tag platform-selector jvm-like" data-active="" data-filter=":android-sdk-ui:dokkaHtml/release">androidJvm</button>
+        </div>
     </div>
-    <div>
-30.3.0    </div>
-    <div class="pull-right d-flex">
-        <button id="theme-toggle-button"><span id="theme-toggle"></span></button>
-        <div id="searchBar"></div>
+    <div class="navigation-controls">
+        <button class="navigation-controls--btn navigation-controls--theme" id="theme-toggle-button" type="button">switch theme</button>
+        <div class="navigation-controls--btn navigation-controls--search" id="searchBar" role="button">search in API</div>
     </div>
-</div>
-<div id="container">
-    <div id="leftColumn">
-        <div id="sideMenu"></div>
-    </div>
-    <div id="main">
-<div class="main-content" id="content" pageIds="braze-android-sdk::com.braze/Braze/changeUser/#kotlin.String?/PointingToDeclaration//-1725759721">
+</nav>
+        <div id="container">
+            <div class="sidebar" id="leftColumn">
+                <div class="sidebar--inner" id="sideMenu"></div>
+            </div>
+            <div id="main">
+<div class="main-content" data-page-type="member" id="content" pageIds="braze-android-sdk::com.braze/Braze/changeUser/#kotlin.String?/PointingToDeclaration//-1725759721">
   <div class="breadcrumbs"><a href="../../../index.html">braze-android-sdk</a><span class="delimiter">/</span><a href="../index.html">com.braze</a><span class="delimiter">/</span><a href="index.html">Braze</a><span class="delimiter">/</span><span class="current">changeUser</span></div>
   <div class="cover ">
     <h1 class="cover"><span>change</span><wbr></wbr><span><span>User</span></span></h1>
   </div>
-  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="change-user.html"><span class="token function">changeUser</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">userId<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="token operator">?</span></span></span><span class="token punctuation">)</span></div><p class="paragraph">When a user first uses Braze on a device they are considered &quot;anonymous&quot;. Use this method to identify a user with a unique ID, which enables the following:</p><p class="paragraph">If the same user is identified on another device, their user profile, usage history and event history will be shared across devices.</p><p class="paragraph">If your app is used on the same device by multiple people, you can assign each of them a unique identifier to track them separately. Only the most recent user on a particular device will receive push notifications and in-app messages.</p><p class="paragraph">When you request a user switch (which is any call to changeUser where the new user ID is not the same as the existing user ID), the current session for the previous user (anonymous or not) is automatically ended and a new session is started. Similarly, following a call to changeUser, any events which fire are guaranteed to be for the new user -- if an in-flight server request completes for the old user after the user switch no events will fire, so you do not need to worry about filtering out events from Braze for old users.</p><p class="paragraph">Additionally, if you identify a user which has never been identified on another device, the entire history of that user as an &quot;anonymous&quot; user on this device will be preserved and associated with the newly identified user. However, if you identify a user which has been identified in another device, any history which was already flushed to the server for the anonymous user on this device will be merged into the identified user.</p><h4 class="">See also</h4><div data-togglable="See also"><div class="table" data-togglable="See also"><div class="table-row" data-filterable-current=":android-sdk-ui:dokkaHtml/release" data-filterable-set=":android-sdk-ui:dokkaHtml/release"><div class="main-subrow keyValue WithExtraAttributes"><div class=""><span class="inline-flex"><div></div></span></div><div><div class="title"><div data-togglable="See also"><p class="paragraph"><a href="https://www.braze.com/docs/api/endpoints/user_data/post_users_merge#merge_updates-behavior">List of merge fields</a></p><p class="paragraph">Note: Once you identify a user, you cannot revert to the &quot;anonymous&quot; user. The transition from anonymous to identified tracking is only allowed once because the initial anonymous user receives special treatment to allow for preservation of their history. As a result, we recommend against changing the user ID just because your app has entered a &quot;logged out&quot; state because it makes you unable to target the previously logged out user with re-engagement campaigns. If you anticipate multiple users on the same device, but only want to target one of them when your app is in a logged out state, we recommend separately keeping track of the user ID you want to target while logged out and switching back to that user ID as part of your app's logout process.</p><p class="paragraph">Note that a <a href="../-braze-user/index.html">BrazeUser</a> can be retrieved at any time using <a href="../-i-braze/get-current-user.html">IBraze.getCurrentUser</a>.</p></div></div></div></div></div><div class="table-row" data-filterable-current=":android-sdk-ui:dokkaHtml/release" data-filterable-set=":android-sdk-ui:dokkaHtml/release"><div class="main-subrow keyValue WithExtraAttributes"><div class=""><span class="inline-flex"><div><a href="../-i-braze/get-current-user.html"><span>IBraze.</span><wbr></wbr><span>get</span><wbr></wbr><span>Current</span><wbr></wbr><span><span>User</span></span></a></div></span></div><div></div></div></div></div></div><h4 class="">Parameters</h4><div data-togglable="Parameters"><div class="table" data-togglable="Parameters"><div class="table-row" data-filterable-current=":android-sdk-ui:dokkaHtml/release" data-filterable-set=":android-sdk-ui:dokkaHtml/release"><div class="main-subrow keyValue WithExtraAttributes"><div class=""><span class="inline-flex"><div><u><span>user</span><wbr></wbr><span><span>Id</span></span></u></div></span></div><div><div class="title"><div data-togglable="Parameters"><p class="paragraph">An external user identifier. May not be longer than <a href="../-constants/-u-s-e-r_-i-d_-m-a-x_-l-e-n-g-t-h_-b-y-t-e-s.html">Constants.USER_ID_MAX_LENGTH_BYTES</a>.</p></div></div></div></div></div></div></div><hr><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="change-user.html"><span class="token function">changeUser</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">userId<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="token operator">?</span><span class="token punctuation">, </span></span><span class="parameter ">sdkAuthSignature<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="token operator">?</span></span></span><span class="token punctuation">)</span></div><p class="paragraph">Identical to .changeUser but provides an sdk auth signature for the user before any networking begins, even if the existing external id is used.</p><h4 class="">See also</h4><div data-togglable="See also"><div class="table" data-togglable="See also"><div class="table-row" data-filterable-current=":android-sdk-ui:dokkaHtml/release" data-filterable-set=":android-sdk-ui:dokkaHtml/release"><div class="main-subrow keyValue WithExtraAttributes"><div class=""><span class="inline-flex"><div></div></span></div><div><div class="title"><div data-togglable="See also"><p class="paragraph">.changeUser</p></div></div></div></div></div></div></div></div></div>
+  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="change-user.html"><span class="token function">changeUser</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">userId<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="token operator">?</span></span></span><span class="token punctuation">)</span></div><p class="paragraph">When a user first uses Braze on a device they are considered &quot;anonymous&quot;. Use this method to identify a user with a unique ID, which enables the following:</p><p class="paragraph">If the same user is identified on another device, their user profile, usage history and event history will be shared across devices.</p><p class="paragraph">If your app is used on the same device by multiple people, you can assign each of them a unique identifier to track them separately. Only the most recent user on a particular device will receive push notifications and in-app messages.</p><p class="paragraph">When you request a user switch (which is any call to changeUser where the new user ID is not the same as the existing user ID), the current session for the previous user (anonymous or not) is automatically ended and a new session is started. Similarly, following a call to changeUser, any events which fire are guaranteed to be for the new user -- if an in-flight server request completes for the old user after the user switch no events will fire, so you do not need to worry about filtering out events from Braze for old users.</p><p class="paragraph">Additionally, if you identify a user which has never been identified on another device, the entire history of that user as an &quot;anonymous&quot; user on this device will be preserved and associated with the newly identified user. However, if you identify a user which has been identified in another device, any history which was already flushed to the server for the anonymous user on this device will be merged into the identified user.</p><h4 class="">Parameters</h4><div class="table"><div class="table-row" data-filterable-current=":android-sdk-ui:dokkaHtml/release" data-filterable-set=":android-sdk-ui:dokkaHtml/release"><div class="main-subrow keyValue "><div class=""><span class="inline-flex"><div><u><span>user</span><wbr></wbr><span><span>Id</span></span></u></div></span></div><div><div class="title"><p class="paragraph">An external user identifier. May not be longer than <a href="../-constants/-u-s-e-r_-i-d_-m-a-x_-l-e-n-g-t-h_-b-y-t-e-s.html">Constants.USER_ID_MAX_LENGTH_BYTES</a>.</p></div></div></div></div></div><h4 class="">See also</h4><div class="table"><div class="table-row" data-filterable-current=":android-sdk-ui:dokkaHtml/release" data-filterable-set=":android-sdk-ui:dokkaHtml/release"><div class="main-subrow keyValue "><div class=""><span class="inline-flex"><div></div></span></div><div><div class="title"><p class="paragraph"><a href="https://www.braze.com/docs/api/endpoints/user_data/post_users_merge#merge_updates-behavior">List of merge fields</a></p><p class="paragraph">Note: Once you identify a user, you cannot revert to the &quot;anonymous&quot; user. The transition from anonymous to identified tracking is only allowed once because the initial anonymous user receives special treatment to allow for preservation of their history. As a result, we recommend against changing the user ID just because your app has entered a &quot;logged out&quot; state because it makes you unable to target the previously logged out user with re-engagement campaigns. If you anticipate multiple users on the same device, but only want to target one of them when your app is in a logged out state, we recommend separately keeping track of the user ID you want to target while logged out and switching back to that user ID as part of your app's logout process.</p><p class="paragraph">Note that a <a href="../-braze-user/index.html">BrazeUser</a> can be retrieved at any time using <a href="../-i-braze/get-current-user.html">IBraze.getCurrentUser</a>.</p></div></div></div></div><div class="table-row" data-filterable-current=":android-sdk-ui:dokkaHtml/release" data-filterable-set=":android-sdk-ui:dokkaHtml/release"><div class="main-subrow keyValue "><div class=""><span class="inline-flex"><div><a href="../-i-braze/get-current-user.html"><span>IBraze.</span><wbr></wbr><span>get</span><wbr></wbr><span>Current</span><wbr></wbr><span><span>User</span></span></a></div></span></div><div></div></div></div></div><hr><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="change-user.html"><span class="token function">changeUser</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">userId<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="token operator">?</span><span class="token punctuation">, </span></span><span class="parameter ">sdkAuthSignature<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="token operator">?</span></span></span><span class="token punctuation">)</span></div><p class="paragraph">Identical to .changeUser but provides an sdk auth signature for the user before any networking begins, even if the existing external id is used.</p><h4 class="">See also</h4><div class="table"><div class="table-row" data-filterable-current=":android-sdk-ui:dokkaHtml/release" data-filterable-set=":android-sdk-ui:dokkaHtml/release"><div class="main-subrow keyValue "><div class=""><span class="inline-flex"><div></div></span></div><div><div class="title"><p class="paragraph">.changeUser</p></div></div></div></div></div></div></div>
 </div>
       <div class="footer">
         <span class="go-to-top-icon"><a href="#content" id="go-to-top-link"></a></span><span>© 2024 Copyright</span><span
                 class="pull-right"><span>Generated by </span><a
                 href="https://github.com/Kotlin/dokka"><span>dokka</span><span class="padded-icon"></span></a></span>
       </div>
+            </div>
+        </div>
     </div>
-</div>
 </body>
 </html>
