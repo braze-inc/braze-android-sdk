@@ -1,3 +1,13 @@
+## 30.4.0
+
+[Release Date](https://github.com/braze-inc/braze-android-sdk/releases/tag/v30.4.0)
+
+##### Fixed
+- Fixed an issue with `com.braze.support.DateTimeUtils.nowInMilliseconds()` where, in the event of the device network time clock not being available, the SDK would continually log about the error.
+
+##### Added
+- Adds support for the `message_extras` Liquid tag for in-app messages.
+
 ## 30.3.0
 
 [Release Date](https://github.com/braze-inc/braze-android-sdk/releases/tag/v30.3.0)

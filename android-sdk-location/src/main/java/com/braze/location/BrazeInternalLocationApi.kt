@@ -22,7 +22,7 @@ import com.braze.support.hasPermission
 import com.braze.support.nowInMilliseconds
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.asExecutor
-import java.util.*
+import java.util.EnumSet
 
 /**
  * An implementation of the location calls so that they are contained in a single, external
