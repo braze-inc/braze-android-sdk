@@ -1,6 +1,50 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 
+android {
+  namespace "com.appboy.sample"
+
+  defaultConfig {
+    compileSdk rootProject.ext.compileSdkVersion
+    minSdkVersion rootProject.ext.minSdkVersion
+    targetSdkVersion rootProject.ext.targetSdkVersion
+    applicationId "com.appboy.sample"
+    versionName rootProject.ext.appVersionName
+    versionCode 1
+    resValue "string", "google_maps_key", (project.findProperty("GOOGLE_MAPS_API_KEY") ?: "")
+
+    buildConfigField "String", "BUILD_TIME", "\"" + new Date() + "\""
+    buildConfigField "boolean", "IS_DROIDBOY_RELEASE_BUILD", "false"
+    buildConfigField "String", "SDK_AUTH_ENDPOINT", "\"\""
+    buildConfigField "boolean", "STRICTMODE_ENABLED", "false"
+    buildConfigField "boolean", "SHOULD_USE_CRASHLYTICS", "false"
+
+    multiDexEnabled true
+  }
+
+  lintOptions {
+    disable 'MissingTranslation'
+  }
+
+  compileOptions {
+    sourceCompatibility JavaVersion.VERSION_1_8
+    targetCompatibility JavaVersion.VERSION_1_8
+  }
+
+  buildFeatures {
+    compose true
+  }
+
+  composeOptions {
+    kotlinCompilerExtensionVersion "${KOTLIN_COMPILER_EXTENSION_VERSION}"
+  }
+
+  kotlinOptions {
+    freeCompilerArgs = ['-Xjvm-default=all']
+    jvmTarget = "1.8"
+  }
+}
+
 dependencies {
   implementation project(':android-sdk-ui')
   implementation project(':android-sdk-location')
@@ -35,46 +79,6 @@ dependencies {
   implementation "androidx.compose.material3:material3"
 }
 
-android {
-  namespace "com.appboy.sample"
-  compileSdkVersion rootProject.ext.compileSdkVersion
-  buildToolsVersion rootProject.ext.buildToolsVersion
-
-  defaultConfig {
-    minSdkVersion rootProject.ext.minSdkVersion
-    targetSdkVersion rootProject.ext.targetSdkVersion
-    applicationId "com.appboy.sample"
-    versionName rootProject.ext.appVersionName
-    versionCode 1
-    resValue "string", "google_maps_key", (project.findProperty("GOOGLE_MAPS_API_KEY") ?: "")
-
-    buildConfigField "String", "BUILD_TIME", "\"" + new Date() + "\""
-    buildConfigField "boolean", "IS_DROIDBOY_RELEASE_BUILD", "false"
-    buildConfigField "String", "SDK_AUTH_ENDPOINT", "\"\""
-    buildConfigField "boolean", "STRICTMODE_ENABLED", "false"
-
-    multiDexEnabled true
-  }
-
-  lintOptions {
-    disable 'MissingTranslation'
-  }
-
-  compileOptions {
-    sourceCompatibility JavaVersion.VERSION_1_8
-    targetCompatibility JavaVersion.VERSION_1_8
-  }
-
-  buildFeatures {
-    compose true
-  }
-
-  composeOptions {
-    kotlinCompilerExtensionVersion "${KOTLIN_COMPILER_EXTENSION_VERSION}"
-  }
-
-  kotlinOptions {
-    freeCompilerArgs = ['-Xjvm-default=all']
-    jvmTarget = "1.8"
-  }
-}
+// Uncomment the following lines to use Firebase Messaging and Crashlytics
+//apply plugin: 'com.google.gms.google-services'
+//apply plugin: 'com.google.firebase.crashlytics'

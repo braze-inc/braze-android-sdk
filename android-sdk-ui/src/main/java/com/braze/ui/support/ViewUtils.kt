@@ -20,13 +20,19 @@ private val TAG = "ViewUtils".getBrazeLogTag()
 private const val TABLET_SMALLEST_WIDTH_DP = 600
 
 fun View?.removeViewFromParent() {
-    if (this == null) {
-        brazelog(TAG, D) { "View passed in is null. Not removing from parent." }
-    }
-    if (this?.parent is ViewGroup) {
-        val parent = this.parent as ViewGroup
-        parent.removeView(this)
-        brazelog(TAG, D) { "Removed view: $this\nfrom parent: $parent" }
+    try {
+        if (this == null) {
+            brazelog(TAG, D) { "View passed in is null. Not removing from parent." }
+        }
+        if (this?.parent is ViewGroup) {
+            val parent = this.parent as ViewGroup
+            parent.removeView(this)
+            brazelog(TAG, D) { "Removed view: $this\nfrom parent: $parent" }
+        }
+    } catch (e: Exception) {
+        brazelog(TAG, E, e) {
+            "Caught exception while removing view from parent."
+        }
     }
 }
 

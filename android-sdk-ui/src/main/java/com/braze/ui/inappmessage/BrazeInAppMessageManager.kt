@@ -182,47 +182,51 @@ open class BrazeInAppMessageManager : InAppMessageManagerBase() {
      * @param activity The current Activity.
      */
     open fun registerInAppMessageManager(activity: Activity?) {
-        if (activity == null) {
-            brazelog(W) { "Null Activity passed to registerInAppMessageManager. Doing nothing" }
-            return
-        } else {
-            brazelog(V) { "Registering InAppMessageManager with activity: ${activity.localClassName}" }
-        }
-
-        // We need the current Activity so that we can inflate or programmatically create the in-app message
-        // View for each Activity. We cannot share the View because doing so would create a memory leak.
-        mActivity = activity
-        if (mApplicationContext == null) {
-            // Note, because this class is a singleton and doesn't have any dependencies passed in,
-            // we cache the application context here because it's not available (as it normally would be
-            // from Braze initialization).
-            mApplicationContext = activity.applicationContext
-            if (mApplicationContext == null) {
-                brazelog(W) { "Activity had null applicationContext in registerInAppMessageManager. Doing Nothing." }
+        try {
+            if (activity == null) {
+                brazelog(W) { "Null Activity passed to registerInAppMessageManager. Doing nothing" }
                 return
+            } else {
+                brazelog(V) { "Registering InAppMessageManager with activity: ${activity.localClassName}" }
             }
-        }
-        if (configurationProvider == null) {
-            configurationProvider = mApplicationContext?.let { BrazeConfigurationProvider(it) }
-        }
 
-        // We have a special check to see if the host app switched to a different Activity (or recreated
-        // the same Activity during an orientation change) so that we can redisplay the in-app message.
-        if (carryoverInAppMessage != null) {
-            carryoverInAppMessage?.let {
-                brazelog { "Requesting display of carryover in-app message." }
-                it.animateIn = false
-                displayInAppMessage(it, true)
+            // We need the current Activity so that we can inflate or programmatically create the in-app message
+            // View for each Activity. We cannot share the View because doing so would create a memory leak.
+            mActivity = activity
+            if (mApplicationContext == null) {
+                // Note, because this class is a singleton and doesn't have any dependencies passed in,
+                // we cache the application context here because it's not available (as it normally would be
+                // from Braze initialization).
+                mApplicationContext = activity.applicationContext
+                if (mApplicationContext == null) {
+                    brazelog(W) { "Activity had null applicationContext in registerInAppMessageManager. Doing Nothing." }
+                    return
+                }
             }
-            carryoverInAppMessage = null
-        } else {
-            unregisteredInAppMessage?.let {
-                brazelog { "Adding previously unregistered in-app message." }
-                addInAppMessage(it)
-                unregisteredInAppMessage = null
+            if (configurationProvider == null) {
+                configurationProvider = mApplicationContext?.let { BrazeConfigurationProvider(it) }
             }
+
+            // We have a special check to see if the host app switched to a different Activity (or recreated
+            // the same Activity during an orientation change) so that we can redisplay the in-app message.
+            if (carryoverInAppMessage != null) {
+                carryoverInAppMessage?.let {
+                    brazelog { "Requesting display of carryover in-app message." }
+                    it.animateIn = false
+                    displayInAppMessage(it, true)
+                }
+                carryoverInAppMessage = null
+            } else {
+                unregisteredInAppMessage?.let {
+                    brazelog { "Adding previously unregistered in-app message." }
+                    addInAppMessage(it)
+                    unregisteredInAppMessage = null
+                }
+            }
+            mApplicationContext?.let { ensureSubscribedToInAppMessageEvents(it) }
+        } catch (e: Exception) {
+            brazelog(E, e) { "Error while calling attempting to register the InAppMessageManager" }
         }
-        mApplicationContext?.let { ensureSubscribedToInAppMessageEvents(it) }
     }
 
     /**
@@ -231,47 +235,51 @@ open class BrazeInAppMessageManager : InAppMessageManagerBase() {
      * @param activity The current Activity.
      */
     open fun unregisterInAppMessageManager(activity: Activity?) {
-        if (shouldNextUnregisterBeSkipped) {
-            brazelog {
-                "Skipping unregistration due to " +
-                    "setShouldNextUnregisterBeSkipped being true. Activity: ${activity?.localClassName}"
+        try {
+            if (shouldNextUnregisterBeSkipped) {
+                brazelog {
+                    "Skipping unregistration due to " +
+                        "setShouldNextUnregisterBeSkipped being true. Activity: ${activity?.localClassName}"
+                }
+                shouldNextUnregisterBeSkipped = false
+                return
             }
-            shouldNextUnregisterBeSkipped = false
-            return
-        }
-        if (activity == null) {
-            // The activity is not needed to unregister so we can continue unregistration with it being null.
-            brazelog(W) { "Null Activity passed to unregisterInAppMessageManager." }
-        } else {
-            brazelog(V) { "Unregistering InAppMessageManager from activity: ${activity.localClassName}" }
-        }
-
-        // If there is an in-app message being displayed when the host app transitions to another Activity (or
-        // requests an orientation change), we save it in memory so that we can redisplay it when the
-        // operation is done.
-        val viewWrapper = inAppMessageViewWrapper
-        if (viewWrapper != null) {
-            val inAppMessageView = viewWrapper.inAppMessageView
-            if (inAppMessageView is InAppMessageHtmlBaseView) {
-                brazelog { "In-app message view includes HTML. Removing the page finished listener." }
-                inAppMessageView.setHtmlPageFinishedListener(null)
-            }
-            inAppMessageView.removeViewFromParent()
-
-            // Only continue if we're not animating a close
-            carryoverInAppMessage = if (viewWrapper.isAnimatingClose) {
-                // Note that mInAppMessageViewWrapper may be null after this call
-                inAppMessageViewLifecycleListener.afterClosed(viewWrapper.inAppMessage)
-                null
+            if (activity == null) {
+                // The activity is not needed to unregister so we can continue unregistration with it being null.
+                brazelog(W) { "Null Activity passed to unregisterInAppMessageManager." }
             } else {
-                viewWrapper.inAppMessage
+                brazelog(V) { "Unregistering InAppMessageManager from activity: ${activity.localClassName}" }
             }
-            inAppMessageViewWrapper = null
-        } else {
-            carryoverInAppMessage = null
+
+            // If there is an in-app message being displayed when the host app transitions to another Activity (or
+            // requests an orientation change), we save it in memory so that we can redisplay it when the
+            // operation is done.
+            val viewWrapper = inAppMessageViewWrapper
+            if (viewWrapper != null) {
+                val inAppMessageView = viewWrapper.inAppMessageView
+                if (inAppMessageView is InAppMessageHtmlBaseView) {
+                    brazelog { "In-app message view includes HTML. Removing the page finished listener." }
+                    inAppMessageView.setHtmlPageFinishedListener(null)
+                }
+                inAppMessageView.removeViewFromParent()
+
+                // Only continue if we're not animating a close
+                carryoverInAppMessage = if (viewWrapper.isAnimatingClose) {
+                    // Note that mInAppMessageViewWrapper may be null after this call
+                    inAppMessageViewLifecycleListener.afterClosed(viewWrapper.inAppMessage)
+                    null
+                } else {
+                    viewWrapper.inAppMessage
+                }
+                inAppMessageViewWrapper = null
+            } else {
+                carryoverInAppMessage = null
+            }
+            mActivity = null
+            displayingInAppMessage.set(false)
+        } catch (e: Exception) {
+            brazelog(E, e) { "Error while calling attempting to unregister the InAppMessageManager" }
         }
-        mActivity = null
-        displayingInAppMessage.set(false)
     }
 
     /**

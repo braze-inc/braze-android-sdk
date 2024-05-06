@@ -143,31 +143,35 @@ abstract class InAppMessageHtmlBaseView(context: Context?, attrs: AttributeSet?)
                     } else {
                         val result = view.hitTestResult
                         brazelog(V) { "onCreateWindow HitTestResult is $result" }
-                        when (result.type) {
-                            HitTestResult.SRC_ANCHOR_TYPE -> {
-                                val data = result.extra
-                                val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse(data))
-                                context.startActivity(browserIntent)
-                            }
+                        try {
+                            when (result.type) {
+                                HitTestResult.SRC_ANCHOR_TYPE -> {
+                                    val data = result.extra
+                                    val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse(data))
+                                    context.startActivity(browserIntent)
+                                }
 
-                            HitTestResult.EMAIL_TYPE -> {
-                                val data = WebView.SCHEME_MAILTO + result.extra
-                                val emailIntent = Intent(Intent.ACTION_VIEW, Uri.parse(data))
-                                context.startActivity(emailIntent)
-                            }
+                                HitTestResult.EMAIL_TYPE -> {
+                                    val data = WebView.SCHEME_MAILTO + result.extra
+                                    val emailIntent = Intent(Intent.ACTION_VIEW, Uri.parse(data))
+                                    context.startActivity(emailIntent)
+                                }
 
-                            HitTestResult.PHONE_TYPE -> {
-                                val data = WebView.SCHEME_TEL + result.extra
-                                val telIntent = Intent(Intent.ACTION_VIEW, Uri.parse(data))
-                                context.startActivity(telIntent)
-                            }
+                                HitTestResult.PHONE_TYPE -> {
+                                    val data = WebView.SCHEME_TEL + result.extra
+                                    val telIntent = Intent(Intent.ACTION_VIEW, Uri.parse(data))
+                                    context.startActivity(telIntent)
+                                }
 
-                            else -> {
-                                brazelog(V) {
-                                    "onCreateWindow: hitTestResult type was ${result.type}. " +
-                                        "Not doing anything."
+                                else -> {
+                                    brazelog(V) {
+                                        "onCreateWindow: hitTestResult type was ${result.type}. " +
+                                            "Not doing anything."
+                                    }
                                 }
                             }
+                        } catch (e: Exception) {
+                            brazelog(E, e) { "Failed to open link in new window. $result" }
                         }
                         false
                     }

@@ -33,8 +33,8 @@ Our SDK is now hosted in Maven Central. You can remove `https://braze-inc.github
 
 ```
 dependencies {
-  implementation 'com.braze:android-sdk-ui:30.4.+'
-  implementation 'com.braze:android-sdk-location:30.4.+'
+  implementation 'com.braze:android-sdk-ui:31.0.+'
+  implementation 'com.braze:android-sdk-location:31.0.+'
   ...
 }
 ```
@@ -53,7 +53,7 @@ repositories {
 
 ```
 dependencies {
-  implementation 'com.braze:android-sdk-ui:30.4.+'
+  implementation 'com.braze:android-sdk-ui:31.0.+'
 }
 ```
 

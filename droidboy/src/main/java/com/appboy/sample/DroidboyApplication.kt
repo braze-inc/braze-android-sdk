@@ -45,7 +45,7 @@ import org.json.JSONObject
 import java.io.OutputStreamWriter
 import java.net.HttpURLConnection
 import java.net.URL
-import java.util.*
+import java.util.EnumSet
 
 class DroidboyApplication : Application() {
     private var isSdkAuthEnabled: Boolean = false
@@ -75,7 +75,9 @@ class DroidboyApplication : Application() {
         } else {
             setupNotificationChannels()
         }
-        setupFirebaseCrashlytics()
+        if (BuildConfig.SHOULD_USE_CRASHLYTICS) {
+            setupFirebaseCrashlytics()
+        }
         BrazeLogger.logLevel = applicationContext.getSharedPreferences(getString(R.string.log_level_dialog_title), MODE_PRIVATE)
             .getInt(getString(R.string.current_log_level), Log.VERBOSE)
         val sharedPreferences = applicationContext.getSharedPreferences(getString(R.string.shared_prefs_location), Context.MODE_PRIVATE)
@@ -142,7 +144,7 @@ class DroidboyApplication : Application() {
     }
 
     private suspend fun getSdkAuthToken(userId: String): String? {
-        if (!isSdkAuthEnabled) return null
+        if (!isSdkAuthEnabled || BuildConfig.SDK_AUTH_ENDPOINT.isBlank()) return null
 
         try {
             return withContext(BrazeCoroutineScope.coroutineContext) {
@@ -308,12 +310,16 @@ class DroidboyApplication : Application() {
     }
 
     private fun setupFirebaseCrashlytics() {
-        // Only enable crash logging for the play store deployed released builds
-        val firebaseCrashlytics = FirebaseCrashlytics.getInstance()
-        firebaseCrashlytics.setCrashlyticsCollectionEnabled(BuildConfig.IS_DROIDBOY_RELEASE_BUILD)
-        firebaseCrashlytics.setCustomKey("build_time", BuildConfig.BUILD_TIME)
-        firebaseCrashlytics.setCustomKey("version_code", BuildConfig.VERSION_CODE)
-        firebaseCrashlytics.setCustomKey("version_name", BuildConfig.VERSION_NAME)
+        try {
+            val firebaseCrashlytics = FirebaseCrashlytics.getInstance()
+            // Only enable crash logging for the play store deployed released builds
+            firebaseCrashlytics.setCrashlyticsCollectionEnabled(BuildConfig.IS_DROIDBOY_RELEASE_BUILD)
+            firebaseCrashlytics.setCustomKey("build_time", BuildConfig.BUILD_TIME)
+            firebaseCrashlytics.setCustomKey("version_code", BuildConfig.VERSION_CODE)
+            firebaseCrashlytics.setCustomKey("version_name", BuildConfig.VERSION_NAME)
+        } catch (e: Exception) {
+            brazelog(E, e) { "Failed to setup Firebase Crashlytics" }
+        }
     }
 
     /**

@@ -12,8 +12,8 @@ buildscript {
   dependencies {
     classpath 'com.android.tools.build:gradle:8.3.0'
     classpath 'com.google.gms:google-services:4.3.4'
-    classpath "org.ajoberstar.grgit:grgit-gradle:${AJOBERSTAR_GIT_GRADLE_PLUGIN_VERSION}"
     classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:${KOTLIN_VERSION}"
+    classpath "com.google.firebase:firebase-crashlytics-gradle:${FIREBASE_CRASHLYTICS_GRADLE_VERSION}"
   }
 }
 
@@ -22,7 +22,7 @@ ext {
   buildToolsVersion = '34.0.0'
   minSdkVersion = 21
   targetSdkVersion = 34
-  appVersionName = '30.4.0'
+  appVersionName = '31.0.0'
 }
 
 subprojects {
@@ -34,5 +34,5 @@ subprojects {
   }
 
   group = 'com.braze'
-  version = '30.4.0'
+  version = '31.0.0'
 }
