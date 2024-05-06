@@ -620,6 +620,7 @@ $dokka.location:com.braze.images/DefaultBrazeImageLoader/putBitmapIntoCache/#kot
 $dokka.location:com.braze.images/DefaultBrazeImageLoader/renderUrlIntoCardView/#android.content.Context#com.braze.models.cards.Card#kotlin.String#android.widget.ImageView#com.braze.enums.BrazeViewBounds?/PointingToDeclaration/braze-android-sdk/com.braze.images/-default-braze-image-loader/render-url-into-card-view.html
 $dokka.location:com.braze.images/DefaultBrazeImageLoader/renderUrlIntoInAppMessageView/#android.content.Context#com.braze.models.inappmessage.IInAppMessage#kotlin.String#android.widget.ImageView#com.braze.enums.BrazeViewBounds?/PointingToDeclaration/braze-android-sdk/com.braze.images/-default-braze-image-loader/render-url-into-in-app-message-view.html
 $dokka.location:com.braze.images/DefaultBrazeImageLoader/setOffline/#kotlin.Boolean/PointingToDeclaration/braze-android-sdk/com.braze.images/-default-braze-image-loader/set-offline.html
+$dokka.location:com.braze.images/DefaultBrazeImageLoader/shouldSkipCaching/#android.net.Uri#kotlin.collections.Map[kotlin.String,kotlin.collections.List[kotlin.String]]?/PointingToDeclaration/braze-android-sdk/com.braze.images/-default-braze-image-loader/should-skip-caching.html
 $dokka.location:com.braze.images/IBrazeImageLoader///PointingToDeclaration/braze-android-sdk/com.braze.images/-i-braze-image-loader/index.html
 $dokka.location:com.braze.images/IBrazeImageLoader/getInAppMessageBitmapFromUrl/#android.content.Context#com.braze.models.inappmessage.IInAppMessage#kotlin.String#com.braze.enums.BrazeViewBounds?/PointingToDeclaration/braze-android-sdk/com.braze.images/-i-braze-image-loader/get-in-app-message-bitmap-from-url.html
 $dokka.location:com.braze.images/IBrazeImageLoader/getPushBitmapFromUrl/#android.content.Context#android.os.Bundle?#kotlin.String#com.braze.enums.BrazeViewBounds?/PointingToDeclaration/braze-android-sdk/com.braze.images/-i-braze-image-loader/get-push-bitmap-from-url.html
@@ -1271,8 +1272,11 @@ $dokka.location:com.braze.models/FeatureFlag///PointingToDeclaration/braze-andr
 $dokka.location:com.braze.models/FeatureFlag/enabled/#/PointingToDeclaration/braze-android-sdk/com.braze.models/-feature-flag/enabled.html
 $dokka.location:com.braze.models/FeatureFlag/forJsonPut/#/PointingToDeclaration/braze-android-sdk/com.braze.models/-feature-flag/for-json-put.html
 $dokka.location:com.braze.models/FeatureFlag/getBooleanProperty/#kotlin.String/PointingToDeclaration/braze-android-sdk/com.braze.models/-feature-flag/get-boolean-property.html
+$dokka.location:com.braze.models/FeatureFlag/getImageProperty/#kotlin.String/PointingToDeclaration/braze-android-sdk/com.braze.models/-feature-flag/get-image-property.html
+$dokka.location:com.braze.models/FeatureFlag/getJSONProperty/#kotlin.String/PointingToDeclaration/braze-android-sdk/com.braze.models/-feature-flag/get-j-s-o-n-property.html
 $dokka.location:com.braze.models/FeatureFlag/getNumberProperty/#kotlin.String/PointingToDeclaration/braze-android-sdk/com.braze.models/-feature-flag/get-number-property.html
 $dokka.location:com.braze.models/FeatureFlag/getStringProperty/#kotlin.String/PointingToDeclaration/braze-android-sdk/com.braze.models/-feature-flag/get-string-property.html
+$dokka.location:com.braze.models/FeatureFlag/getTimestamp/#kotlin.String/PointingToDeclaration/braze-android-sdk/com.braze.models/-feature-flag/get-timestamp.html
 $dokka.location:com.braze.models/FeatureFlag/id/#/PointingToDeclaration/braze-android-sdk/com.braze.models/-feature-flag/id.html
 $dokka.location:com.braze.models/FeatureFlag/properties/#/PointingToDeclaration/braze-android-sdk/com.braze.models/-feature-flag/properties.html
 $dokka.location:com.braze.models/IBrazeLocation.Companion///PointingToDeclaration/braze-android-sdk/com.braze.models/-i-braze-location/-companion/index.html
@@ -1462,6 +1466,10 @@ $dokka.location:com.braze.support//toBundle/kotlin.collections.Map[kotlin.String
 $dokka.location:com.braze.support//toStringMap/android.os.Bundle?#/PointingToDeclaration/braze-android-sdk/com.braze.support/to-string-map.html
 $dokka.location:com.braze.support//truncateToByteLength/kotlin.String#kotlin.Int/PointingToDeclaration/braze-android-sdk/com.braze.support/truncate-to-byte-length.html
 $dokka.location:com.braze.support//wouldPushPermissionPromptDisplay/android.app.Activity?#/PointingToDeclaration/braze-android-sdk/com.braze.support/would-push-permission-prompt-display.html
+$dokka.location:com.braze.support/BitmapAndHeaders///PointingToDeclaration/braze-android-sdk/com.braze.support/-bitmap-and-headers/index.html
+$dokka.location:com.braze.support/BitmapAndHeaders/BitmapAndHeaders/#android.graphics.Bitmap?#kotlin.collections.Map[kotlin.String,kotlin.collections.List[kotlin.String]]?/PointingToDeclaration/braze-android-sdk/com.braze.support/-bitmap-and-headers/-bitmap-and-headers.html
+$dokka.location:com.braze.support/BitmapAndHeaders/bitmap/#/PointingToDeclaration/braze-android-sdk/com.braze.support/-bitmap-and-headers/bitmap.html
+$dokka.location:com.braze.support/BitmapAndHeaders/headers/#/PointingToDeclaration/braze-android-sdk/com.braze.support/-bitmap-and-headers/headers.html
 $dokka.location:com.braze.support/BrazeFunctionNotImplemented///PointingToDeclaration/braze-android-sdk/com.braze.support/-braze-function-not-implemented/index.html
 $dokka.location:com.braze.support/BrazeLogger.Priority.D///PointingToDeclaration/{"org.jetbrains.dokka.links.EnumEntryDRIExtra":{"key":"org.jetbrains.dokka.links.EnumEntryDRIExtra"}}braze-android-sdk/com.braze.support/-braze-logger/-priority/-d/index.html
 $dokka.location:com.braze.support/BrazeLogger.Priority.E///PointingToDeclaration/{"org.jetbrains.dokka.links.EnumEntryDRIExtra":{"key":"org.jetbrains.dokka.links.EnumEntryDRIExtra"}}braze-android-sdk/com.braze.support/-braze-logger/-priority/-e/index.html
