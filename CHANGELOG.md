@@ -7,7 +7,6 @@
   - Custom Image Loaders that have used code from `DefaultBrazeImageLoader` may need to update their code to handle the new return type.
 
 ##### Fixed
-- Fixed an issue with `com.braze.support.DateTimeUtils.nowInMilliseconds()` where, in the event of the device network time clock not being available, the SDK would continually log about the error.
 - Fixed the potential for `ViewUtils.removeViewFromParent` to cause a crash.
 - Fixed an issue where an HTML In-App Message could crash if a bad external link had a query parameter of `target="_blank"`. Thanks to `@chenxiangcxc` for finding the issue.
 - Fixed an issue where images would be cached when the HTTP headers indicated they shouldn't be cached.
