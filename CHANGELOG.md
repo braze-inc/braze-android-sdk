@@ -2,15 +2,11 @@
 
 [Release Date](https://github.com/braze-inc/braze-android-sdk/releases/tag/v31.0.1)
 
-#### Breaking
-
 ##### Fixed
 - Added `getTimestampProperty(key)` to `FeatureFlag` and deprecated `getTimestamp(key)` for consistency.
 
 ##### Added
 - Added Azerbaijani language translations for Braze UI elements.
-
-##### Changed
 
 ## 31.0.0
 
