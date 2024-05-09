@@ -18,10 +18,9 @@ dependencies {
 
 android {
   namespace "com.braze.ui"
-  compileSdkVersion rootProject.ext.compileSdkVersion
-  buildToolsVersion rootProject.ext.buildToolsVersion
 
   defaultConfig {
+    compileSdk rootProject.ext.compileSdkVersion
     minSdkVersion rootProject.ext.minSdkVersion
     targetSdkVersion rootProject.ext.targetSdkVersion
     consumerProguardFiles 'braze-consumer-proguard-rules.pro'

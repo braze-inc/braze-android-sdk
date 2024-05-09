@@ -2,10 +2,9 @@ apply plugin: 'com.android.application'
 
 android {
   namespace "com.braze.helloworld"
-  compileSdkVersion rootProject.ext.compileSdkVersion
-  buildToolsVersion rootProject.ext.buildToolsVersion
 
   defaultConfig {
+    compileSdk rootProject.ext.compileSdkVersion
     minSdkVersion rootProject.ext.minSdkVersion
     targetSdkVersion rootProject.ext.targetSdkVersion
     versionName "1.0"

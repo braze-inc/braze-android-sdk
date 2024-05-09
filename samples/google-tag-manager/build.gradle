@@ -2,11 +2,10 @@ apply plugin: 'com.android.application'
 
 android {
   namespace "com.braze.googletagmanager"
-  compileSdkVersion rootProject.ext.compileSdkVersion
-  buildToolsVersion rootProject.ext.buildToolsVersion
 
   defaultConfig {
     applicationId "com.braze.googletagmanager"
+    compileSdk rootProject.ext.compileSdkVersion
     minSdkVersion rootProject.ext.minSdkVersion
     targetSdkVersion rootProject.ext.targetSdkVersion
     versionCode 1

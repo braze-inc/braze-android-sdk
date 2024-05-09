@@ -1,3 +1,17 @@
+## 31.1.0
+
+[Release Date](https://github.com/braze-inc/braze-android-sdk/releases/tag/v31.0.1)
+
+#### Breaking
+
+##### Fixed
+- Added `getTimestampProperty(key)` to `FeatureFlag` and deprecated `getTimestamp(key)` for consistency.
+
+##### Added
+- Added Azerbaijani language translations for Braze UI elements.
+
+##### Changed
+
 ## 31.0.0
 
 [Release Date](https://github.com/braze-inc/braze-android-sdk/releases/tag/v31.0.0)
@@ -13,7 +27,7 @@
 - Fixed an issue where some liquid templated images would not have the proper aspect ratio.
 
 ##### Added
-- Added support for new Feature Flag property types by adding `getJsonProperty(key)`, `getImageProperty(key)`, and `getDateTimeProperty(key)` to `FeatureFlag`.
+- Added support for new Feature Flag property types by adding `getJsonProperty(key)`, `getImageProperty(key)`, and `getTimestampProperty(key)` to `FeatureFlag`.
 
 ##### Changed
 - Removed `@Synchronized` from Brazelogger in order to eliminate noisy thread deadlock logs.

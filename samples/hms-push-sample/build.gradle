@@ -3,11 +3,10 @@ apply plugin: 'kotlin-android'
 
 android {
   namespace "com.braze.hms_sample"
-  compileSdkVersion rootProject.ext.compileSdkVersion
-  buildToolsVersion rootProject.ext.buildToolsVersion
 
   defaultConfig {
     applicationId "com.braze.hms_sample"
+    compileSdk rootProject.ext.compileSdkVersion
     minSdkVersion 21 //rootProject.ext.minSdkVersion
     // Huawei has not provided an SDK ready for
     // API 31 so this target version is on 30

@@ -3,11 +3,10 @@ apply from: rootProject.file("config/buildscript/break-compile-on-deprecations.g
 
 android {
   namespace "com.braze.firebasepush"
-  compileSdkVersion rootProject.ext.compileSdkVersion
-  buildToolsVersion rootProject.ext.buildToolsVersion
 
   defaultConfig {
     applicationId "com.braze.firebasepush"
+    compileSdk rootProject.ext.compileSdkVersion
     minSdkVersion rootProject.ext.minSdkVersion
     targetSdkVersion rootProject.ext.targetSdkVersion
     versionCode 1
