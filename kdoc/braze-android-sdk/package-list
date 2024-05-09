@@ -1277,6 +1277,7 @@ $dokka.location:com.braze.models/FeatureFlag/getJSONProperty/#kotlin.String/Poin
 $dokka.location:com.braze.models/FeatureFlag/getNumberProperty/#kotlin.String/PointingToDeclaration/braze-android-sdk/com.braze.models/-feature-flag/get-number-property.html
 $dokka.location:com.braze.models/FeatureFlag/getStringProperty/#kotlin.String/PointingToDeclaration/braze-android-sdk/com.braze.models/-feature-flag/get-string-property.html
 $dokka.location:com.braze.models/FeatureFlag/getTimestamp/#kotlin.String/PointingToDeclaration/braze-android-sdk/com.braze.models/-feature-flag/get-timestamp.html
+$dokka.location:com.braze.models/FeatureFlag/getTimestampProperty/#kotlin.String/PointingToDeclaration/braze-android-sdk/com.braze.models/-feature-flag/get-timestamp-property.html
 $dokka.location:com.braze.models/FeatureFlag/id/#/PointingToDeclaration/braze-android-sdk/com.braze.models/-feature-flag/id.html
 $dokka.location:com.braze.models/FeatureFlag/properties/#/PointingToDeclaration/braze-android-sdk/com.braze.models/-feature-flag/properties.html
 $dokka.location:com.braze.models/IBrazeLocation.Companion///PointingToDeclaration/braze-android-sdk/com.braze.models/-i-braze-location/-companion/index.html
