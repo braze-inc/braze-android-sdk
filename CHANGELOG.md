@@ -1,6 +1,6 @@
 ## 31.1.0
 
-[Release Date](https://github.com/braze-inc/braze-android-sdk/releases/tag/v31.0.1)
+[Release Date](https://github.com/braze-inc/braze-android-sdk/releases/tag/v31.1.0)
 
 ##### Fixed
 - Added `getTimestampProperty(key)` to `FeatureFlag` and deprecated `getTimestamp(key)` for consistency.
