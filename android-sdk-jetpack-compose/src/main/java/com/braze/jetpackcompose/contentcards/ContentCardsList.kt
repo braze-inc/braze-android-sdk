@@ -51,6 +51,7 @@ import com.braze.jetpackcompose.contentcards.cards.ContentCard
 import com.braze.jetpackcompose.contentcards.styling.ContentCardListStyling
 import com.braze.jetpackcompose.contentcards.styling.ContentCardStyling
 import com.braze.models.cards.Card
+import com.braze.support.BrazeLogger.Priority.W
 import com.braze.support.BrazeLogger.Priority.V
 import com.braze.support.BrazeLogger.brazelog
 import com.braze.ui.contentcards.BrazeContentCardUtils
@@ -163,6 +164,7 @@ fun ContentCardsList(
         val processedCards = cardUpdateHandler?.invoke(newCards) ?: BrazeContentCardUtils.defaultCardHandling(newCards)
         val cardsToAdd = mutableListOf<Card>()
         var lastCardId = ""
+        val cardIDs = mutableSetOf<String>()
         for (card in processedCards) {
             if (card.isControl) {
                 val idCardPair = Pair(lastCardId, card)
@@ -173,10 +175,11 @@ fun ContentCardsList(
                     // This control card will log impression when the last "real" card has its impression logged.
                     controlCardInference.add(idCardPair)
                 }
+            } else if (cardIDs.contains(card.id)) {
+                brazelog(TAG, W) { "Card ID ${card.id} already exists. Skipping card $card." }
             } else {
+                cardIDs.add(card.id)
                 cardsToAdd.add(card)
-            }
-            if (!card.isControl) {
                 lastCardId = card.id
             }
         }
@@ -312,12 +315,12 @@ fun ContentCardsList(
                     val viewportHeight = layoutInfo.viewportEndOffset + layoutInfo.viewportStartOffset
 
                     if (lastItem.offset + lastItem.size > viewportHeight) {
-                        fullyVisibleItemsInfo.removeLast()
+                        fullyVisibleItemsInfo.removeAt(fullyVisibleItemsInfo.lastIndex)
                     }
 
                     val firstItemIfLeft = fullyVisibleItemsInfo.firstOrNull()
                     if (firstItemIfLeft != null && firstItemIfLeft.offset < layoutInfo.viewportStartOffset) {
-                        fullyVisibleItemsInfo.removeFirst()
+                        fullyVisibleItemsInfo.removeAt(0)
                     }
                 }
 

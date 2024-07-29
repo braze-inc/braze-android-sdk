@@ -1,5 +1,7 @@
 package com.braze.ui;
 
+import static com.braze.support.DateTimeUtils.nowInMilliseconds;
+
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
@@ -210,7 +212,7 @@ public class BrazeFeedFragment extends ListFragment implements SwipeRefreshLayou
 
         // If we got our feed from offline storage, and it was old, we asynchronously request a new one from the server,
         // putting up a spinner if the old feed was empty.
-        if (event.isFromOfflineStorage() && (event.lastUpdatedInSecondsFromEpoch() + MAX_FEED_TTL_SECONDS) * 1000 < System.currentTimeMillis()) {
+        if (event.isFromOfflineStorage() && (event.lastUpdatedInSecondsFromEpoch() + MAX_FEED_TTL_SECONDS) * 1000 < nowInMilliseconds()) {
           BrazeLogger.i(TAG, "Feed received was older than the max time to live of " + MAX_FEED_TTL_SECONDS + " seconds, displaying it "
               + "for now, but requesting an updated view from the server.");
           Braze.getInstance(getContext()).requestFeedRefresh();

@@ -1,6 +1,7 @@
 package com.braze.jetpackcompose.contentcards.cards
 
 import android.os.Build
+import android.util.LayoutDirection
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
@@ -26,11 +27,13 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.draw.scale
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalLifecycleOwner
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
+import androidx.core.text.layoutDirection
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleEventObserver
 import coil.compose.AsyncImage
@@ -48,6 +51,7 @@ import com.braze.models.cards.ShortNewsCard
 import com.braze.models.cards.TextAnnouncementCard
 import com.braze.support.BrazeLogger.brazelog
 import com.braze.ui.contentcards.BrazeContentCardUtils
+import java.util.Locale
 
 @Composable
 @Suppress("LongMethod", "ComplexMethod")
@@ -344,6 +348,13 @@ fun ContentCard(
                         modifier = Modifier
                             .align(style.pinnedAlignment(card))
                             .padding(horizontal = extraPadding)
+                            .run {
+                                if (Locale.getDefault().layoutDirection == LayoutDirection.RTL) {
+                                    this.scale(scaleX = -1f, scaleY = 1f)
+                                } else {
+                                    this
+                                }
+                            }
                     )
                 }
             }

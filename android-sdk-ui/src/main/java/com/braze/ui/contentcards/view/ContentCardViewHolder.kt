@@ -3,8 +3,10 @@ package com.braze.ui.contentcards.view
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.core.text.layoutDirection
 import androidx.recyclerview.widget.RecyclerView
 import com.braze.ui.R
+import java.util.Locale
 
 open class ContentCardViewHolder(view: View, showUnreadIndicator: Boolean) :
     RecyclerView.ViewHolder(view) {
@@ -32,6 +34,12 @@ open class ContentCardViewHolder(view: View, showUnreadIndicator: Boolean) :
      */
     fun setPinnedIconVisible(isVisible: Boolean) {
         pinnedIcon?.visibility = if (isVisible) View.VISIBLE else View.GONE
+
+        // Flip the icon if the layout direction is RTL
+        // This code can be removed once we have vector images that have autoMirror enabled in them
+        if (isVisible && Locale.getDefault().layoutDirection == View.LAYOUT_DIRECTION_RTL) {
+            pinnedIcon?.scaleX = -1.0f
+        }
     }
 
     /**

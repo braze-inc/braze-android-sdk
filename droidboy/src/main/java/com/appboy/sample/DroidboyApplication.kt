@@ -13,7 +13,6 @@ import android.content.pm.ShortcutInfo
 import android.content.pm.ShortcutManager
 import android.graphics.Color
 import android.graphics.drawable.Icon
-import android.net.TrafficStats
 import android.net.Uri
 import android.os.Build
 import android.os.StrictMode
@@ -23,11 +22,12 @@ import android.webkit.WebView
 import androidx.annotation.RequiresApi
 import com.appboy.sample.util.BrazeActionTestingUtil
 import com.appboy.sample.util.ContentCardsTestingUtil
+import com.auth0.jwt.JWT
+import com.auth0.jwt.algorithms.Algorithm
 import com.braze.Braze
 import com.braze.BrazeActivityLifecycleCallbackListener
 import com.braze.BrazeInternal
 import com.braze.configuration.BrazeConfig
-import com.braze.coroutine.BrazeCoroutineScope
 import com.braze.enums.BrazeSdkMetadata
 import com.braze.events.BrazeSdkAuthenticationErrorEvent
 import com.braze.support.BrazeLogger
@@ -35,17 +35,17 @@ import com.braze.support.BrazeLogger.Priority.E
 import com.braze.support.BrazeLogger.Priority.I
 import com.braze.support.BrazeLogger.brazelog
 import com.braze.support.PackageUtils
-import com.braze.support.getPrettyPrintedString
 import com.braze.support.hasPermission
 import com.braze.ui.inappmessage.BrazeInAppMessageManager
 import com.google.firebase.crashlytics.FirebaseCrashlytics
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
-import org.json.JSONObject
-import java.io.OutputStreamWriter
-import java.net.HttpURLConnection
-import java.net.URL
+import java.security.KeyFactory
+import java.security.interfaces.RSAPrivateKey
+import java.security.spec.PKCS8EncodedKeySpec
+import java.util.Date
 import java.util.EnumSet
+import java.util.concurrent.TimeUnit
+import kotlin.io.encoding.Base64
+import kotlin.io.encoding.ExperimentalEncodingApi
 
 class DroidboyApplication : Application() {
     private var isSdkAuthEnabled: Boolean = false
@@ -126,54 +126,51 @@ class DroidboyApplication : Application() {
      * token is available, just calls [Braze.changeUser] without a new SDK Auth token.
      */
     fun changeUserWithNewSdkAuthToken(userId: String) {
-        BrazeCoroutineScope.launch {
-            val token = getSdkAuthToken(userId)
-            if (token != null) {
-                Braze.getInstance(applicationContext).changeUser(userId, token)
-            } else {
-                Braze.getInstance(applicationContext).changeUser(userId)
-            }
+        val token = getSdkAuthToken(userId)
+        if (token != null) {
+            Braze.getInstance(applicationContext).changeUser(userId, token)
+        } else {
+            Braze.getInstance(applicationContext).changeUser(userId)
         }
     }
 
     private fun setNewSdkAuthToken(userId: String) {
-        BrazeCoroutineScope.launch {
-            val token = getSdkAuthToken(userId) ?: return@launch
-            Braze.getInstance(applicationContext).setSdkAuthenticationSignature(token)
-        }
+        val token = getSdkAuthToken(userId) ?: return
+        Braze.getInstance(applicationContext).setSdkAuthenticationSignature(token)
     }
 
-    private suspend fun getSdkAuthToken(userId: String): String? {
-        if (!isSdkAuthEnabled || BuildConfig.SDK_AUTH_ENDPOINT.isBlank()) return null
+    private fun getSdkAuthToken(userId: String): String? {
+        if (!isSdkAuthEnabled) return null
 
         try {
-            return withContext(BrazeCoroutineScope.coroutineContext) {
-                brazelog(TAG) { "Making new SDK Auth token request for user: '$userId'" }
-
-                // See https://github.com/braze-inc/firebase-functions-jwt-responder
-                val url = URL(BuildConfig.SDK_AUTH_ENDPOINT)
-                val payload = JSONObject()
-                    .put(
-                        "data",
-                        JSONObject()
-                            .put("user_id", userId)
-                    )
-
-                with(url.openConnection() as HttpURLConnection) {
-                    TrafficStats.setThreadStatsTag(1337)
-                    requestMethod = "POST"
-                    addRequestProperty("Content-Type", "application/json")
-                    addRequestProperty("Accept", "application/json")
-
-                    OutputStreamWriter(outputStream).use { out -> out.write(payload.toString()) }
-
-                    val responseJson = JSONObject(inputStream.bufferedReader().readText())
-                    brazelog(TAG) { "SDK auth callback got response: ${responseJson.getPrettyPrintedString()}" }
-                    return@withContext responseJson.optJSONObject("data")?.optString("token")
+            // Read the private key from the file
+            val privateKeyPEM = applicationContext.assets.open(SDK_AUTH_KEY_FILE_PATH)
+                .bufferedReader().use {
+                    it.readText()
                 }
-            }
+
+            // Load the private key from the string resource
+            val privateKeyPEMFormatted = privateKeyPEM
+                .replace("-----BEGIN RSA PRIVATE KEY-----", "")
+                .replace("-----END RSA PRIVATE KEY-----", "")
+                .replace("\\s".toRegex(), "")
+
+            @OptIn(ExperimentalEncodingApi::class)
+            val encoded = Base64.decode(privateKeyPEMFormatted)
+            val keySpec = PKCS8EncodedKeySpec(encoded)
+            val privateKey = KeyFactory.getInstance("RSA").generatePrivate(keySpec)
+
+            // Create the JWT
+            val algorithm = Algorithm.RSA256(null, privateKey as RSAPrivateKey?)
+            val jwt = JWT.create()
+                .withAudience("braze")
+                .withSubject(userId)
+                .withExpiresAt(Date(System.currentTimeMillis() + TimeUnit.HOURS.toMillis(12)))
+                .sign(algorithm)
+            brazelog(I) { "Generated JWT: $jwt" }
+            return jwt
         } catch (e: Exception) {
-            brazelog(TAG, E, e) { "Failed to get SDK Auth token" }
+            brazelog(E) { "Failed to generate JWT: $e" }
             return null
         }
     }
@@ -352,12 +349,12 @@ class DroidboyApplication : Application() {
     }
 
     companion object {
-        private val TAG = BrazeLogger.getBrazeLogTag(DroidboyApplication::class.java)
         private var overrideApiKeyInUse: String? = null
         const val OVERRIDE_API_KEY_PREF_KEY = "override_api_key"
         const val OVERRIDE_ENDPOINT_PREF_KEY = "override_endpoint_url"
         const val ENABLE_SDK_AUTH_PREF_KEY = "enable_sdk_auth_if_present_pref_key"
         const val MIN_TRIGGER_INTERVAL_KEY = "min_trigger_interval"
+        const val SDK_AUTH_KEY_FILE_PATH = "sdk_auth_example/example_rsa_private_key.txt"
 
         @JvmStatic
         fun getApiKeyInUse(context: Context): String? {

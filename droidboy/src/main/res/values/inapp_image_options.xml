@@ -16,7 +16,7 @@
     <item>Image: [gif] s3</item>
   </string-array>
   <string-array name="inapp_image_values">
-    <item>@string/not_set</item>
+    <item>@string/braze_not_set</item>
     <item>@string/none</item>
     <item>@string/appboy_image_url_1160w_400h</item>
     <item>@string/appboy_image_url_1000w_1000h</item>

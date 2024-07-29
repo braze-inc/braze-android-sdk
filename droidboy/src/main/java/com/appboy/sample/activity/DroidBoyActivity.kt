@@ -336,7 +336,7 @@ class DroidBoyActivity : AppCompatActivity(), NoticeDialogListener {
             val inputMethodManager = getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
             inputMethodManager.hideSoftInputFromWindow(
                 it.windowToken,
-                InputMethodManager.RESULT_UNCHANGED_SHOWN
+                InputMethodManager.HIDE_IMPLICIT_ONLY
             )
         }
     }

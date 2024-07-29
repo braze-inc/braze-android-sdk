@@ -15,6 +15,7 @@ import com.braze.enums.inappmessage.SlideFrom
 import com.braze.models.inappmessage.IInAppMessage
 import com.braze.models.inappmessage.IInAppMessageImmersive
 import com.braze.models.inappmessage.InAppMessageSlideup
+import com.braze.support.BrazeLogger.Priority.E
 import com.braze.support.BrazeLogger.Priority.V
 import com.braze.support.BrazeLogger.Priority.W
 import com.braze.support.BrazeLogger.brazelog
@@ -377,7 +378,11 @@ open class DefaultInAppMessageViewWrapper @JvmOverloads constructor(
         // Return the focus before closing the message
         if (previouslyFocusedView != null) {
             brazelog { "Returning focus to view after closing message. View: $previouslyFocusedView" }
-            previouslyFocusedView?.requestFocus()
+            try {
+                previouslyFocusedView?.requestFocus()
+            } catch (e: Exception) {
+                brazelog(E, e) { "Failed to request focus on previous view" }
+            }
         }
         inAppMessageViewLifecycleListener.afterClosed(inAppMessage)
     }

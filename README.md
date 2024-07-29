@@ -1,4 +1,7 @@
-![Braze Logo](https://github.com/braze-inc/braze-android-sdk/blob/master/braze-logo.png)
+<p align="center">
+  <img width="480" alt="Braze Logo" src=".github/assets/logo-light.png#gh-light-mode-only" />
+  <img width="480" alt="Braze Logo" src=".github/assets/logo-dark.png#gh-dark-mode-only" />
+</p>
 
 # Android SDK
 
@@ -11,7 +14,7 @@ Successful marketing automation is essential to the future of your mobile app. B
 ## Version Information
 
 - The Braze Android SDK supports Android 5.0+ / API 21+ (Lollipop and up).
-- Last Target SDK Version: 34
+- Last Target SDK Version: 35
 - Kotlin version: `org.jetbrains.kotlin:kotlin-stdlib:1.8.10`
 - Last Compiled Firebase Cloud Messaging Version: 23.2.0
 - Braze uses [Font Awesome](https://fortawesome.github.io/Font-Awesome/) 4.3.0 for in-app message icons. Check out the [cheat sheet](http://fortawesome.github.io/Font-Awesome/cheatsheet/) to browse available icons.
@@ -33,8 +36,8 @@ Our SDK is now hosted in Maven Central. You can remove `https://braze-inc.github
 
 ```
 dependencies {
-  implementation 'com.braze:android-sdk-ui:31.1.+'
-  implementation 'com.braze:android-sdk-location:31.1.+'
+  implementation 'com.braze:android-sdk-ui:32.0.+'
+  implementation 'com.braze:android-sdk-location:32.0.+'
   ...
 }
 ```
@@ -53,7 +56,7 @@ repositories {
 
 ```
 dependencies {
-  implementation 'com.braze:android-sdk-ui:31.1.+'
+  implementation 'com.braze:android-sdk-ui:32.0.+'
 }
 ```
 

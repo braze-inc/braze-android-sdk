@@ -13,7 +13,7 @@
     <item>Icon: Visa</item>
   </string-array>
   <string-array name="inapp_icon_values">
-    <item>@string/not_set</item>
+    <item>@string/braze_not_set</item>
     <item>@string/none</item>
     <item></item>
     <item></item>

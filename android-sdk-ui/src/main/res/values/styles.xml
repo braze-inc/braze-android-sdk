@@ -67,8 +67,8 @@
     <item name="android:layout_gravity">center</item>
     <item name="android:singleLine">true</item>
     <item name="android:textStyle">bold</item>
-    <item name="android:paddingLeft">12dp</item>
-    <item name="android:paddingRight">12dp</item>
+    <item name="android:paddingStart">12dp</item>
+    <item name="android:paddingEnd">12dp</item>
     <item name="android:textAllCaps">false</item>
     <item name="android:minWidth">80dp</item>
     <item name="android:layout_weight">1</item>
@@ -78,9 +78,9 @@
     <item name="android:contentDescription">@string/com_braze_inappmessage_close_content_description</item>
     <item name="android:layout_height">20dp</item>
     <item name="android:layout_width">20dp</item>
-    <item name="android:layout_alignParentRight">true</item>
+    <item name="android:layout_alignParentEnd">true</item>
     <item name="android:background">@drawable/com_braze_inappmessage_close_button_selector</item>
-    <item name="android:layout_marginRight">15dp</item>
+    <item name="android:layout_marginEnd">15dp</item>
     <item name="android:layout_marginTop">15dp</item>
     <item name="android:foreground">?android:attr/selectableItemBackgroundBorderless</item>
     <item name="android:focusable">true</item>
@@ -89,9 +89,9 @@
     <item name="android:layout_height">20dp</item>
     <item name="android:layout_width">12dp</item>
     <item name="android:background">@drawable/com_braze_inappmessage_chevron</item>
-    <item name="android:layout_marginRight">20dp</item>
-    <item name="android:layout_marginLeft">18dp</item>
-    <item name="android:layout_alignParentRight">true</item>
+    <item name="android:layout_marginEnd">20dp</item>
+    <item name="android:layout_marginStart">18dp</item>
+    <item name="android:layout_alignParentEnd">true</item>
     <item name="android:layout_centerVertical">true</item>
   </style>
   <style name="Braze.InAppMessage.Frame">
@@ -117,8 +117,8 @@
   <style name="Braze.InAppMessage.Slideup.Container">
     <item name="android:layout_height">wrap_content</item>
     <item name="android:layout_width">@dimen/com_braze_inappmessage_slideup_max_width</item>
-    <item name="android:layout_marginLeft">10dp</item>
-    <item name="android:layout_marginRight">10dp</item>
+    <item name="android:layout_marginStart">10dp</item>
+    <item name="android:layout_marginEnd">10dp</item>
     <item name="android:layout_marginBottom">10dp</item>
     <item name="android:background">@drawable/com_braze_inappmessage_slideup_background</item>
   </style>
@@ -131,11 +131,11 @@
     <item name="android:gravity">start</item>
     <item name="android:layout_gravity">center_vertical</item>
     <item name="android:layout_centerVertical">true</item>
-    <item name="android:layout_toRightOf">@id/com_braze_inappmessage_slideup_image_layout</item>
-    <item name="android:layout_toLeftOf">@id/com_braze_inappmessage_slideup_chevron</item>
+    <item name="android:layout_toEndOf">@id/com_braze_inappmessage_slideup_image_layout</item>
+    <item name="android:layout_toStartOf">@id/com_braze_inappmessage_slideup_chevron</item>
     <item name="android:layout_marginTop">15dp</item>
     <item name="android:layout_marginBottom">15dp</item>
-    <item name="android:layout_marginRight">20dp</item>
+    <item name="android:layout_marginEnd">20dp</item>
     <item name="android:paddingBottom">15dp</item>
     <item name="android:padding">0.0dp</item>
     <item name="android:ellipsize">end</item>
@@ -144,9 +144,9 @@
     <item name="android:layout_height">wrap_content</item>
     <item name="android:layout_width">wrap_content</item>
     <item name="android:layout_centerVertical">true</item>
-    <item name="android:layout_alignParentLeft">true</item>
-    <item name="android:layout_marginRight">10dp</item>
-    <item name="android:layout_marginLeft">15dp</item>
+    <item name="android:layout_alignParentStart">true</item>
+    <item name="android:layout_marginEnd">10dp</item>
+    <item name="android:layout_marginStart">15dp</item>
     <item name="android:layout_marginTop">15dp</item>
     <item name="android:layout_marginBottom">15dp</item>
   </style>
@@ -159,7 +159,8 @@
     <item name="android:contentDescription">@string/com_braze_inappmessage_icon_content_description</item>
   </style>
   <style name="Braze.InAppMessage.Chevron.Slideup">
-    <item name="android:layout_marginLeft">0dp</item>
+    <item name="android:layout_marginStart">0dp</item>
+    <item name="android:autoMirrored">true</item>
   </style>
 
   <!-- In-App Message Modal -->
@@ -167,8 +168,8 @@
     <item name="android:layout_height">wrap_content</item>
     <item name="android:layout_width">wrap_content</item>
     <item name="android:paddingTop">0.0dp</item>
-    <item name="android:paddingRight">0.0dp</item>
-    <item name="android:paddingLeft">0.0dp</item>
+    <item name="android:paddingEnd">0.0dp</item>
+    <item name="android:paddingStart">0.0dp</item>
     <item name="android:paddingBottom">20.0dp</item>
     <item name="android:layout_centerInParent">true</item>
     <item name="android:background">@drawable/com_braze_inappmessage_modal_background</item>
@@ -218,8 +219,8 @@
     <item name="android:layout_width">match_parent</item>
     <item name="android:layout_centerInParent">true</item>
     <item name="android:layout_gravity">center</item>
-    <item name="android:layout_marginLeft">20.0dp</item>
-    <item name="android:layout_marginRight">20.0dp</item>
+    <item name="android:layout_marginStart">20.0dp</item>
+    <item name="android:layout_marginEnd">20.0dp</item>
     <item name="android:orientation">vertical</item>
     <item name="android:weightSum">1.0</item>
   </style>
@@ -236,10 +237,10 @@
   <style name="Braze.InAppMessage.Button.Modal.Dual">
   </style>
   <style name="Braze.InAppMessage.Button.Modal.Dual.One">
-    <item name="android:layout_marginRight">5dp</item>
+    <item name="android:layout_marginEnd">5dp</item>
   </style>
   <style name="Braze.InAppMessage.Button.Modal.Dual.Two">
-    <item name="android:layout_marginLeft">5dp</item>
+    <item name="android:layout_marginStart">5dp</item>
   </style>
   <style name="Braze.InAppMessage.CloseButton.Modal">
   </style>
@@ -309,8 +310,8 @@
   <style name="Braze.InAppMessage.ScrollView.Full">
     <item name="android:layout_width">match_parent</item>
     <item name="android:layout_height">wrap_content</item>
-    <item name="android:layout_marginLeft">25dp</item>
-    <item name="android:layout_marginRight">25dp</item>
+    <item name="android:layout_marginStart">25dp</item>
+    <item name="android:layout_marginEnd">25dp</item>
   </style>
   <style name="Braze.InAppMessage.Image.Full">
     <item name="android:contentDescription">@string/com_braze_inappmessage_image_content_description</item>
@@ -321,8 +322,8 @@
   <style name="Braze.InAppMessage.Layout.Button.Full">
     <item name="android:layout_width">match_parent</item>
     <item name="android:layout_marginTop">20dp</item>
-    <item name="android:layout_marginRight">25dp</item>
-    <item name="android:layout_marginLeft">25dp</item>
+    <item name="android:layout_marginEnd">25dp</item>
+    <item name="android:layout_marginStart">25dp</item>
   </style>
   <style name="Braze.InAppMessage.Button.Full">
   </style>
@@ -331,13 +332,13 @@
   <style name="Braze.InAppMessage.Button.Full.Dual">
   </style>
   <style name="Braze.InAppMessage.Button.Full.Dual.One">
-    <item name="android:layout_marginRight">5dp</item>
+    <item name="android:layout_marginEnd">5dp</item>
   </style>
   <style name="Braze.InAppMessage.Button.Full.Dual.Two">
-    <item name="android:layout_marginLeft">5dp</item>
+    <item name="android:layout_marginStart">5dp</item>
   </style>
   <style name="Braze.InAppMessage.CloseButton.Full">
-    <item name="android:layout_marginRight">25dp</item>
+    <item name="android:layout_marginEnd">25dp</item>
     <item name="android:layout_marginTop">25dp</item>
   </style>
   <style name="Braze.InAppMessage.Frame.Full">
@@ -384,8 +385,8 @@
     <item name="android:background">@android:color/transparent</item>
     <item name="android:divider">@android:color/transparent</item>
     <item name="android:dividerHeight">16.0dp</item>
-    <item name="android:paddingLeft">12.5dp</item>
-    <item name="android:paddingRight">5.0dp</item>
+    <item name="android:paddingStart">12.5dp</item>
+    <item name="android:paddingEnd">5.0dp</item>
     <item name="android:scrollbarStyle">outsideInset</item>
   </style>
   <style name="Braze.Feed.Empty">
@@ -413,8 +414,8 @@
   <style name="Braze.Cards.ImageSwitcher">
     <item name="android:layout_width">wrap_content</item>
     <item name="android:layout_height">wrap_content</item>
-    <item name="android:layout_alignParentRight">true</item>
-    <item name="android:gravity">right|top</item>
+    <item name="android:layout_alignParentEnd">true</item>
+    <item name="android:gravity">end|top</item>
   </style>
 
   <!-- Image Only Card -->
@@ -483,9 +484,9 @@
     <item name="android:layout_width">57.5dp</item>
     <item name="android:layout_height">57.5dp</item>
     <item name="android:layout_alignParentTop">true</item>
-    <item name="android:layout_alignParentLeft">true</item>
-    <item name="android:layout_marginLeft">10.0dp</item>
-    <item name="android:layout_marginRight">10.0dp</item>
+    <item name="android:layout_alignParentStart">true</item>
+    <item name="android:layout_marginStart">10.0dp</item>
+    <item name="android:layout_marginEnd">10.0dp</item>
     <item name="android:layout_marginTop">10.0dp</item>
   </style>
   <style name="Braze.Cards.ShortNews.Title">
@@ -554,7 +555,7 @@
   <style name="Braze.ContentCards.PinnedIcon">
     <item name="android:layout_width">wrap_content</item>
     <item name="android:layout_height">wrap_content</item>
-    <item name="android:layout_alignParentRight">true</item>
+    <item name="android:layout_alignParentEnd">true</item>
     <item name="android:layout_alignParentTop">true</item>
     <item name="android:src">@drawable/com_braze_content_card_icon_pinned</item>
     <item name="android:contentDescription">@null</item>
@@ -571,8 +572,8 @@
     <item name="android:layout_height">wrap_content</item>
   </style>
   <style name="Braze.ContentCards.CaptionedImage.Root">
-    <item name="android:layout_marginLeft">@dimen/com_braze_content_cards_divider_left_margin</item>
-    <item name="android:layout_marginRight">@dimen/com_braze_content_cards_divider_right_margin</item>
+    <item name="android:layout_marginStart">@dimen/com_braze_content_cards_divider_left_margin</item>
+    <item name="android:layout_marginEnd">@dimen/com_braze_content_cards_divider_right_margin</item>
   </style>
   <style name="Braze.ContentCards.CaptionedImage.ImageContainer">
     <item name="android:layout_width">match_parent</item>
@@ -587,8 +588,8 @@
     <item name="android:importantForAccessibility">no</item>
   </style>
   <style name="Braze.ContentCards.CaptionedImage.Container">
-    <item name="android:layout_marginLeft">25dp</item>
-    <item name="android:layout_marginRight">25dp</item>
+    <item name="android:layout_marginStart">25dp</item>
+    <item name="android:layout_marginEnd">25dp</item>
     <item name="android:layout_marginTop">20dp</item>
     <item name="android:paddingBottom">25dp</item>
     <item name="android:layout_below">@id/com_braze_content_cards_captioned_image_card_image_container</item>
@@ -610,7 +611,7 @@
   </style>
   <style name="Braze.ContentCards.ActionHint.CaptionedImage">
     <item name="android:includeFontPadding">false</item>
-    <item name="android:layout_alignParentLeft">true</item>
+    <item name="android:layout_alignParentStart">true</item>
     <item name="android:layout_marginTop">12dp</item>
     <item name="android:layout_below">@id/com_braze_content_cards_captioned_image_description</item>
   </style>
@@ -620,8 +621,8 @@
   <!-- Image Only Content Card -->
   <style name="Braze.ContentCards.ImageOnly"/>
   <style name="Braze.ContentCards.ImageOnly.Root">
-    <item name="android:layout_marginLeft">@dimen/com_braze_content_cards_divider_left_margin</item>
-    <item name="android:layout_marginRight">@dimen/com_braze_content_cards_divider_right_margin</item>
+    <item name="android:layout_marginStart">@dimen/com_braze_content_cards_divider_left_margin</item>
+    <item name="android:layout_marginEnd">@dimen/com_braze_content_cards_divider_right_margin</item>
   </style>
   <style name="Braze.ContentCards.ImageOnly.Image">
     <item name="android:layout_width">match_parent</item>
@@ -637,15 +638,15 @@
   <!-- Short News Content Card -->
   <style name="Braze.ContentCards.ShortNews"/>
   <style name="Braze.ContentCards.ShortNews.Root">
-    <item name="android:layout_marginLeft">@dimen/com_braze_content_cards_divider_left_margin</item>
-    <item name="android:layout_marginRight">@dimen/com_braze_content_cards_divider_right_margin</item>
+    <item name="android:layout_marginStart">@dimen/com_braze_content_cards_divider_left_margin</item>
+    <item name="android:layout_marginEnd">@dimen/com_braze_content_cards_divider_right_margin</item>
   </style>
   <style name="Braze.ContentCards.ShortNews.ImageContainer">
     <item name="android:layout_width">57.5dp</item>
     <item name="android:layout_height">57.5dp</item>
     <item name="android:layout_alignParentTop">true</item>
-    <item name="android:layout_alignParentLeft">true</item>
-    <item name="android:layout_marginLeft">25dp</item>
+    <item name="android:layout_alignParentStart">true</item>
+    <item name="android:layout_marginStart">25dp</item>
     <item name="android:layout_marginTop">20dp</item>
     <item name="android:layout_marginBottom">25.0dp</item>
   </style>
@@ -659,11 +660,11 @@
     <item name="android:importantForAccessibility">no</item>
   </style>
   <style name="Braze.ContentCards.ShortNews.Container">
-    <item name="android:layout_marginLeft">12dp</item>
+    <item name="android:layout_marginStart">12dp</item>
     <item name="android:layout_marginTop">20dp</item>
     <item name="android:paddingBottom">25dp</item>
-    <item name="android:layout_marginRight">25dp</item>
-    <item name="android:layout_toRightOf">@id/com_braze_content_cards_short_news_card_image_container</item>
+    <item name="android:layout_marginEnd">25dp</item>
+    <item name="android:layout_toEndOf">@id/com_braze_content_cards_short_news_card_image_container</item>
   </style>
   <style name="Braze.ContentCards.ShortNews.Title">
     <item name="android:textColor">@color/com_braze_content_cards_title</item>
@@ -685,7 +686,7 @@
   </style>
   <style name="Braze.ContentCards.ActionHint.ShortNews">
     <item name="android:includeFontPadding">false</item>
-    <item name="android:layout_alignParentLeft">true</item>
+    <item name="android:layout_alignParentStart">true</item>
     <item name="android:layout_marginTop">12dp</item>
     <item name="android:layout_below">@id/com_braze_content_cards_short_news_card_description</item>
   </style>
@@ -697,12 +698,12 @@
     <item name="android:layout_height">wrap_content</item>
   </style>
   <style name="Braze.ContentCards.TextAnnouncement.Root">
-    <item name="android:layout_marginLeft">@dimen/com_braze_content_cards_divider_left_margin</item>
-    <item name="android:layout_marginRight">@dimen/com_braze_content_cards_divider_right_margin</item>
+    <item name="android:layout_marginStart">@dimen/com_braze_content_cards_divider_left_margin</item>
+    <item name="android:layout_marginEnd">@dimen/com_braze_content_cards_divider_right_margin</item>
   </style>
   <style name="Braze.ContentCards.TextAnnouncement.Container">
-    <item name="android:layout_marginLeft">25dp</item>
-    <item name="android:layout_marginRight">25dp</item>
+    <item name="android:layout_marginStart">25dp</item>
+    <item name="android:layout_marginEnd">25dp</item>
     <item name="android:layout_marginTop">20dp</item>
     <item name="android:paddingBottom">25dp</item>
   </style>
@@ -713,7 +714,7 @@
     <item name="android:textStyle">bold</item>
     <item name="android:includeFontPadding">false</item>
     <item name="android:layout_alignParentTop">true</item>
-    <item name="android:layout_alignParentLeft">true</item>
+    <item name="android:layout_alignParentStart">true</item>
     <item name="android:layout_marginBottom">10dp</item>
   </style>
   <style name="Braze.ContentCards.TextAnnouncement.Description">
@@ -721,12 +722,12 @@
     <item name="android:textColor">@color/com_braze_content_cards_description</item>
     <item name="android:textSize">13.0sp</item>
     <item name="android:includeFontPadding">false</item>
-    <item name="android:layout_alignParentLeft">true</item>
+    <item name="android:layout_alignParentStart">true</item>
     <item name="android:layout_below">@id/com_braze_content_cards_text_announcement_card_title</item>
   </style>
   <style name="Braze.ContentCards.ActionHint.TextAnnouncement">
     <item name="android:includeFontPadding">false</item>
-    <item name="android:layout_alignParentLeft">true</item>
+    <item name="android:layout_alignParentStart">true</item>
     <item name="android:layout_below">@id/com_braze_content_cards_text_announcement_card_description</item>
     <item name="android:layout_marginTop">12dp</item>
   </style>
@@ -768,15 +769,15 @@
   </style>
   <style name="Braze.Story.ImageButton.OneImage.Left">
     <item name="android:src">@drawable/com_braze_push_ic_left_arrow</item>
-    <item name="android:layout_alignLeft">@+id/com_braze_story_image_view</item>
-    <item name="android:paddingRight">20dp</item>
-    <item name="android:paddingLeft">3dp</item>
+    <item name="android:layout_alignStart">@+id/com_braze_story_image_view</item>
+    <item name="android:paddingEnd">20dp</item>
+    <item name="android:paddingStart">3dp</item>
   </style>
   <style name="Braze.Story.ImageButton.OneImage.Right">
     <item name="android:src">@drawable/com_braze_push_ic_right_arrow</item>
-    <item name="android:layout_alignRight">@+id/com_braze_story_image_view</item>
-    <item name="android:paddingLeft">20dp</item>
-    <item name="android:paddingRight">3dp</item>
+    <item name="android:layout_alignEnd">@+id/com_braze_story_image_view</item>
+    <item name="android:paddingStart">20dp</item>
+    <item name="android:paddingEnd">3dp</item>
   </style>
   <style name="Braze.Story.TextViewContainer">
     <item name="android:layout_width">match_parent</item>
@@ -828,7 +829,7 @@
     <item name="android:layout_width">0dp</item>
     <item name="android:layout_height">match_parent</item>
     <item name="android:orientation">vertical</item>
-    <item name="android:layout_marginLeft">16dp</item>
+    <item name="android:layout_marginStart">16dp</item>
   </style>
   <style name="Braze.Push.InlineImage.TextArea.Header"/>
   <style name="Braze.Push.InlineImage.TextArea.Header.Layout">
@@ -842,35 +843,35 @@
   <style name="Braze.Push.InlineImage.TextArea.Header.AppIcon">
     <item name="android:layout_width">18dp</item>
     <item name="android:layout_height">18dp</item>
-    <item name="android:layout_marginRight">3dp</item>
+    <item name="android:layout_marginEnd">3dp</item>
     <item name="android:contentDescription">@null</item>
   </style>
   <style name="Braze.Push.InlineImage.TextArea.Header.AppNameText" parent="@style/TextAppearance.Compat.Notification.Info">
     <item name="android:layout_width">wrap_content</item>
     <item name="android:layout_height">wrap_content</item>
-    <item name="android:layout_marginLeft">3dp</item>
-    <item name="android:layout_marginRight">@dimen/com_braze_push_inline_image_header_separating_margin</item>
+    <item name="android:layout_marginStart">3dp</item>
+    <item name="android:layout_marginEnd">@dimen/com_braze_push_inline_image_header_separating_margin</item>
     <item name="android:singleLine">true</item>
   </style>
   <style name="Braze.Push.InlineImage.TextArea.Header.TextDivider" parent="@style/TextAppearance.Compat.Notification.Info">
     <item name="android:layout_width">wrap_content</item>
     <item name="android:layout_height">wrap_content</item>
-    <item name="android:layout_marginLeft">@dimen/com_braze_push_inline_image_header_separating_margin</item>
-    <item name="android:layout_marginRight">@dimen/com_braze_push_inline_image_header_separating_margin</item>
+    <item name="android:layout_marginStart">@dimen/com_braze_push_inline_image_header_separating_margin</item>
+    <item name="android:layout_marginEnd">@dimen/com_braze_push_inline_image_header_separating_margin</item>
     <item name="android:text">@string/com_braze_inline_image_push_notification_header_divider_symbol</item>
   </style>
   <style name="Braze.Push.InlineImage.TextArea.Header.TimeText" parent="@style/TextAppearance.Compat.Notification.Info">
     <item name="android:layout_width">wrap_content</item>
     <item name="android:layout_height">wrap_content</item>
-    <item name="android:layout_marginLeft">@dimen/com_braze_push_inline_image_header_separating_margin</item>
-    <item name="android:layout_marginRight">@dimen/com_braze_push_inline_image_header_separating_margin</item>
+    <item name="android:layout_marginStart">@dimen/com_braze_push_inline_image_header_separating_margin</item>
+    <item name="android:layout_marginEnd">@dimen/com_braze_push_inline_image_header_separating_margin</item>
     <item name="android:singleLine">true</item>
   </style>
   <style name="Braze.Push.InlineImage.TextArea.TitleContent"/>
   <style name="Braze.Push.InlineImage.TextArea.TitleContent.Layout">
     <item name="android:layout_width">wrap_content</item>
     <item name="android:layout_height">wrap_content</item>
-    <item name="android:layout_marginRight">16dp</item>
+    <item name="android:layout_marginEnd">16dp</item>
     <item name="android:orientation">vertical</item>
   </style>
   <style name="Braze.Push.InlineImage.TextArea.TitleContent.TitleText" parent="@style/TextAppearance.Compat.Notification.Title">
@@ -917,13 +918,13 @@
     <item name="android:layout_width">0dp</item>
     <item name="android:layout_height">match_parent</item>
     <item name="android:orientation">vertical</item>
-    <item name="android:layout_marginLeft">16dp</item>
+    <item name="android:layout_marginStart">16dp</item>
   </style>
   <style name="Braze.Push.InlineImageConstrained.TextArea.TitleContent"/>
   <style name="Braze.Push.InlineImageConstrained.TextArea.TitleContent.Layout">
     <item name="android:layout_width">wrap_content</item>
     <item name="android:layout_height">wrap_content</item>
-    <item name="android:layout_marginRight">16dp</item>
+    <item name="android:layout_marginEnd">16dp</item>
     <item name="android:orientation">vertical</item>
   </style>
   <style name="Braze.Push.InlineImageConstrained.TextArea.TitleContent.TitleText" parent="@style/TextAppearance.Compat.Notification.Title">

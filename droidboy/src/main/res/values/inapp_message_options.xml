@@ -12,7 +12,7 @@
         <item>Message: 2400 Chars</item>
     </string-array>
     <string-array name="inapp_message_values">
-        <item>@string/not_set</item>
+        <item>@string/braze_not_set</item>
         <item>@string/message_20</item>
         <item>@string/message_40</item>
         <item>@string/message_70</item>

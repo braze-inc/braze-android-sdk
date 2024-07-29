@@ -22,8 +22,8 @@
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"/>
   </LinearLayout>
-  <fragment android:name="com.braze.ui.BrazeFeedFragment"
-            android:id="@+id/com_appboy_feed"
+  <fragment android:name="com.braze.ui.contentcards.ContentCardsFragment"
+            android:id="@+id/com_braze_content_cards_fragment"
             android:layout_width="match_parent"
             android:layout_height="match_parent"/>
 </LinearLayout>

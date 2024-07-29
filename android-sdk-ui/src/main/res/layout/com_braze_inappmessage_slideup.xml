@@ -18,6 +18,7 @@
         </RelativeLayout>
         <TextView
             android:id="@+id/com_braze_inappmessage_slideup_message"
+            android:textAlignment="viewStart"
             style="@style/Braze.InAppMessage.Message.Slideup"/>
         <ImageView
             android:id="@+id/com_braze_inappmessage_slideup_chevron"

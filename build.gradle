@@ -18,10 +18,10 @@ buildscript {
 }
 
 ext {
-  compileSdkVersion = 34
+  compileSdkVersion = 35
   minSdkVersion = 21
-  targetSdkVersion = 34
-  appVersionName = '31.1.0'
+  targetSdkVersion = 35
+  appVersionName = '32.0.0'
 }
 
 subprojects {
@@ -33,5 +33,5 @@ subprojects {
   }
 
   group = 'com.braze'
-  version = '31.1.0'
+  version = '32.0.0'
 }

@@ -11,7 +11,7 @@
     <item>Message Buttons: One - Show Push Prompt</item>
   </string-array>
   <string-array name="inapp_button_values">
-    <item>@string/not_set</item>
+    <item>@string/braze_not_set</item>
     <item>@string/none</item>
     <item>one</item>
     <item>one_long</item>

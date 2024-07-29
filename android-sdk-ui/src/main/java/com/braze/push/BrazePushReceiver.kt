@@ -35,6 +35,7 @@ import com.braze.support.BrazeLogger.Priority.I
 import com.braze.support.BrazeLogger.Priority.V
 import com.braze.support.BrazeLogger.Priority.W
 import com.braze.support.BrazeLogger.brazelog
+import com.braze.support.nowInMilliseconds
 import com.braze.ui.inappmessage.BrazeInAppMessageManager
 import kotlinx.coroutines.launch
 import java.util.concurrent.TimeUnit
@@ -234,7 +235,7 @@ open class BrazePushReceiver : BroadcastReceiver() {
             if (!notificationExtras.containsKey(Constants.BRAZE_PUSH_RECEIVED_TIMESTAMP_MILLIS)) {
                 notificationExtras.putLong(
                     Constants.BRAZE_PUSH_RECEIVED_TIMESTAMP_MILLIS,
-                    System.currentTimeMillis()
+                    nowInMilliseconds()
                 )
             }
 

@@ -22,6 +22,7 @@
             android:layout_marginRight="10.0dp"
             android:layout_marginTop="11.0dp"
             android:layout_marginBottom="11.0dp"
+            android:textAlignment="viewStart"
             style="@style/Braze.Cards.CaptionedImage.Title"/>
     </RelativeLayout>
 
@@ -33,6 +34,7 @@
         android:layout_marginLeft="10.0dp"
         android:layout_marginRight="10.0dp"
         android:layout_marginTop="8.0dp"
+        android:textAlignment="viewStart"
         style="@style/Braze.Cards.CaptionedImage.Description"/>
 
     <!-- Optional -->
@@ -43,5 +45,6 @@
         android:layout_below="@id/com_braze_captioned_image_description"
         android:layout_marginLeft="10.0dp"
         android:layout_marginRight="10.0dp"
+        android:textAlignment="viewStart"
         style="@style/Braze.Cards.CaptionedImage.Domain"/>
 </merge>

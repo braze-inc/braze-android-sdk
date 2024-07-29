@@ -208,7 +208,7 @@
   <string name="exit_to_app_icon_name">com_appboy_ic_exit_to_app_white</string>
   <string name="world_icon_name">com_appboy_ic_language_white</string>
   <string name="none">none</string>
-  <string name="not_set">not set</string>
+  <string translatable="false" name="braze_not_set">not set</string>
   <string name="custom_logging_name">Name</string>
   <string name="current_log_level">Current Log Level</string>
   <string name="log_level_dialog_title">Log Level</string>

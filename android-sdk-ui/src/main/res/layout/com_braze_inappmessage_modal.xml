@@ -20,6 +20,7 @@
                 style="@style/Braze.InAppMessage.Image.Modal"/>
             <TextView
                 android:id="@+id/com_braze_inappmessage_modal_icon"
+                android:textAlignment="viewStart"
                 style="@style/Braze.InAppMessage.Icon.Modal"/>
         </RelativeLayout>
         <LinearLayout
@@ -34,10 +35,12 @@
                     <TextView
                         android:id="@+id/com_braze_inappmessage_modal_header_text"
                         style="@style/Braze.InAppMessage.Header.Modal"
+                        android:textAlignment="viewStart"
                         tools:text="In App Message Header Text"/>
                     <TextView
                         android:id="@+id/com_braze_inappmessage_modal_message"
                         style="@style/Braze.InAppMessage.Message.Modal"
+                        android:textAlignment="viewStart"
                         tools:text="In App Message Message Text"/>
                 </LinearLayout>
             </ScrollView>

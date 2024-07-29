@@ -15,7 +15,6 @@ android {
 
     buildConfigField "String", "BUILD_TIME", "\"" + new Date() + "\""
     buildConfigField "boolean", "IS_DROIDBOY_RELEASE_BUILD", "false"
-    buildConfigField "String", "SDK_AUTH_ENDPOINT", "\"\""
     buildConfigField "boolean", "STRICTMODE_ENABLED", "false"
     buildConfigField "boolean", "SHOULD_USE_CRASHLYTICS", "false"
 
@@ -77,6 +76,8 @@ dependencies {
   implementation "androidx.compose.ui:ui-graphics:"
   implementation "androidx.compose.ui:ui-tooling-preview:"
   implementation "androidx.compose.material3:material3"
+
+  implementation "com.auth0:java-jwt:${JAVA_JWT_VERSION}"
 }
 
 // Uncomment the following lines to use Firebase Messaging and Crashlytics

@@ -21,6 +21,7 @@ import com.braze.push.BrazePushReceiver.Companion.handleReceivedIntent
 import com.braze.support.BrazeLogger.Priority.E
 import com.braze.support.BrazeLogger.Priority.W
 import com.braze.support.BrazeLogger.brazelog
+import com.braze.support.nowInMilliseconds
 import kotlinx.coroutines.DelicateCoroutinesApi
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -287,7 +288,7 @@ class PushTesterFragment : Fragment(), AdapterView.OnItemSelectedListener {
         }
         if (shouldTestPushDeliveryEvents) {
             notificationExtras.putString(Constants.BRAZE_PUSH_DELIVERY_ENABLED_KEY, "1")
-            notificationExtras.putString(Constants.BRAZE_PUSH_CAMPAIGN_ID_KEY, "test-fake-campaign-id-" + System.currentTimeMillis())
+            notificationExtras.putString(Constants.BRAZE_PUSH_CAMPAIGN_ID_KEY, "test-fake-campaign-id-" + nowInMilliseconds())
             notificationExtras.putString(Constants.BRAZE_PUSH_DELIVERY_FLUSH_MIN_KEY, "0")
             notificationExtras.putString(Constants.BRAZE_PUSH_DELIVERY_FLUSH_MAX_KEY, "1")
         }

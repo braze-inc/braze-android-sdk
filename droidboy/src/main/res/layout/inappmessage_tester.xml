@@ -23,8 +23,8 @@
       android:text="@string/hide_current_inappmessage" />
   </LinearLayout>
   <ScrollView
-    android:layout_marginLeft="20dp"
-    android:layout_marginRight="20dp"
+    android:layout_marginStart="20dp"
+    android:layout_marginEnd="20dp"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_above="@id/inappmessage_buttons"
@@ -33,7 +33,7 @@
     <LinearLayout
       android:layout_width="match_parent"
       android:layout_height="match_parent"
-      android:layout_marginLeft="10dp"
+      android:layout_marginStart="10dp"
       android:orientation="vertical">
       <Spinner
         android:id="@+id/inapp_set_message_type_spinner"

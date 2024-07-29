@@ -9,7 +9,7 @@
     <item>Header: 80 Chars</item>
   </string-array>
   <string-array name="inapp_header_values">
-      <item>@string/not_set</item>
+      <item>@string/braze_not_set</item>
       <item>@string/none</item>
       <item>@string/header_10</item>
       <item>@string/header_20</item>

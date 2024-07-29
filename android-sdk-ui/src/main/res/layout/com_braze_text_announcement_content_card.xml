@@ -10,15 +10,18 @@
     <TextView
       android:id="@+id/com_braze_content_cards_text_announcement_card_title"
       tools:text="Content Card Title"
+      android:textAlignment="viewStart"
       style="@style/Braze.ContentCards.TextAnnouncement.Title"/>
 
     <TextView
       android:id="@+id/com_braze_content_cards_text_announcement_card_description"
       tools:text="Content Card Description"
+      android:textAlignment="viewStart"
       style="@style/Braze.ContentCards.TextAnnouncement.Description"/>
 
     <TextView
       android:id="@+id/com_braze_content_cards_action_hint"
+      android:textAlignment="viewStart"
       style="@style/Braze.ContentCards.ActionHint.TextAnnouncement"/>
   </RelativeLayout>
 

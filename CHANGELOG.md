@@ -1,3 +1,24 @@
+## 32.0.0
+
+[Release Date](https://github.com/braze-inc/braze-android-sdk/releases/tag/v32.0.0)
+
+##### Breaking
+- Fixed issue where cards with duplicate IDs would cause a crash in Jetpack Compose Content Cards.
+  - If you manually add cards, please ensure that they have unique IDs.
+
+##### Fixed
+- Fixed an issue where closing an In-App Message could throw an error if the previously focused `View` was removed.
+- Fixed an issue where some In-App Messages could display after their expiration time.
+- Fixed an issue with In-App Message and Content Cards not displaying RTL language properly.
+- Fixed an issue where logging In-App Message impression or clicks could result in blocking the main thread.
+
+##### Added
+- Added support for Android 15 (API 35).
+  - Note that apps targeting API 35 should update to this SDK version.
+
+##### Changed
+- Changed the behavior of `Braze.wipeData()` to retain external subscriptions (like `Braze.subscribeToContentCardsUpdates()`) after being called.
+
 ## 31.1.0
 
 [Release Date](https://github.com/braze-inc/braze-android-sdk/releases/tag/v31.1.0)

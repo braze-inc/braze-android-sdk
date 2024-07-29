@@ -7,7 +7,7 @@
     <item>Click Action: None</item>
   </string-array>
   <string-array name="inapp_click_action_values">
-    <item>@string/not_set</item>
+    <item>@string/braze_not_set</item>
     <item>newsfeed</item>
     <item>uri</item>
     <item>@string/none</item>

@@ -4,7 +4,7 @@
   <uses-permission android:name="android.permission.POST_NOTIFICATIONS"/>
 
   <uses-sdk tools:overrideLibrary="com.google.firebase.messaging"/>
-  <application>
+  <application android:supportsRtl="true">
     <activity
       android:name="com.braze.ui.BrazeWebViewActivity"
       android:exported="false" />

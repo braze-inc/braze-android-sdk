@@ -22,6 +22,7 @@ import com.braze.support.BrazeLogger.Priority.V
 import com.braze.support.BrazeLogger.Priority.W
 import com.braze.support.BrazeLogger.brazelog
 import com.braze.support.getPrettyPrintedString
+import com.braze.support.nowInMilliseconds
 import com.braze.support.wouldPushPermissionPromptDisplay
 import com.braze.ui.actions.brazeactions.containsAnyPushPermissionBrazeActions
 import com.braze.ui.actions.brazeactions.containsInvalidBrazeAction
@@ -465,22 +466,20 @@ open class BrazeInAppMessageManager : InAppMessageManagerBase() {
                         "displayed when the next Activity registers to receive in-app messages."
                 )
             }
-            if (!isCarryOver) {
-                val inAppMessageExpirationTimestamp = inAppMessage.expirationTimestamp
-                if (inAppMessageExpirationTimestamp > 0) {
-                    val currentTimeMillis = System.currentTimeMillis()
-                    if (currentTimeMillis > inAppMessageExpirationTimestamp) {
-                        throw Exception(
-                            "In-app message is expired. Doing nothing. Expiration: " +
-                                "$inAppMessageExpirationTimestamp. Current time: $currentTimeMillis"
-                        )
-                    }
-                } else {
-                    brazelog { "Expiration timestamp not defined. Continuing." }
+
+            val inAppMessageExpirationTimestamp = inAppMessage.expirationTimestamp
+            if (inAppMessageExpirationTimestamp > 0) {
+                val currentTimeMillis = nowInMilliseconds()
+                if (currentTimeMillis > inAppMessageExpirationTimestamp) {
+                    throw Exception(
+                        "In-app message is expired. Doing nothing. Expiration: " +
+                            "$inAppMessageExpirationTimestamp. Current time: $currentTimeMillis"
+                    )
                 }
             } else {
-                brazelog { "Not checking expiration status for carry-over in-app message." }
+                brazelog { "Expiration timestamp not defined. Continuing." }
             }
+
             if (!verifyOrientationStatus(inAppMessage)) {
                 // No display failure gets logged here since control in-app messages would also be affected.
                 throw Exception("Current orientation did not match specified orientation for in-app message. Doing nothing.")

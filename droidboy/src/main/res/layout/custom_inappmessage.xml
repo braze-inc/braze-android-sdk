@@ -7,9 +7,9 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@drawable/custom_inappmessage_background"
-    android:paddingLeft="15.0dp"
+    android:paddingStart="15.0dp"
     android:paddingTop="15.0dp"
-    android:paddingRight="15.0dp"
+    android:paddingEnd="15.0dp"
     android:paddingBottom="15.0dp">
     <TextView
         android:id="@+id/inappmessage_icon"

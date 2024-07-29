@@ -12,7 +12,7 @@
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:text="Key"
             android:id="@+id/key_text_view"
-            android:layout_toLeftOf="@+id/space"/>
+            android:layout_toStartOf="@+id/space"/>
     <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -26,5 +26,5 @@
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:text="Value"
             android:id="@+id/value_text_view"
-            android:layout_toRightOf="@+id/space"/>
+            android:layout_toEndOf="@+id/space"/>
 </RelativeLayout>

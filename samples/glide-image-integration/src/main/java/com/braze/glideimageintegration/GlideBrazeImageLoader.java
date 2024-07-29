@@ -61,6 +61,7 @@ public class GlideBrazeImageLoader implements IBrazeImageLoader {
                                  BrazeViewBounds viewBounds) {
     Glide.with(context)
         .load(imageUrl)
+        .fitCenter()
         .apply(mRequestOptions)
         .into(imageView);
   }
