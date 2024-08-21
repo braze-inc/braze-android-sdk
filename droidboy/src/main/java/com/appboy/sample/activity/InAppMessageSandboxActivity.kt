@@ -9,6 +9,7 @@ import com.appboy.sample.R
 import com.braze.enums.inappmessage.DismissType
 import com.braze.models.inappmessage.InAppMessageHtml
 import com.braze.models.inappmessage.InAppMessageModal
+import com.braze.models.inappmessage.InAppMessageSlideup
 import com.braze.models.inappmessage.MessageButton
 import com.braze.ui.inappmessage.BrazeInAppMessageManager
 import java.util.Random
@@ -26,7 +27,7 @@ class InAppMessageSandboxActivity : AppCompatActivity() {
         findViewById<View>(R.id.bSandboxDisplayMessage1).setOnClickListener { this.displayMessage(1) }
         findViewById<View>(R.id.bSandboxDisplayMessage0).setOnClickListener { this.displayMessage(0) }
         findViewById<View>(R.id.bSandboxDummyButton).setOnClickListener { Toast.makeText(this, "dummy button pressed!", Toast.LENGTH_SHORT).show() }
-
+        findViewById<View>(R.id.bSandboxDisplaySlideup).setOnClickListener { displaySlideup() }
         findViewById<View>(R.id.bSandboxHtmlInApp).setOnClickListener { displayHtmlMessage() }
     }
 
@@ -57,6 +58,15 @@ class InAppMessageSandboxActivity : AppCompatActivity() {
             1 -> modal.messageButtons = listOf(button1)
         }
         BrazeInAppMessageManager.getInstance().addInAppMessage(modal)
+        BrazeInAppMessageManager.getInstance().requestDisplayInAppMessage()
+    }
+
+    private fun displaySlideup() {
+        val slideup = InAppMessageSlideup()
+        slideup.message = "Welcome to Braze! This is a slideup in-app message."
+        slideup.icon = "\uf091"
+        slideup.dismissType = DismissType.MANUAL
+        BrazeInAppMessageManager.getInstance().addInAppMessage(slideup)
         BrazeInAppMessageManager.getInstance().requestDisplayInAppMessage()
     }
 

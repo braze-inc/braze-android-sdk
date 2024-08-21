@@ -124,15 +124,10 @@ open class BrazeActivityLifecycleCallbackListener @JvmOverloads constructor(
     }
 
     override fun onActivityCreated(activity: Activity, bundle: Bundle?) {
-        if (registerInAppMessageManager &&
-            shouldHandleLifecycleMethodsInActivity(activity, false)
-        ) {
-            brazelog(V) {
-                "Automatically calling lifecycle method: ensureSubscribedToInAppMessageEvents for class: ${activity.javaClass}"
-            }
-            BrazeInAppMessageManager.getInstance()
-                .ensureSubscribedToInAppMessageEvents(activity.applicationContext)
+        brazelog(V) {
+            "Automatically calling lifecycle method: ensureSubscribedToInAppMessageEvents for class: ${activity.javaClass}"
         }
+        BrazeInAppMessageManager.getInstance().ensureSubscribedToInAppMessageEvents(activity.applicationContext)
     }
 
     override fun onActivitySaveInstanceState(activity: Activity, bundle: Bundle) {}

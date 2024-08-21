@@ -1,3 +1,21 @@
+## 32.1.0
+
+[Release Date](https://github.com/braze-inc/braze-android-sdk/releases/tag/v32.1.0)
+
+##### Fixed
+- Fixed an issue where geofence events could not be sent when the app is in the background.
+- Fixed an issue where In-App Messages would fail to be dismissed when the host app is using the predictive back gesture.
+
+##### Added
+- Added support for an upcoming Braze SDK Debugging tool.
+- Added the ability to prevent certain edge cases where the SDK could show In-App Messages to different users than the one that triggered the In-App Message.
+    - Configured via `braze.xml` through `<bool name="com_braze_prevent_in_app_message_display_for_different_user">true</bool>`.
+    - Can also be configured via runtime configuration through `BrazeConfig.setShouldPreventInAppMessageDisplayForDifferentUsers()`.
+    - Defaults to false. Note that even when false, the SDK will still prevent most cases of showing In-App Messages to different users. This configuration option is designed to prevent edge cases such as when the user changes while on a `BrazeActivityLifecycleCallbackListener` blocked Activity or when a mismatched message is still in the stack.
+
+##### Changed
+- Changed the behavior of the `Braze.getDeviceId()` method to return a different device ID based on the API key used to initialize the SDK.
+
 ## 32.0.0
 
 [Release Date](https://github.com/braze-inc/braze-android-sdk/releases/tag/v32.0.0)

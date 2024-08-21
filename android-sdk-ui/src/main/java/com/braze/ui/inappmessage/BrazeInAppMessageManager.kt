@@ -10,6 +10,7 @@ import com.braze.BrazeInternal
 import com.braze.BrazeInternal.retryInAppMessage
 import com.braze.configuration.BrazeConfigurationProvider
 import com.braze.enums.inappmessage.Orientation
+import com.braze.events.BrazeUserChangeEvent
 import com.braze.events.IEventSubscriber
 import com.braze.events.InAppMessageEvent
 import com.braze.events.SdkDataWipeEvent
@@ -78,6 +79,7 @@ import kotlin.concurrent.withLock
  */
 // Static field leak doesn't apply to this singleton since the activity is nullified after the manager is unregistered.
 @SuppressLint("StaticFieldLeak")
+@Suppress("TooManyFunctions")
 open class BrazeInAppMessageManager : InAppMessageManagerBase() {
     private val inAppMessageViewLifecycleListener: IInAppMessageViewLifecycleListener =
         DefaultInAppMessageViewLifecycleListener()
@@ -94,9 +96,15 @@ open class BrazeInAppMessageManager : InAppMessageManagerBase() {
     val inAppMessageEventMap = mutableMapOf<IInAppMessage, InAppMessageEvent>()
     private var inAppMessageEventSubscriber: IEventSubscriber<InAppMessageEvent>? = null
     private var sdkDataWipeEventSubscriber: IEventSubscriber<SdkDataWipeEvent>? = null
+    private var brazeUserChangeEventSubscriber: IEventSubscriber<BrazeUserChangeEvent>? = null
     private var originalOrientation: Int? = null
     private var configurationProvider: BrazeConfigurationProvider? = null
     private var inAppMessageViewWrapper: IInAppMessageViewWrapper? = null
+
+    /**
+     * The last seen user id from the [BrazeUserChangeEvent] subscriber.
+     */
+    private var currentUserId: String = ""
 
     /**
      * An In-App Message being carried over during the
@@ -165,6 +173,20 @@ open class BrazeInAppMessageManager : InAppMessageManagerBase() {
         }.also {
             getInstance(context).addSingleSynchronousSubscription(
                 it, SdkDataWipeEvent::class.java
+            )
+        }
+
+        if (brazeUserChangeEventSubscriber != null) {
+            brazelog(V) { "Removing existing user change event subscriber before subscribing a new one." }
+            getInstance(context).removeSingleSubscription(
+                brazeUserChangeEventSubscriber,
+                BrazeUserChangeEvent::class.java
+            )
+        }
+
+        brazeUserChangeEventSubscriber = createBrazeUserChangeEventSubscriber(context).also {
+            getInstance(context).addSingleSynchronousSubscription(
+                it, BrazeUserChangeEvent::class.java
             )
         }
     }
@@ -485,6 +507,19 @@ open class BrazeInAppMessageManager : InAppMessageManagerBase() {
                 throw Exception("Current orientation did not match specified orientation for in-app message. Doing nothing.")
             }
 
+            // Verify this message is for the intended user
+            val configProvider = configurationProvider
+                ?: throw Exception(
+                    "configurationProvider is null. The in-app message will not be displayed and will not be" +
+                        "put back on the stack."
+                )
+            if (configProvider.isPreventInAppMessageDisplayForDifferentUsersEnabled && !isInAppMessageForTheSameUser(inAppMessage, currentUserId)) {
+                throw Exception(
+                    "The last identifier user $currentUserId does not match the in-app message's user. " +
+                        "The in-app message will not be displayed and will not be put back on the stack."
+                )
+            }
+
             // At this point, the only factors that would inhibit in-app message display are view creation issues.
             // Since control in-app messages have no view, this is the end of execution for control in-app messages
             if (inAppMessage.isControl) {
@@ -520,10 +555,7 @@ open class BrazeInAppMessageManager : InAppMessageManagerBase() {
                 resetAfterInAppMessageClose()
                 return
             }
-            val inAppMessageViewFactory = getInAppMessageViewFactory(inAppMessage)
-            if (inAppMessageViewFactory == null) {
-                throw Exception("ViewFactory from getInAppMessageViewFactory was null.")
-            }
+            val inAppMessageViewFactory = getInAppMessageViewFactory(inAppMessage) ?: throw Exception("ViewFactory from getInAppMessageViewFactory was null.")
             val inAppMessageView = inAppMessageViewFactory.createInAppMessageView(
                 activity, inAppMessage
             )
@@ -542,11 +574,6 @@ open class BrazeInAppMessageManager : InAppMessageManagerBase() {
                 )
             }
 
-            val configProvider = configurationProvider
-                ?: throw Exception(
-                    "configurationProvider is null. The in-app message will not be displayed and will not be" +
-                        "put back on the stack."
-                )
             val openingAnimation = inAppMessageAnimationFactory.getOpeningAnimation(inAppMessage)
             val closingAnimation = inAppMessageAnimationFactory.getClosingAnimation(inAppMessage)
             val viewWrapperFactory = inAppMessageViewWrapperFactory
@@ -635,6 +662,24 @@ open class BrazeInAppMessageManager : InAppMessageManagerBase() {
         }
     }
 
+    private fun createBrazeUserChangeEventSubscriber(context: Context): IEventSubscriber<BrazeUserChangeEvent> {
+        return IEventSubscriber { event: BrazeUserChangeEvent ->
+            brazelog(V) { "InAppMessage manager handling new current user id: '$event'" }
+            val configurationProvider = BrazeInternal.getConfigurationProvider(context)
+            if (!configurationProvider.isPreventInAppMessageDisplayForDifferentUsersEnabled) {
+                brazelog(V) { "Not cleansing in-app messages on user id change" }
+                return@IEventSubscriber
+            }
+            val currentUserId = event.currentUserId
+            this.currentUserId = currentUserId
+            brazelog { "Removing in-app messages not from user $currentUserId" }
+
+            inAppMessageStack.removeAll { !isInAppMessageForTheSameUser(it, currentUserId) }
+            if (!isInAppMessageForTheSameUser(carryoverInAppMessage, currentUserId)) carryoverInAppMessage = null
+            if (!isInAppMessageForTheSameUser(unregisteredInAppMessage, currentUserId)) unregisteredInAppMessage = null
+        }
+    }
+
     /**
      * For in-app messages that have a preferred orientation, locks the screen orientation and
      * returns true if the screen is currently in the preferred orientation. If the screen is not
@@ -671,6 +716,19 @@ open class BrazeInAppMessageManager : InAppMessageManagerBase() {
             }
         }
         return true
+    }
+
+    /**
+     * Determines whether the in-app message was triggered for the same user as the current user.
+     * @return true if the in-app message was triggered for the same user as the current
+     * user, false otherwise. Returns false if the message is null.
+     */
+    @VisibleForTesting
+    open fun isInAppMessageForTheSameUser(inAppMessage: IInAppMessage?, currentUserId: String): Boolean {
+        if (inAppMessage == null) return true
+
+        val inAppMessageUserId = inAppMessageEventMap[inAppMessage]?.userId
+        return inAppMessageUserId == null || inAppMessageUserId == currentUserId
     }
 
     companion object {

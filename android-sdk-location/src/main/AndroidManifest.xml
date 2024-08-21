@@ -3,7 +3,7 @@
      <application>
         <receiver
           android:name="com.braze.location.BrazeActionReceiver"
-          android:exported="false">
+          android:exported="true">
         </receiver>
     </application>
 </manifest>

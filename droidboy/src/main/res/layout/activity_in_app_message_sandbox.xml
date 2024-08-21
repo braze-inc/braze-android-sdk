@@ -51,4 +51,13 @@
     android:text="HTML IAM"
     app:layout_constraintBottom_toTopOf="@+id/bSandboxDummyButton"
     app:layout_constraintStart_toStartOf="parent" />
+  <Button
+    android:id="@+id/bSandboxDisplaySlideup"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="8dp"
+    android:layout_marginBottom="16dp"
+    android:text="Slideup"
+    app:layout_constraintBottom_toTopOf="@+id/bSandboxHtmlInApp"
+    app:layout_constraintStart_toStartOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

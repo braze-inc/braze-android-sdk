@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.app.PendingIntent
 import android.content.Context
 import android.content.SharedPreferences
+import androidx.annotation.VisibleForTesting
 import com.braze.managers.BrazeGeofenceManager
 import com.braze.managers.IBrazeGeofenceLocationUpdateListener
 import com.braze.models.BrazeGeofence
@@ -28,44 +29,63 @@ object GooglePlayLocationUtils {
      *
      * If a given geofence is already registered with Google Play Location Services, it will not be
      * needlessly re-registered. Geofences that are registered with Google Play Location Services but
-     * not included in the given list of geofences will be un-registered.
+     * not included in [desiredGeofencesToRegister] will be un-registered.
      *
-     * If the given geofence list is empty, geofences will be un-registered and deleted from local
+     * If [desiredGeofencesToRegister] is empty, all geofences will be un-registered and deleted from local
      * storage.
      * @param context used by shared preferences
-     * @param geofenceList list of [BrazeGeofence] objects
-     * @param geofenceRequestIntent pending intent to fire when geofences transition events occur
+     * @param desiredGeofencesToRegister list of [BrazeGeofence] objects to register if new or updated. Otherwise ignored.
+     * @param geofenceRequestIntent pending intent to fire when geofences transition events occur.
+     * @param removalFunction function to remove geofences from Google Play Location Services.
+     * @param registerFunction function to register geofences with Google Play Location Services.
      */
     @JvmStatic
     fun registerGeofencesWithGooglePlayIfNecessary(
         context: Context,
-        geofenceList: List<BrazeGeofence>,
-        geofenceRequestIntent: PendingIntent
+        desiredGeofencesToRegister: List<BrazeGeofence>,
+        geofenceRequestIntent: PendingIntent,
+        removalFunction: (List<String>) -> Unit = { removeGeofencesRegisteredWithGeofencingClient(context, it) },
+        registerFunction: (List<BrazeGeofence>) -> Unit = { registerGeofencesWithGeofencingClient(context, it, geofenceRequestIntent) }
     ) {
+        brazelog(V) { "registerGeofencesWithGooglePlayIfNecessary called with $desiredGeofencesToRegister" }
         try {
             val prefs = getRegisteredGeofenceSharedPrefs(context)
             val registeredGeofences = BrazeGeofenceManager.retrieveBrazeGeofencesFromLocalStorage(prefs)
+            val registeredGeofencesById = registeredGeofences.associateBy { it.id }
 
-            val newGeofencesToRegister = geofenceList.filter { newGeofence ->
-                registeredGeofences.none { registeredGeofence ->
-                    registeredGeofence.id == newGeofence.id && registeredGeofence.equivalentServerData(newGeofence)
-                }
-            }
+            // Given the input [desiredGeofencesToRegister] and the [registeredGeofences], we need to determine
+            // which geofences are to be registered, which are obsolete, and which will be no-ops.
+            // We can do this by comparing the geofence data against the registered geofences.
+            // We only want to register geofences that are not already registered.
+            // An obsolete Geofence is one that is registered with Google Play Services but is not in the desired list.
+
+            // If any previously registered Geofence is missing from the desired list, it is obsolete.
             val obsoleteGeofenceIds = registeredGeofences.filter { registeredGeofence ->
-                newGeofencesToRegister.none { newGeofence ->
-                    newGeofence.id == registeredGeofence.id
+                desiredGeofencesToRegister.none { desiredGeofence ->
+                    desiredGeofence.id == registeredGeofence.id
                 }
             }.map { it.id }
 
+            // If any desired Geofence is not already registered, it is new and needs to be registered.
+            // Additionally, any previously registered geofence that has received updates should be re-registered.
+            val newGeofencesToRegister = mutableListOf<BrazeGeofence>()
+            for (desiredGeofence in desiredGeofencesToRegister) {
+                val registeredGeofenceWithSameId = registeredGeofencesById[desiredGeofence.id]
+                if (registeredGeofenceWithSameId == null || !desiredGeofence.equivalentServerData(registeredGeofenceWithSameId)) {
+                    brazelog { "Geofence with id: ${desiredGeofence.id} is new or has been updated." }
+                    newGeofencesToRegister.add(desiredGeofence)
+                }
+            }
+
             if (obsoleteGeofenceIds.isNotEmpty()) {
-                brazelog { "Un-registering ${obsoleteGeofenceIds.size} obsolete geofences from Google Play Services." }
-                removeGeofencesRegisteredWithGeofencingClient(context, obsoleteGeofenceIds)
+                brazelog { "Un-registering $obsoleteGeofenceIds obsolete geofences from Google Play Services." }
+                removalFunction(obsoleteGeofenceIds)
             } else {
                 brazelog { "No obsolete geofences need to be unregistered from Google Play Services." }
             }
             if (newGeofencesToRegister.isNotEmpty()) {
-                brazelog { "Registering ${newGeofencesToRegister.size} new geofences with Google Play Services." }
-                registerGeofencesWithGeofencingClient(context, newGeofencesToRegister, geofenceRequestIntent)
+                brazelog { "Registering $newGeofencesToRegister new geofences with Google Play Services." }
+                registerFunction(newGeofencesToRegister)
             } else {
                 brazelog { "No new geofences need to be registered with Google Play Services." }
             }
@@ -166,7 +186,8 @@ object GooglePlayLocationUtils {
      *
      * @param obsoleteGeofenceIds List of [String]s containing Geofence IDs that needs to be un-registered
      */
-    private fun removeGeofencesRegisteredWithGeofencingClient(context: Context, obsoleteGeofenceIds: List<String>) {
+    @VisibleForTesting
+    internal fun removeGeofencesRegisteredWithGeofencingClient(context: Context, obsoleteGeofenceIds: List<String>) {
         LocationServices.getGeofencingClient(context).removeGeofences(obsoleteGeofenceIds)
             .addOnSuccessListener {
                 brazelog { "Geofences successfully un-registered with Google Play Services." }
@@ -201,7 +222,8 @@ object GooglePlayLocationUtils {
     /**
      * Returns a [SharedPreferences] instance holding list of registered [BrazeGeofence]s.
      */
-    private fun getRegisteredGeofenceSharedPrefs(context: Context): SharedPreferences =
+    @VisibleForTesting
+    internal fun getRegisteredGeofenceSharedPrefs(context: Context): SharedPreferences =
         context.getSharedPreferences(REGISTERED_GEOFENCE_SHARED_PREFS_LOCATION, Context.MODE_PRIVATE)
 
     /**
@@ -209,7 +231,8 @@ object GooglePlayLocationUtils {
      *
      * @param newGeofencesToRegister List of [BrazeGeofence]s to store in SharedPreferences
      */
-    private fun storeGeofencesToSharedPrefs(context: Context, newGeofencesToRegister: List<BrazeGeofence>) {
+    @VisibleForTesting
+    internal fun storeGeofencesToSharedPrefs(context: Context, newGeofencesToRegister: List<BrazeGeofence>) {
         val editor = getRegisteredGeofenceSharedPrefs(context).edit()
         for (brazeGeofence in newGeofencesToRegister) {
             editor.putString(brazeGeofence.id, brazeGeofence.forJsonPut().toString())

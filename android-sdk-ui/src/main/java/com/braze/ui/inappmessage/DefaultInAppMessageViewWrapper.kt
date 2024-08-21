@@ -1,11 +1,14 @@
 package com.braze.ui.inappmessage
 
 import android.app.Activity
+import android.os.Build
 import android.view.Gravity
 import android.view.View
 import android.view.ViewGroup
 import android.view.animation.Animation
 import android.widget.FrameLayout
+import android.window.OnBackInvokedCallback
+import android.window.OnBackInvokedDispatcher
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.braze.configuration.BrazeConfigurationProvider
@@ -23,6 +26,7 @@ import com.braze.ui.inappmessage.listeners.IInAppMessageViewLifecycleListener
 import com.braze.ui.inappmessage.listeners.SwipeDismissTouchListener.DismissCallbacks
 import com.braze.ui.inappmessage.listeners.TouchAwareSwipeDismissTouchListener
 import com.braze.ui.inappmessage.listeners.TouchAwareSwipeDismissTouchListener.ITouchListener
+import com.braze.ui.inappmessage.utils.InAppMessageViewUtils
 import com.braze.ui.inappmessage.views.IInAppMessageImmersiveView
 import com.braze.ui.inappmessage.views.IInAppMessageView
 import com.braze.ui.inappmessage.views.InAppMessageHtmlBaseView
@@ -153,6 +157,19 @@ open class DefaultInAppMessageViewWrapper @JvmOverloads constructor(
                 inAppMessageView,
                 inAppMessageViewLifecycleListener
             )
+        }
+
+        if (BrazeInAppMessageManager.getInstance().doesBackButtonDismissInAppMessageView && Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            activity.let {
+                val dismissInAppMessageCallback = object : OnBackInvokedCallback {
+                    override fun onBackInvoked() {
+                        InAppMessageViewUtils.closeInAppMessageOnKeycodeBack()
+                        it.onBackInvokedDispatcher.unregisterOnBackInvokedCallback(this)
+                    }
+                }
+
+                it.onBackInvokedDispatcher.registerOnBackInvokedCallback(OnBackInvokedDispatcher.PRIORITY_OVERLAY, dismissInAppMessageCallback)
+            }
         }
     }
 
