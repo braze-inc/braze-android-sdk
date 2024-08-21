@@ -1,0 +1,165 @@
+{
+  "formatVersion": "1.1",
+  "component": {
+    "group": "com.braze",
+    "module": "braze-segment-kotlin",
+    "version": "2.0.0",
+    "attributes": {
+      "org.gradle.status": "release"
+    }
+  },
+  "createdBy": {
+    "gradle": {
+      "version": "8.4"
+    }
+  },
+  "variants": [
+    {
+      "name": "releaseVariantReleaseApiPublication",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.libraryelements": "aar",
+        "org.gradle.usage": "java-api"
+      },
+      "dependencies": [
+        {
+          "group": "com.braze",
+          "module": "android-sdk-ui",
+          "version": {
+            "requires": "32.1.0"
+          }
+        },
+        {
+          "group": "org.jetbrains.kotlin",
+          "module": "kotlin-stdlib-jdk8",
+          "version": {
+            "requires": "1.7.10"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "braze-segment-kotlin-2.0.0.aar",
+          "url": "braze-segment-kotlin-2.0.0.aar",
+          "size": 19206,
+          "sha512": "b77c02b6a0e2d7245e456fecf5ae9a1c4be7a3d7387b46f45f4086ce9b74b8c64ada3a066b606b01c17cfc0f1e207c7575e39ceaf1e78fd817c33c6bf9783f8b",
+          "sha256": "34e81b2f7b683c148d3805e8bd72acf892c8410464491144eb1b997275946d04",
+          "sha1": "7035860d058c0aba4ea525cebc656a16cec3f02f",
+          "md5": "a552251ebb6819989d3f7ec60a8cc9db"
+        }
+      ]
+    },
+    {
+      "name": "releaseVariantReleaseRuntimePublication",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.libraryelements": "aar",
+        "org.gradle.usage": "java-runtime"
+      },
+      "dependencies": [
+        {
+          "group": "com.braze",
+          "module": "android-sdk-ui",
+          "version": {
+            "requires": "32.1.0"
+          }
+        },
+        {
+          "group": "org.jetbrains.kotlin",
+          "module": "kotlin-stdlib-jdk8",
+          "version": {
+            "requires": "1.7.10"
+          }
+        },
+        {
+          "group": "com.segment.analytics.kotlin",
+          "module": "android",
+          "version": {
+            "requires": "1.16.3"
+          }
+        },
+        {
+          "group": "androidx.core",
+          "module": "core-ktx",
+          "version": {
+            "requires": "1.9.0"
+          }
+        },
+        {
+          "group": "androidx.appcompat",
+          "module": "appcompat",
+          "version": {
+            "requires": "1.5.1"
+          }
+        },
+        {
+          "group": "com.google.android.material",
+          "module": "material",
+          "version": {
+            "requires": "1.7.0"
+          }
+        },
+        {
+          "group": "androidx.test",
+          "module": "core-ktx",
+          "version": {
+            "requires": "1.5.0"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "braze-segment-kotlin-2.0.0.aar",
+          "url": "braze-segment-kotlin-2.0.0.aar",
+          "size": 19206,
+          "sha512": "b77c02b6a0e2d7245e456fecf5ae9a1c4be7a3d7387b46f45f4086ce9b74b8c64ada3a066b606b01c17cfc0f1e207c7575e39ceaf1e78fd817c33c6bf9783f8b",
+          "sha256": "34e81b2f7b683c148d3805e8bd72acf892c8410464491144eb1b997275946d04",
+          "sha1": "7035860d058c0aba4ea525cebc656a16cec3f02f",
+          "md5": "a552251ebb6819989d3f7ec60a8cc9db"
+        }
+      ]
+    },
+    {
+      "name": "releaseVariantReleaseSourcePublication",
+      "attributes": {
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.docstype": "sources",
+        "org.gradle.usage": "java-runtime"
+      },
+      "files": [
+        {
+          "name": "braze-segment-kotlin-2.0.0-sources.jar",
+          "url": "braze-segment-kotlin-2.0.0-sources.jar",
+          "size": 4966,
+          "sha512": "9c37fac116157c9eed3a35893159e53e4359f2d1d654b2a91c01a184ab9319215a47ee0264ad7f6d15827e7485be4f306e2c2b08a9155903b9dfba74f8f193c0",
+          "sha256": "f684ccd3f21ba7f7201b4417fd91da19ce33bf7d9d122aee4d0389e5fd0d44d1",
+          "sha1": "195d409aa0e772debff7aa43b10bd75edf7e652d",
+          "md5": "457bfe8288adf20e60d86712fc7f1910"
+        }
+      ]
+    },
+    {
+      "name": "releaseVariantReleaseJavaDocPublication",
+      "attributes": {
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.docstype": "javadoc",
+        "org.gradle.usage": "java-runtime"
+      },
+      "files": [
+        {
+          "name": "braze-segment-kotlin-2.0.0-javadoc.jar",
+          "url": "braze-segment-kotlin-2.0.0-javadoc.jar",
+          "size": 288231,
+          "sha512": "02260c1b614e29275c10e3c65802d4980dabcd2ca802954ca546d688ce21e9b65982e8b3f3aab96adfd5ee8ee87766a2674d3b303e31d65a07ac64fa470d92c4",
+          "sha256": "48ea5fcdadc1d3cf6a46c4476f4d428147ccc17e0649dc918599a9edc9157bd3",
+          "sha1": "4133625ec85b9c00fb33564bad699d12c22c81e1",
+          "md5": "ad1fa9bf88e5b3c4a484e4185c2a22c7"
+        }
+      ]
+    }
+  ]
+}
