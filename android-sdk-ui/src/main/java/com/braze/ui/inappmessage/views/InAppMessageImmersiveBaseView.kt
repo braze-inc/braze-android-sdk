@@ -8,11 +8,11 @@ import android.view.KeyEvent
 import android.view.TouchDelegate
 import android.view.View
 import android.widget.TextView
-import com.braze.ui.R
 import com.braze.enums.inappmessage.TextAlign
 import com.braze.models.inappmessage.MessageButton
 import com.braze.support.BrazeLogger.Priority.W
 import com.braze.support.BrazeLogger.brazelog
+import com.braze.ui.R
 import com.braze.ui.inappmessage.BrazeInAppMessageManager
 import com.braze.ui.inappmessage.utils.InAppMessageButtonViewUtils.setButtons
 import com.braze.ui.inappmessage.utils.InAppMessageViewUtils.closeInAppMessageOnKeycodeBack
@@ -118,6 +118,7 @@ abstract class InAppMessageImmersiveBaseView(context: Context?, attrs: Attribute
 
         // The entire view should focus back to the close
         // button and not allow for backwards navigation.
+        @Suppress("ConstantConditionIf", "SENSELESS_COMPARISON")
         if (defaultFocusId != null) {
             this.nextFocusUpId = defaultFocusId
             this.nextFocusDownId = defaultFocusId

@@ -77,7 +77,7 @@ val UndefinedAlignment: Alignment = BiasAlignment(-2.0f, -2.0f)
  * @property shortNewsContentCardStyle Style to use specifically for Short News Content Cards. See note above.
  * @property captionedImageContentCardStyle Style to use specifically for Captioned Image Content Cards. See note above.
  */
-@Suppress("LongParameterList", "TooManyFunctions")
+@Suppress("LongParameterList", "TooManyFunctions", "BooleanPropertyNaming")
 open class ContentCardStyling(
     val modifier: Modifier? = null,
     val pinnedResourceId: Int = R.drawable.com_braze_content_card_icon_pinned,
@@ -105,7 +105,8 @@ open class ContentCardStyling(
     val descriptionTextColor: Color = Color.Unspecified,
     val actionHintTextColor: Color = Color.Unspecified,
     val imageOnlyContentCardStyle: BrazeImageOnlyContentCardStyling = BrazeImageOnlyContentCardStyling(),
-    val textAnnouncementContentCardStyle: BrazeTextAnnouncementContentCardStyling = BrazeTextAnnouncementContentCardStyling(),
+    val textAnnouncementContentCardStyle: BrazeTextAnnouncementContentCardStyling =
+        BrazeTextAnnouncementContentCardStyling(),
     val shortNewsContentCardStyle: BrazeShortNewsContentCardStyling = BrazeShortNewsContentCardStyling(),
     val captionedImageContentCardStyle: BrazeCaptionedImageContentCardStyling = BrazeCaptionedImageContentCardStyling(),
 ) {
@@ -636,6 +637,7 @@ open class ContentCardStyling(
      * NOTE: If modifier is used, then it should have a background color specified in it.
      *
      * @param type
+     * @param extraPadding
      * @return
      */
     @SuppressLint("ModifierFactoryExtensionFunction")
@@ -764,7 +766,7 @@ class BrazeImageOnlyContentCardStyling(
     shadowRadius = shadowRadius
 )
 
-@Suppress("LongParameterList")
+@Suppress("LongParameterList", "BooleanPropertyNaming")
 class BrazeTextAnnouncementContentCardStyling(
     modifier: Modifier? = null,
     pinnedResourceId: Int = 0,
@@ -826,7 +828,7 @@ class BrazeTextAnnouncementContentCardStyling(
     actionHintTextColor = actionHintTextColor
 )
 
-@Suppress("LongParameterList")
+@Suppress("LongParameterList", "BooleanPropertyNaming")
 class BrazeShortNewsContentCardStyling(
     modifier: Modifier? = null,
     pinnedResourceId: Int = 0,
@@ -895,7 +897,7 @@ class BrazeShortNewsContentCardStyling(
     actionHintTextColor = actionHintTextColor
 )
 
-@Suppress("LongParameterList")
+@Suppress("LongParameterList", "BooleanPropertyNaming")
 class BrazeCaptionedImageContentCardStyling(
     modifier: Modifier? = null,
     pinnedResourceId: Int = 0,

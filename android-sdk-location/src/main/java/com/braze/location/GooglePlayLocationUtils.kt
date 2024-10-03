@@ -45,7 +45,9 @@ object GooglePlayLocationUtils {
         desiredGeofencesToRegister: List<BrazeGeofence>,
         geofenceRequestIntent: PendingIntent,
         removalFunction: (List<String>) -> Unit = { removeGeofencesRegisteredWithGeofencingClient(context, it) },
-        registerFunction: (List<BrazeGeofence>) -> Unit = { registerGeofencesWithGeofencingClient(context, it, geofenceRequestIntent) }
+        registerFunction: (List<BrazeGeofence>) -> Unit = {
+            registerGeofencesWithGeofencingClient(context, it, geofenceRequestIntent)
+        }
     ) {
         brazelog(V) { "registerGeofencesWithGooglePlayIfNecessary called with $desiredGeofencesToRegister" }
         try {
@@ -97,6 +99,7 @@ object GooglePlayLocationUtils {
     /**
      * Requests a single location update from Google Play Location Services for the given pending intent.
      *
+     * @param context
      * @param resultListener A callback of type [IBrazeGeofenceLocationUpdateListener]
      * which will be informed of the result of location update.
      */
@@ -136,6 +139,7 @@ object GooglePlayLocationUtils {
     /**
      * Registers a list of [Geofence] with a [com.google.android.gms.location.GeofencingClient].
      *
+     * @param context
      * @param newGeofencesToRegister List of [BrazeGeofence]s to register
      * @param geofenceRequestIntent A pending intent to fire on completion of adding the [Geofence]s with
      * the [com.google.android.gms.location.GeofencingClient].
@@ -184,6 +188,7 @@ object GooglePlayLocationUtils {
     /**
      * Un-registers a list of [Geofence] with a [com.google.android.gms.location.GeofencingClient].
      *
+     * @param context
      * @param obsoleteGeofenceIds List of [String]s containing Geofence IDs that needs to be un-registered
      */
     @VisibleForTesting
@@ -229,6 +234,7 @@ object GooglePlayLocationUtils {
     /**
      * Stores the list of [BrazeGeofence] which are successfully registered.
      *
+     * @param context
      * @param newGeofencesToRegister List of [BrazeGeofence]s to store in SharedPreferences
      */
     @VisibleForTesting
@@ -244,6 +250,7 @@ object GooglePlayLocationUtils {
     /**
      * Removes the list of [BrazeGeofence] which are now un-registered with Google Play Services.
      *
+     * @param context
      * @param obsoleteGeofenceIds List of [String]s containing Geofence IDs that are un-registered
      */
     private fun removeGeofencesFromSharedPrefs(context: Context, obsoleteGeofenceIds: List<String>) {

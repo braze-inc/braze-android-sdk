@@ -92,11 +92,12 @@ open class BrazeWebViewActivity : FragmentActivity() {
                 return true
             }
 
-            override fun getDefaultVideoPoster(): Bitmap {
-                // This bitmap is used to eliminate the default black & white
-                // play icon used as the default poster.
-                return Bitmap.createBitmap(1, 1, Bitmap.Config.ARGB_8888)
-            }
+            /**
+             * This bitmap is used to eliminate the default
+             * black & white play icon used as the default poster.
+             */
+            override fun getDefaultVideoPoster(): Bitmap =
+                Bitmap.createBitmap(1, 1, Bitmap.Config.ARGB_8888)
         }
     }
 

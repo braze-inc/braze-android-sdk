@@ -42,6 +42,8 @@ import com.braze.ui.support.setFocusableInTouchModeAndRequestFocus
  * @param inAppMessage                      In-app message model.
  * @param inAppMessageViewLifecycleListener In-app message lifecycle listener.
  * @param configurationProvider       Configuration provider.
+ * @param openingAnimation                  Animation to run when the in-app message opens.
+ * @param closingAnimation                  Animation to run when the in-app message closes.
  * @param clickableInAppMessageView         View for which click actions apply.
  * @param buttonViews                       List of views corresponding to MessageButton objects stored in the in-app message model object.
  * These views should map one to one with the MessageButton objects.
@@ -60,7 +62,7 @@ open class DefaultInAppMessageViewWrapper @JvmOverloads constructor(
     open var closeButton: View? = null
 ) : IInAppMessageViewWrapper {
     @Suppress("deprecation")
-    open val inAppMessageCloser: InAppMessageCloser
+    open val inAppMessageCloser: InAppMessageCloser = InAppMessageCloser(this)
     override var isAnimatingClose = false
     open var dismissRunnable: Runnable? = null
 
@@ -99,8 +101,6 @@ open class DefaultInAppMessageViewWrapper @JvmOverloads constructor(
             clickableInAppMessageView?.setOnTouchListener(touchAwareSwipeListener)
         }
         clickableInAppMessageView?.setOnClickListener(createClickListener())
-        @Suppress("deprecation")
-        inAppMessageCloser = InAppMessageCloser(this)
 
         this.closeButton?.setOnClickListener(createCloseInAppMessageClickListener())
         createButtonClickListeners()

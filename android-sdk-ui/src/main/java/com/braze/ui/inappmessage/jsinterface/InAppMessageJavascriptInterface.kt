@@ -9,6 +9,7 @@ import com.braze.models.inappmessage.IInAppMessageHtml
 import com.braze.models.outgoing.BrazeProperties
 import com.braze.support.BrazeLogger.Priority.E
 import com.braze.support.BrazeLogger.Priority.V
+import com.braze.support.BrazeLogger.Priority.W
 import com.braze.support.BrazeLogger.brazelog
 import com.braze.support.requestPushPermissionPrompt
 import com.braze.ui.inappmessage.BrazeInAppMessageManager
@@ -52,17 +53,29 @@ class InAppMessageJavascriptInterface(
     @JavascriptInterface
     fun logPurchaseWithJSON(
         productId: String?,
-        price: Double,
+        price: String,
         currencyCode: String?,
-        quantity: Int,
+        quantity: String,
         propertiesJSON: String?
     ) {
         val brazeProperties = parseProperties(propertiesJSON)
+        val priceValue = price.toDoubleOrNull()
+        if (priceValue == null) {
+            brazelog(W) { "Failed to parse logPurchaseWithJSON price value '$price'" }
+            return
+        }
+
+        val quantityValue = quantity.toIntOrNull()
+        if (quantityValue == null) {
+            brazelog(W) { "Failed to parse logPurchaseWithJSON quantity value '$quantity'" }
+            return
+        }
+
         Braze.getInstance(context).logPurchase(
             productId,
             currencyCode,
-            BigDecimal(price.toString()),
-            quantity,
+            BigDecimal(priceValue.toString()),
+            quantityValue,
             brazeProperties
         )
     }

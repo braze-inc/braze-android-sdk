@@ -1,3 +1,21 @@
+## 33.0.0
+
+[Release Date](https://github.com/braze-inc/braze-android-sdk/releases/tag/v33.0.0)
+
+##### Breaking
+- Updated Kotlin from 1.8 to Kotlin 2.0.
+
+##### Fixed
+- Braze HTML In-App Message bridge method `incrementCustomUserAttribute()` will use the provided value as the increment amount instead of always incrementing by 1.
+- Fixed an issue where In-App Message text alignments would not match what was set in the dashboard in some cases.
+    - Removed `android:supportsRtl="true"` from android-sdk-ui `AndroidManifest.xml`. You should have this in your application `AndroidManifest.xml`.
+    - Removed `android:textAlignment="viewStart"` from the In-App Message layouts, since this is sent by the server.
+- Fixed an issue where Content Cards and Feature Flags were not refreshing after a session started due to a session timeout.
+- Fixed an issue with SDK Authentication where tokens that expired and refreshed mid session would be treated as failed.
+
+##### Changed
+- Braze HTML In-App Message bridge method will now also accept strings for `incrementCustomUserAttribute()`, `setDateOfBirth()`, `setCustomLocationAttribute()`, and `logPurchase()`.
+
 ## 32.1.0
 
 [Release Date](https://github.com/braze-inc/braze-android-sdk/releases/tag/v32.1.0)

@@ -69,9 +69,7 @@ object BrazeNotificationUtils {
      */
     @get:JvmStatic
     val activeNotificationFactory: IBrazeNotificationFactory
-        get() {
-            return Braze.customBrazeNotificationFactory ?: BrazeNotificationFactory.instance
-        }
+        get() = Braze.customBrazeNotificationFactory ?: BrazeNotificationFactory.instance
 
     /**
      * The [Class] of the notification receiver used by this application.
@@ -491,7 +489,8 @@ object BrazeNotificationUtils {
     @JvmStatic
     fun setContentIntentIfPresent(context: Context, notificationBuilder: NotificationCompat.Builder, notificationExtras: Bundle?) {
         try {
-            val pushOpenedPendingIntent = getPushActionPendingIntent(context, Constants.BRAZE_PUSH_CLICKED_ACTION, notificationExtras)
+            val pushOpenedPendingIntent =
+                getPushActionPendingIntent(context, Constants.BRAZE_PUSH_CLICKED_ACTION, notificationExtras)
             notificationBuilder.setContentIntent(pushOpenedPendingIntent)
         } catch (e: Exception) {
             brazelog(E, e) { "Error setting content intent." }
@@ -757,6 +756,7 @@ object BrazeNotificationUtils {
      *
      * A Braze session must be active to log a push notification.
      *
+     * @param context
      * @param customContentString extra key value pairs in JSON format.
      */
     @JvmStatic
@@ -1018,6 +1018,7 @@ object BrazeNotificationUtils {
      *
      * This method does not create a notification channel if a valid channel cannot be found.
      *
+     * @param notificationManager The notification manager to use to get the notification channel.
      * @param notificationExtras The extras that will be checked for a valid notification channel id.
      * @return A already created notification channel on the device, or null if one cannot be found.
      */
@@ -1071,6 +1072,7 @@ object BrazeNotificationUtils {
      * Broadcasts an intent with the given action suffix. Will copy the extras from the input intent.
      *
      * @param context            Application context.
+     * @param broadcastType
      * @param notificationExtras The extras to attach to the intent.
      * @param payload The notification payload, may be null. If present, will lead to a callback firing for [IBraze.subscribeToPushNotificationEvents]
      */

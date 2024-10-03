@@ -55,6 +55,7 @@ open class BrazeFirebaseMessagingService : FirebaseMessagingService() {
          * Consumes an incoming [RemoteMessage] if it originated from Braze. If the [RemoteMessage] did
          * not originate from Braze, then this method does nothing and returns false.
          *
+         * @param context
          * @param remoteMessage The [RemoteMessage] from Firebase.
          * @return true iff the [RemoteMessage] originated from Braze and was consumed. Returns false
          * if the [RemoteMessage] did not originate from Braze or otherwise could not be handled by Braze.
@@ -122,7 +123,9 @@ open class BrazeFirebaseMessagingService : FirebaseMessagingService() {
         internal fun invokeFallbackFirebaseService(classpath: String, remoteMessage: RemoteMessage, context: Context) {
             val fallbackObject = constructObjectQuietly(classpath)
             if (fallbackObject == null) {
-                brazelog { "Fallback firebase messaging service $classpath could not be constructed. Not routing fallback RemoteMessage." }
+                brazelog {
+                    "Fallback firebase messaging service $classpath could not be constructed. Not routing fallback RemoteMessage."
+                }
                 return
             }
 

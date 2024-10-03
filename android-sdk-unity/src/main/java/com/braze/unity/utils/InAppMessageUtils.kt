@@ -34,7 +34,7 @@ object InAppMessageUtils {
         }
         if (inAppMessage is IInAppMessageImmersive) {
             inAppMessage.messageButtons
-                .firstOrNull() { it.id == buttonId }
+                .firstOrNull { it.id == buttonId }
                 ?.let { inAppMessage.logButtonClick(it) }
         } else {
             brazelog(W) {

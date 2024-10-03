@@ -78,15 +78,14 @@ fun ContentCard(
         val lifecycleOwner = LocalLifecycleOwner.current
         DisposableEffect(LocalLifecycleOwner.current) {
             val observer = LifecycleEventObserver { _, event ->
-                when (event) {
-                    Lifecycle.Event.ON_PAUSE -> {
-                        brazelog(TAG) { "OnPause called in ContentCardComposable" }
-                        if (!card.isIndicatorHighlighted) {
-                            card.isIndicatorHighlighted = true
-                            isUnread = false
-                        }
+                if (event == Lifecycle.Event.ON_PAUSE) {
+                    brazelog(TAG) { "OnPause called in ContentCardComposable" }
+                    if (!card.isIndicatorHighlighted) {
+                        card.isIndicatorHighlighted = true
+                        isUnread = false
                     }
-                    else -> Unit
+                } else {
+                    Unit
                 }
             }
             lifecycleOwner.lifecycle.addObserver(observer)

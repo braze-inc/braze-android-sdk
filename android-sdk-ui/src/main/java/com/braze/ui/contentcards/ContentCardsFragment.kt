@@ -64,7 +64,8 @@ open class ContentCardsFragment : Fragment(), SwipeRefreshLayout.OnRefreshListen
 
     protected val defaultContentCardUpdateHandler: IContentCardsUpdateHandler = DefaultContentCardsUpdateHandler()
     protected var customContentCardUpdateHandler: IContentCardsUpdateHandler? = null
-    protected val defaultContentCardsViewBindingHandler: IContentCardsViewBindingHandler = DefaultContentCardsViewBindingHandler()
+    protected val defaultContentCardsViewBindingHandler: IContentCardsViewBindingHandler =
+        DefaultContentCardsViewBindingHandler()
     protected var customContentCardsViewBindingHandler: IContentCardsViewBindingHandler? = null
 
     /**
@@ -130,7 +131,9 @@ open class ContentCardsFragment : Fragment(), SwipeRefreshLayout.OnRefreshListen
      */
     override fun onRefresh() {
         Braze.getInstance(requireContext()).requestContentCardsRefresh()
-        BrazeCoroutineScope.launchDelayed(AUTO_HIDE_REFRESH_INDICATOR_DELAY_MS) { contentCardsSwipeLayout?.isRefreshing = false }
+        BrazeCoroutineScope.launchDelayed(AUTO_HIDE_REFRESH_INDICATOR_DELAY_MS) {
+            contentCardsSwipeLayout?.isRefreshing = false
+        }
     }
 
     override fun onResume() {

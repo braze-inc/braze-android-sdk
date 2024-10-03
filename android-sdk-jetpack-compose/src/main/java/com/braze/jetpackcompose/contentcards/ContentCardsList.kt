@@ -51,8 +51,8 @@ import com.braze.jetpackcompose.contentcards.cards.ContentCard
 import com.braze.jetpackcompose.contentcards.styling.ContentCardListStyling
 import com.braze.jetpackcompose.contentcards.styling.ContentCardStyling
 import com.braze.models.cards.Card
-import com.braze.support.BrazeLogger.Priority.W
 import com.braze.support.BrazeLogger.Priority.V
+import com.braze.support.BrazeLogger.Priority.W
 import com.braze.support.BrazeLogger.brazelog
 import com.braze.ui.contentcards.BrazeContentCardUtils
 import kotlinx.coroutines.Dispatchers
@@ -76,6 +76,8 @@ import kotlinx.coroutines.launch
  *                           or return `false` and have the card rendered by default.
  *                           If you use this, you are responsible for handling all aspects of card rendering (unread, pinned, etc.).
  *                           You also need to handle card clicks (See `BrazeContentCardUtils.handleCardClick`).
+ * @param style The styling for the list of content cards.
+ * @param cardStyle The styling for the individual content cards.
  */
 fun ContentCardsList(
     cards: List<Card>? = null,
@@ -103,7 +105,7 @@ fun ContentCardsList(
     var didInitialLoad by remember { mutableStateOf(false) }
 
     val refreshScope = rememberCoroutineScope()
-    var refreshing by remember { mutableStateOf(false) }
+    var isRefreshing by remember { mutableStateOf(false) }
 
     var networkUnavailableJob: Job? = null
 
@@ -114,13 +116,13 @@ fun ContentCardsList(
     val AUTO_HIDE_REFRESH_INDICATOR_DELAY_MS = 2500L
 
     fun refresh() = refreshScope.launch {
-        refreshing = true
+        isRefreshing = true
         Braze.getInstance(context).requestContentCardsRefresh()
         delay(AUTO_HIDE_REFRESH_INDICATOR_DELAY_MS)
-        refreshing = false
+        isRefreshing = false
     }
 
-    val refreshState = rememberPullRefreshState(refreshing, ::refresh)
+    val refreshState = rememberPullRefreshState(isRefreshing, ::refresh)
 
     val impressedCards = remember {
         mutableStateListOf<String>()
@@ -129,7 +131,7 @@ fun ContentCardsList(
     fun networkUnavailable() {
         brazelog(TAG) { "Network is unavailable." }
         networkUnavailableJob = null
-        refreshing = false
+        isRefreshing = false
     }
 
     @Composable
@@ -192,7 +194,7 @@ fun ContentCardsList(
         networkUnavailableJob?.cancel()
         networkUnavailableJob = null
         replaceCards(event.allCards)
-        refreshing = false
+        isRefreshing = false
     }
 
     fun logCardImpression(card: Card) {
@@ -277,7 +279,7 @@ fun ContentCardsList(
             if (myCards.isEmpty() && Braze.getInstance(context).areCachedContentCardsStale()) {
                 Braze.getInstance(context).requestContentCardsRefresh()
                 if (networkUnavailableJob == null) {
-                    refreshing = true
+                    isRefreshing = true
                     networkUnavailableJob =
                         BrazeCoroutineScope.launchDelayed(NETWORK_PROBLEM_WARNING_MS, Dispatchers.Main) {
                             networkUnavailable()
@@ -437,7 +439,7 @@ fun ContentCardsList(
             }
         }
         if (cards == null) {
-            PullRefreshIndicator(refreshing, refreshState, Modifier.align(Alignment.TopCenter))
+            PullRefreshIndicator(isRefreshing, refreshState, Modifier.align(Alignment.TopCenter))
         }
     }
 }

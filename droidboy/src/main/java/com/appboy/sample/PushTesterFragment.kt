@@ -92,7 +92,9 @@ class PushTesterFragment : Fragment(), AdapterView.OnItemSelectedListener {
         view.findViewById<View>(R.id.push_tester_story_title).onCheckboxChecked { shouldSetStoryTitles = !it }
         view.findViewById<View>(R.id.push_tester_story_subtitle).onCheckboxChecked { shouldSetStorySubtitles = !it }
         view.findViewById<View>(R.id.push_tester_inline_image_push_enabled).onCheckboxChecked { isInlineImagePushEnabled = it }
-        view.findViewById<View>(R.id.push_tester_conversational_push_enabled).onCheckboxChecked { isConversationPushEnabled = it }
+        view.findViewById<View>(R.id.push_tester_conversational_push_enabled).onCheckboxChecked {
+            isConversationPushEnabled = it
+        }
         view.findViewById<View>(R.id.push_tester_html).onCheckboxChecked { shouldSetHtmlText = it }
         view.findViewById<View>(R.id.test_push_delivery_events).onCheckboxChecked { shouldTestPushDeliveryEvents = it }
 
@@ -427,7 +429,9 @@ class PushTesterFragment : Fragment(), AdapterView.OnItemSelectedListener {
     private fun generateDisplayValue(field: String): String {
         return if (shouldOverflowText) {
             field + getString(R.string.overflow_string)
-        } else field
+        } else {
+            field
+        }
     }
 
     /**

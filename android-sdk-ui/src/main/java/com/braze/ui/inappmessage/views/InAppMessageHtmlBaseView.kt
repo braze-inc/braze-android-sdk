@@ -49,9 +49,7 @@ abstract class InAppMessageHtmlBaseView(context: Context?, attrs: AttributeSet?)
     override var hasAppliedWindowInsets: Boolean = false
 
     override val messageClickableView: View?
-        get() {
-            return this
-        }
+        get() = this
 
     @get:SuppressLint("SetJavaScriptEnabled")
     open val messageWebView: WebView?

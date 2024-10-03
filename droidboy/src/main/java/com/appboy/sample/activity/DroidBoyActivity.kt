@@ -55,19 +55,20 @@ class DroidBoyActivity : AppCompatActivity(), NoticeDialogListener {
     private var noMatchingTriggerEventSubscriber: IEventSubscriber<NoMatchingTriggerEvent>? = null
     private var noInAppMessageTriggeredPrefListener: SharedPreferences.OnSharedPreferenceChangeListener? = null
 
-    private val requestMultiplePermissionLauncher = registerForActivityResult(RequestMultiplePermissions()) { result: Map<String, Boolean> ->
-        if (result.containsKey(Manifest.permission.ACCESS_FINE_LOCATION)
-            && result[Manifest.permission.ACCESS_FINE_LOCATION] != true
-        ) {
-            showToast("Location permissions denied.")
-        } else if (result.containsKey(Manifest.permission.ACCESS_BACKGROUND_LOCATION)
-            && result[Manifest.permission.ACCESS_BACKGROUND_LOCATION] != true
-        ) {
-            showToast("Background location permissions denied.")
-        } else {
-            showToast("All required location permissions granted.")
+    private val requestMultiplePermissionLauncher =
+        registerForActivityResult(RequestMultiplePermissions()) { result: Map<String, Boolean> ->
+            if (result.containsKey(Manifest.permission.ACCESS_FINE_LOCATION)
+                && result[Manifest.permission.ACCESS_FINE_LOCATION] != true
+            ) {
+                showToast("Location permissions denied.")
+            } else if (result.containsKey(Manifest.permission.ACCESS_BACKGROUND_LOCATION)
+                && result[Manifest.permission.ACCESS_BACKGROUND_LOCATION] != true
+            ) {
+                showToast("Background location permissions denied.")
+            } else {
+                showToast("All required location permissions granted.")
+            }
         }
-    }
 
     private val feedFragment: BrazeFeedFragment?
         get() {
@@ -400,6 +401,7 @@ class DroidBoyActivity : AppCompatActivity(), NoticeDialogListener {
             val bundleString = StringBuilder()
             bundleString.append("Received intent with extras Bundle of size ${bundle.size()} from Braze containing [")
             for (key in bundle.keySet()) {
+                @Suppress("DEPRECATION")
                 bundleString.append(" '$key':'${bundle[key]}'")
             }
             bundleString.append(" ].")

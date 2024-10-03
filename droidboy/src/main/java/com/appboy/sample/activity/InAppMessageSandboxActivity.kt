@@ -26,7 +26,9 @@ class InAppMessageSandboxActivity : AppCompatActivity() {
         findViewById<View>(R.id.bSandboxDisplayMessage2).setOnClickListener { this.displayMessage(2) }
         findViewById<View>(R.id.bSandboxDisplayMessage1).setOnClickListener { this.displayMessage(1) }
         findViewById<View>(R.id.bSandboxDisplayMessage0).setOnClickListener { this.displayMessage(0) }
-        findViewById<View>(R.id.bSandboxDummyButton).setOnClickListener { Toast.makeText(this, "dummy button pressed!", Toast.LENGTH_SHORT).show() }
+        findViewById<View>(R.id.bSandboxDummyButton).setOnClickListener {
+            Toast.makeText(this, "dummy button pressed!", Toast.LENGTH_SHORT).show()
+        }
         findViewById<View>(R.id.bSandboxDisplaySlideup).setOnClickListener { displaySlideup() }
         findViewById<View>(R.id.bSandboxHtmlInApp).setOnClickListener { displayHtmlMessage() }
     }

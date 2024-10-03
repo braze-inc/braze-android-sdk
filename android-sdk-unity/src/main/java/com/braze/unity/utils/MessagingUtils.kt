@@ -23,7 +23,7 @@ object MessagingUtils {
         ON_IAM_DISMISSED("onInAppMessageDismissed"),
         ON_IAM_CLICKED("onInAppMessageClicked"),
         ON_IAM_BUTTON_CLICKED("onInAppMessageButtonClicked"),
-        ON_IAM_HTML_CLICKED("onInAppMessageHTMLClicked");
+        ON_IAM_HTML_CLICKED("onInAppMessageHTMLClicked")
     }
 
     fun sendInAppMessageReceivedMessage(
@@ -192,7 +192,9 @@ object MessagingUtils {
      * Sends some structured data to the BrazeInternalComponent in C# in the Unity binding.
      */
     fun sendToBrazeInternalComponent(method: BrazeInternalComponentMethod, json: String) {
-        brazelog(TAG, V) { "Sending a Braze Internal Component message to $BRAZE_INTERNAL_GAME_OBJECT:${method.methodName} with json: $json" }
+        brazelog(TAG, V) {
+            "Sending a Braze Internal Component message to $BRAZE_INTERNAL_GAME_OBJECT:${method.methodName} with json: $json"
+        }
         UnityPlayer.UnitySendMessage(BRAZE_INTERNAL_GAME_OBJECT, method.methodName, json)
     }
 

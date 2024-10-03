@@ -30,7 +30,7 @@ import com.braze.ui.inappmessage.BrazeInAppMessageManager
  * will not occur. Each class should be retrieved via [Activity.getClass].
  * If null, an empty set is used instead.
  */
-@Suppress("TooManyFunctions")
+@Suppress("TooManyFunctions", "BooleanPropertyNaming")
 open class BrazeActivityLifecycleCallbackListener @JvmOverloads constructor(
     private val sessionHandlingEnabled: Boolean = true,
     private val registerInAppMessageManager: Boolean = true,

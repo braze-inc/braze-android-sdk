@@ -11,9 +11,9 @@ import android.os.Bundle
 import androidx.annotation.VisibleForTesting
 import com.braze.BrazeInternal
 import com.braze.Constants
-import com.braze.enums.Channel
 import com.braze.IBrazeDeeplinkHandler
 import com.braze.configuration.BrazeConfigurationProvider
+import com.braze.enums.Channel
 import com.braze.support.BrazeLogger.Priority.E
 import com.braze.support.BrazeLogger.Priority.I
 import com.braze.support.BrazeLogger.Priority.V
@@ -30,7 +30,7 @@ import com.braze.ui.support.isActivityRegisteredInManifest
 
 open class UriAction : IAction {
     val extras: Bundle?
-    override val channel: Channel
+    final override val channel: Channel
 
     /**
      * @return the [Uri] that represents this [UriAction].
@@ -180,9 +180,9 @@ open class UriAction : IAction {
         // If the class is valid and is manifest registered, use it as the launching intent
         val webViewActivityIntent: Intent = if (!customWebViewActivityClassName.isNullOrBlank()
             && isActivityRegisteredInManifest(
-                    context,
-                    customWebViewActivityClassName
-                )
+                context,
+                customWebViewActivityClassName
+            )
         ) {
             brazelog { "Launching custom WebView Activity with class name: $customWebViewActivityClassName" }
             Intent()
@@ -227,7 +227,10 @@ open class UriAction : IAction {
     /**
      * Gets an [Intent] array that has the configured back stack functionality.
      *
+     * @param context
+     * @param extras The extras to be passed to the intents.
      * @param targetIntent The ultimate intent to be followed. For example, the main/launcher intent would be the penultimate [Intent].
+     * @param configurationProvider
      * @see [BrazeConfigurationProvider.isPushDeepLinkBackStackActivityEnabled]
      * @see [BrazeConfigurationProvider.pushDeepLinkBackStackActivityClassName]
      */

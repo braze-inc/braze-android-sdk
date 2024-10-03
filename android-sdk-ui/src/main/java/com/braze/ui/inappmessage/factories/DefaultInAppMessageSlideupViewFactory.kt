@@ -23,7 +23,9 @@ open class DefaultInAppMessageSlideupViewFactory : IInAppMessageViewFactory {
             null
         ) as InAppMessageSlideupView
         if (isDeviceNotInTouchMode(view)) {
-            brazelog(W) { "The device is not currently in touch mode. This message requires user touch interaction to display properly." }
+            brazelog(W) {
+                "The device is not currently in touch mode. This message requires user touch interaction to display properly."
+            }
             return null
         }
         val inAppMessageSlideup = inAppMessage as InAppMessageSlideup

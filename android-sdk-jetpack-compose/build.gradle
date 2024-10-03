@@ -1,5 +1,6 @@
-apply plugin: 'com.android.library'
-apply plugin: 'kotlin-android'
+apply plugin: "com.android.library"
+apply plugin: "kotlin-android"
+apply plugin: "org.jetbrains.kotlin.plugin.compose"
 
 dependencies {
     api "com.braze:android-sdk-base:${BRAZE_SDK_VERSION}"
@@ -28,16 +29,12 @@ android {
     }
 
     kotlinOptions {
-        freeCompilerArgs = ['-Xjvm-default=all', '-Xopt-in=kotlin.RequiresOptIn']
+        freeCompilerArgs = ["-Xjvm-default=all", "-opt-in=kotlin.RequiresOptIn"]
         jvmTarget = "1.8"
     }
 
     buildFeatures {
         compose true
-    }
-
-    composeOptions {
-        kotlinCompilerExtensionVersion "${KOTLIN_COMPILER_EXTENSION_VERSION}"
     }
 
     compileOptions {

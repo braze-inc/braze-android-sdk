@@ -85,7 +85,11 @@
     <button onClick="brazeBridge.getUser().setPushNotificationSubscriptionType('unsubscribed')" />ab: setPushNotificationSubscriptionType</button>
     <button onClick="brazeBridge.getUser().addToCustomAttributeArray('abAtArray', 'myval')" />ab: addToCustomAttributeArray</button>
     <button onClick="brazeBridge.getUser().removeFromCustomAttributeArray('abAtArray', 'myval')" />ab: removeFromCustomAttributeArray</button>
+    <!-- Testing the incrementCustomUserAttribute with no second parameter, second parameter as a number, and second parameter as a string -->
     <button onClick="brazeBridge.getUser().incrementCustomUserAttribute('abInc')" />ab: incrementCustomUserAttribute</button>
+    <button onClick="brazeBridge.getUser().incrementCustomUserAttribute('abInc', 2)" />ab: incrementCustomUserAttribute by 2</button>
+    <button onClick="brazeBridge.getUser().incrementCustomUserAttribute('abInc', '3')" />ab: incrementCustomUserAttribute by '3'</button>
+    <button onClick="brazeBridge.getUser().incrementCustomUserAttribute('abInc', 'bad')" />ab: incrementCustomUserAttribute by 'bad'</button>
     <button onClick="brazeBridge.getUser().setDateOfBirth(1960, 11, 11)" />ab: setDateOfBirth</button>
     <button onClick="brazeBridge.getUser().setCountry('USA')" />ab: setCountry</button>
     <button onClick="brazeBridge.getUser().setPhoneNumber('9084894848')" />ab: setPhone</button>

@@ -25,7 +25,6 @@ import com.braze.models.push.BrazeNotificationPayload.PushStoryPage
 import com.braze.push.BrazeNotificationUtils.getNotificationId
 import com.braze.push.support.getHtmlSpannedTextIfEnabled
 import com.braze.support.BrazeLogger.Priority.E
-import com.braze.support.BrazeLogger.Priority.I
 import com.braze.support.BrazeLogger.Priority.W
 import com.braze.support.BrazeLogger.brazelog
 import com.braze.support.IntentUtils.getImmutablePendingIntentFlags
@@ -365,12 +364,6 @@ open class BrazeNotificationStyleFactory {
                     } catch (e: Exception) {
                         brazelog(E, e) { "Failed to scale image bitmap, using original." }
                     }
-                }
-                if (imageBitmap == null) {
-                    brazelog(I) {
-                        "Bitmap download failed for push notification. No image will be included with the notification."
-                    }
-                    return null
                 }
                 val bigPictureNotificationStyle = NotificationCompat.BigPictureStyle()
                 bigPictureNotificationStyle.bigPicture(imageBitmap)

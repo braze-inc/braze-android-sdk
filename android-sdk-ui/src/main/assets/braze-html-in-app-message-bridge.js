@@ -28,7 +28,7 @@ var brazeBridge = {
     },
     addToCustomAttributeArray: function(key, value) { brazeInternalBridge.getUser().addToCustomAttributeArray(key, value); },
     removeFromCustomAttributeArray: function(key, value) { brazeInternalBridge.getUser().removeFromCustomAttributeArray(key, value); },
-    incrementCustomUserAttribute: function(key) { brazeInternalBridge.getUser().incrementCustomUserAttribute(key); },
+    incrementCustomUserAttribute: function(key, value) { brazeInternalBridge.getUser().incrementCustomUserAttribute(key, value != null ? value : 1); },
     setDateOfBirth: function(year, month, day) { brazeInternalBridge.getUser().setDateOfBirth(year, month, day); },
     setCountry: function(country) { brazeInternalBridge.getUser().setCountry(country); },
     setPhoneNumber: function(phone) { brazeInternalBridge.getUser().setPhoneNumber(phone); },

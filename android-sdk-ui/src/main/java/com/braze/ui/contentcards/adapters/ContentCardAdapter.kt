@@ -122,7 +122,9 @@ open class ContentCardAdapter(
         if (adapterPosition == RecyclerView.NO_POSITION ||
             !isAdapterPositionOnScreen(adapterPosition)
         ) {
-            brazelog(V) { "The card at position $adapterPosition isn't on screen or does not have a valid adapter position. Not marking as read." }
+            brazelog(V) {
+                "The card at position $adapterPosition isn't on screen or does not have a valid adapter position. Not marking as read."
+            }
             return
         }
 
@@ -222,8 +224,10 @@ open class ContentCardAdapter(
         // Additionally, the "find*CompletelyVisible" value will sometimes update before
         // the "find*Visible" value. To accommodate each of these cases, we'll just take
         // the min of the "first" values and the max of the "last" values.
-        val firstItemPosition = min(layoutManager.findFirstVisibleItemPosition(), layoutManager.findFirstCompletelyVisibleItemPosition())
-        val lastItemPosition = max(layoutManager.findLastVisibleItemPosition(), layoutManager.findLastCompletelyVisibleItemPosition())
+        val firstItemPosition =
+            min(layoutManager.findFirstVisibleItemPosition(), layoutManager.findFirstCompletelyVisibleItemPosition())
+        val lastItemPosition =
+            max(layoutManager.findLastVisibleItemPosition(), layoutManager.findLastCompletelyVisibleItemPosition())
         return adapterPosition in firstItemPosition..lastItemPosition
     }
 

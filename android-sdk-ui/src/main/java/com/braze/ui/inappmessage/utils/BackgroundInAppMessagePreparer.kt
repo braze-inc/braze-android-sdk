@@ -168,7 +168,9 @@ object BackgroundInAppMessagePreparer {
                     inAppMessage,
                     viewBounds
                 )
-            ) return true
+            ) {
+                return true
+            }
         }
 
         // Try to load the remote url next

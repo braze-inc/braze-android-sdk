@@ -17,11 +17,15 @@ buildscript {
   }
 }
 
+plugins {
+  id "org.jetbrains.kotlin.plugin.compose" version "${KOTLIN_VERSION}"
+}
+
 ext {
   compileSdkVersion = 35
   minSdkVersion = 21
   targetSdkVersion = 35
-  appVersionName = '32.1.0'
+  appVersionName = '33.0.0'
 }
 
 subprojects {
@@ -33,5 +37,5 @@ subprojects {
   }
 
   group = 'com.braze'
-  version = '32.1.0'
+  version = '33.0.0'
 }

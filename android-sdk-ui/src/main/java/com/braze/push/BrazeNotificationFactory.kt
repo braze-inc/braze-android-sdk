@@ -4,9 +4,9 @@ import android.app.Notification
 import android.content.Context
 import android.os.Bundle
 import androidx.core.app.NotificationCompat
-import com.braze.models.push.BrazeNotificationPayload
 import com.braze.IBrazeNotificationFactory
 import com.braze.configuration.BrazeConfigurationProvider
+import com.braze.models.push.BrazeNotificationPayload
 import com.braze.push.BrazeNotificationActionUtils.addNotificationActions
 import com.braze.push.BrazeNotificationStyleFactory.Companion.setStyleIfSupported
 import com.braze.push.BrazeNotificationUtils.getOrCreateNotificationChannelId
@@ -93,9 +93,7 @@ open class BrazeNotificationFactory : IBrazeNotificationFactory {
          */
         @JvmStatic
         val instance: BrazeNotificationFactory
-            get() {
-                return internalInstance
-            }
+            get() = internalInstance
 
         /**
          * Returns a notification builder populated with all fields from the notification extras and

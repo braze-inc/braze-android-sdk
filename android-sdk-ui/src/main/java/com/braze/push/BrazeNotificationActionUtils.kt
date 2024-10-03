@@ -5,12 +5,12 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import androidx.core.app.NotificationCompat
-import com.braze.models.push.BrazeNotificationPayload
-import com.braze.models.push.BrazeNotificationPayload.ActionButton
 import com.braze.Braze
 import com.braze.BrazeInternal
 import com.braze.Constants
 import com.braze.IBrazeDeeplinkHandler.IntentFlagPurpose
+import com.braze.models.push.BrazeNotificationPayload
+import com.braze.models.push.BrazeNotificationPayload.ActionButton
 import com.braze.push.BrazeNotificationUtils.cancelNotification
 import com.braze.push.BrazeNotificationUtils.notificationReceiverClass
 import com.braze.push.BrazeNotificationUtils.routeUserWithNotificationOpenedIntent
@@ -181,6 +181,7 @@ object BrazeNotificationActionUtils {
      *
      * @param context
      * @param intent the action button click intent
+     * @param actionType the type of action button that was clicked
      */
     fun logNotificationActionClicked(context: Context, intent: Intent, actionType: String?) {
         val campaignId = intent.getStringExtra(Constants.BRAZE_PUSH_CAMPAIGN_ID_KEY)

@@ -1,5 +1,6 @@
-apply plugin: 'com.android.application'
-apply plugin: 'kotlin-android'
+apply plugin: "com.android.application"
+apply plugin: "kotlin-android"
+apply plugin: "org.jetbrains.kotlin.plugin.compose"
 
 android {
   namespace "com.appboy.sample"
@@ -22,7 +23,7 @@ android {
   }
 
   lintOptions {
-    disable 'MissingTranslation'
+    disable "MissingTranslation"
   }
 
   compileOptions {
@@ -34,20 +35,16 @@ android {
     compose true
   }
 
-  composeOptions {
-    kotlinCompilerExtensionVersion "${KOTLIN_COMPILER_EXTENSION_VERSION}"
-  }
-
   kotlinOptions {
-    freeCompilerArgs = ['-Xjvm-default=all']
+    freeCompilerArgs = ["-Xjvm-default=all"]
     jvmTarget = "1.8"
   }
 }
 
 dependencies {
-  implementation project(':android-sdk-ui')
-  implementation project(':android-sdk-location')
-  implementation project(':android-sdk-jetpack-compose')
+  implementation project(":android-sdk-ui")
+  implementation project(":android-sdk-location")
+  implementation project(":android-sdk-jetpack-compose")
 
   implementation "androidx.appcompat:appcompat:${ANDROIDX_APPCOMPAT_VERSION}"
   implementation "androidx.preference:preference:${ANDROIDX_PREFERENCE_VERSION}"
@@ -81,5 +78,5 @@ dependencies {
 }
 
 // Uncomment the following lines to use Firebase Messaging and Crashlytics
-//apply plugin: 'com.google.gms.google-services'
-//apply plugin: 'com.google.firebase.crashlytics'
+//apply plugin: "com.google.gms.google-services"
+//apply plugin: "com.google.firebase.crashlytics"

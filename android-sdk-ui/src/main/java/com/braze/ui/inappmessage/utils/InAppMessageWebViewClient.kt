@@ -8,9 +8,9 @@ import android.webkit.WebResourceRequest
 import android.webkit.WebResourceResponse
 import android.webkit.WebView
 import androidx.annotation.VisibleForTesting
-import com.braze.BrazeInternal
 import androidx.webkit.WebViewAssetLoader
 import androidx.webkit.WebViewClientCompat
+import com.braze.BrazeInternal
 import com.braze.Constants.TRIGGERS_ASSETS_FOLDER
 import com.braze.coroutine.BrazeCoroutineScope
 import com.braze.models.inappmessage.IInAppMessage
@@ -137,6 +137,7 @@ open class InAppMessageWebViewClient(
     override fun shouldOverrideUrlLoading(view: WebView, request: WebResourceRequest) =
         handleUrlOverride(request.url.toString())
 
+    @Deprecated("Deprecated in Java")
     override fun shouldOverrideUrlLoading(view: WebView, url: String) = handleUrlOverride(url)
 
     fun setWebViewClientStateListener(listener: IWebViewClientStateListener?) {

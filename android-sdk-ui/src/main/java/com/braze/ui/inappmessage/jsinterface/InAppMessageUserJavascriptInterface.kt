@@ -56,14 +56,27 @@ class InAppMessageUserJavascriptInterface(private val context: Context) {
     }
 
     @JavascriptInterface
-    fun setDateOfBirth(year: Int, monthInt: Int, day: Int) {
-        val month = monthFromInt(monthInt)
-        if (month == null) {
-            brazelog(W) { "Failed to parse month for value $monthInt" }
+    fun setDateOfBirth(year: String, month: String, day: String) {
+        val yearValue = year.toIntOrNull()
+        if (yearValue == null) {
+            brazelog(W) { "Failed to parse setDateOfBirth year value '$year'" }
             return
         }
+
+        val monthValue = monthFromInt(month)
+        if (monthValue == null) {
+            brazelog(W) { "Failed to parse setDateOfBirth month for value $month" }
+            return
+        }
+
+        val dayValue = day.toIntOrNull()
+        if (dayValue == null) {
+            brazelog(W) { "Failed to parse setDateOfBirth day value '$day'" }
+            return
+        }
+
         Braze.getInstance(context).runOnUser {
-            it.setDateOfBirth(year, month, day)
+            it.setDateOfBirth(yearValue, monthValue, dayValue)
         }
     }
 
@@ -159,16 +172,33 @@ class InAppMessageUserJavascriptInterface(private val context: Context) {
     }
 
     @JavascriptInterface
-    fun incrementCustomUserAttribute(attribute: String) {
+    fun incrementCustomUserAttribute(attribute: String, value: String) {
+        val incValue = value.toIntOrNull()
+        if (incValue == null) {
+            brazelog(W) { "Failed to parse incrementCustomUserAttribute increment value '$value'" }
+            return
+        }
         Braze.getInstance(context).runOnUser {
-            it.incrementCustomUserAttribute(attribute)
+            it.incrementCustomUserAttribute(attribute, incValue)
         }
     }
 
     @JavascriptInterface
-    fun setCustomLocationAttribute(attribute: String, latitude: Double, longitude: Double) {
+    fun setCustomLocationAttribute(attribute: String, latitude: String, longitude: String) {
+        val latitudeValue = latitude.toDoubleOrNull()
+        if (latitudeValue == null) {
+            brazelog(W) { "Failed to parse setCustomLocationAttribute latitude value '$latitude'" }
+            return
+        }
+
+        val longitudeValue = longitude.toDoubleOrNull()
+        if (longitudeValue == null) {
+            brazelog(W) { "Failed to parse setCustomLocationAttribute longitude value '$longitude'" }
+            return
+        }
+
         Braze.getInstance(context).runOnUser {
-            it.setLocationCustomAttribute(attribute, latitude, longitude)
+            it.setLocationCustomAttribute(attribute, latitudeValue, longitudeValue)
         }
     }
 
@@ -195,10 +225,19 @@ class InAppMessageUserJavascriptInterface(private val context: Context) {
 
     @VisibleForTesting
     @Suppress("MagicNumber")
-    fun monthFromInt(monthInt: Int): Month? {
+    /**
+     * Converts a string of a number to a [Month] enum.
+     *
+     * @param month String representation of an integer for a month.
+     * @return
+     */
+    fun monthFromInt(month: String): Month? {
+        val monthInt = month.toIntOrNull() ?: return null
         return if (monthInt < 1 || monthInt > 12) {
             null
-        } else getMonth(monthInt - 1)
+        } else {
+            getMonth(monthInt - 1)
+        }
     }
 
     @VisibleForTesting
