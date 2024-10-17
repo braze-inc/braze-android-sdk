@@ -206,7 +206,7 @@
 
 [Release Date](https://github.com/braze-inc/braze-android-sdk/releases/tag/v27.0.0)
 
-⚠️ This version has a known issue. Please upgrade to v27.0.1.
+⚠️ This version has a known issue. Please upgrade to v33.0.0.
 
 #### Breaking
 - Removed `IInAppMessage.logDisplayFailure()`.
@@ -223,7 +223,7 @@
 
 [Release Date](https://github.com/braze-inc/braze-android-sdk/releases/tag/v26.3.1)
 
-⚠️ This version has a known issue. Please upgrade to v26.3.2.
+⚠️ This version has a known issue. Please upgrade to v33.0.0.
 
 ##### Fixed
 - Internal bug fixes for an upcoming Braze push feature.
@@ -232,7 +232,7 @@
 
 [Release Date](https://github.com/braze-inc/braze-android-sdk/releases/tag/v26.3.0)
 
-⚠️ This version has a known issue. Please upgrade to v26.3.2.
+⚠️ This version has a known issue. Please upgrade to v33.0.0.
 
 ##### Added
 - Added the ability to forward Firebase push notifications to `FirebaseMessagingService` implementations if that push notification is not a Braze notification.
@@ -242,6 +242,8 @@
 
 ## 26.2.1
 
+⚠️ This version has a known issue. Please upgrade to v33.0.0.
+
 ##### Fixed
 - Fixed a bug introduced in version 26.1.0 where additional empty network requests were sent on `openSession` calls. Customers on v26.2.0 are strongly encouraged to upgrade.
 
@@ -249,7 +251,7 @@
 
 [Release Date](https://github.com/braze-inc/braze-android-sdk/releases/tag/v26.2.0)
 
-⚠️ This version has a known issue. Please upgrade to v26.2.1.
+⚠️ This version has a known issue. Please upgrade to v33.0.0.
 
 ##### Fixed
 - Fixed an issue with Unity not properly forwarding messages to the Braze Unity internal layer for In-App Message events.
@@ -260,6 +262,8 @@
 
 ## 26.1.1
 
+⚠️ This version has a known issue. Please upgrade to v33.0.0.
+
 ##### Fixed
 - Fixed a bug introduced in version 26.1.0 where additional empty network requests were sent on `openSession` calls. Customers on v26.1.0 are strongly encouraged to upgrade.
 
@@ -267,7 +271,7 @@
 
 [Release Date](https://github.com/braze-inc/braze-android-sdk/releases/tag/v26.1.0)
 
-⚠️ This version has a known issue. Please upgrade to v26.1.1.
+⚠️ This version has a known issue. Please upgrade to v33.0.0.
 
 ##### Important
 - This release includes support for Android 14 (Upside Down Cake / API 34).
