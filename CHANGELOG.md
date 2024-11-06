@@ -2,8 +2,6 @@
 
 [Release Date](https://github.com/braze-inc/braze-android-sdk/releases/tag/v33.1.0)
 
-#### Breaking
-
 ##### Fixed
 - Fixed an issue where `ContentCardsFragment` would not show the empty state if the user had only control cards.
 
