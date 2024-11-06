@@ -114,6 +114,15 @@ class DroidboyApplication : Application() {
                 """.trimIndent()
             }
         }
+
+        val droidboyPrefs = getSharedPreferences("droidboy", Context.MODE_PRIVATE)
+        val placementId = droidboyPrefs.getString(MainFragment.BANNER_ID_KEY, null)
+        val list = BANNER_PLACEMENT_IDS.toMutableList()
+        if (!placementId.isNullOrBlank()) {
+            list.add(placementId)
+        }
+        Braze.getInstance(applicationContext).requestBannersRefresh(list)
+
         listenForSpecialTabFeatureFlag()
     }
 
@@ -132,6 +141,11 @@ class DroidboyApplication : Application() {
         } else {
             Braze.getInstance(applicationContext).changeUser(userId)
         }
+        val sharedPreferences = getSharedPreferences("droidboy", Context.MODE_PRIVATE)
+        val editor = sharedPreferences.edit()
+        editor.putString(MainFragment.USER_ID_KEY, userId)
+        editor.apply()
+        FirebaseCrashlytics.getInstance().setUserId(userId)
     }
 
     private fun setNewSdkAuthToken(userId: String) {
@@ -355,6 +369,8 @@ class DroidboyApplication : Application() {
         const val ENABLE_SDK_AUTH_PREF_KEY = "enable_sdk_auth_if_present_pref_key"
         const val MIN_TRIGGER_INTERVAL_KEY = "min_trigger_interval"
         const val SDK_AUTH_KEY_FILE_PATH = "sdk_auth_example/example_rsa_private_key.txt"
+        val BANNER_PLACEMENT_IDS =
+            listOf<String>("placement_1", "placement_2", "sdk-test-1", "sdk-test-2", "custom_html")
 
         @JvmStatic
         fun getApiKeyInUse(context: Context): String? {

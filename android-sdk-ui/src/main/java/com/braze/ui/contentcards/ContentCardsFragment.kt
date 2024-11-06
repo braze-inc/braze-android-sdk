@@ -318,13 +318,18 @@ open class ContentCardsFragment : Fragment(), SwipeRefreshLayout.OnRefreshListen
         // The cards are either fresh from the cache, or came directly from a
         // network request. An empty Content Cards should just display
         // an "empty ContentCards" message.
-        if (cardsForRendering.isNotEmpty()) {
+        if (cardsForRendering.any { !it.isControl }) {
             // The Content Cards contains cards and should be displayed.
+            // Control card impressions are handled by the card adapter in this scenario.
             // The card adapter shouldn't be null at this point
             cardAdapter?.let {
                 swapRecyclerViewAdapter(it)
             }
         } else {
+            // All cards (if any) are control cards, so log impression for them.
+            cardsForRendering.forEach {
+                it.logImpression()
+            }
             // The Content Cards is empty and should display an "empty" message to the user.
             swapRecyclerViewAdapter(emptyCardsAdapter)
         }

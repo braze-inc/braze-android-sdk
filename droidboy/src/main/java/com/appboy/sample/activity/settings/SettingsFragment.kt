@@ -151,9 +151,8 @@ class SettingsFragment : PreferenceFragmentCompat() {
         setSummary("build_type", BuildConfig.BUILD_TYPE)
         setSummary("version_code", BuildConfig.VERSION_CODE.toString())
         setSummary("build_name", BuildConfig.VERSION_NAME)
-        setSummary("build_name", BuildConfig.VERSION_NAME)
+        setSummary("build_time_and_info", BuildConfig.BUILD_TIME)
         Braze.getInstance(context).runOnUser { user -> this@SettingsFragment.setSummary("current_user_id", user.userId) }
-        setSummary("install_time", BuildConfig.BUILD_TIME)
         setSummary("device_id", Braze.getInstance(context).deviceId)
     }
 

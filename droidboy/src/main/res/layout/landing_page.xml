@@ -30,14 +30,20 @@
             android:id="@+id/toolbar_info_endpoint"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="9sp"
+            android:textSize="8sp"
             tools:text="https://test.url.com/api/v3/data"/>
           <TextView
             android:id="@+id/toolbar_info_api_key"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="9sp"
+            android:textSize="8sp"
             tools:text="keys-go-here-1483-4e9f-ac0c-7b40030c8f40"/>
+          <TextView
+            android:id="@+id/toolbar_info_build_info"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="7sp"
+            tools:text="my branch at this time"/>
         </LinearLayout>
       </androidx.appcompat.widget.Toolbar>
       <com.google.android.material.tabs.TabLayout

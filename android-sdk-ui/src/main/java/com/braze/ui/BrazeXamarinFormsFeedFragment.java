@@ -1,7 +1,5 @@
 package com.braze.ui;
 
-import static com.braze.support.DateTimeUtils.nowInMilliseconds;
-
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
@@ -19,7 +17,6 @@ import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 
-import androidx.core.view.GestureDetectorCompat;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.braze.Braze;
@@ -32,6 +29,8 @@ import com.braze.ui.adapters.BrazeListAdapter;
 
 import java.util.ArrayList;
 import java.util.EnumSet;
+
+import static com.braze.support.DateTimeUtils.nowInMilliseconds;
 
 @SuppressWarnings({"deprecation"})
 public class BrazeXamarinFormsFeedFragment extends android.app.ListFragment implements SwipeRefreshLayout.OnRefreshListener {
@@ -67,7 +66,7 @@ public class BrazeXamarinFormsFeedFragment extends android.app.ListFragment impl
   private SwipeRefreshLayout mFeedSwipeLayout;
   private int previousVisibleHeadCardIndex;
   private int currentCardIndexAtBottomOfScreen;
-  private GestureDetectorCompat mGestureDetector;
+  private GestureDetector mGestureDetector;
 
   // This view should only be in the View.VISIBLE state when the listview is not visible. This view's
   // purpose is to let the "network error" and "no card" states to have the swipe-to-refresh functionality
@@ -86,7 +85,7 @@ public class BrazeXamarinFormsFeedFragment extends android.app.ListFragment impl
       mCategories = CardCategory.getAllCategories();
     }
     setRetainInstance(true);
-    mGestureDetector = new GestureDetectorCompat(context, new FeedGestureListener());
+    mGestureDetector = new GestureDetector(context, new FeedGestureListener());
   }
 
   @Override

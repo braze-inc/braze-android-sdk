@@ -1,7 +1,5 @@
 package com.braze.ui;
 
-import static com.braze.support.DateTimeUtils.nowInMilliseconds;
-
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
@@ -20,13 +18,12 @@ import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 
 import androidx.annotation.VisibleForTesting;
-import androidx.core.view.GestureDetectorCompat;
 import androidx.fragment.app.ListFragment;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
-import com.braze.events.FeedUpdatedEvent;
 import com.braze.Braze;
 import com.braze.enums.CardCategory;
+import com.braze.events.FeedUpdatedEvent;
 import com.braze.events.IEventSubscriber;
 import com.braze.models.cards.Card;
 import com.braze.support.BrazeLogger;
@@ -36,6 +33,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.EnumSet;
 import java.util.List;
+
+import static com.braze.support.DateTimeUtils.nowInMilliseconds;
 
 public class BrazeFeedFragment extends ListFragment implements SwipeRefreshLayout.OnRefreshListener {
   private static final String TAG = BrazeLogger.getBrazeLogTag(BrazeFeedFragment.class);
@@ -74,7 +73,7 @@ public class BrazeFeedFragment extends ListFragment implements SwipeRefreshLayou
   private RelativeLayout mFeedRootLayout;
   private EnumSet<CardCategory> mCategories;
   private SwipeRefreshLayout mFeedSwipeLayout;
-  private GestureDetectorCompat mGestureDetector;
+  private GestureDetector mGestureDetector;
   private boolean mSortEnabled = false;
 
   @VisibleForTesting
@@ -96,7 +95,7 @@ public class BrazeFeedFragment extends ListFragment implements SwipeRefreshLayou
       mAdapter = new BrazeListAdapter(context, R.id.tag, new ArrayList<>());
       mCategories = CardCategory.getAllCategories();
     }
-    mGestureDetector = new GestureDetectorCompat(context, new FeedGestureListener());
+    mGestureDetector = new GestureDetector(context, new FeedGestureListener());
   }
 
   @Override

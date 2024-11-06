@@ -25,6 +25,7 @@ import com.braze.push.BrazeNotificationUtils.handleNotificationOpened
 import com.braze.push.BrazeNotificationUtils.handlePushStoryPageClicked
 import com.braze.push.BrazeNotificationUtils.isBrazePushMessage
 import com.braze.push.BrazeNotificationUtils.isNotificationMessage
+import com.braze.push.BrazeNotificationUtils.refreshBannersIfAppropriate
 import com.braze.push.BrazeNotificationUtils.refreshFeatureFlagsIfAppropriate
 import com.braze.push.BrazeNotificationUtils.requestGeofenceRefreshIfAppropriate
 import com.braze.push.BrazeNotificationUtils.sendPushMessageReceivedBroadcast
@@ -332,6 +333,7 @@ open class BrazePushReceiver : BroadcastReceiver() {
                 sendPushMessageReceivedBroadcast(context, notificationExtras, payload)
                 requestGeofenceRefreshIfAppropriate(payload)
                 refreshFeatureFlagsIfAppropriate(payload)
+                refreshBannersIfAppropriate(payload)
                 return false
             }
         }

@@ -1,0 +1,5 @@
+<resources>
+    <declare-styleable name="BannerView">
+        <attr name="placementId" format="string" />
+    </declare-styleable>
+</resources>

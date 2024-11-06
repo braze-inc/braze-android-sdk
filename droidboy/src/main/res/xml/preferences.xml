@@ -6,6 +6,9 @@
     android:title="@string/about_title"
     app:initialExpandedChildrenCount="5">
     <Preference
+      android:key="build_time_and_info"
+      android:title="Build Time and Info" />
+    <Preference
       android:key="current_user_id"
       android:title="Current User ID" />
     <Preference
@@ -26,9 +29,6 @@
     <Preference
       android:key="build_name"
       android:title="Build Name" />
-    <Preference
-      android:key="install_time"
-      android:title="Install Time" />
   </PreferenceCategory>
   <PreferenceCategory
     android:title="@string/sdk_auth">
@@ -122,7 +122,7 @@
       android:title="Reset environment override" />
     <Preference
       android:key="environment_switch_dev"
-      android:title="❄️ Change to Dev endpoint ❄️" />
+      android:title="❄️ Change to Dev endpoint (Olaf) ❄️" />
     <Preference
       android:key="show_set_environment_dialog"
       android:title="@string/set_environment_title" />

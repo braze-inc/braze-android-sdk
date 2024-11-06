@@ -22,6 +22,7 @@ import androidx.core.app.NotificationCompat
 import com.braze.Braze
 import com.braze.BrazeInternal
 import com.braze.BrazeInternal.addSerializedContentCardToStorage
+import com.braze.BrazeInternal.refreshBanners
 import com.braze.BrazeInternal.refreshFeatureFlags
 import com.braze.BrazeInternal.requestGeofenceRefresh
 import com.braze.Constants
@@ -281,6 +282,24 @@ object BrazeNotificationUtils {
             true
         } else {
             brazelog(V) { "Feature flag refresh key not included in push payload or false. Not refreshing feature flags." }
+            false
+        }
+    }
+
+    /**
+     * Requests a banner refresh from Braze if appropriate based on the payload of the push notification.
+     *
+     * @return True iff a banners refresh was requested from Braze.
+     */
+    @JvmStatic
+    fun refreshBannersIfAppropriate(payload: BrazeNotificationPayload): Boolean {
+        val context = payload.context
+        return if (payload.shouldRefreshBanners && context != null) {
+            brazelog { "Banners refresh key was true. Refreshing Banners." }
+            refreshBanners(context)
+            true
+        } else {
+            brazelog(V) { "Banners refresh key not included in push payload or false. Not refreshing banners." }
             false
         }
     }

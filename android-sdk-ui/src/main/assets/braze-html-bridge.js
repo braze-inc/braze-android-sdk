@@ -1,7 +1,5 @@
 /**
- * DEPRECATED: This file is deprecated and will be removed in the future. Please use the braze-html-bridge.js file instead.
- *
- * This file is used to bridge the Braze HTML In-App Messages and the Android SDK.
+ * This file is used to bridge the Braze HTML In-App Messages and Banners to the Android SDK.
  */
 
 var brazeBridge = {

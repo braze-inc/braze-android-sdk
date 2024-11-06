@@ -7,15 +7,14 @@ import com.braze.enums.Channel
 import com.braze.enums.inappmessage.MessageType
 import com.braze.models.inappmessage.IInAppMessage
 import com.braze.models.inappmessage.IInAppMessageHtml
-import com.braze.models.outgoing.BrazeProperties
 import com.braze.support.BrazeLogger.Priority.V
 import com.braze.support.BrazeLogger.Priority.W
 import com.braze.support.BrazeLogger.brazelog
 import com.braze.support.isLocalUri
 import com.braze.support.toBundle
+import com.braze.ui.BrazeWebViewClient
 import com.braze.ui.actions.NewsfeedAction
 import com.braze.ui.inappmessage.BrazeInAppMessageManager
-import com.braze.ui.inappmessage.utils.InAppMessageWebViewClient
 import com.braze.ui.BrazeDeeplinkHandler.Companion.getInstance as getDeeplinkHandlerInstance
 
 open class DefaultInAppMessageWebViewClientListener : IInAppMessageWebViewClientListener {
@@ -79,11 +78,13 @@ open class DefaultInAppMessageWebViewClientListener : IInAppMessageWebViewClient
             queryBundle
         )
         if (!wasHandled) {
-            val customEventName = parseCustomEventNameFromQueryBundle(queryBundle)
+            val customEventName =
+                BrazeWebViewClient.parseCustomEventNameFromQueryBundle(queryBundle)
             if (customEventName.isNullOrBlank()) {
                 return
             }
-            val customEventProperties = parsePropertiesFromQueryBundle(queryBundle)
+            val customEventProperties =
+                BrazeWebViewClient.parsePropertiesFromQueryBundle(queryBundle)
             inAppMessageManager.activity?.let { activity ->
                 getInstance(activity).logCustomEvent(
                     customEventName,
@@ -147,7 +148,6 @@ open class DefaultInAppMessageWebViewClientListener : IInAppMessageWebViewClient
     }
 
     companion object {
-        private const val HTML_IN_APP_MESSAGE_CUSTOM_EVENT_NAME_KEY = "name"
 
         @JvmStatic
         @VisibleForTesting
@@ -157,13 +157,15 @@ open class DefaultInAppMessageWebViewClientListener : IInAppMessageWebViewClient
         ): Boolean {
             var isAnyQueryFlagSet = false
             var isDeepLinkFlagSet = false
-            if (queryBundle.containsKey(InAppMessageWebViewClient.QUERY_NAME_DEEPLINK)) {
-                isDeepLinkFlagSet = queryBundle.getString(InAppMessageWebViewClient.QUERY_NAME_DEEPLINK).toBoolean()
+            if (queryBundle.containsKey(BrazeWebViewClient.QUERY_NAME_DEEPLINK)) {
+                isDeepLinkFlagSet =
+                    queryBundle.getString(BrazeWebViewClient.QUERY_NAME_DEEPLINK).toBoolean()
                 isAnyQueryFlagSet = true
             }
             var isExternalOpenFlagSet = false
-            if (queryBundle.containsKey(InAppMessageWebViewClient.QUERY_NAME_EXTERNAL_OPEN)) {
-                isExternalOpenFlagSet = queryBundle.getString(InAppMessageWebViewClient.QUERY_NAME_EXTERNAL_OPEN).toBoolean()
+            if (queryBundle.containsKey(BrazeWebViewClient.QUERY_NAME_EXTERNAL_OPEN)) {
+                isExternalOpenFlagSet =
+                    queryBundle.getString(BrazeWebViewClient.QUERY_NAME_EXTERNAL_OPEN).toBoolean()
                 isAnyQueryFlagSet = true
             }
             var useWebViewForWebLinks = inAppMessage.openUriInWebView
@@ -176,35 +178,15 @@ open class DefaultInAppMessageWebViewClientListener : IInAppMessageWebViewClient
         @JvmStatic
         @VisibleForTesting
         fun logHtmlInAppMessageClick(inAppMessage: IInAppMessage, queryBundle: Bundle) {
-            if (queryBundle.containsKey(InAppMessageWebViewClient.QUERY_NAME_BUTTON_ID)) {
+            if (queryBundle.containsKey(BrazeWebViewClient.QUERY_NAME_BUTTON_ID)) {
                 val inAppMessageHtml = inAppMessage as IInAppMessageHtml
-                queryBundle.getString(InAppMessageWebViewClient.QUERY_NAME_BUTTON_ID)?.let {
+                queryBundle.getString(BrazeWebViewClient.QUERY_NAME_BUTTON_ID)?.let {
                     inAppMessageHtml.logButtonClick(it)
                 }
             } else if (inAppMessage.messageType === MessageType.HTML_FULL) {
                 // HTML Full messages are the only html type that log clicks implicitly
                 inAppMessage.logClick()
             }
-        }
-
-        @JvmStatic
-        @VisibleForTesting
-        fun parseCustomEventNameFromQueryBundle(queryBundle: Bundle): String? =
-            queryBundle.getString(HTML_IN_APP_MESSAGE_CUSTOM_EVENT_NAME_KEY)
-
-        @JvmStatic
-        @VisibleForTesting
-        fun parsePropertiesFromQueryBundle(queryBundle: Bundle): BrazeProperties {
-            val customEventProperties = BrazeProperties()
-            for (key in queryBundle.keySet()) {
-                if (key != HTML_IN_APP_MESSAGE_CUSTOM_EVENT_NAME_KEY) {
-                    val propertyValue = queryBundle.getString(key, null)
-                    if (!propertyValue.isNullOrBlank()) {
-                        customEventProperties.addProperty(key, propertyValue)
-                    }
-                }
-            }
-            return customEventProperties
         }
     }
 }

@@ -1,3 +1,28 @@
+## 33.1.0
+
+[Release Date](https://github.com/braze-inc/braze-android-sdk/releases/tag/v33.1.0)
+
+#### Breaking
+
+##### Fixed
+- Fixed an issue where `ContentCardsFragment` would not show the empty state if the user had only control cards.
+
+##### Added
+- Adds support for the Braze Banner Cards product.
+- Added `BrazeWebViewClient` to facilitate the creation of `WebViewClient`s in Banners and In-App Messages.
+  - Added `BannerWebViewClient`, which extends `BrazeWebViewClient`.
+  - `InAppMessageWebViewClient` now extends `BrazeWebViewClient`.
+- Added `JavascriptInterfaceBase` to simplify the creation of JavaScript interfaces for Banners and In-App Messages.
+  - Added `BannerJavascriptInterface`, which extends `JavascriptInterfaceBase`.
+  - `InAppMessageJavascriptInterface` now extends `JavascriptInterfaceBase`.
+- Added `IBannerWebViewClientListener` interface for Banner WebViewClient listeners.
+- Added an optional button id parameter to `IInAppMessage.logClick`.
+
+##### Changed
+- Changed the location of `brazeBridge` to be located in file `braze-html-bridge.js`. `brazeBridge` is now accessible in both Banners and In-App Messages.
+  - `braze-html-in-app-message-bridge.js` is now deprecated and will be removed in a future version of the SDK, in favor of `braze-html-bridge.js`.
+- Changed properties in `AttributionData` from non-nullable to nullable to allow for optional values.
+
 ## 33.0.0
 
 [Release Date](https://github.com/braze-inc/braze-android-sdk/releases/tag/v33.0.0)
@@ -324,6 +349,7 @@ Our SDK is now hosted in Maven Central. You can remove `https://braze-inc.github
 - Added `@JvmStatic` to `com.braze.push.BrazeHuaweiPushHandler.handleHmsRemoteMessageData()`.
 - Fixed an issue where notification extra data was not being passed along in Push Story main image clicks.
 - Fixed an issue where ContentCardAdapter was not properly handling bad indexes being passed in.
+- Fixed an issue where a user's push subscription state would not change to "opted in" upon accepting the Android 13+ push prompt.
 
 ##### Added
 - Added the ability to configure dismissal of Push Stories on click by adding `BrazeConfig.setDoesPushStoryDismissOnClick()` or `<bool name="com_braze_does_push_story_dismiss_on_click">true</bool>` to your `braze.xml`. Defaults to true.

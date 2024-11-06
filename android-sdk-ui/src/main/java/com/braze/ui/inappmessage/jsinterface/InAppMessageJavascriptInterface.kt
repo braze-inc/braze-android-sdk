@@ -2,29 +2,24 @@ package com.braze.ui.inappmessage.jsinterface
 
 import android.content.Context
 import android.webkit.JavascriptInterface
-import androidx.annotation.VisibleForTesting
-import com.braze.Braze
 import com.braze.coroutine.BrazeCoroutineScope
 import com.braze.models.inappmessage.IInAppMessageHtml
-import com.braze.models.outgoing.BrazeProperties
-import com.braze.support.BrazeLogger.Priority.E
 import com.braze.support.BrazeLogger.Priority.V
-import com.braze.support.BrazeLogger.Priority.W
 import com.braze.support.BrazeLogger.brazelog
 import com.braze.support.requestPushPermissionPrompt
+import com.braze.ui.JavascriptInterfaceBase
 import com.braze.ui.inappmessage.BrazeInAppMessageManager
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.withTimeout
-import org.json.JSONObject
-import java.math.BigDecimal
 
 /**
  * Used to generate the javascript API in html in-app messages.
  */
 class InAppMessageJavascriptInterface(
-    private val context: Context,
+    context: Context,
     private val inAppMessage: IInAppMessageHtml
-) {
+) : JavascriptInterfaceBase(context) {
+
     @get:JavascriptInterface
     val user: InAppMessageUserJavascriptInterface = InAppMessageUserJavascriptInterface(context)
 
@@ -35,58 +30,12 @@ class InAppMessageJavascriptInterface(
     var wasCloseMessageCalled = false
 
     @JavascriptInterface
-    fun changeUser(userId: String, sdkAuthSignature: String?) {
-        Braze.getInstance(context).changeUser(userId, sdkAuthSignature)
-    }
-
-    @JavascriptInterface
-    fun requestImmediateDataFlush() {
-        Braze.getInstance(context).requestImmediateDataFlush()
-    }
-
-    @JavascriptInterface
-    fun logCustomEventWithJSON(eventName: String?, propertiesJSON: String?) {
-        val brazeProperties = parseProperties(propertiesJSON)
-        Braze.getInstance(context).logCustomEvent(eventName, brazeProperties)
-    }
-
-    @JavascriptInterface
-    fun logPurchaseWithJSON(
-        productId: String?,
-        price: String,
-        currencyCode: String?,
-        quantity: String,
-        propertiesJSON: String?
-    ) {
-        val brazeProperties = parseProperties(propertiesJSON)
-        val priceValue = price.toDoubleOrNull()
-        if (priceValue == null) {
-            brazelog(W) { "Failed to parse logPurchaseWithJSON price value '$price'" }
-            return
-        }
-
-        val quantityValue = quantity.toIntOrNull()
-        if (quantityValue == null) {
-            brazelog(W) { "Failed to parse logPurchaseWithJSON quantity value '$quantity'" }
-            return
-        }
-
-        Braze.getInstance(context).logPurchase(
-            productId,
-            currencyCode,
-            BigDecimal(priceValue.toString()),
-            quantityValue,
-            brazeProperties
-        )
-    }
-
-    @JavascriptInterface
-    fun logButtonClick(buttonId: String?) {
+    override fun logButtonClick(buttonId: String?) {
         buttonId?.let { inAppMessage.logButtonClick(it) }
     }
 
     @JavascriptInterface
-    fun logClick() {
+    override fun logClick() {
         inAppMessage.logClick()
     }
 
@@ -111,20 +60,6 @@ class InAppMessageJavascriptInterface(
             brazelog(V) { "Requesting push prompt from Braze bridge html interface" }
             BrazeInAppMessageManager.getInstance().activity.requestPushPermissionPrompt()
         }
-    }
-
-    @VisibleForTesting
-    fun parseProperties(propertiesJSON: String?): BrazeProperties? {
-        try {
-            if (propertiesJSON != null && propertiesJSON != "undefined"
-                && propertiesJSON != "null"
-            ) {
-                return BrazeProperties(JSONObject(propertiesJSON))
-            }
-        } catch (e: Exception) {
-            brazelog(E, e) { "Failed to parse properties JSON String: $propertiesJSON" }
-        }
-        return null
     }
 
     companion object {

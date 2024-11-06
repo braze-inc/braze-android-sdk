@@ -507,10 +507,7 @@ open class DefaultInAppMessageViewWrapper @JvmOverloads constructor(
                 val child = viewGroup.getChildAt(i)
                 if (child != null) {
                     viewAccessibilityFlagMap[child.id] = child.importantForAccessibility
-                    ViewCompat.setImportantForAccessibility(
-                        child,
-                        ViewCompat.IMPORTANT_FOR_ACCESSIBILITY_NO_HIDE_DESCENDANTS
-                    )
+                    child.importantForAccessibility = View.IMPORTANT_FOR_ACCESSIBILITY_NO_HIDE_DESCENDANTS
                 }
             }
         }
@@ -537,16 +534,10 @@ open class DefaultInAppMessageViewWrapper @JvmOverloads constructor(
                     val id = child.id
                     if (viewAccessibilityFlagMap.containsKey(id)) {
                         viewAccessibilityFlagMap[id]?.let {
-                            ViewCompat.setImportantForAccessibility(
-                                child,
-                                it
-                            )
+                            child.importantForAccessibility = it
                         }
                     } else {
-                        ViewCompat.setImportantForAccessibility(
-                            child,
-                            ViewCompat.IMPORTANT_FOR_ACCESSIBILITY_AUTO
-                        )
+                        child.importantForAccessibility = View.IMPORTANT_FOR_ACCESSIBILITY_AUTO
                     }
                 }
             }

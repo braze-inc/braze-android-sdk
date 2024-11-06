@@ -13,16 +13,17 @@ import android.widget.EditText
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
+import com.braze.Braze
+import com.braze.BrazeUser
 import com.braze.enums.Gender
 import com.braze.enums.Month
 import com.braze.enums.NotificationSubscriptionType
 import com.braze.events.IValueCallback
 import com.braze.models.outgoing.AttributionData
-import com.braze.Braze
-import com.braze.BrazeUser
 import com.braze.support.BrazeLogger.Priority.E
 import com.braze.support.BrazeLogger.brazelog
 import com.braze.support.convertStringJsonArrayToList
+import com.braze.ui.banners.BannerView
 import com.google.android.gms.ads.identifier.AdvertisingIdClient
 import com.google.firebase.crashlytics.FirebaseCrashlytics
 import kotlinx.coroutines.Dispatchers
@@ -30,7 +31,9 @@ import kotlinx.coroutines.launch
 import org.json.JSONArray
 import org.json.JSONException
 import java.math.BigDecimal
-import java.util.*
+import java.util.Date
+import java.util.LinkedList
+import java.util.Queue
 
 class MainFragment : Fragment() {
     private lateinit var customEventTextView: AutoCompleteTextView
@@ -40,6 +43,9 @@ class MainFragment : Fragment() {
     private lateinit var aliasLabelEditText: EditText
     private lateinit var customEventsAndPurchasesArrayAdapter: ArrayAdapter<String?>
     private val lastSeenCustomEventsAndPurchases: Queue<String?> = LinkedList()
+    private lateinit var userIdEditText: EditText
+    private lateinit var bannerIdEditText: EditText
+    private lateinit var bannerView: BannerView
 
     override fun onCreateView(
         layoutInflater: LayoutInflater,
@@ -60,9 +66,11 @@ class MainFragment : Fragment() {
         customEventTextView.setAdapter(customEventsAndPurchasesArrayAdapter)
         customPurchaseTextView.setAdapter(customEventsAndPurchasesArrayAdapter)
 
-        val userIdEditText: EditText =
+        userIdEditText =
             contentView.findViewById(R.id.com_appboy_sample_set_user_id_edit_text)
-        userIdEditText.setText(sharedPreferences.getString(USER_ID_KEY, null))
+
+        bannerIdEditText = contentView.findViewById(R.id.set_banner_placement_text_box_edit_text)
+        bannerView = contentView.findViewById<BannerView>(R.id.main_banner_2)
 
         contentView.setOnButtonClick(R.id.com_appboy_sample_set_user_id_button) {
             val userId = userIdEditText.text.toString()
@@ -73,7 +81,9 @@ class MainFragment : Fragment() {
                 val editor = sharedPreferences.edit()
                 editor.putString(USER_ID_KEY, userId)
                 editor.apply()
-                FirebaseCrashlytics.getInstance().setUserId(userId)
+                if (BuildConfig.SHOULD_USE_CRASHLYTICS) {
+                    FirebaseCrashlytics.getInstance().setUserId(userId)
+                }
             } else {
                 Toast.makeText(requireContext(), "Please enter a userId.", Toast.LENGTH_SHORT)
                     .show()
@@ -81,16 +91,14 @@ class MainFragment : Fragment() {
         }
 
         contentView.setOnButtonClickWithEditableText(
-            R.id.com_appboy_sample_set_sdk_auth_signature_button,
-            R.id.com_appboy_sample_set_sdk_auth_signature_edit_text
+            R.id.com_braze_sample_set_sdk_auth_signature_button,
+            R.id.com_braze_sample_set_sdk_auth_signature_edit_text
         ) { _, signature ->
             if (signature.isNotBlank()) {
                 Braze.getInstance(requireContext()).setSdkAuthenticationSignature(signature)
-                Toast.makeText(requireContext(), "Set signature to: $signature", Toast.LENGTH_SHORT)
-                    .show()
+                showToast("Set signature to: $signature")
             } else {
-                Toast.makeText(requireContext(), "Please enter a signature.", Toast.LENGTH_SHORT)
-                    .show()
+                showToast("Please enter a signature.")
             }
         }
 
@@ -247,6 +255,30 @@ class MainFragment : Fragment() {
                 }
             }
         }
+
+        contentView.setOnButtonClickWithEditableText(
+            buttonId = R.id.set_banner_placement_text_box_button,
+            editTextId = R.id.set_banner_placement_text_box_edit_text
+        ) { _, newPlacementId ->
+            if (newPlacementId.isNotBlank()) {
+                Toast.makeText(requireContext(), "Set custom banner to: $newPlacementId", Toast.LENGTH_SHORT)
+                    .show()
+                sharedPreferences.edit().putString(BANNER_ID_KEY, newPlacementId).apply()
+
+                val list = DroidboyApplication.BANNER_PLACEMENT_IDS.toMutableList()
+                list.add(newPlacementId)
+                Braze.getInstance(requireContext()).requestBannersRefresh(list)
+            } else {
+                Toast.makeText(requireContext(), "No custom banner set.", Toast.LENGTH_SHORT)
+                    .show()
+                sharedPreferences.edit().remove(BANNER_ID_KEY).apply()
+            }
+
+            bannerView.placementId = newPlacementId
+
+            // Then update the singleton of the placement ids
+            Braze.getInstance(requireContext()).requestBannersRefresh(DroidboyApplication.BANNER_PLACEMENT_IDS + newPlacementId)
+        }
         return contentView
     }
 
@@ -310,6 +342,17 @@ class MainFragment : Fragment() {
         activity?.runOnUiThread { Toast.makeText(requireContext(), msg, Toast.LENGTH_SHORT).show() }
     }
 
+    override fun onResume() {
+        super.onResume()
+        userIdEditText.setText(sharedPreferences.getString(USER_ID_KEY, null))
+
+        val bannerId = sharedPreferences.getString(BANNER_ID_KEY, null)
+        bannerIdEditText.setText(bannerId)
+        if (bannerView.placementId != bannerId) {
+            bannerView.placementId = bannerId
+        }
+    }
+
     companion object {
         private const val STRING_ARRAY_ATTRIBUTE_KEY = "stringArrayAttribute"
         private const val ARRAY_ATTRIBUTE_KEY = "arrayAttribute"
@@ -326,6 +369,7 @@ class MainFragment : Fragment() {
         private const val LAST_SEEN_CUSTOM_EVENTS_AND_PURCHASES_PREFERENCE_KEY =
             "last_seen_custom_events_and_purchases"
         const val USER_ID_KEY = "user.id"
+        const val BANNER_ID_KEY = "banner.id"
 
         fun View.setOnButtonClick(id: Int, block: (view: View) -> Unit) {
             val view = this.findViewById<Button>(id)
