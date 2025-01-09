@@ -49,6 +49,7 @@ $dokka.location:com.braze.configuration/BrazeConfig.Builder/setSdkFlavor/#com.br
 $dokka.location:com.braze.configuration/BrazeConfig.Builder/setSdkMetadata/#java.util.EnumSet[com.braze.enums.BrazeSdkMetadata]?/PointingToDeclaration/braze-android-sdk/com.braze.configuration/-braze-config/-builder/set-sdk-metadata.html
 $dokka.location:com.braze.configuration/BrazeConfig.Builder/setServerTarget/#kotlin.String/PointingToDeclaration/braze-android-sdk/com.braze.configuration/-braze-config/-builder/set-server-target.html
 $dokka.location:com.braze.configuration/BrazeConfig.Builder/setSessionTimeout/#kotlin.Int/PointingToDeclaration/braze-android-sdk/com.braze.configuration/-braze-config/-builder/set-session-timeout.html
+$dokka.location:com.braze.configuration/BrazeConfig.Builder/setShouldAddStatusBarPaddingToInAppMessages/#kotlin.Boolean/PointingToDeclaration/braze-android-sdk/com.braze.configuration/-braze-config/-builder/set-should-add-status-bar-padding-to-in-app-messages.html
 $dokka.location:com.braze.configuration/BrazeConfig.Builder/setShouldPreventInAppMessageDisplayForDifferentUsers/#kotlin.Boolean/PointingToDeclaration/braze-android-sdk/com.braze.configuration/-braze-config/-builder/set-should-prevent-in-app-message-display-for-different-users.html
 $dokka.location:com.braze.configuration/BrazeConfig.Builder/setShouldUseWindowFlagSecureInActivities/#kotlin.Boolean/PointingToDeclaration/braze-android-sdk/com.braze.configuration/-braze-config/-builder/set-should-use-window-flag-secure-in-activities.html
 $dokka.location:com.braze.configuration/BrazeConfig.Builder/setSmallNotificationIcon/#kotlin.String/PointingToDeclaration/braze-android-sdk/com.braze.configuration/-braze-config/-builder/set-small-notification-icon.html
@@ -96,6 +97,7 @@ $dokka.location:com.braze.configuration/BrazeConfig/pushDeepLinkBackStackActivit
 $dokka.location:com.braze.configuration/BrazeConfig/sdkFlavor/#/PointingToDeclaration/braze-android-sdk/com.braze.configuration/-braze-config/sdk-flavor.html
 $dokka.location:com.braze.configuration/BrazeConfig/serverTarget/#/PointingToDeclaration/braze-android-sdk/com.braze.configuration/-braze-config/server-target.html
 $dokka.location:com.braze.configuration/BrazeConfig/sessionTimeout/#/PointingToDeclaration/braze-android-sdk/com.braze.configuration/-braze-config/session-timeout.html
+$dokka.location:com.braze.configuration/BrazeConfig/shouldAddStatusBarPaddingToInAppMessages/#/PointingToDeclaration/braze-android-sdk/com.braze.configuration/-braze-config/should-add-status-bar-padding-to-in-app-messages.html
 $dokka.location:com.braze.configuration/BrazeConfig/shouldOptInWhenPushAuthorized/#/PointingToDeclaration/braze-android-sdk/com.braze.configuration/-braze-config/should-opt-in-when-push-authorized.html
 $dokka.location:com.braze.configuration/BrazeConfig/shouldPreventInAppMessageDisplayForDifferentUsers/#/PointingToDeclaration/braze-android-sdk/com.braze.configuration/-braze-config/should-prevent-in-app-message-display-for-different-users.html
 $dokka.location:com.braze.configuration/BrazeConfig/shouldUseWindowFlagSecureInActivities/#/PointingToDeclaration/braze-android-sdk/com.braze.configuration/-braze-config/should-use-window-flag-secure-in-activities.html
@@ -157,6 +159,7 @@ $dokka.location:com.braze.configuration/BrazeConfigurationProvider/pushDeepLinkB
 $dokka.location:com.braze.configuration/BrazeConfigurationProvider/sdkFlavor/#/PointingToDeclaration/braze-android-sdk/com.braze.configuration/-braze-configuration-provider/sdk-flavor.html
 $dokka.location:com.braze.configuration/BrazeConfigurationProvider/sdkMetadata/#/PointingToDeclaration/braze-android-sdk/com.braze.configuration/-braze-configuration-provider/sdk-metadata.html
 $dokka.location:com.braze.configuration/BrazeConfigurationProvider/sessionTimeoutSeconds/#/PointingToDeclaration/braze-android-sdk/com.braze.configuration/-braze-configuration-provider/session-timeout-seconds.html
+$dokka.location:com.braze.configuration/BrazeConfigurationProvider/shouldAddStatusBarPaddingToInAppMessages/#/PointingToDeclaration/braze-android-sdk/com.braze.configuration/-braze-configuration-provider/should-add-status-bar-padding-to-in-app-messages.html
 $dokka.location:com.braze.configuration/BrazeConfigurationProvider/shouldOptInWhenPushAuthorized/#/PointingToDeclaration/braze-android-sdk/com.braze.configuration/-braze-configuration-provider/should-opt-in-when-push-authorized.html
 $dokka.location:com.braze.configuration/BrazeConfigurationProvider/shouldUseWindowFlagSecureInActivities/#/PointingToDeclaration/braze-android-sdk/com.braze.configuration/-braze-configuration-provider/should-use-window-flag-secure-in-activities.html
 $dokka.location:com.braze.configuration/BrazeConfigurationProvider/smallNotificationIconResourceId/#/PointingToDeclaration/braze-android-sdk/com.braze.configuration/-braze-configuration-provider/small-notification-icon-resource-id.html
@@ -644,7 +647,7 @@ $dokka.location:com.braze.images/IBrazeImageLoader/renderUrlIntoCardView/#androi
 $dokka.location:com.braze.images/IBrazeImageLoader/renderUrlIntoInAppMessageView/#android.content.Context#com.braze.models.inappmessage.IInAppMessage#kotlin.String#android.widget.ImageView#com.braze.enums.BrazeViewBounds?/PointingToDeclaration/braze-android-sdk/com.braze.images/-i-braze-image-loader/render-url-into-in-app-message-view.html
 $dokka.location:com.braze.images/IBrazeImageLoader/setOffline/#kotlin.Boolean/PointingToDeclaration/braze-android-sdk/com.braze.images/-i-braze-image-loader/set-offline.html
 $dokka.location:com.braze.jetpackcompose.banners////PointingToDeclaration/braze-android-sdk/com.braze.jetpackcompose.banners/index.html
-$dokka.location:com.braze.jetpackcompose.banners//Banner/#kotlin.String?/PointingToDeclaration/braze-android-sdk/com.braze.jetpackcompose.banners/-banner.html
+$dokka.location:com.braze.jetpackcompose.banners//Banner/#kotlin.String?#kotlin.Function1[kotlin.Double,kotlin.Unit]?/PointingToDeclaration/braze-android-sdk/com.braze.jetpackcompose.banners/-banner.html
 $dokka.location:com.braze.jetpackcompose.contentcards.cards////PointingToDeclaration/braze-android-sdk/com.braze.jetpackcompose.contentcards.cards/index.html
 $dokka.location:com.braze.jetpackcompose.contentcards.cards//ContentCard/#com.braze.models.cards.Card#kotlin.Function1[com.braze.models.cards.Card,kotlin.Boolean]?#com.braze.jetpackcompose.contentcards.styling.ContentCardStyling/PointingToDeclaration/braze-android-sdk/com.braze.jetpackcompose.contentcards.cards/-content-card.html
 $dokka.location:com.braze.jetpackcompose.contentcards.styling////PointingToDeclaration/braze-android-sdk/com.braze.jetpackcompose.contentcards.styling/index.html
@@ -1243,6 +1246,7 @@ $dokka.location:com.braze.models.push/BrazeNotificationPayload/isInlineImagePush
 $dokka.location:com.braze.models.push/BrazeNotificationPayload/isNewlyReceivedPushStory/#/PointingToDeclaration/braze-android-sdk/com.braze.models.push/-braze-notification-payload/is-newly-received-push-story.html
 $dokka.location:com.braze.models.push/BrazeNotificationPayload/isPushDeliveryEnabled/#/PointingToDeclaration/braze-android-sdk/com.braze.models.push/-braze-notification-payload/is-push-delivery-enabled.html
 $dokka.location:com.braze.models.push/BrazeNotificationPayload/isPushStory/#/PointingToDeclaration/braze-android-sdk/com.braze.models.push/-braze-notification-payload/is-push-story.html
+$dokka.location:com.braze.models.push/BrazeNotificationPayload/isSilentPush/#/PointingToDeclaration/braze-android-sdk/com.braze.models.push/-braze-notification-payload/is-silent-push.html
 $dokka.location:com.braze.models.push/BrazeNotificationPayload/isUninstallTrackingPush/#/PointingToDeclaration/braze-android-sdk/com.braze.models.push/-braze-notification-payload/is-uninstall-tracking-push.html
 $dokka.location:com.braze.models.push/BrazeNotificationPayload/largeIcon/#/PointingToDeclaration/braze-android-sdk/com.braze.models.push/-braze-notification-payload/large-icon.html
 $dokka.location:com.braze.models.push/BrazeNotificationPayload/notificationBadgeNumber/#/PointingToDeclaration/braze-android-sdk/com.braze.models.push/-braze-notification-payload/notification-badge-number.html
@@ -1560,9 +1564,11 @@ $dokka.location:com.braze.support/ReflectionUtils/invokeMethodQuietly/#kotlin.An
 $dokka.location:com.braze.support/ValidationUtils///PointingToDeclaration/braze-android-sdk/com.braze.support/-validation-utils/index.html
 $dokka.location:com.braze.support/ValidationUtils/BRAZE_STRING_MAX_LENGTH/#/PointingToDeclaration/braze-android-sdk/com.braze.support/-validation-utils/-b-r-a-z-e_-s-t-r-i-n-g_-m-a-x_-l-e-n-g-t-h.html
 $dokka.location:com.braze.support/ValidationUtils/EMAIL_ADDRESS_MAX_LENGTH/#/PointingToDeclaration/braze-android-sdk/com.braze.support/-validation-utils/-e-m-a-i-l_-a-d-d-r-e-s-s_-m-a-x_-l-e-n-g-t-h.html
+$dokka.location:com.braze.support/ValidationUtils/LINE_ID_MAX_LENGTH/#/PointingToDeclaration/braze-android-sdk/com.braze.support/-validation-utils/-l-i-n-e_-i-d_-m-a-x_-l-e-n-g-t-h.html
 $dokka.location:com.braze.support/ValidationUtils/VALID_CURRENCY_CODES/#/PointingToDeclaration/braze-android-sdk/com.braze.support/-validation-utils/-v-a-l-i-d_-c-u-r-r-e-n-c-y_-c-o-d-e-s.html
 $dokka.location:com.braze.support/ValidationUtils/ensureBrazeFieldLength/#kotlin.String?/PointingToDeclaration/braze-android-sdk/com.braze.support/-validation-utils/ensure-braze-field-length.html
 $dokka.location:com.braze.support/ValidationUtils/isValidEmailAddress/#kotlin.String?/PointingToDeclaration/braze-android-sdk/com.braze.support/-validation-utils/is-valid-email-address.html
+$dokka.location:com.braze.support/ValidationUtils/isValidLineId/#kotlin.String?/PointingToDeclaration/braze-android-sdk/com.braze.support/-validation-utils/is-valid-line-id.html
 $dokka.location:com.braze.support/ValidationUtils/isValidLocation/#kotlin.Double#kotlin.Double/PointingToDeclaration/braze-android-sdk/com.braze.support/-validation-utils/is-valid-location.html
 $dokka.location:com.braze.support/ValidationUtils/isValidLogCustomEventInput/#kotlin.String?#com.braze.storage.ServerConfigStorageProvider/PointingToDeclaration/braze-android-sdk/com.braze.support/-validation-utils/is-valid-log-custom-event-input.html
 $dokka.location:com.braze.support/ValidationUtils/isValidLogPurchaseInput/#kotlin.String?#kotlin.String?#java.math.BigDecimal?#kotlin.Int#com.braze.storage.ServerConfigStorageProvider/PointingToDeclaration/braze-android-sdk/com.braze.support/-validation-utils/is-valid-log-purchase-input.html
@@ -1626,10 +1632,12 @@ $dokka.location:com.braze.ui.adapters/BrazeListAdapter/replaceFeed/#java.util.Li
 $dokka.location:com.braze.ui.adapters/BrazeListAdapter/resetCardImpressionTracker/#/PointingToDeclaration/braze-android-sdk/com.braze.ui.adapters/-braze-list-adapter/reset-card-impression-tracker.html
 $dokka.location:com.braze.ui.banners.jsinterface////PointingToDeclaration/braze-android-sdk/com.braze.ui.banners.jsinterface/index.html
 $dokka.location:com.braze.ui.banners.jsinterface/BannerJavascriptInterface///PointingToDeclaration/braze-android-sdk/com.braze.ui.banners.jsinterface/-banner-javascript-interface/index.html
-$dokka.location:com.braze.ui.banners.jsinterface/BannerJavascriptInterface/BannerJavascriptInterface/#android.content.Context#kotlin.String/PointingToDeclaration/braze-android-sdk/com.braze.ui.banners.jsinterface/-banner-javascript-interface/-banner-javascript-interface.html
+$dokka.location:com.braze.ui.banners.jsinterface/BannerJavascriptInterface/BannerJavascriptInterface/#android.content.Context#kotlin.String#kotlin.Function1[kotlin.Double,kotlin.Unit]/PointingToDeclaration/braze-android-sdk/com.braze.ui.banners.jsinterface/-banner-javascript-interface/-banner-javascript-interface.html
 $dokka.location:com.braze.ui.banners.jsinterface/BannerJavascriptInterface/logButtonClick/#kotlin.String?/PointingToDeclaration/braze-android-sdk/com.braze.ui.banners.jsinterface/-banner-javascript-interface/log-button-click.html
 $dokka.location:com.braze.ui.banners.jsinterface/BannerJavascriptInterface/logClick/#/PointingToDeclaration/braze-android-sdk/com.braze.ui.banners.jsinterface/-banner-javascript-interface/log-click.html
 $dokka.location:com.braze.ui.banners.jsinterface/BannerJavascriptInterface/placementId/#/PointingToDeclaration/braze-android-sdk/com.braze.ui.banners.jsinterface/-banner-javascript-interface/placement-id.html
+$dokka.location:com.braze.ui.banners.jsinterface/BannerJavascriptInterface/setBannerHeight/#kotlin.Double/PointingToDeclaration/braze-android-sdk/com.braze.ui.banners.jsinterface/-banner-javascript-interface/set-banner-height.html
+$dokka.location:com.braze.ui.banners.jsinterface/BannerJavascriptInterface/setHeightCallback/#/PointingToDeclaration/braze-android-sdk/com.braze.ui.banners.jsinterface/-banner-javascript-interface/set-height-callback.html
 $dokka.location:com.braze.ui.banners.jsinterface/BannerJavascriptInterface/user/#/PointingToDeclaration/braze-android-sdk/com.braze.ui.banners.jsinterface/-banner-javascript-interface/user.html
 $dokka.location:com.braze.ui.banners.jsinterface/BannerUserJavascriptInterface///PointingToDeclaration/braze-android-sdk/com.braze.ui.banners.jsinterface/-banner-user-javascript-interface/index.html
 $dokka.location:com.braze.ui.banners.jsinterface/BannerUserJavascriptInterface/BannerUserJavascriptInterface/#android.content.Context/PointingToDeclaration/braze-android-sdk/com.braze.ui.banners.jsinterface/-banner-user-javascript-interface/-banner-user-javascript-interface.html
@@ -1656,6 +1664,7 @@ $dokka.location:com.braze.ui.banners/BannerView/BannerView/#android.content.Cont
 $dokka.location:com.braze.ui.banners/BannerView/BannerView/#android.content.Context#android.util.AttributeSet/PointingToDeclaration/braze-android-sdk/com.braze.ui.banners/-banner-view/-banner-view.html
 $dokka.location:com.braze.ui.banners/BannerView/BannerView/#android.content.Context#kotlin.String?/PointingToDeclaration/braze-android-sdk/com.braze.ui.banners/-banner-view/-banner-view.html
 $dokka.location:com.braze.ui.banners/BannerView/BannerView/#android.content.Context/PointingToDeclaration/braze-android-sdk/com.braze.ui.banners/-banner-view/-banner-view.html
+$dokka.location:com.braze.ui.banners/BannerView/heightCallback/#/PointingToDeclaration/braze-android-sdk/com.braze.ui.banners/-banner-view/height-callback.html
 $dokka.location:com.braze.ui.banners/BannerView/initBanner/#kotlin.String?/PointingToDeclaration/braze-android-sdk/com.braze.ui.banners/-banner-view/init-banner.html
 $dokka.location:com.braze.ui.banners/BannerView/placementId/#/PointingToDeclaration/braze-android-sdk/com.braze.ui.banners/-banner-view/placement-id.html
 $dokka.location:com.braze.ui.contentcards.adapters////PointingToDeclaration/braze-android-sdk/com.braze.ui.contentcards.adapters/index.html
@@ -2202,6 +2211,7 @@ $dokka.location:com.braze.ui.support//getMaxSafeLeftInset/#androidx.core.view.Wi
 $dokka.location:com.braze.ui.support//getMaxSafeRightInset/#androidx.core.view.WindowInsetsCompat/PointingToDeclaration/braze-android-sdk/com.braze.ui.support/get-max-safe-right-inset.html
 $dokka.location:com.braze.ui.support//getMaxSafeTopInset/#androidx.core.view.WindowInsetsCompat/PointingToDeclaration/braze-android-sdk/com.braze.ui.support/get-max-safe-top-inset.html
 $dokka.location:com.braze.ui.support//getQueryParameters/android.net.Uri#/PointingToDeclaration/braze-android-sdk/com.braze.ui.support/get-query-parameters.html
+$dokka.location:com.braze.ui.support//getStatusBarHeight/#android.content.Context/PointingToDeclaration/braze-android-sdk/com.braze.ui.support/get-status-bar-height.html
 $dokka.location:com.braze.ui.support//isActivityRegisteredInManifest/#android.content.Context#kotlin.String/PointingToDeclaration/braze-android-sdk/com.braze.ui.support/is-activity-registered-in-manifest.html
 $dokka.location:com.braze.ui.support//isCurrentOrientationValid/#kotlin.Int#com.braze.enums.inappmessage.Orientation/PointingToDeclaration/braze-android-sdk/com.braze.ui.support/is-current-orientation-valid.html
 $dokka.location:com.braze.ui.support//isDeviceInNightMode/#android.content.Context/PointingToDeclaration/braze-android-sdk/com.braze.ui.support/is-device-in-night-mode.html
@@ -2360,6 +2370,7 @@ $dokka.location:com.braze.ui/UserJavascriptInterfaceBase/setGender/#kotlin.Strin
 $dokka.location:com.braze.ui/UserJavascriptInterfaceBase/setHomeCity/#kotlin.String?/PointingToDeclaration/braze-android-sdk/com.braze.ui/-user-javascript-interface-base/set-home-city.html
 $dokka.location:com.braze.ui/UserJavascriptInterfaceBase/setLanguage/#kotlin.String?/PointingToDeclaration/braze-android-sdk/com.braze.ui/-user-javascript-interface-base/set-language.html
 $dokka.location:com.braze.ui/UserJavascriptInterfaceBase/setLastName/#kotlin.String?/PointingToDeclaration/braze-android-sdk/com.braze.ui/-user-javascript-interface-base/set-last-name.html
+$dokka.location:com.braze.ui/UserJavascriptInterfaceBase/setLineId/#kotlin.String?/PointingToDeclaration/braze-android-sdk/com.braze.ui/-user-javascript-interface-base/set-line-id.html
 $dokka.location:com.braze.ui/UserJavascriptInterfaceBase/setPhoneNumber/#kotlin.String?/PointingToDeclaration/braze-android-sdk/com.braze.ui/-user-javascript-interface-base/set-phone-number.html
 $dokka.location:com.braze.ui/UserJavascriptInterfaceBase/setPushNotificationSubscriptionType/#kotlin.String/PointingToDeclaration/braze-android-sdk/com.braze.ui/-user-javascript-interface-base/set-push-notification-subscription-type.html
 $dokka.location:com.braze.ui/UserJavascriptInterfaceBase/subscriptionTypeFromJavascriptString/#kotlin.String?/PointingToDeclaration/braze-android-sdk/com.braze.ui/-user-javascript-interface-base/subscription-type-from-javascript-string.html
@@ -2515,6 +2526,7 @@ $dokka.location:com.braze/BrazeUser/setHomeCity/#kotlin.String?/PointingToDeclar
 $dokka.location:com.braze/BrazeUser/setLanguage/#kotlin.String?/PointingToDeclaration/braze-android-sdk/com.braze/-braze-user/set-language.html
 $dokka.location:com.braze/BrazeUser/setLastKnownLocation/#kotlin.Double#kotlin.Double#kotlin.Double?#kotlin.Double?#kotlin.Double?/PointingToDeclaration/braze-android-sdk/com.braze/-braze-user/set-last-known-location.html
 $dokka.location:com.braze/BrazeUser/setLastName/#kotlin.String?/PointingToDeclaration/braze-android-sdk/com.braze/-braze-user/set-last-name.html
+$dokka.location:com.braze/BrazeUser/setLineId/#kotlin.String?/PointingToDeclaration/braze-android-sdk/com.braze/-braze-user/set-line-id.html
 $dokka.location:com.braze/BrazeUser/setLocationCustomAttribute/#kotlin.String#kotlin.Double#kotlin.Double/PointingToDeclaration/braze-android-sdk/com.braze/-braze-user/set-location-custom-attribute.html
 $dokka.location:com.braze/BrazeUser/setPhoneNumber/#kotlin.String?/PointingToDeclaration/braze-android-sdk/com.braze/-braze-user/set-phone-number.html
 $dokka.location:com.braze/BrazeUser/setPushNotificationSubscriptionType/#com.braze.enums.NotificationSubscriptionType/PointingToDeclaration/braze-android-sdk/com.braze/-braze-user/set-push-notification-subscription-type.html
