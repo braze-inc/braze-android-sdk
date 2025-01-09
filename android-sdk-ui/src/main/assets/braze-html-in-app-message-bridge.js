@@ -38,6 +38,7 @@ var brazeBridge = {
     setDateOfBirth: function(year, month, day) { brazeInternalBridge.getUser().setDateOfBirth(year, month, day); },
     setCountry: function(country) { brazeInternalBridge.getUser().setCountry(country); },
     setPhoneNumber: function(phone) { brazeInternalBridge.getUser().setPhoneNumber(phone); },
+    setLineId: function(lineId) { brazeInternalBridge.getUser().setLineId(lineId); },
     setCustomUserAttribute: function(key, value, merge = false) {
       var isArray = function(value) {
           if (Array.isArray) {

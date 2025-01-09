@@ -3,7 +3,6 @@ package com.appboy.sample.util
 import android.Manifest
 import android.app.Activity
 import android.content.DialogInterface
-import android.os.Build
 import androidx.activity.result.ActivityResultLauncher
 import androidx.appcompat.app.AlertDialog
 import com.appboy.sample.R
@@ -19,9 +18,6 @@ object RuntimePermissionUtils {
         permission: String,
         singlePermissionLauncher: ActivityResultLauncher<String?>
     ) {
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
-            return
-        }
         if (activity.shouldShowRequestPermissionRationale(permission)) {
             AlertDialog.Builder(activity)
                 .setTitle(
@@ -61,7 +57,7 @@ object RuntimePermissionUtils {
         permissions: Array<String>,
         multiplePermissionLauncher: ActivityResultLauncher<Array<String>>
     ) {
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M || permissions.size <= 1) {
+        if (permissions.size <= 1) {
             return
         }
         var isExplanationNeeded = false

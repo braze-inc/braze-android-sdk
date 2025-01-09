@@ -1,3 +1,23 @@
+## 34.0.0
+
+[Release Date](https://github.com/braze-inc/braze-android-sdk/releases/tag/v34.0.0)
+
+#### Breaking
+- Updated the minimum SDK version from 21 (Lollipop) to 25 (Nougat).
+
+##### Added
+- Adds `BrazeNotificationPayload.isSilentPush` to check if a notification payload is a silent push.
+- Adds `BrazeUser.setLineId(String)` to set the [LINE](https://www.braze.com/docs/user_guide/message_building_by_channel/line) ID of a user.
+  - Adds `brazeBridge.getUser().setLineId(String)` to the javascript interface for HTML In-App Messages and Banners.
+- Added the ability to forcibly pad In-App Messages with the height of the status bar.
+    - Configured via `braze.xml` through `<bool name="com_braze_in_app_message_add_status_bar_padding">true</bool>`.
+    - Can also be configured via runtime configuration through `BrazeConfig.setShouldAddStatusBarPaddingToInAppMessages()`.
+    - Defaults to false. You should not change this value unless you're seeing issues with In-App Messages close button being obscured by the status bar when using a cross-platform framework like React Native or Flutter.
+- Added a callback in `BannerJavascriptInterface` for dynamically setting the height of a Banner.
+
+#### Fixed
+- Fixed an issue where automatic location collection being disabled would also disable Geofences.
+
 ## 33.1.0
 
 [Release Date](https://github.com/braze-inc/braze-android-sdk/releases/tag/v33.1.0)

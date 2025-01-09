@@ -20,8 +20,8 @@
   <string translatable="false" name="com_braze_firebase_cloud_messaging_sender_id">901477453852</string>
   <bool name="com_braze_push_adm_messaging_registration_enabled">true</bool>
 
-  <!-- This integer sets the default accent color for push notifications on Android Lollipop and higher. If not specified,
-    the default background color is gray (the same gray Lollipop uses for system notifications). This value can
+  <!-- This integer sets the default accent color for push notifications. If not specified, the default
+    background color is gray (the same gray Android uses for system notifications). This value can
     be overridden at runtime by a push notification that sets a custom accent color. -->
   <integer name="com_braze_default_notification_accent_color">0xFF000000</integer>
 

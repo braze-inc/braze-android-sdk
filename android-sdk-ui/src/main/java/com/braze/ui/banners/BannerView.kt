@@ -30,6 +30,19 @@ class BannerView : WebView, IBannerView {
             initBanner(value)
         }
 
+    /**
+     * A callback that is called when the height of the banner changes.
+     * It is used where a parent view needs to know the new height of the banner.
+     * The height is in dp. It may or may not need to be converted to pixels before using it
+     * depending on the subsequent interface that will use the height.
+     */
+    var heightCallback: ((Double) -> Unit)? = null
+
+    // Make this a constant so the heightCallback can be set at anytime, not just during initialization.
+    private val internalHeightCallback: (Double) -> Unit = { height ->
+        heightCallback?.invoke(height)
+    }
+
     // This constructor is specifically for the Jetpack integration so the placement ID can be passed in immediately.
     constructor(context: Context, placementId: String?) : super(context) {
         _placementId = placementId
@@ -81,7 +94,7 @@ class BannerView : WebView, IBannerView {
         webViewClient = BannerWebViewClient(context, defaultBannerWebViewClientListener)
 
         // Add the BannerJavascriptInterface to the WebView
-        addJavascriptInterface(BannerJavascriptInterface(context, placementId), "brazeInternalBridge")
+        addJavascriptInterface(BannerJavascriptInterface(context, placementId, internalHeightCallback), "brazeInternalBridge")
     }
 
     override fun initBanner(placementId: String?) {
@@ -131,10 +144,12 @@ class BannerView : WebView, IBannerView {
             Handler(Looper.getMainLooper()).post {
                 loadData("", "text/html", "base64")
                 invalidate()
+                internalHeightCallback(0.0)
             }
         } else {
             loadData("", "text/html", "base64")
             invalidate()
+            internalHeightCallback(0.0)
         }
     }
 }

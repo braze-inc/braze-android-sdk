@@ -1,10 +1,13 @@
 package com.braze.push
 
+import android.Manifest
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.os.Bundle
 import androidx.annotation.VisibleForTesting
+import androidx.core.app.ActivityCompat
 import androidx.core.app.NotificationManagerCompat
 import com.braze.Braze
 import com.braze.BrazeInternal
@@ -307,11 +310,15 @@ open class BrazePushReceiver : BroadcastReceiver() {
                 brazelog {
                     "Value of notificationManager.areNotificationsEnabled() = ${notificationManager.areNotificationsEnabled()}"
                 }
-                notificationManager.notify(
-                    Constants.BRAZE_PUSH_NOTIFICATION_TAG,
-                    notificationId,
-                    notification
-                )
+                if (ActivityCompat.checkSelfPermission(context, Manifest.permission.POST_NOTIFICATIONS) == PackageManager.PERMISSION_GRANTED) {
+                    notificationManager.notify(
+                        Constants.BRAZE_PUSH_NOTIFICATION_TAG,
+                        notificationId,
+                        notification
+                    )
+                } else {
+                    brazelog { "POST_NOTIFICATIONS permission has not been granted. Not posting notification." }
+                }
                 sendPushMessageReceivedBroadcast(context, notificationExtras, payload)
                 wakeScreenIfAppropriate(context, appConfigurationProvider, notificationExtras)
 

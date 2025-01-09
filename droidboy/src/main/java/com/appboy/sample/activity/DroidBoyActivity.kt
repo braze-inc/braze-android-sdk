@@ -180,8 +180,6 @@ class DroidBoyActivity : AppCompatActivity(), NoticeDialogListener {
     }
 
     private fun checkPermissions() {
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) return
-
         val permissionsToRequest = mutableListOf(Manifest.permission.INTERNET)
         if (!didRequestLocationPermission) {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {

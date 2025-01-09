@@ -655,11 +655,9 @@ object BrazeNotificationUtils {
     }
 
     /**
-     * Set accent color for devices on Lollipop and above. We use the push-specific accent color if it exists in the notificationExtras,
+     * Set accent color for devices. We use the push-specific accent color if it exists in the notificationExtras,
      * otherwise we search for a default set in braze.xml or don't set the color at all (and the system notification gray
      * default is used).
-     *
-     * Supported Lollipop+.
      */
     @JvmStatic
     fun setAccentColorIfPresentAndSupported(notificationBuilder: NotificationCompat.Builder, payload: BrazeNotificationPayload) {
@@ -676,11 +674,9 @@ object BrazeNotificationUtils {
     }
 
     /**
-     * Set category for devices on Lollipop and above. Category is one of the predefined notification
+     * Set category for devices. Category is one of the predefined notification
      * categories (see the CATEGORY_* constants in Notification)
      * that best describes a Notification. May be used by the system for ranking and filtering.
-     *
-     * Supported Lollipop+.
      */
     @JvmStatic
     fun setCategoryIfPresentAndSupported(
@@ -697,7 +693,7 @@ object BrazeNotificationUtils {
     }
 
     /**
-     * Set visibility for devices on Lollipop and above.
+     * Set visibility for devices.
      *
      * Sphere of visibility of this notification, which affects how and when the SystemUI reveals the notification's presence and
      * contents in untrusted situations (namely, on the secure lockscreen). The default level, VISIBILITY_PRIVATE, behaves exactly
@@ -706,8 +702,6 @@ object BrazeNotificationUtils {
      * by VISIBILITY_PUBLIC; such a notification can be read even in an "insecure" context (that is, above a secure lockscreen).
      * To modify the public version of this notification—for example, to redact some portions—see setPublicVersion(Notification).
      * Finally, a notification can be made VISIBILITY_SECRET, which will suppress its icon and ticker until the user has bypassed the lockscreen.
-     *
-     * Supported Lollipop+.
      */
     @JvmStatic
     fun setVisibilityIfPresentAndSupported(notificationBuilder: NotificationCompat.Builder, payload: BrazeNotificationPayload) {
@@ -724,17 +718,11 @@ object BrazeNotificationUtils {
 
     /**
      * Set the public version of the notification for notifications with private visibility.
-     *
-     * Supported Lollipop+.
      */
     @JvmStatic
     fun setPublicVersionIfPresentAndSupported(notificationBuilder: NotificationCompat.Builder, payload: BrazeNotificationPayload) {
         val context = payload.context
         val appConfigurationProvider = payload.configurationProvider
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
-            brazelog { "Cannot set public version before Lollipop" }
-            return
-        }
         if (context == null
             || payload.publicNotificationExtras == null
             || appConfigurationProvider == null
@@ -764,7 +752,6 @@ object BrazeNotificationUtils {
     /**
      * Checks whether the given integer value is a valid Android notification visibility constant.
      */
-    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     @JvmStatic
     fun isValidNotificationVisibility(visibility: Int): Boolean =
         visibility == Notification.VISIBILITY_SECRET || visibility == Notification.VISIBILITY_PRIVATE || visibility == Notification.VISIBILITY_PUBLIC
@@ -851,12 +838,13 @@ object BrazeNotificationUtils {
      * Returns true if the bundle is from a push sent by
      * Braze for uninstall tracking. Uninstall tracking push can be ignored.
      *
+     * Please use BrazeNotificationPayload().isUninstallTrackingPush instead
+     *
      * @param notificationExtras A notificationExtras bundle that is passed
      * with the push received intent when a notification message is
      * received, and that Braze passes in the intent to registered receivers.
      */
     @JvmStatic
-    @Deprecated("Please use BrazeNotificationPayload().isUninstallTracking instead")
     fun isUninstallTrackingPush(notificationExtras: Bundle): Boolean {
         try {
             // The ADM case where extras are flattened

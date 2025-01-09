@@ -37,7 +37,6 @@ import com.braze.support.BrazeLogger.brazelog
 import com.braze.support.PackageUtils
 import com.braze.support.hasPermission
 import com.braze.ui.inappmessage.BrazeInAppMessageManager
-import com.google.firebase.crashlytics.FirebaseCrashlytics
 import java.security.KeyFactory
 import java.security.interfaces.RSAPrivateKey
 import java.security.spec.PKCS8EncodedKeySpec
@@ -74,9 +73,6 @@ class DroidboyApplication : Application() {
             }
         } else {
             setupNotificationChannels()
-        }
-        if (BuildConfig.SHOULD_USE_CRASHLYTICS) {
-            setupFirebaseCrashlytics()
         }
         BrazeLogger.logLevel = applicationContext.getSharedPreferences(getString(R.string.log_level_dialog_title), MODE_PRIVATE)
             .getInt(getString(R.string.current_log_level), Log.VERBOSE)
@@ -145,7 +141,6 @@ class DroidboyApplication : Application() {
         val editor = sharedPreferences.edit()
         editor.putString(MainFragment.USER_ID_KEY, userId)
         editor.apply()
-        FirebaseCrashlytics.getInstance().setUserId(userId)
     }
 
     private fun setNewSdkAuthToken(userId: String) {
@@ -276,9 +271,7 @@ class DroidboyApplication : Application() {
         // Note that some detections require a specific sdk version or higher to enable.
         vmPolicyBuilder.detectLeakedRegistrationObjects()
         vmPolicyBuilder.detectFileUriExposure()
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            vmPolicyBuilder.detectCleartextNetwork()
-        }
+        vmPolicyBuilder.detectCleartextNetwork()
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             vmPolicyBuilder.detectContentUriWithoutPermission()
             vmPolicyBuilder.detectUntaggedSockets()
@@ -318,19 +311,6 @@ class DroidboyApplication : Application() {
         val isOverridingSdkAuth = sharedPreferences.getBoolean(ENABLE_SDK_AUTH_PREF_KEY, true)
         config.setIsSdkAuthenticationEnabled(isOverridingSdkAuth)
         return isOverridingSdkAuth
-    }
-
-    private fun setupFirebaseCrashlytics() {
-        try {
-            val firebaseCrashlytics = FirebaseCrashlytics.getInstance()
-            // Only enable crash logging for the play store deployed released builds
-            firebaseCrashlytics.setCrashlyticsCollectionEnabled(BuildConfig.IS_DROIDBOY_RELEASE_BUILD)
-            firebaseCrashlytics.setCustomKey("build_time", BuildConfig.BUILD_TIME)
-            firebaseCrashlytics.setCustomKey("version_code", BuildConfig.VERSION_CODE)
-            firebaseCrashlytics.setCustomKey("version_name", BuildConfig.VERSION_NAME)
-        } catch (e: Exception) {
-            brazelog(E, e) { "Failed to setup Firebase Crashlytics" }
-        }
     }
 
     /**

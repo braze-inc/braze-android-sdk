@@ -19,6 +19,7 @@
   <string name="user_dialog_email_address">Email Address</string>
   <string name="user_dialog_gender">Gender:</string>
   <string name="user_dialog_language">Language</string>
+  <string name="user_dialog_phone_number">Phone Number</string>
   <string name="user_dialog_flush">Flush on close</string>
   <string name="user_dialog_populate">Populate</string>
   <string name="user_dialog_clear">Clear All</string>

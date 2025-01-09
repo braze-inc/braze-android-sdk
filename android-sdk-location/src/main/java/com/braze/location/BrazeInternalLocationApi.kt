@@ -30,18 +30,9 @@ import java.util.EnumSet
  */
 class BrazeInternalLocationApi : IBrazeLocationApi {
     private lateinit var context: Context
-    private lateinit var locationManager: LocationManager
+    internal lateinit var locationManager: LocationManager
     private lateinit var appConfigurationProvider: BrazeConfigurationProvider
     private lateinit var allowedLocationProviders: EnumSet<LocationProviderName>
-
-    private val isLocationCollectionEnabled
-        get() = if (appConfigurationProvider.isLocationCollectionEnabled) {
-            brazelog(I) { "Location collection enabled via sdk configuration." }
-            true
-        } else {
-            brazelog(I) { "Location collection disabled via sdk configuration." }
-            false
-        }
 
     /**
      * Initialize the object with some external variables. This function should be called immediately
@@ -59,14 +50,12 @@ class BrazeInternalLocationApi : IBrazeLocationApi {
     }
 
     /**
-     * Requests a location fix for the session on the device.
+     * Requests a location fix for the session on the device. Note that the return value
+     * of this method is used to start the Geofences process so be wary of early returning based
+     * on configuration that Geofences does not use.
      */
     @Suppress("MissingPermission", "ReturnCount")
-    override fun requestSingleLocationUpdate(manualLocationUpdateCallback: (location: IBrazeLocation) -> Unit): Boolean {
-        if (!isLocationCollectionEnabled) {
-            brazelog(I) { "Did not request single location update. Location collection is disabled." }
-            return false
-        }
+    override fun requestSingleLocationUpdate(locationUpdateCallback: (location: IBrazeLocation) -> Unit): Boolean {
         val hasFinePermission = context.hasPermission(Manifest.permission.ACCESS_FINE_LOCATION)
         val hasCoarsePermission = context.hasPermission(Manifest.permission.ACCESS_COARSE_LOCATION)
         if (!(hasCoarsePermission || hasFinePermission)) {
@@ -81,7 +70,7 @@ class BrazeInternalLocationApi : IBrazeLocationApi {
                 getLastKnownGpsLocationIfValid(locationManager)
             if (lastKnownGpsLocationIfValid != null) {
                 brazelog { "Setting user location to last known GPS location: $lastKnownGpsLocationIfValid" }
-                manualLocationUpdateCallback.invoke(BrazeLocation(lastKnownGpsLocationIfValid))
+                locationUpdateCallback.invoke(BrazeLocation(lastKnownGpsLocationIfValid))
                 return true
             }
         }
@@ -105,7 +94,7 @@ class BrazeInternalLocationApi : IBrazeLocationApi {
                 ) { location: Location? ->
                     brazelog { "Location manager getCurrentLocation got location: $location" }
                     if (location != null) {
-                        manualLocationUpdateCallback.invoke(BrazeLocation(location))
+                        locationUpdateCallback.invoke(BrazeLocation(location))
                     }
                 }
             } else {

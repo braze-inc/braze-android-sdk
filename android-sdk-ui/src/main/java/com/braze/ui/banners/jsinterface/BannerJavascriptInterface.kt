@@ -7,7 +7,18 @@ import com.braze.ui.JavascriptInterfaceBase
 import com.braze.support.BrazeLogger.Priority.I
 import com.braze.support.BrazeLogger.brazelog
 
-class BannerJavascriptInterface(context: Context, val placementId: String) : JavascriptInterfaceBase(context) {
+/**
+ * BannerJavascriptInterface.
+ *
+ * @param context
+ * @param placementId The placement ID of the banner.
+ * @param setHeightCallback a callback to set the height of the banner. You must convert to absolute pixels before calling this method.
+ */
+class BannerJavascriptInterface(
+    context: Context,
+    val placementId: String,
+    val setHeightCallback: (Double) -> Unit = {}
+) : JavascriptInterfaceBase(context) {
 
     @get:JavascriptInterface
     val user: BannerUserJavascriptInterface = BannerUserJavascriptInterface(context)
@@ -22,5 +33,18 @@ class BannerJavascriptInterface(context: Context, val placementId: String) : Jav
     override fun logClick() {
         brazelog(I) { "Banner logClick() called. Logging banner click without button ID." }
         Braze.getInstance(context).logBannerClick(placementId, null)
+    }
+
+    @JavascriptInterface
+    fun setBannerHeight(height: Double) {
+        // Height must be a finite number and not NaN
+        if (height.isInfinite() || height.isNaN() || height < 0) {
+            brazelog {
+                "Banner setBannerHeight($height) called with invalid height. Height must be a finite number, not NaN, and greater or equal to 0."
+            }
+            return
+        }
+        brazelog(I) { "Banner setBannerHeight($height) called." }
+        setHeightCallback(height)
     }
 }

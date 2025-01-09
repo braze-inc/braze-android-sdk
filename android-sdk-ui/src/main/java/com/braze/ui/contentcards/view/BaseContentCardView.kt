@@ -2,7 +2,6 @@ package com.braze.ui.contentcards.view
 
 import android.annotation.TargetApi
 import android.content.Context
-import android.os.Build
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
@@ -72,9 +71,7 @@ abstract class BaseContentCardView<T : Card>(context: Context) : BaseCardView<T>
     protected fun setViewBackground(view: View) {
         @Suppress("deprecation")
         view.background = resources.getDrawable(R.drawable.com_braze_content_card_background)
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            @Suppress("deprecation")
-            view.foreground = resources.getDrawable(R.drawable.com_braze_content_card_scrim)
-        }
+        @Suppress("deprecation")
+        view.foreground = resources.getDrawable(R.drawable.com_braze_content_card_scrim)
     }
 }

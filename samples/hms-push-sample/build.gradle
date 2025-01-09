@@ -7,7 +7,7 @@ android {
   defaultConfig {
     applicationId "com.braze.hms_sample"
     compileSdk rootProject.ext.compileSdkVersion
-    minSdkVersion 21 //rootProject.ext.minSdkVersion
+    minSdkVersion rootProject.ext.minSdkVersion
     // Huawei has not provided an SDK ready for
     // API 31 so this target version is on 30
     //noinspection ExpiredTargetSdkVersion

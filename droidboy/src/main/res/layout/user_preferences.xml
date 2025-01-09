@@ -175,6 +175,24 @@
                 android:layout_span="3"
                 style="@style/BaseWidget.UserSingleLineText"/>
         </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <Button
+                android:id="@+id/phone_number_button"
+                style="@style/BaseWidget.PopulateButton"
+                android:text="@string/user_dialog_phone_number"/>
+
+            <EditText
+                android:id="@+id/phone_number"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_span="3"
+                android:inputType="phone"
+                style="@style/BaseWidget.UserSingleLineText"/>
+        </TableRow>
       <include layout="@layout/dialog_footer_navigation" />
     </TableLayout>
 </ScrollView>

@@ -159,3 +159,13 @@ fun getMaxSafeBottomInset(windowInsets: WindowInsetsCompat): Int {
  */
 fun isDeviceNotInTouchMode(view: View) =
     !view.isInTouchMode
+
+fun getStatusBarHeight(context: Context): Int {
+    // We can't access this directly with android.R.dimen.status_bar_height, so we must get it this way.
+    val resourceId = context.resources.getIdentifier("status_bar_height", "dimen", "android")
+    return if (resourceId > 0) {
+        context.resources.getDimensionPixelSize(resourceId)
+    } else {
+        0
+    }
+}

@@ -6,7 +6,7 @@ import androidx.compose.ui.viewinterop.AndroidView
 import com.braze.ui.banners.BannerView
 
 @Composable
-fun Banner(placementId: String? = null) {
+fun Banner(placementId: String? = null, heightCallback: ((Double) -> Unit)? = null) {
     // Adding a BannerView inside AndroidView
     // with layout as full screen
     AndroidView(factory = {
@@ -15,6 +15,7 @@ fun Banner(placementId: String? = null) {
                 ViewGroup.LayoutParams.MATCH_PARENT,
                 ViewGroup.LayoutParams.WRAP_CONTENT
             )
+            this.heightCallback = heightCallback
         }
     }, update = { it.placementId = placementId })
 }

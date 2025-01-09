@@ -139,6 +139,13 @@ open class UserJavascriptInterfaceBase(private val context: Context) {
     }
 
     @JavascriptInterface
+    fun setLineId(lineId: String?) {
+        Braze.getInstance(context).runOnUser {
+            it.setLineId(lineId)
+        }
+    }
+
+    @JavascriptInterface
     fun setCustomUserAttributeJSON(key: String, jsonStringValue: String, merge: Boolean) {
         Braze.getInstance(context).runOnUser {
             setCustomAttribute(it, key, jsonStringValue, merge)

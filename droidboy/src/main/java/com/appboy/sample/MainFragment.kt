@@ -25,7 +25,6 @@ import com.braze.support.BrazeLogger.brazelog
 import com.braze.support.convertStringJsonArrayToList
 import com.braze.ui.banners.BannerView
 import com.google.android.gms.ads.identifier.AdvertisingIdClient
-import com.google.firebase.crashlytics.FirebaseCrashlytics
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import org.json.JSONArray
@@ -81,9 +80,6 @@ class MainFragment : Fragment() {
                 val editor = sharedPreferences.edit()
                 editor.putString(USER_ID_KEY, userId)
                 editor.apply()
-                if (BuildConfig.SHOULD_USE_CRASHLYTICS) {
-                    FirebaseCrashlytics.getInstance().setUserId(userId)
-                }
             } else {
                 Toast.makeText(requireContext(), "Please enter a userId.", Toast.LENGTH_SHORT)
                     .show()
@@ -150,6 +146,7 @@ class MainFragment : Fragment() {
                     value.setLanguage("cs")
                     value.setHomeCity("New York")
                     value.setPhoneNumber("1234567890")
+                    value.setLineId("U8189cf6745fc0d808977bdb0b9f22995")
                     value.setDateOfBirth(1984, Month.AUGUST, 18)
                     value.setPushNotificationSubscriptionType(NotificationSubscriptionType.OPTED_IN)
                     value.setEmailNotificationSubscriptionType(NotificationSubscriptionType.OPTED_IN)
@@ -209,6 +206,7 @@ class MainFragment : Fragment() {
                     value.setLanguage(null)
                     value.setHomeCity(null)
                     value.setPhoneNumber(null)
+                    value.setLineId(null)
                     value.setDateOfBirth(1970, Month.JANUARY, 1)
                     value.setPushNotificationSubscriptionType(NotificationSubscriptionType.UNSUBSCRIBED)
                     value.setEmailNotificationSubscriptionType(NotificationSubscriptionType.UNSUBSCRIBED)

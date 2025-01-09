@@ -9,6 +9,7 @@ import android.view.animation.Animation
 import android.widget.FrameLayout
 import android.window.OnBackInvokedCallback
 import android.window.OnBackInvokedDispatcher
+import androidx.core.graphics.Insets
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.braze.configuration.BrazeConfigurationProvider
@@ -30,6 +31,7 @@ import com.braze.ui.inappmessage.utils.InAppMessageViewUtils
 import com.braze.ui.inappmessage.views.IInAppMessageImmersiveView
 import com.braze.ui.inappmessage.views.IInAppMessageView
 import com.braze.ui.inappmessage.views.InAppMessageHtmlBaseView
+import com.braze.ui.support.getStatusBarHeight
 import com.braze.ui.support.isDeviceNotInTouchMode
 import com.braze.ui.support.removeViewFromParent
 import com.braze.ui.support.setFocusableInTouchModeAndRequestFocus
@@ -239,20 +241,33 @@ open class DefaultInAppMessageViewWrapper @JvmOverloads constructor(
         brazelog { "Adding In-app message view to parent view group." }
         parentViewGroup.addView(inAppMessageView, getLayoutParams(inAppMessage))
         if (inAppMessageView is IInAppMessageView) {
-            ViewCompat.requestApplyInsets(parentViewGroup)
-            ViewCompat.setOnApplyWindowInsetsListener(parentViewGroup) { _: View?, insets: WindowInsetsCompat? ->
-                if (insets == null) {
-                    // No margin fixing can be done with a null window inset
-                    return@setOnApplyWindowInsetsListener WindowInsetsCompat(insets)
+            if (configurationProvider.shouldAddStatusBarPaddingToInAppMessages) {
+                val statusBarHeight = getStatusBarHeight(inAppMessageView.context)
+                val newInsets = WindowInsetsCompat.Builder().setInsets(
+                    WindowInsetsCompat.Type.systemBars(),
+                    Insets.of(0, statusBarHeight, 0, 0)
+                ).build()
+                brazelog { "Adding status bar height of $statusBarHeight padding to in-app message view." }
+                inAppMessageView.applyWindowInsets(newInsets)
+            } else {
+                ViewCompat.setOnApplyWindowInsetsListener(parentViewGroup) { _: View?, insets: WindowInsetsCompat? ->
+                    brazelog { "In-app message view received window insets." }
+                    if (insets == null) {
+                        // No margin fixing can be done with a null window inset
+                        brazelog { "Window insets were null, so not applying window insets to in-app message view." }
+                        return@setOnApplyWindowInsetsListener WindowInsetsCompat(insets)
+                    }
+                    val castInAppMessageView = inAppMessageView as IInAppMessageView
+                    if (!castInAppMessageView.hasAppliedWindowInsets) {
+                        brazelog(V) { "Calling applyWindowInsets on in-app message view." }
+                        castInAppMessageView.applyWindowInsets(insets)
+                    } else {
+                        brazelog { "Not reapplying window insets to in-app message view." }
+                    }
+                    insets
                 }
-                val castInAppMessageView = inAppMessageView as IInAppMessageView
-                if (!castInAppMessageView.hasAppliedWindowInsets) {
-                    brazelog(V) { "Calling applyWindowInsets on in-app message view." }
-                    castInAppMessageView.applyWindowInsets(insets)
-                } else {
-                    brazelog { "Not reapplying window insets to in-app message view." }
-                }
-                insets
+                brazelog { "Requesting to apply insets." }
+                ViewCompat.requestApplyInsets(parentViewGroup)
             }
         }
         if (inAppMessage.animateIn) {
