@@ -2,7 +2,7 @@
 <html class="no-js">
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1" charset="UTF-8">
-    <title>isPreventInAppMessageDisplayForDifferentUsersEnabled</title>
+    <title>subscribeToBannersErrors</title>
     <link href="../../../images/logo-icon.svg" rel="icon" type="image/svg">
     <script>var pathToRoot = "../../../";</script>
     <script>document.documentElement.classList.replace("no-js","js");</script>
@@ -45,7 +45,7 @@
                     </a>
             </div>
             <div class="library-version">
-34.0.0            </div>
+35.0.0            </div>
         </div>
         <div class="filter-section" id="filter-section">
                 <button class="platform-tag platform-selector jvm-like" data-active="" data-filter=":android-sdk-ui:dokkaHtml/release">androidJvm</button>
@@ -61,12 +61,12 @@
                 <div class="sidebar--inner" id="sideMenu"></div>
             </div>
             <div id="main">
-<div class="main-content" data-page-type="member" id="content" pageIds="braze-android-sdk::com.braze.configuration/BrazeConfigurationProvider/isPreventInAppMessageDisplayForDifferentUsersEnabled/#/PointingToDeclaration//-1725759721">
-  <div class="breadcrumbs"><a href="../../../index.html">braze-android-sdk</a><span class="delimiter">/</span><a href="../index.html">com.braze.configuration</a><span class="delimiter">/</span><a href="index.html">BrazeConfigurationProvider</a><span class="delimiter">/</span><span class="current">isPreventInAppMessageDisplayForDifferentUsersEnabled</span></div>
+<div class="main-content" data-page-type="member" id="content" pageIds="braze-android-sdk::com.braze/IBraze/subscribeToBannersErrors/#com.braze.events.IEventSubscriber[com.braze.events.internal.BannersRequestFailureEvent]/PointingToDeclaration//-1725759721">
+  <div class="breadcrumbs"><a href="../../../index.html">braze-android-sdk</a><span class="delimiter">/</span><a href="../index.html">com.braze</a><span class="delimiter">/</span><a href="index.html">IBraze</a><span class="delimiter">/</span><span class="current">subscribeToBannersErrors</span></div>
   <div class="cover ">
-    <h1 class="cover"><span>is</span><wbr></wbr><span>Prevent</span><wbr></wbr><span>In</span><wbr></wbr><span>App</span><wbr></wbr><span>Message</span><wbr></wbr><span>Display</span><wbr></wbr><span>For</span><wbr></wbr><span>Different</span><wbr></wbr><span>Users</span><wbr></wbr><span><span>Enabled</span></span></h1>
+    <h1 class="cover"><span>subscribe</span><wbr></wbr><span>To</span><wbr></wbr><span>Banners</span><wbr></wbr><span><span>Errors</span></span></h1>
   </div>
-  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><span class="token keyword">val </span><a href="is-prevent-in-app-message-display-for-different-users-enabled.html">isPreventInAppMessageDisplayForDifferentUsersEnabled</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></div></div></div>
+  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><span class="token keyword">abstract </span><span class="token keyword">fun </span><a href="subscribe-to-banners-errors.html"><span class="token function">subscribeToBannersErrors</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">subscriber<span class="token operator">: </span><a href="../../com.braze.events/-i-event-subscriber/index.html">IEventSubscriber</a><span class="token operator">&lt;</span><span data-unresolved-link="com.braze.events.internal/BannersRequestFailureEvent///PointingToDeclaration/">BannersRequestFailureEvent</span><span class="token operator">&gt;</span></span></span><span class="token punctuation">)</span></div><p class="paragraph">Subscribes to Banners error events. The subscriber callback will be called when Banners fail to update. The subscriber will be called with a <span data-unresolved-link="com.braze.events.internal/BannersRequestFailureEvent///PointingToDeclaration/">BannersRequestFailureEvent</span>.</p><p class="paragraph">Subscriptions should be cleaned up manually by calling <a href="remove-single-subscription.html">IBraze.removeSingleSubscription</a>.</p><p class="paragraph">All events are triggered from background threads and isolate any encountered exceptions. If you need to do work on the UI thread in response to an event, you will need to coordinate that in the <a href="../../com.braze.events/-i-event-subscriber/index.html">IEventSubscriber</a> trigger method.</p><h4 class="">Parameters</h4><div class="table"><div class="table-row" data-filterable-current=":android-sdk-ui:dokkaHtml/release" data-filterable-set=":android-sdk-ui:dokkaHtml/release"><div class="main-subrow keyValue "><div class=""><span class="inline-flex"><div><u><span><span>subscriber</span></span></u></div></span></div><div><div class="title"><p class="paragraph">A callback that will be executed when Banners errors occur.</p></div></div></div></div></div></div></div>
 </div>
       <div class="footer">
         <span class="go-to-top-icon"><a href="#content" id="go-to-top-link"></a></span><span>© 2025 Copyright</span><span
