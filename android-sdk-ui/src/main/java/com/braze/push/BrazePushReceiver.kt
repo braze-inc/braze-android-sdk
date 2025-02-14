@@ -266,6 +266,10 @@ open class BrazePushReceiver : BroadcastReceiver() {
             // Parse the notification for any associated ContentCard
             BrazeNotificationUtils.handleContentCardsSerializedCardIfPresent(payload)
 
+            requestGeofenceRefreshIfAppropriate(payload)
+            refreshFeatureFlagsIfAppropriate(payload)
+            refreshBannersIfAppropriate(payload)
+
             if (payload.shouldFetchTestTriggers
                 && appConfigurationProvider.isInAppMessageTestPushEagerDisplayEnabled
                 && BrazeInAppMessageManager.getInstance().activity != null
@@ -338,9 +342,6 @@ open class BrazePushReceiver : BroadcastReceiver() {
             } else {
                 brazelog { "Received silent push notification" }
                 sendPushMessageReceivedBroadcast(context, notificationExtras, payload)
-                requestGeofenceRefreshIfAppropriate(payload)
-                refreshFeatureFlagsIfAppropriate(payload)
-                refreshBannersIfAppropriate(payload)
                 return false
             }
         }

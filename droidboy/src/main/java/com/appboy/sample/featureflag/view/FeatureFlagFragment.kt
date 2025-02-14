@@ -75,6 +75,11 @@ class FeatureFlagFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
         BrazeCoroutineScope.launchDelayed(AUTO_HIDE_REFRESH_INDICATOR_DELAY_MS) { swipeRefreshLayout.isRefreshing = false }
     }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        Braze.getInstance(requireContext()).removeSingleSubscription(updateListener, FeatureFlagsUpdatedEvent::class.java)
+    }
+
     companion object {
         private const val AUTO_HIDE_REFRESH_INDICATOR_DELAY_MS = 1500L
     }

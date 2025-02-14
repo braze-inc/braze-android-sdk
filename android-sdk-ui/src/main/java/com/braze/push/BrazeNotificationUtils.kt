@@ -262,7 +262,7 @@ object BrazeNotificationUtils {
             requestGeofenceRefresh(context, true)
             true
         } else {
-            brazelog { "Geofence sync key not included in push payload or false. Not syncing geofences." }
+            brazelog(V) { "Geofence sync key not included in push payload or false. Not syncing geofences." }
             false
         }
     }

@@ -513,7 +513,7 @@ open class BrazeInAppMessageManager : InAppMessageManagerBase() {
                     "configurationProvider is null. The in-app message will not be displayed and will not be" +
                         "put back on the stack."
                 )
-            if (configProvider.isPreventInAppMessageDisplayForDifferentUsersEnabled && !isInAppMessageForTheSameUser(inAppMessage, currentUserId)) {
+            if (!isInAppMessageForTheSameUser(inAppMessage, currentUserId)) {
                 throw Exception(
                     "The last identifier user $currentUserId does not match the in-app message's user. " +
                         "The in-app message will not be displayed and will not be put back on the stack."
@@ -666,10 +666,6 @@ open class BrazeInAppMessageManager : InAppMessageManagerBase() {
         return IEventSubscriber { event: BrazeUserChangeEvent ->
             brazelog(V) { "InAppMessage manager handling new current user id: '$event'" }
             val configurationProvider = BrazeInternal.getConfigurationProvider(context)
-            if (!configurationProvider.isPreventInAppMessageDisplayForDifferentUsersEnabled) {
-                brazelog(V) { "Not cleansing in-app messages on user id change" }
-                return@IEventSubscriber
-            }
             val currentUserId = event.currentUserId
             this.currentUserId = currentUserId
             brazelog { "Removing in-app messages not from user $currentUserId" }
@@ -731,6 +727,28 @@ open class BrazeInAppMessageManager : InAppMessageManagerBase() {
         return inAppMessageUserId == null || inAppMessageUserId == currentUserId
     }
 
+    internal fun pauseWebviewIfNecessary() {
+        brazelog { "Pausing InAppMessage WebView" }
+        val inAppMessageViewWrapper = inAppMessageViewWrapper
+        if (inAppMessageViewWrapper != null) {
+            val inAppMessageView = inAppMessageViewWrapper.inAppMessageView
+            if (inAppMessageView is InAppMessageHtmlBaseView) {
+                inAppMessageView.messageWebView?.onPause()
+            }
+        }
+    }
+
+    internal fun resumeWebviewIfNecessary() {
+        brazelog { "Resuming InAppMessage WebView" }
+        val inAppMessageViewWrapper = inAppMessageViewWrapper
+        if (inAppMessageViewWrapper != null) {
+            val inAppMessageView = inAppMessageViewWrapper.inAppMessageView
+            if (inAppMessageView is InAppMessageHtmlBaseView) {
+                inAppMessageView.messageWebView?.onResume()
+            }
+        }
+    }
+
     companion object {
         private val instanceLock = ReentrantLock()
 
@@ -748,6 +766,10 @@ open class BrazeInAppMessageManager : InAppMessageManagerBase() {
                 }
             }
             return instance as BrazeInAppMessageManager
+        }
+
+        internal fun setTestingInstance(manager: BrazeInAppMessageManager) {
+            instance = manager
         }
 
         private fun IInAppMessage.containsPushPermissionPrompt(): Boolean {

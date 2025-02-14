@@ -7,12 +7,10 @@
 # For more details, see
 #   http://developer.android.com/guide/developing/tools/proguard.html
 
-# Keeping classes in com.appboy.ui and com.appboy.services because not keeping
-# them can cause build failures for users using Google Play Services with
-# Braze.
--keepnames class com.appboy.ui.** { *; }
--keep class com.appboy.services.** { *; }
+# Keeping classes in com.braze.ui because not keeping them can cause
+# build failures for users using Google Play Services with Braze.
+-keepnames class com.braze.ui.** { *; }
 
 -dontwarn com.amazon.device.messaging.**
 -dontwarn bo.app.**
--dontwarn com.appboy.ui.**
+-dontwarn com.braze.ui.**

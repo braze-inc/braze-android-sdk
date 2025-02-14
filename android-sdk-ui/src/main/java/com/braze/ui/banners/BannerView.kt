@@ -104,8 +104,9 @@ class BannerView : WebView, IBannerView {
             setWebviewToEmpty()
             if (placementId != null) {
                 // If we don't have the banner data yet, still register it so that on sync of the banner, the
-                // [BannerManager] will be able to update the view.
-                BrazeInternal.addBannerViewMonitor(placementId, this, isEmpty = true)
+                // [BannerManager] will be able to update the view. But we do want to skip monitoring for the impression
+                // since there's no banner campaign to report.
+                BrazeInternal.addBannerViewMonitor(placementId, this, skipImpressionMonitoring = true)
             }
             return
         }
@@ -114,14 +115,18 @@ class BannerView : WebView, IBannerView {
         if (banner.html != loadedHtml || banner.userId != currentUserId) {
             loadedHtml = banner.html
             currentUserId = banner.userId
-            if (Looper.myLooper() != Looper.getMainLooper()) {
-                Handler(Looper.getMainLooper()).post {
+            if (banner.isControl) {
+                setWebviewToEmpty()
+            } else {
+                if (Looper.myLooper() != Looper.getMainLooper()) {
+                    Handler(Looper.getMainLooper()).post {
+                        loadHtmlData(placementId)
+                    }
+                } else {
                     loadHtmlData(placementId)
                 }
-            } else {
-                loadHtmlData(placementId)
             }
-            BrazeInternal.addBannerViewMonitor(banner.placementId, this, isEmpty = false)
+            BrazeInternal.addBannerViewMonitor(banner.placementId, this, skipImpressionMonitoring = false)
         }
     }
 

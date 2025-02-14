@@ -6,11 +6,13 @@ import android.app.Application.ActivityLifecycleCallbacks
 import android.content.Context
 import android.os.Bundle
 import androidx.annotation.VisibleForTesting
+import com.braze.configuration.BrazeConfigurationProvider
 import com.braze.push.NotificationTrampolineActivity
 import com.braze.support.BrazeLogger.Priority.E
 import com.braze.support.BrazeLogger.Priority.V
 import com.braze.support.BrazeLogger.brazelog
 import com.braze.ui.inappmessage.BrazeInAppMessageManager
+import java.lang.ref.WeakReference
 
 /**
  * Can be used to automatically handle Braze lifecycle methods.
@@ -39,6 +41,10 @@ open class BrazeActivityLifecycleCallbackListener @JvmOverloads constructor(
 ) : ActivityLifecycleCallbacks {
     private var inAppMessagingRegistrationBlocklist: Set<Class<*>?>
     private var sessionHandlingBlocklist: Set<Class<*>?>
+    private var previousActivityRef: WeakReference<Activity>? = null
+
+    @VisibleForTesting
+    var shouldPersistWebView: Boolean? = null
 
     init {
         this.inAppMessagingRegistrationBlocklist = inAppMessagingRegistrationBlocklist
@@ -105,10 +111,26 @@ open class BrazeActivityLifecycleCallbackListener @JvmOverloads constructor(
         if (registerInAppMessageManager &&
             shouldHandleLifecycleMethodsInActivity(activity, false)
         ) {
-            brazelog(V) {
-                "Automatically calling lifecycle method: registerInAppMessageManager for class: ${activity.javaClass}"
+            val previousActivity = previousActivityRef?.get()
+            if (shouldPersistWebView == true && previousActivity != null && previousActivity != activity) {
+                brazelog(V) {
+                    "Activity is different from previous activity. Unregistering in-app message manager"
+                }
+                BrazeInAppMessageManager.getInstance().unregisterInAppMessageManager(activity)
             }
-            BrazeInAppMessageManager.getInstance().registerInAppMessageManager(activity)
+
+            // If the previous activity is null, this is the first activity, so register.
+            // Or if the activity has changed, we also need to register.
+            if (shouldPersistWebView != true || previousActivity == null || previousActivity != activity) {
+                brazelog(V) {
+                    "Automatically calling lifecycle method: registerInAppMessageManager for class: ${activity.javaClass}"
+                }
+                BrazeInAppMessageManager.getInstance().registerInAppMessageManager(activity)
+            } else {
+                BrazeInAppMessageManager.getInstance().resumeWebviewIfNecessary()
+            }
+
+            previousActivityRef = WeakReference(activity)
         }
     }
 
@@ -116,10 +138,23 @@ open class BrazeActivityLifecycleCallbackListener @JvmOverloads constructor(
         if (registerInAppMessageManager &&
             shouldHandleLifecycleMethodsInActivity(activity, false)
         ) {
-            brazelog(V) {
-                "Automatically calling lifecycle method: unregisterInAppMessageManager for class: ${activity.javaClass}"
+            if (shouldPersistWebView == null) {
+                val configurationProvider = BrazeConfigurationProvider(activity.applicationContext)
+                shouldPersistWebView = configurationProvider.shouldPersistWebViewWhenBackgroundingApp
             }
-            BrazeInAppMessageManager.getInstance().unregisterInAppMessageManager(activity)
+
+            // This should be non-null at this point, we have the check this way to keep the compiler happy
+            if (shouldPersistWebView != true) {
+                brazelog(V) {
+                    "Automatically calling lifecycle method: unregisterInAppMessageManager for class: ${activity.javaClass}"
+                }
+                BrazeInAppMessageManager.getInstance().unregisterInAppMessageManager(activity)
+            } else {
+                BrazeInAppMessageManager.getInstance().pauseWebviewIfNecessary()
+                brazelog(V) {
+                    "Skipping unregisterInAppMessageManager in onActivityPaused because shouldPersistWebView is true"
+                }
+            }
         }
     }
 

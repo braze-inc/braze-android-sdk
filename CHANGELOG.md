@@ -1,3 +1,25 @@
+## 35.0.0
+
+[Release Date](https://github.com/braze-inc/braze-android-sdk/releases/tag/v34.0.1)
+
+#### Breaking
+- HTML In-App Messages will now persist the WebView when the app is put in the background.
+  - To disable this feature, use `<bool name="com_braze_persist_webview_when_backgrounding_app">false</bool>` in your `braze.xml` file.
+- Removes the ability to control whether the SDK prevents showing In-App Messages to different users in certain edge cases.
+  - Removes the option to configure via `braze.xml` through `<bool name="com_braze_prevent_in_app_message_display_for_different_user">true</bool>`.
+  - Removes the option to configure via runtime configuration through `BrazeConfig.setShouldPreventInAppMessageDisplayForDifferentUsers()`.
+  - The SDK will now always behave as if this configuration option were set to true.
+
+##### Fixed
+- Control banners will invoke `Banner.heightCallback` with a value of 0.0. Previously it was not being called for control banners.
+- Fixed an issue where sending a test banner from the dashboard would not update immediately.
+
+##### Added
+- Added the ability to get success and failure callbacks for `BrazeUser.requestBannersRefresh()`.
+- Allows user to subscribe to Banner update errors with `Braze.subscribeToBannersErrors()`.
+
+##### Changed
+
 ## 34.0.0
 
 [Release Date](https://github.com/braze-inc/braze-android-sdk/releases/tag/v34.0.0)

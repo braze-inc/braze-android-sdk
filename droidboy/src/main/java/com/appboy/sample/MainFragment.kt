@@ -275,7 +275,9 @@ class MainFragment : Fragment() {
             bannerView.placementId = newPlacementId
 
             // Then update the singleton of the placement ids
-            Braze.getInstance(requireContext()).requestBannersRefresh(DroidboyApplication.BANNER_PLACEMENT_IDS + newPlacementId)
+            Braze.getInstance(requireContext()).requestBannersRefresh(DroidboyApplication.BANNER_PLACEMENT_IDS + newPlacementId) {
+                showToast("Refreshed banners")
+            }
         }
         return contentView
     }
