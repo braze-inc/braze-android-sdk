@@ -1,6 +1,6 @@
 ## 35.0.0
 
-[Release Date](https://github.com/braze-inc/braze-android-sdk/releases/tag/v34.0.1)
+[Release Date](https://github.com/braze-inc/braze-android-sdk/releases/tag/v35.0.0)
 
 #### Breaking
 - HTML In-App Messages will now persist the WebView when the app is put in the background.
@@ -17,8 +17,6 @@
 ##### Added
 - Added the ability to get success and failure callbacks for `BrazeUser.requestBannersRefresh()`.
 - Allows user to subscribe to Banner update errors with `Braze.subscribeToBannersErrors()`.
-
-##### Changed
 
 ## 34.0.0
 
