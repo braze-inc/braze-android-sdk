@@ -1,3 +1,39 @@
+## 36.0.0
+
+[Release Date](https://github.com/braze-inc/braze-android-sdk/releases/tag/v35.0.1)
+
+> [!IMPORTANT]
+> This release reverts the increase to the minimum Android SDK version of the Braze Android SDK from API 21 to API 25 introduced in 34.0.0. This allows the SDK to once again be compiled into apps supporting as early as API 21. Note that while we are re-introducing the ability to compile, we are not reintroducing formal support for <API 25, and cannot guarantee that the SDK will work as intended on devices running those versions.
+>
+> If your app supports those versions, you should:
+> - Validate your integration of the SDK works as intended on physical devices (not just emulators) for those API versions.
+> - If you cannot validate expected behavior, you must either call [disableSDK](https://braze-inc.github.io/braze-android-sdk/kdoc/braze-android-sdk/com.braze/-braze/-companion/disable-sdk.html), or not initialize the SDK on those versions. Otherwise, you may cause unintended side effects or degraded performance on your end users’ devices.
+
+#### Breaking
+- Fixed an issue where In-App Messages would cause a read on the main thread.
+  - `BrazeInAppMessageManager.displayInAppMessage` is now a Kotlin suspend function.
+  - If you do not call this function directly, you do not need to make any changes.
+- AndroidX Compose BOM updated to 2025.04.01 to handle updates in the Jetpack Compose APIs.
+  
+##### Fixed
+- Fixed a potential issue where the SDK could incorrectly calculate in-flight In-App Message requests and prevent new In-App Messages from being triggered.
+- Ensured that Content Cards, In-App Messages, Feature Flags, and Banners are cleared when calling `Braze.wipeData()`.
+- Set default background of `BannerView` to transparent.
+- Fixed an issue where `BrazeInAppMessageManager.activity` would point to the previous activity when an Activity on the blocklist was active.
+- Fixed an issue where In-App Messages would continue consuming predictive back callbacks after the message was dismissed/closed.
+  - For more detail: The predictive back callback not removed when the In-App Message was closed via the close button (or any other non-back dismissal method). This caused two back button invocations to be needed to trigger the host Activity/Fragment's predictive back callback.
+
+##### Added
+- Added a parameter `enablePullToRefresh` to `ContentCardsList` in Jetpack Compose to allow for disabling pull-to-refresh behavior.
+
+##### Changed
+- Removed the deprecated `announceForAccessibility` in favor of `accessibilityLiveRegion` and `contentDescription` for accessibility TalkBack.
+- Removed any displayed In-App Messages when calling `Braze.changeUser()`.
+- Modified `BrazeActivityLifecycleCallbackListener` to keep track of the latest activity in use.
+  - This is used to handle push permission prompts for various channels (ie. In-App Messages, Banners, etc).
+  - If you plan on using push permission prompts from a channel other than In-App Messages, you should make sure you're registering `BrazeActivityLifecycleCallbackListener` in your Application class.
+- Set `allowFileAccess` to `false` in `BannerView`.
+
 ## 35.0.0
 
 [Release Date](https://github.com/braze-inc/braze-android-sdk/releases/tag/v35.0.0)

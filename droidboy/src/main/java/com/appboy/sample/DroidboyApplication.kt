@@ -271,7 +271,9 @@ class DroidboyApplication : Application() {
         // Note that some detections require a specific sdk version or higher to enable.
         vmPolicyBuilder.detectLeakedRegistrationObjects()
         vmPolicyBuilder.detectFileUriExposure()
-        vmPolicyBuilder.detectCleartextNetwork()
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            vmPolicyBuilder.detectCleartextNetwork()
+        }
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             vmPolicyBuilder.detectContentUriWithoutPermission()
             vmPolicyBuilder.detectUntaggedSockets()

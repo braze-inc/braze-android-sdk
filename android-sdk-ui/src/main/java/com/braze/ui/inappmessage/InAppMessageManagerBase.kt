@@ -45,6 +45,13 @@ open class InAppMessageManagerBase {
 
     // Since many clients have written code against this, we want to maintain backwards compatibility
     // as much as possible. That's why we have these names and present them as JvmFields.
+
+    /*
+     * The activity that is currently being used to display in-app messages. This is set by the
+     * [BrazeInAppMessageManager] when the Activity is registered.
+     *
+     * If this is null, that means that an Activity on the blocklist is currently active or no Activity has been registered.
+     */
     @JvmField
     @Suppress("VariableNaming")
     protected var mActivity: Activity? = null

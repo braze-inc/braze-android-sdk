@@ -32,7 +32,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.platform.LocalLifecycleOwner
+import androidx.lifecycle.compose.LocalLifecycleOwner
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.style.TextAlign
@@ -78,6 +78,7 @@ import kotlinx.coroutines.launch
  *                           You also need to handle card clicks (See `BrazeContentCardUtils.handleCardClick`).
  * @param style The styling for the list of content cards.
  * @param cardStyle The styling for the individual content cards.
+ * @param enablePullToRefresh If true, the user can pull down to refresh the list of content cards.
  */
 fun ContentCardsList(
     cards: List<Card>? = null,
@@ -88,7 +89,8 @@ fun ContentCardsList(
     onCardDismissed: ((Card) -> Unit)? = null,
     customCardComposer: (@Composable ((Card) -> Boolean))? = null,
     style: ContentCardListStyling = LocalContentCardListStyling.current,
-    cardStyle: ContentCardStyling = LocalContentCardStyling.current
+    cardStyle: ContentCardStyling = LocalContentCardStyling.current,
+    enablePullToRefresh: Boolean = true,
 ) {
     val context = LocalContext.current
     var contentCardsUpdatedSubscriber: IEventSubscriber<ContentCardsUpdatedEvent>? = null
@@ -333,10 +335,9 @@ fun ContentCardsList(
 
     val modifier = style.modifier
         .background(style.listBackgroundColor())
-        .pullRefresh(refreshState)
         .let {
             // Don't enable pull-to-refresh if we were given a list of cards.
-            if (cards == null) {
+            if (enablePullToRefresh && cards == null) {
                 it.pullRefresh(refreshState)
             } else {
                 it
@@ -395,7 +396,7 @@ fun ContentCardsList(
                         }
 
                         SwipeToDismiss(
-                            modifier = Modifier.animateItemPlacement(),
+                            modifier = Modifier.animateItem(),
                             state = dismissState,
                             dismissThresholds = {
                                 @Suppress("DEPRECATION")
@@ -438,7 +439,7 @@ fun ContentCardsList(
                 }
             }
         }
-        if (cards == null) {
+        if (enablePullToRefresh && cards == null) {
             PullRefreshIndicator(isRefreshing, refreshState, Modifier.align(Alignment.TopCenter))
         }
     }

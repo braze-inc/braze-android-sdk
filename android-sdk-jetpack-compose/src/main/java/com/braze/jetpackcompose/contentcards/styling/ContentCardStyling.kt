@@ -70,7 +70,7 @@ val UndefinedAlignment: Alignment = BiasAlignment(-2.0f, -2.0f)
  * @property actionHintTextStyle [TextStyle] used for the title. If this is specified, other title text customization will be ignored.
  * @property titleTextColor Color of the card title text. If not specified, it will fallback to R.color.com_braze_content_cards_title
  * @property descriptionTextColor Color of the card description text. If not specified, it will fallback to R.color.com_braze_content_cards_description
- * @property actionHintTextColor Color of the card description text. If not specified, it will fallback to
+ * @property actionHintTextColor Color of the card action hint text. If not specified, it will fallback to
  * R.color.com_braze_content_cards_action_hint_text_color
  * @property imageOnlyContentCardStyle Style to use specifically for Image Only Content Cards. See note above.
  * @property textAnnouncementContentCardStyle Style to use specifically for Text Announcement Content Cards. See note above.

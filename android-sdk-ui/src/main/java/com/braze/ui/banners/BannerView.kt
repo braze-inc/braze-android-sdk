@@ -62,6 +62,8 @@ class BannerView : WebView, IBannerView {
     }
 
     private fun init(attrs: AttributeSet?, defStyle: Int) {
+        setBackgroundColor(Color.TRANSPARENT)
+
         // Load attributes
         val attributes = context.obtainStyledAttributes(
             attrs, R.styleable.BannerView, defStyle, 0
@@ -84,6 +86,7 @@ class BannerView : WebView, IBannerView {
         settings.loadWithOverviewMode = true
         settings.displayZoomControls = false
         settings.domStorageEnabled = true
+        settings.allowFileAccess = false
 
         // This enables hardware acceleration if the manifest also has it defined.
         // If not defined, then the layer type will fallback to software.

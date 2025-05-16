@@ -9,6 +9,8 @@ import com.braze.Braze.Companion.getInstance
 import com.braze.BrazeInternal
 import com.braze.BrazeInternal.retryInAppMessage
 import com.braze.configuration.BrazeConfigurationProvider
+import com.braze.coroutine.BrazeCoroutineScope
+import com.braze.enums.inappmessage.MessageType
 import com.braze.enums.inappmessage.Orientation
 import com.braze.events.BrazeUserChangeEvent
 import com.braze.events.IEventSubscriber
@@ -37,6 +39,9 @@ import com.braze.ui.support.isCurrentOrientationValid
 import com.braze.ui.support.isRunningOnTablet
 import com.braze.ui.support.removeViewFromParent
 import com.braze.ui.support.setActivityRequestedOrientation
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import java.util.*
 import java.util.concurrent.atomic.AtomicBoolean
 import java.util.concurrent.locks.ReentrantLock
@@ -167,6 +172,9 @@ open class BrazeInAppMessageManager : InAppMessageManagerBase() {
         }
         brazelog(V) { "Subscribing sdk data wipe subscriber" }
         sdkDataWipeEventSubscriber = IEventSubscriber<SdkDataWipeEvent> {
+            if (displayingInAppMessage.get()) {
+                hideCurrentlyDisplayingInAppMessage(false)
+            }
             inAppMessageStack.clear()
             carryoverInAppMessage = null
             unregisteredInAppMessage = null
@@ -236,7 +244,9 @@ open class BrazeInAppMessageManager : InAppMessageManagerBase() {
                 carryoverInAppMessage?.let {
                     brazelog { "Requesting display of carryover in-app message." }
                     it.animateIn = false
-                    displayInAppMessage(it, true)
+                    BrazeCoroutineScope.launch(Dispatchers.Main) {
+                        displayInAppMessage(it, true)
+                    }
                 }
                 carryoverInAppMessage = null
             } else {
@@ -425,7 +435,9 @@ open class BrazeInAppMessageManager : InAppMessageManagerBase() {
                     inAppMessageWrapperView.inAppMessage
                 )
             }
-            inAppMessageWrapperView.close()
+            BrazeCoroutineScope.launch(Dispatchers.Main) {
+                inAppMessageWrapperView.close()
+            }
         }
     }
 
@@ -463,7 +475,7 @@ open class BrazeInAppMessageManager : InAppMessageManagerBase() {
     @Suppress("LongMethod", "ComplexMethod", "NestedBlockDepth", "ThrowsCount", "TooGenericExceptionThrown")
     // The TooGenericExceptionThrown is here because some clients may have written code that's dependent
     // on that very generic exception, so we want to stay backwards compatible.
-    open fun displayInAppMessage(inAppMessage: IInAppMessage, isCarryOver: Boolean) {
+    open suspend fun displayInAppMessage(inAppMessage: IInAppMessage, isCarryOver: Boolean) {
         brazelog(V) {
             "Attempting to display in-app message with payload: ${inAppMessage.forJsonPut().getPrettyPrintedString()}"
         }
@@ -556,9 +568,18 @@ open class BrazeInAppMessageManager : InAppMessageManagerBase() {
                 return
             }
             val inAppMessageViewFactory = getInAppMessageViewFactory(inAppMessage) ?: throw Exception("ViewFactory from getInAppMessageViewFactory was null.")
-            val inAppMessageView = inAppMessageViewFactory.createInAppMessageView(
-                activity, inAppMessage
-            )
+
+            val contextToUse =
+                when (inAppMessage.messageType) {
+                    MessageType.HTML, MessageType.HTML_FULL -> Dispatchers.Main
+                    else -> Dispatchers.IO
+                }
+
+            val inAppMessageView = withContext(contextToUse) {
+                inAppMessageViewFactory.createInAppMessageView(
+                    activity, inAppMessage
+                )
+            }
             if (inAppMessageView == null) {
                 throw Exception(
                     "The in-app message view returned from the IInAppMessageViewFactory was null. " +
@@ -662,10 +683,10 @@ open class BrazeInAppMessageManager : InAppMessageManagerBase() {
         }
     }
 
+    @Suppress("UnusedParameter")
     private fun createBrazeUserChangeEventSubscriber(context: Context): IEventSubscriber<BrazeUserChangeEvent> {
         return IEventSubscriber { event: BrazeUserChangeEvent ->
             brazelog(V) { "InAppMessage manager handling new current user id: '$event'" }
-            val configurationProvider = BrazeInternal.getConfigurationProvider(context)
             val currentUserId = event.currentUserId
             this.currentUserId = currentUserId
             brazelog { "Removing in-app messages not from user $currentUserId" }
@@ -673,6 +694,9 @@ open class BrazeInAppMessageManager : InAppMessageManagerBase() {
             inAppMessageStack.removeAll { !isInAppMessageForTheSameUser(it, currentUserId) }
             if (!isInAppMessageForTheSameUser(carryoverInAppMessage, currentUserId)) carryoverInAppMessage = null
             if (!isInAppMessageForTheSameUser(unregisteredInAppMessage, currentUserId)) unregisteredInAppMessage = null
+            if (displayingInAppMessage.get()) {
+                hideCurrentlyDisplayingInAppMessage(false)
+            }
         }
     }
 

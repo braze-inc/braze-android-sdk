@@ -11,10 +11,20 @@ Successful marketing automation is essential to the future of your mobile app. B
 - [Braze Developer Guide](https://www.braze.com/docs/developer_guide/platforms/android/sdk_integration/ "Braze Developer Guide")
 - [KDoc](https://braze-inc.github.io/braze-android-sdk/kdoc/ "Braze Android SDK Class Documentation")
 
+## Android API support
+
+The Braze Android SDK supports Android API 25+.
+
+> [!IMPORTANT]
+> The Braze Android SDK declares a `minSdkVersion` of API 21+. This allows the SDK to be compiled into apps supporting as early as API 21. Note that while this allows the ability to compile, we are not reintroducing formal support for < API 25, and cannot guarantee that the SDK will work as intended on devices running those versions.
+> 
+> If your app supports those versions, you should:
+> - Validate your integration of the SDK works as intended on physical devices (not just emulators) for those API versions.
+> - If you cannot validate expected behavior, you must either call [disableSDK](https://braze-inc.github.io/braze-android-sdk/kdoc/braze-android-sdk/com.braze/-braze/-companion/disable-sdk.html), or not initialize the SDK on those versions. Otherwise, you may cause unintended side effects or degraded performance on your end users’ devices.
+
 ## Version Information
 
-- The Braze Android SDK supports Android 7.1.1+ / API 25+ (Nougat and up).
-  - ⚠️ As of September 30, 2024, Let's Encrypt [discontinued support for cross-signed certificates](https://letsencrypt.org/2023/07/10/cross-sign-expiration/). Users who do not upgrade to Android 7.1.1 or higher may experience issues accessing sites secured by Let's Encrypt certificates. Full certificate compatibility [here](https://letsencrypt.org/docs/certificate-compatibility/).
+- The Braze Android SDK supports Android 5.0+ / API 21+ (Lollipop and up).
 - Last Target SDK Version: 35
 - Kotlin version: `org.jetbrains.kotlin:kotlin-stdlib:2.0.20`
 - Last Compiled Firebase Cloud Messaging Version: 24.1.0
@@ -37,8 +47,8 @@ Our SDK is now hosted in Maven Central. You can remove `https://braze-inc.github
 
 ```
 dependencies {
-  implementation 'com.braze:android-sdk-ui:35.0.+'
-  implementation 'com.braze:android-sdk-location:35.0.+'
+  implementation 'com.braze:android-sdk-ui:36.0.+'
+  implementation 'com.braze:android-sdk-location:36.0.+'
   ...
 }
 ```
@@ -57,7 +67,7 @@ repositories {
 
 ```
 dependencies {
-  implementation 'com.braze:android-sdk-ui:35.0.+'
+  implementation 'com.braze:android-sdk-ui:36.0.+'
 }
 ```
 

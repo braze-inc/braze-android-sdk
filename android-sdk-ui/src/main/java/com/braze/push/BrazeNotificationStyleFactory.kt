@@ -11,6 +11,7 @@ import android.os.Build
 import android.os.Bundle
 import android.view.View
 import android.widget.RemoteViews
+import androidx.annotation.RequiresApi
 import androidx.annotation.VisibleForTesting
 import androidx.core.app.NotificationCompat
 import com.braze.Braze
@@ -91,7 +92,7 @@ open class BrazeNotificationStyleFactory {
                 style = getConversationalPushStyle(notificationBuilder, payload)
             } else if (payload.bigImageUrl != null) {
                 style =
-                    if (payload.isInlineImagePush) {
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && payload.isInlineImagePush) {
                         brazelog { "Rendering push notification with custom inline image style" }
                         getInlineImageStyle(payload, notificationBuilder)
                     } else {
@@ -203,6 +204,7 @@ open class BrazeNotificationStyleFactory {
          * null style is returned.
          */
         @Suppress("LongMethod", "ReturnCount")
+        @RequiresApi(api = Build.VERSION_CODES.M)
         fun getInlineImageStyle(
             payload: BrazeNotificationPayload,
             notificationBuilder: NotificationCompat.Builder

@@ -240,11 +240,15 @@ class SettingsFragment : PreferenceFragmentCompat() {
             }
         }
         setClickPreference("location_runtime_permission_dialog") {
-            RuntimePermissionUtils.requestLocationPermission(
-                activity as Activity,
-                Manifest.permission.ACCESS_FINE_LOCATION,
-                requestPermissionLauncher
-            )
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                RuntimePermissionUtils.requestLocationPermission(
+                    activity as Activity,
+                    Manifest.permission.ACCESS_FINE_LOCATION,
+                    requestPermissionLauncher
+                )
+            } else {
+                showToast("Below Android M there is no need to check for runtime permissions.")
+            }
         }
     }
 

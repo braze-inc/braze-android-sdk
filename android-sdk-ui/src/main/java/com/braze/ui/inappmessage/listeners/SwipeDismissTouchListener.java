@@ -19,7 +19,6 @@ package com.braze.ui.inappmessage.listeners;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.animation.ValueAnimator;
-import android.annotation.TargetApi;
 import android.view.MotionEvent;
 import android.view.VelocityTracker;
 import android.view.View;
@@ -243,7 +242,6 @@ public class SwipeDismissTouchListener implements View.OnTouchListener {
     return false;
   }
 
-  @TargetApi(12)
   public void performDismiss() {
     // Animate the dismissed view to zero-height and then fire the dismiss callback.
     // This triggers layout on each animation frame; in the future we may want to do something

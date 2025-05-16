@@ -120,12 +120,10 @@ object InAppMessageViewUtils {
 
     @JvmStatic
     fun setTextAlignment(textView: TextView, textAlign: TextAlign) {
-        if (textAlign == TextAlign.START) {
-            textView.gravity = Gravity.START
-        } else if (textAlign == TextAlign.END) {
-            textView.gravity = Gravity.END
-        } else if (textAlign == TextAlign.CENTER) {
-            textView.gravity = Gravity.CENTER
+        textView.gravity = when (textAlign) {
+            TextAlign.START -> Gravity.START
+            TextAlign.END -> Gravity.END
+            TextAlign.CENTER -> Gravity.CENTER
         }
     }
 

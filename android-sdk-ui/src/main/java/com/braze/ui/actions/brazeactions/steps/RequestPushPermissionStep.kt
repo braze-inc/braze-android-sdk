@@ -1,8 +1,8 @@
 package com.braze.ui.actions.brazeactions.steps
 
 import android.content.Context
+import com.braze.BrazeActivityLifecycleCallbackListener
 import com.braze.support.requestPushPermissionPrompt
-import com.braze.ui.inappmessage.BrazeInAppMessageManager
 
 internal object RequestPushPermissionStep : BaseBrazeActionStep() {
     /**
@@ -11,6 +11,6 @@ internal object RequestPushPermissionStep : BaseBrazeActionStep() {
     override fun isValid(data: StepData): Boolean = true
 
     override fun run(context: Context, data: StepData) {
-        BrazeInAppMessageManager.getInstance().activity.requestPushPermissionPrompt()
+        BrazeActivityLifecycleCallbackListener.activity.requestPushPermissionPrompt()
     }
 }

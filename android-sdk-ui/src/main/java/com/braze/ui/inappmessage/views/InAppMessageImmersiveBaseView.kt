@@ -150,6 +150,12 @@ abstract class InAppMessageImmersiveBaseView(context: Context?, attrs: Attribute
 
     open fun setMessageHeaderText(text: String) {
         messageHeaderTextView?.text = text
+        messageHeaderTextView?.contentDescription = text
+    }
+
+    override fun setMessage(text: String) {
+        super.setMessage(text)
+        messageTextView?.contentDescription = text
     }
 
     open fun setMessageHeaderTextAlignment(textAlign: TextAlign) {

@@ -28,7 +28,6 @@ import com.braze.ui.inappmessage.listeners.SwipeDismissTouchListener.DismissCall
 import com.braze.ui.inappmessage.listeners.TouchAwareSwipeDismissTouchListener
 import com.braze.ui.inappmessage.listeners.TouchAwareSwipeDismissTouchListener.ITouchListener
 import com.braze.ui.inappmessage.utils.InAppMessageViewUtils
-import com.braze.ui.inappmessage.views.IInAppMessageImmersiveView
 import com.braze.ui.inappmessage.views.IInAppMessageView
 import com.braze.ui.inappmessage.views.InAppMessageHtmlBaseView
 import com.braze.ui.support.getStatusBarHeight
@@ -84,6 +83,11 @@ open class DefaultInAppMessageViewWrapper @JvmOverloads constructor(
      * The [ViewGroup] parent of the in-app message.
      */
     open var contentViewGroupParentLayout: ViewGroup? = null
+
+    /**
+     * The [OnBackInvokedCallback] that is registered to close the in-app message when the back button is pressed.
+     */
+    open var onBackInvokedCallback: OnBackInvokedCallback? = null
 
     init {
         clickableInAppMessageView = clickableInAppMessageView ?: inAppMessageView
@@ -165,22 +169,31 @@ open class DefaultInAppMessageViewWrapper @JvmOverloads constructor(
             activity.let {
                 val dismissInAppMessageCallback = object : OnBackInvokedCallback {
                     override fun onBackInvoked() {
+                        brazelog { "Back button intercepted by in-app message default view wrapper" }
                         InAppMessageViewUtils.closeInAppMessageOnKeycodeBack()
                         it.onBackInvokedDispatcher.unregisterOnBackInvokedCallback(this)
                     }
                 }
 
                 it.onBackInvokedDispatcher.registerOnBackInvokedCallback(OnBackInvokedDispatcher.PRIORITY_OVERLAY, dismissInAppMessageCallback)
+                onBackInvokedCallback = dismissInAppMessageCallback
             }
         }
     }
 
     override fun close() {
+        brazelog { "Closing in-app message view wrapper" }
         if (configurationProvider.isInAppMessageAccessibilityExclusiveModeEnabled) {
             resetAllViewGroupChildrenToPreviousAccessibilityFlagOrAuto(
                 contentViewGroupParentLayout,
                 viewAccessibilityFlagMap
             )
+        }
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            onBackInvokedCallback?.let {
+                brazelog { "Unregistering iam back invoked callback" }
+                BrazeInAppMessageManager.getInstance().activity?.onBackInvokedDispatcher?.unregisterOnBackInvokedCallback(it)
+            }
         }
         inAppMessageView.removeCallbacks(dismissRunnable)
         inAppMessageViewLifecycleListener.beforeClosed(inAppMessageView, inAppMessage)
@@ -281,26 +294,6 @@ open class DefaultInAppMessageViewWrapper @JvmOverloads constructor(
                 addDismissRunnable()
             }
             finalizeViewBeforeDisplay(inAppMessage, inAppMessageView, inAppMessageViewLifecycleListener)
-        }
-    }
-
-    /**
-     * Calls [View.announceForAccessibility] with the [IInAppMessage.getMessage]
-     * if the [IInAppMessageView] is [IInAppMessageImmersiveView] or the fallback message
-     * [IInAppMessageView] is a [InAppMessageHtmlBaseView].
-     */
-    open fun announceForAccessibilityIfNecessary(fallbackAccessibilityMessage: String? = "In app message displayed.") {
-        if (inAppMessageView is IInAppMessageImmersiveView) {
-            val message = inAppMessage.message
-            if (inAppMessage is IInAppMessageImmersive) {
-                // Announce the header and message together with a brief pause between them
-                val header = (inAppMessage as IInAppMessageImmersive).header
-                inAppMessageView.announceForAccessibility("$header . $message")
-            } else {
-                inAppMessageView.announceForAccessibility(message)
-            }
-        } else if (inAppMessageView is InAppMessageHtmlBaseView) {
-            inAppMessageView.announceForAccessibility(fallbackAccessibilityMessage)
         }
     }
 
@@ -445,7 +438,6 @@ open class DefaultInAppMessageViewWrapper @JvmOverloads constructor(
         } else {
             inAppMessageView.setFocusableInTouchModeAndRequestFocus()
         }
-        announceForAccessibilityIfNecessary()
         inAppMessageViewLifecycleListener.afterOpened(inAppMessageView, inAppMessage)
     }
 

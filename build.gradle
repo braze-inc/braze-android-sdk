@@ -22,9 +22,9 @@ plugins {
 
 ext {
   compileSdkVersion = 35
-  minSdkVersion = 25
+  minSdkVersion = 21
   targetSdkVersion = 35
-  appVersionName = '35.0.0'
+  appVersionName = '36.0.0'
 }
 
 subprojects {
@@ -36,5 +36,5 @@ subprojects {
   }
 
   group = 'com.braze'
-  version = '35.0.0'
+  version = '36.0.0'
 }

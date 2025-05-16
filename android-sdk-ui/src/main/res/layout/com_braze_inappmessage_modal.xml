@@ -30,7 +30,8 @@
                 style="@style/Braze.InAppMessage.ScrollView.Modal">
                 <LinearLayout
                     android:id="@+id/com_braze_inappmessage_modal_text_layout"
-                    style="@style/Braze.InAppMessage.Layout.Text.Modal">
+                    style="@style/Braze.InAppMessage.Layout.Text.Modal"
+                    android:accessibilityLiveRegion="polite">
                     <TextView
                         android:id="@+id/com_braze_inappmessage_modal_header_text"
                         style="@style/Braze.InAppMessage.Header.Modal"

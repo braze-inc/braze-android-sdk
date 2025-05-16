@@ -41,7 +41,6 @@ open class BrazeActivityLifecycleCallbackListener @JvmOverloads constructor(
 ) : ActivityLifecycleCallbacks {
     private var inAppMessagingRegistrationBlocklist: Set<Class<*>?>
     private var sessionHandlingBlocklist: Set<Class<*>?>
-    private var previousActivityRef: WeakReference<Activity>? = null
 
     @VisibleForTesting
     var shouldPersistWebView: Boolean? = null
@@ -108,30 +107,42 @@ open class BrazeActivityLifecycleCallbackListener @JvmOverloads constructor(
     }
 
     override fun onActivityResumed(activity: Activity) {
-        if (registerInAppMessageManager &&
-            shouldHandleLifecycleMethodsInActivity(activity, false)
-        ) {
-            val previousActivity = previousActivityRef?.get()
-            if (shouldPersistWebView == true && previousActivity != null && previousActivity != activity) {
-                brazelog(V) {
-                    "Activity is different from previous activity. Unregistering in-app message manager"
+        if (registerInAppMessageManager) {
+            if (shouldHandleLifecycleMethodsInActivity(activity, false)) {
+                val previousActivity = currentActivityRef?.get()
+                if (shouldPersistWebView == true && // We should be persisting (so we didn't unregister during onPause) AND
+                    previousActivity != null && // The previous activity has been set AND
+                    previousActivity != activity // The previous activity is different from the current activity
+                ) {
+                    brazelog(V) {
+                        "Activity is different from previous activity. Unregistering in-app message manager"
+                    }
+                    BrazeInAppMessageManager.getInstance().unregisterInAppMessageManager(activity)
                 }
+
+                // If the previous activity is null, this is the first activity, so register.
+                // Or if the activity has changed, we also need to register.
+                if (shouldPersistWebView != true || // We're not persisting (so we unregistered during onPause) OR
+                    previousActivity == null || // The previous activity is null (so this is the first activity) OR
+                    previousActivity != activity // The activity has changed
+                ) {
+                    brazelog(V) {
+                        "Automatically calling lifecycle method: registerInAppMessageManager for class: ${activity.javaClass}"
+                    }
+                    BrazeInAppMessageManager.getInstance().registerInAppMessageManager(activity)
+                } else {
+                    BrazeInAppMessageManager.getInstance().resumeWebviewIfNecessary()
+                }
+            } else {
+                // We're handling IAM registration in general, but this class is specifically in the block list, so unregister the IAM Manager.
                 BrazeInAppMessageManager.getInstance().unregisterInAppMessageManager(activity)
             }
-
-            // If the previous activity is null, this is the first activity, so register.
-            // Or if the activity has changed, we also need to register.
-            if (shouldPersistWebView != true || previousActivity == null || previousActivity != activity) {
-                brazelog(V) {
-                    "Automatically calling lifecycle method: registerInAppMessageManager for class: ${activity.javaClass}"
-                }
-                BrazeInAppMessageManager.getInstance().registerInAppMessageManager(activity)
-            } else {
-                BrazeInAppMessageManager.getInstance().resumeWebviewIfNecessary()
-            }
-
-            previousActivityRef = WeakReference(activity)
         }
+
+        // Always keep track of the current activity so we have the reference in case the customer isn't using
+        // automatic In-App Message registration, we need the activity reference to get the push permission prompt
+        // for banners.
+        currentActivityRef = WeakReference(activity)
     }
 
     override fun onActivityPaused(activity: Activity) {
@@ -203,5 +214,21 @@ open class BrazeActivityLifecycleCallbackListener @JvmOverloads constructor(
         } catch (e: Exception) {
             brazelog(priority = E, e) { "Failed to register this lifecycle callback listener directly against application class" }
         }
+    }
+
+    companion object {
+        val activity: Activity?
+            get() {
+                val currentActivity = currentActivityRef?.get()
+                if (currentActivity == null) {
+                    brazelog(V) {
+                        "BrazeActivityLifecycleCallbackListener.currentActivity is null. " +
+                            "Ensure that BrazeActivityLifecycleCallbackListener is registered in your Application class."
+                    }
+                }
+                return currentActivity
+            }
+
+        private var currentActivityRef: WeakReference<Activity>? = null
     }
 }
