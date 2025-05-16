@@ -1,6 +1,6 @@
 ## 36.0.0
 
-[Release Date](https://github.com/braze-inc/braze-android-sdk/releases/tag/v35.0.1)
+[Release Date](https://github.com/braze-inc/braze-android-sdk/releases/tag/v36.0.0)
 
 > [!IMPORTANT]
 > This release reverts the increase to the minimum Android SDK version of the Braze Android SDK from API 21 to API 25 introduced in 34.0.0. This allows the SDK to once again be compiled into apps supporting as early as API 21. Note that while we are re-introducing the ability to compile, we are not reintroducing formal support for <API 25, and cannot guarantee that the SDK will work as intended on devices running those versions.
