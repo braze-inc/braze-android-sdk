@@ -328,7 +328,8 @@ class DroidboyApplication : Application() {
                     ?: "https://raw.githubusercontent.com/Appboy/braze-android-sdk/master/braze-logo.png"
                 val title = specialTabFlag.getStringProperty("helpful_title") ?: "title"
                 val desc = specialTabFlag.getStringProperty("helpful_description") ?: "description"
-                val card = ContentCardsTestingUtil.createCaptionedImageCardJson(specialTabFlag.id, title, desc, imageUrl)
+                val altImageText = specialTabFlag.getStringProperty("helpful_alt_image") ?: "alternate image text"
+                val card = ContentCardsTestingUtil.createCaptionedImageCardJson(specialTabFlag.id, title, desc, imageUrl, altImageText)
 
                 // Add our data to the Content Card feed
                 Braze.getInstance(applicationContext).getCurrentUser { brazeUser ->

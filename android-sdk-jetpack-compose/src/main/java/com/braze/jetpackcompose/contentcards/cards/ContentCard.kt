@@ -53,6 +53,13 @@ import com.braze.support.BrazeLogger.brazelog
 import com.braze.ui.contentcards.BrazeContentCardUtils
 import java.util.Locale
 
+/**
+ * Represents an individual content card.
+ *
+ * @param card The content card data model.
+ * @param clickHandler The function to handle a content card click. If null, all card clicks will be handled automatically by the Braze SDK.
+ * @param style The styling for the individual content card.
+ */
 @Composable
 @Suppress("LongMethod", "ComplexMethod")
 fun ContentCard(
@@ -175,7 +182,7 @@ fun ContentCard(
                             .data(imageOnlyCard.imageUrl)
                             .decoderFactory(decoderFactory)
                             .build(),
-                        contentDescription = null,
+                        contentDescription = imageOnlyCard.altImageText,
                         contentScale = ContentScale.Crop,
                         modifier = Modifier
                             .fillMaxWidth()
@@ -202,7 +209,7 @@ fun ContentCard(
                                 .data(captionedImageCard.imageUrl)
                                 .decoderFactory(decoderFactory)
                                 .build(),
-                            contentDescription = null,
+                            contentDescription = captionedImageCard.altImageText,
                             contentScale = ContentScale.Crop,
                             modifier = Modifier
                                 .fillMaxWidth()
@@ -268,7 +275,7 @@ fun ContentCard(
                                 .decoderFactory(decoderFactory)
                                 .build(),
                             contentScale = ContentScale.Crop,
-                            contentDescription = null,
+                            contentDescription = shortNewsCard.altImageText,
                             modifier = Modifier
                                 .padding(
                                     PaddingValues(

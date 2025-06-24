@@ -29,6 +29,26 @@ interface IInAppMessageImageView {
      * Instruct the view to use [android.widget.ImageView.ScaleType.CENTER_CROP] or equivalent.
      */
     fun setInAppMessageImageCropType(cropType: CropType?)
+
+    /**
+     * Instruct the view to use the given aspect ratio for the image.
+     *
+     * @param aspectRatio aspectRatio for the image
+     */
     fun setAspectRatio(aspectRatio: Float)
+
+    /**
+     * Instruct the view to take up half the height of the parent view.
+     *
+     * @param setToHalfHeight set to true if view should take up half the height of the parent view
+     */
     fun setToHalfParentHeight(setToHalfHeight: Boolean)
+
+    /**
+     * Instruct the view to set alternate text for the image to be read aloud when device
+     * is in accessibility mode.
+     *
+     * @param altImage alternate image text
+     */
+    fun setAltImageText(altImage: String?)
 }

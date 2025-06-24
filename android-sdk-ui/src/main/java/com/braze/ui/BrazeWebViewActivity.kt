@@ -108,7 +108,7 @@ open class BrazeWebViewActivity : FragmentActivity() {
                 return didHandleUrl ?: super.shouldOverrideUrlLoading(view, request)
             }
 
-            @Deprecated("Deprecated in Java")
+            @Deprecated("Deprecated in API 24")
             @Suppress("deprecation")
             override fun shouldOverrideUrlLoading(view: WebView, url: String): Boolean {
                 val didHandleUrl = handleUrlOverride(view.context, url)

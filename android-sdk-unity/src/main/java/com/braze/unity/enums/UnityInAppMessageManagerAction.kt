@@ -31,6 +31,6 @@ enum class UnityInAppMessageManagerAction(
 
     companion object {
         fun getTypeFromValue(value: Int): UnityInAppMessageManagerAction? =
-            values().firstOrNull { it.value == value }
+            entries.firstOrNull { it.value == value }
     }
 }

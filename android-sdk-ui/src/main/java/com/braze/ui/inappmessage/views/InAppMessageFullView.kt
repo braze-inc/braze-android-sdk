@@ -186,6 +186,7 @@ open class InAppMessageFullView(context: Context?, attrs: AttributeSet?) :
         inAppMessageImageView: IInAppMessageImageView
     ) {
         inAppMessageImageView.setInAppMessageImageCropType(inAppMessage.cropType)
+        inAppMessageImageView.setAltImageText(inAppMessage.altImageText)
         if (activity.isRunningOnTablet()) {
             val radiusInPx = convertDpToPixels(activity, modalizedImageRadiusDp).toFloat()
             if (inAppMessage.imageStyle == ImageStyle.GRAPHIC) {

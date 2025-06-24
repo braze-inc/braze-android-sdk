@@ -42,6 +42,7 @@ open class CaptionedImageContentCardView(context: Context) : BaseContentCardView
                 captionedImageViewHolder.imageView,
                 card.aspectRatio,
                 card.imageUrl,
+                card.altImageText,
                 card
             )
             viewHolder.itemView.contentDescription = "${card.title} .  ${card.description}"

@@ -75,7 +75,6 @@ fun isActivityRegisteredInManifest(context: Context, className: String): Boolean
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
             context.packageManager.getActivityInfo(ComponentName(context, className), PackageManager.ComponentInfoFlags.of(0))
         } else {
-            @Suppress("DEPRECATION")
             context.packageManager.getActivityInfo(ComponentName(context, className), 0)
         }
         true

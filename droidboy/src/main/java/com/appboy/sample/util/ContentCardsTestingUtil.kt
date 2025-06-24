@@ -23,7 +23,7 @@ class ContentCardsTestingUtil private constructor() {
         fun createRandomCards(context: Context? = null, numCardsOfEachType: Int): List<Card> {
             val cards = mutableListOf<Card>()
 
-            for (cardType in CardType.values()) {
+            for (cardType in CardType.entries) {
                 if (cardType == CardType.DEFAULT) {
                     continue
                 }
@@ -50,7 +50,8 @@ class ContentCardsTestingUtil private constructor() {
             id: String,
             title: String,
             description: String,
-            imageUrl: String
+            imageUrl: String,
+            altImageText: String
         ): JSONObject {
             val ccp = CardKey.Provider(true)
 
@@ -61,6 +62,7 @@ class ContentCardsTestingUtil private constructor() {
                 mapOf(
                     ccp.getKey(CardKey.ID) to id,
                     ccp.getKey(CardKey.CAPTIONED_IMAGE_IMAGE) to imageUrl,
+                    ccp.getKey(CardKey.CAPTIONED_IMAGE_ALT_IMAGE) to altImageText,
                     ccp.getKey(CardKey.CAPTIONED_IMAGE_ASPECT_RATIO) to 1.0,
                     ccp.getKey(CardKey.CAPTIONED_IMAGE_TITLE) to title,
                     ccp.getKey(CardKey.CAPTIONED_IMAGE_DESCRIPTION) to description,
@@ -96,12 +98,14 @@ class ContentCardsTestingUtil private constructor() {
             val title = "Title"
             val description = "Description -> cardType $cardType"
             val randomImage = getRandomImageUrl()
+            val altImageText = getRandomString()
 
             when (cardType) {
                 CardType.IMAGE -> {
                     defaultMapping.mergeWith(
                         mapOf(
                             ccp.getKey(CardKey.IMAGE_ONLY_IMAGE) to randomImage.first,
+                            ccp.getKey(CardKey.IMAGE_ONLY_ALT_IMAGE) to altImageText,
                             ccp.getKey(CardKey.IMAGE_ONLY_ASPECT_RATIO) to randomImage.second,
                             ccp.getKey(CardKey.IMAGE_ONLY_URL) to randomImage.first
                         )
@@ -112,6 +116,7 @@ class ContentCardsTestingUtil private constructor() {
                     defaultMapping.mergeWith(
                         mapOf(
                             ccp.getKey(CardKey.CAPTIONED_IMAGE_IMAGE) to randomImage.first,
+                            ccp.getKey(CardKey.CAPTIONED_IMAGE_ALT_IMAGE) to altImageText,
                             ccp.getKey(CardKey.CAPTIONED_IMAGE_ASPECT_RATIO) to randomImage.second,
                             ccp.getKey(CardKey.CAPTIONED_IMAGE_TITLE) to title,
                             ccp.getKey(CardKey.CAPTIONED_IMAGE_DESCRIPTION) to description,
@@ -124,6 +129,7 @@ class ContentCardsTestingUtil private constructor() {
                     defaultMapping.mergeWith(
                         mapOf(
                             ccp.getKey(CardKey.SHORT_NEWS_IMAGE) to randomImage.first,
+                            ccp.getKey(CardKey.SHORT_NEWS_ALT_IMAGE) to altImageText,
                             ccp.getKey(CardKey.SHORT_NEWS_TITLE) to title,
                             ccp.getKey(CardKey.SHORT_NEWS_DESCRIPTION) to description,
                             ccp.getKey(CardKey.SHORT_NEWS_URL) to randomImage.first

@@ -30,8 +30,7 @@
                     <LinearLayout
                         android:id="@+id/com_braze_inappmessage_full_text_layout"
                         style="@style/Braze.InAppMessage.Full.TextArea"
-                        android:layout_height="wrap_content"
-                        android:accessibilityLiveRegion="polite">
+                        android:layout_height="wrap_content">
                         <TextView
                             android:id="@+id/com_braze_inappmessage_full_header_text"
                             style="@style/Braze.InAppMessage.Header.Full"

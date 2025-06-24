@@ -279,9 +279,6 @@ abstract class InAppMessageHtmlBaseView(context: Context?, attrs: AttributeSet?)
 
     override fun applyWindowInsets(insets: WindowInsetsCompat) {
         hasAppliedWindowInsets = true
-        if (!BrazeConfigurationProvider(this.context).isHtmlInAppMessageApplyWindowInsetsEnabled) {
-            return
-        }
         if (layoutParams == null || layoutParams !is MarginLayoutParams) {
             return
         }

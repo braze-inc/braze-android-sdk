@@ -19,6 +19,7 @@ package com.braze.ui.inappmessage.listeners;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.animation.ValueAnimator;
+import android.content.res.Resources;
 import android.view.MotionEvent;
 import android.view.VelocityTracker;
 import android.view.View;
@@ -103,12 +104,20 @@ public class SwipeDismissTouchListener implements View.OnTouchListener {
    *                 dismiss this view.
    */
   public SwipeDismissTouchListener(View view, Object token, DismissCallbacks callbacks) {
+    long animationTime;
     ViewConfiguration vc = ViewConfiguration.get(view.getContext());
     mSlop = vc.getScaledTouchSlop();
     mMinFlingVelocity = vc.getScaledMinimumFlingVelocity() * 16;
     mMaxFlingVelocity = vc.getScaledMaximumFlingVelocity();
-    mAnimationTime = view.getContext().getResources().getInteger(
-        android.R.integer.config_shortAnimTime);
+    try {
+      final Resources resources = view.getContext().getResources();
+      animationTime = resources.getInteger(android.R.integer.config_shortAnimTime);
+    } catch (Resources.NotFoundException e) {
+      // Defaulted to https://android.googlesource.com/platform/frameworks/base/+/refs/heads/master/core/res/res/values/config.xml#145
+      animationTime = 200;
+    }
+
+    mAnimationTime = animationTime;
     mView = view;
     mToken = token;
     mCallbacks = callbacks;

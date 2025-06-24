@@ -125,6 +125,7 @@ open class InAppMessageModalView(context: Context?, attrs: AttributeSet?) :
             inAppMessageImageView.setCornersRadiiPx(pixelRadius, pixelRadius, 0.0f, 0.0f)
         }
         inAppMessageImageView.setInAppMessageImageCropType(inAppMessage.cropType)
+        inAppMessageImageView.setAltImageText(inAppMessage.altImageText)
     }
 
     /**

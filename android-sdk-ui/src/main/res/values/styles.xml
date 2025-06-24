@@ -16,6 +16,7 @@
     <item name="android:gravity">center</item>
     <item name="android:textStyle">bold</item>
     <item name="android:layout_centerHorizontal">true</item>
+    <item name="android:accessibilityLiveRegion">polite</item>
   </style>
   <style name="Braze.InAppMessage.Message">
     <item name="android:background">@android:color/transparent</item>
@@ -23,6 +24,7 @@
     <item name="android:lineSpacingMultiplier">1.1</item>
     <item name="android:lineSpacingExtra">0dp</item>
     <item name="android:textColor">@color/com_braze_inappmessage_text</item>
+    <item name="android:accessibilityLiveRegion">polite</item>
   </style>
   <style name="Braze.InAppMessage.ScrollView">
     <item name="android:fillViewport">true</item>
@@ -180,6 +182,7 @@
   </style>
   <style name="Braze.InAppMessage.Header.Modal">
     <item name="android:layout_width">match_parent</item>
+    <item name="android:accessibilityLiveRegion">polite</item>
   </style>
   <style name="Braze.InAppMessage.Message.Modal">
     <item name="android:layout_height">wrap_content</item>
@@ -188,6 +191,7 @@
     <item name="android:layout_gravity">center</item>
     <item name="android:padding">0.0dp</item>
     <item name="android:layout_marginTop">10.0dp</item>
+    <item name="android:accessibilityLiveRegion">polite</item>
   </style>
   <style name="Braze.InAppMessage.Layout.Image.Modal">
     <item name="android:contentDescription">@string/com_braze_inappmessage_image_content_description</item>
@@ -229,6 +233,7 @@
   </style>
   <style name="Braze.InAppMessage.Layout.Text.Modal">
     <item name="android:orientation">vertical</item>
+    <item name="android:importantForAccessibility">no</item>
   </style>
   <style name="Braze.InAppMessage.Button.Modal">
   </style>
@@ -290,6 +295,7 @@
     <item name="android:orientation">vertical</item>
     <item name="android:layout_width">match_parent</item>
     <item name="android:layout_height">wrap_content</item>
+    <item name="android:importantForAccessibility">no</item>
   </style>
   <style name="Braze.InAppMessage.Full.TextAndButtonContent">
     <item name="android:layout_marginBottom">30dp</item>

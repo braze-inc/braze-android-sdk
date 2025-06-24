@@ -24,7 +24,6 @@ import com.braze.BrazeInternal
 import com.braze.BrazeInternal.addSerializedContentCardToStorage
 import com.braze.BrazeInternal.refreshBanners
 import com.braze.BrazeInternal.refreshFeatureFlags
-import com.braze.BrazeInternal.requestGeofenceRefresh
 import com.braze.Constants
 import com.braze.Constants.isAmazonDevice
 import com.braze.IBrazeNotificationFactory
@@ -247,24 +246,6 @@ object BrazeNotificationUtils {
     ) {
         brazelog { "Sending push message received broadcast" }
         sendPushActionIntent(context, BrazeNotificationBroadcastType.RECEIVED, notificationExtras, payload)
-    }
-
-    /**
-     * Requests a geofence refresh from Braze if appropriate based on the payload of the push notification.
-     *
-     * @return True iff a geofence refresh was requested from Braze.
-     */
-    @JvmStatic
-    fun requestGeofenceRefreshIfAppropriate(payload: BrazeNotificationPayload): Boolean {
-        val context = payload.context
-        return if (payload.shouldSyncGeofences && context != null) {
-            brazelog { "Geofence sync key was true. Syncing geofences." }
-            requestGeofenceRefresh(context, true)
-            true
-        } else {
-            brazelog(V) { "Geofence sync key not included in push payload or false. Not syncing geofences." }
-            false
-        }
     }
 
     /**

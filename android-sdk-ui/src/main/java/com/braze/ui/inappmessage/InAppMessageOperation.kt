@@ -10,6 +10,6 @@ enum class InAppMessageOperation {
     companion object {
         @JvmStatic
         fun fromValue(value: String?): InAppMessageOperation? =
-            values().firstOrNull { it.name == value?.uppercase(Locale.US) }
+            entries.firstOrNull { it.name == value?.uppercase(Locale.US) }
     }
 }

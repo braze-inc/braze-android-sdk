@@ -18,10 +18,8 @@ open class ContentCardViewHolder(view: View, showUnreadIndicator: Boolean) :
         if (showUnreadIndicator) {
             unreadBar?.visibility = View.VISIBLE
             // Round the edges at the bottom
-            // getDrawable() is deprecated but the alternative is supported by 21+
-            @Suppress("deprecation")
             unreadBar?.background =
-                view.context.resources.getDrawable(R.drawable.com_braze_content_cards_unread_bar_background)
+                view.context.resources.getDrawable(R.drawable.com_braze_content_cards_unread_bar_background, null)
         } else {
             unreadBar?.visibility = View.GONE
         }

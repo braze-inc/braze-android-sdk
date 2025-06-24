@@ -18,6 +18,6 @@ enum class UnityMessageType(private val value: Int) {
 
     companion object {
         fun getTypeFromValue(value: Int) =
-            values().firstOrNull { it.value == value }
+            entries.firstOrNull { it.value == value }
     }
 }

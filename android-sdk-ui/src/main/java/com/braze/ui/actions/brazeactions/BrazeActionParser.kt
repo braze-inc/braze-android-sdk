@@ -47,7 +47,7 @@ object BrazeActionParser {
         INVALID("", NoOpStep);
 
         companion object {
-            private val map = values().associateBy { it.key }
+            private val map = entries.associateBy { it.key }
 
             @JvmStatic
             fun fromValue(value: String?): ActionType = map.getOrElse(value.orEmpty()) { INVALID }

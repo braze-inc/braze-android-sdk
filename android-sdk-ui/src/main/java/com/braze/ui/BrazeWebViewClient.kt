@@ -86,10 +86,6 @@ open class BrazeWebViewClient(
             assetLoader.shouldInterceptRequest(request.url)
         }
 
-    @Deprecated("Use shouldInterceptRequest(WebView, WebResourceRequest)")
-    override fun shouldInterceptRequest(view: WebView?, url: String?): WebResourceResponse? =
-        assetLoader.shouldInterceptRequest(Uri.parse(url))
-
     override fun onPageFinished(view: WebView, url: String) {
         super.onPageFinished(view, url)
         appendBridgeJavascript(view)
@@ -144,7 +140,7 @@ open class BrazeWebViewClient(
     override fun shouldOverrideUrlLoading(view: WebView, request: WebResourceRequest) =
         handleUrlOverride(request.url.toString())
 
-    @Deprecated("Deprecated in Java")
+    @Deprecated("Deprecated in API 24")
     override fun shouldOverrideUrlLoading(view: WebView, url: String) = handleUrlOverride(url)
 
     fun setWebViewClientStateListener(listener: IWebViewClientStateListener?) {

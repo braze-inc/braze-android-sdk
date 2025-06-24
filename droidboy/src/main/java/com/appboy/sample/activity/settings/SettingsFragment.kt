@@ -47,7 +47,6 @@ import com.braze.BrazeInternal
 import com.braze.BrazeUser
 import com.braze.Constants
 import com.braze.images.DefaultBrazeImageLoader
-import com.braze.images.IBrazeImageLoader
 import com.braze.models.outgoing.AttributionData
 import com.braze.support.BrazeLogger.Priority.E
 import com.braze.support.BrazeLogger.brazelog
@@ -56,8 +55,6 @@ import java.io.File
 
 @SuppressLint("ApplySharedPref")
 class SettingsFragment : PreferenceFragmentCompat() {
-    private lateinit var glideImageLoader: IBrazeImageLoader
-    private lateinit var imageLoader: IBrazeImageLoader
     private lateinit var sharedPreferences: SharedPreferences
     private val requestPermissionLauncher =
         registerForActivityResult(RequestPermission()) { result ->
@@ -100,8 +97,6 @@ class SettingsFragment : PreferenceFragmentCompat() {
         setPreferencesFromResource(R.xml.preferences, rootKey)
         val context = this.requireContext()
 
-        glideImageLoader = GlideImageLoader()
-        imageLoader = DefaultBrazeImageLoader(context)
         sharedPreferences = context.getSharedPreferences(getString(R.string.shared_prefs_location), Context.MODE_PRIVATE)
 
         setContentCardsPrefs(context)
@@ -293,11 +288,11 @@ class SettingsFragment : PreferenceFragmentCompat() {
 
     private fun setImageDisplayPrefs(context: Context) {
         setClickPreference("glide_image_loader_enable_setting_key") {
-            Braze.getInstance(context).imageLoader = glideImageLoader
+            Braze.getInstance(context).imageLoader = GlideImageLoader()
             showToast("Glide enabled")
         }
         setClickPreference("glide_image_loader_disable_setting_key") {
-            Braze.getInstance(context).imageLoader = imageLoader
+            Braze.getInstance(context).imageLoader = DefaultBrazeImageLoader(context)
             showToast("Glide disabled. Default Image loader in use.")
         }
     }

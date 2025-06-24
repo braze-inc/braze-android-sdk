@@ -104,6 +104,7 @@ class InAppMessageTesterFragment : Fragment(), AdapterView.OnItemSelectedListene
     private var frameColor: String? = null
     private var icon: String? = null
     private var image: String? = null
+    private var altImageText: String? = null
     private var buttons: String? = null
     private var orientation: String? = null
     private var messageTextAlign: String? = null
@@ -431,6 +432,7 @@ class InAppMessageTesterFragment : Fragment(), AdapterView.OnItemSelectedListene
         if (inAppMessage is IInAppMessageWithImage) {
             setImage(inAppMessage as IInAppMessageWithImage)
         }
+        setAltImageText(inAppMessage)
         setMessageTextAlign(inAppMessage)
         setAnimation(inAppMessage)
         setUseWebview(inAppMessage)
@@ -547,6 +549,17 @@ class InAppMessageTesterFragment : Fragment(), AdapterView.OnItemSelectedListene
                 inAppMessage.remoteImageUrl = null
             } else {
                 inAppMessage.remoteImageUrl = image
+            }
+        }
+    }
+
+    private fun setAltImageText(inAppMessage: IInAppMessage) {
+        // Set in-app message alt image text
+        if (!SpinnerUtils.spinnerItemNotSet(altImageText)) {
+            if (altImageText == getString(R.string.none)) {
+                inAppMessage.altImageText = null
+            } else {
+                inAppMessage.altImageText = altImageText
             }
         }
     }
@@ -794,6 +807,10 @@ class InAppMessageTesterFragment : Fragment(), AdapterView.OnItemSelectedListene
                 image =
                     SpinnerUtils.handleSpinnerItemSelected(parent, R.array.inapp_image_values)
 
+            R.id.inapp_alt_image_text_spinner ->
+                altImageText =
+                    SpinnerUtils.handleSpinnerItemSelected(parent, R.array.inapp_alt_image_text_values)
+
             R.id.inapp_button_spinner ->
                 buttons =
                     SpinnerUtils.handleSpinnerItemSelected(parent, R.array.inapp_button_values)
@@ -906,6 +923,7 @@ class InAppMessageTesterFragment : Fragment(), AdapterView.OnItemSelectedListene
             spinnerMap[R.id.inapp_uri_spinner] = R.array.inapp_uri_options
             spinnerMap[R.id.inapp_icon_spinner] = R.array.inapp_icon_options
             spinnerMap[R.id.inapp_image_spinner] = R.array.inapp_image_options
+            spinnerMap[R.id.inapp_alt_image_text_spinner] = R.array.inapp_alt_image_text_options
             spinnerMap[R.id.inapp_button_spinner] = R.array.inapp_button_options
             spinnerMap[R.id.inapp_orientation_spinner] = R.array.inapp_orientation_options
             spinnerMap[R.id.inapp_header_align_spinner] = R.array.inapp_align_options

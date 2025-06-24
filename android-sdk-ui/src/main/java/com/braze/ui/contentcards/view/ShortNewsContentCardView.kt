@@ -40,6 +40,7 @@ open class ShortNewsContentCardView(context: Context) : BaseContentCardView<Shor
                 shortNewsCardViewHolder.imageView,
                 ASPECT_RATIO,
                 card.imageUrl,
+                card.altImageText,
                 card
             )
             safeSetClipToOutline(shortNewsCardViewHolder.imageView)

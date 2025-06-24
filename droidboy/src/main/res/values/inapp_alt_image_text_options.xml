@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="inapp_alt_image_text_options">
+        <item>Alt Image Text: Not Set</item>
+        <item>Alt Image Text: None</item>
+        <item>Alt Image Text: One Word</item>
+        <item>Alt Image Text: Short Length</item>
+        <item>Alt Image Text: Medium Length</item>
+        <item>Alt Image Text: Long Length</item>
+    </string-array>
+    <string-array name="inapp_alt_image_text_values">
+        <item>@string/braze_not_set</item>
+        <item>@string/none</item>
+        <item>@string/alt_image_text_one_word</item>
+        <item>@string/alt_image_text_short</item>
+        <item>@string/alt_image_text_medium</item>
+        <item>@string/alt_image_text_long</item>
+    </string-array>
+</resources>

@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Context
 import android.content.pm.ActivityInfo
+import android.os.Looper
 import androidx.annotation.VisibleForTesting
 import com.braze.Braze.Companion.getInstance
 import com.braze.BrazeInternal
@@ -435,8 +436,15 @@ open class BrazeInAppMessageManager : InAppMessageManagerBase() {
                     inAppMessageWrapperView.inAppMessage
                 )
             }
-            BrazeCoroutineScope.launch(Dispatchers.Main) {
+
+            // Close the in-app message view wrapper without
+            // any delay if we're already on the main UI thread.
+            if (Looper.myLooper() == Looper.getMainLooper()) {
                 inAppMessageWrapperView.close()
+            } else {
+                BrazeCoroutineScope.launch(Dispatchers.Main) {
+                    inAppMessageWrapperView.close()
+                }
             }
         }
     }

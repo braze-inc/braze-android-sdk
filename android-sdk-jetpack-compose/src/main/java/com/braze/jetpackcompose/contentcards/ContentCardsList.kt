@@ -1,6 +1,5 @@
 package com.braze.jetpackcompose.contentcards
 
-import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -61,7 +60,7 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 @Suppress("LongMethod", "ComplexMethod", "LongParameterList", "VariableNaming", "MagicNumber", "NestedBlockDepth")
-@OptIn(ExperimentalMaterialApi::class, ExperimentalFoundationApi::class)
+@OptIn(ExperimentalMaterialApi::class)
 @Composable
 /**
  * BrazeContentCardsList displays a list of Content Cards.

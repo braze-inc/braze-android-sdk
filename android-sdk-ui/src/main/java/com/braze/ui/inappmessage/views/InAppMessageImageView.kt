@@ -111,6 +111,12 @@ open class InAppMessageImageView(context: Context?, attrs: AttributeSet?) :
         }
     }
 
+    override fun setAltImageText(altImage: String?) {
+        if (altImage != null) {
+            contentDescription = altImage
+        }
+    }
+
     /**
      * Clips the input canvas to a rounded rectangle of the specified width and height, using the
      * radii set in [setCornersRadiiPx].

@@ -100,7 +100,7 @@ open class UriAction : IAction {
     /**
      * Opens the remote scheme Uri in [BrazeWebViewActivity].
      */
-    protected fun openUriWithWebViewActivity(context: Context, uri: Uri, extras: Bundle?) {
+    protected open fun openUriWithWebViewActivity(context: Context, uri: Uri, extras: Bundle?) {
         val intent = getWebViewActivityIntent(context, uri, extras)
         intent.flags = BrazeDeeplinkHandler.getInstance()
             .getIntentFlags(IBrazeDeeplinkHandler.IntentFlagPurpose.URI_ACTION_OPEN_WITH_WEBVIEW_ACTIVITY)
@@ -130,7 +130,7 @@ open class UriAction : IAction {
      *
      * @see [UriAction.getIntentArrayWithConfiguredBackStack]
      */
-    protected fun openUriWithWebViewActivityFromPush(context: Context, uri: Uri, extras: Bundle?) {
+    protected open fun openUriWithWebViewActivityFromPush(context: Context, uri: Uri, extras: Bundle?) {
         val configurationProvider = BrazeInternal.getConfigurationProvider(context)
         try {
             val webViewIntent = getWebViewActivityIntent(context, uri, extras)
@@ -153,7 +153,7 @@ open class UriAction : IAction {
      *
      * @see [UriAction.getIntentArrayWithConfiguredBackStack]
      */
-    protected fun openUriWithActionViewFromPush(context: Context, uri: Uri, extras: Bundle?) {
+    protected open fun openUriWithActionViewFromPush(context: Context, uri: Uri, extras: Bundle?) {
         val configurationProvider = BrazeInternal.getConfigurationProvider(context)
         try {
             val uriIntent = getActionViewIntent(context, uri, extras)
@@ -209,7 +209,6 @@ open class UriAction : IAction {
         val resolveInfos = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
             context.packageManager.queryIntentActivities(intent, PackageManager.ResolveInfoFlags.of(0))
         } else {
-            @Suppress("DEPRECATION")
             context.packageManager.queryIntentActivities(intent, 0)
         }
         if (resolveInfos.size > 1) {

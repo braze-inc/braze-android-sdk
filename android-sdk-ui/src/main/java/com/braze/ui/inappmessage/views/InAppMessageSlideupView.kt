@@ -37,6 +37,7 @@ open class InAppMessageSlideupView(context: Context?, attrs: AttributeSet?) :
     fun applyInAppMessageParameters(inAppMessage: IInAppMessage) {
         inAppMessageImageView = findViewById(R.id.com_braze_inappmessage_slideup_imageview)
         inAppMessageImageView?.setInAppMessageImageCropType(inAppMessage.cropType)
+        inAppMessageImageView?.setAltImageText(inAppMessage.altImageText)
     }
 
     fun setMessageChevron(color: Int, clickAction: ClickAction) {

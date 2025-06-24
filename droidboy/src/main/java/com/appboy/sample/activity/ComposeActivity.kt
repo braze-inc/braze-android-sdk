@@ -5,7 +5,6 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.BackHandler
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
-import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.basicMarquee
 import androidx.compose.foundation.layout.Arrangement
@@ -201,7 +200,6 @@ class ComposeActivity : ComponentActivity() {
     }
 }
 
-@OptIn(ExperimentalFoundationApi::class)
 val myCustomCardRenderer: @Composable ((Card) -> Boolean) = { card ->
     if (card.cardType == CardType.TEXT_ANNOUNCEMENT) {
         val textCard = card as TextAnnouncementCard
@@ -240,7 +238,6 @@ private fun GetMyBrazeStyle(content: @Composable () -> Unit) {
     )
 }
 
-@OptIn(ExperimentalFoundationApi::class)
 @Composable
 @Suppress("UnusedPrivateMember")
 private fun GetMyOtherBrazeStyle(content: @Composable () -> Unit) {

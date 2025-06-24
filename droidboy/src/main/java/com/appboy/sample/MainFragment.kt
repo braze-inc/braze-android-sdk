@@ -201,7 +201,7 @@ class MainFragment : Fragment() {
                     value.setFirstName(null)
                     value.setLastName(null)
                     value.setEmail(null)
-                    value.setGender(Gender.UNKNOWN)
+                    value.setGender(null)
                     value.setCountry(null)
                     value.setLanguage(null)
                     value.setHomeCity(null)

@@ -1,3 +1,31 @@
+## 37.0.0
+
+[Release Date](https://github.com/braze-inc/braze-android-sdk/releases/tag/v37.0.0)
+
+#### Breaking
+- Removed the config field `BrazeConfig.setIsHtmlInAppMessageApplyWindowInsetsEnabled()` and defaulted its behavior to true. The SDK will now unconditionally apply window insets to all HTML In-App Messages.
+- Removed `IBraze.requestContentCardsRefresh(boolean)`. Please instead use `IBraze.requestContentCardsRefresh()` and `IBraze.requestContentCardsRefreshFromCache()`.
+- Removed `BrazeConfig.Builder.setDeviceObjectWhitelist()`. Please use `BrazeConfig.Builder.setDeviceObjectAllowlist()` instead.
+- Removed `BrazeConfig.Builder.setDeviceObjectWhitelistEnabled()`. Please use `BrazeConfig.Builder.setDeviceObjectAllowlistEnabled()` instead.
+- Removed `ContentCardsUpdatedEvent.getLastUpdatedInSecondsFromEpoch`. Please instead use `getTimestampSeconds()`(Java) or `timestampSeconds`(Kotlin).
+- Removed `FeatureFlag.getTimestamp(key)`. Please use `FeatureFlag.getTimestampProperty(key)` instead.
+- Removed `BrazeWebViewClient.shouldInterceptRequest(view, url)`. Please use `BrazeWebViewClient.shouldInterceptRequest(view, request)` instead.
+- Removed `IBraze.getInstallTrackingId()`. Please use `IBraze.deviceId` instead.
+
+##### Fixed
+- Fixed an issue where a `LeakedClosableViolation` would occur when disabling and re-enabling the SDK.
+- Fixed an issue with Android TalkBack announcing "double tap to activate" on header and body text in In-App Messages.
+
+##### Added
+- Added support for Android 16 (API 36).
+  - Note that apps targeting API 36 should update to this SDK version.
+- Added `shutdown()` to `IBrazeImageLoader` to allow for cleanup of resources.
+- Improved accessibility support across In-App Messages and Content Cards by introducing alt text for images (by setting their content description).
+- Added the ability to pass `null` to `BrazeUser.setGender(gender)` in order to unset the gender value.
+
+##### Changed
+- `UriAction.openUriWithActionViewFromPush`, `UriAction.openUriWithWebViewActivity`, and `UriAction.openUriWithWebViewActivityFromPush` are marked as `open` and can now be overridden.
+
 ## 36.0.0
 
 [Release Date](https://github.com/braze-inc/braze-android-sdk/releases/tag/v36.0.0)

@@ -32,6 +32,7 @@ open class ImageOnlyContentCardView(context: Context) : BaseContentCardView<Imag
                 imageOnlyViewHolder.imageView,
                 card.aspectRatio,
                 card.imageUrl,
+                card.altImageText,
                 card
             )
         }

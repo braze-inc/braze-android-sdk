@@ -13,11 +13,11 @@
         app:font="@font/sailec_regular"/>
 
     <font android:fontStyle="normal"
-      android:fontWeight="400"
+      android:fontWeight="700"
       android:font="@font/sailec_bold"
 
       app:fontStyle="normal"
-      app:fontWeight="400"
+      app:fontWeight="700"
       app:font="@font/sailec_bold"/>
 
 </font-family>

@@ -45,16 +45,21 @@ abstract class BaseContentCardView<T : Card>(context: Context) : BaseCardView<T>
      * @param imageView          The ImageView
      * @param cardAspectRatio    The aspect ratio as set by the card itself
      * @param cardImageUrl       The image url
+     * @param cardAltImageText   The image content description text to be announced by TalkBack
      * @param card               The card being rendered
      */
     fun setOptionalCardImage(
         imageView: ImageView?,
         cardAspectRatio: Float,
         cardImageUrl: String?,
+        cardAltImageText: String?,
         card: Card
     ) {
         if (imageView != null && cardImageUrl != null) {
             setImageViewToUrl(imageView, cardImageUrl, cardAspectRatio, card)
+            if (cardAltImageText != null) {
+                imageView.contentDescription = cardAltImageText
+            }
         }
     }
 
@@ -66,13 +71,10 @@ abstract class BaseContentCardView<T : Card>(context: Context) : BaseCardView<T>
         imageView?.clipToOutline = true
     }
 
-    // getDrawable() is deprecated but the alternative is supported by 21+
     protected fun setViewBackground(view: View) {
-        @Suppress("deprecation")
-        view.background = resources.getDrawable(R.drawable.com_braze_content_card_background)
+        view.background = resources.getDrawable(R.drawable.com_braze_content_card_background, null)
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            @Suppress("deprecation")
-            view.foreground = resources.getDrawable(R.drawable.com_braze_content_card_scrim)
+            view.foreground = resources.getDrawable(R.drawable.com_braze_content_card_scrim, null)
         }
     }
 }

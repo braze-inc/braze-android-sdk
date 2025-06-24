@@ -30,7 +30,6 @@ import com.braze.push.BrazeNotificationUtils.isBrazePushMessage
 import com.braze.push.BrazeNotificationUtils.isNotificationMessage
 import com.braze.push.BrazeNotificationUtils.refreshBannersIfAppropriate
 import com.braze.push.BrazeNotificationUtils.refreshFeatureFlagsIfAppropriate
-import com.braze.push.BrazeNotificationUtils.requestGeofenceRefreshIfAppropriate
 import com.braze.push.BrazeNotificationUtils.sendPushMessageReceivedBroadcast
 import com.braze.push.BrazeNotificationUtils.setNotificationDurationAlarm
 import com.braze.push.BrazeNotificationUtils.wakeScreenIfAppropriate
@@ -266,7 +265,6 @@ open class BrazePushReceiver : BroadcastReceiver() {
             // Parse the notification for any associated ContentCard
             BrazeNotificationUtils.handleContentCardsSerializedCardIfPresent(payload)
 
-            requestGeofenceRefreshIfAppropriate(payload)
             refreshFeatureFlagsIfAppropriate(payload)
             refreshBannersIfAppropriate(payload)
 
