@@ -3,7 +3,6 @@ package com.braze.ui
 import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.Bitmap
-import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.view.View
@@ -15,6 +14,7 @@ import android.webkit.WebResourceRequest
 import android.webkit.WebSettings
 import android.webkit.WebView
 import android.webkit.WebViewClient
+import androidx.core.net.toUri
 import androidx.fragment.app.FragmentActivity
 import com.braze.BrazeInternal
 import com.braze.Constants
@@ -26,6 +26,7 @@ import com.braze.support.REMOTE_SCHEMES
 import com.braze.ui.BrazeDeeplinkHandler.Companion.getInstance
 import com.braze.ui.actions.IAction
 import com.braze.ui.support.isDeviceInNightMode
+import androidx.core.graphics.createBitmap
 
 /**
  * Note that this Activity is not and should not be exported by default in
@@ -97,7 +98,7 @@ open class BrazeWebViewActivity : FragmentActivity() {
              * black & white play icon used as the default poster.
              */
             override fun getDefaultVideoPoster(): Bitmap =
-                Bitmap.createBitmap(1, 1, Bitmap.Config.ARGB_8888)
+                createBitmap(1, 1)
         }
     }
 
@@ -127,7 +128,7 @@ open class BrazeWebViewActivity : FragmentActivity() {
              */
             private fun handleUrlOverride(context: Context, url: String): Boolean? {
                 try {
-                    if (REMOTE_SCHEMES.contains(Uri.parse(url).scheme)) {
+                    if (REMOTE_SCHEMES.contains(url.toUri().scheme)) {
                         return null
                     }
                     val action: IAction? = getInstance().createUriActionFromUrlString(url, intent.extras, false, Channel.UNKNOWN)

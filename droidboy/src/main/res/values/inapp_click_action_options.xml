@@ -2,13 +2,11 @@
 <resources>
   <string-array name="inapp_click_action_options">
     <item>Click Action: Not Set</item>
-    <item>Click Action: Newsfeed</item>
     <item>Click Action: URI</item>
     <item>Click Action: None</item>
   </string-array>
   <string-array name="inapp_click_action_values">
     <item>@string/braze_not_set</item>
-    <item>newsfeed</item>
     <item>uri</item>
     <item>@string/none</item>
   </string-array>

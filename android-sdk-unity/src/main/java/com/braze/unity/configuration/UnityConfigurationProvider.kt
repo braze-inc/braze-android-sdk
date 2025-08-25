@@ -14,10 +14,6 @@ class UnityConfigurationProvider(context: Context) : CachedConfigurationProvider
         get() = getStringValue(INAPP_LISTENER_GAME_OBJECT_NAME_KEY, null)
     val inAppMessageListenerCallbackMethodName: String?
         get() = getStringValue(INAPP_LISTENER_CALLBACK_METHOD_NAME_KEY, null)
-    val feedListenerGameObjectName: String?
-        get() = getStringValue(FEED_LISTENER_GAME_OBJECT_NAME_KEY, null)
-    val feedListenerCallbackMethodName: String?
-        get() = getStringValue(FEED_LISTENER_CALLBACK_METHOD_NAME_KEY, null)
     @Suppress("BooleanPropertyNaming")
     val showInAppMessagesAutomaticallyKey: Boolean
         get() = getBooleanValue(INAPP_SHOW_INAPP_MESSAGES_AUTOMATICALLY_KEY, true)
@@ -90,13 +86,6 @@ class UnityConfigurationProvider(context: Context) : CachedConfigurationProvider
                     methodName
                 )
             }
-            UnityMessageType.NEWS_FEED -> {
-                putStringIntoRuntimeConfiguration(FEED_LISTENER_GAME_OBJECT_NAME_KEY, gameObject)
-                putStringIntoRuntimeConfiguration(
-                    FEED_LISTENER_CALLBACK_METHOD_NAME_KEY,
-                    methodName
-                )
-            }
             UnityMessageType.CONTENT_CARDS_UPDATED -> {
                 putStringIntoRuntimeConfiguration(
                     CONTENT_CARDS_UPDATED_LISTENER_GAME_OBJECT_NAME_KEY, gameObject
@@ -143,12 +132,6 @@ class UnityConfigurationProvider(context: Context) : CachedConfigurationProvider
             "com_braze_inapp_auto_set_manager_listener_key"
         private const val INAPP_INITIAL_DISPLAY_OPERATION_KEY =
             "com_braze_inapp_initial_display_operation_key"
-
-        // News Feed listener
-        private const val FEED_LISTENER_GAME_OBJECT_NAME_KEY =
-            "com_braze_feed_listener_game_object_name"
-        private const val FEED_LISTENER_CALLBACK_METHOD_NAME_KEY =
-            "com_braze_feed_listener_callback_method_name"
 
         // Push received
         private const val PUSH_RECEIVED_GAME_OBJECT_NAME_KEY =

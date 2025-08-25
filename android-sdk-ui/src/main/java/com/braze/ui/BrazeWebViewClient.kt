@@ -31,6 +31,7 @@ import kotlinx.coroutines.withContext
 import java.io.File
 import java.util.concurrent.atomic.AtomicBoolean
 import com.braze.ui.banners.listeners.IBannerWebViewClientListener
+import androidx.core.net.toUri
 
 open class BrazeWebViewClient(
     val context: Context,
@@ -181,7 +182,7 @@ open class BrazeWebViewClient(
             brazelog(I) { it }
             return true
         }
-        val uri = Uri.parse(url)
+        val uri = url.toUri()
         val queryBundle = getBundleFromUrl(url)
         if (uri.scheme != null && uri.scheme == BRAZE_SCHEME) {
             handleQueryAction(url, uri, queryBundle)
@@ -219,19 +220,6 @@ open class BrazeWebViewClient(
                     bannerWebViewClientListener?.onCloseAction(context, url, queryBundle)
                 }
 
-            AUTHORITY_NAME_NEWSFEED ->
-                if (type == Type.IN_APP_MESSAGE) {
-                    inAppMessage?.let {
-                        inAppMessageWebViewClientListener?.onNewsfeedAction(
-                            it,
-                            url,
-                            queryBundle
-                        )
-                    }
-                } else if (type == Type.BANNER) {
-                    bannerWebViewClientListener?.onNewsfeedAction(context, url, queryBundle)
-                }
-
             AUTHORITY_NAME_CUSTOM_EVENT ->
                 if (type == Type.IN_APP_MESSAGE) {
                     inAppMessage?.let {
@@ -260,7 +248,6 @@ open class BrazeWebViewClient(
 
         private const val BRAZE_SCHEME = "appboy"
         private const val AUTHORITY_NAME_CLOSE = "close"
-        private const val AUTHORITY_NAME_NEWSFEED = "feed"
         private const val AUTHORITY_NAME_CUSTOM_EVENT = "customEvent"
 
         private const val BRAZE_CUSTOM_EVENT_NAME_KEY = "name"
@@ -295,7 +282,7 @@ open class BrazeWebViewClient(
             if (url.isBlank()) {
                 return queryBundle
             }
-            val uri = Uri.parse(url)
+            val uri = url.toUri()
 
             uri.getQueryParameters().forEach { entry ->
                 queryBundle.putString(entry.key, entry.value)

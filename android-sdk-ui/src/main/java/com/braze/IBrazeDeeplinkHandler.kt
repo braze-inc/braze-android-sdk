@@ -5,7 +5,6 @@ import android.net.Uri
 import android.os.Bundle
 import com.braze.enums.Channel
 import com.braze.push.NotificationTrampolineActivity
-import com.braze.ui.actions.NewsfeedAction
 import com.braze.ui.actions.UriAction
 
 /**
@@ -56,17 +55,6 @@ interface IBrazeDeeplinkHandler {
          */
         URI_UTILS_GET_MAIN_ACTIVITY_INTENT
     }
-
-    /**
-     * This delegate method will be called when Braze wants to display the news feed.
-     *
-     * This method should implement the necessary logic to navigate to the to the Braze news feed
-     * that is integrated into the app.
-     *
-     * @param context        The current context.
-     * @param newsfeedAction The news feed action to execute.
-     */
-    fun gotoNewsFeed(context: Context, newsfeedAction: NewsfeedAction)
 
     /**
      * This delegate method will be called when Braze wants to navigate to a particular URI. If an

@@ -17,16 +17,14 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.drawerlayout.widget.DrawerLayout
-import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.Lifecycle
 import androidx.preference.PreferenceManager
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import androidx.viewpager2.widget.ViewPager2
+import com.appboy.sample.BannersFragment
 import com.appboy.sample.BuildConfig
-import com.appboy.sample.FeedCategoriesFragment
-import com.appboy.sample.FeedCategoriesFragment.NoticeDialogListener
 import com.appboy.sample.InAppMessageTesterFragment
 import com.appboy.sample.MainFragment
 import com.appboy.sample.PushTesterFragment
@@ -37,21 +35,17 @@ import com.appboy.sample.util.ViewUtils
 import com.braze.Braze
 import com.braze.Constants
 import com.braze.configuration.BrazeConfigurationProvider
-import com.braze.enums.CardCategory
 import com.braze.events.IEventSubscriber
 import com.braze.events.NoMatchingTriggerEvent
 import com.braze.support.BrazeLogger.Priority.E
 import com.braze.support.BrazeLogger.Priority.I
 import com.braze.support.BrazeLogger.brazelog
 import com.braze.support.hasPermission
-import com.braze.ui.BrazeFeedFragment
 import com.braze.ui.contentcards.ContentCardsFragment
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
-import java.util.*
 
-class DroidBoyActivity : AppCompatActivity(), NoticeDialogListener {
-    private var feedCategories: EnumSet<CardCategory>? = null
+class DroidBoyActivity : AppCompatActivity() {
     private var drawerLayout: DrawerLayout? = null
     private var noMatchingTriggerEventSubscriber: IEventSubscriber<NoMatchingTriggerEvent>? = null
     private var noInAppMessageTriggeredPrefListener: SharedPreferences.OnSharedPreferenceChangeListener? = null
@@ -69,17 +63,6 @@ class DroidBoyActivity : AppCompatActivity(), NoticeDialogListener {
             } else {
                 showToast("All required location permissions granted.")
             }
-        }
-
-    private val feedFragment: BrazeFeedFragment?
-        get() {
-            val fragments = supportFragmentManager.fragments
-            for (i in fragments.indices) {
-                if (fragments[i] is BrazeFeedFragment) {
-                    return fragments[i] as BrazeFeedFragment?
-                }
-            }
-            return null
         }
 
     public override fun onCreate(savedInstanceState: Bundle?) {
@@ -109,21 +92,7 @@ class DroidBoyActivity : AppCompatActivity(), NoticeDialogListener {
             tab.text = (viewPager.adapter as Adapter).getTitle(position)
         }.attach()
         drawerLayout = findViewById(R.id.root)
-        setupNewsFeedListener()
         setupNoInAppMessageTriggeredListener()
-    }
-
-    private fun setupNewsFeedListener() {
-        val newsFeedSharedPrefs = getSharedPreferences(getString(R.string.feed), MODE_PRIVATE)
-        // We implement the listener this way so that it doesn't get garbage collected when we navigate to and from this activity
-        val newsfeedSortListener =
-            SharedPreferences.OnSharedPreferenceChangeListener { _: SharedPreferences?, _: String? ->
-                val sharedPref1 = getSharedPreferences(getString(R.string.feed), MODE_PRIVATE)
-                feedFragment?.let {
-                    it.sortEnabled = sharedPref1.getBoolean(getString(R.string.sort_feed), false)
-                }
-            }
-        newsFeedSharedPrefs.registerOnSharedPreferenceChangeListener(newsfeedSortListener)
     }
 
     private fun setupNoInAppMessageTriggeredListener() {
@@ -255,7 +224,6 @@ class DroidBoyActivity : AppCompatActivity(), NoticeDialogListener {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
-            R.id.feed_activity_launch -> startActivity(Intent(this, FeedFragmentActivity::class.java))
             R.id.action_settings -> startActivity(Intent(this, SettingsActivity::class.java))
             R.id.action_compose -> startActivity(Intent(this, ComposeActivity::class.java))
             R.id.geofences_map -> {
@@ -263,20 +231,13 @@ class DroidBoyActivity : AppCompatActivity(), NoticeDialogListener {
                 startActivity(Intent(applicationContext, GeofencesMapActivity::class.java))
             }
             R.id.iam_sandbox -> startActivity(Intent(applicationContext, InAppMessageSandboxActivity::class.java))
-            R.id.feed_categories -> {
-                val feedFragment = feedFragment
-                if (feedFragment != null) {
-                    val newFragment: DialogFragment = FeedCategoriesFragment.newInstance(feedFragment.categories ?: CardCategory.getAllCategories())
-                    newFragment.show(supportFragmentManager, "categories")
-                } else {
-                    showToast("Feed fragment hasn't been instantiated yet.")
-                }
-            }
             R.id.action_flush -> {
                 Braze.getInstance(this).requestContentCardsRefresh()
                 Braze.getInstance(this).requestImmediateDataFlush()
                 showToast("Requested data flush and content card sync.")
             }
+            R.id.sample_activity -> startActivity(Intent(this, SampleActivity::class.java))
+            R.id.sample_appcompatactivity -> startActivity(Intent(this, SampleAppCompatActivity::class.java))
             else -> brazelog(E) { "The ${item.title} options item was not found. Ignoring." }
         }
         return true
@@ -325,11 +286,7 @@ class DroidBoyActivity : AppCompatActivity(), NoticeDialogListener {
     private fun navigateToDestination(extras: Bundle) {
         // DESTINATION_VIEW holds the name of the fragment we're trying to visit.
         val destination = extras.getString(resources.getString(R.string.destination_view))
-        if (resources.getString(R.string.feed_key) == destination) {
-            val feedFragment = BrazeFeedFragment()
-            feedFragment.categories = feedCategories
-            replaceCurrentFragment(feedFragment)
-        } else if (resources.getString(R.string.home) == destination) {
+        if (resources.getString(R.string.home) == destination) {
             replaceCurrentFragment(MainFragment())
         }
     }
@@ -341,13 +298,6 @@ class DroidBoyActivity : AppCompatActivity(), NoticeDialogListener {
                 it.windowToken,
                 InputMethodManager.HIDE_IMPLICIT_ONLY
             )
-        }
-    }
-
-    override fun onDialogPositiveClick(dialog: FeedCategoriesFragment) {
-        feedFragment?.let {
-            feedCategories = EnumSet.copyOf(dialog.selectedCategories)
-            it.categories = feedCategories
         }
     }
 
@@ -386,7 +336,10 @@ class DroidBoyActivity : AppCompatActivity(), NoticeDialogListener {
                 { FeatureFlagFragment() },
                 "Flags"
             ),
-
+            FragmentInfo(
+                { BannersFragment() },
+                "Banners"
+            )
         )
 
         override fun getItemCount() = fragmentInfo.size

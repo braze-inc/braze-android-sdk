@@ -3,7 +3,6 @@ package com.appboy.sample
 import android.content.Context
 import android.content.SharedPreferences
 import android.graphics.Color
-import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -13,6 +12,7 @@ import android.widget.Button
 import android.widget.CheckBox
 import android.widget.CompoundButton
 import android.widget.Toast
+import androidx.core.net.toUri
 import androidx.fragment.app.Fragment
 import com.appboy.sample.util.SpinnerUtils
 import com.braze.Braze
@@ -359,8 +359,8 @@ class InAppMessageTesterFragment : Fragment(), AdapterView.OnItemSelectedListene
         inAppMessage.header = "Hello from Braze!"
         val messageButtons = ArrayList<MessageButton>()
         val buttonOne = MessageButton()
-        buttonOne.text = "NewsFeed"
-        buttonOne.setClickBehavior(ClickAction.NEWS_FEED)
+        buttonOne.text = "Close Message"
+        buttonOne.setClickBehavior(ClickAction.NONE)
         messageButtons.add(buttonOne)
         inAppMessage.messageButtons = messageButtons
         addMessageButtons(inAppMessage)
@@ -382,7 +382,7 @@ class InAppMessageTesterFragment : Fragment(), AdapterView.OnItemSelectedListene
     private fun addInAppMessageSlideup(inAppMessage: InAppMessageSlideup) {
         inAppMessage.message = "Welcome to Braze! This is a slideup in-app message."
         inAppMessage.icon = "\uf091"
-        inAppMessage.setClickBehavior(ClickAction.NEWS_FEED)
+        inAppMessage.setClickBehavior(ClickAction.NONE)
         setSlideFrom(inAppMessage)
         setChevronColor(inAppMessage)
     }
@@ -578,14 +578,12 @@ class InAppMessageTesterFragment : Fragment(), AdapterView.OnItemSelectedListene
 
     private fun addClickAction(inAppMessage: IInAppMessage): Boolean {
         // set click action if defined
-        if ("newsfeed" == clickAction) {
-            inAppMessage.setClickBehavior(ClickAction.NEWS_FEED)
-        } else if ("uri" == clickAction) {
+        if ("uri" == clickAction) {
             if (SpinnerUtils.spinnerItemNotSet(uri)) {
                 Toast.makeText(context, "Please choose a URI.", Toast.LENGTH_LONG).show()
                 return false
             } else {
-                inAppMessage.setClickBehavior(ClickAction.URI, Uri.parse(uri))
+                inAppMessage.setClickBehavior(ClickAction.URI, uri?.toUri())
             }
         } else if (getString(R.string.none) == clickAction) {
             inAppMessage.setClickBehavior(ClickAction.NONE)
@@ -655,19 +653,22 @@ class InAppMessageTesterFragment : Fragment(), AdapterView.OnItemSelectedListene
             val buttonTwo = MessageButton()
             when (buttons) {
                 "one" -> {
-                    buttonOne.setClickBehavior(ClickAction.NEWS_FEED)
-                    buttonOne.text = "News Feed"
+                    buttonOne.setClickBehavior(ClickAction.NONE)
+                    buttonOne.text = "Close Message"
                     messageButtons.add(buttonOne)
                 }
 
                 "one_long" -> {
-                    buttonOne.setClickBehavior(ClickAction.NEWS_FEED)
+                    buttonOne.setClickBehavior(ClickAction.NONE)
                     buttonOne.text = getString(R.string.message_2400)
                     messageButtons.add(buttonOne)
                 }
 
                 "push_prompt_one" -> {
-                    val pushPromptBrazeActionUri = Uri.parse(getStringFromAssets(requireContext(), "braze_actions/show_push_prompt.txt"))
+                    val pushPromptBrazeActionUri = getStringFromAssets(
+                        requireContext(),
+                        "braze_actions/show_push_prompt.txt"
+                    ).toUri()
                     buttonOne.setClickBehavior(ClickAction.URI, pushPromptBrazeActionUri)
                     buttonOne.text = "Show Push Prompt"
                     messageButtons.add(buttonOne)
@@ -678,12 +679,12 @@ class InAppMessageTesterFragment : Fragment(), AdapterView.OnItemSelectedListene
                     buttonOne.text = "No Webview"
                     buttonOne.setClickBehavior(
                         ClickAction.URI,
-                        Uri.parse(resources.getString(R.string.braze_homepage_url))
+                        resources.getString(R.string.braze_homepage_url).toUri()
                     )
                     buttonTwo.text = "Webview"
                     buttonTwo.setClickBehavior(
                         ClickAction.URI,
-                        Uri.parse(resources.getString(R.string.braze_homepage_url))
+                        resources.getString(R.string.braze_homepage_url).toUri()
                     )
                     buttonTwo.openUriInWebview = true
                     if ("long" == buttons) {
@@ -698,12 +699,12 @@ class InAppMessageTesterFragment : Fragment(), AdapterView.OnItemSelectedListene
                     buttonOne.text = "TELEPHONE"
                     buttonOne.setClickBehavior(
                         ClickAction.URI,
-                        Uri.parse(resources.getString(R.string.telephone_uri))
+                        resources.getString(R.string.telephone_uri).toUri()
                     )
                     buttonTwo.text = "PLAY STORE"
                     buttonTwo.setClickBehavior(
                         ClickAction.URI,
-                        Uri.parse(resources.getString(R.string.play_store_uri))
+                        resources.getString(R.string.play_store_uri).toUri()
                     )
                     messageButtons.add(buttonOne)
                     messageButtons.add(buttonTwo)

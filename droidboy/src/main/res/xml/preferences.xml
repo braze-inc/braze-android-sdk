@@ -82,6 +82,17 @@
       android:summary="Wipes all data from the SDK"
       android:title="Wipe Data from the SDK" />
   </PreferenceCategory>
+  <PreferenceCategory android:title="@string/delayed_init_title">
+    <Preference
+      android:key="enable_delayed_init_queue"
+      android:title="Enable Delayed Initialization (Queue Push Analytics)" />
+    <Preference
+        android:key="enable_delayed_init_drop"
+        android:title="Enable Delayed Initialization (Drop Push Analytics)" />
+    <Preference
+      android:key="disable_delayed_init"
+      android:title="Disable Delayed Initialization" />
+  </PreferenceCategory>
   <PreferenceCategory
     android:key="settings_network_control_key"
     android:title="@string/network_control_title"
@@ -180,21 +191,6 @@
       android:summaryOff="Not displaying content with no limits"
       android:summaryOn="Displaying content with no limits"
       android:title="Enable Display No Limits Mode" />
-  </PreferenceCategory>
-  <PreferenceCategory
-    android:key="settings_feed_section_key"
-    android:title="@string/feed"
-    app:initialExpandedChildrenCount="0">
-    <SwitchPreferenceCompat
-      android:defaultValue="false"
-      android:key="sort_feed"
-      android:summary="@string/sort_feed_summary"
-      android:title="@string/sort_feed" />
-    <SwitchPreferenceCompat
-      android:defaultValue="false"
-      android:key="set_custom_news_feed_card_click_action_listener"
-      android:summary="@string/custom_news_feed_card_click_action_listener_summary"
-      android:title="@string/custom_news_feed_card_click_action_listener" />
   </PreferenceCategory>
   <PreferenceCategory
     android:key="settings_inappmessage_section_key"

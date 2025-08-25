@@ -13,7 +13,6 @@ import android.content.Context
 import android.content.Intent
 import android.content.res.Configuration
 import android.graphics.BitmapFactory
-import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.os.PowerManager
@@ -52,6 +51,7 @@ import com.braze.support.parseJsonObjectIntoBundle
 import com.braze.ui.BrazeDeeplinkHandler.Companion.getInstance
 import com.braze.ui.support.getMainActivityIntent
 import org.json.JSONObject
+import androidx.core.net.toUri
 
 @Suppress("LargeClass", "TooManyFunctions")
 object BrazeNotificationUtils {
@@ -135,7 +135,8 @@ object BrazeNotificationUtils {
 
     /**
      * Opens any available deep links with an Intent.ACTION_VIEW intent, placing the main activity
-     * on the back stack. If no deep link is available, opens the main activity.
+     * on the back stack. If no deep link is available or delayed initialization is enabled,
+     * opens the main activity.
      *
      * @param context
      * @param intent  the internal notification clicked intent constructed in
@@ -162,7 +163,8 @@ object BrazeNotificationUtils {
 
     /**
      * Opens any available deep links with an Intent.ACTION_VIEW intent, placing the main activity
-     * on the back stack. If no deep link is available, opens the main activity.
+     * on the back stack. If no deep link is available or delayed initialization is enabled,
+     * opens the main activity.
      *
      * @param context
      * @param brazePush the BrazePushEvent
@@ -186,23 +188,28 @@ object BrazeNotificationUtils {
         routeUserWithNotificationOpenedIntent(context, extras, deepLink, useWebView)
     }
 
-    private fun routeUserWithNotificationOpenedIntent(context: Context, extras: Bundle, deepLink: String?, useWebView: Boolean) {
+    internal fun routeUserWithNotificationOpenedIntent(context: Context, extras: Bundle, deepLink: String?, useWebView: Boolean) {
+        // If delayed initialization is enabled or no deep link exists,
+        // start the intent defined in getStartActivityIntent().
+        if (Braze.isDelayedInitializationEnabled || deepLink.isNullOrBlank()) {
+            val mainActivityIntent = getMainActivityIntent(context, extras)
+            context.startActivity(mainActivityIntent)
+            if (Braze.isDelayedInitializationEnabled) {
+                brazelog { "Delayed initialization is enabled. Deep link:$deepLink will not be handled." }
+            } else {
+                brazelog { "Push notification had no deep link. Opening main activity:$mainActivityIntent" }
+            }
+            return
+        }
         // If a deep link exists, start an ACTION_VIEW intent pointing at the deep link.
         // The intent returned from getStartActivityIntent() is placed on the back stack.
-        // Otherwise, start the intent defined in getStartActivityIntent().
-        if (!deepLink.isNullOrBlank()) {
-            brazelog { "Found a deep link: $deepLink. Use webview set to: $useWebView" }
+        brazelog { "Found a deep link:$deepLink. Use webview set to:$useWebView" }
 
-            // Pass deeplink and use webview values to target activity.
-            extras.putString(Constants.BRAZE_PUSH_DEEP_LINK_KEY, deepLink)
-            extras.putBoolean(Constants.BRAZE_PUSH_OPEN_URI_IN_WEBVIEW_KEY, useWebView)
-            getInstance().createUriActionFromUrlString(deepLink, extras, useWebView, Channel.PUSH)?.let {
-                getInstance().gotoUri(context, it)
-            }
-        } else {
-            val mainActivityIntent = getMainActivityIntent(context, extras)
-            brazelog { "Push notification had no deep link. Opening main activity: $mainActivityIntent" }
-            context.startActivity(mainActivityIntent)
+        // Pass deeplink and use webview values to target activity.
+        extras.putString(Constants.BRAZE_PUSH_DEEP_LINK_KEY, deepLink)
+        extras.putBoolean(Constants.BRAZE_PUSH_OPEN_URI_IN_WEBVIEW_KEY, useWebView)
+        getInstance().createUriActionFromUrlString(deepLink, extras, useWebView, Channel.PUSH)?.let {
+            getInstance().gotoUri(context, it)
         }
     }
 
@@ -606,7 +613,7 @@ object BrazeNotificationUtils {
             notificationBuilder.setDefaults(Notification.DEFAULT_SOUND)
         } else {
             brazelog { "Setting sound for notification via uri." }
-            notificationBuilder.setSound(Uri.parse(soundUri))
+            notificationBuilder.setSound(soundUri.toUri())
         }
     }
 

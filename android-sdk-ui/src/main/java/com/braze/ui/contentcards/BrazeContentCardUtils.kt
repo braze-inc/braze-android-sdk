@@ -2,6 +2,7 @@ package com.braze.ui.contentcards
 
 import android.content.Context
 import android.os.Bundle
+import com.braze.enums.Channel
 import com.braze.models.cards.Card
 import com.braze.support.BrazeLogger.Priority.V
 import com.braze.support.BrazeLogger.brazelog
@@ -56,7 +57,7 @@ object BrazeContentCardUtils {
             url,
             extras,
             card.openUriInWebView,
-            card.channel
+            Channel.CONTENT_CARD
         )
     }
 

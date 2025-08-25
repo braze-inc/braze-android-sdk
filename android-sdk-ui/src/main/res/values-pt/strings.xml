@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-  <!-- News feed -->
+  <!-- Content cards -->
   <string name="com_braze_feed_empty">Não temos nenhuma atualização. Verifique novamente mais tarde.</string>
   <string name="com_braze_feed_connection_error_title">Erro de conexão</string>
-  <string name="com_braze_feed_connection_error_body">Não é possível estabelecer uma conexão de rede. Tente novamente mais tarde.</string>
   <string name="com_braze_inappmessage_close_content_description">fechar</string>
 </resources>

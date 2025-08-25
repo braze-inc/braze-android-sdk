@@ -10,12 +10,16 @@
       android:title="Compose Activity"
       app:showAsAction="never" />
     <item
-      android:id="@+id/action_flush"
-      android:title="@string/data_flush_title"
+      android:id="@+id/sample_activity"
+      android:title="Sample Activity"
       app:showAsAction="never" />
     <item
-      android:id="@+id/feed_categories"
-      android:title="Feed Categories"
+      android:id="@+id/sample_appcompatactivity"
+      android:title="Sample AppCompatActivity"
+      app:showAsAction="never" />
+    <item
+      android:id="@+id/action_flush"
+      android:title="@string/data_flush_title"
       app:showAsAction="never" />
     <item
       android:id="@+id/geofences_map"
@@ -24,9 +28,5 @@
     <item
       android:id="@+id/iam_sandbox"
       android:title="IAM Sandbox"
-      app:showAsAction="never" />
-    <item
-      android:id="@+id/feed_activity_launch"
-      android:title="NewsFeed"
       app:showAsAction="never" />
 </menu>

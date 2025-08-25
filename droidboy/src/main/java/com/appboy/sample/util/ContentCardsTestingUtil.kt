@@ -1,7 +1,5 @@
 package com.appboy.sample.util
 
-import android.content.Context
-import com.braze.Braze
 import com.braze.enums.CardKey
 import com.braze.enums.CardType
 import com.braze.models.cards.Card
@@ -20,7 +18,7 @@ class ContentCardsTestingUtil private constructor() {
         )
         private val random = Random()
 
-        fun createRandomCards(context: Context? = null, numCardsOfEachType: Int): List<Card> {
+        fun createRandomCards(numCardsOfEachType: Int): List<Card> {
             val cards = mutableListOf<Card>()
 
             for (cardType in CardType.entries) {
@@ -28,7 +26,7 @@ class ContentCardsTestingUtil private constructor() {
                     continue
                 }
                 repeat((0..numCardsOfEachType).count()) {
-                    createRandomCard(context, cardType).let { card -> cards.add(card) }
+                    createRandomCard(cardType).let { card -> cards.add(card) }
                 }
             }
 
@@ -37,11 +35,10 @@ class ContentCardsTestingUtil private constructor() {
         }
 
         fun getRemovedCardJson(id: String): JSONObject {
-            val ccp = CardKey.Provider(true)
             return JSONObject(
                 mapOf(
-                    ccp.getKey(CardKey.ID) to id,
-                    ccp.getKey(CardKey.REMOVED) to true,
+                    CardKey.ID.key to id,
+                    CardKey.REMOVED.key to true,
                 )
             )
         }
@@ -53,46 +50,42 @@ class ContentCardsTestingUtil private constructor() {
             imageUrl: String,
             altImageText: String
         ): JSONObject {
-            val ccp = CardKey.Provider(true)
-
             // Get the default fields
-            val defaultMapping = getDefaultCardFields(ccp, CardType.CAPTIONED_IMAGE)
+            val defaultMapping = getDefaultCardFields(CardType.CAPTIONED_IMAGE)
 
             defaultMapping.mergeWith(
                 mapOf(
-                    ccp.getKey(CardKey.ID) to id,
-                    ccp.getKey(CardKey.CAPTIONED_IMAGE_IMAGE) to imageUrl,
-                    ccp.getKey(CardKey.CAPTIONED_IMAGE_ALT_IMAGE) to altImageText,
-                    ccp.getKey(CardKey.CAPTIONED_IMAGE_ASPECT_RATIO) to 1.0,
-                    ccp.getKey(CardKey.CAPTIONED_IMAGE_TITLE) to title,
-                    ccp.getKey(CardKey.CAPTIONED_IMAGE_DESCRIPTION) to description,
-                    ccp.getKey(CardKey.PINNED) to true,
-                    ccp.getKey(CardKey.DISMISSIBLE) to false,
-                    ccp.getKey(CardKey.CREATED) to System.currentTimeMillis()
+                    CardKey.ID.key to id,
+                    CardKey.CAPTIONED_IMAGE_IMAGE.key to imageUrl,
+                    CardKey.CAPTIONED_IMAGE_ALT_IMAGE.key to altImageText,
+                    CardKey.CAPTIONED_IMAGE_ASPECT_RATIO.key to 1.0,
+                    CardKey.CAPTIONED_IMAGE_TITLE.key to title,
+                    CardKey.CAPTIONED_IMAGE_DESCRIPTION.key to description,
+                    CardKey.PINNED.key to true,
+                    CardKey.DISMISSIBLE.key to false,
+                    CardKey.CREATED.key to System.currentTimeMillis()
                 )
             )
             return JSONObject(defaultMapping.toMap())
         }
 
-        private fun getDefaultCardFields(ccp: CardKey.Provider, cardType: CardType): MutableMap<String, Any> = mutableMapOf(
-            ccp.getKey(CardKey.ID) to getRandomString(),
-            ccp.getKey(CardKey.TYPE) to ccp.getServerKeyFromCardType(cardType)!!,
-            ccp.getKey(CardKey.VIEWED) to getRandomBoolean(),
-            ccp.getKey(CardKey.CREATED) to getNow(),
-            ccp.getKey(CardKey.EXPIRES_AT) to getNowPlusDelta(TimeUnit.DAYS, 30),
-            ccp.getKey(CardKey.OPEN_URI_IN_WEBVIEW) to getRandomBoolean(),
-            ccp.getKey(CardKey.DISMISSED) to false,
-            ccp.getKey(CardKey.REMOVED) to false,
-            ccp.getKey(CardKey.PINNED) to getRandomBoolean(),
-            ccp.getKey(CardKey.DISMISSIBLE) to getRandomBoolean(),
-            ccp.getKey(CardKey.IS_TEST) to true
+        private fun getDefaultCardFields(cardType: CardType): MutableMap<String, Any> = mutableMapOf(
+            CardKey.ID.key to getRandomString(),
+            CardKey.TYPE.key to CardKey.getServerKeyFromCardType(cardType)!!,
+            CardKey.VIEWED.key to getRandomBoolean(),
+            CardKey.CREATED.key to getNow(),
+            CardKey.EXPIRES_AT.key to getNowPlusDelta(TimeUnit.DAYS, 30),
+            CardKey.OPEN_URI_IN_WEBVIEW.key to getRandomBoolean(),
+            CardKey.DISMISSED.key to false,
+            CardKey.REMOVED.key to false,
+            CardKey.PINNED.key to getRandomBoolean(),
+            CardKey.DISMISSIBLE.key to getRandomBoolean(),
+            CardKey.IS_TEST.key to true
         )
 
-        fun createRandomCard(context: Context? = null, cardType: CardType): Card {
-            val ccp = CardKey.Provider(true)
-
+        private fun createRandomCard(cardType: CardType): Card {
             // Set the default fields
-            val defaultMapping = getDefaultCardFields(ccp, cardType)
+            val defaultMapping = getDefaultCardFields(cardType)
 
             // Based on the card type, add new fields
             val title = "Title"
@@ -104,10 +97,10 @@ class ContentCardsTestingUtil private constructor() {
                 CardType.IMAGE -> {
                     defaultMapping.mergeWith(
                         mapOf(
-                            ccp.getKey(CardKey.IMAGE_ONLY_IMAGE) to randomImage.first,
-                            ccp.getKey(CardKey.IMAGE_ONLY_ALT_IMAGE) to altImageText,
-                            ccp.getKey(CardKey.IMAGE_ONLY_ASPECT_RATIO) to randomImage.second,
-                            ccp.getKey(CardKey.IMAGE_ONLY_URL) to randomImage.first
+                            CardKey.IMAGE_ONLY_IMAGE.key to randomImage.first,
+                            CardKey.IMAGE_ONLY_ALT_IMAGE.key to altImageText,
+                            CardKey.IMAGE_ONLY_ASPECT_RATIO.key to randomImage.second,
+                            CardKey.IMAGE_ONLY_URL.key to randomImage.first
                         )
                     )
                 }
@@ -115,12 +108,12 @@ class ContentCardsTestingUtil private constructor() {
                 CardType.CAPTIONED_IMAGE -> {
                     defaultMapping.mergeWith(
                         mapOf(
-                            ccp.getKey(CardKey.CAPTIONED_IMAGE_IMAGE) to randomImage.first,
-                            ccp.getKey(CardKey.CAPTIONED_IMAGE_ALT_IMAGE) to altImageText,
-                            ccp.getKey(CardKey.CAPTIONED_IMAGE_ASPECT_RATIO) to randomImage.second,
-                            ccp.getKey(CardKey.CAPTIONED_IMAGE_TITLE) to title,
-                            ccp.getKey(CardKey.CAPTIONED_IMAGE_DESCRIPTION) to description,
-                            ccp.getKey(CardKey.CAPTIONED_IMAGE_URL) to randomImage.first
+                            CardKey.CAPTIONED_IMAGE_IMAGE.key to randomImage.first,
+                            CardKey.CAPTIONED_IMAGE_ALT_IMAGE.key to altImageText,
+                            CardKey.CAPTIONED_IMAGE_ASPECT_RATIO.key to randomImage.second,
+                            CardKey.CAPTIONED_IMAGE_TITLE.key to title,
+                            CardKey.CAPTIONED_IMAGE_DESCRIPTION.key to description,
+                            CardKey.CAPTIONED_IMAGE_URL.key to randomImage.first
                         )
                     )
                 }
@@ -128,11 +121,11 @@ class ContentCardsTestingUtil private constructor() {
                 CardType.SHORT_NEWS -> {
                     defaultMapping.mergeWith(
                         mapOf(
-                            ccp.getKey(CardKey.SHORT_NEWS_IMAGE) to randomImage.first,
-                            ccp.getKey(CardKey.SHORT_NEWS_ALT_IMAGE) to altImageText,
-                            ccp.getKey(CardKey.SHORT_NEWS_TITLE) to title,
-                            ccp.getKey(CardKey.SHORT_NEWS_DESCRIPTION) to description,
-                            ccp.getKey(CardKey.SHORT_NEWS_URL) to randomImage.first
+                            CardKey.SHORT_NEWS_IMAGE.key to randomImage.first,
+                            CardKey.SHORT_NEWS_ALT_IMAGE.key to altImageText,
+                            CardKey.SHORT_NEWS_TITLE.key to title,
+                            CardKey.SHORT_NEWS_DESCRIPTION.key to description,
+                            CardKey.SHORT_NEWS_URL.key to randomImage.first
                         )
                     )
                 }
@@ -140,10 +133,10 @@ class ContentCardsTestingUtil private constructor() {
                 CardType.TEXT_ANNOUNCEMENT -> {
                     defaultMapping.mergeWith(
                         mapOf(
-                            ccp.getKey(CardKey.TEXT_ANNOUNCEMENT_DESCRIPTION) to description,
-                            ccp.getKey(CardKey.TEXT_ANNOUNCEMENT_URL) to randomImage.first,
-                            ccp.getKey(CardKey.TEXT_ANNOUNCEMENT_TITLE) to title,
-                            ccp.getKey(CardKey.TEXT_ANNOUNCEMENT_URL) to randomImage.first
+                            CardKey.TEXT_ANNOUNCEMENT_DESCRIPTION.key to description,
+                            CardKey.TEXT_ANNOUNCEMENT_URL.key to randomImage.first,
+                            CardKey.TEXT_ANNOUNCEMENT_TITLE.key to title,
+                            CardKey.TEXT_ANNOUNCEMENT_URL.key to randomImage.first
                         )
                     )
                 }
@@ -154,11 +147,7 @@ class ContentCardsTestingUtil private constructor() {
             }
 
             val json = JSONObject(defaultMapping.toMap())
-            return if (context != null) {
-                Braze.getInstance(context).deserializeContentCard(json) ?: throw RuntimeException("Failed to deserialize test card json")
-            } else {
-                Card(json, ccp)
-            }
+            return Card(json)
         }
 
         private fun getRandomString(): String = UUID.randomUUID().toString()

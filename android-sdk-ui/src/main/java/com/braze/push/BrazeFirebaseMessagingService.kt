@@ -5,8 +5,8 @@ import android.content.Intent
 import android.os.Bundle
 import com.braze.Braze
 import com.braze.BrazeInternal
-import com.braze.BrazeInternal.applyPendingRuntimeConfiguration
 import com.braze.Constants
+import com.braze.push.BrazeFirebaseMessagingService.Companion.FCM_SERVICE_OMR_METHOD
 import com.braze.support.BrazeLogger.Priority.I
 import com.braze.support.BrazeLogger.Priority.V
 import com.braze.support.BrazeLogger.brazelog
@@ -21,21 +21,7 @@ open class BrazeFirebaseMessagingService : FirebaseMessagingService() {
 
     override fun onNewToken(newToken: String) {
         super.onNewToken(newToken)
-        applyPendingRuntimeConfiguration(this)
-        val configurationProvider = BrazeInternal.getConfigurationProvider(this)
-        if (Braze.getConfiguredApiKey(configurationProvider).isNullOrEmpty()) {
-            brazelog(V) { "No configured API key, not registering token in onNewToken. Token: $newToken" }
-            return
-        }
-        if (!configurationProvider.isFirebaseMessagingServiceOnNewTokenRegistrationEnabled) {
-            brazelog(V) {
-                "Automatic FirebaseMessagingService.OnNewToken() registration" +
-                    " disabled, not registering token: $newToken"
-            }
-            return
-        }
-        brazelog(V) { "Registering Firebase push token in onNewToken. Token: $newToken" }
-        Braze.getInstance(this).registeredPushToken = newToken
+        handleOnNewToken(this, newToken)
     }
 
     override fun onMessageReceived(remoteMessage: RemoteMessage) {
@@ -50,6 +36,32 @@ open class BrazeFirebaseMessagingService : FirebaseMessagingService() {
          */
         private const val FCM_SERVICE_OMR_METHOD = "onMessageReceived"
         private const val CONTEXT_ATTACH_METHOD = "attachBaseContext"
+
+        /**
+         * Handles the new token received from Firebase. This method is called when a new token is
+         * generated or refreshed.
+         *
+         * @param context The application context.
+         * @param newToken The new token received from Firebase.
+         */
+        @JvmStatic
+        fun handleOnNewToken(context: Context, newToken: String) {
+            BrazeInternal.applyPendingRuntimeConfiguration(context)
+            val configurationProvider = BrazeInternal.getConfigurationProvider(context)
+            if (Braze.getConfiguredApiKey(configurationProvider).isNullOrEmpty()) {
+                brazelog(V) { "No configured API key, not registering token in handleOnNewToken. Token: $newToken" }
+                return
+            }
+            if (!configurationProvider.isFirebaseMessagingServiceOnNewTokenRegistrationEnabled) {
+                brazelog(V) {
+                    "Automatic FirebaseMessagingService.onNewToken() registration" +
+                        " disabled, not registering token: $newToken"
+                }
+                return
+            }
+            brazelog(V) { "Registering Firebase push token in handleOnNewToken. Token: $newToken" }
+            Braze.getInstance(context).registeredPushToken = newToken
+        }
 
         /**
          * Consumes an incoming [RemoteMessage] if it originated from Braze. If the [RemoteMessage] did

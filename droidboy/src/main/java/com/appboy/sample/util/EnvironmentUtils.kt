@@ -7,7 +7,6 @@ import android.content.Context
 import android.content.DialogInterface
 import android.content.SharedPreferences
 import android.graphics.Bitmap
-import android.net.Uri
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import com.appboy.sample.DroidboyApplication
@@ -18,6 +17,7 @@ import com.google.mlkit.vision.barcode.Barcode
 import com.google.mlkit.vision.barcode.BarcodeScannerOptions
 import com.google.mlkit.vision.barcode.BarcodeScanning
 import com.google.mlkit.vision.common.InputImage
+import androidx.core.net.toUri
 
 class EnvironmentUtils private constructor() {
     companion object {
@@ -57,7 +57,7 @@ class EnvironmentUtils private constructor() {
          */
         @SuppressLint("ApplySharedPref")
         private fun setEnvironmentViaDeepLink(context: Activity, environmentText: String) {
-            val uri = Uri.parse(environmentText)
+            val uri = environmentText.toUri()
             val endpoint = uri.getQueryParameter(BRAZE_ENVIRONMENT_DEEPLINK_ENDPOINT)
             val apiKey = uri.getQueryParameter(BRAZE_ENVIRONMENT_DEEPLINK_API_KEY)
 

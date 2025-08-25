@@ -8,10 +8,10 @@ import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.view.WindowInsetsCompat
-import com.braze.ui.R
 import com.braze.enums.inappmessage.ImageStyle
 import com.braze.models.inappmessage.IInAppMessageImmersive
 import com.braze.support.BrazeLogger.brazelog
+import com.braze.ui.R
 import com.braze.ui.inappmessage.config.BrazeInAppMessageParams.modalizedImageRadiusDp
 import com.braze.ui.inappmessage.utils.InAppMessageViewUtils.setViewBackgroundColor
 import com.braze.ui.inappmessage.utils.InAppMessageViewUtils.setViewBackgroundColorFilter
@@ -23,7 +23,8 @@ import com.braze.ui.support.getMaxSafeTopInset
 import com.braze.ui.support.isRunningOnTablet
 
 open class InAppMessageFullView(context: Context?, attrs: AttributeSet?) :
-    InAppMessageImmersiveBaseView(context, attrs) {
+    InAppMessageImmersiveBaseView(context, attrs), IInAppMessageBackEventListener {
+
     private var inAppMessageImageView: InAppMessageImageView? = null
     private var isGraphic = false
 

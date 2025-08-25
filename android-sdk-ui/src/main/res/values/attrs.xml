@@ -1,9 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-  <declare-styleable name="com.braze.ui.feed.BrazeImageSwitcher">
-    <attr name="brazeFeedCustomReadIcon" format="integer"/>
-    <attr name="brazeFeedCustomUnReadIcon" format="integer"/>
-  </declare-styleable>
   <declare-styleable name="InAppMessageBoundedLayout">
     <attr name="inAppMessageBoundedLayoutMaxWidth" format="dimension"/>
     <attr name="inAppMessageBoundedLayoutMinWidth" format="dimension"/>

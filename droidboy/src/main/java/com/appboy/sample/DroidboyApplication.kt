@@ -13,7 +13,6 @@ import android.content.pm.ShortcutInfo
 import android.content.pm.ShortcutManager
 import android.graphics.Color
 import android.graphics.drawable.Icon
-import android.net.Uri
 import android.os.Build
 import android.os.StrictMode
 import android.os.StrictMode.VmPolicy
@@ -45,6 +44,7 @@ import java.util.EnumSet
 import java.util.concurrent.TimeUnit
 import kotlin.io.encoding.Base64
 import kotlin.io.encoding.ExperimentalEncodingApi
+import androidx.core.net.toUri
 
 class DroidboyApplication : Application() {
     private var isSdkAuthEnabled: Boolean = false
@@ -112,11 +112,12 @@ class DroidboyApplication : Application() {
         }
 
         val droidboyPrefs = getSharedPreferences("droidboy", Context.MODE_PRIVATE)
-        val placementId = droidboyPrefs.getString(MainFragment.BANNER_ID_KEY, null)
+        val placementId = droidboyPrefs.getString(BannersFragment.BANNER_ID_KEY, null)
         val list = BANNER_PLACEMENT_IDS.toMutableList()
         if (!placementId.isNullOrBlank()) {
             list.add(placementId)
         }
+        // Perform an immediate refresh for default placements on app launch.
         Braze.getInstance(applicationContext).requestBannersRefresh(list)
 
         listenForSpecialTabFeatureFlag()
@@ -193,7 +194,7 @@ class DroidboyApplication : Application() {
             .setIntent(
                 Intent(
                     Intent.ACTION_VIEW,
-                    Uri.parse("https://www.braze.com?dynamicshortcut=true")
+                    "https://www.braze.com?dynamicshortcut=true".toUri()
                 )
             )
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {

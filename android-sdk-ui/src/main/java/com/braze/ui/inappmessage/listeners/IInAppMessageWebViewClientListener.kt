@@ -23,15 +23,6 @@ interface IInAppMessageWebViewClientListener {
     fun onCloseAction(inAppMessage: IInAppMessage, url: String, queryBundle: Bundle)
 
     /**
-     * Called when a Newsfeed URL (appboy://newsfeed) is followed in an HTML In App Message.
-     *
-     * @param inAppMessage the inAppMessage
-     * @param url          the url that triggered the action
-     * @param queryBundle a bundle of the query part of url
-     */
-    fun onNewsfeedAction(inAppMessage: IInAppMessage, url: String, queryBundle: Bundle)
-
-    /**
      * Called when the window location is set to a Custom Event URL (appboy://customEvent) in an HTML In App Message.
      *
      * @param inAppMessage the inAppMessage

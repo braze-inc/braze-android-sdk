@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-  <!-- News feed -->
+  <!-- Content cards -->
   <string name="com_braze_feed_empty">İndi sizin üçün heç bir yeniləməmiz yoxdur. Zəhmət olmasa, daha sonra yenidən yoxlayın.</string>
   <string name="com_braze_feed_connection_error_title">Bağlantı Xətası</string>
-  <string name="com_braze_feed_connection_error_body">Şəbəkə bağlantısı qurmaq mümkün olmadı. Zəhmət olmasa, sonra yenidən cəhd edin.</string>
   <string name="com_braze_inappmessage_close_content_description">Bağlayın</string>
 </resources>

@@ -16,7 +16,6 @@ import com.braze.support.WebContentUtils.getHtmlInAppMessageAssetCacheDirectory
 import com.braze.support.deleteFileOrDirectory
 import com.braze.support.toBundle
 import com.braze.ui.BrazeDeeplinkHandler
-import com.braze.ui.actions.NewsfeedAction
 import com.braze.ui.inappmessage.BrazeInAppMessageManager
 import kotlinx.coroutines.launch
 
@@ -70,7 +69,7 @@ open class DefaultInAppMessageViewLifecycleListener : IInAppMessageViewLifecycle
         // in-app message differently depending on where the user is in the app.
         //
         // To modify the default in-app message clicked behavior, mutate the necessary in-app message members. As
-        // an example, if the in-app message were to navigate to the news feed when it was clicked, the
+        // an example, if the in-app message were to navigate to a deeplink when it was clicked, the
         // behavior can be cancelled by setting the click action to NONE.
         @Suppress("SwallowedException")
         val wasHandled = try {
@@ -160,15 +159,6 @@ open class DefaultInAppMessageViewLifecycleListener : IInAppMessageViewLifecycle
             return
         }
         when (clickAction) {
-            ClickAction.NEWS_FEED -> {
-                inAppMessageCloser.close(false)
-                val newsfeedAction = NewsfeedAction(
-                    inAppMessage.extras.toBundle(),
-                    Channel.INAPP_MESSAGE
-                )
-                BrazeDeeplinkHandler.getInstance()
-                    .gotoNewsFeed(activity, newsfeedAction)
-            }
             ClickAction.URI -> {
                 inAppMessageCloser.close(false)
                 if (clickUri == null) {

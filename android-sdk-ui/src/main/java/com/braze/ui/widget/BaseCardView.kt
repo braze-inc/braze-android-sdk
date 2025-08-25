@@ -7,12 +7,10 @@ import android.widget.RelativeLayout
 import android.widget.TextView
 import com.braze.models.cards.Card
 import com.braze.ui.R
-import com.braze.ui.feed.BrazeImageSwitcher
 import com.braze.Braze
 import com.braze.BrazeInternal
 import com.braze.enums.BrazeViewBounds
 import com.braze.support.BrazeLogger.Priority.V
-import com.braze.support.BrazeLogger.Priority.W
 import com.braze.support.BrazeLogger.brazelog
 import com.braze.support.BrazeLogger.getBrazeLogTag
 import com.braze.ui.BrazeDeeplinkHandler.Companion.getInstance
@@ -20,9 +18,6 @@ import com.braze.ui.actions.IAction
 import com.braze.ui.actions.UriAction
 import com.braze.ui.contentcards.BrazeContentCardUtils
 
-/**
- * Base class for Braze feed card views.
- */
 abstract class BaseCardView<T : Card>(context: Context) : RelativeLayout(context) {
     @JvmField
     protected val applicationContext: Context = context.applicationContext
@@ -30,14 +25,10 @@ abstract class BaseCardView<T : Card>(context: Context) : RelativeLayout(context
     @JvmField
     protected var card: T? = null
     @JvmField
-    var imageSwitcher: BrazeImageSwitcher? = null
-    @JvmField
     protected var configurationProvider = BrazeInternal.getConfigurationProvider(context)
 
-    private val isUnreadCardVisualIndicatorEnabled: Boolean = configurationProvider.isNewsfeedVisualIndicatorOn
-
     val isUnreadIndicatorEnabled: Boolean
-        get() = isUnreadCardVisualIndicatorEnabled
+        get() = configurationProvider.isContentCardsUnreadVisualIndicatorEnabled
 
     /**
      * Applies the text to the [TextView]. If the text is null or blank,
@@ -104,42 +95,6 @@ abstract class BaseCardView<T : Card>(context: Context) : RelativeLayout(context
         }
     }
 
-    /**
-     * Checks to see if the card object is viewed and if so, sets the read/unread status
-     * indicator image. If the card is null, does nothing.
-     */
-    fun setCardViewedIndicator(imageSwitcher: BrazeImageSwitcher?, card: Card) {
-        if (imageSwitcher == null) {
-            brazelog(W) { "imageSwitcher is null. Can't set card viewed indicator." }
-            return
-        }
-        // Check the tag for the image switcher so we don't have to re-draw the same indicator unnecessarily
-        var imageSwitcherTag =
-            imageSwitcher.getTag(R.string.com_braze_image_is_read_tag_key)
-        // If the tag is null, default to the empty string
-        imageSwitcherTag = imageSwitcherTag ?: ""
-
-        if (card.isIndicatorHighlighted) {
-            if (imageSwitcherTag != ICON_READ_TAG) {
-                if (imageSwitcher.readIcon != null) {
-                    imageSwitcher.setImageDrawable(imageSwitcher.readIcon)
-                } else {
-                    imageSwitcher.setImageResource(R.drawable.com_braze_content_card_icon_read)
-                }
-                imageSwitcher.setTag(R.string.com_braze_image_is_read_tag_key, ICON_READ_TAG)
-            }
-        } else {
-            if (imageSwitcherTag != ICON_UNREAD_TAG) {
-                if (imageSwitcher.unReadIcon != null) {
-                    imageSwitcher.setImageDrawable(imageSwitcher.unReadIcon)
-                } else {
-                    imageSwitcher.setImageResource(R.drawable.com_braze_content_card_icon_unread)
-                }
-                imageSwitcher.setTag(R.string.com_braze_image_is_read_tag_key, ICON_UNREAD_TAG)
-            }
-        }
-    }
-
     protected fun handleCardClick(context: Context, card: Card, cardAction: IAction?) {
         brazelog(V) { "Handling card click for card: $card" }
         card.isIndicatorHighlighted = true
@@ -172,9 +127,6 @@ abstract class BaseCardView<T : Card>(context: Context) : RelativeLayout(context
     ): Boolean
 
     companion object {
-        private const val ICON_READ_TAG = "icon_read"
-        private const val ICON_UNREAD_TAG = "icon_unread"
-
         @JvmStatic
         protected fun getUriActionForCard(card: Card): UriAction? = BrazeContentCardUtils.getUriActionForCard(card)
     }

@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-  <!-- News feed -->
+  <!-- Content cards -->
   <string name="com_braze_feed_empty">Nemáme žádné aktualizace. Zkontrolujte prosím znovu později.</string>
   <string name="com_braze_feed_connection_error_title">Chyba připojení</string>
-  <string name="com_braze_feed_connection_error_body">Nelze navázat síťové připojení. Prosím zkuste to znovu později.</string>
   <string name="com_braze_inappmessage_close_content_description">zavřít</string>
 </resources>

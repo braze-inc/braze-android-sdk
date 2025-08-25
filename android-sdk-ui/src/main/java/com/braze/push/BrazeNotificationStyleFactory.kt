@@ -5,7 +5,6 @@ import android.content.Context
 import android.content.Intent
 import android.content.pm.ApplicationInfo
 import android.content.pm.PackageManager
-import android.graphics.Bitmap
 import android.graphics.drawable.Icon
 import android.os.Build
 import android.os.Bundle
@@ -35,6 +34,7 @@ import com.braze.support.getDisplayWidthPixels
 import com.braze.support.getPixelsFromDensityAndDp
 import com.braze.ui.BrazeDeeplinkHandler.Companion.getInstance
 import com.braze.ui.R
+import androidx.core.graphics.scale
 
 open class BrazeNotificationStyleFactory {
     /**
@@ -355,12 +355,8 @@ open class BrazeNotificationStyleFactory {
                         bigPictureWidthPixels = displayWidthPixels
                     }
                     try {
-                        imageBitmap = Bitmap.createScaledBitmap(
-                            imageBitmap,
-                            bigPictureWidthPixels,
-                            bigPictureHeightPixels,
-                            true
-                        )
+                        imageBitmap =
+                            imageBitmap.scale(bigPictureWidthPixels, bigPictureHeightPixels)
                     } catch (e: Exception) {
                         brazelog(E, e) { "Failed to scale image bitmap, using original." }
                     }

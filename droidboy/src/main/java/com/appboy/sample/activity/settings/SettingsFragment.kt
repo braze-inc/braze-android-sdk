@@ -25,7 +25,6 @@ import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
 import androidx.preference.PreferenceManager
 import com.appboy.sample.BuildConfig
-import com.appboy.sample.CustomFeedClickActionListener
 import com.appboy.sample.DroidboyApplication
 import com.appboy.sample.MainFragment
 import com.appboy.sample.R
@@ -46,11 +45,11 @@ import com.braze.Braze
 import com.braze.BrazeInternal
 import com.braze.BrazeUser
 import com.braze.Constants
+import com.braze.enums.DelayedInitializationAnalyticsBehavior
 import com.braze.images.DefaultBrazeImageLoader
 import com.braze.models.outgoing.AttributionData
 import com.braze.support.BrazeLogger.Priority.E
 import com.braze.support.BrazeLogger.brazelog
-import com.braze.ui.feed.BrazeFeedManager
 import java.io.File
 
 @SuppressLint("ApplySharedPref")
@@ -103,10 +102,10 @@ class SettingsFragment : PreferenceFragmentCompat() {
         setSdkAuthPrefs(context)
         setNotchPrefs(context)
         setGdprPrefs(context)
+        setDelayedInitPrefs(context)
         setNetworkPrefs(context)
         setImageDisplayPrefs(context)
         setSessionPrefs(context)
-        setNewsFeedPrefs(context)
         setLocationPrefs(context)
         setMiscellaneousPrefs(context)
         setEnvironmentPrefs(context)
@@ -247,18 +246,6 @@ class SettingsFragment : PreferenceFragmentCompat() {
         }
     }
 
-    private fun setNewsFeedPrefs(context: Context) {
-        setSwitchPreference("sort_feed") { newValue: Boolean ->
-            val sharedPref: SharedPreferences = context.getSharedPreferences(getString(R.string.feed), Context.MODE_PRIVATE)
-            val editor = sharedPref.edit()
-            editor.putBoolean(getString(R.string.sort_feed), newValue)
-            editor.apply()
-        }
-        setSwitchPreference("set_custom_news_feed_card_click_action_listener") { newValue: Boolean ->
-            BrazeFeedManager.getInstance().feedCardClickActionListener = if (newValue) CustomFeedClickActionListener() else null
-        }
-    }
-
     private fun setInAppMessagePrefs(context: Context) {
         setEditTextPreference("min_trigger_interval", true) { newValue: String ->
             if (newValue.isEmpty()) {
@@ -326,6 +313,16 @@ class SettingsFragment : PreferenceFragmentCompat() {
         setClickPreference("disable_sdk_key") { Braze.disableSdk(context) }
     }
 
+    private fun setDelayedInitPrefs(context: Context) {
+        setClickPreference("enable_delayed_init_queue") {
+            Braze.enableDelayedInitialization(context, DelayedInitializationAnalyticsBehavior.QUEUE)
+        }
+        setClickPreference("enable_delayed_init_drop") {
+            Braze.enableDelayedInitialization(context, DelayedInitializationAnalyticsBehavior.DROP)
+        }
+        setClickPreference("disable_delayed_init") { Braze.disableDelayedInitialization(context) }
+    }
+
     private fun setContentCardsPrefs(context: Context) {
         setClickPreference("content_card_dismiss_all_cards_setting_key") {
             val cachedContentCards = Braze.getInstance(context).getCachedContentCards()
@@ -336,7 +333,7 @@ class SettingsFragment : PreferenceFragmentCompat() {
             }
         }
         setClickPreference("content_card_populate_random_cards_setting_key") {
-            val randomCards = createRandomCards(context, 5)
+            val randomCards = createRandomCards(5)
             Braze.getInstance(context).currentUser?.userId?.let { userId ->
                 randomCards.iterator().forEach { card ->
                     BrazeInternal.addSerializedContentCardToStorage(context, card.forJsonPut().toString(), userId)

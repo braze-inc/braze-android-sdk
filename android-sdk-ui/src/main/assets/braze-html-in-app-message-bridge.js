@@ -11,7 +11,6 @@ var brazeBridge = {
   },
   closeMessage: function () { brazeInternalBridge.beforeMessageClosed();window.location = 'appboy://close'; },
   requestImmediateDataFlush: function () { brazeInternalBridge.requestImmediateDataFlush(); },
-  display: { showFeed: function () { window.open('appboy://feed'); } },
   logClick: function(buttonId) {
     if (buttonId != null) {
       brazeInternalBridge.logButtonClick(buttonId);

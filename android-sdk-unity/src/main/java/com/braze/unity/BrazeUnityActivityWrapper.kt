@@ -42,7 +42,6 @@ class BrazeUnityActivityWrapper {
                 config
             )
         )
-        braze.subscribeToFeedUpdates(EventSubscriberFactory.createFeedUpdatedEventSubscriber(config))
         braze.subscribeToContentCardsUpdates(
             EventSubscriberFactory.createContentCardsEventSubscriber(
                 config

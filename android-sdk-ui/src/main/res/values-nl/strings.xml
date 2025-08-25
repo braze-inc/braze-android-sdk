@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-  <!-- News feed -->
+  <!-- Content cards -->
   <string name="com_braze_feed_empty">Er zijn geen updates. Probeer het later opnieuw.</string>
   <string name="com_braze_feed_connection_error_title">Verbindingsfout</string>
-  <string name="com_braze_feed_connection_error_body">Kan geen netwerkverbinding maken. Probeer het later opnieuw.</string>
   <string name="com_braze_inappmessage_close_content_description">sluiten</string>
 </resources>

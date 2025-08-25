@@ -20,6 +20,7 @@ import com.braze.ui.inappmessage.listeners.DefaultInAppMessageWebViewClientListe
 import com.braze.ui.inappmessage.listeners.IHtmlInAppMessageActionListener
 import com.braze.ui.inappmessage.listeners.IInAppMessageManagerListener
 import com.braze.ui.inappmessage.listeners.IInAppMessageWebViewClientListener
+import java.lang.ref.WeakReference
 
 @Suppress("TooManyFunctions")
 open class InAppMessageManagerBase {
@@ -54,7 +55,7 @@ open class InAppMessageManagerBase {
      */
     @JvmField
     @Suppress("VariableNaming")
-    protected var mActivity: Activity? = null
+    protected var mActivity: WeakReference<Activity>? = null
 
     @JvmField
     @Suppress("VariableNaming")
@@ -63,7 +64,7 @@ open class InAppMessageManagerBase {
     // These serve the purpose of allowing people to write more Kotlin-friendly code, but also provide
     // the getActivity() and getApplicationContext() Java generated code for backwards compatibility
     open val activity
-        get() = mActivity
+        get() = mActivity?.get()
 
     open val applicationContext
         get() = mApplicationContext

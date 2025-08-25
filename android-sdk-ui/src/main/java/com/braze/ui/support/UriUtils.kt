@@ -9,6 +9,7 @@ import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
+import androidx.core.net.toUri
 import com.braze.IBrazeDeeplinkHandler
 import com.braze.support.BrazeLogger.Priority.E
 import com.braze.support.BrazeLogger.Priority.V
@@ -35,7 +36,7 @@ fun Uri.getQueryParameters(): Map<String, String> {
         if (uri.isOpaque) {
             // Convert the opaque uri into a parseable hierarchical one
             // This is basically copying the query from the original uri onto a new one
-            uri = Uri.parse("://")
+            uri = "://".toUri()
                 .buildUpon()
                 .encodedQuery(encodedQuery)
                 .build()

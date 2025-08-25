@@ -14,6 +14,8 @@ import com.braze.ui.R
 import com.braze.ui.banners.jsinterface.BannerJavascriptInterface
 import com.braze.ui.banners.listeners.DefaultBannerWebViewClientListener
 import com.braze.ui.banners.utils.BannerWebViewClient
+import androidx.core.content.withStyledAttributes
+import com.braze.ui.support.setWebViewSettings
 
 /**
  * An Android View that displays a Braze banner.
@@ -65,28 +67,22 @@ class BannerView : WebView, IBannerView {
         setBackgroundColor(Color.TRANSPARENT)
 
         // Load attributes
-        val attributes = context.obtainStyledAttributes(
+        context.withStyledAttributes(
             attrs, R.styleable.BannerView, defStyle, 0
-        )
+        ) {
 
-        if (attributes.hasValue(R.styleable.BannerView_placementId)) {
-            _placementId = attributes.getString(
-                R.styleable.BannerView_placementId
-            )
+            if (hasValue(R.styleable.BannerView_placementId)) {
+                _placementId = getString(
+                    R.styleable.BannerView_placementId
+                )
+            }
         }
-
-        attributes.recycle()
 
         initBanner(placementId)
     }
 
     private fun configureWebView(placementId: String) {
-        settings.javaScriptEnabled = true
-        settings.useWideViewPort = true
-        settings.loadWithOverviewMode = true
-        settings.displayZoomControls = false
-        settings.domStorageEnabled = true
-        settings.allowFileAccess = false
+        setWebViewSettings(settings, context)
 
         // This enables hardware acceleration if the manifest also has it defined.
         // If not defined, then the layer type will fallback to software.

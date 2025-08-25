@@ -11,7 +11,6 @@ enum class UnityMessageType(private val value: Int) {
     PUSH_OPENED(3),
     PUSH_DELETED(4),
     IN_APP_MESSAGE(5),
-    NEWS_FEED(6),
     CONTENT_CARDS_UPDATED(7),
     SDK_AUTHENTICATION_FAILURE(8),
     FEATURE_FLAGS_UPDATED(9);

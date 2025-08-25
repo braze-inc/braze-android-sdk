@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-  <!-- News feed -->
+  <!-- Content cards -->
   <string name="com_braze_feed_empty">Brak aktualizacji. Proszę sprawdzić ponownie później.</string>
   <string name="com_braze_feed_connection_error_title">Błąd połączenia</string>
-  <string name="com_braze_feed_connection_error_body">Nie można ustanowić połączenia z siecią. Proszę spróbować ponownie później.</string>
   <string name="com_braze_inappmessage_close_content_description">zamknąć</string>
 </resources>

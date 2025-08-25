@@ -118,7 +118,7 @@ abstract class InAppMessageImmersiveBaseView(context: Context?, attrs: Attribute
 
         // The entire view should focus back to the close
         // button and not allow for backwards navigation.
-        @Suppress("ConstantConditionIf", "SENSELESS_COMPARISON")
+        @Suppress("SENSELESS_COMPARISON")
         if (defaultFocusId != null) {
             this.nextFocusUpId = defaultFocusId
             this.nextFocusDownId = defaultFocusId

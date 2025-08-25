@@ -1,3 +1,33 @@
+## 38.0.0
+
+[Release Date](https://github.com/braze-inc/braze-android-sdk/releases/tag/v38.0.0)
+
+#### Breaking
+- Removed News Feed.
+  - Removed `BrazeImageSwitcher`, `CardKey.Provider`, and `CardCategory`.
+  - `Card` objects now only represent Content Cards.
+  - Removed `Card.updated`.
+  - Removed `IBraze.logFeedDisplayed()`, `IBraze.requestFeedRefreshFromCache()`, `IBraze.requestFeedRefresh()`, `IBraze.subscribeToFeedUpdates(subscriber)`, `IBraze.logFeedCardImpression(cardId)`, and `IBraze.logFeedCardClick(cardId)`.
+  - Removed `BrazeConfig.isNewsFeedVisualIndicatorOn`.
+
+##### Added
+- Added support for delayed SDK initialization.
+  - To enable delayed initialization, call `Braze.enableDelayedInitialization(context, analyticsBehavior)`.
+  - To disable delayed initialization, call `Braze.disableDelayedInitialization(context)`.
+- Added predictive back animations to full view in-app messages on gesture navigation modes on API 34+, and 3-button navigation modes on API 36+. See the [Android 16 Documentation](https://developer.android.com/about/versions/16/behavior-changes-all) for more details.
+- Moved the method internals of `BrazeFirebaseMessagingService.onNewToken()` to the companion object for easier behavior overriding.
+- Added support for new `Banner` properties by adding the following methods:
+  - `Banner.getStringProperty(key)` for accessing `String` properties.
+  - `Banner.getNumberProperty(key)` for accessing `Number` properties.
+  - `Banner.getBooleanProperty(key)` for accessing `Boolean` properties.
+  - `Banner.getJSONProperty(key)` for accessing `JSONObject` properties.
+  - `Banner.getImageProperty(key)` for accessing image URL properties as `String`s.
+  - `Banner.getTimestampProperty(key)` for accessing Unix UTC millisecond timestamp properties as `Long`s.
+
+##### Changed
+- Changed the behavior of templated In-App Messages to not automatically retry on endpoint errors to match the behavior of the iOS and Web SDKs.
+- The default client-side rate limiting values for Banners refresh has been increased. For more information on SDK rate limiting, please refer to the [Braze Developer Guide](https://www.braze.com/docs/developer_guide/sdk_integration/rate_limits#braze-sdk-rate-limits).
+
 ## 37.0.0
 
 [Release Date](https://github.com/braze-inc/braze-android-sdk/releases/tag/v37.0.0)

@@ -9,9 +9,6 @@
       android:name="com.braze.ui.BrazeWebViewActivity"
       android:exported="false" />
     <activity
-      android:name=".activities.BrazeFeedActivity"
-      android:exported="false" />
-    <activity
       android:name="com.braze.ui.activities.ContentCardsActivity"
       android:exported="false" />
     <activity

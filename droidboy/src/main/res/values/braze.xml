@@ -31,11 +31,6 @@
   <drawable name="com_braze_push_small_notification_icon">@drawable/notification_small_icon</drawable>
   <drawable name="com_braze_push_large_notification_icon">@drawable/notification_large_icon</drawable>
 
-  <!-- News Feed configuration -->
-  <!-- This boolean sets whether the read/unread visual indicator at the top right of news feed cards
-    on or off. -->
-  <bool name="com_braze_newsfeed_unread_visual_indicator_on">true</bool>
-
   <!-- Location configuration -->
   <!-- This boolean sets whether Braze should automatically collect location (if the user permits).
     If set to true, location data will be collected once at the start of each session.

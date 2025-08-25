@@ -13,7 +13,6 @@ import com.braze.support.BrazeLogger.brazelog
 import com.braze.support.isLocalUri
 import com.braze.support.toBundle
 import com.braze.ui.BrazeWebViewClient
-import com.braze.ui.actions.NewsfeedAction
 import com.braze.ui.inappmessage.BrazeInAppMessageManager
 import com.braze.ui.BrazeDeeplinkHandler.Companion.getInstance as getDeeplinkHandlerInstance
 
@@ -33,33 +32,6 @@ open class DefaultInAppMessageWebViewClientListener : IInAppMessageWebViewClient
             queryBundle
         )
         brazelog { "IInAppMessageWebViewClientListener.onCloseAction finished." }
-    }
-
-    override fun onNewsfeedAction(inAppMessage: IInAppMessage, url: String, queryBundle: Bundle) {
-        brazelog { "IInAppMessageWebViewClientListener.onNewsfeedAction called." }
-        if (inAppMessageManager.activity == null) {
-            brazelog(W) { "Can't perform news feed action because the cached activity is null." }
-            return
-        }
-        // Log a click since the user left to the newsfeed
-        logHtmlInAppMessageClick(inAppMessage, queryBundle)
-        val wasHandled = inAppMessageManager.htmlInAppMessageActionListener.onNewsfeedClicked(
-            inAppMessage,
-            url,
-            queryBundle
-        )
-        if (!wasHandled) {
-            inAppMessage.animateOut = false
-            // Dismiss the in-app message since we're navigating away to the news feed
-            inAppMessageManager.hideCurrentlyDisplayingInAppMessage(false)
-            val newsfeedAction = NewsfeedAction(
-                inAppMessage.extras.toBundle(),
-                Channel.INAPP_MESSAGE
-            )
-            inAppMessageManager.activity?.let { activity ->
-                getDeeplinkHandlerInstance().gotoNewsFeed(activity, newsfeedAction)
-            }
-        }
     }
 
     override fun onCustomEventAction(

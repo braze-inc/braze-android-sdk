@@ -5,6 +5,7 @@ import android.content.Context
 import android.content.Intent
 import com.braze.Constants
 import com.braze.models.BrazeGeofence
+import com.braze.storage.GeofenceDataStoreProvider
 import com.braze.support.IntentUtils
 import com.google.android.gms.location.LocationServices
 
@@ -42,15 +43,16 @@ class BrazeInternalGeofenceApi : IBrazeGeofenceApi {
     override fun registerGeofences(
         context: Context,
         geofenceList: List<BrazeGeofence>,
-        geofenceRequestIntent: PendingIntent
+        geofenceRequestIntent: PendingIntent,
+        dataStoreProvider: GeofenceDataStoreProvider
     ) {
-        GooglePlayLocationUtils.registerGeofencesWithGooglePlayIfNecessary(context, geofenceList, geofenceRequestIntent)
+        GooglePlayLocationUtils.registerGeofencesWithGooglePlayIfNecessary(context, geofenceList, geofenceRequestIntent, dataStoreProvider = dataStoreProvider)
     }
 
     /**
      * Deletes the geofence cache.
      */
-    override fun deleteRegisteredGeofenceCache(context: Context) {
-        GooglePlayLocationUtils.deleteRegisteredGeofenceCache(context)
+    override fun deleteRegisteredGeofenceCache(dataStoreProvider: GeofenceDataStoreProvider) {
+        GooglePlayLocationUtils.deleteRegisteredGeofenceCache(dataStoreProvider)
     }
 }

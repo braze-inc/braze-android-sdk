@@ -33,7 +33,7 @@ The Braze Android SDK supports Android API 25+.
 ## Components
 
 - `android-sdk-base` - the Braze SDK base analytics library.
-- `android-sdk-ui` - the Braze SDK user interface library for in-app messages, push, and the news feed.
+- `android-sdk-ui` - the Braze SDK user interface library for in-app messages, push, content cards, and banners.
 - `android-sdk-location` - the Braze SDK location library for location and geofences.
 - `android-sdk-jetpack-compose` - the Braze SDK location library for Jetpack Compose support.
 - `droidboy` - a sample app demonstrating how to use Braze in-depth.
@@ -47,8 +47,8 @@ Our SDK is now hosted in Maven Central. You can remove `https://braze-inc.github
 
 ```
 dependencies {
-  implementation 'com.braze:android-sdk-ui:37.0.+'
-  implementation 'com.braze:android-sdk-location:37.0.+'
+  implementation 'com.braze:android-sdk-ui:38.0.+'
+  implementation 'com.braze:android-sdk-location:38.0.+'
   ...
 }
 ```
@@ -67,7 +67,7 @@ repositories {
 
 ```
 dependencies {
-  implementation 'com.braze:android-sdk-ui:37.0.+'
+  implementation 'com.braze:android-sdk-ui:38.0.+'
 }
 ```
 

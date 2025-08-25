@@ -1,6 +1,5 @@
 package com.braze.unity
 
-import com.braze.events.FeedUpdatedEvent
 import com.braze.unity.configuration.UnityConfigurationProvider
 import com.braze.enums.BrazePushEventType
 import com.braze.events.BrazePushEvent
@@ -13,7 +12,6 @@ import com.braze.support.BrazeLogger.brazelog
 import com.braze.support.BrazeLogger.getBrazeLogTag
 import com.braze.unity.utils.MessagingUtils.sendContentCardsUpdatedEventToUnity
 import com.braze.unity.utils.MessagingUtils.sendFeatureFlagsUpdatedEventToUnity
-import com.braze.unity.utils.MessagingUtils.sendFeedUpdatedEventToUnity
 import com.braze.unity.utils.MessagingUtils.sendInAppMessageReceivedMessage
 import com.braze.unity.utils.MessagingUtils.sendPushEventToUnity
 import com.braze.unity.utils.MessagingUtils.sendSdkAuthErrorEventToUnity
@@ -30,17 +28,6 @@ object EventSubscriberFactory {
                     inAppMessageEvent.inAppMessage
                 )
             brazelog(TAG) { "Did send in-app message event to Unity Player?: $isInAppMessageEventSent" }
-        }
-    }
-
-    fun createFeedUpdatedEventSubscriber(config: UnityConfigurationProvider): IEventSubscriber<FeedUpdatedEvent> {
-        return IEventSubscriber { feedUpdatedEvent: FeedUpdatedEvent ->
-            val isFeedUpdatedEventSent = sendFeedUpdatedEventToUnity(
-                config.feedListenerGameObjectName,
-                config.feedListenerCallbackMethodName,
-                feedUpdatedEvent
-            )
-            brazelog(TAG) { "Did send Feed updated event to Unity Player?: $isFeedUpdatedEventSent" }
         }
     }
 

@@ -1,11 +1,8 @@
 package com.braze.ui.inappmessage.views
 
-import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
-import android.graphics.Bitmap
 import android.graphics.Color
-import android.net.Uri
 import android.os.Build
 import android.os.Message
 import android.util.AttributeSet
@@ -16,9 +13,9 @@ import android.webkit.WebChromeClient
 import android.webkit.WebView
 import android.webkit.WebView.HitTestResult
 import android.widget.RelativeLayout
+import androidx.core.graphics.createBitmap
+import androidx.core.net.toUri
 import androidx.core.view.WindowInsetsCompat
-import androidx.webkit.WebSettingsCompat
-import androidx.webkit.WebViewFeature
 import com.braze.configuration.BrazeConfigurationProvider
 import com.braze.support.BrazeLogger.Priority.E
 import com.braze.support.BrazeLogger.Priority.V
@@ -33,8 +30,8 @@ import com.braze.ui.support.getMaxSafeBottomInset
 import com.braze.ui.support.getMaxSafeLeftInset
 import com.braze.ui.support.getMaxSafeRightInset
 import com.braze.ui.support.getMaxSafeTopInset
-import com.braze.ui.support.isDeviceInNightMode
 import com.braze.ui.support.setFocusableInTouchModeAndRequestFocus
+import com.braze.ui.support.setWebViewSettings
 
 abstract class InAppMessageHtmlBaseView(context: Context?, attrs: AttributeSet?) :
     RelativeLayout(context, attrs), IInAppMessageView {
@@ -51,7 +48,6 @@ abstract class InAppMessageHtmlBaseView(context: Context?, attrs: AttributeSet?)
     override val messageClickableView: View?
         get() = this
 
-    @get:SuppressLint("SetJavaScriptEnabled")
     open val messageWebView: WebView?
         get() {
             if (isFinished) {
@@ -72,38 +68,12 @@ abstract class InAppMessageHtmlBaseView(context: Context?, attrs: AttributeSet?)
                 return null
             }
             val webSettings = webView.settings
-            webSettings.javaScriptEnabled = true
-            webSettings.useWideViewPort = true
-            webSettings.loadWithOverviewMode = true
-            webSettings.displayZoomControls = false
-            webSettings.domStorageEnabled = true
+            setWebViewSettings(webSettings, context)
 
-            // We now use a WebViewAssetLoader in InAppMessageWebViewClient to handle downloaded assets
-            webSettings.allowFileAccess = false
             // This enables hardware acceleration if the manifest also has it defined.
             // If not defined, then the layer type will fallback to software.
             webView.setLayerType(LAYER_TYPE_HARDWARE, null)
             webView.setBackgroundColor(Color.TRANSPARENT)
-            try {
-                // Note that this check is OS version agnostic since the Android WebView can be
-                // updated independently
-                if (WebViewFeature.isFeatureSupported(WebViewFeature.FORCE_DARK)
-                    && isDeviceInNightMode(context)
-                ) {
-                    WebSettingsCompat.setForceDark(
-                        webSettings,
-                        WebSettingsCompat.FORCE_DARK_ON
-                    )
-                }
-                if (WebViewFeature.isFeatureSupported(WebViewFeature.FORCE_DARK_STRATEGY)) {
-                    WebSettingsCompat.setForceDarkStrategy(
-                        webSettings,
-                        WebSettingsCompat.DARK_STRATEGY_WEB_THEME_DARKENING_ONLY
-                    )
-                }
-            } catch (e: Throwable) {
-                brazelog(E, e) { "Failed to set dark mode WebView settings" }
-            }
 
             val isLinkTargetSupported = BrazeConfigurationProvider(this.context).isHtmlInAppMessageHtmlLinkTargetEnabled
             if (isLinkTargetSupported) {
@@ -145,19 +115,19 @@ abstract class InAppMessageHtmlBaseView(context: Context?, attrs: AttributeSet?)
                             when (result.type) {
                                 HitTestResult.SRC_ANCHOR_TYPE -> {
                                     val data = result.extra
-                                    val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse(data))
+                                    val browserIntent = Intent(Intent.ACTION_VIEW, data?.toUri())
                                     context.startActivity(browserIntent)
                                 }
 
                                 HitTestResult.EMAIL_TYPE -> {
                                     val data = WebView.SCHEME_MAILTO + result.extra
-                                    val emailIntent = Intent(Intent.ACTION_VIEW, Uri.parse(data))
+                                    val emailIntent = Intent(Intent.ACTION_VIEW, data.toUri())
                                     context.startActivity(emailIntent)
                                 }
 
                                 HitTestResult.PHONE_TYPE -> {
                                     val data = WebView.SCHEME_TEL + result.extra
-                                    val telIntent = Intent(Intent.ACTION_VIEW, Uri.parse(data))
+                                    val telIntent = Intent(Intent.ACTION_VIEW, data.toUri())
                                     context.startActivity(telIntent)
                                 }
 
@@ -178,7 +148,7 @@ abstract class InAppMessageHtmlBaseView(context: Context?, attrs: AttributeSet?)
                 // This bitmap is used to eliminate the default black & white
                 // play icon used as the default poster.
                 override fun getDefaultVideoPoster() =
-                    Bitmap.createBitmap(1, 1, Bitmap.Config.ARGB_8888)
+                    createBitmap(1, 1)
             }
             configuredMessageWebView = webView
             return configuredMessageWebView

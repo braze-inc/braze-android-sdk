@@ -8,6 +8,7 @@ import com.braze.enums.inappmessage.DismissType
 import com.braze.models.inappmessage.IInAppMessage
 import com.braze.models.inappmessage.InAppMessageModal
 import com.braze.models.inappmessage.MessageButton
+import androidx.core.net.toUri
 
 object BrazeActionTestingUtil {
 
@@ -41,6 +42,6 @@ object BrazeActionTestingUtil {
             .use {
                 it.readText()
             }
-        return Uri.parse(contents)
+        return contents.toUri()
     }
 }

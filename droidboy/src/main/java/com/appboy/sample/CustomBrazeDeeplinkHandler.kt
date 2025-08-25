@@ -4,32 +4,15 @@ import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import com.appboy.sample.activity.DroidBoyActivity
-import com.braze.Constants
 import com.braze.IBrazeDeeplinkHandler
 import com.braze.IBrazeDeeplinkHandler.IntentFlagPurpose
 import com.braze.enums.Channel
 import com.braze.support.BrazeLogger.Priority.E
 import com.braze.support.BrazeLogger.brazelog
 import com.braze.ui.BrazeDeeplinkHandler
-import com.braze.ui.actions.NewsfeedAction
 import com.braze.ui.actions.UriAction
 
 class CustomBrazeDeeplinkHandler : IBrazeDeeplinkHandler {
-    override fun gotoNewsFeed(context: Context, newsfeedAction: NewsfeedAction) {
-        val intent = Intent(context, DroidBoyActivity::class.java)
-        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP)
-        newsfeedAction.extras?.let { intent.putExtras(it) }
-        intent.putExtra(context.resources.getString(R.string.source_key), Constants.BRAZE)
-        intent.putExtra(
-            context.resources.getString(R.string.destination_view),
-            context.resources.getString(
-                R.string.feed_key
-            )
-        )
-        context.startActivity(intent)
-    }
-
     override fun gotoUri(context: Context, uriAction: UriAction) {
         val uri = uriAction.uri.toString()
         if (uri.isNotBlank() && uri.matches(

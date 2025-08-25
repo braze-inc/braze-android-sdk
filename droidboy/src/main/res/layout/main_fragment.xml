@@ -16,13 +16,6 @@
       android:paddingEnd="20dp"
       android:paddingBottom="250dp">
 
-        <com.braze.ui.banners.BannerView
-            android:id="@+id/main_banner_1"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:placementId="placement_1"
-            />
-
         <TextView
           android:id="@+id/user_id_textview"
           android:layout_width="match_parent"
@@ -331,48 +324,6 @@
           android:layout_marginTop="15dp"
           android:layout_marginBottom="15dp"
           android:background="?android:attr/listDivider" />
-
-        <com.braze.ui.banners.BannerView
-            android:id="@+id/main_banner_2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-
-      <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
-        <TextView
-          android:id="@+id/main_set_banner_textview"
-          android:layout_width="match_parent"
-          android:layout_height="wrap_content"
-          android:layout_marginTop="15dp"
-          android:ems="10"
-          android:text="Banner Placement ID (above this element)"
-          android:fontFamily="@font/sailec_bold" />
-
-        <com.google.android.material.textfield.TextInputLayout
-          android:id="@+id/set_banner_placement_text_box"
-          style="@style/DroidboyOutlinedBox"
-          android:layout_width="match_parent"
-          android:layout_height="match_parent"
-          android:hint="Banner Placement ID">
-
-          <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/set_banner_placement_text_box_edit_text"
-            style="@style/BaseWidget.DroidboyTextInput"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:inputType="textMultiLine" />
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <Button
-          android:id="@+id/set_banner_placement_text_box_button"
-          style="@style/DroidboyOutlinedButton"
-          android:layout_width="200dp"
-          android:layout_marginTop="15dp"
-          android:text="Set Banner placement ID" />
-
-      </LinearLayout>
 
     </LinearLayout>
 </ScrollView>

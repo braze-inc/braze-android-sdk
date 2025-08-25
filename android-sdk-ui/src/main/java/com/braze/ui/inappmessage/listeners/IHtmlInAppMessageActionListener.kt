@@ -20,15 +20,6 @@ interface IHtmlInAppMessageActionListener {
      * @param url the url clicked.
      * @param queryBundle a bundle of the query part of the url.
      * @return boolean flag to indicate to Braze whether the click has been manually handled. If
-     * true, Braze will log a click and do nothing. If false, Braze will also navigate to the Newsfeed.
-     */
-    fun onNewsfeedClicked(inAppMessage: IInAppMessage, url: String, queryBundle: Bundle): Boolean = false
-
-    /**
-     * @param inAppMessage the In-App Message being displayed.
-     * @param url the url clicked.
-     * @param queryBundle a bundle of the query part of the url.
-     * @return boolean flag to indicate to Braze whether the click has been manually handled. If
      * true, Braze will do nothing. If false, Braze will log the custom event.
      */
     fun onCustomEventFired(

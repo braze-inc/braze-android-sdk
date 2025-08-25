@@ -23,7 +23,6 @@ import com.braze.models.outgoing.AttributionData
 import com.braze.support.BrazeLogger.Priority.E
 import com.braze.support.BrazeLogger.brazelog
 import com.braze.support.convertStringJsonArrayToList
-import com.braze.ui.banners.BannerView
 import com.google.android.gms.ads.identifier.AdvertisingIdClient
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -43,8 +42,6 @@ class MainFragment : Fragment() {
     private lateinit var customEventsAndPurchasesArrayAdapter: ArrayAdapter<String?>
     private val lastSeenCustomEventsAndPurchases: Queue<String?> = LinkedList()
     private lateinit var userIdEditText: EditText
-    private lateinit var bannerIdEditText: EditText
-    private lateinit var bannerView: BannerView
 
     override fun onCreateView(
         layoutInflater: LayoutInflater,
@@ -67,9 +64,6 @@ class MainFragment : Fragment() {
 
         userIdEditText =
             contentView.findViewById(R.id.com_appboy_sample_set_user_id_edit_text)
-
-        bannerIdEditText = contentView.findViewById(R.id.set_banner_placement_text_box_edit_text)
-        bannerView = contentView.findViewById<BannerView>(R.id.main_banner_2)
 
         contentView.setOnButtonClick(R.id.com_appboy_sample_set_user_id_button) {
             val userId = userIdEditText.text.toString()
@@ -254,31 +248,6 @@ class MainFragment : Fragment() {
             }
         }
 
-        contentView.setOnButtonClickWithEditableText(
-            buttonId = R.id.set_banner_placement_text_box_button,
-            editTextId = R.id.set_banner_placement_text_box_edit_text
-        ) { _, newPlacementId ->
-            if (newPlacementId.isNotBlank()) {
-                Toast.makeText(requireContext(), "Set custom banner to: $newPlacementId", Toast.LENGTH_SHORT)
-                    .show()
-                sharedPreferences.edit().putString(BANNER_ID_KEY, newPlacementId).apply()
-
-                val list = DroidboyApplication.BANNER_PLACEMENT_IDS.toMutableList()
-                list.add(newPlacementId)
-                Braze.getInstance(requireContext()).requestBannersRefresh(list)
-            } else {
-                Toast.makeText(requireContext(), "No custom banner set.", Toast.LENGTH_SHORT)
-                    .show()
-                sharedPreferences.edit().remove(BANNER_ID_KEY).apply()
-            }
-
-            bannerView.placementId = newPlacementId
-
-            // Then update the singleton of the placement ids
-            Braze.getInstance(requireContext()).requestBannersRefresh(DroidboyApplication.BANNER_PLACEMENT_IDS + newPlacementId) {
-                showToast("Refreshed banners")
-            }
-        }
         return contentView
     }
 
@@ -345,12 +314,6 @@ class MainFragment : Fragment() {
     override fun onResume() {
         super.onResume()
         userIdEditText.setText(sharedPreferences.getString(USER_ID_KEY, null))
-
-        val bannerId = sharedPreferences.getString(BANNER_ID_KEY, null)
-        bannerIdEditText.setText(bannerId)
-        if (bannerView.placementId != bannerId) {
-            bannerView.placementId = bannerId
-        }
     }
 
     companion object {
@@ -369,7 +332,6 @@ class MainFragment : Fragment() {
         private const val LAST_SEEN_CUSTOM_EVENTS_AND_PURCHASES_PREFERENCE_KEY =
             "last_seen_custom_events_and_purchases"
         const val USER_ID_KEY = "user.id"
-        const val BANNER_ID_KEY = "banner.id"
 
         fun View.setOnButtonClick(id: Int, block: (view: View) -> Unit) {
             val view = this.findViewById<Button>(id)

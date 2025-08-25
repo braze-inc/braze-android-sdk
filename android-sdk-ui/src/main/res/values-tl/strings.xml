@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-  <!-- News feed -->
+  <!-- Content cards -->
   <string name="com_braze_feed_empty">Wala kaming mga update. Mangyaring suriin muli sa ibang pagkakataon.</string>
   <string name="com_braze_feed_connection_error_title">May Error sa Koneksyon</string>
-  <string name="com_braze_feed_connection_error_body">Hindi makapagtatag ng koneksyon sa network. Mangyaring subukan muli mamaya.</string>
   <string name="com_braze_inappmessage_close_content_description">Isara</string>
 </resources>

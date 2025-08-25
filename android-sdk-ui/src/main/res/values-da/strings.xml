@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-  <!-- News feed -->
+  <!-- Content cards -->
   <string name="com_braze_feed_empty">Vi har ingen updates. Prøv venligst senere.</string>
   <string name="com_braze_feed_connection_error_title">Netværksfejl</string>
-  <string name="com_braze_feed_connection_error_body">Kan ikke etablere netværksforbindelse. Prøv venligst senere.</string>
   <string name="com_braze_inappmessage_close_content_description">at lukke</string>
 </resources>

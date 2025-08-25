@@ -16,10 +16,6 @@ open class DefaultBannerWebViewClientListener : IBannerWebViewClientListener {
         brazelog(W) { "Close action not available on Banners." }
     }
 
-    override fun onNewsfeedAction(context: Context, url: String, queryBundle: Bundle) {
-        brazelog(W) { "Newsfeed action not available on Banners." }
-    }
-
     override fun onCustomEventAction(context: Context, url: String, queryBundle: Bundle) {
         brazelog { "DefaultBannerWebViewClientListener.onCustomEventAction called." }
 

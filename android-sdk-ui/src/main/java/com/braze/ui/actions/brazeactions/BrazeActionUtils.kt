@@ -3,6 +3,7 @@
 package com.braze.ui.actions.brazeactions
 
 import android.net.Uri
+import androidx.core.net.toUri
 import com.braze.models.cards.Card
 import com.braze.models.inappmessage.IInAppMessage
 import com.braze.models.inappmessage.IInAppMessageImmersive
@@ -32,10 +33,9 @@ internal fun IInAppMessage.containsInvalidBrazeAction() =
  * Determines whether any [Uri] in the card contains an invalid action.
  */
 internal fun Card.containsInvalidBrazeAction(): Boolean {
-    if (this.url != null) {
-        return doAnyTypesMatch(ActionType.INVALID, listOf(Uri.parse(this.url)))
-    }
-    return false
+    return this.url?.let { url ->
+        doAnyTypesMatch(ActionType.INVALID, listOf(url.toUri()))
+    } ?: false
 }
 
 /**

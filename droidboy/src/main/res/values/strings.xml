@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="ExtraTranslation, MissingTranslation">
   <string name="app_name">Droidboy</string>
-  <string name="feed">News Feed</string>
   <string name="inappmessage">In-App Messages</string>
   <string name="settings">Settings</string>
   <string name="network_control_title">Network Controls</string>
@@ -9,6 +8,7 @@
   <string name="location_title">Location</string>
   <string name="about_title">About</string>
   <string name="sdk_state_change_settings_title">Braze SDK State Change</string>
+  <string name="delayed_init_title">Delayed Initialization</string>
   <string name="sdk_auth">SDK Auth</string>
   <string name="user_dialog_title">Default Attributes</string>
   <string name="user_dialog_okay">OK</string>
@@ -148,16 +148,12 @@
   <string name="get_registration_id_title">Get Push Registration Id</string>
   <string name="set_email_subscription_state_title">Set Email Subscription State</string>
   <string name="set_push_subscription_state_title">Set Push Subscription State</string>
-  <string name="sort_feed">Sort News Feed</string>
   <string name="min_trigger_interval">Trigger Action Minimum Time Interval (s)</string>
-  <string name="custom_news_feed_card_click_action_listener">Custom INewsFeedClickActionListener</string>
   <string name="get_registration_id_summary">Retrieve the Registration Id used for push on this device.</string>
   <string name="set_push_subscription_state_summary">Subscribe, opt-in, or opt-out for push.</string>
   <string name="set_email_subscription_state_summary">Subscribe, opt-in, or opt-out for email.</string>
   <string name="log_attribution_title">Log Attribution For User</string>
   <string name="log_attribution_summary">Log Creative, AdGroup, Network, and Campaign.</string>
-  <string name="sort_feed_summary">Sort the News Feed Cards to Prefer to Display Unread Cards</string>
-  <string name="custom_news_feed_card_click_action_listener_summary">toggles the use of CustomNewsFeedClickActionListener</string>
   <string name="notch_settings_category">Notch Settings</string>
   <string name="droidboy_notification_group_01_id">my_group_01</string>
   <string name="droidboy_notification_group_01_name">Group 1</string>
@@ -232,7 +228,6 @@
   <string name="source_key">source</string>
   <string name="destination_view">destination</string>
   <string name="home">home</string>
-  <string name="feed_key">feed</string>
   <string name="environment_preference_category">Environment</string>
   <string name="display_message">Display Message</string>
   <string name="dummy_button">Dummy Button</string>

@@ -5,7 +5,6 @@ import com.braze.events.BrazePushEvent
 import com.braze.events.BrazeSdkAuthenticationErrorEvent
 import com.braze.events.ContentCardsUpdatedEvent
 import com.braze.events.FeatureFlagsUpdatedEvent
-import com.braze.events.FeedUpdatedEvent
 import com.braze.models.inappmessage.IInAppMessage
 import com.braze.support.BrazeLogger.Priority.V
 import com.braze.support.BrazeLogger.brazelog
@@ -75,33 +74,6 @@ object MessagingUtils {
             unityCallbackFunctionName,
             getPushBundleExtras(event.notificationPayload.notificationExtras).toString()
         )
-        return true
-    }
-
-    fun sendFeedUpdatedEventToUnity(
-        unityGameObjectName: String?,
-        unityCallbackFunctionName: String?,
-        feedUpdatedEvent: FeedUpdatedEvent
-    ): Boolean {
-        if (unityGameObjectName.isNullOrBlank()) {
-            brazelog(TAG) {
-                "There is no Unity GameObject registered in the braze.xml configuration " +
-                    "file to receive feed updates. Not sending the message to Unity."
-            }
-            return false
-        }
-        if (unityCallbackFunctionName.isNullOrBlank()) {
-            brazelog(TAG) {
-                "There is no Unity callback method name registered to receive feed updates in " +
-                    "the braze.xml configuration file. Not sending the message to Unity."
-            }
-            return false
-        }
-        val json = JSONObject()
-            .put("mFeedCards", feedUpdatedEvent.feedCards.constructJsonArray())
-            .put("mFromOfflineStorage", feedUpdatedEvent.isFromOfflineStorage)
-        brazelog(TAG) { "Sending a feed updated event message to $unityGameObjectName:$unityCallbackFunctionName." }
-        UnityPlayer.UnitySendMessage(unityGameObjectName, unityCallbackFunctionName, json.toString())
         return true
     }
 

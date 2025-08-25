@@ -9,14 +9,10 @@ import com.braze.IBrazeDeeplinkHandler
 import com.braze.IBrazeDeeplinkHandler.IntentFlagPurpose
 import com.braze.support.BrazeLogger.Priority.E
 import com.braze.support.BrazeLogger.brazelog
-import com.braze.ui.actions.NewsfeedAction
 import com.braze.ui.actions.UriAction
+import androidx.core.net.toUri
 
 open class BrazeDeeplinkHandler : IBrazeDeeplinkHandler {
-    override fun gotoNewsFeed(context: Context, newsfeedAction: NewsfeedAction) {
-        newsfeedAction.execute(context)
-    }
-
     override fun gotoUri(context: Context, uriAction: UriAction) {
         uriAction.execute(context)
     }
@@ -44,7 +40,7 @@ open class BrazeDeeplinkHandler : IBrazeDeeplinkHandler {
     ): UriAction? {
         return try {
             if (url.isNotBlank()) {
-                val uri = Uri.parse(url)
+                val uri = url.toUri()
                 createUriActionFromUri(uri, extras, openInWebView, channel)
             } else {
                 brazelog(E) { "createUriActionFromUrlString url was null. Returning null." }

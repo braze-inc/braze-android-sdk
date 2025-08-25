@@ -32,13 +32,6 @@ public class CustomHtmlInAppMessageActionListener implements IHtmlInAppMessageAc
   }
 
   @Override
-  public boolean onNewsfeedClicked(IInAppMessage inAppMessage, String url, Bundle queryBundle) {
-    Toast.makeText(mContext, "Newsfeed button pressed. Ignoring.", Toast.LENGTH_LONG).show();
-    BrazeInAppMessageManager.getInstance().hideCurrentlyDisplayingInAppMessage(false);
-    return true;
-  }
-
-  @Override
   public boolean onOtherUrlAction(IInAppMessage inAppMessage, String url, Bundle queryBundle) {
     Toast.makeText(mContext, "Custom url pressed: " + url + " . Ignoring", Toast.LENGTH_LONG).show();
     BrazeInAppMessageManager.getInstance().hideCurrentlyDisplayingInAppMessage(false);
