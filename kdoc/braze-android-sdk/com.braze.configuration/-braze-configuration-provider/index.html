@@ -26,39 +26,82 @@
 <link href="../../../styles/prism.css" rel="Stylesheet">
 <link href="../../../styles/logo-styles.css" rel="Stylesheet">
 <link href="../../../styles/font-jb-sans-auto.css" rel="Stylesheet">
+<link href="../../../ui-kit/ui-kit.min.css" rel="Stylesheet">
 <script type="text/javascript" src="../../../scripts/clipboard.js" async="async"></script>
 <script type="text/javascript" src="../../../scripts/navigation-loader.js" async="async"></script>
 <script type="text/javascript" src="../../../scripts/platform-content-handler.js" async="async"></script>
 <script type="text/javascript" src="../../../scripts/main.js" defer="defer"></script>
 <script type="text/javascript" src="../../../scripts/prism.js" async="async"></script>
+<script type="text/javascript" src="../../../ui-kit/ui-kit.min.js" defer="defer"></script>
 <script type="text/javascript" src="../../../scripts/symbol-parameters-wrapper_deferred.js" defer="defer"></script>
 </head>
 <body>
     <div class="root">
-<nav class="navigation" id="navigation-wrapper">
-    <div class="navigation--inner">
-        <div class="navigation-title">
-            <button class="menu-toggle" id="menu-toggle" type="button">toggle menu</button>
-            <div class="library-name">
-                    <a class="library-name--link" href="../../../index.html">
-                            braze-android-sdk
-                    </a>
+    <nav class="navigation theme-dark" id="navigation-wrapper">
+            <a class="library-name--link" href="../../../index.html">
+                    braze-android-sdk
+            </a>
+        <button class="navigation-controls--btn navigation-controls--btn_toc ui-kit_mobile-only" id="toc-toggle"
+                type="button">Toggle table of contents
+        </button>
+        <div class="navigation-controls--break ui-kit_mobile-only"></div>
+        <div class="library-version" id="library-version">
+38.0.0        </div>
+        <div class="navigation-controls">
+        <div class="filter-section filter-section_loading" id="filter-section">
+                <button class="platform-tag platform-selector jvm-like" data-active=""
+                        data-filter=":android-sdk-ui:dokkaHtml/release">androidJvm</button>
+            <div class="dropdown filter-section--dropdown" data-role="dropdown" id="filter-section-dropdown">
+                <button class="button button_dropdown filter-section--dropdown-toggle" role="combobox"
+                        data-role="dropdown-toggle"
+                        aria-controls="platform-tags-listbox"
+                        aria-haspopup="listbox"
+                        aria-expanded="false"
+                        aria-label="Toggle source sets"
+                ></button>
+                <ul role="listbox" id="platform-tags-listbox" class="dropdown--list" data-role="dropdown-listbox">
+                    <div class="dropdown--header"><span>Platform filter</span>
+                        <button class="button" data-role="dropdown-toggle" aria-label="Close platform filter">
+                            <i class="ui-kit-icon ui-kit-icon_cross"></i>
+                        </button>
+                    </div>
+                        <li role="option" class="dropdown--option platform-selector-option jvm-like" tabindex="0">
+                            <label class="checkbox">
+                                <input type="checkbox" class="checkbox--input" id=":android-sdk-ui:dokkaHtml/release"
+                                       data-filter=":android-sdk-ui:dokkaHtml/release"/>
+                                <span class="checkbox--icon"></span>
+                                androidJvm
+                            </label>
+                        </li>
+                </ul>
+                <div class="dropdown--overlay"></div>
             </div>
-            <div class="library-version">
-37.0.0            </div>
         </div>
-        <div class="filter-section" id="filter-section">
-                <button class="platform-tag platform-selector jvm-like" data-active="" data-filter=":android-sdk-ui:dokkaHtml/release">androidJvm</button>
+            <button class="navigation-controls--btn navigation-controls--btn_theme" id="theme-toggle-button"
+                    type="button">Switch theme
+            </button>
+            <div class="navigation-controls--btn navigation-controls--btn_search" id="searchBar" role="button">Search in
+                API
+            </div>
         </div>
-    </div>
-    <div class="navigation-controls">
-        <button class="navigation-controls--btn navigation-controls--theme" id="theme-toggle-button" type="button">switch theme</button>
-        <div class="navigation-controls--btn navigation-controls--search" id="searchBar" role="button">search in API</div>
-    </div>
-</nav>
+    </nav>
         <div id="container">
             <div class="sidebar" id="leftColumn">
-                <div class="sidebar--inner" id="sideMenu"></div>
+                <div class="dropdown theme-dark_mobile" data-role="dropdown" id="toc-dropdown">
+                    <ul role="listbox" id="toc-listbox" class="dropdown--list dropdown--list_toc-list"
+                        data-role="dropdown-listbox">
+                        <div class="dropdown--header">
+                            <span>
+                                    braze-android-sdk
+                            </span>
+                            <button class="button" data-role="dropdown-toggle" aria-label="Close table of contents">
+                                <i class="ui-kit-icon ui-kit-icon_cross"></i>
+                            </button>
+                        </div>
+                        <div class="sidebar--inner" id="sideMenu"></div>
+                    </ul>
+                    <div class="dropdown--overlay"></div>
+                </div>
             </div>
             <div id="main">
 <div class="main-content" data-page-type="classlike" id="content" pageIds="braze-android-sdk::com.braze.configuration/BrazeConfigurationProvider///PointingToDeclaration//-1725759721">
@@ -120,7 +163,7 @@
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><span class="token keyword">val </span><a href="application-icon-resource-id.html">applicationIconResourceId</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin-stdlib/kotlin/-int/index.html">Int</a></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><span class="token keyword">val </span><a href="application-icon-resource-id.html">applicationIconResourceId</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></div></div></div>
                 </div>
               </div>
             </div>
@@ -135,7 +178,7 @@
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><span class="token keyword">val </span><a href="base-url-for-requests.html">baseUrlForRequests</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin-stdlib/kotlin/-string/index.html">String</a></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><span class="token keyword">val </span><a href="base-url-for-requests.html">baseUrlForRequests</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></div></div></div>
                 </div>
               </div>
             </div>
@@ -165,7 +208,7 @@
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><span class="token keyword">val </span><a href="../-cached-configuration-provider/configuration-cache.html">configurationCache</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin-stdlib/kotlin.collections/-mutable-map/index.html">MutableMap</a><span class="token operator">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin-stdlib/kotlin/-any/index.html">Any</a><span class="token operator">?</span><span class="token operator">&gt;</span></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><span class="token keyword">val </span><a href="../-cached-configuration-provider/configuration-cache.html">configurationCache</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-mutable-map/index.html">MutableMap</a><span class="token operator">&lt;</span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-any/index.html">Any</a><span class="token operator">?</span><span class="token operator">&gt;</span></div></div></div>
                 </div>
               </div>
             </div>
@@ -180,7 +223,7 @@
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><span class="token keyword">val </span><a href="custom-endpoint.html">customEndpoint</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token operator">?</span></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><span class="token keyword">val </span><a href="custom-endpoint.html">customEndpoint</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token operator">?</span></div></div></div>
                 </div>
               </div>
             </div>
@@ -195,7 +238,7 @@
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><span class="token keyword">val </span><a href="custom-html-web-view-activity-class-name.html">customHtmlWebViewActivityClassName</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token operator">?</span></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><span class="token keyword">val </span><a href="custom-html-web-view-activity-class-name.html">customHtmlWebViewActivityClassName</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token operator">?</span></div></div></div>
                 </div>
               </div>
             </div>
@@ -225,7 +268,7 @@
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><div class="block"><div class="block"><span class="token annotation builtin">@get:</span><a href="https://developer.android.com/reference/kotlin/androidx/annotation/ColorInt.html"><span class="token annotation builtin">ColorInt</span></a></div></div><span class="token keyword">val </span><a href="default-notification-accent-color.html">defaultNotificationAccentColor</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin-stdlib/kotlin/-int/index.html">Int</a></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><div class="block"><div class="block"><span class="token annotation builtin">@get:</span><a href="https://developer.android.com/reference/kotlin/androidx/annotation/ColorInt.html"><span class="token annotation builtin">ColorInt</span></a></div></div><span class="token keyword">val </span><a href="default-notification-accent-color.html">defaultNotificationAccentColor</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></div></div></div>
                 </div>
               </div>
             </div>
@@ -240,7 +283,7 @@
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><span class="token keyword">val </span><a href="default-notification-channel-description.html">defaultNotificationChannelDescription</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin-stdlib/kotlin/-string/index.html">String</a></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><span class="token keyword">val </span><a href="default-notification-channel-description.html">defaultNotificationChannelDescription</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></div></div></div>
                 </div>
               </div>
             </div>
@@ -255,7 +298,22 @@
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><span class="token keyword">val </span><a href="default-notification-channel-name.html">defaultNotificationChannelName</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin-stdlib/kotlin/-string/index.html">String</a></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><span class="token keyword">val </span><a href="default-notification-channel-name.html">defaultNotificationChannelName</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="215747579%2FProperties%2F-1725759721" anchor-label="delayedInitializationAnalyticsBehavior" id="215747579%2FProperties%2F-1725759721" data-filterable-set=":android-sdk-ui:dokkaHtml/release"></a>
+          <div class="table-row" data-filterable-current=":android-sdk-ui:dokkaHtml/release" data-filterable-set=":android-sdk-ui:dokkaHtml/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="delayed-initialization-analytics-behavior.html"><span>delayed</span><wbr></wbr><span>Initialization</span><wbr></wbr><span>Analytics</span><wbr></wbr><span><span>Behavior</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="215747579%2FProperties%2F-1725759721"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><span class="token keyword">val </span><a href="delayed-initialization-analytics-behavior.html">delayedInitializationAnalyticsBehavior</a><span class="token operator">: </span><a href="../../com.braze.enums/-delayed-initialization-analytics-behavior/index.html">DelayedInitializationAnalyticsBehavior</a></div></div></div>
                 </div>
               </div>
             </div>
@@ -285,7 +343,7 @@
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><span class="token keyword">val </span><a href="does-handle-push-deep-links-automatically.html">doesHandlePushDeepLinksAutomatically</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><span class="token keyword">val </span><a href="does-handle-push-deep-links-automatically.html">doesHandlePushDeepLinksAutomatically</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a></div></div></div>
                 </div>
               </div>
             </div>
@@ -300,7 +358,7 @@
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><span class="token keyword">val </span><a href="does-push-story-dismiss-on-click.html">doesPushStoryDismissOnClick</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><span class="token keyword">val </span><a href="does-push-story-dismiss-on-click.html">doesPushStoryDismissOnClick</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a></div></div></div>
                 </div>
               </div>
             </div>
@@ -315,7 +373,7 @@
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><span class="token keyword">val </span><a href="ephemeral-event-keys.html">ephemeralEventKeys</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin-stdlib/kotlin.collections/-set/index.html">Set</a><span class="token operator">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token operator">&gt;</span></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><span class="token keyword">val </span><a href="ephemeral-event-keys.html">ephemeralEventKeys</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-set/index.html">Set</a><span class="token operator">&lt;</span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token operator">&gt;</span></div></div></div>
                 </div>
               </div>
             </div>
@@ -330,7 +388,7 @@
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><span class="token keyword">val </span><a href="fallback-firebase-messaging-service-classpath.html">fallbackFirebaseMessagingServiceClasspath</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token operator">?</span></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><span class="token keyword">val </span><a href="fallback-firebase-messaging-service-classpath.html">fallbackFirebaseMessagingServiceClasspath</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token operator">?</span></div></div></div>
                 </div>
               </div>
             </div>
@@ -345,7 +403,7 @@
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><span class="token keyword">val </span><a href="firebase-cloud-messaging-sender-id-key.html">firebaseCloudMessagingSenderIdKey</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token operator">?</span></div><div class="brief "><p class="paragraph">Gets the sender ID key used to register for Firebase Cloud Messaging.</p></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><span class="token keyword">val </span><a href="firebase-cloud-messaging-sender-id-key.html">firebaseCloudMessagingSenderIdKey</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token operator">?</span></div><div class="brief "><p class="paragraph">Gets the sender ID key used to register for Firebase Cloud Messaging.</p></div></div></div>
                 </div>
               </div>
             </div>
@@ -360,7 +418,7 @@
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><span class="token keyword">val </span><a href="in-app-message-web-view-client-on-page-finished-max-wait-ms.html">inAppMessageWebViewClientOnPageFinishedMaxWaitMs</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin-stdlib/kotlin/-int/index.html">Int</a></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><span class="token keyword">val </span><a href="in-app-message-web-view-client-on-page-finished-max-wait-ms.html">inAppMessageWebViewClientOnPageFinishedMaxWaitMs</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></div></div></div>
                 </div>
               </div>
             </div>
@@ -375,7 +433,7 @@
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><span class="token keyword">val </span><a href="is-adm-messaging-registration-enabled.html">isAdmMessagingRegistrationEnabled</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><span class="token keyword">val </span><a href="is-adm-messaging-registration-enabled.html">isAdmMessagingRegistrationEnabled</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a></div></div></div>
                 </div>
               </div>
             </div>
@@ -390,7 +448,7 @@
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><span class="token keyword">val </span><a href="is-automatic-geofence-requests-enabled.html">isAutomaticGeofenceRequestsEnabled</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><span class="token keyword">val </span><a href="is-automatic-geofence-requests-enabled.html">isAutomaticGeofenceRequestsEnabled</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a></div></div></div>
                 </div>
               </div>
             </div>
@@ -405,7 +463,22 @@
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><span class="token keyword">val </span><a href="is-content-cards-unread-visual-indicator-enabled.html">isContentCardsUnreadVisualIndicatorEnabled</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a></div><div class="brief "><p class="paragraph">Gets whether the Content Cards unread visual indication bar is enabled.</p></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><span class="token keyword">val </span><a href="is-content-cards-unread-visual-indicator-enabled.html">isContentCardsUnreadVisualIndicatorEnabled</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a></div><div class="brief "><p class="paragraph">Gets whether the Content Cards unread visual indication bar is enabled.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1924909128%2FProperties%2F-1725759721" anchor-label="isDelayedInitializationEnabled" id="1924909128%2FProperties%2F-1725759721" data-filterable-set=":android-sdk-ui:dokkaHtml/release"></a>
+          <div class="table-row" data-filterable-current=":android-sdk-ui:dokkaHtml/release" data-filterable-set=":android-sdk-ui:dokkaHtml/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="is-delayed-initialization-enabled.html"><span>is</span><wbr></wbr><span>Delayed</span><wbr></wbr><span>Initialization</span><wbr></wbr><span><span>Enabled</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1924909128%2FProperties%2F-1725759721"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><span class="token keyword">val </span><a href="is-delayed-initialization-enabled.html">isDelayedInitializationEnabled</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a></div></div></div>
                 </div>
               </div>
             </div>
@@ -420,7 +493,7 @@
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><span class="token keyword">val </span><a href="is-device-object-allowlist-enabled.html">isDeviceObjectAllowlistEnabled</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><span class="token keyword">val </span><a href="is-device-object-allowlist-enabled.html">isDeviceObjectAllowlistEnabled</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a></div></div></div>
                 </div>
               </div>
             </div>
@@ -435,7 +508,7 @@
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><span class="token keyword">val </span><a href="is-ephemeral-events-enabled.html">isEphemeralEventsEnabled</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><span class="token keyword">val </span><a href="is-ephemeral-events-enabled.html">isEphemeralEventsEnabled</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a></div></div></div>
                 </div>
               </div>
             </div>
@@ -450,7 +523,7 @@
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><span class="token keyword">val </span><a href="is-fallback-firebase-messaging-service-enabled.html">isFallbackFirebaseMessagingServiceEnabled</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><span class="token keyword">val </span><a href="is-fallback-firebase-messaging-service-enabled.html">isFallbackFirebaseMessagingServiceEnabled</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a></div></div></div>
                 </div>
               </div>
             </div>
@@ -465,7 +538,7 @@
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><span class="token keyword">val </span><a href="is-firebase-cloud-messaging-registration-enabled.html">isFirebaseCloudMessagingRegistrationEnabled</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a></div><div class="brief "><p class="paragraph">Gets whether the SDK is configured to automatically register for Firebase Cloud Messaging.</p></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><span class="token keyword">val </span><a href="is-firebase-cloud-messaging-registration-enabled.html">isFirebaseCloudMessagingRegistrationEnabled</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a></div><div class="brief "><p class="paragraph">Gets whether the SDK is configured to automatically register for Firebase Cloud Messaging.</p></div></div></div>
                 </div>
               </div>
             </div>
@@ -480,7 +553,7 @@
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><span class="token keyword">val </span><a href="is-firebase-messaging-service-on-new-token-registration-enabled.html">isFirebaseMessagingServiceOnNewTokenRegistrationEnabled</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a></div><div class="brief "><p class="paragraph">Determines whether the Braze will automatically register tokens in <span data-unresolved-link="com.google.firebase.messaging/FirebaseMessagingService/onNewToken/#kotlin.String/PointingToDeclaration/">com.google.firebase.messaging.FirebaseMessagingService.onNewToken</span>.</p></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><span class="token keyword">val </span><a href="is-firebase-messaging-service-on-new-token-registration-enabled.html">isFirebaseMessagingServiceOnNewTokenRegistrationEnabled</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a></div><div class="brief "><p class="paragraph">Determines whether the Braze will automatically register tokens in <span data-unresolved-link="com.google.firebase.messaging/FirebaseMessagingService/onNewToken/#kotlin.String/PointingToDeclaration/">com.google.firebase.messaging.FirebaseMessagingService.onNewToken</span>.</p></div></div></div>
                 </div>
               </div>
             </div>
@@ -495,7 +568,7 @@
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><span class="token keyword">val </span><a href="is-geofences-enabled.html">isGeofencesEnabled</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><span class="token keyword">val </span><a href="is-geofences-enabled.html">isGeofencesEnabled</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a></div></div></div>
                 </div>
               </div>
             </div>
@@ -510,7 +583,7 @@
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><span class="token keyword">val </span><a href="is-html-in-app-message-html-link-target-enabled.html">isHtmlInAppMessageHtmlLinkTargetEnabled</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><span class="token keyword">val </span><a href="is-html-in-app-message-html-link-target-enabled.html">isHtmlInAppMessageHtmlLinkTargetEnabled</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a></div></div></div>
                 </div>
               </div>
             </div>
@@ -525,7 +598,7 @@
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><span class="token keyword">val </span><a href="is-in-app-message-accessibility-exclusive-mode-enabled.html">isInAppMessageAccessibilityExclusiveModeEnabled</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><span class="token keyword">val </span><a href="is-in-app-message-accessibility-exclusive-mode-enabled.html">isInAppMessageAccessibilityExclusiveModeEnabled</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a></div></div></div>
                 </div>
               </div>
             </div>
@@ -540,7 +613,7 @@
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><span class="token keyword">val </span><a href="is-in-app-message-test-push-eager-display-enabled.html">isInAppMessageTestPushEagerDisplayEnabled</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><span class="token keyword">val </span><a href="is-in-app-message-test-push-eager-display-enabled.html">isInAppMessageTestPushEagerDisplayEnabled</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a></div></div></div>
                 </div>
               </div>
             </div>
@@ -555,22 +628,7 @@
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><span class="token keyword">val </span><a href="is-location-collection-enabled.html">isLocationCollectionEnabled</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a></div></div></div>
-                </div>
-              </div>
-            </div>
-          </div>
-<a data-name="-1610972490%2FProperties%2F-1725759721" anchor-label="isNewsfeedVisualIndicatorOn" id="-1610972490%2FProperties%2F-1725759721" data-filterable-set=":android-sdk-ui:dokkaHtml/release"></a>
-          <div class="table-row" data-filterable-current=":android-sdk-ui:dokkaHtml/release" data-filterable-set=":android-sdk-ui:dokkaHtml/release">
-            <div class="main-subrow keyValue ">
-              <div class=""><span class="inline-flex">
-                  <div><a href="is-newsfeed-visual-indicator-on.html"><span>is</span><wbr></wbr><span>Newsfeed</span><wbr></wbr><span>Visual</span><wbr></wbr><span>Indicator</span><wbr></wbr><span><span>On</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1610972490%2FProperties%2F-1725759721"></span>
-                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
-                  </span></span></div>
-              <div>
-                <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><span class="token keyword">val </span><a href="is-newsfeed-visual-indicator-on.html">isNewsfeedVisualIndicatorOn</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><span class="token keyword">val </span><a href="is-location-collection-enabled.html">isLocationCollectionEnabled</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a></div></div></div>
                 </div>
               </div>
             </div>
@@ -585,7 +643,7 @@
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><span class="token keyword">val </span><a href="is-push-deep-link-back-stack-activity-enabled.html">isPushDeepLinkBackStackActivityEnabled</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><span class="token keyword">val </span><a href="is-push-deep-link-back-stack-activity-enabled.html">isPushDeepLinkBackStackActivityEnabled</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a></div></div></div>
                 </div>
               </div>
             </div>
@@ -600,7 +658,7 @@
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><span class="token keyword">val </span><a href="is-push-notification-html-rendering-enabled.html">isPushNotificationHtmlRenderingEnabled</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><span class="token keyword">val </span><a href="is-push-notification-html-rendering-enabled.html">isPushNotificationHtmlRenderingEnabled</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a></div></div></div>
                 </div>
               </div>
             </div>
@@ -615,7 +673,7 @@
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><span class="token keyword">val </span><a href="is-push-wake-screen-for-notification-enabled.html">isPushWakeScreenForNotificationEnabled</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><span class="token keyword">val </span><a href="is-push-wake-screen-for-notification-enabled.html">isPushWakeScreenForNotificationEnabled</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a></div></div></div>
                 </div>
               </div>
             </div>
@@ -630,7 +688,7 @@
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><span class="token keyword">val </span><a href="is-sdk-authentication-enabled.html">isSdkAuthenticationEnabled</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><span class="token keyword">val </span><a href="is-sdk-authentication-enabled.html">isSdkAuthenticationEnabled</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a></div></div></div>
                 </div>
               </div>
             </div>
@@ -645,7 +703,7 @@
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><span class="token keyword">val </span><a href="is-session-start-based-timeout-enabled.html">isSessionStartBasedTimeoutEnabled</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><span class="token keyword">val </span><a href="is-session-start-based-timeout-enabled.html">isSessionStartBasedTimeoutEnabled</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a></div></div></div>
                 </div>
               </div>
             </div>
@@ -660,7 +718,7 @@
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><span class="token keyword">val </span><a href="is-touch-mode-required-for-html-in-app-messages.html">isTouchModeRequiredForHtmlInAppMessages</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><span class="token keyword">val </span><a href="is-touch-mode-required-for-html-in-app-messages.html">isTouchModeRequiredForHtmlInAppMessages</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a></div></div></div>
                 </div>
               </div>
             </div>
@@ -675,7 +733,7 @@
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><span class="token keyword">val </span><a href="large-notification-icon-resource-id.html">largeNotificationIconResourceId</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin-stdlib/kotlin/-int/index.html">Int</a></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><span class="token keyword">val </span><a href="large-notification-icon-resource-id.html">largeNotificationIconResourceId</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></div></div></div>
                 </div>
               </div>
             </div>
@@ -690,7 +748,7 @@
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><span class="token keyword">val </span><a href="logger-initial-log-level.html">loggerInitialLogLevel</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin-stdlib/kotlin/-int/index.html">Int</a></div><div class="brief "><p class="paragraph">Gets the value for the initial log level. Note that this method defaults to <a href="https://developer.android.com/reference/kotlin/android/util/Log.html#info">Log.INFO</a>. Should only be used in conjunction with <a href="../../com.braze.support/-braze-logger/index.html">BrazeLogger</a>.</p></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><span class="token keyword">val </span><a href="logger-initial-log-level.html">loggerInitialLogLevel</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></div><div class="brief "><p class="paragraph">Gets the value for the initial log level. Note that this method defaults to <a href="https://developer.android.com/reference/kotlin/android/util/Log.html#info">Log.INFO</a>. Should only be used in conjunction with <a href="../../com.braze.support/-braze-logger/index.html">BrazeLogger</a>.</p></div></div></div>
                 </div>
               </div>
             </div>
@@ -705,7 +763,7 @@
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><span class="token keyword">val </span><a href="push-deep-link-back-stack-activity-class-name.html">pushDeepLinkBackStackActivityClassName</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token operator">?</span></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><span class="token keyword">val </span><a href="push-deep-link-back-stack-activity-class-name.html">pushDeepLinkBackStackActivityClassName</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token operator">?</span></div></div></div>
                 </div>
               </div>
             </div>
@@ -765,7 +823,7 @@
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><span class="token keyword">val </span><a href="session-timeout-seconds.html">sessionTimeoutSeconds</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin-stdlib/kotlin/-int/index.html">Int</a></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><span class="token keyword">val </span><a href="session-timeout-seconds.html">sessionTimeoutSeconds</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></div></div></div>
                 </div>
               </div>
             </div>
@@ -780,7 +838,7 @@
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><span class="token keyword">val </span><a href="should-add-status-bar-padding-to-in-app-messages.html">shouldAddStatusBarPaddingToInAppMessages</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><span class="token keyword">val </span><a href="should-add-status-bar-padding-to-in-app-messages.html">shouldAddStatusBarPaddingToInAppMessages</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a></div></div></div>
                 </div>
               </div>
             </div>
@@ -795,7 +853,7 @@
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><span class="token keyword">val </span><a href="should-opt-in-when-push-authorized.html">shouldOptInWhenPushAuthorized</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><span class="token keyword">val </span><a href="should-opt-in-when-push-authorized.html">shouldOptInWhenPushAuthorized</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a></div></div></div>
                 </div>
               </div>
             </div>
@@ -810,7 +868,7 @@
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><span class="token keyword">val </span><a href="should-persist-web-view-when-backgrounding-app.html">shouldPersistWebViewWhenBackgroundingApp</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><span class="token keyword">val </span><a href="should-persist-web-view-when-backgrounding-app.html">shouldPersistWebViewWhenBackgroundingApp</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a></div></div></div>
                 </div>
               </div>
             </div>
@@ -825,7 +883,7 @@
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><span class="token keyword">val </span><a href="should-use-window-flag-secure-in-activities.html">shouldUseWindowFlagSecureInActivities</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><span class="token keyword">val </span><a href="should-use-window-flag-secure-in-activities.html">shouldUseWindowFlagSecureInActivities</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a></div></div></div>
                 </div>
               </div>
             </div>
@@ -840,7 +898,7 @@
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><span class="token keyword">val </span><a href="small-notification-icon-resource-id.html">smallNotificationIconResourceId</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin-stdlib/kotlin/-int/index.html">Int</a></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><span class="token keyword">val </span><a href="small-notification-icon-resource-id.html">smallNotificationIconResourceId</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></div></div></div>
                 </div>
               </div>
             </div>
@@ -855,7 +913,7 @@
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><span class="token keyword">val </span><a href="trigger-action-minimum-time-interval-in-seconds.html">triggerActionMinimumTimeIntervalInSeconds</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin-stdlib/kotlin/-long/index.html">Long</a></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><span class="token keyword">val </span><a href="trigger-action-minimum-time-interval-in-seconds.html">triggerActionMinimumTimeIntervalInSeconds</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-long/index.html">Long</a></div></div></div>
                 </div>
               </div>
             </div>
@@ -870,7 +928,7 @@
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><span class="token keyword">val </span><a href="version-code.html">versionCode</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin-stdlib/kotlin/-int/index.html">Int</a></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><span class="token keyword">val </span><a href="version-code.html">versionCode</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></div></div></div>
                 </div>
               </div>
             </div>
@@ -904,7 +962,7 @@
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><span class="token keyword">fun </span><a href="../-cached-configuration-provider/get-boolean-value.html"><span class="token function">getBooleanValue</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">primaryKey<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span></span><span class="parameter ">defaultValue<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a></div><div class="brief "><p class="paragraph">Attempts to find the mapped value for the primary key, then the secondary key. A found value for the primary key will always take precedence over the secondary key. The configuration cache will update using the primary key, even if the secondary key has the mapped value.</p></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><span class="token keyword">fun </span><a href="../-cached-configuration-provider/get-boolean-value.html"><span class="token function">getBooleanValue</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">primaryKey<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span></span><span class="parameter ">defaultValue<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a></div><div class="brief "><p class="paragraph">Attempts to find the mapped value for the primary key, then the secondary key. A found value for the primary key will always take precedence over the secondary key. The configuration cache will update using the primary key, even if the secondary key has the mapped value.</p></div></div></div>
                 </div>
               </div>
             </div>
@@ -919,7 +977,7 @@
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><div class="block"><div class="block"><span class="token annotation builtin">@</span><a href="https://developer.android.com/reference/kotlin/androidx/annotation/ColorInt.html"><span class="token annotation builtin">ColorInt</span></a></div></div><span class="token keyword">fun </span><a href="../-cached-configuration-provider/get-color-value.html"><span class="token function">getColorValue</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">primaryKey<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin-stdlib/kotlin/-string/index.html">String</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin-stdlib/kotlin/-int/index.html">Int</a><span class="token operator">?</span></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><div class="block"><div class="block"><span class="token annotation builtin">@</span><a href="https://developer.android.com/reference/kotlin/androidx/annotation/ColorInt.html"><span class="token annotation builtin">ColorInt</span></a></div></div><span class="token keyword">fun </span><a href="../-cached-configuration-provider/get-color-value.html"><span class="token function">getColorValue</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">primaryKey<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a><span class="token operator">?</span></div></div></div>
                 </div>
               </div>
             </div>
@@ -934,7 +992,7 @@
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><div class="block"><div class="block"><span class="token annotation builtin">@</span><a href="https://developer.android.com/reference/kotlin/androidx/annotation/VisibleForTesting.html"><span class="token annotation builtin">VisibleForTesting</span></a></div></div><span class="token keyword">fun </span><a href="../-cached-configuration-provider/get-configuration-value.html"><span class="token function">getConfigurationValue</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">type<span class="token operator">: </span><a href="../-cached-configuration-provider/-resource-type/index.html">CachedConfigurationProvider.ResourceType</a><span class="token punctuation">, </span></span><span class="parameter ">key<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span></span><span class="parameter ">defaultValue<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin-stdlib/kotlin/-any/index.html">Any</a><span class="token operator">?</span></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin-stdlib/kotlin/-any/index.html">Any</a><span class="token operator">?</span></div><div class="brief "><p class="paragraph">Performs retrieval of a given resource type from the varying levels of caches using the primary and secondary keys.</p></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><div class="block"><div class="block"><span class="token annotation builtin">@</span><a href="https://developer.android.com/reference/kotlin/androidx/annotation/VisibleForTesting.html"><span class="token annotation builtin">VisibleForTesting</span></a></div></div><span class="token keyword">fun </span><a href="../-cached-configuration-provider/get-configuration-value.html"><span class="token function">getConfigurationValue</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">type<span class="token operator">: </span><a href="../-cached-configuration-provider/-resource-type/index.html">CachedConfigurationProvider.ResourceType</a><span class="token punctuation">, </span></span><span class="parameter ">key<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span></span><span class="parameter ">defaultValue<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-any/index.html">Any</a><span class="token operator">?</span></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-any/index.html">Any</a><span class="token operator">?</span></div><div class="brief "><p class="paragraph">Performs retrieval of a given resource type from the varying levels of caches using the primary and secondary keys.</p></div></div></div>
                 </div>
               </div>
             </div>
@@ -949,7 +1007,7 @@
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><span class="token keyword">fun </span><a href="../-cached-configuration-provider/get-int-value.html"><span class="token function">getIntValue</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">primaryKey<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span></span><span class="parameter ">defaultValue<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin-stdlib/kotlin/-int/index.html">Int</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin-stdlib/kotlin/-int/index.html">Int</a></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><span class="token keyword">fun </span><a href="../-cached-configuration-provider/get-int-value.html"><span class="token function">getIntValue</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">primaryKey<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span></span><span class="parameter ">defaultValue<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></div></div></div>
                 </div>
               </div>
             </div>
@@ -964,7 +1022,7 @@
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><span class="token keyword">fun </span><a href="../-cached-configuration-provider/get-string-set-value.html"><span class="token function">getStringSetValue</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">primaryKey<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span></span><span class="parameter ">defaultValue<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin-stdlib/kotlin.collections/-set/index.html">Set</a><span class="token operator">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token operator">&gt;</span><span class="token operator">?</span></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin-stdlib/kotlin.collections/-set/index.html">Set</a><span class="token operator">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token operator">&gt;</span><span class="token operator">?</span></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><span class="token keyword">fun </span><a href="../-cached-configuration-provider/get-string-set-value.html"><span class="token function">getStringSetValue</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">primaryKey<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span></span><span class="parameter ">defaultValue<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-set/index.html">Set</a><span class="token operator">&lt;</span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token operator">&gt;</span><span class="token operator">?</span></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-set/index.html">Set</a><span class="token operator">&lt;</span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token operator">&gt;</span><span class="token operator">?</span></div></div></div>
                 </div>
               </div>
             </div>
@@ -979,7 +1037,7 @@
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><span class="token keyword">fun </span><a href="../-cached-configuration-provider/get-string-value.html"><span class="token function">getStringValue</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">primaryKey<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span></span><span class="parameter ">defaultValue<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token operator">?</span></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token operator">?</span></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><span class="token keyword">fun </span><a href="../-cached-configuration-provider/get-string-value.html"><span class="token function">getStringValue</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">primaryKey<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span></span><span class="parameter ">defaultValue<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token operator">?</span></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token operator">?</span></div></div></div>
                 </div>
               </div>
             </div>
@@ -994,7 +1052,7 @@
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><div class="block"><div class="block"><span class="token annotation builtin">@</span><a href="https://developer.android.com/reference/kotlin/androidx/annotation/VisibleForTesting.html"><span class="token annotation builtin">VisibleForTesting</span></a></div></div><span class="token keyword">fun </span><a href="../-cached-configuration-provider/get-value-from-resources.html"><span class="token function">getValueFromResources</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">type<span class="token operator">: </span><a href="../-cached-configuration-provider/-resource-type/index.html">CachedConfigurationProvider.ResourceType</a><span class="token punctuation">, </span></span><span class="parameter ">resourceId<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin-stdlib/kotlin/-int/index.html">Int</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin-stdlib/kotlin/-any/index.html">Any</a></div><div class="brief "><p class="paragraph">Queries the context resources for a given resource identifier.</p></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><div class="block"><div class="block"><span class="token annotation builtin">@</span><a href="https://developer.android.com/reference/kotlin/androidx/annotation/VisibleForTesting.html"><span class="token annotation builtin">VisibleForTesting</span></a></div></div><span class="token keyword">fun </span><a href="../-cached-configuration-provider/get-value-from-resources.html"><span class="token function">getValueFromResources</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">type<span class="token operator">: </span><a href="../-cached-configuration-provider/-resource-type/index.html">CachedConfigurationProvider.ResourceType</a><span class="token punctuation">, </span></span><span class="parameter ">resourceId<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-any/index.html">Any</a></div><div class="brief "><p class="paragraph">Queries the context resources for a given resource identifier.</p></div></div></div>
                 </div>
               </div>
             </div>
@@ -1009,7 +1067,7 @@
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><div class="block"><div class="block"><span class="token annotation builtin">@</span><a href="https://developer.android.com/reference/kotlin/androidx/annotation/VisibleForTesting.html"><span class="token annotation builtin">VisibleForTesting</span></a></div></div><span class="token keyword">fun </span><a href="../-cached-configuration-provider/read-resource-value.html"><span class="token function">readResourceValue</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">type<span class="token operator">: </span><a href="../-cached-configuration-provider/-resource-type/index.html">CachedConfigurationProvider.ResourceType</a><span class="token punctuation">, </span></span><span class="parameter ">key<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span></span><span class="parameter ">defaultValue<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin-stdlib/kotlin/-any/index.html">Any</a><span class="token operator">?</span></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin-stdlib/kotlin/-any/index.html">Any</a><span class="token operator">?</span></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><div class="block"><div class="block"><span class="token annotation builtin">@</span><a href="https://developer.android.com/reference/kotlin/androidx/annotation/VisibleForTesting.html"><span class="token annotation builtin">VisibleForTesting</span></a></div></div><span class="token keyword">fun </span><a href="../-cached-configuration-provider/read-resource-value.html"><span class="token function">readResourceValue</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">type<span class="token operator">: </span><a href="../-cached-configuration-provider/-resource-type/index.html">CachedConfigurationProvider.ResourceType</a><span class="token punctuation">, </span></span><span class="parameter ">key<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span></span><span class="parameter ">defaultValue<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-any/index.html">Any</a><span class="token operator">?</span></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-any/index.html">Any</a><span class="token operator">?</span></div></div></div>
                 </div>
               </div>
             </div>
@@ -1019,11 +1077,16 @@
     </div>
   </div>
 </div>
-      <div class="footer">
-        <span class="go-to-top-icon"><a href="#content" id="go-to-top-link"></a></span><span>© 2025 Copyright</span><span
-                class="pull-right"><span>Generated by </span><a
-                href="https://github.com/Kotlin/dokka"><span>dokka</span><span class="padded-icon"></span></a></span>
-      </div>
+    <div class="footer">
+        <a href="#content" id="go-to-top-link" class="footer--button footer--button_go-to-top"></a>
+        <span>© 2025 Copyright</span>
+        <span class="pull-right">
+            <span>Generated by </span>
+            <a class="footer--link footer--link_external" href="https://github.com/Kotlin/dokka">
+                <span>dokka</span>
+            </a>
+        </span>
+    </div>
             </div>
         </div>
     </div>

@@ -26,39 +26,82 @@
 <link href="../../../../styles/prism.css" rel="Stylesheet">
 <link href="../../../../styles/logo-styles.css" rel="Stylesheet">
 <link href="../../../../styles/font-jb-sans-auto.css" rel="Stylesheet">
+<link href="../../../../ui-kit/ui-kit.min.css" rel="Stylesheet">
 <script type="text/javascript" src="../../../../scripts/clipboard.js" async="async"></script>
 <script type="text/javascript" src="../../../../scripts/navigation-loader.js" async="async"></script>
 <script type="text/javascript" src="../../../../scripts/platform-content-handler.js" async="async"></script>
 <script type="text/javascript" src="../../../../scripts/main.js" defer="defer"></script>
 <script type="text/javascript" src="../../../../scripts/prism.js" async="async"></script>
+<script type="text/javascript" src="../../../../ui-kit/ui-kit.min.js" defer="defer"></script>
 <script type="text/javascript" src="../../../../scripts/symbol-parameters-wrapper_deferred.js" defer="defer"></script>
 </head>
 <body>
     <div class="root">
-<nav class="navigation" id="navigation-wrapper">
-    <div class="navigation--inner">
-        <div class="navigation-title">
-            <button class="menu-toggle" id="menu-toggle" type="button">toggle menu</button>
-            <div class="library-name">
-                    <a class="library-name--link" href="../../../../index.html">
-                            braze-android-sdk
-                    </a>
+    <nav class="navigation theme-dark" id="navigation-wrapper">
+            <a class="library-name--link" href="../../../../index.html">
+                    braze-android-sdk
+            </a>
+        <button class="navigation-controls--btn navigation-controls--btn_toc ui-kit_mobile-only" id="toc-toggle"
+                type="button">Toggle table of contents
+        </button>
+        <div class="navigation-controls--break ui-kit_mobile-only"></div>
+        <div class="library-version" id="library-version">
+38.0.0        </div>
+        <div class="navigation-controls">
+        <div class="filter-section filter-section_loading" id="filter-section">
+                <button class="platform-tag platform-selector jvm-like" data-active=""
+                        data-filter=":android-sdk-ui:dokkaHtml/release">androidJvm</button>
+            <div class="dropdown filter-section--dropdown" data-role="dropdown" id="filter-section-dropdown">
+                <button class="button button_dropdown filter-section--dropdown-toggle" role="combobox"
+                        data-role="dropdown-toggle"
+                        aria-controls="platform-tags-listbox"
+                        aria-haspopup="listbox"
+                        aria-expanded="false"
+                        aria-label="Toggle source sets"
+                ></button>
+                <ul role="listbox" id="platform-tags-listbox" class="dropdown--list" data-role="dropdown-listbox">
+                    <div class="dropdown--header"><span>Platform filter</span>
+                        <button class="button" data-role="dropdown-toggle" aria-label="Close platform filter">
+                            <i class="ui-kit-icon ui-kit-icon_cross"></i>
+                        </button>
+                    </div>
+                        <li role="option" class="dropdown--option platform-selector-option jvm-like" tabindex="0">
+                            <label class="checkbox">
+                                <input type="checkbox" class="checkbox--input" id=":android-sdk-ui:dokkaHtml/release"
+                                       data-filter=":android-sdk-ui:dokkaHtml/release"/>
+                                <span class="checkbox--icon"></span>
+                                androidJvm
+                            </label>
+                        </li>
+                </ul>
+                <div class="dropdown--overlay"></div>
             </div>
-            <div class="library-version">
-37.0.0            </div>
         </div>
-        <div class="filter-section" id="filter-section">
-                <button class="platform-tag platform-selector jvm-like" data-active="" data-filter=":android-sdk-ui:dokkaHtml/release">androidJvm</button>
+            <button class="navigation-controls--btn navigation-controls--btn_theme" id="theme-toggle-button"
+                    type="button">Switch theme
+            </button>
+            <div class="navigation-controls--btn navigation-controls--btn_search" id="searchBar" role="button">Search in
+                API
+            </div>
         </div>
-    </div>
-    <div class="navigation-controls">
-        <button class="navigation-controls--btn navigation-controls--theme" id="theme-toggle-button" type="button">switch theme</button>
-        <div class="navigation-controls--btn navigation-controls--search" id="searchBar" role="button">search in API</div>
-    </div>
-</nav>
+    </nav>
         <div id="container">
             <div class="sidebar" id="leftColumn">
-                <div class="sidebar--inner" id="sideMenu"></div>
+                <div class="dropdown theme-dark_mobile" data-role="dropdown" id="toc-dropdown">
+                    <ul role="listbox" id="toc-listbox" class="dropdown--list dropdown--list_toc-list"
+                        data-role="dropdown-listbox">
+                        <div class="dropdown--header">
+                            <span>
+                                    braze-android-sdk
+                            </span>
+                            <button class="button" data-role="dropdown-toggle" aria-label="Close table of contents">
+                                <i class="ui-kit-icon ui-kit-icon_cross"></i>
+                            </button>
+                        </div>
+                        <div class="sidebar--inner" id="sideMenu"></div>
+                    </ul>
+                    <div class="dropdown--overlay"></div>
+                </div>
             </div>
             <div id="main">
 <div class="main-content" data-page-type="classlike" id="content" pageIds="braze-android-sdk::com.braze.ui/BrazeWebViewClient.Companion///PointingToDeclaration//-1725759721">
@@ -76,13 +119,13 @@
           <div class="table-row" data-filterable-current=":android-sdk-ui:dokkaHtml/release" data-filterable-set=":android-sdk-ui:dokkaHtml/release">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
-                  <div><a href="-b-r-i-d-g-e_-j-s_-f-i-l-e.html"><span><span>BRIDGE_JS_FILE</span></span></a></div>
+                  <div><a href="-b-r-i-d-g-e_-j-s_-f-i-l-e.html"><span>BRIDGE_</span><wbr></wbr><span>JS_</span><wbr></wbr><span>FILE</span></a></div>
 <span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1160109684%2FProperties%2F-1725759721"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><span class="token keyword">const </span><span class="token keyword">val </span><a href="-b-r-i-d-g-e_-j-s_-f-i-l-e.html">BRIDGE_JS_FILE</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin-stdlib/kotlin/-string/index.html">String</a></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><span class="token keyword">const </span><span class="token keyword">val </span><a href="-b-r-i-d-g-e_-j-s_-f-i-l-e.html">BRIDGE_JS_FILE</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></div></div></div>
                 </div>
               </div>
             </div>
@@ -91,13 +134,13 @@
           <div class="table-row" data-filterable-current=":android-sdk-ui:dokkaHtml/release" data-filterable-set=":android-sdk-ui:dokkaHtml/release">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
-                  <div><a href="-j-a-v-a-s-c-r-i-p-t_-p-r-e-f-i-x.html"><span><span>JAVASCRIPT_PREFIX</span></span></a></div>
+                  <div><a href="-j-a-v-a-s-c-r-i-p-t_-p-r-e-f-i-x.html"><span>JAVASCRIPT_</span><wbr></wbr><span>PREFIX</span></a></div>
 <span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-696628602%2FProperties%2F-1725759721"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><span class="token keyword">const </span><span class="token keyword">val </span><a href="-j-a-v-a-s-c-r-i-p-t_-p-r-e-f-i-x.html">JAVASCRIPT_PREFIX</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin-stdlib/kotlin/-string/index.html">String</a></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><span class="token keyword">const </span><span class="token keyword">val </span><a href="-j-a-v-a-s-c-r-i-p-t_-p-r-e-f-i-x.html">JAVASCRIPT_PREFIX</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></div></div></div>
                 </div>
               </div>
             </div>
@@ -106,13 +149,13 @@
           <div class="table-row" data-filterable-current=":android-sdk-ui:dokkaHtml/release" data-filterable-set=":android-sdk-ui:dokkaHtml/release">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
-                  <div><a href="-q-u-e-r-y_-n-a-m-e_-b-u-t-t-o-n_-i-d.html"><span><span>QUERY_NAME_BUTTON_ID</span></span></a></div>
+                  <div><a href="-q-u-e-r-y_-n-a-m-e_-b-u-t-t-o-n_-i-d.html"><span>QUERY_</span><wbr></wbr><span>NAME_</span><wbr></wbr><span>BUTTON_</span><wbr></wbr><span>ID</span></a></div>
 <span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1938357755%2FProperties%2F-1725759721"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><span class="token keyword">const </span><span class="token keyword">val </span><a href="-q-u-e-r-y_-n-a-m-e_-b-u-t-t-o-n_-i-d.html">QUERY_NAME_BUTTON_ID</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin-stdlib/kotlin/-string/index.html">String</a></div><div class="brief "><p class="paragraph">The query key for the button id for tracking.</p></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><span class="token keyword">const </span><span class="token keyword">val </span><a href="-q-u-e-r-y_-n-a-m-e_-b-u-t-t-o-n_-i-d.html">QUERY_NAME_BUTTON_ID</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></div><div class="brief "><p class="paragraph">The query key for the button id for tracking.</p></div></div></div>
                 </div>
               </div>
             </div>
@@ -121,13 +164,13 @@
           <div class="table-row" data-filterable-current=":android-sdk-ui:dokkaHtml/release" data-filterable-set=":android-sdk-ui:dokkaHtml/release">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
-                  <div><a href="-q-u-e-r-y_-n-a-m-e_-d-e-e-p-l-i-n-k.html"><span><span>QUERY_NAME_DEEPLINK</span></span></a></div>
+                  <div><a href="-q-u-e-r-y_-n-a-m-e_-d-e-e-p-l-i-n-k.html"><span>QUERY_</span><wbr></wbr><span>NAME_</span><wbr></wbr><span>DEEPLINK</span></a></div>
 <span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1727770375%2FProperties%2F-1725759721"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><span class="token keyword">const </span><span class="token keyword">val </span><a href="-q-u-e-r-y_-n-a-m-e_-d-e-e-p-l-i-n-k.html">QUERY_NAME_DEEPLINK</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin-stdlib/kotlin/-string/index.html">String</a></div><div class="brief "><p class="paragraph">Query key for directing Braze to open Url intents using the INTENT.ACTION_VIEW.</p></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><span class="token keyword">const </span><span class="token keyword">val </span><a href="-q-u-e-r-y_-n-a-m-e_-d-e-e-p-l-i-n-k.html">QUERY_NAME_DEEPLINK</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></div><div class="brief "><p class="paragraph">Query key for directing Braze to open Url intents using the INTENT.ACTION_VIEW.</p></div></div></div>
                 </div>
               </div>
             </div>
@@ -136,13 +179,13 @@
           <div class="table-row" data-filterable-current=":android-sdk-ui:dokkaHtml/release" data-filterable-set=":android-sdk-ui:dokkaHtml/release">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
-                  <div><a href="-q-u-e-r-y_-n-a-m-e_-e-x-t-e-r-n-a-l_-o-p-e-n.html"><span><span>QUERY_NAME_EXTERNAL_OPEN</span></span></a></div>
+                  <div><a href="-q-u-e-r-y_-n-a-m-e_-e-x-t-e-r-n-a-l_-o-p-e-n.html"><span>QUERY_</span><wbr></wbr><span>NAME_</span><wbr></wbr><span>EXTERNAL_</span><wbr></wbr><span>OPEN</span></a></div>
 <span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-998400561%2FProperties%2F-1725759721"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><span class="token keyword">const </span><span class="token keyword">val </span><a href="-q-u-e-r-y_-n-a-m-e_-e-x-t-e-r-n-a-l_-o-p-e-n.html">QUERY_NAME_EXTERNAL_OPEN</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin-stdlib/kotlin/-string/index.html">String</a></div><div class="brief "><p class="paragraph">The query key for opening links externally (i.e. outside your app). Url intents will be opened with the INTENT.ACTION_VIEW intent. Links beginning with the appboy:// scheme are unaffected by this query key.</p></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><span class="token keyword">const </span><span class="token keyword">val </span><a href="-q-u-e-r-y_-n-a-m-e_-e-x-t-e-r-n-a-l_-o-p-e-n.html">QUERY_NAME_EXTERNAL_OPEN</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></div><div class="brief "><p class="paragraph">The query key for opening links externally (i.e. outside your app). Url intents will be opened with the INTENT.ACTION_VIEW intent. Links beginning with the appboy:// scheme are unaffected by this query key.</p></div></div></div>
                 </div>
               </div>
             </div>
@@ -161,7 +204,7 @@
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><div class="block"><div class="block"><span class="token annotation builtin">@</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin-stdlib/kotlin.jvm/-jvm-static/index.html"><span class="token annotation builtin">JvmStatic</span></a></div><div class="block"><span class="token annotation builtin">@</span><a href="https://developer.android.com/reference/kotlin/androidx/annotation/VisibleForTesting.html"><span class="token annotation builtin">VisibleForTesting</span></a></div></div><span class="token keyword">fun </span><a href="get-bundle-from-url.html"><span class="token function">getBundleFromUrl</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">url<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin-stdlib/kotlin/-string/index.html">String</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/android/os/Bundle.html">Bundle</a></div><div class="brief "><p class="paragraph">Returns the string mapping of the query keys and values from the query string of the url. If the query string contains duplicate keys, then the last key in the string will be kept.</p></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><div class="block"><div class="block"><span class="token annotation builtin">@</span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.jvm/-jvm-static/index.html"><span class="token annotation builtin">JvmStatic</span></a></div><div class="block"><span class="token annotation builtin">@</span><a href="https://developer.android.com/reference/kotlin/androidx/annotation/VisibleForTesting.html"><span class="token annotation builtin">VisibleForTesting</span></a></div></div><span class="token keyword">fun </span><a href="get-bundle-from-url.html"><span class="token function">getBundleFromUrl</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">url<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/android/os/Bundle.html">Bundle</a></div><div class="brief "><p class="paragraph">Returns the string mapping of the query keys and values from the query string of the url. If the query string contains duplicate keys, then the last key in the string will be kept.</p></div></div></div>
                 </div>
               </div>
             </div>
@@ -176,7 +219,7 @@
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><div class="block"><div class="block"><span class="token annotation builtin">@</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin-stdlib/kotlin.jvm/-jvm-static/index.html"><span class="token annotation builtin">JvmStatic</span></a></div></div><span class="token keyword">fun </span><a href="parse-custom-event-name-from-query-bundle.html"><span class="token function">parseCustomEventNameFromQueryBundle</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">queryBundle<span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/android/os/Bundle.html">Bundle</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token operator">?</span></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><div class="block"><div class="block"><span class="token annotation builtin">@</span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.jvm/-jvm-static/index.html"><span class="token annotation builtin">JvmStatic</span></a></div></div><span class="token keyword">fun </span><a href="parse-custom-event-name-from-query-bundle.html"><span class="token function">parseCustomEventNameFromQueryBundle</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">queryBundle<span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/android/os/Bundle.html">Bundle</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token operator">?</span></div></div></div>
                 </div>
               </div>
             </div>
@@ -191,7 +234,7 @@
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><div class="block"><div class="block"><span class="token annotation builtin">@</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin-stdlib/kotlin.jvm/-jvm-static/index.html"><span class="token annotation builtin">JvmStatic</span></a></div></div><span class="token keyword">fun </span><a href="parse-properties-from-query-bundle.html"><span class="token function">parsePropertiesFromQueryBundle</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">queryBundle<span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/android/os/Bundle.html">Bundle</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../../../com.braze.models.outgoing/-braze-properties/index.html">BrazeProperties</a></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><div class="block"><div class="block"><span class="token annotation builtin">@</span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.jvm/-jvm-static/index.html"><span class="token annotation builtin">JvmStatic</span></a></div></div><span class="token keyword">fun </span><a href="parse-properties-from-query-bundle.html"><span class="token function">parsePropertiesFromQueryBundle</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">queryBundle<span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/android/os/Bundle.html">Bundle</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../../../com.braze.models.outgoing/-braze-properties/index.html">BrazeProperties</a></div></div></div>
                 </div>
               </div>
             </div>
@@ -201,11 +244,16 @@
     </div>
   </div>
 </div>
-      <div class="footer">
-        <span class="go-to-top-icon"><a href="#content" id="go-to-top-link"></a></span><span>© 2025 Copyright</span><span
-                class="pull-right"><span>Generated by </span><a
-                href="https://github.com/Kotlin/dokka"><span>dokka</span><span class="padded-icon"></span></a></span>
-      </div>
+    <div class="footer">
+        <a href="#content" id="go-to-top-link" class="footer--button footer--button_go-to-top"></a>
+        <span>© 2025 Copyright</span>
+        <span class="pull-right">
+            <span>Generated by </span>
+            <a class="footer--link footer--link_external" href="https://github.com/Kotlin/dokka">
+                <span>dokka</span>
+            </a>
+        </span>
+    </div>
             </div>
         </div>
     </div>

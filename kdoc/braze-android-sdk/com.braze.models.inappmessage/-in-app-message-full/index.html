@@ -26,39 +26,82 @@
 <link href="../../../styles/prism.css" rel="Stylesheet">
 <link href="../../../styles/logo-styles.css" rel="Stylesheet">
 <link href="../../../styles/font-jb-sans-auto.css" rel="Stylesheet">
+<link href="../../../ui-kit/ui-kit.min.css" rel="Stylesheet">
 <script type="text/javascript" src="../../../scripts/clipboard.js" async="async"></script>
 <script type="text/javascript" src="../../../scripts/navigation-loader.js" async="async"></script>
 <script type="text/javascript" src="../../../scripts/platform-content-handler.js" async="async"></script>
 <script type="text/javascript" src="../../../scripts/main.js" defer="defer"></script>
 <script type="text/javascript" src="../../../scripts/prism.js" async="async"></script>
+<script type="text/javascript" src="../../../ui-kit/ui-kit.min.js" defer="defer"></script>
 <script type="text/javascript" src="../../../scripts/symbol-parameters-wrapper_deferred.js" defer="defer"></script>
 </head>
 <body>
     <div class="root">
-<nav class="navigation" id="navigation-wrapper">
-    <div class="navigation--inner">
-        <div class="navigation-title">
-            <button class="menu-toggle" id="menu-toggle" type="button">toggle menu</button>
-            <div class="library-name">
-                    <a class="library-name--link" href="../../../index.html">
-                            braze-android-sdk
-                    </a>
+    <nav class="navigation theme-dark" id="navigation-wrapper">
+            <a class="library-name--link" href="../../../index.html">
+                    braze-android-sdk
+            </a>
+        <button class="navigation-controls--btn navigation-controls--btn_toc ui-kit_mobile-only" id="toc-toggle"
+                type="button">Toggle table of contents
+        </button>
+        <div class="navigation-controls--break ui-kit_mobile-only"></div>
+        <div class="library-version" id="library-version">
+38.0.0        </div>
+        <div class="navigation-controls">
+        <div class="filter-section filter-section_loading" id="filter-section">
+                <button class="platform-tag platform-selector jvm-like" data-active=""
+                        data-filter=":android-sdk-ui:dokkaHtml/release">androidJvm</button>
+            <div class="dropdown filter-section--dropdown" data-role="dropdown" id="filter-section-dropdown">
+                <button class="button button_dropdown filter-section--dropdown-toggle" role="combobox"
+                        data-role="dropdown-toggle"
+                        aria-controls="platform-tags-listbox"
+                        aria-haspopup="listbox"
+                        aria-expanded="false"
+                        aria-label="Toggle source sets"
+                ></button>
+                <ul role="listbox" id="platform-tags-listbox" class="dropdown--list" data-role="dropdown-listbox">
+                    <div class="dropdown--header"><span>Platform filter</span>
+                        <button class="button" data-role="dropdown-toggle" aria-label="Close platform filter">
+                            <i class="ui-kit-icon ui-kit-icon_cross"></i>
+                        </button>
+                    </div>
+                        <li role="option" class="dropdown--option platform-selector-option jvm-like" tabindex="0">
+                            <label class="checkbox">
+                                <input type="checkbox" class="checkbox--input" id=":android-sdk-ui:dokkaHtml/release"
+                                       data-filter=":android-sdk-ui:dokkaHtml/release"/>
+                                <span class="checkbox--icon"></span>
+                                androidJvm
+                            </label>
+                        </li>
+                </ul>
+                <div class="dropdown--overlay"></div>
             </div>
-            <div class="library-version">
-37.0.0            </div>
         </div>
-        <div class="filter-section" id="filter-section">
-                <button class="platform-tag platform-selector jvm-like" data-active="" data-filter=":android-sdk-ui:dokkaHtml/release">androidJvm</button>
+            <button class="navigation-controls--btn navigation-controls--btn_theme" id="theme-toggle-button"
+                    type="button">Switch theme
+            </button>
+            <div class="navigation-controls--btn navigation-controls--btn_search" id="searchBar" role="button">Search in
+                API
+            </div>
         </div>
-    </div>
-    <div class="navigation-controls">
-        <button class="navigation-controls--btn navigation-controls--theme" id="theme-toggle-button" type="button">switch theme</button>
-        <div class="navigation-controls--btn navigation-controls--search" id="searchBar" role="button">search in API</div>
-    </div>
-</nav>
+    </nav>
         <div id="container">
             <div class="sidebar" id="leftColumn">
-                <div class="sidebar--inner" id="sideMenu"></div>
+                <div class="dropdown theme-dark_mobile" data-role="dropdown" id="toc-dropdown">
+                    <ul role="listbox" id="toc-listbox" class="dropdown--list dropdown--list_toc-list"
+                        data-role="dropdown-listbox">
+                        <div class="dropdown--header">
+                            <span>
+                                    braze-android-sdk
+                            </span>
+                            <button class="button" data-role="dropdown-toggle" aria-label="Close table of contents">
+                                <i class="ui-kit-icon ui-kit-icon_cross"></i>
+                            </button>
+                        </div>
+                        <div class="sidebar--inner" id="sideMenu"></div>
+                    </ul>
+                    <div class="dropdown--overlay"></div>
+                </div>
             </div>
             <div id="main">
 <div class="main-content" data-page-type="classlike" id="content" pageIds="braze-android-sdk::com.braze.models.inappmessage/InAppMessageFull///PointingToDeclaration//-1725759721">
@@ -101,7 +144,7 @@
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">var </span><a href="../-in-app-message-base/alt-image-text.html">altImageText</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token operator">?</span></div><div class="brief "><p class="paragraph">The alternate text for the image to be announced by TalkBack.</p></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">var </span><a href="../-in-app-message-base/alt-image-text.html">altImageText</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token operator">?</span></div><div class="brief "><p class="paragraph">The alternate text for the image to be announced by TalkBack.</p></div></div></div>
                 </div>
               </div>
             </div>
@@ -116,7 +159,7 @@
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">var </span><a href="../-in-app-message-base/animate-in.html">animateIn</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a></div><div class="brief "><p class="paragraph">Whether this in-app message will animate in or appear suddenly. The recommended default is true.</p></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">var </span><a href="../-in-app-message-base/animate-in.html">animateIn</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a></div><div class="brief "><p class="paragraph">Whether this in-app message will animate in or appear suddenly. The recommended default is true.</p></div></div></div>
                 </div>
               </div>
             </div>
@@ -131,7 +174,7 @@
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">var </span><a href="../-in-app-message-base/animate-out.html">animateOut</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a></div><div class="brief "><p class="paragraph">Whether this in-app message will animate out or disappear suddenly.</p></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">var </span><a href="../-in-app-message-base/animate-out.html">animateOut</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a></div><div class="brief "><p class="paragraph">Whether this in-app message will animate out or disappear suddenly.</p></div></div></div>
                 </div>
               </div>
             </div>
@@ -146,7 +189,7 @@
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><div class="block"><div class="block"><span class="token annotation builtin">@</span><a href="https://developer.android.com/reference/kotlin/androidx/annotation/ColorInt.html"><span class="token annotation builtin">ColorInt</span></a></div></div><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">var </span><a href="../-in-app-message-base/background-color.html">backgroundColor</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin-stdlib/kotlin/-int/index.html">Int</a></div><div class="brief "><p class="paragraph">The <a href="https://developer.android.com/reference/kotlin/android/graphics/Color.html">android.graphics.Color</a> background color on this in-app message.</p></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><div class="block"><div class="block"><span class="token annotation builtin">@</span><a href="https://developer.android.com/reference/kotlin/androidx/annotation/ColorInt.html"><span class="token annotation builtin">ColorInt</span></a></div></div><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">var </span><a href="../-in-app-message-base/background-color.html">backgroundColor</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></div><div class="brief "><p class="paragraph">The <a href="https://developer.android.com/reference/kotlin/android/graphics/Color.html">android.graphics.Color</a> background color on this in-app message.</p></div></div></div>
                 </div>
               </div>
             </div>
@@ -206,7 +249,7 @@
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><div class="block"><div class="block"><span class="token annotation builtin">@</span><a href="https://developer.android.com/reference/kotlin/androidx/annotation/ColorInt.html"><span class="token annotation builtin">ColorInt</span></a></div></div><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">var </span><a href="../-in-app-message-immersive-base/close-button-color.html">closeButtonColor</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin-stdlib/kotlin/-int/index.html">Int</a></div><div class="brief "><p class="paragraph">The close button color on this in-app message.</p></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><div class="block"><div class="block"><span class="token annotation builtin">@</span><a href="https://developer.android.com/reference/kotlin/androidx/annotation/ColorInt.html"><span class="token annotation builtin">ColorInt</span></a></div></div><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">var </span><a href="../-in-app-message-immersive-base/close-button-color.html">closeButtonColor</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></div><div class="brief "><p class="paragraph">The close button color on this in-app message.</p></div></div></div>
                 </div>
               </div>
             </div>
@@ -251,7 +294,7 @@
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">var </span><a href="../-in-app-message-base/duration-in-milliseconds.html">durationInMilliseconds</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin-stdlib/kotlin/-int/index.html">Int</a></div><div class="brief "><p class="paragraph">Gets the duration of this in-app message. Only valid for <a href="../../com.braze.enums.inappmessage/-dismiss-type/-a-u-t-o_-d-i-s-m-i-s-s/index.html">DismissType.AUTO_DISMISS</a>.</p></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">var </span><a href="../-in-app-message-base/duration-in-milliseconds.html">durationInMilliseconds</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></div><div class="brief "><p class="paragraph">Gets the duration of this in-app message. Only valid for <a href="../../com.braze.enums.inappmessage/-dismiss-type/-a-u-t-o_-d-i-s-m-i-s-s/index.html">DismissType.AUTO_DISMISS</a>.</p></div></div></div>
                 </div>
               </div>
             </div>
@@ -266,7 +309,7 @@
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">var </span><a href="../-in-app-message-base/expiration-timestamp.html">expirationTimestamp</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin-stdlib/kotlin/-long/index.html">Long</a></div><div class="brief "><p class="paragraph">Expiration timestamp is not stored locally since it changes dynamically depending on trigger time.</p></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">var </span><a href="../-in-app-message-base/expiration-timestamp.html">expirationTimestamp</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-long/index.html">Long</a></div><div class="brief "><p class="paragraph">Expiration timestamp is not stored locally since it changes dynamically depending on trigger time.</p></div></div></div>
                 </div>
               </div>
             </div>
@@ -281,7 +324,7 @@
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">var </span><a href="../-in-app-message-base/extras.html">extras</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin-stdlib/kotlin.collections/-map/index.html">Map</a><span class="token operator">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token operator">&gt;</span></div><div class="brief "><p class="paragraph">The extras on this in-app message as a map of key value pairs.</p></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">var </span><a href="../-in-app-message-base/extras.html">extras</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-map/index.html">Map</a><span class="token operator">&lt;</span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token operator">&gt;</span></div><div class="brief "><p class="paragraph">The extras on this in-app message as a map of key value pairs.</p></div></div></div>
                 </div>
               </div>
             </div>
@@ -296,7 +339,7 @@
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><div class="block"><div class="block"><span class="token annotation builtin">@</span><a href="https://developer.android.com/reference/kotlin/androidx/annotation/ColorInt.html"><span class="token annotation builtin">ColorInt</span></a></div></div><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">var </span><a href="../-in-app-message-immersive-base/frame-color.html">frameColor</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin-stdlib/kotlin/-int/index.html">Int</a><span class="token operator">?</span></div><div class="brief "><p class="paragraph">The frame color for this in-app message. The frame refers to the area surrounding a modal in-app message.</p></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><div class="block"><div class="block"><span class="token annotation builtin">@</span><a href="https://developer.android.com/reference/kotlin/androidx/annotation/ColorInt.html"><span class="token annotation builtin">ColorInt</span></a></div></div><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">var </span><a href="../-in-app-message-immersive-base/frame-color.html">frameColor</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a><span class="token operator">?</span></div><div class="brief "><p class="paragraph">The frame color for this in-app message. The frame refers to the area surrounding a modal in-app message.</p></div></div></div>
                 </div>
               </div>
             </div>
@@ -311,7 +354,7 @@
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">var </span><a href="../-in-app-message-immersive-base/header.html">header</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token operator">?</span></div><div class="brief "><p class="paragraph">The header text on this in-app message.</p></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">var </span><a href="../-in-app-message-immersive-base/header.html">header</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token operator">?</span></div><div class="brief "><p class="paragraph">The header text on this in-app message.</p></div></div></div>
                 </div>
               </div>
             </div>
@@ -341,7 +384,7 @@
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><div class="block"><div class="block"><span class="token annotation builtin">@</span><a href="https://developer.android.com/reference/kotlin/androidx/annotation/ColorInt.html"><span class="token annotation builtin">ColorInt</span></a></div></div><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">var </span><a href="../-in-app-message-immersive-base/header-text-color.html">headerTextColor</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin-stdlib/kotlin/-int/index.html">Int</a></div><div class="brief "><p class="paragraph">The header text color on this in-app message.</p></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><div class="block"><div class="block"><span class="token annotation builtin">@</span><a href="https://developer.android.com/reference/kotlin/androidx/annotation/ColorInt.html"><span class="token annotation builtin">ColorInt</span></a></div></div><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">var </span><a href="../-in-app-message-immersive-base/header-text-color.html">headerTextColor</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></div><div class="brief "><p class="paragraph">The header text color on this in-app message.</p></div></div></div>
                 </div>
               </div>
             </div>
@@ -356,7 +399,7 @@
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">var </span><a href="../-in-app-message-base/icon.html">icon</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token operator">?</span></div><div class="brief "><p class="paragraph">The Font Awesome icon on this in-app message.</p></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">var </span><a href="../-in-app-message-base/icon.html">icon</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token operator">?</span></div><div class="brief "><p class="paragraph">The Font Awesome icon on this in-app message.</p></div></div></div>
                 </div>
               </div>
             </div>
@@ -371,7 +414,7 @@
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><div class="block"><div class="block"><span class="token annotation builtin">@</span><a href="https://developer.android.com/reference/kotlin/androidx/annotation/ColorInt.html"><span class="token annotation builtin">ColorInt</span></a></div></div><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">var </span><a href="../-in-app-message-base/icon-background-color.html">iconBackgroundColor</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin-stdlib/kotlin/-int/index.html">Int</a></div><div class="brief "><p class="paragraph">The icon background color on this in-app message. This will set the color of the icon background itself (not the icon itself).</p></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><div class="block"><div class="block"><span class="token annotation builtin">@</span><a href="https://developer.android.com/reference/kotlin/androidx/annotation/ColorInt.html"><span class="token annotation builtin">ColorInt</span></a></div></div><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">var </span><a href="../-in-app-message-base/icon-background-color.html">iconBackgroundColor</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></div><div class="brief "><p class="paragraph">The icon background color on this in-app message. This will set the color of the icon background itself (not the icon itself).</p></div></div></div>
                 </div>
               </div>
             </div>
@@ -386,7 +429,7 @@
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><div class="block"><div class="block"><span class="token annotation builtin">@</span><a href="https://developer.android.com/reference/kotlin/androidx/annotation/ColorInt.html"><span class="token annotation builtin">ColorInt</span></a></div></div><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">var </span><a href="../-in-app-message-base/icon-color.html">iconColor</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin-stdlib/kotlin/-int/index.html">Int</a></div><div class="brief "><p class="paragraph">The icon color (<a href="https://developer.android.com/reference/kotlin/android/graphics/Color.html">android.graphics.Color</a>) of this in-app message. This is the color of the icon itself (not the background).</p></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><div class="block"><div class="block"><span class="token annotation builtin">@</span><a href="https://developer.android.com/reference/kotlin/androidx/annotation/ColorInt.html"><span class="token annotation builtin">ColorInt</span></a></div></div><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">var </span><a href="../-in-app-message-base/icon-color.html">iconColor</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></div><div class="brief "><p class="paragraph">The icon color (<a href="https://developer.android.com/reference/kotlin/android/graphics/Color.html">android.graphics.Color</a>) of this in-app message. This is the color of the icon itself (not the background).</p></div></div></div>
                 </div>
               </div>
             </div>
@@ -401,7 +444,7 @@
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">var </span><a href="../-in-app-message-with-image-base/image-download-successful.html">imageDownloadSuccessful</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a></div><div class="brief "><p class="paragraph">The status of the image download on this in-app message. If the image specified by <a href="../-in-app-message-with-image-base/remote-image-url.html">remoteImageUrl</a> could not be downloaded successfully then this should return false. Returns false by default.</p></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">var </span><a href="../-in-app-message-with-image-base/image-download-successful.html">imageDownloadSuccessful</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a></div><div class="brief "><p class="paragraph">The status of the image download on this in-app message. If the image specified by <a href="../-in-app-message-with-image-base/remote-image-url.html">remoteImageUrl</a> could not be downloaded successfully then this should return false. Returns false by default.</p></div></div></div>
                 </div>
               </div>
             </div>
@@ -431,7 +474,7 @@
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">val </span><a href="../-in-app-message-with-image-base/image-url.html">imageUrl</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token operator">?</span></div><div class="brief "><p class="paragraph">Gets the image url on this in-app message.</p></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">val </span><a href="../-in-app-message-with-image-base/image-url.html">imageUrl</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token operator">?</span></div><div class="brief "><p class="paragraph">Gets the image url on this in-app message.</p></div></div></div>
                 </div>
               </div>
             </div>
@@ -461,7 +504,7 @@
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">val </span><a href="../-in-app-message-base/is-control.html">isControl</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a></div><div class="brief "><p class="paragraph">Whether this in-app message is a control for multivariate testing. Control in-app messages should not be displayed to users.</p></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">val </span><a href="../-in-app-message-base/is-control.html">isControl</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a></div><div class="brief "><p class="paragraph">Whether this in-app message is a control for multivariate testing. Control in-app messages should not be displayed to users.</p></div></div></div>
                 </div>
               </div>
             </div>
@@ -476,7 +519,7 @@
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">var </span><a href="../-in-app-message-base/is-test-send.html">isTestSend</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a></div><div class="brief "><p class="paragraph">Is this in-app message from a test send.</p></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">var </span><a href="../-in-app-message-base/is-test-send.html">isTestSend</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a></div><div class="brief "><p class="paragraph">Is this in-app message from a test send.</p></div></div></div>
                 </div>
               </div>
             </div>
@@ -506,7 +549,7 @@
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">var </span><a href="../-in-app-message-with-image-base/local-image-url.html">localImageUrl</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token operator">?</span></div><div class="brief "><p class="paragraph">The local uri of this in-app message image.</p></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">var </span><a href="../-in-app-message-with-image-base/local-image-url.html">localImageUrl</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token operator">?</span></div><div class="brief "><p class="paragraph">The local uri of this in-app message image.</p></div></div></div>
                 </div>
               </div>
             </div>
@@ -521,7 +564,7 @@
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">var </span><a href="../-in-app-message-base/message.html">message</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token operator">?</span></div><div class="brief "><p class="paragraph">The message text on this in-app message.</p></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">var </span><a href="../-in-app-message-base/message.html">message</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token operator">?</span></div><div class="brief "><p class="paragraph">The message text on this in-app message.</p></div></div></div>
                 </div>
               </div>
             </div>
@@ -536,7 +579,7 @@
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">var </span><a href="../-in-app-message-immersive-base/message-buttons.html">messageButtons</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin-stdlib/kotlin.collections/-list/index.html">List</a><span class="token operator">&lt;</span><a href="../-message-button/index.html">MessageButton</a><span class="token operator">&gt;</span></div><div class="brief "><p class="paragraph">The message buttons for this in-app message.</p></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">var </span><a href="../-in-app-message-immersive-base/message-buttons.html">messageButtons</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-list/index.html">List</a><span class="token operator">&lt;</span><a href="../-message-button/index.html">MessageButton</a><span class="token operator">&gt;</span></div><div class="brief "><p class="paragraph">The message buttons for this in-app message.</p></div></div></div>
                 </div>
               </div>
             </div>
@@ -551,7 +594,7 @@
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">var </span><a href="../-in-app-message-base/message-extras.html">messageExtras</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token operator">?</span></div><div class="brief "><p class="paragraph">The message extras on this in-app message as a string. This field will be absent if there is no value.</p></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">var </span><a href="../-in-app-message-base/message-extras.html">messageExtras</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token operator">?</span></div><div class="brief "><p class="paragraph">The message extras on this in-app message as a string. This field will be absent if there is no value.</p></div></div></div>
                 </div>
               </div>
             </div>
@@ -581,7 +624,7 @@
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><div class="block"><div class="block"><span class="token annotation builtin">@</span><a href="https://developer.android.com/reference/kotlin/androidx/annotation/ColorInt.html"><span class="token annotation builtin">ColorInt</span></a></div></div><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">var </span><a href="../-in-app-message-base/message-text-color.html">messageTextColor</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin-stdlib/kotlin/-int/index.html">Int</a></div><div class="brief "><p class="paragraph">The message text color on this in-app message.</p></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><div class="block"><div class="block"><span class="token annotation builtin">@</span><a href="https://developer.android.com/reference/kotlin/androidx/annotation/ColorInt.html"><span class="token annotation builtin">ColorInt</span></a></div></div><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">var </span><a href="../-in-app-message-base/message-text-color.html">messageTextColor</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></div><div class="brief "><p class="paragraph">The message text color on this in-app message.</p></div></div></div>
                 </div>
               </div>
             </div>
@@ -611,7 +654,7 @@
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">var </span><a href="../-in-app-message-base/open-uri-in-web-view.html">openUriInWebView</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a></div><div class="brief "><p class="paragraph">Sets whether to use BrazeWebViewActivity to open deep links from this in-app message.</p></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">var </span><a href="../-in-app-message-base/open-uri-in-web-view.html">openUriInWebView</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a></div><div class="brief "><p class="paragraph">Sets whether to use BrazeWebViewActivity to open deep links from this in-app message.</p></div></div></div>
                 </div>
               </div>
             </div>
@@ -641,7 +684,7 @@
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">var </span><a href="../-in-app-message-with-image-base/remote-image-url.html">remoteImageUrl</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token operator">?</span></div><div class="brief "><p class="paragraph">The remote uri of this in-app message image.</p></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">var </span><a href="../-in-app-message-with-image-base/remote-image-url.html">remoteImageUrl</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token operator">?</span></div><div class="brief "><p class="paragraph">The remote uri of this in-app message image.</p></div></div></div>
                 </div>
               </div>
             </div>
@@ -656,7 +699,7 @@
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><span class="token keyword">val </span><a href="../-in-app-message-base/trigger-id.html">triggerId</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token operator">?</span></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><span class="token keyword">val </span><a href="../-in-app-message-base/trigger-id.html">triggerId</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token operator">?</span></div></div></div>
                 </div>
               </div>
             </div>
@@ -720,7 +763,7 @@
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">fun </span><a href="../-i-in-app-message/get-local-prefetched-asset-paths.html"><span class="token function">getLocalPrefetchedAssetPaths</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin-stdlib/kotlin.collections/-map/index.html">Map</a><span class="token operator">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token operator">&gt;</span></div><div class="brief "><p class="paragraph">Gets where to find the pre-fetched remote assets specified in <a href="../-i-in-app-message/set-local-prefetched-asset-paths.html">setLocalPrefetchedAssetPaths</a>.</p></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">fun </span><a href="../-i-in-app-message/get-local-prefetched-asset-paths.html"><span class="token function">getLocalPrefetchedAssetPaths</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-map/index.html">Map</a><span class="token operator">&lt;</span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token operator">&gt;</span></div><div class="brief "><p class="paragraph">Gets where to find the pre-fetched remote assets specified in <a href="../-i-in-app-message/set-local-prefetched-asset-paths.html">setLocalPrefetchedAssetPaths</a>.</p></div></div></div>
                 </div>
               </div>
             </div>
@@ -735,7 +778,7 @@
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="../-in-app-message-with-image-base/get-remote-asset-paths-for-prefetch.html"><span class="token function">getRemoteAssetPathsForPrefetch</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin-stdlib/kotlin.collections/-list/index.html">List</a><span class="token operator">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token operator">&gt;</span></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="../-in-app-message-with-image-base/get-remote-asset-paths-for-prefetch.html"><span class="token function">getRemoteAssetPathsForPrefetch</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-list/index.html">List</a><span class="token operator">&lt;</span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token operator">&gt;</span></div></div></div>
                 </div>
               </div>
             </div>
@@ -750,7 +793,7 @@
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="../-in-app-message-immersive-base/log-button-click.html"><span class="token function">logButtonClick</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">messageButton<span class="token operator">: </span><a href="../-message-button/index.html">MessageButton</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a></div><div class="brief "><p class="paragraph">Logs a click on this message button.</p></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="../-in-app-message-immersive-base/log-button-click.html"><span class="token function">logButtonClick</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">messageButton<span class="token operator">: </span><a href="../-message-button/index.html">MessageButton</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a></div><div class="brief "><p class="paragraph">Logs a click on this message button.</p></div></div></div>
                 </div>
               </div>
             </div>
@@ -765,7 +808,7 @@
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="../-in-app-message-base/log-click.html"><span class="token function">logClick</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a></div><div class="brief "><p class="paragraph">Logs a click on this in-app message. Clicks (either with or without button IDs) may only be logged once per in-app message instance.</p></div><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="../-in-app-message-base/log-click.html"><span class="token function">logClick</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">buttonId<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin-stdlib/kotlin/-string/index.html">String</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a></div><div class="brief "><p class="paragraph">Logs a button click on this in-app message. Clicks (either with or without button IDs) may only be logged once per in-app message instance.</p></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="../-in-app-message-base/log-click.html"><span class="token function">logClick</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a></div><div class="brief "><p class="paragraph">Logs a click on this in-app message. Clicks (either with or without button IDs) may only be logged once per in-app message instance.</p></div><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="../-in-app-message-base/log-click.html"><span class="token function">logClick</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">buttonId<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a></div><div class="brief "><p class="paragraph">Logs a button click on this in-app message. Clicks (either with or without button IDs) may only be logged once per in-app message instance.</p></div></div></div>
                 </div>
               </div>
             </div>
@@ -780,7 +823,7 @@
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="../-in-app-message-base/log-impression.html"><span class="token function">logImpression</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a></div><div class="brief "><p class="paragraph">Logs an impression on this in-app message. Impressions may only be logged once per in-app message instance.</p></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="../-in-app-message-base/log-impression.html"><span class="token function">logImpression</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a></div><div class="brief "><p class="paragraph">Logs an impression on this in-app message. Impressions may only be logged once per in-app message instance.</p></div></div></div>
                 </div>
               </div>
             </div>
@@ -825,7 +868,7 @@
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="../-in-app-message-with-image-base/set-local-prefetched-asset-paths.html"><span class="token function">setLocalPrefetchedAssetPaths</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">remotePathToLocalAssetMap<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin-stdlib/kotlin.collections/-map/index.html">Map</a><span class="token operator">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token operator">&gt;</span></span></span><span class="token punctuation">)</span></div><div class="brief "><p class="paragraph">The base In-App Message class does not have assets of its own. Subclasses provide and manage assets.</p></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="../-in-app-message-with-image-base/set-local-prefetched-asset-paths.html"><span class="token function">setLocalPrefetchedAssetPaths</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">remotePathToLocalAssetMap<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-map/index.html">Map</a><span class="token operator">&lt;</span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token operator">&gt;</span></span></span><span class="token punctuation">)</span></div><div class="brief "><p class="paragraph">The base In-App Message class does not have assets of its own. Subclasses provide and manage assets.</p></div></div></div>
                 </div>
               </div>
             </div>
@@ -835,11 +878,16 @@
     </div>
   </div>
 </div>
-      <div class="footer">
-        <span class="go-to-top-icon"><a href="#content" id="go-to-top-link"></a></span><span>© 2025 Copyright</span><span
-                class="pull-right"><span>Generated by </span><a
-                href="https://github.com/Kotlin/dokka"><span>dokka</span><span class="padded-icon"></span></a></span>
-      </div>
+    <div class="footer">
+        <a href="#content" id="go-to-top-link" class="footer--button footer--button_go-to-top"></a>
+        <span>© 2025 Copyright</span>
+        <span class="pull-right">
+            <span>Generated by </span>
+            <a class="footer--link footer--link_external" href="https://github.com/Kotlin/dokka">
+                <span>dokka</span>
+            </a>
+        </span>
+    </div>
             </div>
         </div>
     </div>
