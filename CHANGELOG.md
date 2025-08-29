@@ -1,3 +1,16 @@
+## 39.0.0
+
+[Release Date](https://github.com/braze-inc/braze-android-sdk/releases/tag/v39.0.0)
+
+#### Breaking
+- Changed the behavior of `Braze.subscribeToContentCardsUpdates()` to immediately return cached Content Cards after registering the subscriber.
+
+##### Fixed
+- Fixed a race condition in `BrazeBootReceiver` which could cause a crash upon SDK initialization.
+
+##### Changed
+- Increased the socket read timeout for all network requests to 25 seconds.
+
 ## 38.0.0
 
 [Release Date](https://github.com/braze-inc/braze-android-sdk/releases/tag/v38.0.0)
