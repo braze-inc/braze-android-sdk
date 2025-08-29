@@ -2468,6 +2468,7 @@ $dokka.location:com.braze/BrazeInternal///PointingToDeclaration/braze-android-s
 $dokka.location:com.braze/BrazeInternal/addBannerViewMonitor/#kotlin.String#android.view.View#kotlin.Boolean/PointingToDeclaration/braze-android-sdk/com.braze/-braze-internal/add-banner-view-monitor.html
 $dokka.location:com.braze/BrazeInternal/addSerializedContentCardToStorage/#android.content.Context#kotlin.String#kotlin.String?/PointingToDeclaration/braze-android-sdk/com.braze/-braze-internal/add-serialized-content-card-to-storage.html
 $dokka.location:com.braze/BrazeInternal/applyPendingRuntimeConfiguration/#android.content.Context/PointingToDeclaration/braze-android-sdk/com.braze/-braze-internal/apply-pending-runtime-configuration.html
+$dokka.location:com.braze/BrazeInternal/deleteRegisteredGeofenceCache/#android.content.Context/PointingToDeclaration/braze-android-sdk/com.braze/-braze-internal/delete-registered-geofence-cache.html
 $dokka.location:com.braze/BrazeInternal/getConfigurationProvider/#android.content.Context/PointingToDeclaration/braze-android-sdk/com.braze/-braze-internal/get-configuration-provider.html
 $dokka.location:com.braze/BrazeInternal/handleInAppMessageTestPush/#android.content.Context#android.content.Intent/PointingToDeclaration/braze-android-sdk/com.braze/-braze-internal/handle-in-app-message-test-push.html
 $dokka.location:com.braze/BrazeInternal/logLocationRecordedEvent/#android.content.Context#com.braze.models.IBrazeLocation/PointingToDeclaration/braze-android-sdk/com.braze/-braze-internal/log-location-recorded-event.html
