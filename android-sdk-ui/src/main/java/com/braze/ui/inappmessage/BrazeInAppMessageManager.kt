@@ -36,8 +36,8 @@ import com.braze.ui.inappmessage.listeners.IInAppMessageViewLifecycleListener
 import com.braze.ui.inappmessage.utils.BackgroundInAppMessagePreparer.prepareInAppMessageForDisplay
 import com.braze.ui.inappmessage.views.IInAppMessageImmersiveView
 import com.braze.ui.inappmessage.views.IInAppMessageView
-import com.braze.ui.inappmessage.views.InAppMessageHtmlBaseView
 import com.braze.ui.inappmessage.views.InAppMessageFullView
+import com.braze.ui.inappmessage.views.InAppMessageHtmlBaseView
 import com.braze.ui.support.isCurrentOrientationValid
 import com.braze.ui.support.isRunningOnTablet
 import com.braze.ui.support.removeViewFromParent
@@ -46,7 +46,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import java.lang.ref.WeakReference
-import java.util.*
+import java.util.Stack
 import java.util.concurrent.atomic.AtomicBoolean
 import java.util.concurrent.locks.ReentrantLock
 import kotlin.concurrent.withLock
@@ -111,9 +111,10 @@ open class BrazeInAppMessageManager : InAppMessageManagerBase() {
     private var inAppMessageViewWrapper: IInAppMessageViewWrapper? = null
 
     /**
-     * The last seen user id from the [BrazeUserChangeEvent] subscriber.
+     * The last seen user id from the [BrazeUserChangeEvent] subscriber. Starts as null
+     * to account for the case where the current user ID is not yet known.
      */
-    private var currentUserId: String = ""
+    private var currentUserId: String? = null
 
     /**
      * An In-App Message being carried over during the
@@ -197,9 +198,7 @@ open class BrazeInAppMessageManager : InAppMessageManagerBase() {
         }
 
         brazeUserChangeEventSubscriber = createBrazeUserChangeEventSubscriber(context).also {
-            getInstance(context).addSingleSynchronousSubscription(
-                it, BrazeUserChangeEvent::class.java
-            )
+            getInstance(context).subscribeToChangeUserEvents(it)
         }
     }
 
@@ -538,7 +537,8 @@ open class BrazeInAppMessageManager : InAppMessageManagerBase() {
                 )
             if (!isInAppMessageForTheSameUser(inAppMessage, currentUserId)) {
                 throw Exception(
-                    "The last identifier user $currentUserId does not match the in-app message's user. " +
+                    "The last identified user '$currentUserId' does not match the incoming " +
+                        "in-app message's user '${inAppMessageEventMap[inAppMessage]?.userId}'. " +
                         "The in-app message will not be displayed and will not be put back on the stack."
                 )
             }
@@ -760,8 +760,9 @@ open class BrazeInAppMessageManager : InAppMessageManagerBase() {
      * user, false otherwise. Returns false if the message is null.
      */
     @VisibleForTesting
-    open fun isInAppMessageForTheSameUser(inAppMessage: IInAppMessage?, currentUserId: String): Boolean {
-        if (inAppMessage == null) return true
+    open fun isInAppMessageForTheSameUser(inAppMessage: IInAppMessage?, currentUserId: String?): Boolean {
+        // If we don't have a user id or in-app message, we can't verify the user
+        if (inAppMessage == null || currentUserId == null) return true
 
         val inAppMessageUserId = inAppMessageEventMap[inAppMessage]?.userId
         return inAppMessageUserId == null || inAppMessageUserId == currentUserId

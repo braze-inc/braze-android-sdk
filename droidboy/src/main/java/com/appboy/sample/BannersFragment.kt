@@ -21,6 +21,8 @@ import com.braze.models.IPropertiesObject
 import com.braze.support.BrazeLogger.Priority.I
 import com.braze.support.BrazeLogger.brazelog
 import com.braze.ui.banners.BannerView
+import com.google.android.material.chip.Chip
+import com.google.android.material.chip.ChipGroup
 
 class BannersFragment : Fragment() {
 
@@ -32,6 +34,7 @@ class BannersFragment : Fragment() {
     private lateinit var bannersFragmentBannerView: BannerView
     private lateinit var bannerPropertiesContainer: LinearLayout
     private lateinit var propertyFilterSpinner: Spinner
+    private lateinit var cachedPlacementIdsChipGroup: ChipGroup
 
     private var bannerUpdateSubscriber: IEventSubscriber<BannersUpdatedEvent>? = null
     private var currentlyDisplayedBanner: Banner? = null
@@ -63,6 +66,7 @@ class BannersFragment : Fragment() {
         bannersFragmentBannerView = view.findViewById(R.id.banners_fragment_banner_view)
         bannerPropertiesContainer = view.findViewById(R.id.banner_properties_container)
         propertyFilterSpinner = view.findViewById(R.id.property_filter_spinner)
+        cachedPlacementIdsChipGroup = view.findViewById(R.id.cached_placement_ids_chip_group)
 
         setupPropertyFilters()
 
@@ -143,7 +147,13 @@ class BannersFragment : Fragment() {
         if (bannerUpdateSubscriber == null) {
             bannerUpdateSubscriber = IEventSubscriber { update ->
                 brazelog(I) {
-                    "BannersFragment: Received ${update.banners.size} banners with placement IDs: ${update.banners.map { it.placementId }}"
+                    "BannersFragment: Received ${update.banners.size} banners with " +
+                        "placement IDs: ${update.banners.map { it.placementId }}"
+                }
+
+                val placementIds = update.banners.map { it.placementId }
+                cachedPlacementIdsChipGroup.post {
+                    updateCachedPlacementChips(placementIds)
                 }
             }
             bannerUpdateSubscriber?.let {
@@ -269,6 +279,28 @@ class BannersFragment : Fragment() {
             setBackgroundResource(R.drawable.property_item_background)
         }
         bannerPropertiesContainer.addView(textView)
+    }
+
+    /**
+     * Updates the ChipGroup with chips for each cached placement ID.
+     * Each chip is clickable and will prefill the "Get Banner" input field.
+     */
+    private fun updateCachedPlacementChips(placementIds: List<String>) {
+        cachedPlacementIdsChipGroup.removeAllViews()
+
+        placementIds.forEach { placementId ->
+            val chip = Chip(requireContext()).apply {
+                text = placementId
+                isClickable = true
+                isCheckable = false
+                setOnClickListener {
+                    // Prefill the get banner input field with this placement ID
+                    getBannerTextInput.setText(placementId)
+                    showToast("Selected placement ID: $placementId")
+                }
+            }
+            cachedPlacementIdsChipGroup.addView(chip)
+        }
     }
 
     private fun showToast(message: String) {

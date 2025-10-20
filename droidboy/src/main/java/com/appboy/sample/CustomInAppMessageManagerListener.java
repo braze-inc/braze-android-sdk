@@ -5,12 +5,9 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.braze.models.inappmessage.IInAppMessage;
-import com.braze.models.inappmessage.MessageButton;
-import com.braze.ui.inappmessage.InAppMessageCloser;
 import com.braze.ui.inappmessage.InAppMessageOperation;
 import com.braze.ui.inappmessage.listeners.IInAppMessageManagerListener;
 
-import java.util.ArrayList;
 import java.util.Map;
 
 public class CustomInAppMessageManagerListener implements IInAppMessageManagerListener {
@@ -31,26 +28,6 @@ public class CustomInAppMessageManagerListener implements IInAppMessageManagerLi
       shouldDrop = true;
       return InAppMessageOperation.DISPLAY_NOW;
     }
-  }
-
-  @Override
-  public boolean onInAppMessageClicked(IInAppMessage inAppMessage, InAppMessageCloser inAppMessageCloser) {
-    Toast.makeText(mActivity, "The click was ignored.", Toast.LENGTH_LONG).show();
-
-    // Closing should not be animated if transitioning to a new activity.
-    // If remaining in the same activity, closing should be animated.
-    inAppMessageCloser.close(true);
-    return true;
-  }
-
-  @Override
-  public boolean onInAppMessageButtonClicked(IInAppMessage inAppMessage, MessageButton button, InAppMessageCloser inAppMessageCloser) {
-    Toast.makeText(mActivity, "The button click was ignored.", Toast.LENGTH_LONG).show();
-
-    // Closing should not be animated if transitioning to a new activity.
-    // If remaining in the same activity, closing should be animated.
-    inAppMessageCloser.close(true);
-    return true;
   }
 
   @Override

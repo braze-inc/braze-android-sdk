@@ -59,6 +59,21 @@
             android:layout_marginBottom="8dp"
             android:fontFamily="@font/sailec_bold"/>
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Cached Placement IDs:"
+            android:layout_marginBottom="4dp"
+            android:fontFamily="@font/sailec_bold"/>
+
+        <com.google.android.material.chip.ChipGroup
+            android:id="@+id/cached_placement_ids_chip_group"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            app:chipSpacing="8dp"
+            app:singleLine="false" />
+
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/get_banner_input_layout"
             style="@style/DroidboyOutlinedBox"

@@ -1,3 +1,25 @@
+## 40.0.0
+
+[Release Date](https://github.com/braze-inc/braze-android-sdk/releases/tag/v40.0.0)
+
+#### Breaking
+- Removed `InAppMessageCloser`.
+  - Use `BrazeInAppMessageManager.hideCurrentlyDisplayingInAppMessage()` to hide in-app messages and `IInAppMessage#setAnimateOut()` for controlling exit animations.
+
+##### Fixed
+- Fixed an issue where calls to `wipeData()` followed by `enableSdk()` could result in certain SDK data being unusable until the app was restarted.
+    - All data would still be properly wiped from storage after calls to `wipeData()`.
+    - This issue would manifest as `IllegalStateException: There are multiple DataStores active for the same file` in logcat and would not result in an app crash.
+    - This issue does not result in any data loss.
+- Fixed an issue where anonymous user transitions to identified users could cause SDK Auth errors when push token data was present.
+- Fixed an issue where `BrazeInAppMessageManager` could misreport incoming in-app messages as not belonging to the current user after disabling and re-enabling the SDK.
+
+##### Added
+- Added `IBraze.subscribeToChangeUserEvents()`.
+
+##### Changed
+- Removes `DeviceKey.RESOLUTION`.
+
 ## 39.0.0
 
 [Release Date](https://github.com/braze-inc/braze-android-sdk/releases/tag/v39.0.0)

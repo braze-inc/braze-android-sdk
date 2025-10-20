@@ -55,9 +55,7 @@ open class DefaultInAppMessageViewLifecycleListener : IInAppMessageViewLifecycle
         inAppMessageManager.inAppMessageManagerListener.afterInAppMessageViewClosed(inAppMessage)
     }
 
-    @Suppress("DEPRECATION")
     override fun onClicked(
-        inAppMessageCloser: com.braze.ui.inappmessage.InAppMessageCloser,
         inAppMessageView: View,
         inAppMessage: IInAppMessage
     ) {
@@ -72,23 +70,14 @@ open class DefaultInAppMessageViewLifecycleListener : IInAppMessageViewLifecycle
         // an example, if the in-app message were to navigate to a deeplink when it was clicked, the
         // behavior can be cancelled by setting the click action to NONE.
         @Suppress("SwallowedException")
-        val wasHandled = try {
-            val wasHandledLegacy = inAppMessageManager.inAppMessageManagerListener.onInAppMessageClicked(inAppMessage, inAppMessageCloser)
-            brazelog { "Deprecated onInAppMessageClicked(inAppMessage, inAppMessageCloser) called." }
-            wasHandledLegacy
-        } catch (e: BrazeFunctionNotImplemented) {
-            brazelog { "Using non-deprecated onInAppMessageClicked(inAppMessage)" }
-            inAppMessageManager.inAppMessageManagerListener.onInAppMessageClicked(inAppMessage)
-        }
+        val wasHandled = inAppMessageManager.inAppMessageManagerListener.onInAppMessageClicked(inAppMessage)
         if (!wasHandled) {
             // Perform the default (or modified) in-app message clicked behavior.
-            performInAppMessageClicked(inAppMessage, inAppMessageCloser)
+            performInAppMessageClicked(inAppMessage)
         }
     }
 
-    @Suppress("DEPRECATION")
     override fun onButtonClicked(
-        inAppMessageCloser: com.braze.ui.inappmessage.InAppMessageCloser,
         messageButton: MessageButton,
         inAppMessageImmersive: IInAppMessageImmersive
     ) {
@@ -99,8 +88,7 @@ open class DefaultInAppMessageViewLifecycleListener : IInAppMessageViewLifecycle
             try {
                 inAppMessageManager.inAppMessageManagerListener.onInAppMessageButtonClicked(
                     inAppMessageImmersive,
-                    messageButton,
-                    inAppMessageCloser
+                    messageButton
                 )
             } catch (e: BrazeFunctionNotImplemented) {
                 inAppMessageManager.inAppMessageManagerListener.onInAppMessageButtonClicked(
@@ -110,7 +98,7 @@ open class DefaultInAppMessageViewLifecycleListener : IInAppMessageViewLifecycle
             }
         if (!wasHandled) {
             // Perform the default (or modified) in-app message button clicked behavior.
-            performInAppMessageButtonClicked(messageButton, inAppMessageImmersive, inAppMessageCloser)
+            performInAppMessageButtonClicked(messageButton, inAppMessageImmersive)
         }
     }
 
@@ -119,37 +107,30 @@ open class DefaultInAppMessageViewLifecycleListener : IInAppMessageViewLifecycle
         inAppMessageManager.inAppMessageManagerListener.onInAppMessageDismissed(inAppMessage)
     }
 
-    @Suppress("DEPRECATION")
     private fun performInAppMessageButtonClicked(
         messageButton: MessageButton,
-        inAppMessage: IInAppMessage,
-        inAppMessageCloser: com.braze.ui.inappmessage.InAppMessageCloser
+        inAppMessage: IInAppMessage
     ) {
         performClickAction(
             messageButton.clickAction,
             inAppMessage,
-            inAppMessageCloser,
             messageButton.uri,
             messageButton.openUriInWebview
         )
     }
 
-    @Suppress("DEPRECATION")
-    private fun performInAppMessageClicked(inAppMessage: IInAppMessage, inAppMessageCloser: com.braze.ui.inappmessage.InAppMessageCloser) {
+    private fun performInAppMessageClicked(inAppMessage: IInAppMessage) {
         performClickAction(
             inAppMessage.clickAction,
             inAppMessage,
-            inAppMessageCloser,
             inAppMessage.uri,
             inAppMessage.openUriInWebView
         )
     }
 
-    @Suppress("DEPRECATION")
     private fun performClickAction(
         clickAction: ClickAction,
         inAppMessage: IInAppMessage,
-        inAppMessageCloser: com.braze.ui.inappmessage.InAppMessageCloser,
         clickUri: Uri?,
         openUriInWebview: Boolean
     ) {
@@ -160,7 +141,7 @@ open class DefaultInAppMessageViewLifecycleListener : IInAppMessageViewLifecycle
         }
         when (clickAction) {
             ClickAction.URI -> {
-                inAppMessageCloser.close(false)
+                inAppMessageManager.hideCurrentlyDisplayingInAppMessage(false)
                 if (clickUri == null) {
                     brazelog { "clickUri is null, not performing click action" }
                     return
@@ -178,8 +159,8 @@ open class DefaultInAppMessageViewLifecycleListener : IInAppMessageViewLifecycle
                     BrazeDeeplinkHandler.getInstance().gotoUri(appContext, uriAction)
                 }
             }
-            ClickAction.NONE -> inAppMessageCloser.close(inAppMessage.animateOut)
-            else -> inAppMessageCloser.close(false)
+            ClickAction.NONE -> inAppMessageManager.hideCurrentlyDisplayingInAppMessage(false)
+            else -> inAppMessageManager.hideCurrentlyDisplayingInAppMessage(false)
         }
     }
 

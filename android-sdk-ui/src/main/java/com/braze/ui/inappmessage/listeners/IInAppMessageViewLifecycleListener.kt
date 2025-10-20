@@ -4,7 +4,6 @@ package com.braze.ui.inappmessage.listeners
 
 import android.view.View
 import com.braze.models.inappmessage.IInAppMessage
-import com.braze.ui.inappmessage.InAppMessageCloser
 import com.braze.models.inappmessage.MessageButton
 import com.braze.models.inappmessage.IInAppMessageImmersive
 
@@ -48,24 +47,20 @@ interface IInAppMessageViewLifecycleListener {
 
     /**
      * Called when the in-app message View is clicked.
-     * @param inAppMessageCloser
      * @param inAppMessageView
      * @param inAppMessage
      */
     fun onClicked(
-        inAppMessageCloser: InAppMessageCloser,
         inAppMessageView: View,
         inAppMessage: IInAppMessage
     )
 
     /**
      * Called when an in-app message Button is clicked.
-     * @param inAppMessageCloser
      * @param messageButton
      * @param inAppMessageImmersive
      */
     fun onButtonClicked(
-        inAppMessageCloser: InAppMessageCloser,
         messageButton: MessageButton,
         inAppMessageImmersive: IInAppMessageImmersive
     )

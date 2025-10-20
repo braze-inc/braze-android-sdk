@@ -4,8 +4,6 @@ package com.braze.ui.inappmessage.listeners
 import android.view.View
 import com.braze.models.inappmessage.IInAppMessage
 import com.braze.models.inappmessage.MessageButton
-import com.braze.support.BrazeFunctionNotImplemented
-import com.braze.ui.inappmessage.InAppMessageCloser
 import com.braze.ui.inappmessage.InAppMessageOperation
 
 /**
@@ -28,38 +26,11 @@ interface IInAppMessageManagerListener {
 
     /**
      * @param inAppMessage       The clicked in-app message.
-     * @param inAppMessageCloser Closing should not be animated if transitioning to a new activity.
-     * If remaining in the same activity, closing should be animated.
-     * @return boolean flag to indicate to Braze whether the click has been manually handled.
-     * If true, Braze will only log a click and do nothing else. If false, Braze will
-     * log a click and also close the in-app message automatically.
-     */
-    @Deprecated("InAppMessageCloser is deprecated", ReplaceWith("onInAppMessageClicked(inAppMessage)"))
-    fun onInAppMessageClicked(inAppMessage: IInAppMessage, inAppMessageCloser: InAppMessageCloser?): Boolean = throw BrazeFunctionNotImplemented
-
-    /**
-     * @param inAppMessage       The clicked in-app message.
      * @return boolean flag to indicate to Braze whether the click has been manually handled.
      * If true, Braze will only log a click and do nothing else. If false, Braze will
      * log a click and also close the in-app message automatically.
      */
     fun onInAppMessageClicked(inAppMessage: IInAppMessage) = false
-
-    /**
-     * @param inAppMessage       The clicked in-app message.
-     * @param button             The clicked message button.
-     * @param inAppMessageCloser Closing should not be animated if transitioning to a new activity.
-     * If remaining in the same activity, closing should be animated.
-     * @return boolean flag to indicate to Braze whether the click has been manually handled.
-     * If true, Braze will only log a click and do nothing else. If false, Braze will
-     * log a click and also close the in-app message automatically.
-     */
-    @Deprecated("InAppMessageCloser is deprecated", ReplaceWith("onInAppMessageButtonClicked(inAppMessage, button)"))
-    fun onInAppMessageButtonClicked(
-        inAppMessage: IInAppMessage,
-        button: MessageButton,
-        inAppMessageCloser: InAppMessageCloser?
-    ): Boolean = throw BrazeFunctionNotImplemented
 
     /**
      * @param inAppMessage       The clicked in-app message.

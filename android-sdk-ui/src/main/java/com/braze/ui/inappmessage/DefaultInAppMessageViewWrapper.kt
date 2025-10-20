@@ -62,8 +62,6 @@ open class DefaultInAppMessageViewWrapper @JvmOverloads constructor(
     open var buttonViews: List<View>? = null,
     open var closeButton: View? = null
 ) : IInAppMessageViewWrapper {
-    @Suppress("deprecation")
-    open val inAppMessageCloser: InAppMessageCloser = InAppMessageCloser(this)
     override var isAnimatingClose = false
     open var dismissRunnable: Runnable? = null
 
@@ -312,7 +310,6 @@ open class DefaultInAppMessageViewWrapper @JvmOverloads constructor(
                 || inAppMessage !is IInAppMessageImmersive
             ) {
                 inAppMessageViewLifecycleListener.onClicked(
-                    inAppMessageCloser,
                     inAppMessageView,
                     inAppMessage
                 )
@@ -338,7 +335,6 @@ open class DefaultInAppMessageViewWrapper @JvmOverloads constructor(
                 messageButton?.let { button ->
                     view.setOnClickListener {
                         inAppMessageViewLifecycleListener.onButtonClicked(
-                            inAppMessageCloser,
                             button,
                             immersiveMessage
                         )
