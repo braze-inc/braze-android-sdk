@@ -1,3 +1,10 @@
+## 40.0.1
+
+[Release Date](https://github.com/braze-inc/braze-android-sdk/releases/tag/v40.0.1)
+
+##### Changed
+- Improved state management of the networking stack to be more efficient with requests after the app is resumed.
+
 ## 40.0.0
 
 [Release Date](https://github.com/braze-inc/braze-android-sdk/releases/tag/v40.0.0)
