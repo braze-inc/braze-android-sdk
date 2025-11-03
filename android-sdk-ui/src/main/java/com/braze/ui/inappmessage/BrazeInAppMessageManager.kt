@@ -6,6 +6,7 @@ import android.content.Context
 import android.content.pm.ActivityInfo
 import android.os.Build
 import android.os.Looper
+import androidx.annotation.RestrictTo
 import androidx.annotation.VisibleForTesting
 import com.braze.Braze.Companion.getInstance
 import com.braze.BrazeInternal
@@ -809,7 +810,9 @@ open class BrazeInAppMessageManager : InAppMessageManagerBase() {
             return instance as BrazeInAppMessageManager
         }
 
-        internal fun setTestingInstance(manager: BrazeInAppMessageManager) {
+        @VisibleForTesting
+        @RestrictTo(RestrictTo.Scope.TESTS)
+        internal fun setTestingInstance(manager: BrazeInAppMessageManager?) {
             instance = manager
         }
 

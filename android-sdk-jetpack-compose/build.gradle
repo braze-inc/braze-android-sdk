@@ -3,42 +3,55 @@ apply plugin: "kotlin-android"
 apply plugin: "org.jetbrains.kotlin.plugin.compose"
 
 dependencies {
-    api "com.braze:android-sdk-base:${BRAZE_SDK_VERSION}"
-    api "com.braze:android-sdk-ui:${BRAZE_SDK_VERSION}"
-    compileOnly "androidx.annotation:annotation:${ANDROIDX_ANNOTATIONS_VERSION}"
-    implementation "org.jetbrains.kotlin:kotlin-stdlib:${KOTLIN_VERSION}"
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:${KOTLIN_COROUTINES_VERSION}")
-    implementation "androidx.core:core:${ANDROIDX_CORE_VERSION}"
-    implementation platform("androidx.compose:compose-bom:${ANDROIDX_COMPOSE_BOM_VERSION}")
-    implementation "androidx.compose.foundation:foundation"
-    implementation "androidx.compose.material:material"
-    implementation "androidx.compose.ui:ui-tooling"
-    implementation "androidx.compose.runtime:runtime"
-    implementation "io.coil-kt:coil:${COIL_VERSION}"
-    implementation "io.coil-kt:coil-compose:${COIL_VERSION}"
-    implementation "io.coil-kt:coil-gif:${COIL_VERSION}"
+  api "com.braze:android-sdk-base:${BRAZE_SDK_VERSION}"
+  api "com.braze:android-sdk-ui:${BRAZE_SDK_VERSION}"
+  compileOnly "androidx.annotation:annotation:${ANDROIDX_ANNOTATIONS_VERSION}"
+  implementation "org.jetbrains.kotlin:kotlin-stdlib:${KOTLIN_VERSION}"
+  implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:${KOTLIN_COROUTINES_VERSION}")
+  implementation "androidx.core:core:${ANDROIDX_CORE_VERSION}"
+  implementation platform("androidx.compose:compose-bom:${ANDROIDX_COMPOSE_BOM_VERSION}")
+  implementation "androidx.compose.foundation:foundation"
+  implementation "androidx.compose.material:material"
+  implementation "androidx.compose.ui:ui-tooling"
+  implementation "androidx.compose.runtime:runtime"
+  implementation "io.coil-kt:coil:${COIL_VERSION}"
+  implementation "io.coil-kt:coil-compose:${COIL_VERSION}"
+  implementation "io.coil-kt:coil-gif:${COIL_VERSION}"
 }
 
 android {
-    namespace "com.braze.jetpackcompose"
+  namespace "com.braze.jetpackcompose"
 
-    defaultConfig {
-        compileSdk rootProject.ext.compileSdkVersion
-        minSdkVersion rootProject.ext.minSdkVersion
-        targetSdkVersion rootProject.ext.targetSdkVersion
-    }
+  defaultConfig {
+    compileSdk rootProject.ext.compileSdkVersion
+    minSdkVersion rootProject.ext.minSdkVersion
+    targetSdkVersion rootProject.ext.targetSdkVersion
+  }
 
-    kotlinOptions {
-        freeCompilerArgs = ["-Xjvm-default=all", "-opt-in=kotlin.RequiresOptIn"]
-        jvmTarget = "1.8"
-    }
+  kotlinOptions {
+    freeCompilerArgs = ["-Xjvm-default=all", "-opt-in=kotlin.RequiresOptIn"]
+    jvmTarget = "1.8"
+  }
 
-    buildFeatures {
-        compose true
-    }
+  buildFeatures {
+    compose true
+  }
 
-    compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
+  compileOptions {
+    sourceCompatibility JavaVersion.VERSION_1_8
+    targetCompatibility JavaVersion.VERSION_1_8
+  }
+
+  testOptions {
+    unitTests {
+      compileOptions {
+        sourceCompatibility JavaVersion.VERSION_11
+        targetCompatibility JavaVersion.VERSION_11
+      }
+
+      kotlinOptions {
+        jvmTarget = "11"
+      }
     }
+  }
 }

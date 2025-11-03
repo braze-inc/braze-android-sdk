@@ -1,3 +1,10 @@
+## 40.0.2
+
+[Release Date](https://github.com/braze-inc/braze-android-sdk/releases/tag/v40.0.2)
+
+##### Fixed
+- Fixed an issue with `com.braze.Braze.Companion#disableDelayedInitialization` on low end devices.
+
 ## 40.0.1
 
 [Release Date](https://github.com/braze-inc/braze-android-sdk/releases/tag/v40.0.1)
