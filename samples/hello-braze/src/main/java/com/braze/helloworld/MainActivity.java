@@ -2,6 +2,7 @@ package com.braze.helloworld;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -9,6 +10,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.braze.Braze;
+import com.braze.configuration.BrazeConfig;
 import com.braze.support.StringUtils;
 
 public class MainActivity extends Activity {
@@ -61,7 +63,41 @@ public class MainActivity extends Activity {
         }
       }
     });
+
+      Button wipe = findViewById(R.id.hello_wipe_restart);
+      wipe.setOnClickListener(new View.OnClickListener() {
+          @Override
+          public void onClick(View view) {
+              // Wipes the Braze data and restarts the app.
+              Braze.wipeData(mApplicationContext);
+              displayToast("Wiped Braze data. Restarting Braze.");
+              configureBrazeAtRuntime();
+          }
+      });
   }
+
+    /**
+     * Duplicate from application class
+     */
+    private void configureBrazeAtRuntime() {
+        Resources resources = getResources();
+        BrazeConfig brazeConfig = new BrazeConfig.Builder()
+                .setApiKey("dd162bff-b14e-4d87-9bf0-fec609a77ca4")
+                .setIsFirebaseCloudMessagingRegistrationEnabled(false)
+                .setAdmMessagingRegistrationEnabled(false)
+                .setSessionTimeout(11)
+                .setHandlePushDeepLinksAutomatically(true)
+                .setSmallNotificationIcon(resources.getResourceEntryName(R.drawable.ic_launcher_hello_braze))
+                .setLargeNotificationIcon(resources.getResourceEntryName(R.drawable.ic_launcher_hello_braze))
+                .setTriggerActionMinimumTimeIntervalSeconds(5)
+                .setIsLocationCollectionEnabled(false)
+                .setDefaultNotificationAccentColor(0xFFf33e3e)
+                .setBadNetworkDataFlushInterval(120)
+                .setGoodNetworkDataFlushInterval(60)
+                .setGreatNetworkDataFlushInterval(10)
+                .build();
+        Braze.configure(this, brazeConfig);
+    }
 
   // Displays a long toast to the user.
   private void displayToast(String message) {

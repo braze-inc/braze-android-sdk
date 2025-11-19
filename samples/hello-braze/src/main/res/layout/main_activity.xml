@@ -15,12 +15,26 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:textColor="#f33e3e"/>
-  <Button
-    android:layout_width="fill_parent"
-    android:layout_height="wrap_content"
-    android:text="@string/high_score_submit_hint"
-    android:id="@+id/hello_submit"
-    android:layout_alignParentBottom="true"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:orientation="vertical">
+
+        <Button
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="Wipe and Restart"
+            android:id="@+id/hello_wipe_restart"
+            />
+
+        <Button
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/high_score_submit_hint"
+            android:id="@+id/hello_submit"
+            />
+    </LinearLayout>
   <EditText
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
