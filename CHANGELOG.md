@@ -1,3 +1,15 @@
+## 40.1.0
+
+[Release Date](https://github.com/braze-inc/braze-android-sdk/releases/tag/v40.1.0)
+
+##### Fixed
+- Fixed an error that could occur when a WebView failed to render correctly.
+- Fixed an issue with location collection on pre-Android 11 devices.
+- Fixed an issue that could cause an IAM with a deeplink click action to become unresponsive after being clicked.
+
+##### Added
+- Added the ability to call `setGoogleAdvertisingId` with `null` or a blank string in order to completely opt out users from ad tracking.
+
 ## 40.0.2
 
 [Release Date](https://github.com/braze-inc/braze-android-sdk/releases/tag/v40.0.2)

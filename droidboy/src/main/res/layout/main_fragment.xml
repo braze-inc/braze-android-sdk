@@ -266,12 +266,64 @@
           android:layout_marginBottom="15dp"
           android:background="?android:attr/listDivider" />
 
+        <TextView
+          android:id="@+id/google_advertising_id_textview"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_marginTop="20dp"
+          android:text="Google Advertising ID and Ad Tracking"
+          android:fontFamily="@font/sailec_bold" /> 
+
+        <com.google.android.material.textfield.TextInputLayout
+          android:id="@+id/com_appboy_sample_google_advertising_id_outlined_text_box"
+          style="@style/DroidboyOutlinedBox"
+          android:layout_width="match_parent"
+          android:layout_height="match_parent"
+          android:layout_weight="1"
+          android:hint="Enter Google Advertising ID">
+
+              <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/com_appboy_sample_google_advertising_id_edit_text"
+                style="@style/BaseWidget.DroidboyTextInput"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:inputType="textMultiLine" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <RadioGroup
+          android:id="@+id/com_appboy_sample_ad_tracking_preference_radio_group"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:orientation="horizontal"
+          android:layout_marginTop="10dp">
+            <RadioButton
+              android:id="@+id/com_appboy_sample_ad_tracking_enabled_radio_button"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:text="Ad Tracking Enabled"
+              android:checked="true" />
+
+            <RadioButton
+              android:id="@+id/com_appboy_sample_ad_tracking_disabled_radio_button"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:layout_marginStart="20dp"
+              android:text="Ad Tracking Disabled" />
+        </RadioGroup>
+
+        <Button 
+          android:id="@+id/com_appboy_sample_set_google_advertising_id_button"
+          style="@style/DroidboyOutlinedButton"
+          android:layout_width="200dp"
+          android:layout_marginTop="15dp"
+          android:text="Set Google Advertising ID" />
+
         <Button
           android:id="@+id/com_appboy_sample_collect_and_flush_google_advertising_id_button"
           style="@style/DroidboyOutlinedButton"
           android:layout_width="250dp"
           android:paddingTop="10dp"
-          android:text="Get/Flush Google Advertising ID" />
+          android:text="Get/Flush Device Google Advertising ID" />
 
         <View
           android:id="@+id/divider4"

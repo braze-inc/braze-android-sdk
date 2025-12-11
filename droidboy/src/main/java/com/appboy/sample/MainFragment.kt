@@ -10,6 +10,7 @@ import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
 import android.widget.Button
 import android.widget.EditText
+import android.widget.RadioGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
@@ -39,6 +40,9 @@ class MainFragment : Fragment() {
     private lateinit var sharedPreferences: SharedPreferences
     private lateinit var aliasEditText: EditText
     private lateinit var aliasLabelEditText: EditText
+    private lateinit var googleAdIdEditText: EditText
+    private lateinit var adTrackingEnabledRadioGroup: RadioGroup
+    private lateinit var setGoogleAdIdButton: Button
     private lateinit var customEventsAndPurchasesArrayAdapter: ArrayAdapter<String?>
     private val lastSeenCustomEventsAndPurchases: Queue<String?> = LinkedList()
     private lateinit var userIdEditText: EditText
@@ -230,6 +234,15 @@ class MainFragment : Fragment() {
         contentView.setOnButtonClick(R.id.com_appboy_sample_request_flush_button) {
             Braze.getInstance(requireContext()).requestImmediateDataFlush()
             Toast.makeText(requireContext(), "Requested data flush.", Toast.LENGTH_SHORT).show()
+        }
+
+        googleAdIdEditText = contentView.findViewById(R.id.com_appboy_sample_google_advertising_id_edit_text)
+        adTrackingEnabledRadioGroup = contentView.findViewById(R.id.com_appboy_sample_ad_tracking_preference_radio_group)
+        setGoogleAdIdButton = contentView.findViewById(R.id.com_appboy_sample_set_google_advertising_id_button)
+        setGoogleAdIdButton.setOnClickListener {
+            val googleAdId = googleAdIdEditText.text.toString()
+            val isAdTrackingEnabled = adTrackingEnabledRadioGroup.checkedRadioButtonId == R.id.com_appboy_sample_ad_tracking_enabled_radio_button
+            Braze.getInstance(requireContext()).setGoogleAdvertisingId(googleAdId, isAdTrackingEnabled)
         }
 
         contentView.setOnButtonClick(R.id.com_appboy_sample_collect_and_flush_google_advertising_id_button) {

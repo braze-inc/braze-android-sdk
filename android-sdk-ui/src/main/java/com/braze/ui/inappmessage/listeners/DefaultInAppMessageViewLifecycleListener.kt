@@ -141,6 +141,7 @@ open class DefaultInAppMessageViewLifecycleListener : IInAppMessageViewLifecycle
         }
         when (clickAction) {
             ClickAction.URI -> {
+                inAppMessage.animateOut = false
                 inAppMessageManager.hideCurrentlyDisplayingInAppMessage(false)
                 if (clickUri == null) {
                     brazelog { "clickUri is null, not performing click action" }

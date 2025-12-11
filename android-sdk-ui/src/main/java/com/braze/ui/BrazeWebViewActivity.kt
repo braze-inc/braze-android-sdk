@@ -40,46 +40,50 @@ import androidx.core.graphics.createBitmap
 @SuppressLint("SetJavaScriptEnabled")
 open class BrazeWebViewActivity : FragmentActivity() {
     public override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+        try {
+            super.onCreate(savedInstanceState)
 
-        // Enables hardware acceleration for the window.
-        // See https://developer.android.com/guide/topics/graphics/hardware-accel.html#controlling.
-        // With this flag, we can view Youtube videos since HTML5 requires hardware acceleration.
-        window.setFlags(
-            WindowManager.LayoutParams.FLAG_HARDWARE_ACCELERATED,
-            WindowManager.LayoutParams.FLAG_HARDWARE_ACCELERATED
-        )
-        if (BrazeInternal.getConfigurationProvider(this).shouldUseWindowFlagSecureInActivities) {
+            // Enables hardware acceleration for the window.
+            // See https://developer.android.com/guide/topics/graphics/hardware-accel.html#controlling.
+            // With this flag, we can view Youtube videos since HTML5 requires hardware acceleration.
             window.setFlags(
-                WindowManager.LayoutParams.FLAG_SECURE,
-                WindowManager.LayoutParams.FLAG_SECURE
+                WindowManager.LayoutParams.FLAG_HARDWARE_ACCELERATED,
+                WindowManager.LayoutParams.FLAG_HARDWARE_ACCELERATED
             )
-        }
-        setContentView(R.layout.com_braze_webview_activity)
-        val webView = findViewById<WebView>(R.id.com_braze_webview_activity_webview)
-        webView.setLayerType(View.LAYER_TYPE_HARDWARE, null)
-        val webSettings = webView.settings
-        webSettings.allowFileAccess = false
-        webSettings.builtInZoomControls = true
-        webSettings.javaScriptEnabled = true
-        webSettings.useWideViewPort = true
-        webSettings.loadWithOverviewMode = true
-        webSettings.displayZoomControls = false
-        webSettings.domStorageEnabled = true
-        if (isDeviceInNightMode(this.applicationContext)) {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-                webSettings.isAlgorithmicDarkeningAllowed = true
-            } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-                @Suppress("DEPRECATION")
-                webSettings.forceDark = WebSettings.FORCE_DARK_ON
+            if (BrazeInternal.getConfigurationProvider(this).shouldUseWindowFlagSecureInActivities) {
+                window.setFlags(
+                    WindowManager.LayoutParams.FLAG_SECURE,
+                    WindowManager.LayoutParams.FLAG_SECURE
+                )
             }
-        }
-        webView.webChromeClient = createWebChromeClient()
-        webView.webViewClient = createWebViewClient()
+            setContentView(R.layout.com_braze_webview_activity)
+            val webView = findViewById<WebView>(R.id.com_braze_webview_activity_webview)
+            webView.setLayerType(View.LAYER_TYPE_HARDWARE, null)
+            val webSettings = webView.settings
+            webSettings.allowFileAccess = false
+            webSettings.builtInZoomControls = true
+            webSettings.javaScriptEnabled = true
+            webSettings.useWideViewPort = true
+            webSettings.loadWithOverviewMode = true
+            webSettings.displayZoomControls = false
+            webSettings.domStorageEnabled = true
+            if (isDeviceInNightMode(this.applicationContext)) {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+                    webSettings.isAlgorithmicDarkeningAllowed = true
+                } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+                    @Suppress("DEPRECATION")
+                    webSettings.forceDark = WebSettings.FORCE_DARK_ON
+                }
+            }
+            webView.webChromeClient = createWebChromeClient()
+            webView.webViewClient = createWebViewClient()
 
-        // Opens the URL passed as an intent extra (if one exists).
-        intent.extras?.getString(Constants.BRAZE_WEBVIEW_URL_EXTRA)?.let { url ->
-            webView.loadUrl(url)
+            // Opens the URL passed as an intent extra (if one exists).
+            intent.extras?.getString(Constants.BRAZE_WEBVIEW_URL_EXTRA)?.let { url ->
+                webView.loadUrl(url)
+            }
+        } catch (e: Exception) {
+            brazelog(E, e) { "Error creating BrazeWebViewActivity. Webview will not display." }
         }
     }
 

@@ -46,7 +46,7 @@ open class InAppMessageFullView(context: Context?, attrs: AttributeSet?) :
         get() = findViewById(R.id.com_braze_inappmessage_full)
 
     /**
-     * @return the size in pixels of the long edge of a modalized full in-app messages, used to size
+     * @return the size in pixels of the long edge of a modalized full in-app message, used to size
      * modalized in-app messages appropriately on tablets.
      */
     open val longEdge: Int
@@ -56,7 +56,7 @@ open class InAppMessageFullView(context: Context?, attrs: AttributeSet?) :
         }
 
     /**
-     * @return the size in pixels of the short edge of a modalized full in-app messages, used to size
+     * @return the size in pixels of the short edge of a modalized full in-app message, used to size
      * modalized in-app messages appropriately on tablets.
      */
     open val shortEdge: Int
