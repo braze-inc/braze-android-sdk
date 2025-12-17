@@ -6,7 +6,6 @@ import android.os.Parcelable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -343,13 +342,6 @@ open class ContentCardsFragment : Fragment(), SwipeRefreshLayout.OnRefreshListen
      */
     protected suspend fun networkUnavailable() {
         brazelog(V) { "Displaying network unavailable toast." }
-        context?.applicationContext?.let { applicationContext ->
-            Toast.makeText(
-                applicationContext,
-                applicationContext.getString(R.string.com_braze_feed_connection_error_title),
-                Toast.LENGTH_LONG
-            ).show()
-        }
         swapRecyclerViewAdapter(emptyCardsAdapter)
         contentCardsSwipeLayout?.isRefreshing = false
     }
