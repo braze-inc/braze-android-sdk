@@ -22,6 +22,11 @@
       android:name=".activity.GeofencesMapActivity"
       android:exported="true" />
     <activity
+      android:name=".activity.TranslucentActivity"
+      android:exported="true"
+      android:label="Translucent Activity"
+      android:theme="@style/Theme.Droidboy.Translucent" />
+    <activity
       android:name=".activity.DroidBoyActivity"
       android:exported="true"
       android:icon="@mipmap/ic_launcher_droidboy"

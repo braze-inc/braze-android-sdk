@@ -99,6 +99,14 @@
 
     <style name="Theme.Droidboy" parent="Base.Theme.Droidboy"></style>
 
+    <!-- Translucent theme for testing lifecycle behavior -->
+    <style name="Theme.Droidboy.Translucent" parent="Base.Theme.Droidboy">
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowIsFloating">false</item>
+        <item name="android:backgroundDimEnabled">true</item>
+    </style>
+
     <style name="Base.Theme.Droidboy" parent="Theme.MaterialComponents.Light.NoActionBar">
         <item name="colorPrimary">#1c222b</item>
         <item name="colorPrimaryDark">#1c222b</item>

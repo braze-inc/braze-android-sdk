@@ -3,6 +3,7 @@ package com.braze.unity.configuration
 import android.content.Context
 import com.braze.unity.enums.UnityMessageType
 import com.braze.configuration.CachedConfigurationProvider
+import com.braze.enums.DataStoreKey
 import com.braze.support.BrazeLogger.brazelog
 import com.braze.ui.inappmessage.InAppMessageOperation
 import com.braze.ui.inappmessage.InAppMessageOperation.Companion.fromValue
@@ -11,42 +12,42 @@ class UnityConfigurationProvider(context: Context) : CachedConfigurationProvider
     context, false
 ) {
     val inAppMessageListenerGameObjectName: String?
-        get() = getStringValue(INAPP_LISTENER_GAME_OBJECT_NAME_KEY, null)
+        get() = getStringValue(DataStoreKey.INAPP_LISTENER_GAME_OBJECT_NAME.key, null)
     val inAppMessageListenerCallbackMethodName: String?
-        get() = getStringValue(INAPP_LISTENER_CALLBACK_METHOD_NAME_KEY, null)
+        get() = getStringValue(DataStoreKey.INAPP_LISTENER_CALLBACK_METHOD_NAME.key, null)
     @Suppress("BooleanPropertyNaming")
     val showInAppMessagesAutomaticallyKey: Boolean
-        get() = getBooleanValue(INAPP_SHOW_INAPP_MESSAGES_AUTOMATICALLY_KEY, true)
+        get() = getBooleanValue(DataStoreKey.INAPP_SHOW_INAPP_MESSAGES_AUTOMATICALLY.key, true)
     val pushReceivedGameObjectName: String?
-        get() = getStringValue(PUSH_RECEIVED_GAME_OBJECT_NAME_KEY, null)
+        get() = getStringValue(DataStoreKey.PUSH_RECEIVED_GAME_OBJECT_NAME.key, null)
     val pushReceivedCallbackMethodName: String?
-        get() = getStringValue(PUSH_RECEIVED_CALLBACK_METHOD_NAME_KEY, null)
+        get() = getStringValue(DataStoreKey.PUSH_RECEIVED_CALLBACK_METHOD_NAME.key, null)
     val pushOpenedGameObjectName: String?
-        get() = getStringValue(PUSH_OPENED_GAME_OBJECT_NAME_KEY, null)
+        get() = getStringValue(DataStoreKey.PUSH_OPENED_GAME_OBJECT_NAME.key, null)
     val pushOpenedCallbackMethodName: String?
-        get() = getStringValue(PUSH_OPENED_CALLBACK_METHOD_NAME_KEY, null)
+        get() = getStringValue(DataStoreKey.PUSH_OPENED_CALLBACK_METHOD_NAME.key, null)
     val pushDeletedGameObjectName: String?
-        get() = getStringValue(PUSH_DELETED_GAME_OBJECT_NAME_KEY, null)
+        get() = getStringValue(DataStoreKey.PUSH_DELETED_GAME_OBJECT_NAME.key, null)
     val pushDeletedCallbackMethodName: String?
-        get() = getStringValue(PUSH_DELETED_CALLBACK_METHOD_NAME_KEY, null)
+        get() = getStringValue(DataStoreKey.PUSH_DELETED_CALLBACK_METHOD_NAME.key, null)
     val contentCardsUpdatedListenerGameObjectName: String?
-        get() = getStringValue(CONTENT_CARDS_UPDATED_LISTENER_GAME_OBJECT_NAME_KEY, null)
+        get() = getStringValue(DataStoreKey.CONTENT_CARDS_UPDATED_LISTENER_GAME_OBJECT_NAME.key, null)
     val contentCardsUpdatedListenerCallbackMethodName: String?
-        get() = getStringValue(CONTENT_CARDS_UPDATED_LISTENER_CALLBACK_METHOD_NAME_KEY, null)
+        get() = getStringValue(DataStoreKey.CONTENT_CARDS_UPDATED_LISTENER_CALLBACK_METHOD_NAME.key, null)
     val featureFlagsUpdatedListenerGameObjectName: String?
-        get() = getStringValue(FEATURE_FLAGS_UPDATED_LISTENER_GAME_OBJECT_NAME_KEY, null)
+        get() = getStringValue(DataStoreKey.FEATURE_FLAGS_UPDATED_LISTENER_GAME_OBJECT_NAME.key, null)
     val featureFlagsUpdatedListenerCallbackMethodName: String?
-        get() = getStringValue(FEATURE_FLAGS_UPDATED_LISTENER_CALLBACK_METHOD_NAME_KEY, null)
+        get() = getStringValue(DataStoreKey.FEATURE_FLAGS_UPDATED_LISTENER_CALLBACK_METHOD_NAME.key, null)
     val sdkAuthenticationFailureListenerGameObjectName: String?
-        get() = getStringValue(SDK_AUTHENTICATION_FAILURE_LISTENER_GAME_OBJECT_NAME_KEY, null)
+        get() = getStringValue(DataStoreKey.SDK_AUTHENTICATION_FAILURE_LISTENER_GAME_OBJECT_NAME.key, null)
     val sdkAuthenticationFailureListenerCallbackMethodName: String?
-        get() = getStringValue(SDK_AUTHENTICATION_FAILURE_LISTENER_CALLBACK_METHOD_NAME_KEY, null)
+        get() = getStringValue(DataStoreKey.SDK_AUTHENTICATION_FAILURE_LISTENER_CALLBACK_METHOD_NAME.key, null)
     @Suppress("BooleanPropertyNaming")
     val autoSetInAppMessageManagerListener: Boolean
-        get() = getBooleanValue(INAPP_AUTO_SET_MANAGER_LISTENER_KEY, true)
+        get() = getBooleanValue(DataStoreKey.INAPP_AUTO_SET_MANAGER_LISTENER.key, true)
     val initialInAppMessageDisplayOperation: InAppMessageOperation
         get() {
-            val rawValue = getStringValue(INAPP_INITIAL_DISPLAY_OPERATION_KEY, null)
+            val rawValue = getStringValue(DataStoreKey.INAPP_INITIAL_DISPLAY_OPERATION.key, null)
             val operation = fromValue(rawValue)
             return operation ?: InAppMessageOperation.DISPLAY_NOW
         }
@@ -65,108 +66,55 @@ class UnityConfigurationProvider(context: Context) : CachedConfigurationProvider
             UnityMessageType.PUSH_PERMISSIONS_PROMPT_RESPONSE,
             UnityMessageType.PUSH_TOKEN_RECEIVED_FROM_SYSTEM -> {}
             UnityMessageType.PUSH_RECEIVED -> {
-                putStringIntoRuntimeConfiguration(PUSH_RECEIVED_GAME_OBJECT_NAME_KEY, gameObject)
+                putStringIntoRuntimeConfiguration(DataStoreKey.PUSH_RECEIVED_GAME_OBJECT_NAME.key, gameObject)
                 putStringIntoRuntimeConfiguration(
-                    PUSH_RECEIVED_CALLBACK_METHOD_NAME_KEY,
+                    DataStoreKey.PUSH_RECEIVED_CALLBACK_METHOD_NAME.key,
                     methodName
                 )
             }
             UnityMessageType.PUSH_OPENED -> {
-                putStringIntoRuntimeConfiguration(PUSH_OPENED_GAME_OBJECT_NAME_KEY, gameObject)
-                putStringIntoRuntimeConfiguration(PUSH_OPENED_CALLBACK_METHOD_NAME_KEY, methodName)
+                putStringIntoRuntimeConfiguration(DataStoreKey.PUSH_OPENED_GAME_OBJECT_NAME.key, gameObject)
+                putStringIntoRuntimeConfiguration(DataStoreKey.PUSH_OPENED_CALLBACK_METHOD_NAME.key, methodName)
             }
             UnityMessageType.PUSH_DELETED -> {
-                putStringIntoRuntimeConfiguration(PUSH_DELETED_GAME_OBJECT_NAME_KEY, gameObject)
-                putStringIntoRuntimeConfiguration(PUSH_DELETED_CALLBACK_METHOD_NAME_KEY, methodName)
+                putStringIntoRuntimeConfiguration(DataStoreKey.PUSH_DELETED_GAME_OBJECT_NAME.key, gameObject)
+                putStringIntoRuntimeConfiguration(DataStoreKey.PUSH_DELETED_CALLBACK_METHOD_NAME.key, methodName)
             }
             UnityMessageType.IN_APP_MESSAGE -> {
-                putStringIntoRuntimeConfiguration(INAPP_LISTENER_GAME_OBJECT_NAME_KEY, gameObject)
+                putStringIntoRuntimeConfiguration(DataStoreKey.INAPP_LISTENER_GAME_OBJECT_NAME.key, gameObject)
                 putStringIntoRuntimeConfiguration(
-                    INAPP_LISTENER_CALLBACK_METHOD_NAME_KEY,
+                    DataStoreKey.INAPP_LISTENER_CALLBACK_METHOD_NAME.key,
                     methodName
                 )
             }
             UnityMessageType.CONTENT_CARDS_UPDATED -> {
                 putStringIntoRuntimeConfiguration(
-                    CONTENT_CARDS_UPDATED_LISTENER_GAME_OBJECT_NAME_KEY, gameObject
+                    DataStoreKey.CONTENT_CARDS_UPDATED_LISTENER_GAME_OBJECT_NAME.key, gameObject
                 )
                 putStringIntoRuntimeConfiguration(
-                    CONTENT_CARDS_UPDATED_LISTENER_CALLBACK_METHOD_NAME_KEY, methodName
+                    DataStoreKey.CONTENT_CARDS_UPDATED_LISTENER_CALLBACK_METHOD_NAME.key, methodName
                 )
             }
             UnityMessageType.SDK_AUTHENTICATION_FAILURE -> {
                 putStringIntoRuntimeConfiguration(
-                    SDK_AUTHENTICATION_FAILURE_LISTENER_GAME_OBJECT_NAME_KEY, gameObject
+                    DataStoreKey.SDK_AUTHENTICATION_FAILURE_LISTENER_GAME_OBJECT_NAME.key, gameObject
                 )
                 putStringIntoRuntimeConfiguration(
-                    SDK_AUTHENTICATION_FAILURE_LISTENER_CALLBACK_METHOD_NAME_KEY, methodName
+                    DataStoreKey.SDK_AUTHENTICATION_FAILURE_LISTENER_CALLBACK_METHOD_NAME.key, methodName
                 )
             }
             UnityMessageType.FEATURE_FLAGS_UPDATED -> {
                 putStringIntoRuntimeConfiguration(
-                    FEATURE_FLAGS_UPDATED_LISTENER_GAME_OBJECT_NAME_KEY, gameObject
+                    DataStoreKey.FEATURE_FLAGS_UPDATED_LISTENER_GAME_OBJECT_NAME.key, gameObject
                 )
                 putStringIntoRuntimeConfiguration(
-                    FEATURE_FLAGS_UPDATED_LISTENER_CALLBACK_METHOD_NAME_KEY, methodName
+                    DataStoreKey.FEATURE_FLAGS_UPDATED_LISTENER_CALLBACK_METHOD_NAME.key, methodName
                 )
             }
         }
     }
 
     private fun putStringIntoRuntimeConfiguration(key: String, value: String) {
-        runtimeAppConfigurationProvider.startEdit()
-        runtimeAppConfigurationProvider.putString(key, value)
-        runtimeAppConfigurationProvider.applyEdit()
-    }
-
-    companion object {
-        private const val INAPP_SHOW_INAPP_MESSAGES_AUTOMATICALLY_KEY =
-            "com_braze_inapp_show_inapp_messages_automatically"
-
-        // In App Messages
-        private const val INAPP_LISTENER_GAME_OBJECT_NAME_KEY =
-            "com_braze_inapp_listener_game_object_name"
-        private const val INAPP_LISTENER_CALLBACK_METHOD_NAME_KEY =
-            "com_braze_inapp_listener_callback_method_name"
-        private const val INAPP_AUTO_SET_MANAGER_LISTENER_KEY =
-            "com_braze_inapp_auto_set_manager_listener_key"
-        private const val INAPP_INITIAL_DISPLAY_OPERATION_KEY =
-            "com_braze_inapp_initial_display_operation_key"
-
-        // Push received
-        private const val PUSH_RECEIVED_GAME_OBJECT_NAME_KEY =
-            "com_braze_push_received_game_object_name"
-        private const val PUSH_RECEIVED_CALLBACK_METHOD_NAME_KEY =
-            "com_braze_push_received_callback_method_name"
-
-        // Push opened
-        private const val PUSH_OPENED_GAME_OBJECT_NAME_KEY =
-            "com_braze_push_opened_game_object_name"
-        private const val PUSH_OPENED_CALLBACK_METHOD_NAME_KEY =
-            "com_braze_push_opened_callback_method_name"
-
-        // Push deleted
-        private const val PUSH_DELETED_GAME_OBJECT_NAME_KEY =
-            "com_braze_push_deleted_game_object_name"
-        private const val PUSH_DELETED_CALLBACK_METHOD_NAME_KEY =
-            "com_braze_push_deleted_callback_method_name"
-
-        // Content Cards
-        private const val CONTENT_CARDS_UPDATED_LISTENER_GAME_OBJECT_NAME_KEY =
-            "com_braze_content_cards_updated_listener_game_object_name"
-        private const val CONTENT_CARDS_UPDATED_LISTENER_CALLBACK_METHOD_NAME_KEY =
-            "com_braze_content_cards_updated_listener_callback_method_name"
-
-        // Feature Flags
-        private const val FEATURE_FLAGS_UPDATED_LISTENER_GAME_OBJECT_NAME_KEY =
-            "com_braze_feature_flags_updated_listener_game_object_name"
-        private const val FEATURE_FLAGS_UPDATED_LISTENER_CALLBACK_METHOD_NAME_KEY =
-            "com_braze_feature_flags_updated_listener_callback_method_name"
-
-        // SDK Authentication Failure
-        private const val SDK_AUTHENTICATION_FAILURE_LISTENER_GAME_OBJECT_NAME_KEY =
-            "com_braze_sdk_authentication_failure_listener_game_object_name"
-        private const val SDK_AUTHENTICATION_FAILURE_LISTENER_CALLBACK_METHOD_NAME_KEY =
-            "com_braze_sdk_authentication_failure_listener_callback_method_name"
+        runtimeAppConfigurationProvider.writeString(key, value)
     }
 }

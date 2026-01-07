@@ -1,3 +1,11 @@
+## 40.1.1
+
+[Release Date](https://github.com/braze-inc/braze-android-sdk/releases/tag/v40.1.1)
+
+##### Fixed
+- Fixed a potential memory leak in session management. See [#86](https://github.com/braze-inc/braze-android-sdk/issues/86) for details.
+- Fixed an issue with multiple sessions being opened when transparent activities are present.
+
 ## 40.1.0
 
 [Release Date](https://github.com/braze-inc/braze-android-sdk/releases/tag/v40.1.0)

@@ -18,6 +18,10 @@
       android:title="Sample AppCompatActivity"
       app:showAsAction="never" />
     <item
+      android:id="@+id/translucent_activity"
+      android:title="Translucent Activity"
+      app:showAsAction="never" />
+    <item
       android:id="@+id/action_flush"
       android:title="@string/data_flush_title"
       app:showAsAction="never" />

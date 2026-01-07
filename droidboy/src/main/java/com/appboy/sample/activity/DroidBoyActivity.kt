@@ -238,6 +238,7 @@ class DroidBoyActivity : AppCompatActivity() {
             }
             R.id.sample_activity -> startActivity(Intent(this, SampleActivity::class.java))
             R.id.sample_appcompatactivity -> startActivity(Intent(this, SampleAppCompatActivity::class.java))
+            R.id.translucent_activity -> startActivity(Intent(this, TranslucentActivity::class.java))
             else -> brazelog(E) { "The ${item.title} options item was not found. Ignoring." }
         }
         return true

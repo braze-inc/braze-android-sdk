@@ -1,10 +1,12 @@
 package com.braze.unity.enums
 
+import androidx.annotation.VisibleForTesting
+
 /**
  * Types of messages that Braze can be configured to send to a GameObject method at runtime.
  */
 @Suppress("MagicNumber")
-enum class UnityMessageType(private val value: Int) {
+enum class UnityMessageType(@get:VisibleForTesting internal val value: Int) {
     PUSH_PERMISSIONS_PROMPT_RESPONSE(0),
     PUSH_TOKEN_RECEIVED_FROM_SYSTEM(1),
     PUSH_RECEIVED(2),
