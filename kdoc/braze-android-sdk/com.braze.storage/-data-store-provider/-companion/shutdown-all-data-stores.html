@@ -46,7 +46,7 @@
         </button>
         <div class="navigation-controls--break ui-kit_mobile-only"></div>
         <div class="library-version" id="library-version">
-40.1.1        </div>
+40.2.0        </div>
         <div class="navigation-controls">
         <div class="filter-section filter-section_loading" id="filter-section">
                 <button class="platform-tag platform-selector jvm-like" data-active=""
@@ -104,12 +104,12 @@
                 </div>
             </div>
             <div id="main">
-<div class="main-content" data-page-type="member" id="content" pageIds="braze-android-sdk::com.braze.storage/DataStoreProvider.Companion/shutdownAllDataStores/#/PointingToDeclaration//-1725759721">
+<div class="main-content" data-page-type="member" id="content" pageIds="braze-android-sdk::com.braze.storage/DataStoreProvider.Companion/shutdownAllDataStores/#android.content.Context?/PointingToDeclaration//-1725759721">
   <div class="breadcrumbs"><a href="../../../../index.html">braze-android-sdk</a><span class="delimiter">/</span><a href="../../index.html">com.braze.storage</a><span class="delimiter">/</span><a href="../index.html">DataStoreProvider</a><span class="delimiter">/</span><a href="index.html">Companion</a><span class="delimiter">/</span><span class="current">shutdownAllDataStores</span></div>
   <div class="cover ">
     <h1 class="cover"><span>shutdown</span><wbr></wbr><span>All</span><wbr></wbr><span>Data</span><wbr></wbr><span><span>Stores</span></span></h1>
   </div>
-  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><span class="token keyword">suspend </span><span class="token keyword">fun </span><a href="shutdown-all-data-stores.html"><span class="token function">shutdownAllDataStores</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span></div></div></div>
+  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><span class="token keyword">fun </span><a href="shutdown-all-data-stores.html"><span class="token function">shutdownAllDataStores</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">context<span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/android/content/Context.html">Context</a><span class="token operator">?</span><span class="token operator"> = </span>null</span></span><span class="token punctuation">)</span></div><p class="paragraph">Shuts down all DataStore instances by cancelling their coroutine scopes and clearing in-memory caches.</p><h4 class="">Parameters</h4><div class="table"><div class="table-row" data-filterable-current=":android-sdk-ui:dokkaHtml/release" data-filterable-set=":android-sdk-ui:dokkaHtml/release"><div class="main-subrow keyValue "><div class=""><span class="inline-flex"><div><u><span><span>context</span></span></u></div></span></div><div><div class="title"><p class="paragraph">If provided, also deletes the DataStore files from disk     (except those with <a href="-p-e-r-s-i-s-t-e-n-t_-d-a-t-a-s-t-o-r-e_-p-r-e-f-i-x.html">PERSISTENT_DATASTORE_PREFIX</a>).     Pass context when you need to clear persisted data (e.g., wipeData, tests).</p></div></div></div></div></div></div></div>
 </div>
     <div class="footer">
         <a href="#content" id="go-to-top-link" class="footer--button footer--button_go-to-top"></a>
