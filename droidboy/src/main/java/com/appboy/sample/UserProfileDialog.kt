@@ -2,7 +2,6 @@ package com.appboy.sample
 
 import android.app.DatePickerDialog
 import android.content.Context
-import android.content.SharedPreferences
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -15,6 +14,11 @@ import android.widget.RadioGroup
 import android.widget.TextView
 import com.appboy.sample.dialog.CustomDialogBase
 import com.appboy.sample.util.ButtonUtils
+import com.appboy.sample.util.DroidboyDataStoreUtils.readPrefsInt
+import com.appboy.sample.util.DroidboyDataStoreUtils.readPrefsString
+import com.appboy.sample.util.DroidboyDataStoreUtils.writePrefsInt
+import com.appboy.sample.util.DroidboyDataStoreUtils.writePrefsString
+import com.appboy.sample.util.DroidboyPreferenceKeys
 import com.braze.Braze.Companion.getInstance
 import com.braze.BrazeUser
 import com.braze.enums.Gender
@@ -37,9 +41,6 @@ class UserProfileDialog : CustomDialogBase(), View.OnClickListener {
     private var birthDay = 0
     private var isBirthdaySet = false
 
-    private val sharedPreferences: SharedPreferences
-        get() = requireContext().getSharedPreferences(getString(R.string.shared_prefs_location), Context.MODE_PRIVATE)
-
     private val birthdayDisplayValue: String
         get() = (birthMonth + 1).toString() + "/" + birthDay + "/" + birthYear
 
@@ -58,36 +59,36 @@ class UserProfileDialog : CustomDialogBase(), View.OnClickListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val sharedPreferences = sharedPreferences
-        firstName.setText(sharedPreferences.getString(FIRST_NAME_PREFERENCE_KEY, null))
-        lastName.setText(sharedPreferences.getString(LAST_NAME_PREFERENCE_KEY, null))
-        email.setText(sharedPreferences.getString(EMAIL_PREFERENCE_KEY, null))
-        phoneNumber.setText(sharedPreferences.getString(PHONE_NUMBER_PREFERENCE_KEY, null))
-        gender.check(parseGenderFromSharedPreferences())
-        language.setText(sharedPreferences.getString(LANGUAGE_PREFERENCE_KEY, null))
-        birthdayText.text = sharedPreferences.getString(BIRTHDAY_PREFERENCE_KEY, null)
+        val context = requireContext()
+        firstName.setText(context.readPrefsString(DroidboyPreferenceKeys.USER_FIRST_NAME))
+        lastName.setText(context.readPrefsString(DroidboyPreferenceKeys.USER_LAST_NAME))
+        email.setText(context.readPrefsString(DroidboyPreferenceKeys.USER_EMAIL))
+        phoneNumber.setText(context.readPrefsString(DroidboyPreferenceKeys.USER_PHONE_NUMBER))
+        gender.check(parseGenderFromDataStore())
+        language.setText(context.readPrefsString(DroidboyPreferenceKeys.USER_LANGUAGE))
+        birthdayText.text = context.readPrefsString(DroidboyPreferenceKeys.USER_BIRTHDAY)
 
         ButtonUtils.setUpPopulateButton(
             view,
-            R.id.first_name_button, firstName, this.sharedPreferences.getString(FIRST_NAME_PREFERENCE_KEY, SAMPLE_FIRST_NAME)
+            R.id.first_name_button, firstName, context.readPrefsString(DroidboyPreferenceKeys.USER_FIRST_NAME) ?: SAMPLE_FIRST_NAME
         )
         ButtonUtils.setUpPopulateButton(
             view,
-            R.id.last_name_button, lastName, this.sharedPreferences.getString(LAST_NAME_PREFERENCE_KEY, SAMPLE_LAST_NAME)
+            R.id.last_name_button, lastName, context.readPrefsString(DroidboyPreferenceKeys.USER_LAST_NAME) ?: SAMPLE_LAST_NAME
         )
         ButtonUtils.setUpPopulateButton(
             view,
-            R.id.email_button, email, this.sharedPreferences.getString(EMAIL_PREFERENCE_KEY, SAMPLE_EMAIL)
+            R.id.email_button, email, context.readPrefsString(DroidboyPreferenceKeys.USER_EMAIL) ?: SAMPLE_EMAIL
         )
         ButtonUtils.setUpPopulateButton(
             view,
-            R.id.language_button, language, this.sharedPreferences.getString(LANGUAGE_PREFERENCE_KEY, SAMPLE_LANGUAGE)
+            R.id.language_button, language, context.readPrefsString(DroidboyPreferenceKeys.USER_LANGUAGE) ?: SAMPLE_LANGUAGE
         )
         ButtonUtils.setUpPopulateButton(
             view,
             R.id.phone_number_button,
             phoneNumber,
-            this.sharedPreferences.getString(PHONE_NUMBER_PREFERENCE_KEY, SAMPLE_PHONE_NUMBER)
+            context.readPrefsString(DroidboyPreferenceKeys.USER_PHONE_NUMBER) ?: SAMPLE_PHONE_NUMBER
         )
 
         val populateButton = view.findViewById<Button>(R.id.user_dialog_button_populate)
@@ -137,23 +138,24 @@ class UserProfileDialog : CustomDialogBase(), View.OnClickListener {
     }
 
     private fun populate() {
+        val context = requireContext()
         if (firstName.text.isEmpty()) {
-            firstName.setText(sharedPreferences.getString(FIRST_NAME_PREFERENCE_KEY, SAMPLE_FIRST_NAME))
+            firstName.setText(context.readPrefsString(DroidboyPreferenceKeys.USER_FIRST_NAME) ?: SAMPLE_FIRST_NAME)
         }
         if (lastName.text.isEmpty()) {
-            lastName.setText(sharedPreferences.getString(LAST_NAME_PREFERENCE_KEY, SAMPLE_LAST_NAME))
+            lastName.setText(context.readPrefsString(DroidboyPreferenceKeys.USER_LAST_NAME) ?: SAMPLE_LAST_NAME)
         }
         if (language.text.isEmpty()) {
-            language.setText(sharedPreferences.getString(LANGUAGE_PREFERENCE_KEY, SAMPLE_LANGUAGE))
+            language.setText(context.readPrefsString(DroidboyPreferenceKeys.USER_LANGUAGE) ?: SAMPLE_LANGUAGE)
         }
         if (email.text.isEmpty()) {
-            email.setText(sharedPreferences.getString(EMAIL_PREFERENCE_KEY, SAMPLE_EMAIL))
+            email.setText(context.readPrefsString(DroidboyPreferenceKeys.USER_EMAIL) ?: SAMPLE_EMAIL)
         }
         if (gender.checkedRadioButtonId == R.id.unspecified) {
             gender.check(SAMPLE_GENDER)
         }
         if (birthdayText.text.isEmpty()) {
-            birthdayText.text = sharedPreferences.getString(BIRTHDAY_PREFERENCE_KEY, SAMPLE_BIRTHDAY)
+            birthdayText.text = context.readPrefsString(DroidboyPreferenceKeys.USER_BIRTHDAY) ?: SAMPLE_BIRTHDAY
             isBirthdaySet = true
         }
     }
@@ -167,88 +169,87 @@ class UserProfileDialog : CustomDialogBase(), View.OnClickListener {
         val genderId = gender.indexOfChild(genderRadioButton)
         val language = language.text.toString()
         val phoneNumber = phoneNumber.text.toString()
+        val context = requireContext()
 
-        getInstance(requireContext()).getCurrentUser { brazeUser ->
-            val editor = sharedPreferences.edit()
+        getInstance(context).getCurrentUser { brazeUser ->
             if (firstName.isNotBlank()) {
                 brazeUser.setFirstName(firstName)
-                editor.putString(FIRST_NAME_PREFERENCE_KEY, firstName)
+                context.writePrefsString(DroidboyPreferenceKeys.USER_FIRST_NAME, firstName)
             }
             if (lastName.isNotBlank()) {
                 brazeUser.setLastName(lastName)
-                editor.putString(LAST_NAME_PREFERENCE_KEY, lastName)
+                context.writePrefsString(DroidboyPreferenceKeys.USER_LAST_NAME, lastName)
             }
             if (language.isNotBlank()) {
                 brazeUser.setLanguage(language)
-                editor.putString(LANGUAGE_PREFERENCE_KEY, language)
+                context.writePrefsString(DroidboyPreferenceKeys.USER_LANGUAGE, language)
             }
             if (email.isNotBlank()) {
-                editor.putString(EMAIL_PREFERENCE_KEY, email)
+                context.writePrefsString(DroidboyPreferenceKeys.USER_EMAIL, email)
                 brazeUser.setEmail(email)
             }
             if (phoneNumber.isNotBlank()) {
-                editor.putString(PHONE_NUMBER_PREFERENCE_KEY, phoneNumber)
+                context.writePrefsString(DroidboyPreferenceKeys.USER_PHONE_NUMBER, phoneNumber)
                 brazeUser.setPhoneNumber(phoneNumber)
             }
             if (isBirthdaySet) {
-                editor.putString(BIRTHDAY_PREFERENCE_KEY, birthdayDisplayValue)
+                context.writePrefsString(DroidboyPreferenceKeys.USER_BIRTHDAY, birthdayDisplayValue)
                 val month = getMonth(birthMonth)
                 if (month != null) {
                     brazeUser.setDateOfBirth(birthYear, month, birthDay)
                 }
             }
 
-            saveGenderToPrefs(genderId, brazeUser, editor)
-            editor.apply()
+            saveGenderToDataStore(genderId, brazeUser, context)
         }
 
         // Flushing manually is not recommended in almost all production situations as
         // Braze automatically flushes data to its servers periodically. This call
         // is solely for testing purposes.
         if (isPositive) {
-            getInstance(requireContext()).requestImmediateDataFlush()
+            getInstance(context).requestImmediateDataFlush()
         }
         this.dismiss()
     }
 
-    private fun saveGenderToPrefs(genderId: Int, brazeUser: BrazeUser, editor: SharedPreferences.Editor) {
+    private fun saveGenderToDataStore(genderId: Int, brazeUser: BrazeUser, context: Context) {
         when (genderId) {
             GENDER_MALE_INDEX -> {
                 brazeUser.setGender(Gender.MALE)
-                editor.putInt(GENDER_PREFERENCE_KEY, genderId)
+                context.writePrefsInt(DroidboyPreferenceKeys.USER_GENDER, genderId)
             }
 
             GENDER_FEMALE_INDEX -> {
                 brazeUser.setGender(Gender.FEMALE)
-                editor.putInt(GENDER_PREFERENCE_KEY, genderId)
+                context.writePrefsInt(DroidboyPreferenceKeys.USER_GENDER, genderId)
             }
 
             GENDER_OTHER_INDEX -> {
                 brazeUser.setGender(Gender.OTHER)
-                editor.putInt(GENDER_PREFERENCE_KEY, genderId)
+                context.writePrefsInt(DroidboyPreferenceKeys.USER_GENDER, genderId)
             }
 
             GENDER_UNKNOWN_INDEX -> {
                 brazeUser.setGender(Gender.UNKNOWN)
-                editor.putInt(GENDER_PREFERENCE_KEY, genderId)
+                context.writePrefsInt(DroidboyPreferenceKeys.USER_GENDER, genderId)
             }
 
             GENDER_NOT_APPLICABLE_INDEX -> {
                 brazeUser.setGender(Gender.NOT_APPLICABLE)
-                editor.putInt(GENDER_PREFERENCE_KEY, genderId)
+                context.writePrefsInt(DroidboyPreferenceKeys.USER_GENDER, genderId)
             }
 
             GENDER_PREFER_NOT_TO_SAY_INDEX -> {
                 brazeUser.setGender(Gender.PREFER_NOT_TO_SAY)
-                editor.putInt(GENDER_PREFERENCE_KEY, genderId)
+                context.writePrefsInt(DroidboyPreferenceKeys.USER_GENDER, genderId)
             }
 
             else -> Log.w(TAG, "Error parsing gender from user preferences.")
         }
     }
 
-    private fun parseGenderFromSharedPreferences(): Int {
-        return when (sharedPreferences.getInt(GENDER_PREFERENCE_KEY, GENDER_UNSPECIFIED_INDEX)) {
+    private fun parseGenderFromDataStore(): Int {
+        return when (requireContext().readPrefsInt(DroidboyPreferenceKeys.USER_GENDER, GENDER_UNSPECIFIED_INDEX)) {
             GENDER_UNSPECIFIED_INDEX -> R.id.unspecified
             GENDER_MALE_INDEX -> R.id.male
             GENDER_FEMALE_INDEX -> R.id.female
@@ -257,7 +258,7 @@ class UserProfileDialog : CustomDialogBase(), View.OnClickListener {
             GENDER_NOT_APPLICABLE_INDEX -> R.id.not_applicable
             GENDER_PREFER_NOT_TO_SAY_INDEX -> R.id.prefer_not_to_say
             else -> {
-                Log.w(TAG, "Error parsing gender from shared preferences.")
+                Log.w(TAG, "Error parsing gender from DataStore.")
                 R.id.unspecified
             }
         }
@@ -274,14 +275,6 @@ class UserProfileDialog : CustomDialogBase(), View.OnClickListener {
         private const val GENDER_PREFER_NOT_TO_SAY_INDEX = 6
 
         private val calendar: Calendar = Calendar.getInstance()
-
-        private const val FIRST_NAME_PREFERENCE_KEY = "user.firstname"
-        private const val LAST_NAME_PREFERENCE_KEY = "user.lastname"
-        private const val LANGUAGE_PREFERENCE_KEY = "user.language"
-        private const val EMAIL_PREFERENCE_KEY = "user.email"
-        private const val GENDER_PREFERENCE_KEY = "user.gender_resource_id"
-        private const val BIRTHDAY_PREFERENCE_KEY = "user.birthday"
-        private const val PHONE_NUMBER_PREFERENCE_KEY = "user.phone_number"
 
         private const val SAMPLE_FIRST_NAME = "Jane"
         private const val SAMPLE_LAST_NAME = "Doe"

@@ -9,6 +9,8 @@ import android.view.animation.Animation
 import android.widget.FrameLayout
 import android.window.OnBackInvokedCallback
 import android.window.OnBackInvokedDispatcher
+import androidx.activity.ComponentActivity
+import androidx.activity.OnBackPressedCallback
 import androidx.core.graphics.Insets
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
@@ -86,6 +88,17 @@ open class DefaultInAppMessageViewWrapper @JvmOverloads constructor(
      * The [OnBackInvokedCallback] that is registered to close the in-app message when the back button is pressed.
      */
     open var onBackInvokedCallback: OnBackInvokedCallback? = null
+
+    /**
+     * Fallback [OnBackPressedCallback] used to close the in-app message when the back button is pressed.
+     *
+     * This is a workaround for certain Samsung devices on Android 16 / One UI 8.0+ where the
+     * Accessibility Menu's back button does not trigger [OnBackInvokedCallback].
+     *
+     * Note: This workaround may become unnecessary in future Android or One UI versions
+     * if the underlying issue with the Accessibility Menu's back button is resolved.
+     */
+    private var onBackPressedDispatcherFallbackCallback: OnBackPressedCallback? = null
 
     init {
         clickableInAppMessageView = clickableInAppMessageView ?: inAppMessageView
@@ -177,6 +190,20 @@ open class DefaultInAppMessageViewWrapper @JvmOverloads constructor(
                 onBackInvokedCallback = dismissInAppMessageCallback
             }
         }
+
+        val compActivity = activity as? ComponentActivity
+        // Only register the fallback if config flag is enabled
+        if (compActivity != null && BrazeInAppMessageManager.getInstance().doesBackButtonDismissInAppMessageView) {
+            val dismissInAppMessageCallbackFallback = object : OnBackPressedCallback(true) {
+                override fun handleOnBackPressed() {
+                    brazelog { "Fallback Back button intercepted by in-app message" }
+                    InAppMessageViewUtils.closeInAppMessageOnKeycodeBack()
+                    this.remove()
+                }
+            }
+            compActivity.onBackPressedDispatcher.addCallback(dismissInAppMessageCallbackFallback)
+            onBackPressedDispatcherFallbackCallback = dismissInAppMessageCallbackFallback
+        }
     }
 
     override fun close() {
@@ -193,6 +220,7 @@ open class DefaultInAppMessageViewWrapper @JvmOverloads constructor(
                 BrazeInAppMessageManager.getInstance().activity?.onBackInvokedDispatcher?.unregisterOnBackInvokedCallback(it)
             }
         }
+
         inAppMessageView.removeCallbacks(dismissRunnable)
         inAppMessageViewLifecycleListener.beforeClosed(inAppMessageView, inAppMessage)
         if (inAppMessage.animateOut) {

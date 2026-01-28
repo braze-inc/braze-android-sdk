@@ -1,11 +1,93 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:orientation="vertical"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent">
-  <fragment xmlns:android="http://schemas.android.com/apk/res/android"
-            android:id="@+id/map"
-            android:name="com.google.android.gms.maps.SupportMapFragment"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+    
+    <fragment
+        android:id="@+id/map"
+        android:name="com.google.android.gms.maps.SupportMapFragment"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.7" />
+    
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.3"
+        android:background="@color/console_background"
+        android:orientation="vertical"
+        android:padding="8dp">
+        
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:paddingStart="4dp"
+            android:paddingEnd="4dp">
+            
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/geofence_event_log_label"
+                android:textColor="@color/console_label_gray"
+                android:textSize="9sp"
+                android:textStyle="bold" />
+            
+            <Button
+                android:id="@+id/btn_help"
+                android:layout_width="wrap_content"
+                android:layout_height="28dp"
+                android:layout_marginEnd="8dp"
+                android:background="@color/transparent"
+                android:text="@string/geofence_help_button"
+                android:textColor="@color/button_help_yellow"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                android:minWidth="0dp"
+                android:padding="2dp" />
+            
+            <Button
+                android:id="@+id/btn_real_location"
+                android:layout_width="wrap_content"
+                android:layout_height="28dp"
+                android:layout_marginEnd="8dp"
+                android:background="@color/transparent"
+                android:text="@string/geofence_real_gps_button"
+                android:textColor="@color/button_real_gps_magenta"
+                android:textSize="8sp"
+                android:minWidth="0dp"
+                android:padding="2dp" />
+            
+            <Button
+                android:id="@+id/btn_clear_map"
+                android:layout_width="wrap_content"
+                android:layout_height="28dp"
+                android:background="@color/transparent"
+                android:text="@string/geofence_clear_button"
+                android:textColor="@color/button_clear_red"
+                android:textSize="8sp"
+                android:minWidth="0dp"
+                android:padding="2dp" />
+        </LinearLayout>
+        
+        <ScrollView
+            android:id="@+id/console_scroll"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fillViewport="true">
+            
+            <TextView
+                android:id="@+id/console_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="monospace"
+                android:text="@string/geofence_console_initial_message"
+                android:textColor="@color/console_text_green"
+                android:textSize="12sp" />
+        </ScrollView>
+    </LinearLayout>
 </LinearLayout>

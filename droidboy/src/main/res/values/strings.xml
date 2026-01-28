@@ -222,8 +222,6 @@
   <string name="set_environment_override_api_key_description">Set API Key:</string>
   <string name="set_environment_override_prev_api_key_description">Previously Used API Keys:</string>
   <string name="set_environment_override_endpoint_description">Set Endpoint:</string>
-  <string name="shared_prefs_location">com.appboy.sample.sharedpreferences</string>
-  <string name="api_key_shared_prefs_location">com.appboy.sample.sharedpreferences.api_key</string>
   <string name="mock_appboy_network_requests">mock_appboy_network_requests</string>
   <string name="source_key">source</string>
   <string name="destination_view">destination</string>
@@ -250,4 +248,13 @@
   <string name="attachment_summary_off">Only download attachments when manually requested</string>
   <string name="settings_fragment_tab_title">Settings️</string>
   <string name="conversation_push">Conversation Push</string>
+  <!-- Geofence Instructions Dialog -->
+  <string name="geofence_dialog_title">🗺️ Geofence Testing Instructions</string>
+  <string name="geofence_dialog_positive_button">Got it!</string>
+  <string name="geofence_instructions">📍 Choose to test using your real or mocked location:\n\n1️⃣ — Real Location (Easiest) —\n• Tap \"REAL GPS\" button\n• Your device\'s actual GPS location will be used\n• Great for testing local geofences\n\n2️⃣ — Mock Location (Advanced) —\n• Long-press anywhere on the map to \"teleport\"\n• Cyan markers = mock locations\n\n⚙️ — Mock Location Setup —\n1. Enable Developer Options:\n   - Go to Settings → About Phone\n   - Tap Build Number 7 times\n\n2. Configure Mock Locations:\n   - Settings → Developer Options\n   - Find \"Select mock location app\"\n   - Select this Droidboy app\n\n3. Test it:\n   - Return to this screen\n   - Long-press the map\n   - Check the console log for success\n\n📊 — Checking Results —\n• Watch the \"EVENT LOG\" below the map for real-time events\n• 🟢 = Entered geofence\n• 🔴 = Exited geofence\n• Purple circles on map = active geofences\n• Geofences appear automatically when received from Braze\n\n🧹 — Tips —\n• Use \"CLEAR MAP\" to remove all markers and geofences\n• Tap yellow \"?\" anytime to see these instructions\n• Magenta markers = real location\n• Cyan markers = mock location\n• Purple circles = geofence boundaries\n• Tap geofence markers to see ID and radius</string>
+  <string name="geofence_event_log_label">EVENT LOG</string>
+  <string name="geofence_help_button">?</string>
+  <string name="geofence_real_gps_button">REAL GPS</string>
+  <string name="geofence_clear_button">CLEAR</string>
+  <string name="geofence_console_initial_message">Waiting for user input…\n</string>
 </resources>

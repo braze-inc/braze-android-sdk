@@ -1,15 +1,13 @@
 package com.appboy.sample.util
 
 import android.R
-import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Context
 import android.content.DialogInterface
-import android.content.SharedPreferences
 import android.graphics.Bitmap
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
-import com.appboy.sample.DroidboyApplication
+import com.appboy.sample.util.DroidboyDataStoreUtils.writePrefsString
 import com.braze.support.BrazeLogger.Priority.E
 import com.braze.support.BrazeLogger.Priority.I
 import com.braze.support.BrazeLogger.brazelog
@@ -55,7 +53,6 @@ class EnvironmentUtils private constructor() {
          * Braze deep link in the form
          * braze://environment?endpoint=ENDPOINT_HERE&api_key=API_KEY_HERE
          */
-        @SuppressLint("ApplySharedPref")
         private fun setEnvironmentViaDeepLink(context: Activity, environmentText: String) {
             val uri = environmentText.toUri()
             val endpoint = uri.getQueryParameter(BRAZE_ENVIRONMENT_DEEPLINK_ENDPOINT)
@@ -77,21 +74,14 @@ class EnvironmentUtils private constructor() {
                 .setTitle("Changing Droidboy environment")
                 .setMessage(message.toString())
                 .setPositiveButton(R.string.ok) { _: DialogInterface?, _: Int ->
-                    val sharedPreferencesEditor: SharedPreferences.Editor = getPrefs(context).edit()
-                    sharedPreferencesEditor.putString(DroidboyApplication.OVERRIDE_API_KEY_PREF_KEY, apiKey)
-                    sharedPreferencesEditor.putString(DroidboyApplication.OVERRIDE_ENDPOINT_PREF_KEY, endpoint)
-                    sharedPreferencesEditor.commit()
+                    apiKey?.let { context.writePrefsString(DroidboyPreferenceKeys.OVERRIDE_API_KEY, it) }
+                    endpoint?.let { context.writePrefsString(DroidboyPreferenceKeys.OVERRIDE_ENDPOINT, it) }
                     LifecycleUtils.restartApp(context)
                 } // A null listener allows the button to dismiss the dialog and take no further action.
                 .setNegativeButton(R.string.cancel, null)
                 .setIcon(R.drawable.ic_dialog_info)
                 .show()
         }
-
-        private fun getPrefs(context: Context): SharedPreferences = context.getSharedPreferences(
-            context.getString(com.appboy.sample.R.string.shared_prefs_location),
-            Context.MODE_PRIVATE
-        )
 
         private fun showToast(context: Context, message: String) {
             Toast.makeText(context, message, Toast.LENGTH_LONG).show()

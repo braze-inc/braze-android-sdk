@@ -1,3 +1,11 @@
+## 40.2.0
+
+[Release Date](https://github.com/braze-inc/braze-android-sdk/releases/tag/v40.2.0)
+
+##### Fixed
+- Fixed a potential memory leak in the activity lifecycle. See [#86](https://github.com/braze-inc/braze-android-sdk/issues/86) for details.
+- Fixed an issue when pressing the Back button from the Accessibility menu to dismiss an in-app message, occurring on Samsung devices running on Android 16 or higher.
+
 ## 40.1.1
 
 [Release Date](https://github.com/braze-inc/braze-android-sdk/releases/tag/v40.1.1)

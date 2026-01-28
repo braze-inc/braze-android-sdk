@@ -2,4 +2,14 @@
 <resources>
   <color name="custom_inappmessage_green">#FF89E4DF</color>
   <color name="window_background">@android:color/white</color>
+  <!-- Geofences Map Activity -->
+  <color name="console_background">#212121</color>
+  <color name="console_label_gray">#808080</color>
+  <color name="button_help_yellow">#FFD700</color>
+  <color name="button_real_gps_magenta">#FF00FF</color>
+  <color name="button_clear_red">#FF5555</color>
+  <color name="console_text_green">#00FF00</color>
+  <color name="transparent">#00000000</color>
+  <color name="geofence_circle_fill_color">#229370DB</color>
+  <color name="geofence_circle_stroke_color">#889370DB</color>
 </resources>

@@ -5,7 +5,6 @@ import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
-import android.content.SharedPreferences
 import android.graphics.Bitmap
 import android.graphics.ImageDecoder
 import android.net.Uri
@@ -26,7 +25,6 @@ import androidx.preference.PreferenceFragmentCompat
 import androidx.preference.PreferenceManager
 import com.appboy.sample.BuildConfig
 import com.appboy.sample.DroidboyApplication
-import com.appboy.sample.MainFragment
 import com.appboy.sample.R
 import com.appboy.sample.SetEnvironmentPreference
 import com.appboy.sample.UserProfileDialog
@@ -37,6 +35,10 @@ import com.appboy.sample.logging.CustomUserAttributeDialog
 import com.appboy.sample.subscriptions.EmailSubscriptionStateDialog
 import com.appboy.sample.subscriptions.PushSubscriptionStateDialog
 import com.appboy.sample.util.ContentCardsTestingUtil.Companion.createRandomCards
+import com.appboy.sample.util.DroidboyDataStoreUtils.removePrefsKey
+import com.appboy.sample.util.DroidboyDataStoreUtils.writePrefsBoolean
+import com.appboy.sample.util.DroidboyDataStoreUtils.writePrefsString
+import com.appboy.sample.util.DroidboyPreferenceKeys
 import com.appboy.sample.util.EnvironmentUtils
 import com.appboy.sample.util.LifecycleUtils
 import com.appboy.sample.util.LogcatExportUtil.Companion.exportLogcatToFile
@@ -54,7 +56,6 @@ import java.io.File
 
 @SuppressLint("ApplySharedPref")
 class SettingsFragment : PreferenceFragmentCompat() {
-    private lateinit var sharedPreferences: SharedPreferences
     private val requestPermissionLauncher =
         registerForActivityResult(RequestPermission()) { result ->
             Toast.makeText(
@@ -96,8 +97,6 @@ class SettingsFragment : PreferenceFragmentCompat() {
         setPreferencesFromResource(R.xml.preferences, rootKey)
         val context = this.requireContext()
 
-        sharedPreferences = context.getSharedPreferences(getString(R.string.shared_prefs_location), Context.MODE_PRIVATE)
-
         setContentCardsPrefs(context)
         setSdkAuthPrefs(context)
         setNotchPrefs(context)
@@ -116,15 +115,11 @@ class SettingsFragment : PreferenceFragmentCompat() {
 
     private fun setSdkAuthPrefs(context: Context) {
         setClickPreference("enable_sdk_auth") {
-            val sharedPreferencesEditor = sharedPreferences.edit()
-            sharedPreferencesEditor.putBoolean(DroidboyApplication.ENABLE_SDK_AUTH_PREF_KEY, true)
-            sharedPreferencesEditor.commit()
+            context.writePrefsBoolean(DroidboyPreferenceKeys.ENABLE_SDK_AUTH, true)
             LifecycleUtils.restartApp(context)
         }
         setClickPreference("disable_sdk_auth") {
-            val sharedPreferencesEditor = sharedPreferences.edit()
-            sharedPreferencesEditor.putBoolean(DroidboyApplication.ENABLE_SDK_AUTH_PREF_KEY, false)
-            sharedPreferencesEditor.commit()
+            context.writePrefsBoolean(DroidboyPreferenceKeys.ENABLE_SDK_AUTH, false)
             LifecycleUtils.restartApp(context)
         }
     }
@@ -173,11 +168,8 @@ class SettingsFragment : PreferenceFragmentCompat() {
             cameraActivityLauncher.launch(environmentQrPhotoUri)
         }
         setClickPreference("environment_reset_key") {
-            val sharedPreferencesEditor = sharedPreferences.edit()
-            sharedPreferencesEditor.remove(DroidboyApplication.OVERRIDE_API_KEY_PREF_KEY)
-            sharedPreferencesEditor.remove(DroidboyApplication.OVERRIDE_ENDPOINT_PREF_KEY)
-
-            sharedPreferencesEditor.commit()
+            context.removePrefsKey(DroidboyPreferenceKeys.OVERRIDE_API_KEY)
+            context.removePrefsKey(DroidboyPreferenceKeys.OVERRIDE_ENDPOINT)
             LifecycleUtils.restartApp(context)
         }
         setClickPreference("environment_switch_dev") { changeEndpointToDevelopment() }
@@ -186,18 +178,9 @@ class SettingsFragment : PreferenceFragmentCompat() {
 
     private fun setMiscellaneousPrefs(context: Context) {
         setClickPreference("anonymous_revert") {
-            // Note that .commit() is used here since we're restarting the process and
-            // thus need to immediately flush all shared prefs changes to disk
-            val userSharedPreferences: SharedPreferences = context.getSharedPreferences("com.appboy.offline.storagemap", Context.MODE_PRIVATE)
-            userSharedPreferences
-                .edit()
-                .clear()
-                .commit()
-            val droidboySharedPrefs: SharedPreferences = context.getSharedPreferences("droidboy", Context.MODE_PRIVATE)
-            droidboySharedPrefs
-                .edit()
-                .remove(MainFragment.USER_ID_KEY)
-                .commit()
+            // Note: SDK internal storage "com.appboy.offline.storagemap" is managed by the SDK
+            // We only need to clear our own user ID preference
+            context.removePrefsKey(DroidboyPreferenceKeys.USER_ID)
             LifecycleUtils.restartApp(context)
         }
         setClickPreference("log_attribution") {
@@ -250,17 +233,17 @@ class SettingsFragment : PreferenceFragmentCompat() {
         setEditTextPreference("min_trigger_interval", true) { newValue: String ->
             if (newValue.isEmpty()) {
                 showToast("Clearing setting. Restart for new value to take effect")
-                sharedPreferences.edit().remove("min_trigger_interval").apply()
+                context.removePrefsKey(DroidboyPreferenceKeys.MIN_TRIGGER_INTERVAL)
                 return@setEditTextPreference
             }
 
             newValue.toIntOrNull() ?: run {
                 Toast.makeText(context, "Interval must be only digits", Toast.LENGTH_LONG).show()
-                sharedPreferences.edit().remove("min_trigger_interval").apply()
+                context.removePrefsKey(DroidboyPreferenceKeys.MIN_TRIGGER_INTERVAL)
                 return@setEditTextPreference
             }
 
-            sharedPreferences.edit().putString("min_trigger_interval", newValue).apply()
+            context.writePrefsString(DroidboyPreferenceKeys.MIN_TRIGGER_INTERVAL, newValue)
             Toast.makeText(context, "Restart for new value to take effect", Toast.LENGTH_LONG).show()
         }
     }
@@ -368,17 +351,16 @@ class SettingsFragment : PreferenceFragmentCompat() {
     }
 
     private fun changeEndpointToDevelopment() {
-        Braze.wipeData(requireContext())
-        Braze.enableSdk(requireContext())
-        val sharedPreferencesEditor: SharedPreferences.Editor = sharedPreferences.edit()
+        val context = requireContext()
+        Braze.wipeData(context)
+        Braze.enableSdk(context)
         if (Constants.isAmazonDevice) {
-            sharedPreferencesEditor.putString(DroidboyApplication.OVERRIDE_API_KEY_PREF_KEY, DEV_FIREOS_DROIDBOY_API_KEY)
+            context.writePrefsString(DroidboyPreferenceKeys.OVERRIDE_API_KEY, DEV_FIREOS_DROIDBOY_API_KEY)
         } else {
-            sharedPreferencesEditor.putString(DroidboyApplication.OVERRIDE_API_KEY_PREF_KEY, DEV_DROIDBOY_API_KEY)
+            context.writePrefsString(DroidboyPreferenceKeys.OVERRIDE_API_KEY, DEV_DROIDBOY_API_KEY)
         }
-        sharedPreferencesEditor.putString(DroidboyApplication.OVERRIDE_ENDPOINT_PREF_KEY, DEV_SDK_ENDPOINT)
-        sharedPreferencesEditor.commit()
-        LifecycleUtils.restartApp(this.requireContext())
+        context.writePrefsString(DroidboyPreferenceKeys.OVERRIDE_ENDPOINT, DEV_SDK_ENDPOINT)
+        LifecycleUtils.restartApp(context)
     }
 
     private fun showDialogOnClick(key: String, dialog: DialogFragment) {

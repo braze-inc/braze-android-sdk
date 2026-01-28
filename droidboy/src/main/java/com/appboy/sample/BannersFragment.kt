@@ -306,8 +306,4 @@ class BannersFragment : Fragment() {
     private fun showToast(message: String) {
         Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
     }
-
-    companion object {
-        const val BANNER_ID_KEY = "banner.id"
-    }
 }

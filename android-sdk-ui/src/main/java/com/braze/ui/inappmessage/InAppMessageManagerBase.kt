@@ -3,6 +3,7 @@ package com.braze.ui.inappmessage
 import android.app.Activity
 import android.content.Context
 import androidx.annotation.RestrictTo
+import androidx.annotation.VisibleForTesting
 import com.braze.enums.inappmessage.MessageType
 import com.braze.models.inappmessage.IInAppMessage
 import com.braze.support.BrazeLogger.Priority.W
@@ -42,7 +43,8 @@ open class InAppMessageManagerBase {
     open val doesBackButtonDismissInAppMessageView
         get() = doesBackButtonDismissInAppMessageViewField
 
-    private var doesBackButtonDismissInAppMessageViewField = true
+    @VisibleForTesting
+    internal var doesBackButtonDismissInAppMessageViewField = true
 
     // Since many clients have written code against this, we want to maintain backwards compatibility
     // as much as possible. That's why we have these names and present them as JvmFields.

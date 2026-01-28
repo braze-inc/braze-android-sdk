@@ -8,7 +8,6 @@ import android.app.NotificationChannelGroup
 import android.app.NotificationManager
 import android.content.Context
 import android.content.Intent
-import android.content.SharedPreferences
 import android.content.pm.ShortcutInfo
 import android.content.pm.ShortcutManager
 import android.graphics.Color
@@ -19,8 +18,14 @@ import android.os.StrictMode.VmPolicy
 import android.util.Log
 import android.webkit.WebView
 import androidx.annotation.RequiresApi
+import androidx.core.net.toUri
 import com.appboy.sample.util.BrazeActionTestingUtil
 import com.appboy.sample.util.ContentCardsTestingUtil
+import com.appboy.sample.util.DroidboyDataStoreUtils.readPrefsBoolean
+import com.appboy.sample.util.DroidboyDataStoreUtils.readPrefsInt
+import com.appboy.sample.util.DroidboyDataStoreUtils.readPrefsString
+import com.appboy.sample.util.DroidboyDataStoreUtils.writePrefsString
+import com.appboy.sample.util.DroidboyPreferenceKeys
 import com.auth0.jwt.JWT
 import com.auth0.jwt.algorithms.Algorithm
 import com.braze.Braze
@@ -44,7 +49,6 @@ import java.util.EnumSet
 import java.util.concurrent.TimeUnit
 import kotlin.io.encoding.Base64
 import kotlin.io.encoding.ExperimentalEncodingApi
-import androidx.core.net.toUri
 
 class DroidboyApplication : Application() {
     private var isSdkAuthEnabled: Boolean = false
@@ -74,17 +78,15 @@ class DroidboyApplication : Application() {
         } else {
             setupNotificationChannels()
         }
-        BrazeLogger.logLevel = applicationContext.getSharedPreferences(getString(R.string.log_level_dialog_title), MODE_PRIVATE)
-            .getInt(getString(R.string.current_log_level), Log.VERBOSE)
-        val sharedPreferences = applicationContext.getSharedPreferences(getString(R.string.shared_prefs_location), Context.MODE_PRIVATE)
+        BrazeLogger.logLevel = applicationContext.readPrefsInt(DroidboyPreferenceKeys.CURRENT_LOG_LEVEL, Log.VERBOSE)
 
         Braze.configure(this, null)
         val brazeConfigBuilder = BrazeConfig.Builder().setShouldUseWindowFlagSecureInActivities(true)
         brazeConfigBuilder.setSdkMetadata(EnumSet.of(BrazeSdkMetadata.MANUAL))
-        setOverrideApiKeyIfConfigured(sharedPreferences, brazeConfigBuilder)
-        setOverrideEndpointIfConfigured(sharedPreferences, brazeConfigBuilder)
-        setMinTriggerIntervalIfConfigured(sharedPreferences, brazeConfigBuilder)
-        isSdkAuthEnabled = setSdkAuthIfConfigured(sharedPreferences, brazeConfigBuilder)
+        setOverrideApiKeyIfConfigured(brazeConfigBuilder)
+        setOverrideEndpointIfConfigured(brazeConfigBuilder)
+        setMinTriggerIntervalIfConfigured(brazeConfigBuilder)
+        isSdkAuthEnabled = setSdkAuthIfConfigured(brazeConfigBuilder)
         Braze.configure(this, brazeConfigBuilder.build())
         Braze.addSdkMetadata(this, EnumSet.of(BrazeSdkMetadata.BRANCH))
 
@@ -111,8 +113,7 @@ class DroidboyApplication : Application() {
             }
         }
 
-        val droidboyPrefs = getSharedPreferences("droidboy", Context.MODE_PRIVATE)
-        val placementId = droidboyPrefs.getString(BannersFragment.BANNER_ID_KEY, null)
+        val placementId = applicationContext.readPrefsString(DroidboyPreferenceKeys.BANNER_ID)
         val list = BANNER_PLACEMENT_IDS.toMutableList()
         if (!placementId.isNullOrBlank()) {
             list.add(placementId)
@@ -138,10 +139,7 @@ class DroidboyApplication : Application() {
         } else {
             Braze.getInstance(applicationContext).changeUser(userId)
         }
-        val sharedPreferences = getSharedPreferences("droidboy", Context.MODE_PRIVATE)
-        val editor = sharedPreferences.edit()
-        editor.putString(MainFragment.USER_ID_KEY, userId)
-        editor.apply()
+        applicationContext.writePrefsString(DroidboyPreferenceKeys.USER_ID, userId)
     }
 
     private fun setNewSdkAuthToken(userId: String) {
@@ -283,8 +281,8 @@ class DroidboyApplication : Application() {
         StrictMode.setVmPolicy(vmPolicyBuilder.build())
     }
 
-    private fun setOverrideApiKeyIfConfigured(sharedPreferences: SharedPreferences, config: BrazeConfig.Builder) {
-        val overrideApiKey = sharedPreferences.getString(OVERRIDE_API_KEY_PREF_KEY, null)
+    private fun setOverrideApiKeyIfConfigured(config: BrazeConfig.Builder) {
+        val overrideApiKey = applicationContext.readPrefsString(DroidboyPreferenceKeys.OVERRIDE_API_KEY)
         if (!overrideApiKey.isNullOrBlank()) {
             brazelog(I) { "Override API key found, configuring Braze with override key $overrideApiKey." }
             config.setApiKey(overrideApiKey)
@@ -292,16 +290,16 @@ class DroidboyApplication : Application() {
         }
     }
 
-    private fun setOverrideEndpointIfConfigured(sharedPreferences: SharedPreferences, config: BrazeConfig.Builder) {
-        val overrideEndpoint = sharedPreferences.getString(OVERRIDE_ENDPOINT_PREF_KEY, null)
+    private fun setOverrideEndpointIfConfigured(config: BrazeConfig.Builder) {
+        val overrideEndpoint = applicationContext.readPrefsString(DroidboyPreferenceKeys.OVERRIDE_ENDPOINT)
         if (!overrideEndpoint.isNullOrBlank()) {
             brazelog(I) { "Override endpoint found, configuring Braze with override endpoint $overrideEndpoint." }
             config.setCustomEndpoint(overrideEndpoint)
         }
     }
 
-    private fun setMinTriggerIntervalIfConfigured(sharedPreferences: SharedPreferences, config: BrazeConfig.Builder) {
-        val minIntervalString = sharedPreferences.getString(MIN_TRIGGER_INTERVAL_KEY, null)
+    private fun setMinTriggerIntervalIfConfigured(config: BrazeConfig.Builder) {
+        val minIntervalString = applicationContext.readPrefsString(DroidboyPreferenceKeys.MIN_TRIGGER_INTERVAL)
         if (!minIntervalString.isNullOrBlank()) {
             val minTriggerInterval = minIntervalString.toIntOrNull() ?: return
             brazelog(I) { "Min trigger interval found, configuring Braze with minimum interval $minTriggerInterval seconds." }
@@ -309,9 +307,9 @@ class DroidboyApplication : Application() {
         }
     }
 
-    private fun setSdkAuthIfConfigured(sharedPreferences: SharedPreferences, config: BrazeConfig.Builder): Boolean {
+    private fun setSdkAuthIfConfigured(config: BrazeConfig.Builder): Boolean {
         // Default to true for testing dogfood purposes
-        val isOverridingSdkAuth = sharedPreferences.getBoolean(ENABLE_SDK_AUTH_PREF_KEY, true)
+        val isOverridingSdkAuth = applicationContext.readPrefsBoolean(DroidboyPreferenceKeys.ENABLE_SDK_AUTH, true)
         config.setIsSdkAuthenticationEnabled(isOverridingSdkAuth)
         return isOverridingSdkAuth
     }
@@ -348,10 +346,6 @@ class DroidboyApplication : Application() {
 
     companion object {
         private var overrideApiKeyInUse: String? = null
-        const val OVERRIDE_API_KEY_PREF_KEY = "override_api_key"
-        const val OVERRIDE_ENDPOINT_PREF_KEY = "override_endpoint_url"
-        const val ENABLE_SDK_AUTH_PREF_KEY = "enable_sdk_auth_if_present_pref_key"
-        const val MIN_TRIGGER_INTERVAL_KEY = "min_trigger_interval"
         const val SDK_AUTH_KEY_FILE_PATH = "sdk_auth_example/example_rsa_private_key.txt"
         val BANNER_PLACEMENT_IDS =
             listOf<String>("placement_1", "placement_2", "sdk-test-1", "sdk-test-2", "custom_html")

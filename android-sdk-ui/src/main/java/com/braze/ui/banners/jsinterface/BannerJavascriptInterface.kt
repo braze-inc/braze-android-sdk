@@ -3,13 +3,13 @@ package com.braze.ui.banners.jsinterface
 import android.content.Context
 import android.webkit.JavascriptInterface
 import com.braze.Braze
-import com.braze.BrazeActivityLifecycleCallbackListener
 import com.braze.coroutine.BrazeCoroutineScope
 import com.braze.support.BrazeLogger.Priority.I
 import com.braze.support.BrazeLogger.Priority.V
 import com.braze.support.BrazeLogger.brazelog
 import com.braze.support.requestPushPermissionPrompt
 import com.braze.ui.JavascriptInterfaceBase
+import com.braze.ui.inappmessage.BrazeInAppMessageManager
 import kotlinx.coroutines.launch
 
 /**
@@ -57,7 +57,7 @@ class BannerJavascriptInterface(
     fun requestPushPermission() {
         brazelog(V) { "Banner requestPushPermission() called. Requesting push permission now." }
         BrazeCoroutineScope.launch {
-            BrazeActivityLifecycleCallbackListener.activity.requestPushPermissionPrompt()
+            BrazeInAppMessageManager.getInstance().activity.requestPushPermissionPrompt()
         }
     }
 }

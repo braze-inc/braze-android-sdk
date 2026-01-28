@@ -1,7 +1,5 @@
 package com.appboy.sample
 
-import android.content.Context
-import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -14,6 +12,9 @@ import android.widget.RadioGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
+import com.appboy.sample.util.DroidboyDataStoreUtils.readPrefsString
+import com.appboy.sample.util.DroidboyDataStoreUtils.writePrefsString
+import com.appboy.sample.util.DroidboyPreferenceKeys
 import com.braze.Braze
 import com.braze.BrazeUser
 import com.braze.enums.Gender
@@ -37,7 +38,6 @@ import java.util.Queue
 class MainFragment : Fragment() {
     private lateinit var customEventTextView: AutoCompleteTextView
     private lateinit var customPurchaseTextView: AutoCompleteTextView
-    private lateinit var sharedPreferences: SharedPreferences
     private lateinit var aliasEditText: EditText
     private lateinit var aliasLabelEditText: EditText
     private lateinit var googleAdIdEditText: EditText
@@ -53,7 +53,6 @@ class MainFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val contentView = layoutInflater.inflate(R.layout.main_fragment, container, false)
-        sharedPreferences = requireActivity().getSharedPreferences("droidboy", Context.MODE_PRIVATE)
         customEventTextView =
             contentView.findViewById(R.id.com_appboy_sample_custom_event_autocomplete_text_view)
         customPurchaseTextView =
@@ -75,9 +74,7 @@ class MainFragment : Fragment() {
                 (requireActivity().applicationContext as DroidboyApplication).changeUserWithNewSdkAuthToken(userId)
                 Toast.makeText(requireContext(), "Set userId to: $userId", Toast.LENGTH_SHORT)
                     .show()
-                val editor = sharedPreferences.edit()
-                editor.putString(USER_ID_KEY, userId)
-                editor.apply()
+                requireContext().writePrefsString(DroidboyPreferenceKeys.USER_ID, userId)
             } else {
                 Toast.makeText(requireContext(), "Please enter a userId.", Toast.LENGTH_SHORT)
                     .show()
@@ -266,7 +263,7 @@ class MainFragment : Fragment() {
 
     private fun getLastSeenCustomEventsAndPurchasesFromLocalStorage(): Array<String?> {
         val serializedEvents =
-            sharedPreferences.getString(LAST_SEEN_CUSTOM_EVENTS_AND_PURCHASES_PREFERENCE_KEY, null)
+            requireContext().readPrefsString(DroidboyPreferenceKeys.LAST_SEEN_CUSTOM_EVENTS_AND_PURCHASES)
         try {
             if (serializedEvents != null) {
                 lastSeenCustomEventsAndPurchases.addAll(
@@ -287,12 +284,10 @@ class MainFragment : Fragment() {
         if (lastSeenCustomEventsAndPurchases.size > 5) {
             lastSeenCustomEventsAndPurchases.remove()
         }
-        val editor = sharedPreferences.edit()
-        editor.putString(
-            LAST_SEEN_CUSTOM_EVENTS_AND_PURCHASES_PREFERENCE_KEY,
+        requireContext().writePrefsString(
+            DroidboyPreferenceKeys.LAST_SEEN_CUSTOM_EVENTS_AND_PURCHASES,
             JSONArray(lastSeenCustomEventsAndPurchases).toString()
         )
-        editor.apply()
         customEventsAndPurchasesArrayAdapter.clear()
         customEventsAndPurchasesArrayAdapter.addAll(*lastSeenCustomEventsAndPurchases.toTypedArray())
     }
@@ -326,7 +321,7 @@ class MainFragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
-        userIdEditText.setText(sharedPreferences.getString(USER_ID_KEY, null))
+        userIdEditText.setText(requireContext().readPrefsString(DroidboyPreferenceKeys.USER_ID))
     }
 
     companion object {
@@ -342,9 +337,6 @@ class MainFragment : Fragment() {
         private const val DOUBLE_ATTRIBUTE_KEY = "doubleAttribute"
         private const val INCREMENT_ATTRIBUTE_KEY = "incrementAttribute"
         private const val ATTRIBUTION_DATA_KEY = "ab_install_attribution"
-        private const val LAST_SEEN_CUSTOM_EVENTS_AND_PURCHASES_PREFERENCE_KEY =
-            "last_seen_custom_events_and_purchases"
-        const val USER_ID_KEY = "user.id"
 
         fun View.setOnButtonClick(id: Int, block: (view: View) -> Unit) {
             val view = this.findViewById<Button>(id)

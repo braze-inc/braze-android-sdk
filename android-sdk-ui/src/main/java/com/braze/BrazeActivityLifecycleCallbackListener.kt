@@ -7,12 +7,15 @@ import android.content.Context
 import android.os.Bundle
 import androidx.annotation.VisibleForTesting
 import com.braze.configuration.BrazeConfigurationProvider
+import com.braze.coroutine.BrazeCoroutineScope
 import com.braze.push.NotificationTrampolineActivity
 import com.braze.support.BrazeLogger.Priority.E
 import com.braze.support.BrazeLogger.Priority.V
 import com.braze.support.BrazeLogger.brazelog
 import com.braze.ui.inappmessage.BrazeInAppMessageManager
+import kotlinx.coroutines.launch
 import java.lang.ref.WeakReference
+import java.util.concurrent.atomic.AtomicBoolean
 
 /**
  * Can be used to automatically handle Braze lifecycle methods.
@@ -42,8 +45,12 @@ open class BrazeActivityLifecycleCallbackListener @JvmOverloads constructor(
     private var inAppMessagingRegistrationBlocklist: Set<Class<*>?>
     private var sessionHandlingBlocklist: Set<Class<*>?>
 
+    @Volatile
     @VisibleForTesting
     var shouldPersistWebView: Boolean? = null
+
+    private val isLoadingShouldPersistWebView = AtomicBoolean(false)
+    private var currentActivityRef: WeakReference<Activity>? = null
 
     init {
         this.inAppMessagingRegistrationBlocklist = inAppMessagingRegistrationBlocklist
@@ -149,13 +156,10 @@ open class BrazeActivityLifecycleCallbackListener @JvmOverloads constructor(
         if (registerInAppMessageManager &&
             shouldHandleLifecycleMethodsInActivity(activity, false)
         ) {
-            if (shouldPersistWebView == null) {
-                val configurationProvider = BrazeConfigurationProvider(activity.applicationContext)
-                shouldPersistWebView = configurationProvider.shouldPersistWebViewWhenBackgroundingApp
-            }
-
-            // This should be non-null at this point, we have the check this way to keep the compiler happy
-            if (shouldPersistWebView != true) {
+            // When shouldPersistWebView is null (async config load not yet complete), default to persist behavior.
+            // This is the safer default because persisting the webview is less disruptive than unregistering,
+            // and matches the SDK's default configuration value of true.
+            if (shouldPersistWebView == false) {
                 brazelog(V) {
                     "Automatically calling lifecycle method: unregisterInAppMessageManager for class: ${activity.javaClass}"
                 }
@@ -163,7 +167,8 @@ open class BrazeActivityLifecycleCallbackListener @JvmOverloads constructor(
             } else {
                 BrazeInAppMessageManager.getInstance().pauseWebviewIfNecessary()
                 brazelog(V) {
-                    "Skipping unregisterInAppMessageManager in onActivityPaused because shouldPersistWebView is true"
+                    "Skipping unregisterInAppMessageManager in onActivityPaused. " +
+                        "shouldPersistWebView=$shouldPersistWebView (null means async load incomplete, defaulting to persist)"
                 }
             }
         }
@@ -174,6 +179,26 @@ open class BrazeActivityLifecycleCallbackListener @JvmOverloads constructor(
             "Automatically calling lifecycle method: ensureSubscribedToInAppMessageEvents for class: ${activity.javaClass}"
         }
         BrazeInAppMessageManager.getInstance().ensureSubscribedToInAppMessageEvents(activity.applicationContext)
+
+        // Pre-load shouldPersistWebView on IO thread to avoid blocking read in onActivityPaused
+        // Uses compareAndSet to prevent race condition if onActivityCreated is called rapidly
+        if (registerInAppMessageManager &&
+            shouldPersistWebView == null &&
+            isLoadingShouldPersistWebView.compareAndSet(false, true)
+        ) {
+            val context = activity.applicationContext
+            BrazeCoroutineScope.launch {
+                try {
+                    val configurationProvider = BrazeConfigurationProvider(context)
+                    shouldPersistWebView = configurationProvider.shouldPersistWebViewWhenBackgroundingApp
+                } catch (e: Exception) {
+                    brazelog(priority = E, e) {
+                        "Error while reading shouldPersistWebViewWhenBackgroundingApp from BrazeConfigurationProvider"
+                    }
+                }
+                brazelog(V) { "Async load of shouldPersistWebView completed: $shouldPersistWebView" }
+            }
+        }
     }
 
     override fun onActivitySaveInstanceState(activity: Activity, bundle: Bundle) {}
@@ -214,21 +239,5 @@ open class BrazeActivityLifecycleCallbackListener @JvmOverloads constructor(
         } catch (e: Exception) {
             brazelog(priority = E, e) { "Failed to register this lifecycle callback listener directly against application class" }
         }
-    }
-
-    companion object {
-        val activity: Activity?
-            get() {
-                val currentActivity = currentActivityRef?.get()
-                if (currentActivity == null) {
-                    brazelog(V) {
-                        "BrazeActivityLifecycleCallbackListener.currentActivity is null. " +
-                            "Ensure that BrazeActivityLifecycleCallbackListener is registered in your Application class."
-                    }
-                }
-                return currentActivity
-            }
-
-        private var currentActivityRef: WeakReference<Activity>? = null
     }
 }
