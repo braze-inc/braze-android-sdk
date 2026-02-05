@@ -2,7 +2,7 @@
 <html class="no-js">
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1" charset="UTF-8">
-    <title>setIsLocationCollectionEnabled</title>
+    <title>setIsAutomaticLocationCollectionEnabled</title>
     <link href="../../../../images/logo-icon.svg" rel="icon" type="image/svg">
     <script>var pathToRoot = "../../../../";</script>
     <script>document.documentElement.classList.replace("no-js","js");</script>
@@ -46,7 +46,7 @@
         </button>
         <div class="navigation-controls--break ui-kit_mobile-only"></div>
         <div class="library-version" id="library-version">
-40.2.0        </div>
+41.0.0        </div>
         <div class="navigation-controls">
         <div class="filter-section filter-section_loading" id="filter-section">
                 <button class="platform-tag platform-selector jvm-like" data-active=""
@@ -104,12 +104,12 @@
                 </div>
             </div>
             <div id="main">
-<div class="main-content" data-page-type="member" id="content" pageIds="braze-android-sdk::com.braze.configuration/BrazeConfig.Builder/setIsLocationCollectionEnabled/#kotlin.Boolean/PointingToDeclaration//-1725759721">
-  <div class="breadcrumbs"><a href="../../../../index.html">braze-android-sdk</a><span class="delimiter">/</span><a href="../../index.html">com.braze.configuration</a><span class="delimiter">/</span><a href="../index.html">BrazeConfig</a><span class="delimiter">/</span><a href="index.html">Builder</a><span class="delimiter">/</span><span class="current">setIsLocationCollectionEnabled</span></div>
+<div class="main-content" data-page-type="member" id="content" pageIds="braze-android-sdk::com.braze.configuration/BrazeConfig.Builder/setIsAutomaticLocationCollectionEnabled/#kotlin.Boolean/PointingToDeclaration//-1725759721">
+  <div class="breadcrumbs"><a href="../../../../index.html">braze-android-sdk</a><span class="delimiter">/</span><a href="../../index.html">com.braze.configuration</a><span class="delimiter">/</span><a href="../index.html">BrazeConfig</a><span class="delimiter">/</span><a href="index.html">Builder</a><span class="delimiter">/</span><span class="current">setIsAutomaticLocationCollectionEnabled</span></div>
   <div class="cover ">
-    <h1 class="cover"><span>set</span><wbr></wbr><span>Is</span><wbr></wbr><span>Location</span><wbr></wbr><span>Collection</span><wbr></wbr><span><span>Enabled</span></span></h1>
+    <h1 class="cover"><span>set</span><wbr></wbr><span>Is</span><wbr></wbr><span>Automatic</span><wbr></wbr><span>Location</span><wbr></wbr><span>Collection</span><wbr></wbr><span><span>Enabled</span></span></h1>
   </div>
-  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><span class="token keyword">fun </span><a href="set-is-location-collection-enabled.html"><span class="token function">setIsLocationCollectionEnabled</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">isLocationCollectionEnabled<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">BrazeConfig.Builder</a></div><p class="paragraph">This boolean sets whether Braze should automatically collect location (if the user permits). If set to true, location data will be collected once at the start of each session. If not specified or set to false, all location collection will be disabled and location will never be set for the user unless integrating apps manually call BrazeUser.setLastKnownLocation.</p><p class="paragraph">Defaults to false.</p><h4 class="">Parameters</h4><div class="table"><div class="table-row" data-filterable-current=":android-sdk-ui:dokkaHtml/release" data-filterable-set=":android-sdk-ui:dokkaHtml/release"><div class="main-subrow keyValue "><div class=""><span class="inline-flex"><div><u><span>is</span><wbr></wbr><span>Location</span><wbr></wbr><span>Collection</span><wbr></wbr><span><span>Enabled</span></span></u></div></span></div><div><div class="title"><p class="paragraph">flag for enabling automatic location collection</p></div></div></div></div></div></div></div>
+  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui:dokkaHtml/release"><div class="symbol monospace"><span class="token keyword">fun </span><a href="set-is-automatic-location-collection-enabled.html"><span class="token function">setIsAutomaticLocationCollectionEnabled</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">isAutomaticLocationCollectionEnabled<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">BrazeConfig.Builder</a></div><p class="paragraph">This boolean sets whether Braze should automatically collect location (if the user permits). If set to true, location data will be collected once at the start of each session. If not specified or set to false, automatic location collection will be disabled.</p><p class="paragraph">Note: Integrating apps can manually track location via BrazeUser.setLastKnownLocation regardless of this setting.</p><p class="paragraph">Defaults to false.</p><h4 class="">Parameters</h4><div class="table"><div class="table-row" data-filterable-current=":android-sdk-ui:dokkaHtml/release" data-filterable-set=":android-sdk-ui:dokkaHtml/release"><div class="main-subrow keyValue "><div class=""><span class="inline-flex"><div><u><span>is</span><wbr></wbr><span>Automatic</span><wbr></wbr><span>Location</span><wbr></wbr><span>Collection</span><wbr></wbr><span><span>Enabled</span></span></u></div></span></div><div><div class="title"><p class="paragraph">flag for enabling automatic location collection</p></div></div></div></div></div></div></div>
 </div>
     <div class="footer">
         <a href="#content" id="go-to-top-link" class="footer--button footer--button_go-to-top"></a>
