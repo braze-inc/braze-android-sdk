@@ -34,9 +34,7 @@
   <!-- Location configuration -->
   <!-- This boolean sets whether Braze should automatically collect location (if the user permits).
     If set to true, location data will be collected once at the start of each session.
-    If not specified or set to false, all location collection will be disabled and location will
-    never be set for the user unless integrating apps manually call setLastKnownLocation on the
-    BrazeUser. -->
+    If not specified or set to false, automatic location collection will be disabled. -->
   <bool name="com_braze_enable_location_collection">true</bool>
 
   <!-- Triggered Action configuration -->

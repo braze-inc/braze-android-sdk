@@ -30,7 +30,7 @@ public class CustomApplication extends Application {
         .setSmallNotificationIcon(resources.getResourceEntryName(R.drawable.ic_launcher_hello_braze))
         .setLargeNotificationIcon(resources.getResourceEntryName(R.drawable.ic_launcher_hello_braze))
         .setTriggerActionMinimumTimeIntervalSeconds(5)
-        .setIsLocationCollectionEnabled(false)
+        .setIsAutomaticLocationCollectionEnabled(false)
         .setDefaultNotificationAccentColor(0xFFf33e3e)
         .setBadNetworkDataFlushInterval(120)
         .setGoodNetworkDataFlushInterval(60)

@@ -14,9 +14,10 @@ dependencies {
   implementation "androidx.compose.material:material"
   implementation "androidx.compose.ui:ui-tooling"
   implementation "androidx.compose.runtime:runtime"
-  implementation "io.coil-kt:coil:${COIL_VERSION}"
-  implementation "io.coil-kt:coil-compose:${COIL_VERSION}"
-  implementation "io.coil-kt:coil-gif:${COIL_VERSION}"
+  implementation "io.coil-kt.coil3:coil:${COIL_VERSION}"
+  implementation "io.coil-kt.coil3:coil-compose:${COIL_VERSION}"
+  implementation "io.coil-kt.coil3:coil-gif:${COIL_VERSION}"
+  implementation "io.coil-kt.coil3:coil-network-okhttp:${COIL_VERSION}"
 }
 
 android {

@@ -1,6 +1,5 @@
 package com.braze.jetpackcompose.contentcards.cards
 
-import android.os.Build
 import android.util.LayoutDirection
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
@@ -36,10 +35,9 @@ import androidx.compose.ui.unit.dp
 import androidx.core.text.layoutDirection
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleEventObserver
-import coil.compose.AsyncImage
-import coil.decode.GifDecoder
-import coil.decode.ImageDecoderDecoder
-import coil.request.ImageRequest
+import coil3.compose.AsyncImage
+import coil3.compose.LocalPlatformContext
+import coil3.request.ImageRequest
 import com.braze.configuration.BrazeConfigurationProvider
 import com.braze.enums.CardType
 import com.braze.jetpackcompose.LocalContentCardStyling
@@ -71,8 +69,6 @@ fun ContentCard(
 
     @Suppress("VariableNaming")
     val TAG = "ContentCardComposable"
-    val decoderFactory =
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) ImageDecoderDecoder.Factory() else GifDecoder.Factory()
 
     // Track the unread with this so we can dynamically change it if needed
     var isUnread by remember { mutableStateOf(!card.isIndicatorHighlighted) }
@@ -178,9 +174,8 @@ fun ContentCard(
                     customComposable.invoke(card)
                 } else {
                     AsyncImage(
-                        model = ImageRequest.Builder(LocalContext.current)
+                        model = ImageRequest.Builder(LocalPlatformContext.current)
                             .data(imageOnlyCard.imageUrl)
-                            .decoderFactory(decoderFactory)
                             .build(),
                         contentDescription = imageOnlyCard.altImageText,
                         contentScale = ContentScale.Crop,
@@ -205,9 +200,8 @@ fun ContentCard(
                         customComposable.invoke(card)
                     } else {
                         AsyncImage(
-                            model = ImageRequest.Builder(LocalContext.current)
+                            model = ImageRequest.Builder(LocalPlatformContext.current)
                                 .data(captionedImageCard.imageUrl)
-                                .decoderFactory(decoderFactory)
                                 .build(),
                             contentDescription = captionedImageCard.altImageText,
                             contentScale = ContentScale.Crop,
@@ -270,9 +264,8 @@ fun ContentCard(
                         customComposable.invoke(card)
                     } else {
                         AsyncImage(
-                            model = ImageRequest.Builder(LocalContext.current)
+                            model = ImageRequest.Builder(LocalPlatformContext.current)
                                 .data(shortNewsCard.imageUrl)
-                                .decoderFactory(decoderFactory)
                                 .build(),
                             contentScale = ContentScale.Crop,
                             contentDescription = shortNewsCard.altImageText,

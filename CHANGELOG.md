@@ -1,3 +1,20 @@
+## 41.0.0
+
+[Release Date](https://github.com/braze-inc/braze-android-sdk/releases/tag/v41.0.0)
+
+#### Breaking
+- Renamed `BrazeConfig.Builder.setIsLocationCollectionEnabled()` to `setIsAutomaticLocationCollectionEnabled()`.
+- Renamed `BrazeConfig.isLocationCollectionEnabled` to `isAutomaticLocationCollectionEnabled`.
+- Renamed `BrazeConfigurationProvider.isLocationCollectionEnabled` to `isAutomaticLocationCollectionEnabled`.
+
+##### Fixed
+- Fixed an issue where manual location tracking was being blocked by automatic location tracking.
+  - `BrazeUser.setLastKnownLocation()` now works independently of the automatic location collection setting. Customers can use automatic collection, manual tracking, both, or neither.
+- Fixed a memory leak in the data persistence layer.
+
+##### Changed
+- Updated Coil library to Coil3.
+
 ## 40.2.0
 
 [Release Date](https://github.com/braze-inc/braze-android-sdk/releases/tag/v40.2.0)

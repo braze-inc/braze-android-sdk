@@ -24,7 +24,7 @@ ext {
   compileSdkVersion = 36
   minSdkVersion = 21
   targetSdkVersion = 36
-  appVersionName = '40.2.0'
+  appVersionName = '41.0.0'
 }
 
 subprojects {
@@ -36,5 +36,5 @@ subprojects {
   }
 
   group = 'com.braze'
-  version = '40.2.0'
+  version = '41.0.0'
 }
