@@ -1,6 +1,8 @@
-apply plugin: "com.android.application"
-apply plugin: "kotlin-android"
-apply plugin: "org.jetbrains.kotlin.plugin.compose"
+plugins {
+  alias(libs.plugins.android.application)
+  alias(libs.plugins.kotlin.android)
+  alias(libs.plugins.kotlin.compose)
+}
 
 android {
   namespace "com.appboy.sample"
@@ -58,36 +60,36 @@ dependencies {
   implementation project(":android-sdk-location")
   implementation project(":android-sdk-jetpack-compose")
 
-  implementation "androidx.appcompat:appcompat:${ANDROIDX_APPCOMPAT_VERSION}"
-  implementation "androidx.preference:preference:${ANDROIDX_PREFERENCE_VERSION}"
-  implementation "com.google.android.material:material:${GOOGLE_MATERIAL_VERSION}"
-  implementation "androidx.swiperefreshlayout:swiperefreshlayout:${ANDROIDX_SWIPE_REFRESH_LAYOUT_VERSION}"
-  implementation "androidx.constraintlayout:constraintlayout:${ANDROIDX_CONSTRAINT_LAYOUT_VERSION}"
+  implementation libs.androidx.appcompat
+  implementation libs.androidx.preference.ktx
+  implementation libs.google.material
+  implementation libs.androidx.swiperefreshlayout
+  implementation libs.androidx.constraintlayout
 
-  implementation "com.google.android.gms:play-services-location:${PLAY_SERVICES_LOCATION_VERSION}"
-  implementation "com.google.android.gms:play-services-maps:${PLAY_SERVICES_MAPS_VERSION}"
+  implementation libs.play.services.location
+  implementation libs.play.services.maps
 
-  implementation "com.github.bumptech.glide:glide:${GLIDE_VERSION}"
+  implementation libs.glide
 
-  implementation "com.google.firebase:firebase-core:${FIREBASE_CORE_VERSION}"
-  implementation "com.google.firebase:firebase-messaging:${FIREBASE_PUSH_MESSAGING_VERSION}"
-  implementation "com.google.android.gms:play-services-mlkit-barcode-scanning:${GOOGLE_ML_VISION_BARCODE}"
+  implementation libs.firebase.core
+  implementation libs.firebase.messaging
+  implementation libs.play.services.mlkit.barcode
 
-  implementation "org.jetbrains.kotlin:kotlin-stdlib:${KOTLIN_VERSION}"
-  implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:${KOTLIN_COROUTINES_VERSION}")
-  implementation "androidx.lifecycle:lifecycle-runtime-ktx:${KOTLIN_LIFECYCLE_RUNTIME_KTX_VERSION}"
-  implementation "androidx.lifecycle:lifecycle-runtime-compose-android:${KOTLIN_LIFECYCLE_RUNTIME_KTX_VERSION}"
-  implementation "androidx.multidex:multidex:${ANDROIDX_MULTIDEX_VERSION}"
+  implementation libs.kotlin.stdlib
+  implementation libs.kotlin.coroutines.android
+  implementation libs.androidx.lifecycle.runtime.ktx
+  implementation libs.androidx.lifecycle.runtime.compose.android
+  implementation libs.androidx.multidex
 
-  implementation "androidx.activity:activity-compose:${ANDROIDX_ACTIVITY_COMPOSE_VERSION}"
-  implementation platform("androidx.compose:compose-bom:${ANDROIDX_COMPOSE_BOM_VERSION}")
-  implementation "androidx.navigation:navigation-compose:${ANDROIDX_NAVIGATION_COMPOSE_VERSION}"
-  implementation "androidx.compose.ui:ui"
-  implementation "androidx.compose.ui:ui-graphics:"
-  implementation "androidx.compose.ui:ui-tooling-preview:"
-  implementation "androidx.compose.material3:material3"
+  implementation libs.androidx.activity.compose
+  implementation platform(libs.androidx.compose.bom)
+  implementation libs.androidx.navigation.compose
+  implementation libs.androidx.ui
+  implementation libs.compose.ui.graphics
+  implementation libs.compose.ui.tooling.preview
+  implementation libs.androidx.material3
 
-  implementation "com.auth0:java-jwt:${JAVA_JWT_VERSION}"
+  implementation libs.java.jwt
 }
 
 // Uncomment the following lines to use Firebase Messaging

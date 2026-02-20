@@ -1,13 +1,6 @@
-apply plugin: "com.android.library"
-apply plugin: "kotlin-android"
-
-dependencies {
-    api "com.braze:android-sdk-base:${BRAZE_SDK_VERSION}"
-    compileOnly "androidx.annotation:annotation:${ANDROIDX_ANNOTATIONS_VERSION}"
-    implementation "org.jetbrains.kotlin:kotlin-stdlib:${KOTLIN_VERSION}"
-    implementation "com.google.android.gms:play-services-location:${PLAY_SERVICES_LOCATION_VERSION}"
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:${KOTLIN_COROUTINES_VERSION}")
-    implementation "androidx.core:core:${ANDROIDX_CORE_VERSION}"
+plugins {
+  alias(libs.plugins.android.library)
+  alias(libs.plugins.kotlin.android)
 }
 
 android {
@@ -41,4 +34,13 @@ android {
       }
     }
   }
+}
+
+dependencies {
+  api "com.braze:android-sdk-base:${BRAZE_SDK_VERSION}"
+  compileOnly libs.androidx.annotations
+  implementation libs.kotlin.stdlib
+  implementation libs.play.services.location
+  implementation libs.kotlin.coroutines.android
+  implementation libs.androidx.core
 }

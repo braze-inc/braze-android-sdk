@@ -1,3 +1,10 @@
+## 41.1.0
+
+[Release Date](https://github.com/braze-inc/braze-android-sdk/releases/tag/v41.1.0)
+
+##### Changed
+- Updated the Coil library from 3.1.0 to 3.2.0.
+
 ## 41.0.0
 
 [Release Date](https://github.com/braze-inc/braze-android-sdk/releases/tag/v41.0.0)
