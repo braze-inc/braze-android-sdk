@@ -1,1 +1,1 @@
-sourceset_dependencies='{":android-sdk-ui:dokkaHtml/main":[],":android-sdk-ui:dokkaHtml/release":[]}'
+sourceset_dependencies='{":android-sdk-ui/main":[],":android-sdk-ui/release":[]}'
