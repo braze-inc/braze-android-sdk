@@ -1,30 +1,16 @@
-buildscript {
-  repositories {
-    mavenLocal()
-    google()
-    mavenCentral()
-    maven {
-      name = 'ajoberstar-backup'
-      url = 'https://ajoberstar.org/bintray-backup/'
-    }
-  }
-
-  dependencies {
-    classpath 'com.android.tools.build:gradle:8.7.1'
-    classpath 'com.google.gms:google-services:4.4.2'
-    classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:${KOTLIN_VERSION}"
-  }
-}
-
 plugins {
-  id "org.jetbrains.kotlin.plugin.compose" version "${KOTLIN_VERSION}"
+  alias(libs.plugins.android.library) apply false
+  alias(libs.plugins.android.application) apply false
+  alias(libs.plugins.kotlin.android) apply false
+  alias(libs.plugins.kotlin.compose) apply false
+  alias(libs.plugins.google.services) apply false
 }
 
 ext {
   compileSdkVersion = 36
   minSdkVersion = 21
   targetSdkVersion = 36
-  appVersionName = '41.0.0'
+  appVersionName = '41.1.0'
 }
 
 subprojects {
@@ -36,5 +22,5 @@ subprojects {
   }
 
   group = 'com.braze'
-  version = '41.0.0'
+  version = '41.1.0'
 }

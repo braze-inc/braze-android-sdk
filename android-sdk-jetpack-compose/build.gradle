@@ -1,23 +1,7 @@
-apply plugin: "com.android.library"
-apply plugin: "kotlin-android"
-apply plugin: "org.jetbrains.kotlin.plugin.compose"
-
-dependencies {
-  api "com.braze:android-sdk-base:${BRAZE_SDK_VERSION}"
-  api "com.braze:android-sdk-ui:${BRAZE_SDK_VERSION}"
-  compileOnly "androidx.annotation:annotation:${ANDROIDX_ANNOTATIONS_VERSION}"
-  implementation "org.jetbrains.kotlin:kotlin-stdlib:${KOTLIN_VERSION}"
-  implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:${KOTLIN_COROUTINES_VERSION}")
-  implementation "androidx.core:core:${ANDROIDX_CORE_VERSION}"
-  implementation platform("androidx.compose:compose-bom:${ANDROIDX_COMPOSE_BOM_VERSION}")
-  implementation "androidx.compose.foundation:foundation"
-  implementation "androidx.compose.material:material"
-  implementation "androidx.compose.ui:ui-tooling"
-  implementation "androidx.compose.runtime:runtime"
-  implementation "io.coil-kt.coil3:coil:${COIL_VERSION}"
-  implementation "io.coil-kt.coil3:coil-compose:${COIL_VERSION}"
-  implementation "io.coil-kt.coil3:coil-gif:${COIL_VERSION}"
-  implementation "io.coil-kt.coil3:coil-network-okhttp:${COIL_VERSION}"
+plugins {
+  alias(libs.plugins.android.library)
+  alias(libs.plugins.kotlin.android)
+  alias(libs.plugins.kotlin.compose)
 }
 
 android {
@@ -55,4 +39,22 @@ android {
       }
     }
   }
+}
+
+dependencies {
+  api "com.braze:android-sdk-base:${BRAZE_SDK_VERSION}"
+  api "com.braze:android-sdk-ui:${BRAZE_SDK_VERSION}"
+  compileOnly libs.androidx.annotations
+  implementation libs.kotlin.stdlib
+  implementation libs.kotlin.coroutines.android
+  implementation libs.androidx.core
+  implementation platform(libs.androidx.compose.bom)
+  implementation "androidx.compose.foundation:foundation"
+  implementation "androidx.compose.material:material"
+  implementation "androidx.compose.ui:ui-tooling"
+  implementation "androidx.compose.runtime:runtime"
+  implementation libs.coil.core
+  implementation libs.coil.compose
+  implementation libs.coil.gif
+  implementation libs.coil.network.okhttp
 }

@@ -1,3 +1,29 @@
+pluginManagement {
+  repositories {
+    google()
+    mavenCentral()
+    gradlePluginPortal()
+  }
+}
+
+plugins {
+    id "com.github.burrunan.s3-build-cache" version "${S3_BUILD_CACHE_PLUGIN_VERSION}"
+}
+
+buildCache {
+    local {
+        enabled = true
+    }
+    remote(com.github.burrunan.s3cache.AwsS3BuildCache) {
+        region = System.getenv("AWS_REGION") ?: "us-east-1"
+        bucket = System.getenv("S3_BUILD_CACHE_BUCKET") ?: "braze-buildkite-caches"
+        prefix = System.getenv("S3_BUILD_CACHE_PREFIX") ?: "android-sdk/gradle-build-cache/"
+        lookupDefaultAwsCredentials = true
+        enabled = System.getenv("BUILDKITE") != null || System.getenv("S3_BUILD_CACHE_ENABLED") == "true"
+        push = System.getenv("BUILDKITE") != null
+    }
+}
+
 include ':android-sdk-location'
 include ':android-sdk-ui'
 include ':android-sdk-jetpack-compose'
