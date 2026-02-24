@@ -1,3 +1,12 @@
+## 41.1.1
+
+[Release Date](https://github.com/braze-inc/braze-android-sdk/releases/tag/v41.1.1)
+
+##### Fixed
+- Fixed an issue where calling `wipeData()` could result in SDK read/writes not working until the app was restarted.
+  - All data would still be properly wiped from storage after calls to `wipeData()`.
+  - This issue would manifest as `CancellationException` or `StorageException` in logs and would not result in an app crash.
+
 ## 41.1.0
 
 [Release Date](https://github.com/braze-inc/braze-android-sdk/releases/tag/v41.1.0)
