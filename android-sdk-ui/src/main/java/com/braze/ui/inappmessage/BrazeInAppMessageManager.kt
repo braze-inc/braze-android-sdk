@@ -706,11 +706,16 @@ open class BrazeInAppMessageManager : InAppMessageManagerBase() {
             brazelog(V) { "InAppMessage manager handling new current user id: '$event'" }
             val currentUserId = event.currentUserId
             this.currentUserId = currentUserId
-            brazelog { "Removing in-app messages not from user $currentUserId" }
+            brazelog { "Clearing all queued in-app messages for user change to $currentUserId" }
 
-            inAppMessageStack.removeAll { !isInAppMessageForTheSameUser(it, currentUserId) }
-            if (!isInAppMessageForTheSameUser(carryoverInAppMessage, currentUserId)) carryoverInAppMessage = null
-            if (!isInAppMessageForTheSameUser(unregisteredInAppMessage, currentUserId)) unregisteredInAppMessage = null
+            // Clear all queued messages unconditionally on user change to prevent
+            // stale messages (e.g. re-enqueued via DISPLAY_LATER) from being
+            // presented to the wrong user. Messages without a tracked userId in
+            // inAppMessageEventMap would otherwise pass the per-user filter.
+            inAppMessageStack.clear()
+            inAppMessageEventMap.clear()
+            carryoverInAppMessage = null
+            unregisteredInAppMessage = null
             if (displayingInAppMessage.get()) {
                 hideCurrentlyDisplayingInAppMessage(false)
             }
