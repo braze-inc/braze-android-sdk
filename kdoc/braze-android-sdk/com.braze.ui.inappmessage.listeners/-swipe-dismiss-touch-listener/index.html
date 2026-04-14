@@ -44,7 +44,7 @@
         </button>
         <div class="navigation-controls--break ui-kit_mobile-only"></div>
         <div class="library-version" id="library-version">
-41.1.1        </div>
+42.0.0        </div>
         <div class="navigation-controls">
         <ul class="filter-section filter-section_loading" id="filter-section" aria-label="Target filter">
                 <button class="platform-tag platform-selector jvm-like" data-active="" aria-pressed="true"
@@ -110,7 +110,7 @@
     <h1 class="cover"><span>Swipe</span><wbr></wbr><span>Dismiss</span><wbr></wbr><span>Touch</span><wbr></wbr><span><span>Listener</span></span></h1>
     <div class="platform-hinted  with-platform-tabs" data-platform-hinted="data-platform-hinted">
       <div class="platform-bookmarks-row" data-toggle-list="data-toggle-list"><button class="platform-bookmark" data-filterable-current=":android-sdk-ui/main" data-filterable-set=":android-sdk-ui/main" data-active="" data-toggle=":android-sdk-ui/main">androidJvm</button></div>
-<div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui/main"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">class </span><a href="index.html">SwipeDismissTouchListener</a> : <a href="https://developer.android.com/reference/kotlin/android/view/View.OnTouchListener.html">View.OnTouchListener</a></div><p class="paragraph">A <a href="https://developer.android.com/reference/kotlin/android/view/View.OnTouchListener.html">android.view.View.OnTouchListener</a> that makes any <a href="https://developer.android.com/reference/kotlin/android/view/View.html">android.view.View</a> dismissable when the user swipes (drags her finger) horizontally across the view. </p><p class="paragraph">For <a href="https://developer.android.com/reference/kotlin/android/widget/ListView.html">android.widget.ListView</a> list items that don't manage their own touch events (i.e. you're using <a href="https://developer.android.com/reference/kotlin/android/widget/AdapterView.html#setonitemclicklistener">setOnItemClickListener</a> or an equivalent listener on <a href="https://developer.android.com/reference/kotlin/android/app/ListActivity.html">android.app.ListActivity</a> or <a href="https://developer.android.com/reference/kotlin/android/app/ListFragment.html">android.app.ListFragment</a>, use SwipeDismissListViewTouchListener instead.</p><p class="paragraph">Example usage:</p><div class="sample-container"><pre><code class="block lang-kotlin" theme="idea">view.setOnTouchListener(new SwipeDismissTouchListener(
+<div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui/main"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">class </span><a href="index.html">SwipeDismissTouchListener</a> : <a href="https://developer.android.com/reference/kotlin/android/view/View.OnTouchListener.html">View.OnTouchListener</a></div><p class="paragraph">A <a href="https://developer.android.com/reference/kotlin/android/view/View.OnTouchListener.html">android.view.View.OnTouchListener</a> that makes any <a href="https://developer.android.com/reference/kotlin/android/view/View.html">android.view.View</a> dismissable when the user swipes (drags her finger) horizontally across the view. Optionally supports vertical swipe dismissal in a single configured direction (up or down). </p><p class="paragraph">For <a href="https://developer.android.com/reference/kotlin/android/widget/ListView.html">android.widget.ListView</a> list items that don't manage their own touch events (i.e. you're using <a href="https://developer.android.com/reference/kotlin/android/widget/AdapterView.html#setonitemclicklistener">setOnItemClickListener</a> or an equivalent listener on <a href="https://developer.android.com/reference/kotlin/android/app/ListActivity.html">android.app.ListActivity</a> or <a href="https://developer.android.com/reference/kotlin/android/app/ListFragment.html">android.app.ListFragment</a>, use SwipeDismissListViewTouchListener instead.</p><p class="paragraph">Example usage:</p><div class="sample-container"><pre><code class="block lang-kotlin" theme="idea">view.setOnTouchListener(new SwipeDismissTouchListener(
         view,
         null, // Optional token/cookie object
         new SwipeDismissTouchListener.OnDismissCallback() {
@@ -125,19 +125,19 @@
     <div class="tabs-section-body">
       <div data-togglable="CONSTRUCTOR">
         <h2 class="tableheader">Constructors</h2>
-        <div class="table"><a data-name="561624802%2FConstructors%2F1102423332" anchor-label="SwipeDismissTouchListener" id="561624802%2FConstructors%2F1102423332" data-filterable-set=":android-sdk-ui/main"></a>
+        <div class="table"><a data-name="-1778445314%2FConstructors%2F1102423332" anchor-label="SwipeDismissTouchListener" id="-1778445314%2FConstructors%2F1102423332" data-filterable-set=":android-sdk-ui/main"></a>
           <div class="table-row table-row_content" data-togglable="CONSTRUCTOR" data-filterable-current=":android-sdk-ui/main" data-filterable-set=":android-sdk-ui/main">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="-swipe-dismiss-touch-listener.html"><span>Swipe</span><wbr></wbr><span>Dismiss</span><wbr></wbr><span>Touch</span><wbr></wbr><span><span>Listener</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="561624802%2FConstructors%2F1102423332"></span>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1778445314%2FConstructors%2F1102423332"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
                   <div class="platform-hinted  with-platform-tabs" data-platform-hinted="data-platform-hinted">
                     <div class="platform-bookmarks-row" data-toggle-list="data-toggle-list"><button class="platform-bookmark" data-filterable-current=":android-sdk-ui/main" data-filterable-set=":android-sdk-ui/main" data-active="" data-toggle=":android-sdk-ui/main">androidJvm</button></div>
-<div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui/main"><div class="symbol monospace"><span class="token keyword">constructor</span><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">view<span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/android/view/View.html">View</a><span class="token punctuation">, </span></span><span class="parameter ">token<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-any/index.html">Any</a><span class="token punctuation">, </span></span><span class="parameter ">callbacks<span class="token operator">: </span><a href="-dismiss-callbacks/index.html">SwipeDismissTouchListener.DismissCallbacks</a></span></span><span class="token punctuation">)</span></div><div class="brief ">Constructs a new swipe-to-dismiss touch listener for the given view.</div></div>                  </div>
+<div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui/main"><div class="symbol monospace"><span class="token keyword">constructor</span><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">view<span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/android/view/View.html">View</a><span class="token punctuation">, </span></span><span class="parameter ">token<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-any/index.html">Any</a><span class="token punctuation">, </span></span><span class="parameter ">callbacks<span class="token operator">: </span><a href="-dismiss-callbacks/index.html">SwipeDismissTouchListener.DismissCallbacks</a></span></span><span class="token punctuation">)</span></div><div class="brief ">Constructs a new swipe-to-dismiss touch listener for the given view with horizontal-only dismissal.</div><div class="symbol monospace"><span class="token keyword">constructor</span><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">view<span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/android/view/View.html">View</a><span class="token punctuation">, </span></span><span class="parameter ">token<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-any/index.html">Any</a><span class="token punctuation">, </span></span><span class="parameter ">callbacks<span class="token operator">: </span><a href="-dismiss-callbacks/index.html">SwipeDismissTouchListener.DismissCallbacks</a><span class="token punctuation">, </span></span><span class="parameter ">verticalDismissDirection<span class="token operator">: </span><a href="-vertical-dismiss-direction/index.html">SwipeDismissTouchListener.VerticalDismissDirection</a></span></span><span class="token punctuation">)</span></div><div class="brief ">Constructs a new swipe-to-dismiss touch listener for the given view.</div></div>                  </div>
                 </div>
               </div>
             </div>
@@ -159,6 +159,23 @@
                   <div class="platform-hinted  with-platform-tabs" data-platform-hinted="data-platform-hinted">
                     <div class="platform-bookmarks-row" data-toggle-list="data-toggle-list"><button class="platform-bookmark" data-filterable-current=":android-sdk-ui/main" data-filterable-set=":android-sdk-ui/main" data-active="" data-toggle=":android-sdk-ui/main">androidJvm</button></div>
 <div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui/main"><div class="symbol monospace"><span class="token keyword">interface </span><a href="-dismiss-callbacks/index.html">DismissCallbacks</a></div><div class="brief ">The callback interface used by <a href="index.html">SwipeDismissTouchListener</a> to inform its client about a successful dismissal of the view for which it was created.</div></div>                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-366008861%2FClasslikes%2F1102423332" anchor-label="VerticalDismissDirection" id="-366008861%2FClasslikes%2F1102423332" data-filterable-set=":android-sdk-ui/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":android-sdk-ui/main" data-filterable-set=":android-sdk-ui/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-vertical-dismiss-direction/index.html"><span>Vertical</span><wbr></wbr><span>Dismiss</span><wbr></wbr><span><span>Direction</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-366008861%2FClasslikes%2F1102423332"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted  with-platform-tabs" data-platform-hinted="data-platform-hinted">
+                    <div class="platform-bookmarks-row" data-toggle-list="data-toggle-list"><button class="platform-bookmark" data-filterable-current=":android-sdk-ui/main" data-filterable-set=":android-sdk-ui/main" data-active="" data-toggle=":android-sdk-ui/main">androidJvm</button></div>
+<div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui/main"><div class="symbol monospace"><span class="token keyword">enum </span><a href="-vertical-dismiss-direction/index.html">VerticalDismissDirection</a></div><div class="brief ">Specifies which vertical swipe direction, if any, should trigger a dismiss.</div></div>                  </div>
                 </div>
               </div>
             </div>
@@ -196,7 +213,7 @@
                 <div class="title">
                   <div class="platform-hinted  with-platform-tabs" data-platform-hinted="data-platform-hinted">
                     <div class="platform-bookmarks-row" data-toggle-list="data-toggle-list"><button class="platform-bookmark" data-filterable-current=":android-sdk-ui/main" data-filterable-set=":android-sdk-ui/main" data-active="" data-toggle=":android-sdk-ui/main">androidJvm</button></div>
-<div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui/main"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">fun </span><a href="perform-dismiss.html"><span class="token function">performDismiss</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span></div></div>                  </div>
+<div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui/main"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">fun </span><a href="perform-dismiss.html"><span class="token function">performDismiss</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span></div><div class="brief ">Animates the dismissed view to zero-height and then fires the dismiss callback.</div></div>                  </div>
                 </div>
               </div>
             </div>
