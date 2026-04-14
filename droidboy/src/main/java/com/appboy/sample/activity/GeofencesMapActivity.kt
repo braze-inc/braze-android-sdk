@@ -90,16 +90,17 @@ class GeofencesMapActivity : AppCompatActivity(), OnMapReadyCallback {
         logToConsole("Ready. Long-press map to TELEPORT.")
     }
 
+    @SuppressLint("MissingPermission")
     override fun onDestroy() {
         // Remove the logger callback to prevent memory leaks
         BrazeLogger.onLoggedCallback = null
 
-        // Disable mock mode when leaving
+        // Disable mock mode when leaving (permission already granted when mock mode was enabled)
         if (isMockMode) {
             try {
                 fusedLocationClient.setMockMode(false)
             } catch (e: Exception) {
-                logToConsole("⚠️ Could not disable mock mode: ${e.message}")
+                logToConsole("Could not disable mock mode: ${e.message}")
             }
         }
 

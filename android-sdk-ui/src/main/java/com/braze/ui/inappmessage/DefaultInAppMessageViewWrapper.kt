@@ -27,6 +27,7 @@ import com.braze.support.BrazeLogger.Priority.W
 import com.braze.support.BrazeLogger.brazelog
 import com.braze.ui.inappmessage.listeners.IInAppMessageViewLifecycleListener
 import com.braze.ui.inappmessage.listeners.SwipeDismissTouchListener.DismissCallbacks
+import com.braze.ui.inappmessage.listeners.SwipeDismissTouchListener.VerticalDismissDirection
 import com.braze.ui.inappmessage.listeners.TouchAwareSwipeDismissTouchListener
 import com.braze.ui.inappmessage.listeners.TouchAwareSwipeDismissTouchListener.ITouchListener
 import com.braze.ui.inappmessage.utils.InAppMessageViewUtils
@@ -104,12 +105,18 @@ open class DefaultInAppMessageViewWrapper @JvmOverloads constructor(
         clickableInAppMessageView = clickableInAppMessageView ?: inAppMessageView
 
         // Only slideup in-app messages can be swiped.
-        if (inAppMessage is InAppMessageSlideup) {
+        val slideupMessage = inAppMessage as? InAppMessageSlideup
+        if (slideupMessage != null) {
             // Adds the swipe listener to the in-app message View. All slideup in-app messages should be dismissible via a swipe
             // (even auto close slideup in-app messages).
             val dismissCallbacks = createDismissCallbacks()
+            val verticalDismissDirection = if (slideupMessage.slideFrom == SlideFrom.TOP) {
+                VerticalDismissDirection.UP
+            } else {
+                VerticalDismissDirection.DOWN
+            }
             val touchAwareSwipeListener = TouchAwareSwipeDismissTouchListener(
-                inAppMessageView, dismissCallbacks
+                inAppMessageView, dismissCallbacks, verticalDismissDirection
             )
             // We no longer set a custom touch listener that cancels the auto close runnable when
             // touched and adds a new runnable when the touch ends. However, this code should be
@@ -176,13 +183,20 @@ open class DefaultInAppMessageViewWrapper @JvmOverloads constructor(
             )
         }
 
+        // On API 36+ the callback must not unregister itself when handling back so the default back
+        // is not invoked; unregistration happens in close() only.
         if (BrazeInAppMessageManager.getInstance().doesBackButtonDismissInAppMessageView && Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
             activity.let {
+                // Unregister any previously registered callback so open() is idempotent (e.g. when
+                // called again after app returns from background, avoiding duplicate back callbacks).
+                onBackInvokedCallback?.let { existing ->
+                    it.onBackInvokedDispatcher.unregisterOnBackInvokedCallback(existing)
+                    onBackInvokedCallback = null
+                }
                 val dismissInAppMessageCallback = object : OnBackInvokedCallback {
                     override fun onBackInvoked() {
                         brazelog { "Back button intercepted by in-app message default view wrapper" }
                         InAppMessageViewUtils.closeInAppMessageOnKeycodeBack()
-                        it.onBackInvokedDispatcher.unregisterOnBackInvokedCallback(this)
                     }
                 }
 
@@ -194,11 +208,13 @@ open class DefaultInAppMessageViewWrapper @JvmOverloads constructor(
         val compActivity = activity as? ComponentActivity
         // Only register the fallback if config flag is enabled
         if (compActivity != null && BrazeInAppMessageManager.getInstance().doesBackButtonDismissInAppMessageView) {
+            // Remove any previously added fallback so open() is idempotent.
+            onBackPressedDispatcherFallbackCallback?.remove()
+            onBackPressedDispatcherFallbackCallback = null
             val dismissInAppMessageCallbackFallback = object : OnBackPressedCallback(true) {
                 override fun handleOnBackPressed() {
                     brazelog { "Fallback Back button intercepted by in-app message" }
                     InAppMessageViewUtils.closeInAppMessageOnKeycodeBack()
-                    this.remove()
                 }
             }
             compActivity.onBackPressedDispatcher.addCallback(dismissInAppMessageCallbackFallback)
@@ -218,8 +234,11 @@ open class DefaultInAppMessageViewWrapper @JvmOverloads constructor(
             onBackInvokedCallback?.let {
                 brazelog { "Unregistering iam back invoked callback" }
                 BrazeInAppMessageManager.getInstance().activity?.onBackInvokedDispatcher?.unregisterOnBackInvokedCallback(it)
+                onBackInvokedCallback = null
             }
         }
+        onBackPressedDispatcherFallbackCallback?.remove()
+        onBackPressedDispatcherFallbackCallback = null
 
         inAppMessageView.removeCallbacks(dismissRunnable)
         inAppMessageViewLifecycleListener.beforeClosed(inAppMessageView, inAppMessage)

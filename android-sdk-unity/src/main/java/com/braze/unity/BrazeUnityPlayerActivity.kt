@@ -46,21 +46,25 @@ open class BrazeUnityPlayerActivity : UnityPlayerActivity() {
         unityActivityWrapper.onNewIntentCalled(intent, this)
     }
 
+    /** Forwards the given [UnityInAppMessageManagerAction][com.braze.unity.enums.UnityInAppMessageManagerAction] value to the wrapper. */
     @JvmName("onNewUnityInAppMessageManagerAction")
     fun onNewUnityInAppMessageManagerAction(actionEnumValue: Int) {
         unityActivityWrapper.onNewUnityInAppMessageManagerAction(actionEnumValue)
     }
 
+    /** Launches the Braze Content Cards screen. */
     @JvmName("launchContentCardsActivity")
     fun launchContentCardsActivity() {
         unityActivityWrapper.launchContentCardsActivity(this)
     }
 
+    /** Registers the custom in-app message manager listener for Unity callbacks. */
     @JvmName("setInAppMessageListener")
     fun setInAppMessageListener() {
         unityActivityWrapper.setInAppMessageListener()
     }
 
+    /** Requests that the next queued in-app message be displayed immediately. */
     @JvmName("requestDisplayInAppMessage")
     fun requestDisplayInAppMessage() {
         unityActivityWrapper.requestInAppMessageDisplay()

@@ -87,6 +87,10 @@ open class BrazeWebViewActivity : FragmentActivity() {
         }
     }
 
+    /**
+     * Creates the [WebChromeClient] for the WebView. Override to customize
+     * console logging or video poster behavior.
+     */
     open fun createWebChromeClient(): WebChromeClient {
         return object : WebChromeClient() {
             override fun onConsoleMessage(cm: ConsoleMessage): Boolean {
@@ -106,6 +110,10 @@ open class BrazeWebViewActivity : FragmentActivity() {
         }
     }
 
+    /**
+     * Creates the [WebViewClient] for the WebView. Override to customize URL
+     * interception, navigation, or render crash handling.
+     */
     open fun createWebViewClient(): WebViewClient {
         return object : WebViewClient() {
             override fun shouldOverrideUrlLoading(view: WebView, request: WebResourceRequest): Boolean {
@@ -114,7 +122,7 @@ open class BrazeWebViewActivity : FragmentActivity() {
             }
 
             @Deprecated("Deprecated in API 24")
-            @Suppress("deprecation")
+            @Suppress("deprecation", "OVERRIDE_DEPRECATION")
             override fun shouldOverrideUrlLoading(view: WebView, url: String): Boolean {
                 val didHandleUrl = handleUrlOverride(view.context, url)
                 return didHandleUrl ?: super.shouldOverrideUrlLoading(view, url)

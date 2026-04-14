@@ -22,7 +22,19 @@ import com.braze.support.BrazeLogger.Priority.E
 import com.braze.support.BrazeLogger.brazelog
 import com.braze.ui.inappmessage.BrazeInAppMessageManager
 
+/**
+ * Utility methods for configuring in-app message view properties such as
+ * images, icons, colors, text alignment, backgrounds, and margins.
+ */
 object InAppMessageViewUtils {
+
+    /**
+     * True when the device is below API 36 (BAKLAVA). On API 36+ back is handled only by
+     * [OnBackInvokedDispatcher]; below that, views handle back via key events.
+     */
+    @JvmStatic
+    val isApiBelowBaklava: Boolean = Build.VERSION.SDK_INT < Build.VERSION_CODES.BAKLAVA
+
     @JvmStatic
     fun setImage(bitmap: Bitmap?, imageView: ImageView) {
         if (bitmap != null) {

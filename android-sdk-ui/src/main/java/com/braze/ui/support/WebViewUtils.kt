@@ -11,6 +11,13 @@ import com.braze.support.BrazeLogger.getBrazeLogTag
 
 private val TAG = "WebViewUtils".getBrazeLogTag()
 
+/**
+ * Configures common [WebSettings] for Braze WebViews including JavaScript, DOM storage,
+ * wide viewport, and dark mode support via AndroidX WebView compatibility APIs.
+ *
+ * @param settings The [WebSettings] to configure.
+ * @param context The Android [Context] used for night mode detection.
+ */
 @SuppressLint("SetJavaScriptEnabled")
 fun setWebViewSettings(settings: WebSettings, context: Context) {
     settings.javaScriptEnabled = true

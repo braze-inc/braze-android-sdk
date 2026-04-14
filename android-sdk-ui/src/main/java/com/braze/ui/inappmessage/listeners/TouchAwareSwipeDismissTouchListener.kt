@@ -6,8 +6,12 @@ import android.view.View
 /**
  * Adds touch events to the SwipeDismissTouchListener.
  */
-class TouchAwareSwipeDismissTouchListener(view: View, token: Any?, callbacks: DismissCallbacks?) :
-    SwipeDismissTouchListener(view, token, callbacks) {
+class TouchAwareSwipeDismissTouchListener(
+    view: View,
+    token: Any?,
+    callbacks: DismissCallbacks?,
+    verticalDismissDirection: VerticalDismissDirection
+) : SwipeDismissTouchListener(view, token, callbacks, verticalDismissDirection) {
     private var touchListener: ITouchListener? = null
 
     interface ITouchListener {
@@ -15,7 +19,14 @@ class TouchAwareSwipeDismissTouchListener(view: View, token: Any?, callbacks: Di
         fun onTouchEnded()
     }
 
-    constructor(view: View, callbacks: DismissCallbacks?) : this(view, null, callbacks)
+    constructor(view: View, token: Any?, callbacks: DismissCallbacks?) :
+        this(view, token, callbacks, VerticalDismissDirection.NONE)
+
+    constructor(view: View, callbacks: DismissCallbacks?) :
+        this(view, null, callbacks, VerticalDismissDirection.NONE)
+
+    constructor(view: View, callbacks: DismissCallbacks?, verticalDismissDirection: VerticalDismissDirection) :
+        this(view, null, callbacks, verticalDismissDirection)
 
     fun setTouchListener(newTouchListener: ITouchListener) {
         touchListener = newTouchListener

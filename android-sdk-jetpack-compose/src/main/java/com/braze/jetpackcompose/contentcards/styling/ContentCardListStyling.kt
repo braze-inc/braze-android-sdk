@@ -10,6 +10,15 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.braze.ui.R
 
+/**
+ * Styling configuration for the Content Card list container.
+ *
+ * @property modifier The [Modifier] applied to the list container.
+ * @property spacerSize Vertical spacing between Content Cards.
+ * @property listPadding Vertical padding at the top and bottom of the list.
+ * @property listBackgroundColor Background color of the list. Falls back to the Braze default if [Color.Unspecified].
+ * @property emptyTextStyle [TextStyle] for the empty state message, or null to use the default.
+ */
 @Suppress("LongParameterList")
 open class ContentCardListStyling(
     val modifier: Modifier = Modifier.fillMaxSize(),

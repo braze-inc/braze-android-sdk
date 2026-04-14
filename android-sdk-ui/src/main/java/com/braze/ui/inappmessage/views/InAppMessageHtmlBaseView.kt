@@ -25,6 +25,7 @@ import com.braze.support.WebContentUtils.ASSET_LOADER_DUMMY_DOMAIN
 import com.braze.ui.inappmessage.BrazeInAppMessageManager
 import com.braze.ui.inappmessage.listeners.IWebViewClientStateListener
 import com.braze.ui.inappmessage.utils.InAppMessageViewUtils.closeInAppMessageOnKeycodeBack
+import com.braze.ui.inappmessage.utils.InAppMessageViewUtils.isApiBelowBaklava
 import com.braze.ui.inappmessage.utils.InAppMessageWebViewClient
 import com.braze.ui.support.getMaxSafeBottomInset
 import com.braze.ui.support.getMaxSafeLeftInset
@@ -216,7 +217,11 @@ abstract class InAppMessageHtmlBaseView(context: Context?, attrs: AttributeSet?)
      * and return true to indicate that the event was handled.
      */
     override fun onKeyDown(keyCode: Int, event: KeyEvent): Boolean {
-        if (keyCode == KeyEvent.KEYCODE_BACK && BrazeInAppMessageManager.getInstance().doesBackButtonDismissInAppMessageView) {
+        // API 36 = Android 16 (BAKLAVA). On API 36+ back is handled only by the dispatcher.
+        if (isApiBelowBaklava &&
+            keyCode == KeyEvent.KEYCODE_BACK &&
+            BrazeInAppMessageManager.getInstance().doesBackButtonDismissInAppMessageView
+        ) {
             closeInAppMessageOnKeycodeBack()
             return true
         }
@@ -239,8 +244,13 @@ abstract class InAppMessageHtmlBaseView(context: Context?, attrs: AttributeSet?)
      * @return If the button pressed was the back button, close the in-app message
      * and return true to indicate that the event was handled.
      */
+    @Suppress("ComplexCondition")
     override fun dispatchKeyEvent(event: KeyEvent): Boolean {
-        if (!isInTouchMode && event.keyCode == KeyEvent.KEYCODE_BACK && BrazeInAppMessageManager.getInstance().doesBackButtonDismissInAppMessageView) {
+        if (isApiBelowBaklava &&
+            !isInTouchMode &&
+            event.keyCode == KeyEvent.KEYCODE_BACK &&
+            BrazeInAppMessageManager.getInstance().doesBackButtonDismissInAppMessageView
+        ) {
             closeInAppMessageOnKeycodeBack()
             return true
         }
@@ -249,6 +259,9 @@ abstract class InAppMessageHtmlBaseView(context: Context?, attrs: AttributeSet?)
 
     override fun applyWindowInsets(insets: WindowInsetsCompat) {
         hasAppliedWindowInsets = true
+        if (!BrazeConfigurationProvider(this.context).isHtmlInAppMessageApplyWindowInsetsEnabled) {
+            return
+        }
         if (layoutParams == null || layoutParams !is MarginLayoutParams) {
             return
         }

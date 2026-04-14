@@ -1,7 +1,7 @@
 [versions]
 
 # Gradle plugins
-androidGradlePlugin = "8.7.1"
+androidGradlePlugin = "8.11.2"
 googleServicesPlugin = "4.4.4"
 
 # Java
@@ -63,11 +63,10 @@ hamcrestLibrary = "1.3"
 jsonassert = "1.5.3"
 
 # Kotlin
-kotlin = "2.0.20"
-kotlinCoroutines = "1.8.1"
+kotlin = "2.2.20"
+kotlinCoroutines = "1.10.2"
 kotlinLifecycleRuntimeKtx = "2.8.4"
-kotlinReflect = "1.6.0"
-kotlinSerialization = "1.8.0"
+kotlinSerialization = "1.9.0"
 kotlinDetektFormatter = "1.23.6"
 kotlinDokka = "2.1.0"
 
@@ -93,7 +92,7 @@ androidx-material3 = { module = "androidx.compose.material3:material3" }
 androidx-ui = { module = "androidx.compose.ui:ui" }
 kotlin-stdlib = { module = "org.jetbrains.kotlin:kotlin-stdlib", version.ref = "kotlin" }
 kotlin-reflect = { module = "org.jetbrains.kotlin:kotlin-reflect", version.ref = "kotlin" }
-kotlin-reflect-compat = { module = "org.jetbrains.kotlin:kotlin-reflect", version.ref = "kotlinReflect" }
+kotlin-reflect-compat = { module = "org.jetbrains.kotlin:kotlin-reflect", version.ref = "kotlin" }
 kotlin-coroutines-android = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-android", version.ref = "kotlinCoroutines" }
 kotlin-coroutines-test = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-test", version.ref = "kotlinCoroutines" }
 kotlin-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "kotlinSerialization" }

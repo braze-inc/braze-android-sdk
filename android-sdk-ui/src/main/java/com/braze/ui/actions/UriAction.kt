@@ -28,8 +28,14 @@ import com.braze.ui.actions.brazeactions.BrazeActionParser.isBrazeActionUri
 import com.braze.ui.support.getMainActivityIntent
 import com.braze.ui.support.isActivityRegisteredInManifest
 
+/**
+ * [IAction] that navigates to a [Uri] via deeplink, WebView, or external browser.
+ * Supports back stack configuration for push-originated navigation.
+ */
 open class UriAction : IAction {
+    /** Optional extras to pass to the launched intent. */
     val extras: Bundle?
+    /** The [Channel] from which this action originated. */
     final override val channel: Channel
 
     /**

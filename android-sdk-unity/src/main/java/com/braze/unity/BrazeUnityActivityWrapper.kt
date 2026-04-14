@@ -113,6 +113,12 @@ class BrazeUnityActivityWrapper {
         activity.intent = intent
     }
 
+    /**
+     * Updates the next in-app message display operation based on the
+     * [UnityInAppMessageManagerAction] integer value received from Unity.
+     *
+     * @param actionEnumValue Integer value corresponding to a [UnityInAppMessageManagerAction].
+     */
     fun onNewUnityInAppMessageManagerAction(actionEnumValue: Int) {
         when (val action = UnityInAppMessageManagerAction.getTypeFromValue(actionEnumValue)) {
             UnityInAppMessageManagerAction.IAM_DISPLAY_NOW,
@@ -127,15 +133,26 @@ class BrazeUnityActivityWrapper {
         }
     }
 
+    /** Requests that the next queued in-app message be displayed immediately. */
     fun requestInAppMessageDisplay() {
         wasInAppMessageDisplayRequested = true
         BrazeInAppMessageManager.getInstance().requestDisplayInAppMessage()
     }
 
+    /**
+     * Launches the [ContentCardsActivity] from the given [Activity].
+     *
+     * @param activity The hosting Activity used to start the Content Cards screen.
+     */
     fun launchContentCardsActivity(activity: Activity) {
         activity.startActivity(Intent(activity, ContentCardsActivity::class.java))
     }
 
+    /**
+     * Registers custom [DefaultInAppMessageManagerListener] and
+     * [DefaultHtmlInAppMessageActionListener] implementations that forward
+     * in-app message lifecycle events to the Unity layer via [MessagingUtils].
+     */
     fun setInAppMessageListener() {
         brazelog(I) { "Setting in app message manager custom listener." }
         BrazeInAppMessageManager.getInstance().setCustomInAppMessageManagerListener(

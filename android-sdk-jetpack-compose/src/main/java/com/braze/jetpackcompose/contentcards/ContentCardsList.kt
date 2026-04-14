@@ -56,8 +56,15 @@ import com.braze.support.BrazeLogger.brazelog
 import com.braze.ui.contentcards.BrazeContentCardUtils
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
+import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+
+private sealed interface CardListMutation {
+    data class ReplaceCards(val newCards: List<Card>) : CardListMutation
+    data class DismissCard(val card: Card) : CardListMutation
+    data class InitializeFromCache(val cachedCards: List<Card>) : CardListMutation
+}
 
 @Suppress("LongMethod", "ComplexMethod", "LongParameterList", "VariableNaming", "MagicNumber", "NestedBlockDepth")
 @OptIn(ExperimentalMaterialApi::class)
@@ -95,12 +102,13 @@ fun ContentCardsList(
     var contentCardsUpdatedSubscriber: IEventSubscriber<ContentCardsUpdatedEvent>? = null
     var sdkDataWipeEventSubscriber: IEventSubscriber<SdkDataWipeEvent>? = null
 
-    val myCards = remember {
-        mutableStateListOf<Card>()
-    }
+    var myCards by remember { mutableStateOf<List<Card>>(emptyList()) }
 
     val controlCardInference = remember {
         mutableStateListOf<Pair<String, Card>>()
+    }
+    val cardListMutationChannel = remember {
+        Channel<CardListMutation>(Channel.UNLIMITED)
     }
 
     var didInitialLoad by remember { mutableStateOf(false) }
@@ -163,9 +171,17 @@ fun ContentCardsList(
         }
     }
 
-    fun replaceCards(newCards: List<Card>) {
+    fun enqueueCardListMutation(mutation: CardListMutation) {
+        val sendResult = cardListMutationChannel.trySend(mutation)
+        if (sendResult.isFailure) {
+            brazelog(TAG, W) { "Failed to enqueue card list mutation: ${sendResult.exceptionOrNull()}" }
+        }
+    }
+
+    fun applyCardReplacement(newCards: List<Card>) {
         val processedCards = cardUpdateHandler?.invoke(newCards) ?: BrazeContentCardUtils.defaultCardHandling(newCards)
         val cardsToAdd = mutableListOf<Card>()
+        val controlCardPairsToAdd = mutableSetOf<Pair<String, Card>>()
         var lastCardId = ""
         val cardIDs = mutableSetOf<String>()
         for (card in processedCards) {
@@ -174,9 +190,8 @@ fun ContentCardsList(
                 if (lastCardId.isBlank()) {
                     brazelog(TAG) { "Control card $card.id is at the front. Logging impression immediately" }
                     card.logImpression()
-                } else if (!controlCardInference.contains(idCardPair)) {
-                    // This control card will log impression when the last "real" card has its impression logged.
-                    controlCardInference.add(idCardPair)
+                } else {
+                    controlCardPairsToAdd.add(idCardPair)
                 }
             } else if (cardIDs.contains(card.id)) {
                 brazelog(TAG, W) { "Card ID ${card.id} already exists. Skipping card $card." }
@@ -186,16 +201,54 @@ fun ContentCardsList(
                 lastCardId = card.id
             }
         }
-        myCards.clear()
-        myCards.addAll(cardsToAdd)
+        val newControlCardPairs = controlCardPairsToAdd.filterNot { controlCardInference.contains(it) }
+        controlCardInference.addAll(newControlCardPairs)
+        myCards = cardsToAdd
+    }
+
+    fun replaceCards(newCards: List<Card>) {
+        enqueueCardListMutation(CardListMutation.ReplaceCards(newCards))
+    }
+
+    fun requestStaleRefreshIfNeeded() {
+        if (Braze.getInstance(context).areCachedContentCardsStale()) {
+            Braze.getInstance(context).requestContentCardsRefresh()
+            if (networkUnavailableJob == null) {
+                isRefreshing = true
+                networkUnavailableJob =
+                    BrazeCoroutineScope.launchDelayed(NETWORK_PROBLEM_WARNING_MS, Dispatchers.Main) {
+                        networkUnavailable()
+                    }
+            }
+        }
+    }
+
+    fun processCardListMutation(mutation: CardListMutation) {
+        when (mutation) {
+            is CardListMutation.ReplaceCards -> {
+                networkUnavailableJob?.cancel()
+                networkUnavailableJob = null
+                applyCardReplacement(mutation.newCards)
+                isRefreshing = false
+            }
+            is CardListMutation.InitializeFromCache -> {
+                applyCardReplacement(mutation.cachedCards)
+                if (myCards.isEmpty()) {
+                    requestStaleRefreshIfNeeded()
+                }
+            }
+            is CardListMutation.DismissCard -> {
+                myCards = myCards.filterNot { it.id == mutation.card.id }
+                brazelog(TAG) { "Removing card ${mutation.card.id}. Total size is now ${myCards.size}" }
+                mutation.card.isDismissed = true
+                onCardDismissed?.invoke(mutation.card)
+            }
+        }
     }
 
     fun handleContentCardsUpdatedEvent(event: ContentCardsUpdatedEvent) {
         brazelog(TAG) { "Handling ContentCardsUpdatedEvent" }
-        networkUnavailableJob?.cancel()
-        networkUnavailableJob = null
         replaceCards(event.allCards)
-        isRefreshing = false
     }
 
     fun logCardImpression(card: Card) {
@@ -215,6 +268,17 @@ fun ContentCardsList(
                 impressedCards.add(controlCard.id)
                 controlCard.logImpression()
             }
+        }
+    }
+
+    LaunchedEffect(cardListMutationChannel) {
+        for (mutation in cardListMutationChannel) {
+            processCardListMutation(mutation)
+        }
+    }
+    DisposableEffect(cardListMutationChannel) {
+        onDispose {
+            cardListMutationChannel.close()
         }
     }
 
@@ -274,18 +338,11 @@ fun ContentCardsList(
         }
 
         if (!didInitialLoad) {
-            Braze.getInstance(context).getCachedContentCards()?.let {
-                replaceCards(it)
-            }
-            if (myCards.isEmpty() && Braze.getInstance(context).areCachedContentCardsStale()) {
-                Braze.getInstance(context).requestContentCardsRefresh()
-                if (networkUnavailableJob == null) {
-                    isRefreshing = true
-                    networkUnavailableJob =
-                        BrazeCoroutineScope.launchDelayed(NETWORK_PROBLEM_WARNING_MS, Dispatchers.Main) {
-                            networkUnavailable()
-                        }
-                }
+            val cachedCards = Braze.getInstance(context).getCachedContentCards()
+            if (!cachedCards.isNullOrEmpty()) {
+                enqueueCardListMutation(CardListMutation.InitializeFromCache(cachedCards))
+            } else {
+                requestStaleRefreshIfNeeded()
             }
             didInitialLoad = true
         } else {
@@ -387,10 +444,7 @@ fun ContentCardsList(
 
                         if (hasCardBeenDismissed) {
                             LaunchedEffect(Unit) {
-                                myCards.remove(card)
-                                brazelog { "Removing card ${card.id}. Total size is now ${myCards.size}" }
-                                card.isDismissed = true
-                                onCardDismissed?.invoke(card)
+                                enqueueCardListMutation(CardListMutation.DismissCard(card))
                             }
                         }
 

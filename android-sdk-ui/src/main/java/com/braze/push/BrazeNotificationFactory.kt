@@ -31,6 +31,11 @@ import com.braze.support.BrazeLogger.Priority.I
 import com.braze.support.BrazeLogger.Priority.V
 import com.braze.support.BrazeLogger.brazelog
 
+/**
+ * Default [IBrazeNotificationFactory] that builds Android notifications from
+ * Braze push payloads. Configures icons, images, sounds, styles, actions,
+ * and notification channels.
+ */
 open class BrazeNotificationFactory : IBrazeNotificationFactory {
     /**
      * Creates the rich notification. The notification content varies based on the Android version on the

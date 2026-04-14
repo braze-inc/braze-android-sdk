@@ -296,7 +296,7 @@ fun ContentCard(
                             Text(
                                 text = it,
                                 style = style.titleTextStyle(type = card.cardType),
-                                maxLines = 1,
+                                maxLines = style.shortNewsContentCardStyle.titleMaxLines,
                             )
                         }
                         Text(

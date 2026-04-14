@@ -16,6 +16,11 @@ import com.braze.ui.BrazeWebViewClient
 import com.braze.ui.inappmessage.BrazeInAppMessageManager
 import com.braze.ui.BrazeDeeplinkHandler.Companion.getInstance as getDeeplinkHandlerInstance
 
+/**
+ * Default [IInAppMessageWebViewClientListener] that processes URL actions from HTML
+ * in-app message WebViews. Handles close actions, custom event firing, and external
+ * URL navigation with deeplink and webview-open query parameter support.
+ */
 open class DefaultInAppMessageWebViewClientListener : IInAppMessageWebViewClientListener {
     private val inAppMessageManager: BrazeInAppMessageManager
         get() = BrazeInAppMessageManager.getInstance()

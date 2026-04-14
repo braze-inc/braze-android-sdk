@@ -44,6 +44,14 @@ import kotlinx.coroutines.launch
 import java.util.concurrent.TimeUnit
 import kotlin.random.Random
 
+/**
+ * [BroadcastReceiver] that handles all Braze push notification intents including
+ * message receipt, click, dismissal, story traversal, and action button clicks.
+ *
+ * Serves as the central entry point for processing push payloads from FCM, ADM,
+ * and HMS. The companion object exposes static methods for direct intent routing
+ * when a [BroadcastReceiver] context is not available.
+ */
 open class BrazePushReceiver : BroadcastReceiver() {
     override fun onReceive(context: Context, intent: Intent) {
         handleReceivedIntent(context, intent)
@@ -140,6 +148,14 @@ open class BrazePushReceiver : BroadcastReceiver() {
             }
         }
 
+        /**
+         * Routes an incoming push [Intent] to the appropriate handler. By default, processing
+         * occurs on a background coroutine to avoid blocking the calling thread.
+         *
+         * @param context The Android [Context].
+         * @param intent The push intent to handle.
+         * @param runOnThread If true (default), processes on a background thread; if false, runs on the caller thread.
+         */
         @JvmStatic
         @JvmOverloads
         fun handleReceivedIntent(context: Context, intent: Intent, runOnThread: Boolean = true) {
@@ -154,6 +170,14 @@ open class BrazePushReceiver : BroadcastReceiver() {
             }
         }
 
+        /**
+         * Handles an ADM registration event if ADM messaging registration is enabled in the configuration.
+         *
+         * @param appConfigurationProvider The configuration provider.
+         * @param context The Android [Context].
+         * @param intent The ADM registration intent.
+         * @return true if the ADM registration event was processed.
+         */
         @JvmStatic
         @VisibleForTesting
         fun handleAdmRegistrationEventIfEnabled(
@@ -211,6 +235,14 @@ open class BrazePushReceiver : BroadcastReceiver() {
             return true
         }
 
+        /**
+         * Processes a Braze push notification payload: validates the message, creates and displays
+         * the notification, handles push stories, uninstall tracking, and push delivery logging.
+         *
+         * @param context The Android [Context].
+         * @param intent The intent containing the push payload.
+         * @return true if a visible notification was displayed.
+         */
         @JvmStatic
         @VisibleForTesting
         @Suppress("LongMethod", "ComplexMethod", "ReturnCount")
@@ -344,6 +376,15 @@ open class BrazePushReceiver : BroadcastReceiver() {
             }
         }
 
+        /**
+         * Creates a [BrazeNotificationPayload] from the notification extras and Braze extras bundles.
+         *
+         * @param context The Android [Context].
+         * @param appConfigurationProvider The configuration provider.
+         * @param notificationExtras The full notification extras bundle.
+         * @param brazeExtras The Braze-specific extras bundle.
+         * @return A [BrazeNotificationPayload] suitable for notification construction.
+         */
         @JvmStatic
         @VisibleForTesting
         fun createPayload(

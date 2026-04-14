@@ -22,6 +22,10 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
+/**
+ * [BroadcastReceiver] that handles geofence transitions and single location
+ * updates from Google Play Location Services for the Braze SDK.
+ */
 @Keep
 class BrazeActionReceiver : BroadcastReceiver() {
     @OptIn(DelicateCoroutinesApi::class)

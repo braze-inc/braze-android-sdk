@@ -8,6 +8,7 @@ import android.window.OnBackInvokedDispatcher
 import com.braze.support.BrazeLogger.brazelog
 import com.braze.ui.inappmessage.utils.InAppMessageViewUtils
 import com.braze.ui.inappmessage.views.IInAppMessageBackEventListener
+import java.lang.ref.WeakReference
 
 /**
  * [InAppMessageBackEventHandler] handles back events by creating a back animation callback. Requires API 34+.
@@ -22,6 +23,9 @@ open class InAppMessageBackEventHandler(
     private val inAppMessageView: IInAppMessageBackEventListener?
 ) {
 
+    private var activityRef: WeakReference<Activity>? = null
+    private var backAnimationCallback: OnBackAnimationCallback? = null
+
     init {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.UPSIDE_DOWN_CAKE && BrazeInAppMessageManager.getInstance().doesBackButtonDismissInAppMessageView) {
             activity.let {
@@ -29,7 +33,6 @@ open class InAppMessageBackEventHandler(
                     override fun onBackInvoked() {
                         brazelog { "Back button intercepted by in-app message back animation callback, closing in-app message." }
                         InAppMessageViewUtils.closeInAppMessageOnKeycodeBack()
-                        it.onBackInvokedDispatcher.unregisterOnBackInvokedCallback(this)
                     }
 
                     override fun onBackStarted(backEvent: BackEvent) {
@@ -51,8 +54,24 @@ open class InAppMessageBackEventHandler(
                     }
                 }
 
+                backAnimationCallback = inAppMessageBackAnimationCallback
+                activityRef = WeakReference(it)
                 it.onBackInvokedDispatcher.registerOnBackInvokedCallback(OnBackInvokedDispatcher.PRIORITY_OVERLAY, inAppMessageBackAnimationCallback)
             }
         }
+    }
+
+    /**
+     * Unregisters the back animation callback from the activity's dispatcher.
+     * Must be called when the in-app message is closed so the callback does not remain registered.
+     */
+    open fun unregister() {
+        val activity = activityRef?.get()
+        val callback = backAnimationCallback
+        if (activity != null && callback != null && Build.VERSION.SDK_INT >= Build.VERSION_CODES.UPSIDE_DOWN_CAKE) {
+            activity.onBackInvokedDispatcher.unregisterOnBackInvokedCallback(callback)
+        }
+        backAnimationCallback = null
+        activityRef = null
     }
 }

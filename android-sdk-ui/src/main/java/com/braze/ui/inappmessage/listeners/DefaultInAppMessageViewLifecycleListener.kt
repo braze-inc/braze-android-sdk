@@ -19,6 +19,11 @@ import com.braze.ui.BrazeDeeplinkHandler
 import com.braze.ui.inappmessage.BrazeInAppMessageManager
 import kotlinx.coroutines.launch
 
+/**
+ * Default [IInAppMessageViewLifecycleListener] that handles the lifecycle of in-app message
+ * views including impression logging, click/button click handling with deeplink resolution,
+ * dismissal callbacks, and HTML asset cleanup.
+ */
 open class DefaultInAppMessageViewLifecycleListener : IInAppMessageViewLifecycleListener {
     private val inAppMessageManager: BrazeInAppMessageManager
         get() = BrazeInAppMessageManager.getInstance()
@@ -161,7 +166,6 @@ open class DefaultInAppMessageViewLifecycleListener : IInAppMessageViewLifecycle
                 }
             }
             ClickAction.NONE -> inAppMessageManager.hideCurrentlyDisplayingInAppMessage(false)
-            else -> inAppMessageManager.hideCurrentlyDisplayingInAppMessage(false)
         }
     }
 

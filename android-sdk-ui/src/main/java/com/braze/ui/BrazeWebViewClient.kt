@@ -33,6 +33,18 @@ import java.util.concurrent.atomic.AtomicBoolean
 import com.braze.ui.banners.listeners.IBannerWebViewClientListener
 import androidx.core.net.toUri
 
+/**
+ * [WebViewClient] for Braze HTML content that intercepts URL loading to handle
+ * Braze scheme actions (close, custom events), injects the JavaScript bridge, and
+ * delegates URL actions to the appropriate listener based on the [Type].
+ *
+ * @param context The Android [Context].
+ * @param type Whether this client serves a [Type.BANNER] or [Type.IN_APP_MESSAGE].
+ * @param inAppMessage The in-app message model, required when [type] is [Type.IN_APP_MESSAGE].
+ * @param inAppMessageWebViewClientListener Listener for in-app message URL actions.
+ * @param bannerWebViewClientListener Listener for banner URL actions.
+ * @param assetDirectoryUrl Optional local asset directory for WebView asset loading.
+ */
 open class BrazeWebViewClient(
     val context: Context,
     val type: Type,
@@ -42,8 +54,12 @@ open class BrazeWebViewClient(
     assetDirectoryUrl: String? = null
 ) : WebViewClient() {
 
+    /** Identifies the Braze message type this [BrazeWebViewClient] is serving. */
     enum class Type {
+        /** HTML Banner content. */
         BANNER,
+
+        /** HTML In-App Message content. */
         IN_APP_MESSAGE
     }
 
@@ -144,6 +160,12 @@ open class BrazeWebViewClient(
     @Deprecated("Deprecated in API 24")
     override fun shouldOverrideUrlLoading(view: WebView, url: String) = handleUrlOverride(url)
 
+    /**
+     * Sets a [IWebViewClientStateListener] to receive page load completion callbacks.
+     * If the page has already finished loading, the listener is notified immediately.
+     *
+     * @param listener The listener, or null to clear.
+     */
     fun setWebViewClientStateListener(listener: IWebViewClientStateListener?) {
         // If the page is already done loading, inform the new listener
         if (listener != null &&
@@ -291,10 +313,22 @@ open class BrazeWebViewClient(
             return queryBundle
         }
 
+        /**
+         * Extracts the custom event name from a query parameter [Bundle].
+         *
+         * @param queryBundle The bundle of query parameters.
+         * @return The custom event name, or null if not present.
+         */
         @JvmStatic
         fun parseCustomEventNameFromQueryBundle(queryBundle: Bundle): String? =
             queryBundle.getString(BRAZE_CUSTOM_EVENT_NAME_KEY)
 
+        /**
+         * Extracts event properties from a query parameter [Bundle], excluding the event name key.
+         *
+         * @param queryBundle The bundle of query parameters.
+         * @return A [BrazeProperties] containing all non-name query parameters.
+         */
         @JvmStatic
         fun parsePropertiesFromQueryBundle(queryBundle: Bundle): BrazeProperties {
             val customEventProperties = BrazeProperties()

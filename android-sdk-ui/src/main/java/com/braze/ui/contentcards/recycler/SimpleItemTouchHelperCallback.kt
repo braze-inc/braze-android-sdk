@@ -3,6 +3,12 @@ package com.braze.ui.contentcards.recycler
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
 
+/**
+ * [ItemTouchHelper.Callback] that enables swipe-to-dismiss on Content Card items.
+ * Drag-and-drop is disabled; only start-direction swipe is supported for dismissable items.
+ *
+ * @param adapter The [ItemTouchHelperAdapter] that handles item dismissal.
+ */
 open class SimpleItemTouchHelperCallback(private val adapter: ItemTouchHelperAdapter) : ItemTouchHelper.Callback() {
     override fun isLongPressDragEnabled() =
         false

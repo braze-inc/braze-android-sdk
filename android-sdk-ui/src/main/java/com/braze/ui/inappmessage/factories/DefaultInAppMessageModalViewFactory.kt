@@ -16,6 +16,11 @@ import com.braze.ui.inappmessage.views.InAppMessageBaseView
 import com.braze.ui.inappmessage.views.InAppMessageImageView
 import com.braze.ui.inappmessage.views.InAppMessageModalView
 
+/**
+ * Default [IInAppMessageViewFactory] for modal in-app messages.
+ * Inflates the appropriate modal layout (standard or graphic), configures images,
+ * buttons, colors, header, and directional navigation.
+ */
 open class DefaultInAppMessageModalViewFactory : IInAppMessageViewFactory {
     override fun createInAppMessageView(
         activity: Activity,

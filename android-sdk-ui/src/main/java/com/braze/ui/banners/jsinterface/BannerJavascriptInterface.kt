@@ -60,4 +60,11 @@ class BannerJavascriptInterface(
             BrazeInAppMessageManager.getInstance().activity.requestPushPermissionPrompt()
         }
     }
+
+    @JavascriptInterface
+    fun beforeMessageClosed() {
+        brazelog(I) { "Banner beforeMessageClosed() called. Dismissing banner." }
+        val banner = Braze.getInstance(context).getBanner(placementId)
+        banner?.dismiss()
+    }
 }

@@ -36,6 +36,11 @@ import com.braze.ui.BrazeDeeplinkHandler.Companion.getInstance
 import com.braze.ui.R
 import androidx.core.graphics.scale
 
+/**
+ * Factory for creating [NotificationCompat.Style] instances for Braze push notifications.
+ * Supports Big Text, Big Picture, Push Story, Conversational, and Inline Image styles
+ * depending on the notification payload and device capabilities.
+ */
 open class BrazeNotificationStyleFactory {
     /**
      * A sentinel value used solely to denote that a style
@@ -371,6 +376,14 @@ open class BrazeNotificationStyleFactory {
             }
         }
 
+        /**
+         * Returns a [NotificationCompat.MessagingStyle] for conversational push notifications,
+         * or null if the conversation data is incomplete.
+         *
+         * @param notificationBuilder The notification builder to configure.
+         * @param payload The notification payload containing conversation data.
+         * @return A [NotificationCompat.MessagingStyle], or null on failure.
+         */
         fun getConversationalPushStyle(
             notificationBuilder: NotificationCompat.Builder,
             payload: BrazeNotificationPayload

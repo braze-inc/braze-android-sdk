@@ -13,10 +13,16 @@ import com.braze.support.constructJsonArray
 import com.unity3d.player.UnityPlayer
 import org.json.JSONObject
 
+/**
+ * Sends Braze SDK event payloads to Unity via [UnityPlayer.UnitySendMessage].
+ * Each method serializes the event data to JSON and dispatches it to the
+ * configured Unity GameObject and callback method.
+ */
 object MessagingUtils {
     private val TAG = getBrazeLogTag(MessagingUtils::class.java)
     private const val BRAZE_INTERNAL_GAME_OBJECT = "BrazeInternalCallback"
 
+    /** C# method names on the internal Braze Unity component that receive in-app message lifecycle events. */
     enum class BrazeInternalComponentMethod(val methodName: String) {
         BEFORE_IAM_DISPLAYED("beforeInAppMessageDisplayed"),
         ON_IAM_DISMISSED("onInAppMessageDismissed"),
@@ -25,6 +31,14 @@ object MessagingUtils {
         ON_IAM_HTML_CLICKED("onInAppMessageHTMLClicked")
     }
 
+    /**
+     * Sends an in-app message payload to the specified Unity GameObject.
+     *
+     * @param unityGameObjectName Target Unity GameObject name, or null to skip.
+     * @param unityCallbackFunctionName Callback method name on the GameObject, or null to skip.
+     * @param inAppMessage The in-app message to serialize and send.
+     * @return True if the message was sent, false if either parameter was blank.
+     */
     fun sendInAppMessageReceivedMessage(
         unityGameObjectName: String?,
         unityCallbackFunctionName: String?,
@@ -49,6 +63,14 @@ object MessagingUtils {
         return true
     }
 
+    /**
+     * Sends a push notification event payload to the specified Unity GameObject.
+     *
+     * @param unityGameObjectName Target Unity GameObject name, or null to skip.
+     * @param unityCallbackFunctionName Callback method name on the GameObject, or null to skip.
+     * @param event The push event to serialize and send.
+     * @return True if the message was sent, false if either parameter was blank.
+     */
     fun sendPushEventToUnity(
         unityGameObjectName: String?,
         unityCallbackFunctionName: String?,
@@ -77,6 +99,14 @@ object MessagingUtils {
         return true
     }
 
+    /**
+     * Sends a Content Cards updated event payload to the specified Unity GameObject.
+     *
+     * @param unityGameObjectName Target Unity GameObject name, or null to skip.
+     * @param unityCallbackFunctionName Callback method name on the GameObject, or null to skip.
+     * @param contentCardsUpdatedEvent The Content Cards updated event to serialize and send.
+     * @return True if the message was sent, false if either parameter was blank.
+     */
     fun sendContentCardsUpdatedEventToUnity(
         unityGameObjectName: String?,
         unityCallbackFunctionName: String?,
@@ -104,6 +134,14 @@ object MessagingUtils {
         return true
     }
 
+    /**
+     * Sends a Feature Flags updated event payload to the specified Unity GameObject.
+     *
+     * @param unityGameObjectName Target Unity GameObject name, or null to skip.
+     * @param unityCallbackFunctionName Callback method name on the GameObject, or null to skip.
+     * @param featureFlagsUpdatedEvent The Feature Flags updated event to serialize and send.
+     * @return True if the message was sent, false if either parameter was blank.
+     */
     fun sendFeatureFlagsUpdatedEventToUnity(
         unityGameObjectName: String?,
         unityCallbackFunctionName: String?,
@@ -130,6 +168,14 @@ object MessagingUtils {
         return true
     }
 
+    /**
+     * Sends an SDK authentication failure event payload to the specified Unity GameObject.
+     *
+     * @param unityGameObjectName Target Unity GameObject name, or null to skip.
+     * @param unityCallbackFunctionName Callback method name on the GameObject, or null to skip.
+     * @param sdkAuthError The SDK authentication error event to serialize and send.
+     * @return True if the message was sent, false if either parameter was blank.
+     */
     fun sendSdkAuthErrorEventToUnity(
         unityGameObjectName: String?,
         unityCallbackFunctionName: String?,
