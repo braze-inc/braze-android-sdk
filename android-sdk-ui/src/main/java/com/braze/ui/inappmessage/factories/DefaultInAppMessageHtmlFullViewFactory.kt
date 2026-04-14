@@ -16,6 +16,13 @@ import com.braze.ui.inappmessage.views.InAppMessageHtmlBaseView
 import com.braze.ui.inappmessage.views.InAppMessageHtmlFullView
 import com.braze.ui.support.isDeviceNotInTouchMode
 
+/**
+ * Default [IInAppMessageViewFactory] for HTML Full in-app messages.
+ * Inflates an [InAppMessageHtmlFullView], configures the WebView with a JavaScript
+ * bridge, and attaches the provided [IInAppMessageWebViewClientListener] for URL handling.
+ *
+ * @param inAppMessageWebViewClientListener Listener for WebView client URL actions.
+ */
 open class DefaultInAppMessageHtmlFullViewFactory(private val inAppMessageWebViewClientListener: IInAppMessageWebViewClientListener) :
     IInAppMessageViewFactory {
     @SuppressLint("AddJavascriptInterface")

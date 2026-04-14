@@ -6,6 +6,10 @@ import com.braze.events.ContentCardsUpdatedEvent
 import com.braze.models.cards.Card
 import com.braze.ui.contentcards.BrazeContentCardUtils
 
+/**
+ * Default [IContentCardsUpdateHandler] that applies [BrazeContentCardUtils.defaultCardHandling]
+ * to sort and filter Content Cards from a [ContentCardsUpdatedEvent].
+ */
 open class DefaultContentCardsUpdateHandler : IContentCardsUpdateHandler {
     override fun handleCardUpdate(event: ContentCardsUpdatedEvent): List<Card> =
         BrazeContentCardUtils.defaultCardHandling(event.allCards)

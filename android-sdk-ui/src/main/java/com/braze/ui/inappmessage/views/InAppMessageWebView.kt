@@ -6,6 +6,7 @@ import android.view.KeyEvent
 import android.webkit.WebView
 import com.braze.ui.inappmessage.BrazeInAppMessageManager
 import com.braze.ui.inappmessage.utils.InAppMessageViewUtils.closeInAppMessageOnKeycodeBack
+import com.braze.ui.inappmessage.utils.InAppMessageViewUtils.isApiBelowBaklava
 
 /**
  * WebView embedded in Braze html in-app messages.
@@ -24,7 +25,8 @@ open class InAppMessageWebView(context: Context, attrs: AttributeSet?) : WebView
      * and return true to indicate that the event was handled.
      */
     override fun onKeyDown(keyCode: Int, event: KeyEvent): Boolean {
-        if (keyCode == KeyEvent.KEYCODE_BACK &&
+        if (isApiBelowBaklava &&
+            keyCode == KeyEvent.KEYCODE_BACK &&
             BrazeInAppMessageManager.getInstance().doesBackButtonDismissInAppMessageView
         ) {
             closeInAppMessageOnKeycodeBack()
@@ -39,8 +41,11 @@ open class InAppMessageWebView(context: Context, attrs: AttributeSet?) : WebView
      * @return If the button pressed was the back button, close the in-app message
      * and return true to indicate that the event was handled.
      */
+    @Suppress("ComplexCondition")
     override fun dispatchKeyEvent(event: KeyEvent): Boolean {
-        if (!isInTouchMode && event.keyCode == KeyEvent.KEYCODE_BACK &&
+        if (isApiBelowBaklava &&
+            !isInTouchMode &&
+            event.keyCode == KeyEvent.KEYCODE_BACK &&
             BrazeInAppMessageManager.getInstance().doesBackButtonDismissInAppMessageView
         ) {
             closeInAppMessageOnKeycodeBack()

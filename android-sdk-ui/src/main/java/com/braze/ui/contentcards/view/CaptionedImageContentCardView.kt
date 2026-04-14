@@ -10,6 +10,11 @@ import com.braze.models.cards.CaptionedImageCard
 import com.braze.models.cards.Card
 import com.braze.ui.R
 
+/**
+ * View class responsible for inflating and binding the Captioned Image Content Card layout.
+ *
+ * @param context The Android [Context] used for view inflation.
+ */
 open class CaptionedImageContentCardView(context: Context) : BaseContentCardView<CaptionedImageCard>(
     context
 ) {

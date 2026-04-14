@@ -9,6 +9,12 @@ import com.braze.models.cards.Card
 import com.braze.models.cards.TextAnnouncementCard
 import com.braze.ui.R
 
+/**
+ * View class responsible for inflating and binding the Text Announcement Content Card layout.
+ * Displays title, description, and action hint text without an image.
+ *
+ * @param context The Android [Context] used for view inflation.
+ */
 open class TextAnnouncementContentCardView(context: Context) :
     BaseContentCardView<TextAnnouncementCard>(
         context

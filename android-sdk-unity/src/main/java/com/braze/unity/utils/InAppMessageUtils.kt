@@ -7,7 +7,18 @@ import com.braze.models.inappmessage.IInAppMessageImmersive
 import com.braze.support.BrazeLogger.Priority.W
 import com.braze.support.BrazeLogger.brazelog
 
+/**
+ * Utility methods for deserializing and logging analytics on in-app messages
+ * from the Unity layer.
+ */
 object InAppMessageUtils {
+    /**
+     * Deserializes a JSON string into an [IInAppMessage] instance.
+     *
+     * @param context Android context, or null to return null.
+     * @param messageJSONString JSON representation of the in-app message, or null to return null.
+     * @return The deserialized [IInAppMessage], or null if either parameter is null.
+     */
     fun inAppMessageFromString(context: Context?, messageJSONString: String?): IInAppMessage? {
         return if (messageJSONString == null || context == null) {
             null
@@ -17,6 +28,11 @@ object InAppMessageUtils {
         }
     }
 
+    /**
+     * Logs a click event on the given in-app message.
+     *
+     * @param inAppMessage The in-app message that was clicked, or null to no-op.
+     */
     fun logInAppMessageClick(inAppMessage: IInAppMessage?) {
         if (inAppMessage != null) {
             inAppMessage.logClick()
@@ -27,6 +43,12 @@ object InAppMessageUtils {
         }
     }
 
+    /**
+     * Logs a button click event on the given in-app message.
+     *
+     * @param inAppMessage The in-app message containing the button, or null to no-op.
+     * @param buttonId The identifier of the button that was clicked.
+     */
     fun logInAppMessageButtonClick(inAppMessage: IInAppMessage?, buttonId: Int) {
         if (inAppMessage == null) {
             brazelog(W) { "The in-app message is null. Not logging in-app message button $buttonId click." }
@@ -44,6 +66,11 @@ object InAppMessageUtils {
         }
     }
 
+    /**
+     * Logs an impression event on the given in-app message.
+     *
+     * @param inAppMessage The in-app message that was displayed, or null to no-op.
+     */
     fun logInAppMessageImpression(inAppMessage: IInAppMessage?) {
         if (inAppMessage != null) {
             inAppMessage.logImpression()

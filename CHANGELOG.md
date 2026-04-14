@@ -1,3 +1,26 @@
+## 42.0.0
+
+[Release Date](https://github.com/braze-inc/braze-android-sdk/releases/tag/v42.0.0)
+
+#### Breaking
+- Updated Kotlin from 2.0.20 to 2.2.20.
+  - Updated Kotlin Coroutines from 1.8.1 to 1.10.2.
+  - Updated Kotlin Serialization from 1.8.0 to 1.9.0.
+
+##### Fixed
+- Fixed an issue where non-HTML In-App Message view creation was dispatched to a background thread, causing an `IllegalArgumentException` when image loaders like Glide require the main thread. See [#102](https://github.com/braze-inc/braze-android-sdk/issues/102) for details.
+- Fixed an issue where in-app messages from a previous user session could be presented after `changeUser()` is called. On user change, the in-app message stack, event map, and any carryover or unregistered messages are now unconditionally cleared.
+- Fixed an issue on API 36+ where pressing the Back button to dismiss an in-app message could also close the app or navigate back.
+- Fixed an issue where expired Banners would be returned in `Braze.subscribeToBannersUpdates()`.
+- Fixed R8 optimized resource shrinking stripping custom `res/values` that Braze requires to operate when `android.r8.optimizedResourceShrinking` is enabled (Gradle 9.x). See [#84](https://github.com/braze-inc/braze-android-sdk/issues/84) for details.
+- Fixed an issue where `setDateOfBirth` accepted out-of-range or negative date values instead of rejecting them.
+- Fixed a potential ANR when registering for Braze updates during `Activity` lifecycle (for example when using `BrazeActivityLifecycleCallbackListener`). That registration no longer blocks the UI thread.
+
+##### Added
+- Added a config field `BrazeConfig.setIsHtmlInAppMessageApplyWindowInsetsEnabled()` to configure the SDK to automatically apply window insets to HTML In-App messages.
+  - By default, this value is true.
+- Added support for dismissing slideup in-app messages by vertical swipes. Slideups from the bottom can be dismissed by swiping down and slideups from the top can be dismissed by swiping up.
+
 ## 41.1.1
 
 [Release Date](https://github.com/braze-inc/braze-android-sdk/releases/tag/v41.1.1)
@@ -127,12 +150,12 @@
 - Added predictive back animations to full view in-app messages on gesture navigation modes on API 34+, and 3-button navigation modes on API 36+. See the [Android 16 Documentation](https://developer.android.com/about/versions/16/behavior-changes-all) for more details.
 - Moved the method internals of `BrazeFirebaseMessagingService.onNewToken()` to the companion object for easier behavior overriding.
 - Added support for new `Banner` properties by adding the following methods:
-  - `Banner.getStringProperty(key)` for accessing `String` properties.
-  - `Banner.getNumberProperty(key)` for accessing `Number` properties.
-  - `Banner.getBooleanProperty(key)` for accessing `Boolean` properties.
-  - `Banner.getJSONProperty(key)` for accessing `JSONObject` properties.
-  - `Banner.getImageProperty(key)` for accessing image URL properties as `String`s.
-  - `Banner.getTimestampProperty(key)` for accessing Unix UTC millisecond timestamp properties as `Long`s.
+  - `banner.getStringProperty(key)` for accessing `String` properties.
+  - `banner.getNumberProperty(key)` for accessing `Number` properties.
+  - `banner.getBooleanProperty(key)` for accessing `Boolean` properties.
+  - `banner.getJSONProperty(key)` for accessing `JSONObject` properties.
+  - `banner.getImageProperty(key)` for accessing image URL properties as `String`s.
+  - `banner.getTimestampProperty(key)` for accessing Unix UTC millisecond timestamp properties as `Long`s.
 
 ##### Changed
 - Changed the behavior of templated In-App Messages to not automatically retry on endpoint errors to match the behavior of the iOS and Web SDKs.
@@ -215,7 +238,7 @@
   - The SDK will now always behave as if this configuration option were set to true.
 
 ##### Fixed
-- Control banners will invoke `Banner.heightCallback` with a value of 0.0. Previously it was not being called for control banners.
+- Control banners will invoke `bannerView.heightCallback` with a value of 0.0. Previously it was not being called for control banners.
 - Fixed an issue where sending a test banner from the dashboard would not update immediately.
 
 ##### Added

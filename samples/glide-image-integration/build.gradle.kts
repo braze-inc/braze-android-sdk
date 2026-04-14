@@ -1,5 +1,8 @@
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
+
 plugins {
     id("com.android.application")
+    id("kotlin-android")
 }
 
 android {
@@ -29,8 +32,16 @@ android {
     }
 }
 
+kotlin {
+    compilerOptions {
+        jvmTarget.set(JvmTarget.JVM_1_8)
+        freeCompilerArgs.addAll("-Xjvm-default=all")
+    }
+}
+
 dependencies {
     implementation(project(":android-sdk-ui"))
     implementation(libs.androidx.appcompat)
     implementation(libs.glide)
+    implementation(libs.kotlin.stdlib)
 }

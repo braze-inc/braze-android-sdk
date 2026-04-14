@@ -5,6 +5,10 @@ import android.content.Context
 import android.util.AttributeSet
 import android.widget.Button
 
+/**
+ * Custom [Button] subclass used for in-app message action buttons.
+ * Provides standard [Button] constructors for XML inflation and programmatic creation.
+ */
 @SuppressLint("AppCompatCustomView")
 open class InAppMessageButton : Button {
     constructor(context: Context?) : super(context)

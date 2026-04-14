@@ -20,6 +20,10 @@ import com.google.android.gms.location.GeofencingRequest
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.location.Priority
 
+/**
+ * Utility methods for interacting with Google Play Location Services to manage
+ * geofence registration, location requests, and geofence data store persistence.
+ */
 @SuppressLint("MissingPermission")
 object GooglePlayLocationUtils {
     /**

@@ -13,6 +13,11 @@ import com.braze.ui.inappmessage.views.InAppMessageBaseView
 import com.braze.ui.inappmessage.views.InAppMessageSlideupView
 import com.braze.ui.support.isDeviceNotInTouchMode
 
+/**
+ * Default [IInAppMessageViewFactory] for slideup in-app messages.
+ * Inflates an [InAppMessageSlideupView] and configures its image, background color,
+ * message text, icon, and chevron indicator.
+ */
 open class DefaultInAppMessageSlideupViewFactory : IInAppMessageViewFactory {
     override fun createInAppMessageView(
         activity: Activity,

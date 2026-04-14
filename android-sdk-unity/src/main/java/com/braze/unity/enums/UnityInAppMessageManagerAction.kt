@@ -2,11 +2,19 @@ package com.braze.unity.enums
 
 import com.braze.ui.inappmessage.InAppMessageOperation
 
+/**
+ * Maps integer values received from the Unity layer to their corresponding
+ * [InAppMessageOperation], controlling how the in-app message manager handles
+ * the next message.
+ *
+ * @property inAppMessageOperation The SDK [InAppMessageOperation] this action maps to, or null for [UNKNOWN].
+ */
 @Suppress("MagicNumber")
 enum class UnityInAppMessageManagerAction(
     private val value: Int,
     val inAppMessageOperation: InAppMessageOperation?
 ) {
+    /** Unrecognized action value. */
     UNKNOWN(-1, null),
 
     /**
@@ -30,6 +38,7 @@ enum class UnityInAppMessageManagerAction(
     IAM_REENQUEUE(3, InAppMessageOperation.REENQUEUE);
 
     companion object {
+        /** Returns the [UnityInAppMessageManagerAction] matching [value], or null if none match. */
         fun getTypeFromValue(value: Int): UnityInAppMessageManagerAction? =
             entries.firstOrNull { it.value == value }
     }

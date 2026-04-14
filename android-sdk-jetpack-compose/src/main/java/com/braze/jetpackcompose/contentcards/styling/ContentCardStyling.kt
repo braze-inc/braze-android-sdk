@@ -25,6 +25,7 @@ import com.braze.enums.CardType
 import com.braze.models.cards.Card
 import com.braze.ui.R
 
+/** Sentinel [Alignment] value indicating that no alignment override has been specified. */
 @Suppress("MagicNumber")
 val UndefinedAlignment: Alignment = BiasAlignment(-2.0f, -2.0f)
 
@@ -699,6 +700,11 @@ open class ContentCardStyling(
     }
 }
 
+/**
+ * Base styling configuration shared by all Content Card type-specific styling classes.
+ * Properties defined here serve as fallback values when a card-type-specific style
+ * does not override them.
+ */
 @Suppress("LongParameterList")
 open class BrazeContentCardBaseStyling(
     val modifier: Modifier? = null,
@@ -726,6 +732,11 @@ open class BrazeContentCardBaseStyling(
     val shadowRadius: Dp = Dp.Unspecified
 )
 
+/**
+ * Styling configuration for Image Only Content Cards.
+ *
+ * @property imageHeight Height of the card image.
+ */
 @Suppress("LongParameterList")
 class BrazeImageOnlyContentCardStyling(
     modifier: Modifier? = null,
@@ -766,6 +777,23 @@ class BrazeImageOnlyContentCardStyling(
     shadowRadius = shadowRadius
 )
 
+/**
+ * Styling configuration for Text Announcement Content Cards.
+ *
+ * @property textColumnPaddingTop Padding above the text column.
+ * @property textColumnPaddingBottom Padding below the text column.
+ * @property textColumnPaddingStart Padding at the start of the text column.
+ * @property textColumnPaddingEnd Padding at the end of the text column.
+ * @property titleTextSize Font size of the title text.
+ * @property titleFontWeight Font weight of the title text.
+ * @property titleIncludeFontPadding Whether to include font padding for the title.
+ * @property titlePaddingBottom Padding below the title text.
+ * @property descriptionTextSize Font size of the description text.
+ * @property descriptionIncludeFontPadding Whether to include font padding for the description.
+ * @property actionHintTextSize Font size of the action hint text.
+ * @property actionHintIncludeFontPadding Whether to include font padding for the action hint.
+ * @property actionHintPaddingTop Padding above the action hint text.
+ */
 @Suppress("LongParameterList", "BooleanPropertyNaming")
 class BrazeTextAnnouncementContentCardStyling(
     modifier: Modifier? = null,
@@ -828,6 +856,29 @@ class BrazeTextAnnouncementContentCardStyling(
     actionHintTextColor = actionHintTextColor
 )
 
+/**
+ * Styling configuration for Short News Content Cards.
+ *
+ * @property textColumnPaddingTop Padding above the text column.
+ * @property textColumnPaddingBottom Padding below the text column.
+ * @property textColumnPaddingStart Padding at the start of the text column.
+ * @property textColumnPaddingEnd Padding at the end of the text column.
+ * @property imageHeight Height of the card thumbnail image.
+ * @property imageWidth Width of the card thumbnail image.
+ * @property imagePaddingTop Padding above the thumbnail image.
+ * @property imagePaddingStart Padding at the start of the thumbnail image.
+ * @property imagePaddingBottom Padding below the thumbnail image.
+ * @property titleTextSize Font size of the title text.
+ * @property titleFontWeight Font weight of the title text.
+ * @property titleIncludeFontPadding Whether to include font padding for the title.
+ * @property titleMaxLines Maximum number of lines for the title text. Defaults to 1.
+ * @property descriptionTextSize Font size of the description text.
+ * @property descriptionIncludeFontPadding Whether to include font padding for the description.
+ * @property descriptionPaddingTop Padding above the description text.
+ * @property actionHintTextSize Font size of the action hint text.
+ * @property actionHintIncludeFontPadding Whether to include font padding for the action hint.
+ * @property actionHintPaddingTop Padding above the action hint text.
+ */
 @Suppress("LongParameterList", "BooleanPropertyNaming")
 class BrazeShortNewsContentCardStyling(
     modifier: Modifier? = null,
@@ -863,6 +914,7 @@ class BrazeShortNewsContentCardStyling(
     val titleTextSize: TextUnit = 16.sp,
     val titleFontWeight: FontWeight = FontWeight.Bold,
     val titleIncludeFontPadding: Boolean = false,
+    val titleMaxLines: Int = 1,
     descriptionTextColor: Color = Color.Unspecified,
     val descriptionTextSize: TextUnit = 13.sp,
     val descriptionIncludeFontPadding: Boolean = false,
@@ -897,6 +949,23 @@ class BrazeShortNewsContentCardStyling(
     actionHintTextColor = actionHintTextColor
 )
 
+/**
+ * Styling configuration for Captioned Image Content Cards.
+ *
+ * @property textColumnPaddingTop Padding above the text column.
+ * @property textColumnPaddingBottom Padding below the text column.
+ * @property textColumnPaddingStart Padding at the start of the text column.
+ * @property textColumnPaddingEnd Padding at the end of the text column.
+ * @property titleTextSize Font size of the title text.
+ * @property titleFontWeight Font weight of the title text.
+ * @property titleIncludeFontPadding Whether to include font padding for the title.
+ * @property descriptionTextSize Font size of the description text.
+ * @property descriptionIncludeFontPadding Whether to include font padding for the description.
+ * @property descriptionPaddingTop Padding above the description text.
+ * @property actionHintTextSize Font size of the action hint text.
+ * @property actionHintIncludeFontPadding Whether to include font padding for the action hint.
+ * @property actionHintPaddingTop Padding above the action hint text.
+ */
 @Suppress("LongParameterList", "BooleanPropertyNaming")
 class BrazeCaptionedImageContentCardStyling(
     modifier: Modifier? = null,

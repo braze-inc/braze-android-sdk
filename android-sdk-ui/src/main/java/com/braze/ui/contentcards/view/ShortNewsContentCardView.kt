@@ -10,6 +10,12 @@ import com.braze.models.cards.Card
 import com.braze.models.cards.ShortNewsCard
 import com.braze.ui.R
 
+/**
+ * View class responsible for inflating and binding the Short News Content Card layout.
+ * Displays a thumbnail image alongside title, description, and action hint text.
+ *
+ * @param context The Android [Context] used for view inflation.
+ */
 open class ShortNewsContentCardView(context: Context) : BaseContentCardView<ShortNewsCard>(
     context
 ) {

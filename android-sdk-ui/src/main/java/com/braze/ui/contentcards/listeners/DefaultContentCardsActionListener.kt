@@ -1,4 +1,7 @@
 package com.braze.ui.contentcards.listeners
 
-// Use the default implementations from the interface
+/**
+ * Default [IContentCardsActionListener] that uses the interface's default method implementations
+ * for handling Content Card click and dismissal actions.
+ */
 open class DefaultContentCardsActionListener : IContentCardsActionListener

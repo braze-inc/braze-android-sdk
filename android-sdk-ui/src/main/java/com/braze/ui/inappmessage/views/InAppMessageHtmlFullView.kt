@@ -4,6 +4,10 @@ import android.content.Context
 import android.util.AttributeSet
 import com.braze.ui.R
 
+/**
+ * View for rendering full-screen HTML in-app messages. Extends [InAppMessageHtmlBaseView]
+ * and binds to the HTML Full WebView layout resource.
+ */
 open class InAppMessageHtmlFullView(context: Context?, attrs: AttributeSet?) :
     InAppMessageHtmlBaseView(context, attrs) {
 

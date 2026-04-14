@@ -17,6 +17,13 @@ import com.braze.support.ReflectionUtils.invokeMethodQuietly
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
 
+/**
+ * [FirebaseMessagingService] implementation that routes incoming Firebase Cloud
+ * Messaging (FCM) push notifications and token refreshes to the Braze SDK.
+ *
+ * Register this service (or a subclass) in your AndroidManifest to enable
+ * automatic handling of Braze push messages delivered through FCM.
+ */
 open class BrazeFirebaseMessagingService : FirebaseMessagingService() {
 
     override fun onNewToken(newToken: String) {

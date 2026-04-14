@@ -12,6 +12,12 @@ import com.braze.support.BrazeLogger.Priority.E
 import com.braze.support.BrazeLogger.Priority.V
 import com.braze.support.BrazeLogger.brazelog
 
+/**
+ * Transparent trampoline [Activity] that routes notification intents back to
+ * [BrazePushReceiver] and then immediately finishes. Required on Android 12+
+ * where [PendingIntent][android.app.PendingIntent] targets for notifications
+ * cannot directly launch a [BroadcastReceiver][android.content.BroadcastReceiver].
+ */
 class NotificationTrampolineActivity : Activity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

@@ -13,7 +13,6 @@ import com.braze.BrazeInternal
 import com.braze.BrazeInternal.retryInAppMessage
 import com.braze.configuration.BrazeConfigurationProvider
 import com.braze.coroutine.BrazeCoroutineScope
-import com.braze.enums.inappmessage.MessageType
 import com.braze.enums.inappmessage.Orientation
 import com.braze.events.BrazeUserChangeEvent
 import com.braze.events.IEventSubscriber
@@ -45,7 +44,6 @@ import com.braze.ui.support.removeViewFromParent
 import com.braze.ui.support.setActivityRequestedOrientation
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import java.lang.ref.WeakReference
 import java.util.Stack
 import java.util.concurrent.atomic.AtomicBoolean
@@ -110,6 +108,12 @@ open class BrazeInAppMessageManager : InAppMessageManagerBase() {
     private var originalOrientation: Int? = null
     private var configurationProvider: BrazeConfigurationProvider? = null
     private var inAppMessageViewWrapper: IInAppMessageViewWrapper? = null
+
+    /**
+     * The back animation callback handler for full in-app messages on API 34+.
+     * Unregistered when the in-app message is closed via [resetAfterInAppMessageClose].
+     */
+    private var currentBackEventHandler: InAppMessageBackEventHandler? = null
 
     /**
      * The last seen user id from the [BrazeUserChangeEvent] subscriber. Starts as null
@@ -198,7 +202,7 @@ open class BrazeInAppMessageManager : InAppMessageManagerBase() {
             )
         }
 
-        brazeUserChangeEventSubscriber = createBrazeUserChangeEventSubscriber(context).also {
+        brazeUserChangeEventSubscriber = createBrazeUserChangeEventSubscriber().also {
             getInstance(context).subscribeToChangeUserEvents(it)
         }
     }
@@ -308,6 +312,8 @@ open class BrazeInAppMessageManager : InAppMessageManagerBase() {
                 } else {
                     viewWrapper.inAppMessage
                 }
+                currentBackEventHandler?.unregister()
+                currentBackEventHandler = null
                 inAppMessageViewWrapper = null
             } else {
                 carryoverInAppMessage = null
@@ -460,6 +466,8 @@ open class BrazeInAppMessageManager : InAppMessageManagerBase() {
      */
     open fun resetAfterInAppMessageClose() {
         brazelog(V) { "Resetting after in-app message close." }
+        currentBackEventHandler?.unregister()
+        currentBackEventHandler = null
         inAppMessageViewWrapper = null
         val activity = mActivity?.get()
         val origOrientation = originalOrientation
@@ -581,17 +589,9 @@ open class BrazeInAppMessageManager : InAppMessageManagerBase() {
             }
             val inAppMessageViewFactory = getInAppMessageViewFactory(inAppMessage) ?: throw Exception("ViewFactory from getInAppMessageViewFactory was null.")
 
-            val contextToUse =
-                when (inAppMessage.messageType) {
-                    MessageType.HTML, MessageType.HTML_FULL -> Dispatchers.Main
-                    else -> Dispatchers.IO
-                }
-
-            val inAppMessageView = withContext(contextToUse) {
-                inAppMessageViewFactory.createInAppMessageView(
-                    activity, inAppMessage
-                )
-            }
+            val inAppMessageView = inAppMessageViewFactory.createInAppMessageView(
+                activity, inAppMessage
+            )
             if (inAppMessageView == null) {
                 throw Exception(
                     "The in-app message view returned from the IInAppMessageViewFactory was null. " +
@@ -682,7 +682,7 @@ open class BrazeInAppMessageManager : InAppMessageManagerBase() {
 
             // For full in-app messages on API 34+, add predictive back animation
             if (inAppMessageView is InAppMessageFullView && Build.VERSION.SDK_INT >= Build.VERSION_CODES.UPSIDE_DOWN_CAKE) {
-                InAppMessageBackEventHandler(activity, inAppMessageView)
+                currentBackEventHandler = InAppMessageBackEventHandler(activity, inAppMessageView)
             }
         } catch (e: Throwable) {
             brazelog(E, e) {
@@ -700,19 +700,22 @@ open class BrazeInAppMessageManager : InAppMessageManagerBase() {
         }
     }
 
-    @Suppress("UnusedParameter")
-    private fun createBrazeUserChangeEventSubscriber(context: Context): IEventSubscriber<BrazeUserChangeEvent> {
+    @VisibleForTesting
+    internal fun createBrazeUserChangeEventSubscriber(): IEventSubscriber<BrazeUserChangeEvent> {
         return IEventSubscriber { event: BrazeUserChangeEvent ->
-            brazelog(V) { "InAppMessage manager handling new current user id: '$event'" }
-            val currentUserId = event.currentUserId
-            this.currentUserId = currentUserId
-            brazelog { "Removing in-app messages not from user $currentUserId" }
+            brazelog(V) { "InAppMessage manager handling user change event. New user id: '${event.currentUserId}'" }
+            val previousUserId = this.currentUserId
+            this.currentUserId = event.currentUserId
 
-            inAppMessageStack.removeAll { !isInAppMessageForTheSameUser(it, currentUserId) }
-            if (!isInAppMessageForTheSameUser(carryoverInAppMessage, currentUserId)) carryoverInAppMessage = null
-            if (!isInAppMessageForTheSameUser(unregisteredInAppMessage, currentUserId)) unregisteredInAppMessage = null
-            if (displayingInAppMessage.get()) {
-                hideCurrentlyDisplayingInAppMessage(false)
+            if (previousUserId != null && previousUserId != event.currentUserId) {
+                brazelog { "User changed from '$previousUserId' to '${event.currentUserId}'. Clearing in-app message state." }
+                if (displayingInAppMessage.get()) {
+                    hideCurrentlyDisplayingInAppMessage(false)
+                }
+                inAppMessageStack.clear()
+                inAppMessageEventMap.clear()
+                carryoverInAppMessage = null
+                unregisteredInAppMessage = null
             }
         }
     }

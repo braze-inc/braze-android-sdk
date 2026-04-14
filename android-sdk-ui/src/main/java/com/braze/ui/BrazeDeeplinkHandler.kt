@@ -12,6 +12,11 @@ import com.braze.support.BrazeLogger.brazelog
 import com.braze.ui.actions.UriAction
 import androidx.core.net.toUri
 
+/**
+ * Default [IBrazeDeeplinkHandler] implementation that handles URI resolution,
+ * intent flag configuration, and navigation for deeplinks originating from
+ * Braze messages. Use [setBrazeDeeplinkHandler] to replace with a custom handler.
+ */
 open class BrazeDeeplinkHandler : IBrazeDeeplinkHandler {
     override fun gotoUri(context: Context, uriAction: UriAction) {
         uriAction.execute(context)

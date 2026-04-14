@@ -9,6 +9,11 @@ import com.braze.models.cards.Card
 import com.braze.models.cards.ImageOnlyCard
 import com.braze.ui.R
 
+/**
+ * View class responsible for inflating and binding the Image Only Content Card layout.
+ *
+ * @param context The Android [Context] used for view inflation.
+ */
 open class ImageOnlyContentCardView(context: Context) : BaseContentCardView<ImageOnlyCard>(
     context
 ) {

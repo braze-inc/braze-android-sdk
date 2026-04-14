@@ -16,6 +16,7 @@ import com.braze.ui.R
 import com.braze.ui.inappmessage.BrazeInAppMessageManager
 import com.braze.ui.inappmessage.utils.InAppMessageButtonViewUtils.setButtons
 import com.braze.ui.inappmessage.utils.InAppMessageViewUtils.closeInAppMessageOnKeycodeBack
+import com.braze.ui.inappmessage.utils.InAppMessageViewUtils.isApiBelowBaklava
 import com.braze.ui.inappmessage.utils.InAppMessageViewUtils.resetMessageMarginsIfNecessary
 import com.braze.ui.inappmessage.utils.InAppMessageViewUtils.setFrameColor
 import com.braze.ui.inappmessage.utils.InAppMessageViewUtils.setTextAlignment
@@ -183,7 +184,10 @@ abstract class InAppMessageImmersiveBaseView(context: Context?, attrs: Attribute
      * and return true to indicate that the event was handled.
      */
     override fun onKeyDown(keyCode: Int, event: KeyEvent): Boolean {
-        if (keyCode == KeyEvent.KEYCODE_BACK && BrazeInAppMessageManager.getInstance().doesBackButtonDismissInAppMessageView) {
+        if (isApiBelowBaklava &&
+            keyCode == KeyEvent.KEYCODE_BACK &&
+            BrazeInAppMessageManager.getInstance().doesBackButtonDismissInAppMessageView
+        ) {
             closeInAppMessageOnKeycodeBack()
             return true
         }
@@ -196,8 +200,13 @@ abstract class InAppMessageImmersiveBaseView(context: Context?, attrs: Attribute
      * @return If the button pressed was the back button, close the in-app message
      * and return true to indicate that the event was handled.
      */
+    @Suppress("ComplexCondition")
     override fun dispatchKeyEvent(event: KeyEvent): Boolean {
-        if (!isInTouchMode && event.keyCode == KeyEvent.KEYCODE_BACK && BrazeInAppMessageManager.getInstance().doesBackButtonDismissInAppMessageView) {
+        if (isApiBelowBaklava &&
+            !isInTouchMode &&
+            event.keyCode == KeyEvent.KEYCODE_BACK &&
+            BrazeInAppMessageManager.getInstance().doesBackButtonDismissInAppMessageView
+        ) {
             closeInAppMessageOnKeycodeBack()
             return true
         }

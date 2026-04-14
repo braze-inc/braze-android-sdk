@@ -10,6 +10,11 @@ import com.braze.ui.inappmessage.IInAppMessageAnimationFactory
 import com.braze.ui.support.createVerticalAnimation
 import com.braze.ui.support.setAnimationParams
 
+/**
+ * Default [IInAppMessageAnimationFactory] that provides slide and fade animations
+ * for in-app messages. Slideup messages animate vertically based on their
+ * [SlideFrom] direction; all other message types use an alpha fade.
+ */
 open class DefaultInAppMessageAnimationFactory : IInAppMessageAnimationFactory {
     private val shortAnimationDurationMs =
         Resources.getSystem().getInteger(android.R.integer.config_shortAnimTime).toLong()
