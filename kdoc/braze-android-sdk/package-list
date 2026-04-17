@@ -551,8 +551,11 @@ $dokka.location:com.braze.enums/DataStoreKey.AD_TRACKING_ENABLED///PointingToDec
 $dokka.location:com.braze.enums/DataStoreKey.API_KEY///PointingToDeclaration/{"org.jetbrains.dokka.links.EnumEntryDRIExtra":{"key":"org.jetbrains.dokka.links.EnumEntryDRIExtra"}}braze-android-sdk/com.braze.enums/-data-store-key/-a-p-i_-k-e-y/index.html
 $dokka.location:com.braze.enums/DataStoreKey.AUTOMATIC_LOCATION_COLLECTION///PointingToDeclaration/{"org.jetbrains.dokka.links.EnumEntryDRIExtra":{"key":"org.jetbrains.dokka.links.EnumEntryDRIExtra"}}braze-android-sdk/com.braze.enums/-data-store-key/-a-u-t-o-m-a-t-i-c_-l-o-c-a-t-i-o-n_-c-o-l-l-e-c-t-i-o-n/index.html
 $dokka.location:com.braze.enums/DataStoreKey.BANNERS///PointingToDeclaration/{"org.jetbrains.dokka.links.EnumEntryDRIExtra":{"key":"org.jetbrains.dokka.links.EnumEntryDRIExtra"}}braze-android-sdk/com.braze.enums/-data-store-key/-b-a-n-n-e-r-s/index.html
+$dokka.location:com.braze.enums/DataStoreKey.BANNERS_DISMISSALS_CACHE_SIZE///PointingToDeclaration/{"org.jetbrains.dokka.links.EnumEntryDRIExtra":{"key":"org.jetbrains.dokka.links.EnumEntryDRIExtra"}}braze-android-sdk/com.braze.enums/-data-store-key/-b-a-n-n-e-r-s_-d-i-s-m-i-s-s-a-l-s_-c-a-c-h-e_-s-i-z-e/index.html
 $dokka.location:com.braze.enums/DataStoreKey.BANNERS_ENABLED///PointingToDeclaration/{"org.jetbrains.dokka.links.EnumEntryDRIExtra":{"key":"org.jetbrains.dokka.links.EnumEntryDRIExtra"}}braze-android-sdk/com.braze.enums/-data-store-key/-b-a-n-n-e-r-s_-e-n-a-b-l-e-d/index.html
 $dokka.location:com.braze.enums/DataStoreKey.BANNERS_IMPRESSION_MAP///PointingToDeclaration/{"org.jetbrains.dokka.links.EnumEntryDRIExtra":{"key":"org.jetbrains.dokka.links.EnumEntryDRIExtra"}}braze-android-sdk/com.braze.enums/-data-store-key/-b-a-n-n-e-r-s_-i-m-p-r-e-s-s-i-o-n_-m-a-p/index.html
+$dokka.location:com.braze.enums/DataStoreKey.BANNERS_LAST_REQUEST_TIME_PER_PLACEMENT///PointingToDeclaration/{"org.jetbrains.dokka.links.EnumEntryDRIExtra":{"key":"org.jetbrains.dokka.links.EnumEntryDRIExtra"}}braze-android-sdk/com.braze.enums/-data-store-key/-b-a-n-n-e-r-s_-l-a-s-t_-r-e-q-u-e-s-t_-t-i-m-e_-p-e-r_-p-l-a-c-e-m-e-n-t/index.html
+$dokka.location:com.braze.enums/DataStoreKey.BANNERS_PENDING_DISMISSALS///PointingToDeclaration/{"org.jetbrains.dokka.links.EnumEntryDRIExtra":{"key":"org.jetbrains.dokka.links.EnumEntryDRIExtra"}}braze-android-sdk/com.braze.enums/-data-store-key/-b-a-n-n-e-r-s_-p-e-n-d-i-n-g_-d-i-s-m-i-s-s-a-l-s/index.html
 $dokka.location:com.braze.enums/DataStoreKey.BLOCKLISTED_ATTRIBUTES///PointingToDeclaration/{"org.jetbrains.dokka.links.EnumEntryDRIExtra":{"key":"org.jetbrains.dokka.links.EnumEntryDRIExtra"}}braze-android-sdk/com.braze.enums/-data-store-key/-b-l-o-c-k-l-i-s-t-e-d_-a-t-t-r-i-b-u-t-e-s/index.html
 $dokka.location:com.braze.enums/DataStoreKey.BLOCKLISTED_EVENTS///PointingToDeclaration/{"org.jetbrains.dokka.links.EnumEntryDRIExtra":{"key":"org.jetbrains.dokka.links.EnumEntryDRIExtra"}}braze-android-sdk/com.braze.enums/-data-store-key/-b-l-o-c-k-l-i-s-t-e-d_-e-v-e-n-t-s/index.html
 $dokka.location:com.braze.enums/DataStoreKey.BLOCKLISTED_PURCHASES///PointingToDeclaration/{"org.jetbrains.dokka.links.EnumEntryDRIExtra":{"key":"org.jetbrains.dokka.links.EnumEntryDRIExtra"}}braze-android-sdk/com.braze.enums/-data-store-key/-b-l-o-c-k-l-i-s-t-e-d_-p-u-r-c-h-a-s-e-s/index.html
@@ -848,6 +851,9 @@ $dokka.location:com.braze.enums/SdkFlavor/jsonKey/#/PointingToDeclaration/braze
 $dokka.location:com.braze.enums/SdkFlavor/valueOf/#kotlin.String/PointingToDeclaration/braze-android-sdk/com.braze.enums/-sdk-flavor/value-of.html
 $dokka.location:com.braze.enums/SdkFlavor/values/#/PointingToDeclaration/braze-android-sdk/com.braze.enums/-sdk-flavor/values.html
 $dokka.location:com.braze.events////PointingToDeclaration/braze-android-sdk/com.braze.events/index.html
+$dokka.location:com.braze.events/BannerDismissedEvent///PointingToDeclaration/braze-android-sdk/com.braze.events/-banner-dismissed-event/index.html
+$dokka.location:com.braze.events/BannerDismissedEvent/BannerDismissedEvent/#kotlin.String/PointingToDeclaration/braze-android-sdk/com.braze.events/-banner-dismissed-event/-banner-dismissed-event.html
+$dokka.location:com.braze.events/BannerDismissedEvent/placementId/#/PointingToDeclaration/braze-android-sdk/com.braze.events/-banner-dismissed-event/placement-id.html
 $dokka.location:com.braze.events/BannersUpdatedEvent.Companion///PointingToDeclaration/braze-android-sdk/com.braze.events/-banners-updated-event/-companion/index.html
 $dokka.location:com.braze.events/BannersUpdatedEvent.Companion/emptyUpdate/#/PointingToDeclaration/braze-android-sdk/com.braze.events/-banners-updated-event/-companion/empty-update.html
 $dokka.location:com.braze.events/BannersUpdatedEvent///PointingToDeclaration/braze-android-sdk/com.braze.events/-banners-updated-event/index.html
@@ -1197,6 +1203,9 @@ $dokka.location:com.braze.location/IBrazeGeofenceApi/teardownGeofences/#android.
 $dokka.location:com.braze.location/IBrazeLocationApi///PointingToDeclaration/braze-android-sdk/com.braze.location/-i-braze-location-api/index.html
 $dokka.location:com.braze.location/IBrazeLocationApi/initWithContext/#android.content.Context#java.util.EnumSet[com.braze.enums.LocationProviderName]#com.braze.configuration.BrazeConfigurationProvider/PointingToDeclaration/braze-android-sdk/com.braze.location/-i-braze-location-api/init-with-context.html
 $dokka.location:com.braze.location/IBrazeLocationApi/requestSingleLocationUpdate/#kotlin.Function1[com.braze.models.IBrazeLocation,kotlin.Unit]/PointingToDeclaration/braze-android-sdk/com.braze.location/-i-braze-location-api/request-single-location-update.html
+$dokka.location:com.braze.managers.banners////PointingToDeclaration/braze-android-sdk/com.braze.managers.banners/index.html
+$dokka.location:com.braze.managers.banners/IBannerView///PointingToDeclaration/braze-android-sdk/com.braze.managers.banners/-i-banner-view/index.html
+$dokka.location:com.braze.managers.banners/IBannerView/initBanner/#kotlin.String?/PointingToDeclaration/braze-android-sdk/com.braze.managers.banners/-i-banner-view/init-banner.html
 $dokka.location:com.braze.managers////PointingToDeclaration/braze-android-sdk/com.braze.managers/index.html
 $dokka.location:com.braze.managers/BrazeGeofenceManager.Companion///PointingToDeclaration/braze-android-sdk/com.braze.managers/-braze-geofence-manager/-companion/index.html
 $dokka.location:com.braze.managers/BrazeGeofenceManager.Companion/getGeofencesEnabledFromConfiguration/#com.braze.configuration.BrazeConfigurationProvider/PointingToDeclaration/braze-android-sdk/com.braze.managers/-braze-geofence-manager/-companion/get-geofences-enabled-from-configuration.html
@@ -1234,8 +1243,6 @@ $dokka.location:com.braze.managers/BrazeGeofenceManager/serverConfigStorageProvi
 $dokka.location:com.braze.managers/BrazeGeofenceManager/setUpGeofences/#kotlin.Boolean/PointingToDeclaration/braze-android-sdk/com.braze.managers/-braze-geofence-manager/set-up-geofences.html
 $dokka.location:com.braze.managers/BrazeGeofenceManager/tearDownGeofences/#android.app.PendingIntent?/PointingToDeclaration/braze-android-sdk/com.braze.managers/-braze-geofence-manager/tear-down-geofences.html
 $dokka.location:com.braze.managers/BrazeGeofenceManager/unregisterGeofences/#/PointingToDeclaration/braze-android-sdk/com.braze.managers/-braze-geofence-manager/unregister-geofences.html
-$dokka.location:com.braze.managers/IBannerView///PointingToDeclaration/braze-android-sdk/com.braze.managers/-i-banner-view/index.html
-$dokka.location:com.braze.managers/IBannerView/initBanner/#kotlin.String?/PointingToDeclaration/braze-android-sdk/com.braze.managers/-i-banner-view/init-banner.html
 $dokka.location:com.braze.managers/IBrazeGeofenceLocationUpdateListener///PointingToDeclaration/braze-android-sdk/com.braze.managers/-i-braze-geofence-location-update-listener/index.html
 $dokka.location:com.braze.managers/IBrazeGeofenceLocationUpdateListener/onLocationRequestComplete/#com.braze.models.IBrazeLocation?/PointingToDeclaration/braze-android-sdk/com.braze.managers/-i-braze-geofence-location-update-listener/on-location-request-complete.html
 $dokka.location:com.braze.models.cards////PointingToDeclaration/braze-android-sdk/com.braze.models.cards/index.html
@@ -1750,13 +1757,13 @@ $dokka.location:com.braze.models/Banner.Companion/HTML/#/PointingToDeclaration/
 $dokka.location:com.braze.models/Banner.Companion/IS_CONTROL/#/PointingToDeclaration/braze-android-sdk/com.braze.models/-banner/-companion/-i-s_-c-o-n-t-r-o-l.html
 $dokka.location:com.braze.models/Banner.Companion/IS_TEST_SEND/#/PointingToDeclaration/braze-android-sdk/com.braze.models/-banner/-companion/-i-s_-t-e-s-t_-s-e-n-d.html
 $dokka.location:com.braze.models/Banner.Companion/PLACEMENT_ID/#/PointingToDeclaration/braze-android-sdk/com.braze.models/-banner/-companion/-p-l-a-c-e-m-e-n-t_-i-d.html
+$dokka.location:com.braze.models/Banner.Companion/STABLE_KEY/#/PointingToDeclaration/braze-android-sdk/com.braze.models/-banner/-companion/-s-t-a-b-l-e_-k-e-y.html
 $dokka.location:com.braze.models/Banner.Companion/TRACKING_ID/#/PointingToDeclaration/braze-android-sdk/com.braze.models/-banner/-companion/-t-r-a-c-k-i-n-g_-i-d.html
 $dokka.location:com.braze.models/Banner.Companion/parseBanner/#org.json.JSONObject/PointingToDeclaration/braze-android-sdk/com.braze.models/-banner/-companion/parse-banner.html
 $dokka.location:com.braze.models/Banner.Companion/parseSingleBanner/#org.json.JSONObject?/PointingToDeclaration/braze-android-sdk/com.braze.models/-banner/-companion/parse-single-banner.html
 $dokka.location:com.braze.models/Banner///PointingToDeclaration/braze-android-sdk/com.braze.models/-banner/index.html
-$dokka.location:com.braze.models/Banner/Banner/#kotlin.String#kotlin.String#kotlin.String#kotlin.Boolean#kotlin.Long#kotlin.Boolean#org.json.JSONObject/PointingToDeclaration/braze-android-sdk/com.braze.models/-banner/-banner.html
+$dokka.location:com.braze.models/Banner/Banner/#kotlin.String#kotlin.String#kotlin.String#kotlin.Boolean#kotlin.Long#kotlin.Boolean#kotlin.String?#org.json.JSONObject/PointingToDeclaration/braze-android-sdk/com.braze.models/-banner/-banner.html
 $dokka.location:com.braze.models/Banner/deepcopy/#/PointingToDeclaration/braze-android-sdk/com.braze.models/-banner/deepcopy.html
-$dokka.location:com.braze.models/Banner/dismiss/#/PointingToDeclaration/braze-android-sdk/com.braze.models/-banner/dismiss.html
 $dokka.location:com.braze.models/Banner/expirationTimestampSeconds/#/PointingToDeclaration/braze-android-sdk/com.braze.models/-banner/expiration-timestamp-seconds.html
 $dokka.location:com.braze.models/Banner/forJsonPut/#/PointingToDeclaration/braze-android-sdk/com.braze.models/-banner/for-json-put.html
 $dokka.location:com.braze.models/Banner/html/#/PointingToDeclaration/braze-android-sdk/com.braze.models/-banner/html.html
@@ -1765,9 +1772,15 @@ $dokka.location:com.braze.models/Banner/isExpired/#/PointingToDeclaration/braze
 $dokka.location:com.braze.models/Banner/isTestSend/#/PointingToDeclaration/braze-android-sdk/com.braze.models/-banner/is-test-send.html
 $dokka.location:com.braze.models/Banner/placementId/#/PointingToDeclaration/braze-android-sdk/com.braze.models/-banner/placement-id.html
 $dokka.location:com.braze.models/Banner/properties/#/PointingToDeclaration/braze-android-sdk/com.braze.models/-banner/properties.html
+$dokka.location:com.braze.models/Banner/stableKey/#/PointingToDeclaration/braze-android-sdk/com.braze.models/-banner/stable-key.html
 $dokka.location:com.braze.models/Banner/toString/#/PointingToDeclaration/braze-android-sdk/com.braze.models/-banner/to-string.html
 $dokka.location:com.braze.models/Banner/trackingId/#/PointingToDeclaration/braze-android-sdk/com.braze.models/-banner/tracking-id.html
 $dokka.location:com.braze.models/Banner/userId/#/PointingToDeclaration/braze-android-sdk/com.braze.models/-banner/user-id.html
+$dokka.location:com.braze.models/BannerPendingDismissal///PointingToDeclaration/braze-android-sdk/com.braze.models/-banner-pending-dismissal/index.html
+$dokka.location:com.braze.models/BannerPendingDismissal/BannerPendingDismissal/#kotlin.String#kotlin.String?#kotlin.Long/PointingToDeclaration/braze-android-sdk/com.braze.models/-banner-pending-dismissal/-banner-pending-dismissal.html
+$dokka.location:com.braze.models/BannerPendingDismissal/bannerId/#/PointingToDeclaration/braze-android-sdk/com.braze.models/-banner-pending-dismissal/banner-id.html
+$dokka.location:com.braze.models/BannerPendingDismissal/dismissalTimeMs/#/PointingToDeclaration/braze-android-sdk/com.braze.models/-banner-pending-dismissal/dismissal-time-ms.html
+$dokka.location:com.braze.models/BannerPendingDismissal/stableKey/#/PointingToDeclaration/braze-android-sdk/com.braze.models/-banner-pending-dismissal/stable-key.html
 $dokka.location:com.braze.models/BrazeGeofence.Companion///PointingToDeclaration/braze-android-sdk/com.braze.models/-braze-geofence/-companion/index.html
 $dokka.location:com.braze.models/BrazeGeofence.Companion/ANALYTICS_ENABLED_ENTER/#/PointingToDeclaration/braze-android-sdk/com.braze.models/-braze-geofence/-companion/-a-n-a-l-y-t-i-c-s_-e-n-a-b-l-e-d_-e-n-t-e-r.html
 $dokka.location:com.braze.models/BrazeGeofence.Companion/ANALYTICS_ENABLED_EXIT/#/PointingToDeclaration/braze-android-sdk/com.braze.models/-braze-geofence/-companion/-a-n-a-l-y-t-i-c-s_-e-n-a-b-l-e-d_-e-x-i-t.html
@@ -2280,6 +2293,7 @@ $dokka.location:com.braze.ui.banners/BannerView/BannerView/#android.content.Cont
 $dokka.location:com.braze.ui.banners/BannerView/BannerView/#android.content.Context/PointingToDeclaration/braze-android-sdk/com.braze.ui.banners/-banner-view/-banner-view.html
 $dokka.location:com.braze.ui.banners/BannerView/heightCallback/#/PointingToDeclaration/braze-android-sdk/com.braze.ui.banners/-banner-view/height-callback.html
 $dokka.location:com.braze.ui.banners/BannerView/initBanner/#kotlin.String?/PointingToDeclaration/braze-android-sdk/com.braze.ui.banners/-banner-view/init-banner.html
+$dokka.location:com.braze.ui.banners/BannerView/onDismissCallback/#/PointingToDeclaration/braze-android-sdk/com.braze.ui.banners/-banner-view/on-dismiss-callback.html
 $dokka.location:com.braze.ui.banners/BannerView/placementId/#/PointingToDeclaration/braze-android-sdk/com.braze.ui.banners/-banner-view/placement-id.html
 $dokka.location:com.braze.ui.contentcards.adapters////PointingToDeclaration/braze-android-sdk/com.braze.ui.contentcards.adapters/index.html
 $dokka.location:com.braze.ui.contentcards.adapters/ContentCardAdapter///PointingToDeclaration/braze-android-sdk/com.braze.ui.contentcards.adapters/-content-card-adapter/index.html
@@ -2982,6 +2996,7 @@ $dokka.location:com.braze/Braze/deserializeContentCard/#org.json.JSONObject?/Poi
 $dokka.location:com.braze/Braze/deserializeInAppMessageString/#kotlin.String?/PointingToDeclaration/braze-android-sdk/com.braze/-braze/deserialize-in-app-message-string.html
 $dokka.location:com.braze/Braze/deviceId/#/PointingToDeclaration/braze-android-sdk/com.braze/-braze/device-id.html
 $dokka.location:com.braze/Braze/deviceIdProvider/#/PointingToDeclaration/braze-android-sdk/com.braze/-braze/device-id-provider.html
+$dokka.location:com.braze/Braze/dismissBanner/#kotlin.String/PointingToDeclaration/braze-android-sdk/com.braze/-braze/dismiss-banner.html
 $dokka.location:com.braze/Braze/externalIEventMessenger/#/PointingToDeclaration/braze-android-sdk/com.braze/-braze/external-i-event-messenger.html
 $dokka.location:com.braze/Braze/getAllFeatureFlags/#/PointingToDeclaration/braze-android-sdk/com.braze/-braze/get-all-feature-flags.html
 $dokka.location:com.braze/Braze/getBanner/#kotlin.String/PointingToDeclaration/braze-android-sdk/com.braze/-braze/get-banner.html
@@ -3048,6 +3063,7 @@ $dokka.location:com.braze/Braze/setGoogleAdvertisingId/#kotlin.String?#kotlin.Bo
 $dokka.location:com.braze/Braze/setSdkAuthenticationSignature/#kotlin.String/PointingToDeclaration/braze-android-sdk/com.braze/-braze/set-sdk-authentication-signature.html
 $dokka.location:com.braze/Braze/setSyncPolicyOfflineStatus/#kotlin.Boolean/PointingToDeclaration/braze-android-sdk/com.braze/-braze/set-sync-policy-offline-status.html
 $dokka.location:com.braze/Braze/setUserSpecificMemberVariablesAndStartDispatch/#com.braze.managers.UserDependencyManager/PointingToDeclaration/braze-android-sdk/com.braze/-braze/set-user-specific-member-variables-and-start-dispatch.html
+$dokka.location:com.braze/Braze/subscribeToBannersDismissedEvent/#com.braze.events.IEventSubscriber[com.braze.events.BannerDismissedEvent]/PointingToDeclaration/braze-android-sdk/com.braze/-braze/subscribe-to-banners-dismissed-event.html
 $dokka.location:com.braze/Braze/subscribeToBannersErrors/#com.braze.events.IEventSubscriber[com.braze.events.internal.BannersRequestFailureEvent]/PointingToDeclaration/braze-android-sdk/com.braze/-braze/subscribe-to-banners-errors.html
 $dokka.location:com.braze/Braze/subscribeToBannersUpdates/#com.braze.events.IEventSubscriber[com.braze.events.BannersUpdatedEvent]/PointingToDeclaration/braze-android-sdk/com.braze/-braze/subscribe-to-banners-updates.html
 $dokka.location:com.braze/Braze/subscribeToChangeUserEvents/#com.braze.events.IEventSubscriber[com.braze.events.BrazeUserChangeEvent]/PointingToDeclaration/braze-android-sdk/com.braze/-braze/subscribe-to-change-user-events.html
@@ -3060,6 +3076,7 @@ $dokka.location:com.braze/Braze/subscribeToPushNotificationEvents/#com.braze.eve
 $dokka.location:com.braze/Braze/subscribeToSdkAuthenticationFailures/#com.braze.events.IEventSubscriber[com.braze.events.BrazeSdkAuthenticationErrorEvent]/PointingToDeclaration/braze-android-sdk/com.braze/-braze/subscribe-to-sdk-authentication-failures.html
 $dokka.location:com.braze/Braze/subscribeToSessionUpdates/#com.braze.events.IEventSubscriber[com.braze.events.SessionStateChangedEvent]/PointingToDeclaration/braze-android-sdk/com.braze/-braze/subscribe-to-session-updates.html
 $dokka.location:com.braze/Braze/udm/#/PointingToDeclaration/braze-android-sdk/com.braze/-braze/udm.html
+$dokka.location:com.braze/Braze/unsubscribeFromBannersDismissedEvent/#com.braze.events.IEventSubscriber[com.braze.events.BannerDismissedEvent]/PointingToDeclaration/braze-android-sdk/com.braze/-braze/unsubscribe-from-banners-dismissed-event.html
 $dokka.location:com.braze/Braze/validateAndStorePushId/#kotlin.String/PointingToDeclaration/braze-android-sdk/com.braze/-braze/validate-and-store-push-id.html
 $dokka.location:com.braze/Braze/verifyProperSdkSetup/#/PointingToDeclaration/braze-android-sdk/com.braze/-braze/verify-proper-sdk-setup.html
 $dokka.location:com.braze/Braze/waitForUserDependencyThread/#/PointingToDeclaration/braze-android-sdk/com.braze/-braze/wait-for-user-dependency-thread.html
@@ -3094,6 +3111,7 @@ $dokka.location:com.braze/BrazeInternal/addBannerViewMonitor/#kotlin.String#andr
 $dokka.location:com.braze/BrazeInternal/addSerializedContentCardToStorage/#android.content.Context#kotlin.String#kotlin.String?/PointingToDeclaration/braze-android-sdk/com.braze/-braze-internal/add-serialized-content-card-to-storage.html
 $dokka.location:com.braze/BrazeInternal/applyPendingRuntimeConfiguration/#android.content.Context/PointingToDeclaration/braze-android-sdk/com.braze/-braze-internal/apply-pending-runtime-configuration.html
 $dokka.location:com.braze/BrazeInternal/deleteRegisteredGeofenceCache/#android.content.Context/PointingToDeclaration/braze-android-sdk/com.braze/-braze-internal/delete-registered-geofence-cache.html
+$dokka.location:com.braze/BrazeInternal/dismissBanner/#android.content.Context#kotlin.String/PointingToDeclaration/braze-android-sdk/com.braze/-braze-internal/dismiss-banner.html
 $dokka.location:com.braze/BrazeInternal/getConfigurationProvider/#android.content.Context/PointingToDeclaration/braze-android-sdk/com.braze/-braze-internal/get-configuration-provider.html
 $dokka.location:com.braze/BrazeInternal/getInstance/#android.content.Context/PointingToDeclaration/braze-android-sdk/com.braze/-braze-internal/get-instance.html
 $dokka.location:com.braze/BrazeInternal/handleInAppMessageTestPush/#android.content.Context#android.content.Intent/PointingToDeclaration/braze-android-sdk/com.braze/-braze-internal/handle-in-app-message-test-push.html
@@ -3109,6 +3127,8 @@ $dokka.location:com.braze/BrazeInternal/refreshFeatureFlags/#android.content.Con
 $dokka.location:com.braze/BrazeInternal/requestGeofenceRefresh/#android.content.Context#com.braze.models.IBrazeLocation/PointingToDeclaration/braze-android-sdk/com.braze/-braze-internal/request-geofence-refresh.html
 $dokka.location:com.braze/BrazeInternal/requestGeofenceRefresh/#android.content.Context#kotlin.Boolean/PointingToDeclaration/braze-android-sdk/com.braze/-braze-internal/request-geofence-refresh.html
 $dokka.location:com.braze/BrazeInternal/retryInAppMessage/#android.content.Context#com.braze.events.InAppMessageEvent/PointingToDeclaration/braze-android-sdk/com.braze/-braze-internal/retry-in-app-message.html
+$dokka.location:com.braze/BrazeInternal/subscribeToBannersDismissedEvent/#android.content.Context#com.braze.events.IEventSubscriber[com.braze.events.BannerDismissedEvent]/PointingToDeclaration/braze-android-sdk/com.braze/-braze-internal/subscribe-to-banners-dismissed-event.html
+$dokka.location:com.braze/BrazeInternal/unsubscribeFromBannersDismissedEvent/#android.content.Context#com.braze.events.IEventSubscriber[com.braze.events.BannerDismissedEvent]/PointingToDeclaration/braze-android-sdk/com.braze/-braze-internal/unsubscribe-from-banners-dismissed-event.html
 $dokka.location:com.braze/BrazeInternal/validateAndStorePushId/#android.content.Context#kotlin.String/PointingToDeclaration/braze-android-sdk/com.braze/-braze-internal/validate-and-store-push-id.html
 $dokka.location:com.braze/BrazeUser///PointingToDeclaration/braze-android-sdk/com.braze/-braze-user/index.html
 $dokka.location:com.braze/BrazeUser/BrazeUser/#com.braze.storage.UserCache#com.braze.managers.IBrazeManager#kotlin.String#com.braze.managers.ILocationManager#com.braze.storage.ServerConfigStorageProvider/PointingToDeclaration/braze-android-sdk/com.braze/-braze-user/-braze-user.html
@@ -3350,6 +3370,7 @@ com.braze.jetpackcompose.contentcards.cards
 com.braze.jetpackcompose.contentcards.styling
 com.braze.location
 com.braze.managers
+com.braze.managers.banners
 com.braze.models
 com.braze.models.cards
 com.braze.models.inappmessage
