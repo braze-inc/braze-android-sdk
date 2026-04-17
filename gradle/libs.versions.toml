@@ -1,7 +1,7 @@
 [versions]
 
 # Gradle plugins
-androidGradlePlugin = "8.11.2"
+androidGradlePlugin = "8.12.3"
 googleServicesPlugin = "4.4.4"
 
 # Java
@@ -47,8 +47,8 @@ androidxDatastorePreferences = "1.1.7"
 androidxTestCore = "1.5.0"
 androidxTestRunner = "1.5.2"
 androidxTestRules = "1.5.0"
-androidxTestEspressoCore = "3.5.1"
-androidxTestEspressoContrib = "3.5.1"
+androidxTestEspressoCore = "3.7.0"
+androidxTestEspressoContrib = "3.7.0"
 androidxTestEspressoIdlingResource = "3.5.1"
 androidxTestEspressoWeb = "3.5.1"
 androidxTestEspressoIntents = "3.5.1"

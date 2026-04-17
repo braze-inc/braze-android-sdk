@@ -2,20 +2,30 @@ package com.braze.ui.banners
 
 import android.content.Context
 import android.graphics.Color
+import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.util.AttributeSet
 import android.util.Base64
+import android.view.View
 import android.webkit.WebView
+import android.webkit.WebViewClient
+import androidx.annotation.VisibleForTesting
+import androidx.core.content.withStyledAttributes
 import com.braze.Braze
 import com.braze.BrazeInternal
-import com.braze.managers.IBannerView
+import com.braze.events.BannerDismissedEvent
+import com.braze.events.IEventSubscriber
+import com.braze.managers.banners.IBannerView
+import com.braze.support.BrazeLogger.Priority.E
+import com.braze.support.BrazeLogger.Priority.V
+import com.braze.support.BrazeLogger.brazelog
 import com.braze.ui.R
 import com.braze.ui.banners.jsinterface.BannerJavascriptInterface
 import com.braze.ui.banners.listeners.DefaultBannerWebViewClientListener
 import com.braze.ui.banners.utils.BannerWebViewClient
-import androidx.core.content.withStyledAttributes
 import com.braze.ui.support.setWebViewSettings
+import java.util.concurrent.atomic.AtomicBoolean
 
 /**
  * An Android View that displays a Braze banner.
@@ -24,6 +34,31 @@ class BannerView : WebView, IBannerView {
     private var _placementId: String? = null
     private var loadedHtml: String? = null
     private var currentUserId: String? = null
+    private val isDismissed = AtomicBoolean(false)
+
+    /**
+     * Callback invoked when the banner is dismissed (e.g. via Braze bridge closeMessage).
+     * Set by integrators to run custom logic when the banner is dismissed.
+     * Invoked after the view's visibility is set to [GONE] and its WebView processing is paused.
+     * The view remains in the hierarchy so it can be reused if new content is loaded.
+     */
+    var onDismissCallback: (() -> Unit)? = null
+
+    private val dismissSubscriber = IEventSubscriber<BannerDismissedEvent> { event ->
+        if (event.placementId == _placementId) {
+            dismiss()
+        }
+    }
+
+    private val attachStateListener = object : OnAttachStateChangeListener {
+        override fun onViewAttachedToWindow(v: View) {
+            BrazeInternal.subscribeToBannersDismissedEvent(context, dismissSubscriber)
+        }
+
+        override fun onViewDetachedFromWindow(v: View) {
+            BrazeInternal.unsubscribeFromBannersDismissedEvent(context, dismissSubscriber)
+        }
+    }
 
     var placementId: String?
         get() = _placementId
@@ -48,18 +83,22 @@ class BannerView : WebView, IBannerView {
     // This constructor is specifically for the Jetpack integration so the placement ID can be passed in immediately.
     constructor(context: Context, placementId: String?) : super(context) {
         _placementId = placementId
+        addOnAttachStateChangeListener(attachStateListener)
         init(null, 0)
     }
 
     constructor(context: Context) : super(context) {
+        addOnAttachStateChangeListener(attachStateListener)
         init(null, 0)
     }
 
     constructor(context: Context, attrs: AttributeSet) : super(context, attrs) {
+        addOnAttachStateChangeListener(attachStateListener)
         init(attrs, 0)
     }
 
     constructor(context: Context, attrs: AttributeSet, defStyle: Int) : super(context, attrs, defStyle) {
+        addOnAttachStateChangeListener(attachStateListener)
         init(attrs, defStyle)
     }
 
@@ -89,12 +128,30 @@ class BannerView : WebView, IBannerView {
         setLayerType(LAYER_TYPE_HARDWARE, null)
         setBackgroundColor(Color.TRANSPARENT)
 
-        val defaultBannerWebViewClientListener = DefaultBannerWebViewClientListener()
-        webViewClient = BannerWebViewClient(context, defaultBannerWebViewClientListener)
+        webViewClient = BannerWebViewClient(context, createBannerWebViewClientListener())
 
-        // Add the BannerJavascriptInterface to the WebView
-        addJavascriptInterface(BannerJavascriptInterface(context, placementId, internalHeightCallback), "brazeInternalBridge")
+        addJavascriptInterface(
+            BannerJavascriptInterface(
+                context = context,
+                placementId = placementId,
+                setHeightCallback = internalHeightCallback
+            ),
+            JS_BRIDGE_NAME
+        )
     }
+
+    /**
+     * Creates the [IBannerWebViewClientListener] used by this view's [BannerWebViewClient].
+     * Overrides [DefaultBannerWebViewClientListener.onCloseAction] so that `appboy://close`
+     * URL intercepts trigger [dismiss].
+     */
+    @VisibleForTesting
+    internal fun createBannerWebViewClientListener(): DefaultBannerWebViewClientListener =
+        object : DefaultBannerWebViewClientListener() {
+            override fun onCloseAction(context: Context, url: String, queryBundle: Bundle) {
+                dismiss()
+            }
+        }
 
     override fun initBanner(placementId: String?) {
         val banner = placementId?.let { Braze.getInstance(context).getBanner(it) }
@@ -130,6 +187,12 @@ class BannerView : WebView, IBannerView {
     }
 
     private fun loadHtmlData(placementId: String) {
+        val wasDismissed = isDismissed.getAndSet(false)
+        if (wasDismissed) {
+            onResume()
+            settings.javaScriptEnabled = true
+            visibility = VISIBLE
+        }
         configureWebView(placementId)
         loadedHtml?.let { html ->
             loadData(
@@ -155,5 +218,58 @@ class BannerView : WebView, IBannerView {
             invalidate()
             internalHeightCallback(0.0)
         }
+    }
+
+    /**
+     * Shuts down the WebView and hides it via [GONE]. Stops any
+     * in-flight load, clears content, disables JavaScript, removes
+     * the JS bridge/client, and pauses all internal WebView processing
+     * so the view consumes zero CPU while dismissed.
+     *
+     * Runs teardown inline when already on the UI thread. When called
+     * from a background thread, posts to the main looper and re-checks
+     * [isDismissed] before executing, so a reload that occurred in the
+     * interim is not clobbered by a stale dismiss runnable.
+     *
+     * Guarded by [isDismissed] so duplicate calls (e.g. from both the
+     * `appboy://close` URL intercept and the [BannerDismissedEvent]
+     * subscriber) are safe.
+     */
+    private fun dismiss() {
+        if (!isDismissed.compareAndSet(false, true)) return
+        if (Looper.myLooper() == Looper.getMainLooper()) {
+            performDismissTeardown()
+        } else {
+            Handler(Looper.getMainLooper()).post {
+                if (!isDismissed.get()) return@post
+                performDismissTeardown()
+            }
+        }
+    }
+
+    /**
+     * Performs the actual teardown. Must be called on the main thread.
+     */
+    private fun performDismissTeardown() {
+        try {
+            stopLoading()
+            setWebviewToEmpty()
+            clearHistory()
+            settings.javaScriptEnabled = false
+            removeJavascriptInterface(JS_BRIDGE_NAME)
+            webViewClient = WebViewClient()
+            onPause()
+            visibility = GONE
+            onDismissCallback?.invoke()
+            brazelog(V) { "Banner dismiss completed. placementId=$_placementId" }
+        } catch (e: Exception) {
+            brazelog(E, e) {
+                "Banner dismiss: error during view teardown or onDismissCallback for placementId=$_placementId"
+            }
+        }
+    }
+
+    private companion object {
+        private const val JS_BRIDGE_NAME = "brazeInternalBridge"
     }
 }

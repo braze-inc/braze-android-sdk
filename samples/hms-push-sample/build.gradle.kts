@@ -7,10 +7,16 @@ plugins {
 
 android {
     namespace = "com.braze.hms_sample"
+    val compileSdkPreviewName =
+        rootProject.findProperty("compileSdkPreviewName")?.toString()?.trim().orEmpty()
+    if (compileSdkPreviewName.isNotEmpty()) {
+        compileSdkPreview = compileSdkPreviewName
+    } else {
+        compileSdk = rootProject.extra["compileSdkVersion"] as Int
+    }
 
     defaultConfig {
         applicationId = "com.braze.hms_sample"
-        compileSdk = rootProject.extra["compileSdkVersion"] as Int
         minSdk = rootProject.extra["minSdkVersion"] as Int
         // Huawei has not provided an SDK ready for
         // API 31 so this target version is on 30

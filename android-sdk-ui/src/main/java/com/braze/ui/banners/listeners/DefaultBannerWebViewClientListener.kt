@@ -13,12 +13,13 @@ import com.braze.ui.BrazeDeeplinkHandler.Companion.getInstance as getDeeplinkHan
 
 /**
  * Default [IBannerWebViewClientListener] that handles URL actions from Banner HTML WebViews.
- * Processes custom event firing and external URL navigation; close actions are not
- * supported for Banners.
+ * Processes custom event firing and external URL navigation. The default [onCloseAction]
+ * is a no-op; subclasses (e.g. in [com.braze.ui.banners.BannerView]) override it to
+ * dismiss the banner when `appboy://close` is intercepted.
  */
 open class DefaultBannerWebViewClientListener : IBannerWebViewClientListener {
     override fun onCloseAction(context: Context, url: String, queryBundle: Bundle) {
-        brazelog(W) { "Close action not available on Banners." }
+        brazelog { "DefaultBannerWebViewClientListener.onCloseAction called. Override to handle banner dismiss." }
     }
 
     override fun onCustomEventAction(context: Context, url: String, queryBundle: Bundle) {

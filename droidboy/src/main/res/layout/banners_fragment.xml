@@ -91,6 +91,25 @@
                 android:maxLines="1" />
         </com.google.android.material.textfield.TextInputLayout>
 
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/banner_slot_spinner_layout"
+            style="@style/DroidboyOutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Display slot"
+            android:layout_marginBottom="16dp">
+
+            <Spinner
+                android:id="@+id/banner_slot_spinner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:spinnerMode="dropdown"
+                android:paddingTop="12dp"
+                android:paddingBottom="12dp"
+                android:paddingStart="8dp"
+                android:paddingEnd="8dp" />
+        </com.google.android.material.textfield.TextInputLayout>
+
         <Button
             android:id="@+id/get_banner_button"
             style="@style/DroidboyOutlinedButton"
@@ -99,23 +118,29 @@
             android:text="Display This Banner"
             android:layout_marginBottom="24dp"/>
 
-        <!-- Banner Display Area -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Banner slots (1–5)"
+            android:textAppearance="?attr/textAppearanceHeadline6"
+            android:layout_marginBottom="8dp"
+            android:fontFamily="@font/sailec_bold"/>
+
+        <LinearLayout
+            android:id="@+id/banners_multi_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginBottom="24dp" />
+
         <TextView
             android:id="@+id/current_banner_placement_display"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Current Banner Displayed: N/A"
+            android:text="Banner properties: none placed yet"
             android:textAppearance="?attr/textAppearanceSubtitle1"
             android:layout_marginBottom="16dp"
             android:fontFamily="@font/sailec_bold"/>
-
-        <com.braze.ui.banners.BannerView
-            android:id="@+id/banners_fragment_banner_view"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="24dp"
-            android:background="@android:color/darker_gray"
-            android:minHeight="100dp" />
 
         <!-- Banner Properties Display Area -->
         <TextView
