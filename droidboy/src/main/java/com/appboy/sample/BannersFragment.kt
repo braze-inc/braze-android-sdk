@@ -30,8 +30,9 @@ class BannersFragment : Fragment() {
     private lateinit var refreshBannersButton: Button
     private lateinit var getBannerTextInput: EditText
     private lateinit var getBannerButton: Button
+    private lateinit var bannerSlotSpinner: Spinner
     private lateinit var currentBannerPlacementDisplay: TextView
-    private lateinit var bannersFragmentBannerView: BannerView
+    private lateinit var bannersMultiContainer: LinearLayout
     private lateinit var bannerPropertiesContainer: LinearLayout
     private lateinit var propertyFilterSpinner: Spinner
     private lateinit var cachedPlacementIdsChipGroup: ChipGroup
@@ -39,6 +40,7 @@ class BannersFragment : Fragment() {
     private var bannerUpdateSubscriber: IEventSubscriber<BannersUpdatedEvent>? = null
     private var currentlyDisplayedBanner: Banner? = null
     private var currentFilterType: String? = null
+    private val slotBannerViews = ArrayList<BannerView>(MAX_SLOT_COUNT)
 
     // Define property types and their display names for filters, null means no filter and show all
     private val propertyFilterTypes = mapOf(
@@ -61,13 +63,24 @@ class BannersFragment : Fragment() {
         refreshBannersTextInput = view.findViewById(R.id.refresh_banners_input)
         refreshBannersButton = view.findViewById(R.id.refresh_banners_button)
         getBannerTextInput = view.findViewById(R.id.get_banner_input)
+        getBannerTextInput.setOnFocusChangeListener { _, hasFocus ->
+            if (!hasFocus) {
+                val trimmed = getBannerTextInput.text.toString().trim()
+                if (trimmed != getBannerTextInput.text.toString()) {
+                    getBannerTextInput.setText(trimmed)
+                }
+            }
+        }
         getBannerButton = view.findViewById(R.id.get_banner_button)
+        bannerSlotSpinner = view.findViewById(R.id.banner_slot_spinner)
         currentBannerPlacementDisplay = view.findViewById(R.id.current_banner_placement_display)
-        bannersFragmentBannerView = view.findViewById(R.id.banners_fragment_banner_view)
+        bannersMultiContainer = view.findViewById(R.id.banners_multi_container)
         bannerPropertiesContainer = view.findViewById(R.id.banner_properties_container)
         propertyFilterSpinner = view.findViewById(R.id.property_filter_spinner)
         cachedPlacementIdsChipGroup = view.findViewById(R.id.cached_placement_ids_chip_group)
 
+        setupBannerSlotSpinner()
+        setupSlotBannerPlacements()
         setupPropertyFilters()
 
         // Listener for "Request Banners Refresh" button (by list of placement IDs)
@@ -82,47 +95,50 @@ class BannersFragment : Fragment() {
                 // Get the distinct IDs between the default and input banner placement IDs, then refresh
                 val allPlacementIds = DroidboyApplication.BANNER_PLACEMENT_IDS.toMutableList()
                 allPlacementIds.addAll(placementIdsToRefresh)
+                // Include placements currently shown in slots so they stay in sync
+                slotBannerViews.mapNotNull { it.placementId }.forEach { allPlacementIds.add(it) }
                 val uniquePlacementIds = allPlacementIds.distinct()
                 if (uniquePlacementIds.isNotEmpty()) {
                     Braze.getInstance(requireContext()).requestBannersRefresh(uniquePlacementIds)
                     showToast("Requested banner refresh for placements: ${uniquePlacementIds.joinToString()}")
 
-                    // Clear the currently displayed banner
-                    currentBannerPlacementDisplay.text = "Current Banner Displayed: None"
-                    bannersFragmentBannerView.placementId = ""
-                    bannersFragmentBannerView.initBanner(bannersFragmentBannerView.placementId)
-                    currentlyDisplayedBanner = null
-                    displayBannerProperties(null)
+                    clearDisplayedBannerUi()
                 }
             } else {
                 showToast("No banner placement IDs entered. Enter at least one banner placement ID.")
             }
         }
 
-        // Listener for "Display This Banner" button (by placement ID)
+        // Listener for "Display This Banner" — placement from text field, target slot from spinner
         getBannerButton.setOnClickListener {
             val bannerId = getBannerTextInput.text.toString().trim()
-            if (bannerId.isNotBlank()) {
-                val banner = Braze.getInstance(requireContext()).getBanner(bannerId)
-                if (banner != null) {
-                    bannersFragmentBannerView.placementId = banner.placementId
-                    bannersFragmentBannerView.initBanner(bannersFragmentBannerView.placementId)
-                    currentBannerPlacementDisplay.text = "Current Banner Displayed: ${banner.placementId}"
-                    currentlyDisplayedBanner = banner
-                    displayBannerProperties(banner)
-                    showToast("Displayed banner with ID: $bannerId. See console for details.")
-                    brazelog { "BannersFragment: Got banner - $banner" }
-                } else {
-                    bannersFragmentBannerView.placementId = ""
-                    bannersFragmentBannerView.initBanner(null)
-                    currentBannerPlacementDisplay.text = "Current Banner Displayed: None"
-                    currentlyDisplayedBanner = null
-                    displayBannerProperties(null)
-                    addPropertyTextView(null)
-                    showToast("No banner found for placement: $bannerId.")
-                }
+            if (bannerId.isBlank()) {
+                showToast("No banner placement ID entered. Enter a placement ID to display.")
+                return@setOnClickListener
+            }
+            val slotIndex = bannerSlotSpinner.selectedItemPosition
+            if (slotIndex !in 0 until MAX_SLOT_COUNT) {
+                showToast("Select a display slot from 1 to $MAX_SLOT_COUNT.")
+                return@setOnClickListener
+            }
+            val banner = Braze.getInstance(requireContext()).getBanner(bannerId)
+            val targetView = slotBannerViews[slotIndex]
+            if (banner != null) {
+                targetView.placementId = banner.placementId
+                getBannerTextInput.setText(banner.placementId)
+                currentlyDisplayedBanner = banner
+                displayBannerProperties(banner)
+                currentBannerPlacementDisplay.text =
+                    "Banner properties: slot ${slotIndex + 1}, placement ${banner.placementId}"
+                showToast("Displayed in slot ${slotIndex + 1}: $bannerId")
+                brazelog { "BannersFragment: Got banner - $banner" }
             } else {
-                showToast("No banner placement ID entered. Enter a placement ID to display and log.")
+                targetView.placementId = null
+                currentlyDisplayedBanner = null
+                displayBannerProperties(null)
+                addPropertyTextView(null)
+                currentBannerPlacementDisplay.text = "Banner properties: slot ${slotIndex + 1}, no data for placement"
+                showToast("No banner found for placement: $bannerId.")
             }
         }
         return view
@@ -131,11 +147,7 @@ class BannersFragment : Fragment() {
     override fun onResume() {
         super.onResume()
         subscribeToBannerUpdates()
-        val initialPlacementId = refreshBannersTextInput.text.toString().trim()
-        if (initialPlacementId.isNotBlank()) {
-            bannersFragmentBannerView.placementId = initialPlacementId
-            bannersFragmentBannerView.initBanner(bannersFragmentBannerView.placementId)
-        }
+        refreshSlotBannerViews()
     }
 
     override fun onPause() {
@@ -154,6 +166,7 @@ class BannersFragment : Fragment() {
                 val placementIds = update.banners.map { it.placementId }
                 cachedPlacementIdsChipGroup.post {
                     updateCachedPlacementChips(placementIds)
+                    refreshSlotBannerViews()
                 }
             }
             bannerUpdateSubscriber?.let {
@@ -167,6 +180,48 @@ class BannersFragment : Fragment() {
             Braze.getInstance(requireContext()).removeSingleSubscription(it, BannersUpdatedEvent::class.java)
         }
         bannerUpdateSubscriber = null
+    }
+
+    private fun setupBannerSlotSpinner() {
+        val labels = (1..MAX_SLOT_COUNT).map { "Slot $it" }.toTypedArray()
+        val adapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, labels)
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        bannerSlotSpinner.adapter = adapter
+        bannerSlotSpinner.setSelection(0)
+    }
+
+    /**
+     * Five fixed [BannerView]s (slots 1–5), initially empty.
+     */
+    private fun setupSlotBannerPlacements() {
+        bannersMultiContainer.removeAllViews()
+        slotBannerViews.clear()
+        val bottomMarginPx = (16 * resources.displayMetrics.density).toInt()
+        val labelTopMarginPx = (8 * resources.displayMetrics.density).toInt()
+        val minHeightPx = (100 * resources.displayMetrics.density).toInt()
+        repeat(MAX_SLOT_COUNT) { index ->
+            val slotLabel = TextView(requireContext()).apply {
+                text = "Slot ${index + 1}"
+                setPadding(0, if (index == 0) 0 else labelTopMarginPx, 0, 0)
+            }
+            bannersMultiContainer.addView(slotLabel)
+            val bannerView = BannerView(requireContext(), null).apply {
+                layoutParams = LinearLayout.LayoutParams(
+                    LinearLayout.LayoutParams.MATCH_PARENT,
+                    LinearLayout.LayoutParams.WRAP_CONTENT
+                ).apply { bottomMargin = bottomMarginPx }
+                setBackgroundResource(android.R.color.darker_gray)
+                minimumHeight = minHeightPx
+            }
+            bannersMultiContainer.addView(bannerView)
+            slotBannerViews.add(bannerView)
+        }
+    }
+
+    private fun refreshSlotBannerViews() {
+        slotBannerViews.forEach { bannerView ->
+            bannerView.initBanner(bannerView.placementId)
+        }
     }
 
     /**
@@ -294,8 +349,7 @@ class BannersFragment : Fragment() {
                 isClickable = true
                 isCheckable = false
                 setOnClickListener {
-                    // Prefill the get banner input field with this placement ID
-                    getBannerTextInput.setText(placementId)
+                    getBannerTextInput.setText(placementId.trim())
                     showToast("Selected placement ID: $placementId")
                 }
             }
@@ -305,5 +359,21 @@ class BannersFragment : Fragment() {
 
     private fun showToast(message: String) {
         Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
+    }
+
+    /**
+     * Clears all slot previews and properties (after refresh).
+     */
+    private fun clearDisplayedBannerUi() {
+        currentBannerPlacementDisplay.text = "Banner properties: none placed yet"
+        slotBannerViews.forEach { view ->
+            view.placementId = null
+        }
+        currentlyDisplayedBanner = null
+        displayBannerProperties(null)
+    }
+
+    companion object {
+        private const val MAX_SLOT_COUNT = 5
     }
 }

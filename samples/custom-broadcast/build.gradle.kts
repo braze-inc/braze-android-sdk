@@ -4,12 +4,22 @@ plugins {
 
 android {
     namespace = "com.braze.custombroadcast"
+    val compileSdkPreviewName =
+        rootProject.findProperty("compileSdkPreviewName")?.toString()?.trim().orEmpty()
+    if (compileSdkPreviewName.isNotEmpty()) {
+        compileSdkPreview = compileSdkPreviewName
+    } else {
+        compileSdk = rootProject.extra["compileSdkVersion"] as Int
+    }
 
     defaultConfig {
         applicationId = "com.braze.custombroadcast"
-        compileSdk = rootProject.extra["compileSdkVersion"] as Int
         minSdk = rootProject.extra["minSdkVersion"] as Int
-        targetSdk = rootProject.extra["targetSdkVersion"] as Int
+        if (compileSdkPreviewName.isNotEmpty()) {
+            targetSdkPreview = compileSdkPreviewName
+        } else {
+            targetSdk = rootProject.extra["targetSdkVersion"] as Int
+        }
         versionCode = 1
         versionName = "1.0"
     }

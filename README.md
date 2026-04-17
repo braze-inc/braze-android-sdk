@@ -21,8 +21,8 @@ repositories {
 }
 // ...
 dependencies {
-  `implementation 'com.braze:android-sdk-ui:42.0.+'`
-  `implementation 'com.braze:android-sdk-location:42.0.+'`
+  `implementation 'com.braze:android-sdk-ui:42.1.+'`
+  `implementation 'com.braze:android-sdk-location:42.1.+'`
 }
 // ...
 ```
@@ -54,7 +54,7 @@ See [the Braze Developer Guide](https://www.braze.com/docs/developer_guide/sdk_i
 Tool | Minimum Supported Version
 :----|:----
 minSdk|5.0+ / API 21+ (Lollipop and up)
-targetSdk|36
+targetSdk|37
 Kotlin|`org.jetbrains.kotlin:kotlin-stdlib:2.2.20`
 Firebase Cloud Messaging|24.1.2
 Font Awesome|4.3.0

@@ -1,3 +1,11 @@
+## 42.1.0
+
+[Release Date](https://github.com/braze-inc/braze-android-sdk/releases/tag/v42.1.0)
+
+##### Added
+- Added support for Android 17 (API 37).
+- Added `BannerView.onDismissCallback` for integrators to run custom logic when a Banner is dismissed.
+
 ## 42.0.0
 
 [Release Date](https://github.com/braze-inc/braze-android-sdk/releases/tag/v42.0.0)
