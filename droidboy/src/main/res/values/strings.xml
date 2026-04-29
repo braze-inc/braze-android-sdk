@@ -1,6 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="ExtraTranslation, MissingTranslation">
   <string name="app_name">Droidboy</string>
+  <string name="tab_user">User</string>
+  <string name="tab_cards">Cards</string>
+  <string name="tab_push">Push</string>
+  <string name="tab_flags">Flags</string>
+  <string name="tab_banners">Banners</string>
+  <string name="tab_ecommerce">eCommerce</string>
+
+  <!-- Banners fragment -->
+  <string name="banners_refresh_header">Refresh Banners by Placement ID</string>
+  <string name="banners_refresh_input_hint">List of placement ID(s) (comma-separated)</string>
+  <string name="banners_refresh_button">Request Banners Refresh</string>
+  <string name="banners_get_header">Get Banner by Placement ID</string>
+  <string name="banners_cached_placement_ids_label">Cached Placement IDs:</string>
+  <string name="banners_get_input_hint">Banner placement ID</string>
+  <string name="banners_slot_spinner_hint">Display slot</string>
+  <string name="banners_get_button">Display This Banner</string>
+  <string name="banners_slots_header">Banner slots</string>
+  <string name="banners_properties_none_placed_yet">Banner properties: none placed yet</string>
+  <string name="banners_properties_header">Banner Properties</string>
+  <string name="banners_properties_filter_label">Filter properties by type:</string>
+  <string name="banners_properties_filter_hint">Filter Properties by Type</string>
   <string name="inappmessage">In-App Messages</string>
   <string name="settings">Settings</string>
   <string name="network_control_title">Network Controls</string>
@@ -233,6 +254,8 @@
   <string name="droidboy_required_location_prompt_message">Droidboy collects location data to enable Braze Geofences and session start location tracking even when the app is closed or not in use. This "prominent disclosure" is required by Google for Droidboy and does not automatically appear in our client apps as part of the SDK.</string>
   <string name="droidboy_required_bg_location_prompt_title">Please enable Droidboy background locations</string>
   <string name="droidboy_required_bg_location_prompt_message">To enable Geofencing, please allow access all the time.</string>
+  <string name="droidboy_required_local_network_prompt_title">Allow Droidboy to reach devices on your local network</string>
+  <string name="droidboy_required_local_network_prompt_message">Droidboy\'s override endpoint points at a LAN address (for example 10.0.2.2 on an emulator, a Wi-Fi IP, or Charles/Proxyman on your dev laptop). Android 17 gates this traffic behind the local-network permission.</string>
   <string name="html_push_title_text">&lt;p&gt;&lt;span style=\"color: #99cc00;\"&gt;M&lt;/span&gt;u&lt;span style=\"color: #008080;\"&gt;lti&lt;/span&gt;Colo&lt;span style=\"color: #ff6600;\"&gt;r&lt;/span&gt; &lt;span style=\"color: #000080;\"&gt;P&lt;/span&gt;&lt;span style=\"color: #00ccff;\"&gt;u&lt;/span&gt;&lt;span style=\"color: #ff0000;\"&gt;s&lt;/span&gt;&lt;span style=\"color: #808080;\"&gt;h&lt;/span&gt;&lt;/p&gt;</string>
   <string name="html_push_body_text">&lt;p&gt;&lt;em&gt;test&lt;/em&gt; &lt;span style=\"text-decoration: underline; background-color: #ff6600;\"&gt;&lt;strong&gt;message&lt;/strong&gt;&lt;/span&gt;&lt;/p&gt;</string>
   <!-- Preference Titles -->

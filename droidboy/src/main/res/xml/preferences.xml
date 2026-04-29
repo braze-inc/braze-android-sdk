@@ -143,6 +143,10 @@
     android:title="@string/misc_preference_category"
     app:initialExpandedChildrenCount="1">
     <Preference
+      android:key="open_network_console"
+      android:summary="Live view of Braze SDK network activity"
+      android:title="Open Network Console" />
+    <Preference
       android:key="logcat_export_file_key"
       android:summary="Will reset the logcat after click!"
       android:title="Export Droidboy Logcat to a File" />

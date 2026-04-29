@@ -33,4 +33,8 @@
       android:id="@+id/iam_sandbox"
       android:title="IAM Sandbox"
       app:showAsAction="never" />
+    <item
+      android:id="@+id/action_network_console"
+      android:title="Network Console"
+      app:showAsAction="never" />
 </menu>

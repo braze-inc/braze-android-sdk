@@ -21,8 +21,8 @@ repositories {
 }
 // ...
 dependencies {
-  `implementation 'com.braze:android-sdk-ui:42.1.+'`
-  `implementation 'com.braze:android-sdk-location:42.1.+'`
+  `implementation 'com.braze:android-sdk-ui:42.2.+'`
+  `implementation 'com.braze:android-sdk-location:42.2.+'`
 }
 // ...
 ```

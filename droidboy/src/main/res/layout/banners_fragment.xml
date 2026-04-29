@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fillViewport="true"
-    tools:ignore="HardcodedText">
+    android:fillViewport="true">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -20,7 +18,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Refresh Banners by Placement ID"
+            android:text="@string/banners_refresh_header"
             android:textAppearance="?attr/textAppearanceHeadline6"
             android:layout_marginBottom="8dp"
             android:fontFamily="@font/sailec_bold"/>
@@ -30,7 +28,7 @@
             style="@style/DroidboyOutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="List of placement ID(s) (comma-separated)"
+            android:hint="@string/banners_refresh_input_hint"
             android:layout_marginBottom="16dp">
 
             <com.google.android.material.textfield.TextInputEditText
@@ -47,14 +45,14 @@
             style="@style/DroidboyOutlinedButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Request Banners Refresh"
+            android:text="@string/banners_refresh_button"
             android:layout_marginBottom="24dp"/>
 
         <!-- Section for Displaying a Specific Banner by its Unique ID -->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Get Banner by Placement ID"
+            android:text="@string/banners_get_header"
             android:textAppearance="?attr/textAppearanceHeadline6"
             android:layout_marginBottom="8dp"
             android:fontFamily="@font/sailec_bold"/>
@@ -62,7 +60,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Cached Placement IDs:"
+            android:text="@string/banners_cached_placement_ids_label"
             android:layout_marginBottom="4dp"
             android:fontFamily="@font/sailec_bold"/>
 
@@ -79,7 +77,7 @@
             style="@style/DroidboyOutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Banner placement ID"
+            android:hint="@string/banners_get_input_hint"
             android:layout_marginBottom="16dp">
 
             <com.google.android.material.textfield.TextInputEditText
@@ -96,7 +94,7 @@
             style="@style/DroidboyOutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Display slot"
+            android:hint="@string/banners_slot_spinner_hint"
             android:layout_marginBottom="16dp">
 
             <Spinner
@@ -115,13 +113,13 @@
             style="@style/DroidboyOutlinedButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Display This Banner"
+            android:text="@string/banners_get_button"
             android:layout_marginBottom="24dp"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Banner slots (1–5)"
+            android:text="@string/banners_slots_header"
             android:textAppearance="?attr/textAppearanceHeadline6"
             android:layout_marginBottom="8dp"
             android:fontFamily="@font/sailec_bold"/>
@@ -137,7 +135,7 @@
             android:id="@+id/current_banner_placement_display"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Banner properties: none placed yet"
+            android:text="@string/banners_properties_none_placed_yet"
             android:textAppearance="?attr/textAppearanceSubtitle1"
             android:layout_marginBottom="16dp"
             android:fontFamily="@font/sailec_bold"/>
@@ -146,7 +144,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Banner Properties"
+            android:text="@string/banners_properties_header"
             android:textAppearance="?attr/textAppearanceHeadline6"
             android:layout_marginBottom="8dp"
             android:fontFamily="@font/sailec_bold"/>
@@ -154,7 +152,7 @@
         <TextView
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
-          android:text="Filter properties by type:"
+          android:text="@string/banners_properties_filter_label"
           android:fontFamily="@font/sailec_bold" />
 
         <!-- Property Filter Dropdown -->
@@ -163,7 +161,7 @@
             style="@style/DroidboyOutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Filter Properties by Type"
+            android:hint="@string/banners_properties_filter_hint"
             android:layout_marginBottom="16dp">
 
             <Spinner

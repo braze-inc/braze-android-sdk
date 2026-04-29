@@ -1,9 +1,20 @@
+## 42.2.0
+
+[Release Date](https://github.com/braze-inc/braze-android-sdk/releases/tag/v42.2.0)
+
+#### Breaking
+- **BannerView**: `onDismissCallback` is now invoked with a single `BannerDismissSnapshot` argument (`placementId`, `stableKey`, and `trackingId`, each nullable when unknown) instead of a no-argument callback. Integrators must update assignments to use the new signature.
+
+##### Changed
+- Removed the hardcoded `Toast` shown by `ContentCardsFragment` when the network is unavailable, aligning with `ContentCardsList` (Jetpack Compose) which only logs. The empty-state view is still displayed. Integrators that want to surface a custom network-error UI should handle it at the app layer using their own connectivity signals.
+
 ## 42.1.0
 
 [Release Date](https://github.com/braze-inc/braze-android-sdk/releases/tag/v42.1.0)
 
 ##### Added
 - Added support for Android 17 (API 37).
+- Added support for Banner Dismissal events.
 - Added `BannerView.onDismissCallback` for integrators to run custom logic when a Banner is dismissed.
 
 ## 42.0.0

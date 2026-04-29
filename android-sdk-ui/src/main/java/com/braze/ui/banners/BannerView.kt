@@ -26,6 +26,7 @@ import com.braze.ui.banners.listeners.DefaultBannerWebViewClientListener
 import com.braze.ui.banners.utils.BannerWebViewClient
 import com.braze.ui.support.setWebViewSettings
 import java.util.concurrent.atomic.AtomicBoolean
+import java.util.concurrent.atomic.AtomicReference
 
 /**
  * An Android View that displays a Braze banner.
@@ -37,12 +38,21 @@ class BannerView : WebView, IBannerView {
     private val isDismissed = AtomicBoolean(false)
 
     /**
+     * Latest resolved banner identity from [initBanner] when banner data was present. Held in an
+     * [AtomicReference] because [initBanner] may run off the main thread while dismiss runs on the
+     * main thread.
+     */
+    private val dismissSnapshot = AtomicReference<BannerDismissSnapshot?>(null)
+
+    /**
      * Callback invoked when the banner is dismissed (e.g. via Braze bridge closeMessage).
      * Set by integrators to run custom logic when the banner is dismissed.
      * Invoked after the view's visibility is set to [GONE] and its WebView processing is paused.
      * The view remains in the hierarchy so it can be reused if new content is loaded.
+     *
+     * @param snapshot [BannerDismissSnapshot] with placement, stable key, and tracking id when known.
      */
-    var onDismissCallback: (() -> Unit)? = null
+    var onDismissCallback: ((BannerDismissSnapshot) -> Unit)? = null
 
     private val dismissSubscriber = IEventSubscriber<BannerDismissedEvent> { event ->
         if (event.placementId == _placementId) {
@@ -156,6 +166,7 @@ class BannerView : WebView, IBannerView {
     override fun initBanner(placementId: String?) {
         val banner = placementId?.let { Braze.getInstance(context).getBanner(it) }
         if (banner == null) {
+            dismissSnapshot.set(null)
             currentUserId = null
             setWebviewToEmpty()
             if (placementId != null) {
@@ -166,6 +177,14 @@ class BannerView : WebView, IBannerView {
             }
             return
         }
+
+        dismissSnapshot.set(
+            BannerDismissSnapshot(
+                placementId = banner.placementId,
+                stableKey = banner.stableKey,
+                trackingId = banner.trackingId,
+            )
+        )
 
         // Don't reload if the HTML is the same
         if (banner.html != loadedHtml || banner.userId != currentUserId) {
@@ -260,7 +279,14 @@ class BannerView : WebView, IBannerView {
             webViewClient = WebViewClient()
             onPause()
             visibility = GONE
-            onDismissCallback?.invoke()
+            val cached = dismissSnapshot.get()
+            onDismissCallback?.invoke(
+                BannerDismissSnapshot(
+                    placementId = cached?.placementId ?: _placementId,
+                    stableKey = cached?.stableKey,
+                    trackingId = cached?.trackingId,
+                )
+            )
             brazelog(V) { "Banner dismiss completed. placementId=$_placementId" }
         } catch (e: Exception) {
             brazelog(E, e) {

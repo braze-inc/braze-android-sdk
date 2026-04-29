@@ -31,6 +31,7 @@ import com.appboy.sample.UserProfileDialog
 import com.appboy.sample.imageloading.GlideImageLoader
 import com.appboy.sample.logging.CustomEventDialog
 import com.appboy.sample.logging.CustomPurchaseDialog
+import com.appboy.sample.networkconsole.NetworkConsoleDialogFragment
 import com.appboy.sample.logging.CustomUserAttributeDialog
 import com.appboy.sample.subscriptions.EmailSubscriptionStateDialog
 import com.appboy.sample.subscriptions.PushSubscriptionStateDialog
@@ -177,6 +178,9 @@ class SettingsFragment : PreferenceFragmentCompat() {
     }
 
     private fun setMiscellaneousPrefs(context: Context) {
+        setClickPreference("open_network_console") {
+            NetworkConsoleDialogFragment().show(parentFragmentManager, NetworkConsoleDialogFragment.TAG)
+        }
         setClickPreference("anonymous_revert") {
             // Note: SDK internal storage "com.appboy.offline.storagemap" is managed by the SDK
             // We only need to clear our own user ID preference
@@ -218,9 +222,10 @@ class SettingsFragment : PreferenceFragmentCompat() {
         }
         setClickPreference("location_runtime_permission_dialog") {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                RuntimePermissionUtils.requestLocationPermission(
+                RuntimePermissionUtils.requestPermissionWithRationale(
                     activity as Activity,
                     Manifest.permission.ACCESS_FINE_LOCATION,
+                    RuntimePermissionUtils.LOCATION_RATIONALE,
                     requestPermissionLauncher
                 )
             } else {

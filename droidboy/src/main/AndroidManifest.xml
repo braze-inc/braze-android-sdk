@@ -144,6 +144,13 @@
     android:protectionLevel="signature" />
 
   <uses-permission android:name="android.permission.INTERNET" />
+  <!-- Android 17 (API 37) gates traffic to LAN addresses behind this permission.
+       Droidboy can be pointed at a dev machine via Settings > "Override endpoint"
+       (e.g. 10.0.2.2 from an emulator, or a Wi-Fi LAN / Charles proxy from a
+       device). Declared here so we can request it at runtime when an override
+       endpoint is set to a non-loopback address. Loopback (localhost /
+       127.0.0.1 / ::1) and public domains are NOT affected. -->
+  <uses-permission android:name="android.permission.ACCESS_LOCAL_NETWORK" />
   <uses-permission android:name="android.permission.ACCESS_MOCK_LOCATION"
       tools:ignore="MockLocation,ProtectedPermissions" />
   <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />

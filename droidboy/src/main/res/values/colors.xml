@@ -12,4 +12,9 @@
   <color name="transparent">#00000000</color>
   <color name="geofence_circle_fill_color">#229370DB</color>
   <color name="geofence_circle_stroke_color">#889370DB</color>
+  <!-- Network Console Dialog -->
+  <color name="network_console_request">#1565C0</color>
+  <color name="network_console_response">#2E7D32</color>
+  <color name="network_console_failure">#C62828</color>
+  <color name="network_console_dispatch">#6A1B9A</color>
 </resources>

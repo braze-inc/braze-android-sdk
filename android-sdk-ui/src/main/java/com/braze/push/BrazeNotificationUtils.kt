@@ -153,7 +153,7 @@ object BrazeNotificationUtils {
             Constants.BRAZE_PUSH_CAMPAIGN_ID_KEY,
             intent.getStringExtra(Constants.BRAZE_PUSH_CAMPAIGN_ID_KEY)
         )
-        extras.putString(SOURCE_KEY, Constants.BRAZE)
+        extras.putString(SOURCE_KEY, Constants.BRAZE_INTENT_SOURCE)
 
         val deepLink = intent.getStringExtra(Constants.BRAZE_PUSH_DEEP_LINK_KEY)
         val useWebView = "true".equals(intent.getStringExtra(Constants.BRAZE_PUSH_OPEN_URI_IN_WEBVIEW_KEY), ignoreCase = true)
@@ -177,7 +177,7 @@ object BrazeNotificationUtils {
             Constants.BRAZE_PUSH_CAMPAIGN_ID_KEY,
             brazePush.notificationPayload.campaignId
         )
-        extras.putString(SOURCE_KEY, Constants.BRAZE)
+        extras.putString(SOURCE_KEY, Constants.BRAZE_INTENT_SOURCE)
 
         // If a deep link exists, start an ACTION_VIEW intent pointing at the deep link.
         // The intent returned from getStartActivityIntent() is placed on the back stack.
@@ -767,7 +767,7 @@ object BrazeNotificationUtils {
             val jsonExtras = JSONObject(customContentString)
             val source = jsonExtras.getOptionalString(SOURCE_KEY)
             val campaignId = jsonExtras.getOptionalString(Constants.BRAZE_PUSH_CAMPAIGN_ID_KEY)
-            if (source != null && source == Constants.BRAZE && campaignId != null) {
+            if (source != null && source == Constants.BRAZE_INTENT_SOURCE && campaignId != null) {
                 Braze.getInstance(context).logPushNotificationOpened(campaignId)
             }
         } catch (e: Exception) {

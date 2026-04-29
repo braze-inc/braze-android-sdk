@@ -13,6 +13,7 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts.RequestMultiplePermissions
+import androidx.activity.result.contract.ActivityResultContracts.RequestPermission
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
@@ -27,10 +28,15 @@ import com.appboy.sample.BannersFragment
 import com.appboy.sample.BuildConfig
 import com.appboy.sample.InAppMessageTesterFragment
 import com.appboy.sample.MainFragment
+import com.appboy.sample.networkconsole.NetworkConsoleDialogFragment
 import com.appboy.sample.PushTesterFragment
 import com.appboy.sample.R
 import com.appboy.sample.featureflag.view.FeatureFlagFragment
-import com.appboy.sample.util.RuntimePermissionUtils.requestLocationPermissions
+import com.appboy.sample.util.DroidboyDataStoreUtils.readPrefsString
+import com.appboy.sample.util.DroidboyPreferenceKeys
+import com.appboy.sample.util.RuntimePermissionUtils
+import com.appboy.sample.util.RuntimePermissionUtils.requestPermissionWithRationale
+import com.appboy.sample.util.RuntimePermissionUtils.requestPermissionsWithRationale
 import com.appboy.sample.util.ViewUtils
 import com.braze.Braze
 import com.braze.Constants
@@ -62,6 +68,15 @@ class DroidBoyActivity : AppCompatActivity() {
                 showToast("Background location permissions denied.")
             } else {
                 showToast("All required location permissions granted.")
+            }
+        }
+
+    private val requestLocalNetworkPermissionLauncher =
+        registerForActivityResult(RequestPermission()) { granted: Boolean ->
+            if (granted) {
+                showToast("Local network permission granted.")
+            } else {
+                showToast("Local network permission denied. Override endpoint traffic may fail on Android 17+.")
             }
         }
 
@@ -151,16 +166,16 @@ class DroidBoyActivity : AppCompatActivity() {
     private fun checkPermissions() {
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) return
 
-        val permissionsToRequest = mutableListOf(Manifest.permission.INTERNET)
+        val locationPermissionsToRequest = mutableListOf(Manifest.permission.INTERNET)
         if (!didRequestLocationPermission) {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
                 val hasFineLocationPermission =
                     applicationContext.hasPermission(Manifest.permission.ACCESS_FINE_LOCATION)
                 if (!hasFineLocationPermission) {
-                    permissionsToRequest.add(Manifest.permission.ACCESS_FINE_LOCATION)
+                    locationPermissionsToRequest.add(Manifest.permission.ACCESS_FINE_LOCATION)
                 } else if (!applicationContext.hasPermission(Manifest.permission.ACCESS_BACKGROUND_LOCATION)) {
                     // Request background now that fine is set
-                    permissionsToRequest.add(Manifest.permission.ACCESS_BACKGROUND_LOCATION)
+                    locationPermissionsToRequest.add(Manifest.permission.ACCESS_BACKGROUND_LOCATION)
                 }
             } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
                 val hasAllPermissions = (
@@ -169,23 +184,56 @@ class DroidBoyActivity : AppCompatActivity() {
                     )
                 if (!hasAllPermissions) {
                     // Request both BACKGROUND and FINE location permissions
-                    permissionsToRequest.add(Manifest.permission.ACCESS_FINE_LOCATION)
-                    permissionsToRequest.add(Manifest.permission.ACCESS_BACKGROUND_LOCATION)
+                    locationPermissionsToRequest.add(Manifest.permission.ACCESS_FINE_LOCATION)
+                    locationPermissionsToRequest.add(Manifest.permission.ACCESS_BACKGROUND_LOCATION)
                 }
             } else {
                 // From M to P, FINE gives us BACKGROUND access
                 if (!applicationContext.hasPermission(Manifest.permission.ACCESS_FINE_LOCATION)) {
                     // Request only FINE location permission
-                    permissionsToRequest.add(Manifest.permission.ACCESS_FINE_LOCATION)
+                    locationPermissionsToRequest.add(Manifest.permission.ACCESS_FINE_LOCATION)
                 }
             }
             didRequestLocationPermission = true
         }
-        requestLocationPermissions(
+        requestPermissionsWithRationale(
             this,
-            permissionsToRequest.toTypedArray(),
+            locationPermissionsToRequest.toTypedArray(),
+            RuntimePermissionUtils.LOCATION_RATIONALE,
             requestMultiplePermissionLauncher
         )
+
+        if (shouldRequestLocalNetworkPermission()) {
+            requestPermissionWithRationale(
+                this,
+                ACCESS_LOCAL_NETWORK_PERMISSION,
+                RuntimePermissionUtils.LOCAL_NETWORK_RATIONALE,
+                requestLocalNetworkPermissionLauncher
+            )
+        }
+    }
+
+    /**
+     * Android 17 (API 37) requires apps to hold ACCESS_LOCAL_NETWORK before they
+     * can reach LAN addresses (10.0.2.2 from an emulator, Wi-Fi LAN IPs,
+     * Charles / Proxyman on the dev's laptop, etc.). When Droidboy has been
+     * pointed at a non-loopback override endpoint, make sure we ask for it so
+     * dev traffic keeps flowing. Loopback and public domains are unaffected.
+     */
+    private fun shouldRequestLocalNetworkPermission(): Boolean {
+        if (Build.VERSION.SDK_INT < ANDROID_17_API_LEVEL) return false
+        val overrideEndpoint = applicationContext.readPrefsString(
+            DroidboyPreferenceKeys.OVERRIDE_ENDPOINT
+        )
+        if (overrideEndpoint.isNullOrBlank() || isLoopbackEndpoint(overrideEndpoint)) return false
+        if (applicationContext.hasPermission(ACCESS_LOCAL_NETWORK_PERMISSION)) return false
+        return true
+    }
+
+    private fun isLoopbackEndpoint(endpoint: String): Boolean {
+        val withScheme = if (endpoint.contains("://")) endpoint else "http://$endpoint"
+        val host = android.net.Uri.parse(withScheme).host?.lowercase() ?: return false
+        return host == "localhost" || host == "127.0.0.1" || host == "::1" || host == "[::1]"
     }
 
     private fun setupViewPager(viewPager: ViewPager2) {
@@ -231,6 +279,10 @@ class DroidBoyActivity : AppCompatActivity() {
                 startActivity(Intent(applicationContext, GeofencesMapActivity::class.java))
             }
             R.id.iam_sandbox -> startActivity(Intent(applicationContext, InAppMessageSandboxActivity::class.java))
+            R.id.action_network_console -> NetworkConsoleDialogFragment().show(
+                supportFragmentManager,
+                NetworkConsoleDialogFragment.TAG
+            )
             R.id.action_flush -> {
                 Braze.getInstance(this).requestContentCardsRefresh()
                 Braze.getInstance(this).requestImmediateDataFlush()
@@ -273,7 +325,7 @@ class DroidBoyActivity : AppCompatActivity() {
         // Check to see if the Activity was opened by the Broadcast Receiver. If it was, navigate to the
         // correct fragment.
         val extras = intent.extras
-        if (extras != null && Constants.BRAZE == extras.getString(resources.getString(R.string.source_key))) {
+        if (extras != null && Constants.BRAZE_INTENT_SOURCE == extras.getString(resources.getString(R.string.source_key))) {
             navigateToDestination(extras)
             val bundleLogString = bundleToLogString(extras)
             showToast(bundleLogString)
@@ -319,11 +371,11 @@ class DroidBoyActivity : AppCompatActivity() {
         private val fragmentInfo = arrayOf(
             FragmentInfo(
                 { MainFragment() },
-                "Main"
+                context.getString(R.string.tab_user)
             ),
             FragmentInfo(
                 { ContentCardsFragment() },
-                "Cards"
+                context.getString(R.string.tab_cards)
             ),
             FragmentInfo(
                 { InAppMessageTesterFragment() },
@@ -331,11 +383,11 @@ class DroidBoyActivity : AppCompatActivity() {
             ),
             FragmentInfo(
                 { PushTesterFragment() },
-                "Push"
+                context.getString(R.string.tab_push)
             ),
             FragmentInfo(
                 { FeatureFlagFragment() },
-                "Flags"
+                context.getString(R.string.tab_flags)
             ),
             FragmentInfo(
                 { BannersFragment() },
@@ -352,6 +404,10 @@ class DroidBoyActivity : AppCompatActivity() {
 
     companion object {
         private var didRequestLocationPermission = false
+
+        private const val ANDROID_17_API_LEVEL = 37
+        private const val ACCESS_LOCAL_NETWORK_PERMISSION =
+            "android.permission.ACCESS_LOCAL_NETWORK"
 
         private fun bundleToLogString(bundle: Bundle): String {
             val bundleString = StringBuilder()

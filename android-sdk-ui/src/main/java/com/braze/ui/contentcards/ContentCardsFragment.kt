@@ -6,7 +6,6 @@ import android.os.Parcelable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -339,17 +338,13 @@ open class ContentCardsFragment : Fragment(), SwipeRefreshLayout.OnRefreshListen
     }
 
     /**
-     * A main thread runnable to handle displaying network unavailable messages on the main thread.
+     * Called on the main thread when Content Cards cannot be refreshed because the network
+     * is unavailable. Logs the event, swaps in the empty cards adapter, and stops the refresh
+     * indicator. Integrators that want to surface a custom network-error UI (for example a
+     * Toast or Snackbar) should do so at the app layer using their own connectivity signals.
      */
     protected suspend fun networkUnavailable() {
-        brazelog(V) { "Displaying network unavailable toast." }
-        context?.applicationContext?.let { applicationContext ->
-            Toast.makeText(
-                applicationContext,
-                applicationContext.getString(R.string.com_braze_feed_connection_error_title),
-                Toast.LENGTH_LONG
-            ).show()
-        }
+        brazelog(V) { "Network is unavailable." }
         swapRecyclerViewAdapter(emptyCardsAdapter)
         contentCardsSwipeLayout?.isRefreshing = false
     }
