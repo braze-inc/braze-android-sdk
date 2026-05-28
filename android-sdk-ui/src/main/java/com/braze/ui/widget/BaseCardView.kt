@@ -5,25 +5,29 @@ import android.view.ViewTreeObserver
 import android.widget.ImageView
 import android.widget.RelativeLayout
 import android.widget.TextView
-import com.braze.models.cards.Card
-import com.braze.ui.R
 import com.braze.Braze
 import com.braze.BrazeInternal
 import com.braze.enums.BrazeViewBounds
+import com.braze.models.cards.Card
 import com.braze.support.BrazeLogger.Priority.V
 import com.braze.support.BrazeLogger.brazelog
 import com.braze.support.BrazeLogger.getBrazeLogTag
 import com.braze.ui.BrazeDeeplinkHandler.Companion.getInstance
+import com.braze.ui.R
 import com.braze.ui.actions.IAction
 import com.braze.ui.actions.UriAction
 import com.braze.ui.contentcards.BrazeContentCardUtils
 
-abstract class BaseCardView<T : Card>(context: Context) : RelativeLayout(context) {
+abstract class BaseCardView<T : Card>(
+    context: Context,
+) : RelativeLayout(context) {
     @JvmField
     protected val applicationContext: Context = context.applicationContext
     val classLogTag: String = getBrazeLogTag(this.javaClass)
+
     @JvmField
     protected var card: T? = null
+
     @JvmField
     protected var configurationProvider = BrazeInternal.getConfigurationProvider(context)
 
@@ -34,7 +38,10 @@ abstract class BaseCardView<T : Card>(context: Context) : RelativeLayout(context
      * Applies the text to the [TextView]. If the text is null or blank,
      * the [TextView]'s visibility is changed to [android.view.View.GONE].
      */
-    fun setOptionalTextView(view: TextView, text: String?) {
+    fun setOptionalTextView(
+        view: TextView,
+        text: String?,
+    ) {
         if (!text.isNullOrBlank()) {
             view.text = text
             view.visibility = VISIBLE
@@ -58,7 +65,7 @@ abstract class BaseCardView<T : Card>(context: Context) : RelativeLayout(context
         imageView: ImageView,
         imageUrl: String,
         placeholderAspectRatio: Float,
-        card: Card
+        card: Card,
     ) {
         if (imageUrl != imageView.getTag(R.string.com_braze_image_resize_tag_key)) {
             // If the campaign is using liquid, the aspect ratio could be unknown (0)
@@ -70,15 +77,17 @@ abstract class BaseCardView<T : Card>(context: Context) : RelativeLayout(context
                 // so we remove our listener after the resizing.
                 val viewTreeObserver = imageView.viewTreeObserver
                 if (viewTreeObserver.isAlive) {
-                    viewTreeObserver.addOnPreDrawListener(object : ViewTreeObserver.OnPreDrawListener {
-                        override fun onPreDraw(): Boolean {
-                            imageView.viewTreeObserver.removeOnPreDrawListener(this)
-                            val width = imageView.width
-                            imageView.layoutParams =
-                                LayoutParams(width, (width / placeholderAspectRatio).toInt())
-                            return true
-                        }
-                    })
+                    viewTreeObserver.addOnPreDrawListener(
+                        object : ViewTreeObserver.OnPreDrawListener {
+                            override fun onPreDraw(): Boolean {
+                                imageView.viewTreeObserver.removeOnPreDrawListener(this)
+                                val width = imageView.width
+                                imageView.layoutParams =
+                                    LayoutParams(width, (width / placeholderAspectRatio).toInt())
+                                return true
+                            }
+                        },
+                    )
                 }
             }
             imageView.setImageResource(android.R.color.transparent)
@@ -88,14 +97,18 @@ abstract class BaseCardView<T : Card>(context: Context) : RelativeLayout(context
                 card,
                 imageUrl,
                 imageView,
-                BrazeViewBounds.BASE_CARD_VIEW
+                BrazeViewBounds.BASE_CARD_VIEW,
             )
 
             imageView.setTag(R.string.com_braze_image_resize_tag_key, imageUrl)
         }
     }
 
-    protected fun handleCardClick(context: Context, card: Card, cardAction: IAction?) {
+    protected fun handleCardClick(
+        context: Context,
+        card: Card,
+        cardAction: IAction?,
+    ) {
         brazelog(V) { "Handling card click for card: $card" }
         card.isIndicatorHighlighted = true
         if (!isClickHandled(context, card, cardAction)) {
@@ -123,7 +136,7 @@ abstract class BaseCardView<T : Card>(context: Context) : RelativeLayout(context
     protected abstract fun isClickHandled(
         context: Context,
         card: Card,
-        cardAction: IAction?
+        cardAction: IAction?,
     ): Boolean
 
     companion object {

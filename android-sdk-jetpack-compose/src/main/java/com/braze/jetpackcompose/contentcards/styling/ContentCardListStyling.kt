@@ -25,7 +25,7 @@ open class ContentCardListStyling(
     val spacerSize: Dp = 32.dp,
     val listPadding: Dp = 32.dp,
     val listBackgroundColor: Color = Color.Unspecified,
-    val emptyTextStyle: TextStyle? = null
+    val emptyTextStyle: TextStyle? = null,
 ) {
     @Composable
     fun listBackgroundColor(): Color {

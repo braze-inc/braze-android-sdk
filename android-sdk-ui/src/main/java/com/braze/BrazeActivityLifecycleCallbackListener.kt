@@ -40,7 +40,7 @@ open class BrazeActivityLifecycleCallbackListener @JvmOverloads constructor(
     private val sessionHandlingEnabled: Boolean = true,
     private val registerInAppMessageManager: Boolean = true,
     inAppMessagingRegistrationBlocklist: Set<Class<*>?>? = emptySet<Class<*>>(),
-    sessionHandlingBlocklist: Set<Class<*>?>? = emptySet<Class<*>>()
+    sessionHandlingBlocklist: Set<Class<*>?>? = emptySet<Class<*>>(),
 ) : ActivityLifecycleCallbacks {
     private var inAppMessagingRegistrationBlocklist: Set<Class<*>?>
     private var sessionHandlingBlocklist: Set<Class<*>?>
@@ -76,7 +76,7 @@ open class BrazeActivityLifecycleCallbackListener @JvmOverloads constructor(
     @JvmOverloads
     constructor(
         inAppMessagingRegistrationBlocklist: Set<Class<*>?>?,
-        sessionHandlingBlocklist: Set<Class<*>?>? = emptySet<Class<*>>()
+        sessionHandlingBlocklist: Set<Class<*>?>? = emptySet<Class<*>>(),
     ) : this(true, true, inAppMessagingRegistrationBlocklist, sessionHandlingBlocklist)
 
     /**
@@ -117,9 +117,11 @@ open class BrazeActivityLifecycleCallbackListener @JvmOverloads constructor(
         if (registerInAppMessageManager) {
             if (shouldHandleLifecycleMethodsInActivity(activity, false)) {
                 val previousActivity = currentActivityRef?.get()
-                if (shouldPersistWebView == true && // We should be persisting (so we didn't unregister during onPause) AND
-                    previousActivity != null && // The previous activity has been set AND
-                    previousActivity != activity // The previous activity is different from the current activity
+                if (shouldPersistWebView == true &&
+                    // We should be persisting (so we didn't unregister during onPause) AND
+                    previousActivity != null &&
+                    // The previous activity has been set AND
+                    previousActivity != activity
                 ) {
                     brazelog(V) {
                         "Activity is different from previous activity. Unregistering in-app message manager"
@@ -129,9 +131,11 @@ open class BrazeActivityLifecycleCallbackListener @JvmOverloads constructor(
 
                 // If the previous activity is null, this is the first activity, so register.
                 // Or if the activity has changed, we also need to register.
-                if (shouldPersistWebView != true || // We're not persisting (so we unregistered during onPause) OR
-                    previousActivity == null || // The previous activity is null (so this is the first activity) OR
-                    previousActivity != activity // The activity has changed
+                if (shouldPersistWebView != true ||
+                    // We're not persisting (so we unregistered during onPause) OR
+                    previousActivity == null ||
+                    // The previous activity is null (so this is the first activity) OR
+                    previousActivity != activity
                 ) {
                     brazelog(V) {
                         "Automatically calling lifecycle method: registerInAppMessageManager for class: ${activity.javaClass}"
@@ -174,7 +178,10 @@ open class BrazeActivityLifecycleCallbackListener @JvmOverloads constructor(
         }
     }
 
-    override fun onActivityCreated(activity: Activity, bundle: Bundle?) {
+    override fun onActivityCreated(
+        activity: Activity,
+        bundle: Bundle?,
+    ) {
         brazelog(V) {
             "Automatically calling lifecycle method: ensureSubscribedToInAppMessageEvents for class: ${activity.javaClass}"
         }
@@ -201,7 +208,11 @@ open class BrazeActivityLifecycleCallbackListener @JvmOverloads constructor(
         }
     }
 
-    override fun onActivitySaveInstanceState(activity: Activity, bundle: Bundle) {}
+    override fun onActivitySaveInstanceState(
+        activity: Activity,
+        bundle: Bundle,
+    ) {}
+
     override fun onActivityDestroyed(activity: Activity) {}
 
     /**
@@ -210,7 +221,7 @@ open class BrazeActivityLifecycleCallbackListener @JvmOverloads constructor(
     @VisibleForTesting
     fun shouldHandleLifecycleMethodsInActivity(
         activity: Activity,
-        forSessionHandling: Boolean
+        forSessionHandling: Boolean,
     ): Boolean {
         val activityClass: Class<out Activity> = activity.javaClass
         if (activityClass == NotificationTrampolineActivity::class.java) {

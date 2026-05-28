@@ -2,7 +2,6 @@ package com.braze.ui.inappmessage.factories
 
 import android.annotation.SuppressLint
 import android.app.Activity
-import com.braze.ui.R
 import com.braze.Braze
 import com.braze.enums.BrazeViewBounds
 import com.braze.enums.inappmessage.ImageStyle
@@ -10,6 +9,7 @@ import com.braze.models.inappmessage.IInAppMessage
 import com.braze.models.inappmessage.InAppMessageModal
 import com.braze.support.BrazeLogger.Priority.I
 import com.braze.support.BrazeLogger.brazelog
+import com.braze.ui.R
 import com.braze.ui.inappmessage.BrazeInAppMessageManager
 import com.braze.ui.inappmessage.IInAppMessageViewFactory
 import com.braze.ui.inappmessage.views.InAppMessageBaseView
@@ -24,7 +24,7 @@ import com.braze.ui.inappmessage.views.InAppMessageModalView
 open class DefaultInAppMessageModalViewFactory : IInAppMessageViewFactory {
     override fun createInAppMessageView(
         activity: Activity,
-        inAppMessage: IInAppMessage
+        inAppMessage: IInAppMessage,
     ): InAppMessageModalView {
         val applicationContext = activity.applicationContext
         val inAppMessageModal = inAppMessage as InAppMessageModal
@@ -40,7 +40,7 @@ open class DefaultInAppMessageModalViewFactory : IInAppMessageViewFactory {
                     inAppMessage,
                     imageUrl,
                     it,
-                    BrazeViewBounds.IN_APP_MESSAGE_MODAL
+                    BrazeViewBounds.IN_APP_MESSAGE_MODAL,
                 )
             }
         }
@@ -65,7 +65,7 @@ open class DefaultInAppMessageModalViewFactory : IInAppMessageViewFactory {
                 view.setMessageIcon(
                     it,
                     inAppMessage.iconColor,
-                    inAppMessage.iconBackgroundColor
+                    inAppMessage.iconBackgroundColor,
                 )
             }
             view.setMessageHeaderTextAlignment(inAppMessageModal.headerTextAlign)
@@ -81,20 +81,19 @@ open class DefaultInAppMessageModalViewFactory : IInAppMessageViewFactory {
     @SuppressLint("InflateParams")
     private fun getAppropriateModalView(
         activity: Activity,
-        isGraphic: Boolean
-    ): InAppMessageModalView {
-        return if (isGraphic) {
+        isGraphic: Boolean,
+    ): InAppMessageModalView =
+        if (isGraphic) {
             activity.layoutInflater.inflate(
                 R.layout.com_braze_inappmessage_modal_graphic,
-                null
+                null,
             ) as InAppMessageModalView
         } else {
             activity.layoutInflater.inflate(
                 R.layout.com_braze_inappmessage_modal,
-                null
+                null,
             ) as InAppMessageModalView
         }
-    }
 
     companion object {
         private const val NON_GRAPHIC_ASPECT_RATIO = 290f / 100f

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.textfield.TextInputLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/DroidboyOutlinedExposedDropdownBox"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="12dp">
+
+    <com.google.android.material.textfield.MaterialAutoCompleteTextView
+        android:id="@+id/ecommerce_property_dropdown"
+        style="@style/BaseWidget.DroidboyTextInput"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="none"
+        android:paddingStart="8dp"
+        android:paddingTop="12dp"
+        android:paddingEnd="8dp"
+        android:paddingBottom="12dp" />
+
+</com.google.android.material.textfield.TextInputLayout>

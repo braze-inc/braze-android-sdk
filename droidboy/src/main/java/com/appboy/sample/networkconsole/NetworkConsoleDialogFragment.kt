@@ -22,22 +22,21 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.appboy.sample.R
 import com.google.android.material.appbar.MaterialToolbar
-import java.io.File
-import java.text.SimpleDateFormat
-import java.util.Date
-import java.util.Locale
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import java.io.File
+import java.text.SimpleDateFormat
+import java.util.Date
+import java.util.Locale
 
 /**
  * Full-screen dialog that displays Braze SDK network activity captured by
  * [BrazeNetworkLogTailer]. Provides Pause, Clear, and Share controls in the toolbar.
  */
 class NetworkConsoleDialogFragment : DialogFragment() {
-
     private lateinit var adapter: NetworkConsoleAdapter
     private lateinit var recyclerView: RecyclerView
     private lateinit var statusView: TextView
@@ -46,27 +45,29 @@ class NetworkConsoleDialogFragment : DialogFragment() {
     private var collectJob: Job? = null
     private var tailer: BrazeNetworkLogTailer? = null
 
-    override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-        return super.onCreateDialog(savedInstanceState).apply {
+    override fun onCreateDialog(savedInstanceState: Bundle?): Dialog =
+        super.onCreateDialog(savedInstanceState).apply {
             setCanceledOnTouchOutside(true)
         }
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View = inflater.inflate(R.layout.network_console_dialog, container, false)
 
     override fun onStart() {
         super.onStart()
         dialog?.window?.setLayout(
             ViewGroup.LayoutParams.MATCH_PARENT,
-            ViewGroup.LayoutParams.MATCH_PARENT
+            ViewGroup.LayoutParams.MATCH_PARENT,
         )
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+    override fun onViewCreated(
+        view: View,
+        savedInstanceState: Bundle?,
+    ) {
         super.onViewCreated(view, savedInstanceState)
         toolbar = view.findViewById(R.id.network_console_toolbar)
         statusView = view.findViewById(R.id.network_console_status)
@@ -139,23 +140,27 @@ class NetworkConsoleDialogFragment : DialogFragment() {
             // Joining every entry (some multi-KB) and writing to disk is big enough
             // to noticeably block the UI thread when the buffer is full, so push
             // the string build and the file I/O to a background dispatcher.
-            val uri = withContext(Dispatchers.IO) {
-                val text = snapshot.joinToString(separator = "\n") { entry ->
-                    "[${formatTimestamp(entry.timestampMillis)}] " +
-                        "${entry.direction} ${entry.tag}: ${entry.message}"
+            val uri =
+                withContext(Dispatchers.IO) {
+                    val text =
+                        snapshot.joinToString(separator = "\n") { entry ->
+                            "[${formatTimestamp(entry.timestampMillis)}] " +
+                                "${entry.direction} ${entry.tag}: ${entry.message}"
+                        }
+                    val exportDir = File(cacheDir, EXPORT_DIRECTORY).apply { mkdirs() }
+                    val outputFile =
+                        File(
+                            exportDir,
+                            "network_console_${System.currentTimeMillis()}.txt",
+                        ).apply { writeText(text) }
+                    FileProvider.getUriForFile(appContext, "$packageName.fileprovider", outputFile)
                 }
-                val exportDir = File(cacheDir, EXPORT_DIRECTORY).apply { mkdirs() }
-                val outputFile = File(
-                    exportDir,
-                    "network_console_${System.currentTimeMillis()}.txt"
-                ).apply { writeText(text) }
-                FileProvider.getUriForFile(appContext, "$packageName.fileprovider", outputFile)
-            }
-            val shareIntent = Intent(Intent.ACTION_SEND).apply {
-                type = "text/plain"
-                putExtra(Intent.EXTRA_STREAM, uri)
-                addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
-            }
+            val shareIntent =
+                Intent(Intent.ACTION_SEND).apply {
+                    type = "text/plain"
+                    putExtra(Intent.EXTRA_STREAM, uri)
+                    addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
+                }
             startActivity(Intent.createChooser(shareIntent, "Share network console"))
         }
     }
@@ -163,32 +168,34 @@ class NetworkConsoleDialogFragment : DialogFragment() {
     private fun showEntryDetail(entry: NetworkLogEntry) {
         val context = requireContext()
         val padding = (DETAIL_PADDING_DP * context.resources.displayMetrics.density).toInt()
-        val messageView = TextView(context).apply {
-            text = buildDetailText(entry)
-            textSize = DETAIL_TEXT_SIZE_SP
-            setTextIsSelectable(true)
-            typeface = android.graphics.Typeface.MONOSPACE
-            setPadding(padding, padding, padding, padding)
-        }
+        val messageView =
+            TextView(context).apply {
+                text = buildDetailText(entry)
+                textSize = DETAIL_TEXT_SIZE_SP
+                setTextIsSelectable(true)
+                typeface = android.graphics.Typeface.MONOSPACE
+                setPadding(padding, padding, padding, padding)
+            }
         val scrollContainer = ScrollView(context).apply { addView(messageView) }
-        AlertDialog.Builder(context)
+        AlertDialog
+            .Builder(context)
             .setTitle("${entry.direction} ${entry.tag}")
             .setView(scrollContainer)
             .setPositiveButton("Copy") { dialog, _ ->
                 copyEntryToClipboard(entry)
                 dialog.dismiss()
-            }
-            .setNegativeButton("Close", null)
+            }.setNegativeButton("Close", null)
             .show()
     }
 
-    private fun buildDetailText(entry: NetworkLogEntry): String = buildString {
-        append(formatTimestamp(entry.timestampMillis)).append('\n')
-        entry.url?.let { append("URL: ").append(it).append('\n') }
-        entry.statusCode?.let { append("Status: ").append(it).append('\n') }
-        if (isNotEmpty()) append('\n')
-        append(entry.message)
-    }
+    private fun buildDetailText(entry: NetworkLogEntry): String =
+        buildString {
+            append(formatTimestamp(entry.timestampMillis)).append('\n')
+            entry.url?.let { append("URL: ").append(it).append('\n') }
+            entry.statusCode?.let { append("Status: ").append(it).append('\n') }
+            if (isNotEmpty()) append('\n')
+            append(entry.message)
+        }
 
     private fun copyEntryToClipboard(entry: NetworkLogEntry) {
         val clipboard = requireContext().getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
@@ -207,21 +214,22 @@ class NetworkConsoleDialogFragment : DialogFragment() {
         adapter.appendAll(tailer.history())
         updateStatus()
 
-        collectJob = viewLifecycleOwner.lifecycleScope.launch {
-            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
-                tailer.events.collect { entry ->
-                    // Capture "was the user already at/near the tail?" BEFORE the
-                    // insertion so the newly appended row doesn't itself make us
-                    // think we're no longer at the bottom.
-                    val wasFollowingTail = isRecyclerAtTail()
-                    adapter.append(entry)
-                    if (wasFollowingTail) {
-                        recyclerView.scrollToPosition(adapter.itemCount - 1)
+        collectJob =
+            viewLifecycleOwner.lifecycleScope.launch {
+                viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                    tailer.events.collect { entry ->
+                        // Capture "was the user already at/near the tail?" BEFORE the
+                        // insertion so the newly appended row doesn't itself make us
+                        // think we're no longer at the bottom.
+                        val wasFollowingTail = isRecyclerAtTail()
+                        adapter.append(entry)
+                        if (wasFollowingTail) {
+                            recyclerView.scrollToPosition(adapter.itemCount - 1)
+                        }
+                        updateStatus()
                     }
-                    updateStatus()
                 }
             }
-        }
     }
 
     /**
@@ -247,8 +255,7 @@ class NetworkConsoleDialogFragment : DialogFragment() {
         Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
     }
 
-    private fun formatTimestamp(millis: Long): String =
-        SimpleDateFormat("HH:mm:ss.SSS", Locale.US).format(Date(millis))
+    private fun formatTimestamp(millis: Long): String = SimpleDateFormat("HH:mm:ss.SSS", Locale.US).format(Date(millis))
 
     companion object {
         const val TAG = "NetworkConsoleDialogFragment"

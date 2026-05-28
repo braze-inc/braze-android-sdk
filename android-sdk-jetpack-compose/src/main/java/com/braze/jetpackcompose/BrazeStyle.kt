@@ -25,11 +25,11 @@ val LocalContentCardStyling = compositionLocalOf { ContentCardStyling() }
 fun BrazeStyle(
     contentCardListStyle: ContentCardListStyling = ContentCardListStyling(),
     contentCardStyle: ContentCardStyling = ContentCardStyling(),
-    content: @Composable () -> Unit
+    content: @Composable () -> Unit,
 ) {
     CompositionLocalProvider(
         LocalContentCardListStyling provides contentCardListStyle,
         LocalContentCardStyling provides contentCardStyle,
-        content = content
+        content = content,
     )
 }

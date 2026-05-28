@@ -2,8 +2,8 @@ package com.appboy.sample
 
 import android.app.Notification
 import androidx.core.app.NotificationCompat
-import com.braze.models.push.BrazeNotificationPayload
 import com.braze.IBrazeNotificationFactory
+import com.braze.models.push.BrazeNotificationPayload
 import com.braze.push.BrazeNotificationUtils.getOrCreateNotificationChannelId
 import com.braze.push.BrazeNotificationUtils.setAccentColorIfPresentAndSupported
 
@@ -21,9 +21,10 @@ class FullyCustomNotificationFactory : IBrazeNotificationFactory {
         return notificationBuilder.build()
     }
 
-    private fun parseContentsFromExtras(extras: Map<String, String>): String = """
+    private fun parseContentsFromExtras(extras: Map<String, String>): String =
+        """
         Your order: ${extras[PushTesterFragment.EXAMPLE_EXTRA_KEY_1]}, 
         ${extras[PushTesterFragment.EXAMPLE_EXTRA_KEY_2]}, 
         ${extras[PushTesterFragment.EXAMPLE_EXTRA_KEY_3]}.
-    """.trimIndent()
+        """.trimIndent()
 }

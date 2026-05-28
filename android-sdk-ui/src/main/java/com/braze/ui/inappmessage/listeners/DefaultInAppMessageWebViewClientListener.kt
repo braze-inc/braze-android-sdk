@@ -25,7 +25,11 @@ open class DefaultInAppMessageWebViewClientListener : IInAppMessageWebViewClient
     private val inAppMessageManager: BrazeInAppMessageManager
         get() = BrazeInAppMessageManager.getInstance()
 
-    override fun onCloseAction(inAppMessage: IInAppMessage, url: String, queryBundle: Bundle) {
+    override fun onCloseAction(
+        inAppMessage: IInAppMessage,
+        url: String,
+        queryBundle: Bundle,
+    ) {
         brazelog { "IInAppMessageWebViewClientListener.onCloseAction called." }
         logHtmlInAppMessageClick(inAppMessage, queryBundle)
 
@@ -34,7 +38,7 @@ open class DefaultInAppMessageWebViewClientListener : IInAppMessageWebViewClient
         inAppMessageManager.htmlInAppMessageActionListener.onCloseClicked(
             inAppMessage,
             url,
-            queryBundle
+            queryBundle,
         )
         brazelog { "IInAppMessageWebViewClientListener.onCloseAction finished." }
     }
@@ -42,18 +46,19 @@ open class DefaultInAppMessageWebViewClientListener : IInAppMessageWebViewClient
     override fun onCustomEventAction(
         inAppMessage: IInAppMessage,
         url: String,
-        queryBundle: Bundle
+        queryBundle: Bundle,
     ) {
         brazelog { "IInAppMessageWebViewClientListener.onCustomEventAction called." }
         if (inAppMessageManager.activity == null) {
             brazelog(W) { "Can't perform custom event action because the activity is null." }
             return
         }
-        val wasHandled = inAppMessageManager.htmlInAppMessageActionListener.onCustomEventFired(
-            inAppMessage,
-            url,
-            queryBundle
-        )
+        val wasHandled =
+            inAppMessageManager.htmlInAppMessageActionListener.onCustomEventFired(
+                inAppMessage,
+                url,
+                queryBundle,
+            )
         if (!wasHandled) {
             val customEventName =
                 BrazeWebViewClient.parseCustomEventNameFromQueryBundle(queryBundle)
@@ -65,13 +70,17 @@ open class DefaultInAppMessageWebViewClientListener : IInAppMessageWebViewClient
             inAppMessageManager.activity?.let { activity ->
                 getInstance(activity).logCustomEvent(
                     customEventName,
-                    customEventProperties
+                    customEventProperties,
                 )
             }
         }
     }
 
-    override fun onOtherUrlAction(inAppMessage: IInAppMessage, url: String, queryBundle: Bundle) {
+    override fun onOtherUrlAction(
+        inAppMessage: IInAppMessage,
+        url: String,
+        queryBundle: Bundle,
+    ) {
         brazelog { "IInAppMessageWebViewClientListener.onOtherUrlAction called." }
         if (inAppMessageManager.activity == null) {
             brazelog(W) { "Can't perform other url action because the cached activity is null. Url: $url" }
@@ -79,11 +88,12 @@ open class DefaultInAppMessageWebViewClientListener : IInAppMessageWebViewClient
         }
         // Log a click since the uri link was followed
         logHtmlInAppMessageClick(inAppMessage, queryBundle)
-        val wasHandled = inAppMessageManager.htmlInAppMessageActionListener.onOtherUrlAction(
-            inAppMessage,
-            url,
-            queryBundle
-        )
+        val wasHandled =
+            inAppMessageManager.htmlInAppMessageActionListener.onOtherUrlAction(
+                inAppMessage,
+                url,
+                queryBundle,
+            )
         if (wasHandled) {
             brazelog(V) {
                 "HTML message action listener handled url in onOtherUrlAction. Doing nothing further. Url: $url"
@@ -95,12 +105,13 @@ open class DefaultInAppMessageWebViewClientListener : IInAppMessageWebViewClient
         val useWebViewForWebLinks = parseUseWebViewFromQueryBundle(inAppMessage, queryBundle)
         val inAppMessageBundle = inAppMessage.extras.toBundle()
         inAppMessageBundle.putAll(queryBundle)
-        val uriAction = getDeeplinkHandlerInstance().createUriActionFromUrlString(
-            url,
-            inAppMessageBundle,
-            useWebViewForWebLinks,
-            Channel.INAPP_MESSAGE
-        )
+        val uriAction =
+            getDeeplinkHandlerInstance().createUriActionFromUrlString(
+                url,
+                inAppMessageBundle,
+                useWebViewForWebLinks,
+                Channel.INAPP_MESSAGE,
+            )
         if (uriAction == null) {
             brazelog(W) { "UriAction is null. Not passing any URI to BrazeDeeplinkHandler. Url: $url" }
             return
@@ -125,12 +136,11 @@ open class DefaultInAppMessageWebViewClientListener : IInAppMessageWebViewClient
     }
 
     companion object {
-
         @JvmStatic
         @VisibleForTesting
         fun parseUseWebViewFromQueryBundle(
             inAppMessage: IInAppMessage,
-            queryBundle: Bundle
+            queryBundle: Bundle,
         ): Boolean {
             var isAnyQueryFlagSet = false
             var isDeepLinkFlagSet = false
@@ -154,7 +164,10 @@ open class DefaultInAppMessageWebViewClientListener : IInAppMessageWebViewClient
 
         @JvmStatic
         @VisibleForTesting
-        fun logHtmlInAppMessageClick(inAppMessage: IInAppMessage, queryBundle: Bundle) {
+        fun logHtmlInAppMessageClick(
+            inAppMessage: IInAppMessage,
+            queryBundle: Bundle,
+        ) {
             if (queryBundle.containsKey(BrazeWebViewClient.QUERY_NAME_BUTTON_ID)) {
                 val inAppMessageHtml = inAppMessage as IInAppMessageHtml
                 queryBundle.getString(BrazeWebViewClient.QUERY_NAME_BUTTON_ID)?.let {

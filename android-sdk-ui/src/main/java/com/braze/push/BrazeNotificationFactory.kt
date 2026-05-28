@@ -61,14 +61,15 @@ open class BrazeNotificationFactory : IBrazeNotificationFactory {
         appConfigurationProvider: BrazeConfigurationProvider?,
         context: Context?,
         notificationExtras: Bundle?,
-        brazeExtras: Bundle?
+        brazeExtras: Bundle?,
     ): Notification? {
-        val payload = BrazeNotificationPayload(
-            notificationExtras,
-            brazeExtras,
-            context,
-            appConfigurationProvider
-        )
+        val payload =
+            BrazeNotificationPayload(
+                notificationExtras,
+                brazeExtras,
+                context,
+                appConfigurationProvider,
+            )
         return createNotification(payload)
     }
 
@@ -79,14 +80,15 @@ open class BrazeNotificationFactory : IBrazeNotificationFactory {
         configurationProvider: BrazeConfigurationProvider?,
         context: Context?,
         notificationExtras: Bundle?,
-        brazeExtras: Bundle?
+        brazeExtras: Bundle?,
     ): NotificationCompat.Builder? {
-        val payload = BrazeNotificationPayload(
-            notificationExtras,
-            brazeExtras,
-            context,
-            configurationProvider
-        )
+        val payload =
+            BrazeNotificationPayload(
+                notificationExtras,
+                brazeExtras,
+                context,
+                configurationProvider,
+            )
         return populateNotificationBuilder(payload)
     }
 
@@ -131,7 +133,8 @@ open class BrazeNotificationFactory : IBrazeNotificationFactory {
             prefetchBitmapsIfNewlyReceivedStoryPush(payload)
             val notificationChannelId = getOrCreateNotificationChannelId(payload)
             val notificationBuilder =
-                NotificationCompat.Builder(context, notificationChannelId)
+                NotificationCompat
+                    .Builder(context, notificationChannelId)
                     .setAutoCancel(true)
             setTitleIfPresent(notificationBuilder, payload)
             setContentIfPresent(notificationBuilder, payload)

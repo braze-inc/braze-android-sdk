@@ -25,8 +25,11 @@ import com.braze.ui.inappmessage.utils.InAppMessageViewUtils.setViewBackgroundCo
 import com.braze.ui.support.removeViewFromParent
 
 @Suppress("TooManyFunctions")
-abstract class InAppMessageImmersiveBaseView(context: Context?, attrs: AttributeSet?) :
-    InAppMessageBaseView(context, attrs), IInAppMessageImmersiveView {
+abstract class InAppMessageImmersiveBaseView(
+    context: Context?,
+    attrs: AttributeSet?,
+) : InAppMessageBaseView(context, attrs),
+    IInAppMessageImmersiveView {
     abstract val frameView: View?
     abstract override val messageTextView: TextView?
     abstract val messageHeaderTextView: TextView?
@@ -112,9 +115,10 @@ abstract class InAppMessageImmersiveBaseView(context: Context?, attrs: Attribute
                 closeButton.nextFocusRightId = closeButtonId
                 closeButton.nextFocusLeftId = closeButtonId
             }
-            else -> brazelog(W) {
-                "Cannot setup directional navigation. Got unsupported number of buttons: $numButtons"
-            }
+            else ->
+                brazelog(W) {
+                    "Cannot setup directional navigation. Got unsupported number of buttons: $numButtons"
+                }
         }
 
         // The entire view should focus back to the close
@@ -183,7 +187,10 @@ abstract class InAppMessageImmersiveBaseView(context: Context?, attrs: Attribute
      * @return If the button pressed was the back button, close the in-app message
      * and return true to indicate that the event was handled.
      */
-    override fun onKeyDown(keyCode: Int, event: KeyEvent): Boolean {
+    override fun onKeyDown(
+        keyCode: Int,
+        event: KeyEvent,
+    ): Boolean {
         if (isApiBelowBaklava &&
             keyCode == KeyEvent.KEYCODE_BACK &&
             BrazeInAppMessageManager.getInstance().doesBackButtonDismissInAppMessageView

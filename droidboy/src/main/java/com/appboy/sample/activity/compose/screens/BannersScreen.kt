@@ -25,7 +25,7 @@ fun BannersScreen(
     openDrawer: () -> Unit,
     viewModel: MainViewModel,
     scope: CoroutineScope? = null,
-    snackbarHostState: SnackbarHostState? = null
+    snackbarHostState: SnackbarHostState? = null,
 ) {
     Column(modifier = Modifier.fillMaxSize()) {
         TopBar(
@@ -34,16 +34,17 @@ fun BannersScreen(
             onButtonClicked = { openDrawer() },
         )
         Column(
-            modifier = Modifier
-                .fillMaxSize()
-                .verticalScroll(rememberScrollState())
-                .padding(horizontal = 16.dp),
+            modifier =
+                Modifier
+                    .fillMaxSize()
+                    .verticalScroll(rememberScrollState())
+                    .padding(horizontal = 16.dp),
             verticalArrangement = Arrangement.Top,
-            horizontalAlignment = Alignment.Start
+            horizontalAlignment = Alignment.Start,
         ) {
             Text(
                 text = "Placement + slot selection (1–5) is on the Banners tab. Example preview:",
-                modifier = Modifier.padding(vertical = 8.dp)
+                modifier = Modifier.padding(vertical = 8.dp),
             )
             Banner(placementId = "sdk-test-1")
         }

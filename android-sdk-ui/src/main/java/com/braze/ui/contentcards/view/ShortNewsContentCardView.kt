@@ -16,24 +16,30 @@ import com.braze.ui.R
  *
  * @param context The Android [Context] used for view inflation.
  */
-open class ShortNewsContentCardView(context: Context) : BaseContentCardView<ShortNewsCard>(
-    context
-) {
-    private inner class ViewHolder constructor(view: View) :
-        ContentCardViewHolder(view, isUnreadIndicatorEnabled) {
+open class ShortNewsContentCardView(
+    context: Context,
+) : BaseContentCardView<ShortNewsCard>(context) {
+    private inner class ViewHolder constructor(
+        view: View,
+    ) : ContentCardViewHolder(view, isUnreadIndicatorEnabled) {
         val title: TextView? = view.findViewById(R.id.com_braze_content_cards_short_news_card_title)
         val description: TextView? = view.findViewById(R.id.com_braze_content_cards_short_news_card_description)
         val imageView: ImageView? = view.findViewById(R.id.com_braze_content_cards_short_news_card_image)
     }
 
     override fun createViewHolder(viewGroup: ViewGroup): ContentCardViewHolder {
-        val view = LayoutInflater.from(viewGroup.context)
-            .inflate(R.layout.com_braze_short_news_content_card, viewGroup, false)
+        val view =
+            LayoutInflater
+                .from(viewGroup.context)
+                .inflate(R.layout.com_braze_short_news_content_card, viewGroup, false)
         setViewBackground(view)
         return ViewHolder(view)
     }
 
-    override fun bindViewHolder(viewHolder: ContentCardViewHolder, card: Card) {
+    override fun bindViewHolder(
+        viewHolder: ContentCardViewHolder,
+        card: Card,
+    ) {
         if (card is ShortNewsCard) {
             super.bindViewHolder(viewHolder, card)
             val shortNewsCardViewHolder = viewHolder as ViewHolder
@@ -47,7 +53,7 @@ open class ShortNewsContentCardView(context: Context) : BaseContentCardView<Shor
                 ASPECT_RATIO,
                 card.imageUrl,
                 card.altImageText,
-                card
+                card,
             )
             safeSetClipToOutline(shortNewsCardViewHolder.imageView)
             viewHolder.itemView.contentDescription = "${card.title} . ${card.description}"

@@ -2,8 +2,8 @@ package com.braze.ui.inappmessage.listeners
 
 import android.net.Uri
 import android.view.View
-import com.braze.enums.Channel
 import com.braze.coroutine.BrazeCoroutineScope
+import com.braze.enums.Channel
 import com.braze.enums.inappmessage.ClickAction
 import com.braze.models.inappmessage.IInAppMessage
 import com.braze.models.inappmessage.IInAppMessageHtml
@@ -28,21 +28,30 @@ open class DefaultInAppMessageViewLifecycleListener : IInAppMessageViewLifecycle
     private val inAppMessageManager: BrazeInAppMessageManager
         get() = BrazeInAppMessageManager.getInstance()
 
-    override fun beforeOpened(inAppMessageView: View, inAppMessage: IInAppMessage) {
+    override fun beforeOpened(
+        inAppMessageView: View,
+        inAppMessage: IInAppMessage,
+    ) {
         // Note that the client method must be called before any default processing below
         inAppMessageManager.inAppMessageManagerListener.beforeInAppMessageViewOpened(inAppMessageView, inAppMessage)
         brazelog { "IInAppMessageViewLifecycleListener.beforeOpened called." }
         inAppMessage.logImpression()
     }
 
-    override fun afterOpened(inAppMessageView: View, inAppMessage: IInAppMessage) {
+    override fun afterOpened(
+        inAppMessageView: View,
+        inAppMessage: IInAppMessage,
+    ) {
         brazelog { "IInAppMessageViewLifecycleListener.afterOpened called." }
 
         // Note that the client method must be called after any default processing above
         inAppMessageManager.inAppMessageManagerListener.afterInAppMessageViewOpened(inAppMessageView, inAppMessage)
     }
 
-    override fun beforeClosed(inAppMessageView: View, inAppMessage: IInAppMessage) {
+    override fun beforeClosed(
+        inAppMessageView: View,
+        inAppMessage: IInAppMessage,
+    ) {
         // Note that the client method must be called before any default processing below
         inAppMessageManager.inAppMessageManagerListener.beforeInAppMessageViewClosed(inAppMessageView, inAppMessage)
         brazelog { "IInAppMessageViewLifecycleListener.beforeClosed called." }
@@ -62,7 +71,7 @@ open class DefaultInAppMessageViewLifecycleListener : IInAppMessageViewLifecycle
 
     override fun onClicked(
         inAppMessageView: View,
-        inAppMessage: IInAppMessage
+        inAppMessage: IInAppMessage,
     ) {
         brazelog { "IInAppMessageViewLifecycleListener.onClicked called." }
         inAppMessage.logClick()
@@ -84,7 +93,7 @@ open class DefaultInAppMessageViewLifecycleListener : IInAppMessageViewLifecycle
 
     override fun onButtonClicked(
         messageButton: MessageButton,
-        inAppMessageImmersive: IInAppMessageImmersive
+        inAppMessageImmersive: IInAppMessageImmersive,
     ) {
         brazelog { "IInAppMessageViewLifecycleListener.onButtonClicked called." }
         inAppMessageImmersive.logButtonClick(messageButton)
@@ -93,12 +102,12 @@ open class DefaultInAppMessageViewLifecycleListener : IInAppMessageViewLifecycle
             try {
                 inAppMessageManager.inAppMessageManagerListener.onInAppMessageButtonClicked(
                     inAppMessageImmersive,
-                    messageButton
+                    messageButton,
                 )
             } catch (e: BrazeFunctionNotImplemented) {
                 inAppMessageManager.inAppMessageManagerListener.onInAppMessageButtonClicked(
                     inAppMessageImmersive,
-                    messageButton
+                    messageButton,
                 )
             }
         if (!wasHandled) {
@@ -107,20 +116,23 @@ open class DefaultInAppMessageViewLifecycleListener : IInAppMessageViewLifecycle
         }
     }
 
-    override fun onDismissed(inAppMessageView: View, inAppMessage: IInAppMessage) {
+    override fun onDismissed(
+        inAppMessageView: View,
+        inAppMessage: IInAppMessage,
+    ) {
         brazelog { "IInAppMessageViewLifecycleListener.onDismissed called." }
         inAppMessageManager.inAppMessageManagerListener.onInAppMessageDismissed(inAppMessage)
     }
 
     private fun performInAppMessageButtonClicked(
         messageButton: MessageButton,
-        inAppMessage: IInAppMessage
+        inAppMessage: IInAppMessage,
     ) {
         performClickAction(
             messageButton.clickAction,
             inAppMessage,
             messageButton.uri,
-            messageButton.openUriInWebview
+            messageButton.openUriInWebview,
         )
     }
 
@@ -129,7 +141,7 @@ open class DefaultInAppMessageViewLifecycleListener : IInAppMessageViewLifecycle
             inAppMessage.clickAction,
             inAppMessage,
             inAppMessage.uri,
-            inAppMessage.openUriInWebView
+            inAppMessage.openUriInWebView,
         )
     }
 
@@ -137,7 +149,7 @@ open class DefaultInAppMessageViewLifecycleListener : IInAppMessageViewLifecycle
         clickAction: ClickAction,
         inAppMessage: IInAppMessage,
         clickUri: Uri?,
-        openUriInWebview: Boolean
+        openUriInWebview: Boolean,
     ) {
         val activity = inAppMessageManager.activity
         if (activity == null) {
@@ -152,10 +164,13 @@ open class DefaultInAppMessageViewLifecycleListener : IInAppMessageViewLifecycle
                     brazelog { "clickUri is null, not performing click action" }
                     return
                 }
-                val uriAction = BrazeDeeplinkHandler.getInstance().createUriActionFromUri(
-                    clickUri, inAppMessage.extras.toBundle(),
-                    openUriInWebview, Channel.INAPP_MESSAGE
-                )
+                val uriAction =
+                    BrazeDeeplinkHandler.getInstance().createUriActionFromUri(
+                        clickUri,
+                        inAppMessage.extras.toBundle(),
+                        openUriInWebview,
+                        Channel.INAPP_MESSAGE,
+                    )
 
                 val appContext = inAppMessageManager.applicationContext
                 if (appContext == null) {

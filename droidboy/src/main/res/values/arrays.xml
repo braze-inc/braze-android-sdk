@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="delayed_init_mode_entries">
+        <item>Disabled</item>
+        <item>Queue Push Analytics</item>
+        <item>Drop Push Analytics</item>
+    </string-array>
+    <string-array name="delayed_init_mode_values">
+        <item>disabled</item>
+        <item>queue</item>
+        <item>drop</item>
+    </string-array>
+</resources>

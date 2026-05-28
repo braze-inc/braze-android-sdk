@@ -29,7 +29,9 @@ import org.json.JSONException
 import org.json.JSONObject
 import java.util.Random
 
-class PushTesterFragment : Fragment(), AdapterView.OnItemSelectedListener {
+class PushTesterFragment :
+    Fragment(),
+    AdapterView.OnItemSelectedListener {
     private var priority = "0"
     private var image: String? = null
     private var clickActionUrl: String? = null
@@ -78,7 +80,11 @@ class PushTesterFragment : Fragment(), AdapterView.OnItemSelectedListener {
             return publicVersionJSON.toString()
         }
 
-    override fun onCreateView(layoutInflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        layoutInflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?,
+    ): View? {
         val view = layoutInflater.inflate(R.layout.push_tester, container, false)
         view.findViewById<View>(R.id.push_tester_big_title).onCheckboxChecked { shouldUseBigTitle = it }
         view.findViewById<View>(R.id.push_tester_summary).onCheckboxChecked { shouldUseSummary = it }
@@ -123,7 +129,12 @@ class PushTesterFragment : Fragment(), AdapterView.OnItemSelectedListener {
     }
 
     @Suppress("ComplexMethod")
-    override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+    override fun onItemSelected(
+        parent: AdapterView<*>?,
+        view: View?,
+        position: Int,
+        id: Long,
+    ) {
         if (parent == null) return
 
         when (parent.id) {
@@ -184,7 +195,10 @@ class PushTesterFragment : Fragment(), AdapterView.OnItemSelectedListener {
                 if (!pushAccentColorString.isNullOrBlank()) {
                     shouldSetAccentColor = true
                     // Convert our hexadecimal string to the decimal expected by Braze
-                    accentColorString = java.lang.Long.decode(pushAccentColorString).toString()
+                    accentColorString =
+                        java.lang.Long
+                            .decode(pushAccentColorString)
+                            .toString()
                 } else {
                     shouldSetAccentColor = false
                 }
@@ -228,11 +242,12 @@ class PushTesterFragment : Fragment(), AdapterView.OnItemSelectedListener {
             notificationExtras.putString(Constants.BRAZE_PUSH_CONTENT_KEY, generateDisplayValue(CONTENT + random.nextInt()))
         }
         notificationExtras.putString(Constants.BRAZE_PUSH_BRAZE_KEY, TRUE_STRING)
-        val notificationId = if (shouldUseConstantNotificationId) {
-            "100"
-        } else {
-            getNotificationId(BrazeNotificationPayload(notificationExtras)).toString()
-        }
+        val notificationId =
+            if (shouldUseConstantNotificationId) {
+                "100"
+            } else {
+                getNotificationId(BrazeNotificationPayload(notificationExtras)).toString()
+            }
         notificationExtras.putString(Constants.BRAZE_PUSH_CUSTOM_NOTIFICATION_ID, notificationId)
         notificationExtras = addActionButtons(notificationExtras)
         if (isInlineImagePushEnabled) {
@@ -426,31 +441,31 @@ class PushTesterFragment : Fragment(), AdapterView.OnItemSelectedListener {
 
     // If shouldOverflowText is specified we concatenate an append string
     // This is to test big text and ellipsis cutoff in varying screen sizes
-    private fun generateDisplayValue(field: String): String {
-        return if (shouldOverflowText) {
+    private fun generateDisplayValue(field: String): String =
+        if (shouldOverflowText) {
             field + getString(R.string.overflow_string)
         } else {
             field
         }
-    }
 
     /**
      * Sets the Braze instance's notification factory.
      */
     private fun setNotificationFactory() {
-        customBrazeNotificationFactory = when (notificationFactoryType) {
-            "DroidboyNotificationFactory" -> {
-                DroidboyNotificationFactory()
-            }
+        customBrazeNotificationFactory =
+            when (notificationFactoryType) {
+                "DroidboyNotificationFactory" -> {
+                    DroidboyNotificationFactory()
+                }
 
-            "FullyCustomNotificationFactory" -> {
-                FullyCustomNotificationFactory()
-            }
+                "FullyCustomNotificationFactory" -> {
+                    FullyCustomNotificationFactory()
+                }
 
-            else -> {
-                null
+                else -> {
+                    null
+                }
             }
-        }
     }
 
     companion object {
@@ -480,16 +495,16 @@ class PushTesterFragment : Fragment(), AdapterView.OnItemSelectedListener {
                     "https://braze.com",
                     "Twenty WWWWWWW WWWW#",
                     "Twenty WWWWWWW WWWW#",
-                    "https://cdn-staging.braze.com/appboy/communication/assets/image_assets/images/60c82de467360e39d4ac9c4b/original.jpeg?1623731684"
-                )
+                    "https://cdn-staging.braze.com/appboy/communication/assets/image_assets/images/60c82de467360e39d4ac9c4b/original.jpeg?1623731684",
+                ),
             )
             PUSH_STORY_PAGE_VALUES.add(
                 PushStoryTesterPage(
                     "http://google.com",
                     "Twenty Five WW WWWW WWWW#",
                     "Twenty Five WW WWWW WWWW#",
-                    "https://cdn-staging.braze.com/appboy/communication/assets/image_assets/images/60c82de467360e2ab3ac9cf0/original.jpeg?1623731684"
-                )
+                    "https://cdn-staging.braze.com/appboy/communication/assets/image_assets/images/60c82de467360e2ab3ac9cf0/original.jpeg?1623731684",
+                ),
             )
 
             PUSH_STORY_PAGE_VALUES.add(
@@ -497,48 +512,48 @@ class PushTesterFragment : Fragment(), AdapterView.OnItemSelectedListener {
                     "https://braze.com",
                     "Thirty WW WWWW WWWW WWWW WWWW#",
                     "Thirty WW WWWW WWWW WWWW WWWW#",
-                    "https://cdn-staging.braze.com/appboy/communication/assets/image_assets/images/60c82de4ad561022b6418bd8/original.jpeg?1623731684"
-                )
+                    "https://cdn-staging.braze.com/appboy/communication/assets/image_assets/images/60c82de4ad561022b6418bd8/original.jpeg?1623731684",
+                ),
             )
             PUSH_STORY_PAGE_VALUES.add(
                 PushStoryTesterPage(
                     "https://braze.com",
                     "Forty WWW WWWW WWWW WWWW WWWW WWWW WWWW#",
                     "Forty WWW WWWW WWWW WWWW WWWW WWWW WWWW#",
-                    "https://cdn-staging.braze.com/appboy/communication/assets/image_assets/images/60c82de567360e3aa4ac9bed/original.jpeg?1623731685"
-                )
+                    "https://cdn-staging.braze.com/appboy/communication/assets/image_assets/images/60c82de567360e3aa4ac9bed/original.jpeg?1623731685",
+                ),
             )
             PUSH_STORY_PAGE_VALUES.add(
                 PushStoryTesterPage(
                     "https://braze.com",
                     "Forty Five WWW WWWW WWWW WWWW WWWW WWWW WWWW#",
                     "Forty Five WWW WWWW WWWW WWWW WWWW WWWW WWWW#",
-                    "https://cdn-staging.braze.com/appboy/communication/assets/image_assets/images/60c82de467360e7d35ac9e5f/original.jpeg?1623731684"
-                )
+                    "https://cdn-staging.braze.com/appboy/communication/assets/image_assets/images/60c82de467360e7d35ac9e5f/original.jpeg?1623731684",
+                ),
             )
             PUSH_STORY_PAGE_VALUES.add(
                 PushStoryTesterPage(
                     "https://braze.com",
                     "Fifteen W WWW#",
                     "Fifteen W WWW#",
-                    "https://cdn-staging.braze.com/appboy/communication/assets/image_assets/images/60c82de567360e2ab3ac9cf1/original.jpeg?1623731685"
-                )
+                    "https://cdn-staging.braze.com/appboy/communication/assets/image_assets/images/60c82de567360e2ab3ac9cf1/original.jpeg?1623731685",
+                ),
             )
             PUSH_STORY_PAGE_VALUES.add(
                 PushStoryTesterPage(
                     "https://braze.com",
                     "Ten  WWWW#",
                     "Ten  WWWW#",
-                    "https://cdn-staging.braze.com/appboy/communication/assets/image_assets/images/60c82de53a531a3ff3e7ef46/original.jpeg?1623731685"
-                )
+                    "https://cdn-staging.braze.com/appboy/communication/assets/image_assets/images/60c82de53a531a3ff3e7ef46/original.jpeg?1623731685",
+                ),
             )
             PUSH_STORY_PAGE_VALUES.add(
                 PushStoryTesterPage(
                     "https://braze.com",
                     "Five#",
                     "Five#",
-                    "https://cdn-staging.braze.com/appboy/communication/assets/image_assets/images/60c82de5ad5610327e418ac2/original.jpeg?1623731684"
-                )
+                    "https://cdn-staging.braze.com/appboy/communication/assets/image_assets/images/60c82de5ad5610327e418ac2/original.jpeg?1623731684",
+                ),
             )
         }
 

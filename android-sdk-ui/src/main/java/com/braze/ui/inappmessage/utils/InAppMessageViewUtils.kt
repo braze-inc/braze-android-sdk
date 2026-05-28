@@ -27,7 +27,6 @@ import com.braze.ui.inappmessage.BrazeInAppMessageManager
  * images, icons, colors, text alignment, backgrounds, and margins.
  */
 object InAppMessageViewUtils {
-
     /**
      * True when the device is below API 36 (BAKLAVA). On API 36+ back is handled only by
      * [OnBackInvokedDispatcher]; below that, views handle back via key events.
@@ -36,7 +35,10 @@ object InAppMessageViewUtils {
     val isApiBelowBaklava: Boolean = Build.VERSION.SDK_INT < Build.VERSION_CODES.BAKLAVA
 
     @JvmStatic
-    fun setImage(bitmap: Bitmap?, imageView: ImageView) {
+    fun setImage(
+        bitmap: Bitmap?,
+        imageView: ImageView,
+    ) {
         if (bitmap != null) {
             imageView.setImageBitmap(bitmap)
         }
@@ -48,7 +50,7 @@ object InAppMessageViewUtils {
         icon: String?,
         iconColor: Int,
         iconBackgroundColor: Int,
-        textView: TextView
+        textView: TextView,
     ) {
         if (icon != null) {
             try {
@@ -69,22 +71,34 @@ object InAppMessageViewUtils {
     }
 
     @JvmStatic
-    fun setFrameColor(view: View, color: Int?) {
+    fun setFrameColor(
+        view: View,
+        color: Int?,
+    ) {
         color?.let { view.setBackgroundColor(it) }
     }
 
     @JvmStatic
-    fun setTextViewColor(textView: TextView, color: Int) {
+    fun setTextViewColor(
+        textView: TextView,
+        color: Int,
+    ) {
         textView.setTextColor(color)
     }
 
     @JvmStatic
-    fun setViewBackgroundColor(view: View, color: Int) {
+    fun setViewBackgroundColor(
+        view: View,
+        color: Int,
+    ) {
         view.setBackgroundColor(color)
     }
 
     @JvmStatic
-    fun setViewBackgroundColorFilter(view: View, @ColorInt color: Int) {
+    fun setViewBackgroundColorFilter(
+        view: View,
+        @ColorInt color: Int,
+    ) {
         setDrawableColorFilter(view.background, color)
 
         // The alpha needs to be set separately from the background color filter or else it won't apply
@@ -92,7 +106,10 @@ object InAppMessageViewUtils {
     }
 
     @JvmStatic
-    fun setDrawableColor(drawable: Drawable, @ColorInt color: Int) {
+    fun setDrawableColor(
+        drawable: Drawable,
+        @ColorInt color: Int,
+    ) {
         if (drawable is LayerDrawable) {
             // This layer drawable should have the GradientDrawable as the
             // 0th layer and the RippleDrawable as the 1st layer
@@ -113,7 +130,10 @@ object InAppMessageViewUtils {
     }
 
     @JvmStatic
-    fun resetMessageMarginsIfNecessary(messageView: TextView?, headerView: TextView?) {
+    fun resetMessageMarginsIfNecessary(
+        messageView: TextView?,
+        headerView: TextView?,
+    ) {
         if (headerView == null && messageView != null) {
             // If header is not present but message is present, reset message margins to 0
             // Typically, the message's has a top margin to accommodate the header.
@@ -131,16 +151,23 @@ object InAppMessageViewUtils {
     }
 
     @JvmStatic
-    fun setTextAlignment(textView: TextView, textAlign: TextAlign) {
-        textView.gravity = when (textAlign) {
-            TextAlign.START -> Gravity.START
-            TextAlign.END -> Gravity.END
-            TextAlign.CENTER -> Gravity.CENTER
-        }
+    fun setTextAlignment(
+        textView: TextView,
+        textAlign: TextAlign,
+    ) {
+        textView.gravity =
+            when (textAlign) {
+                TextAlign.START -> Gravity.START
+                TextAlign.END -> Gravity.END
+                TextAlign.CENTER -> Gravity.CENTER
+            }
     }
 
     @Suppress("deprecation")
-    private fun setDrawableColorFilter(drawable: Drawable, @ColorInt color: Int) {
+    private fun setDrawableColorFilter(
+        drawable: Drawable,
+        @ColorInt color: Int,
+    ) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
             drawable.colorFilter = BlendModeColorFilter(color, BlendMode.SRC_ATOP)
         } else {

@@ -22,14 +22,19 @@ fun createVerticalAnimation(
     fromY: Float,
     toY: Float,
     duration: Long,
-    accelerate: Boolean
+    accelerate: Boolean,
 ): Animation {
-    val animation = TranslateAnimation(
-        Animation.RELATIVE_TO_PARENT, 0.0f,
-        Animation.RELATIVE_TO_PARENT, 0.0f,
-        Animation.RELATIVE_TO_SELF, fromY,
-        Animation.RELATIVE_TO_SELF, toY
-    )
+    val animation =
+        TranslateAnimation(
+            Animation.RELATIVE_TO_PARENT,
+            0.0f,
+            Animation.RELATIVE_TO_PARENT,
+            0.0f,
+            Animation.RELATIVE_TO_SELF,
+            fromY,
+            Animation.RELATIVE_TO_SELF,
+            toY,
+        )
     return setAnimationParams(animation, duration, accelerate)
 }
 
@@ -44,14 +49,19 @@ fun createHorizontalAnimation(
     fromX: Float,
     toX: Float,
     duration: Long,
-    accelerate: Boolean
+    accelerate: Boolean,
 ): Animation {
-    val animation = TranslateAnimation(
-        Animation.RELATIVE_TO_SELF, fromX,
-        Animation.RELATIVE_TO_SELF, toX,
-        Animation.RELATIVE_TO_PARENT, 0.0f,
-        Animation.RELATIVE_TO_PARENT, 0.0f
-    )
+    val animation =
+        TranslateAnimation(
+            Animation.RELATIVE_TO_SELF,
+            fromX,
+            Animation.RELATIVE_TO_SELF,
+            toX,
+            Animation.RELATIVE_TO_PARENT,
+            0.0f,
+            Animation.RELATIVE_TO_PARENT,
+            0.0f,
+        )
     return setAnimationParams(animation, duration, accelerate)
 }
 
@@ -63,7 +73,11 @@ fun createHorizontalAnimation(
  * @param accelerate Whether to use the accelerate interpolator or the decelerate interpolator.
  * @return the input Animation with duration and interpolator set
  */
-fun setAnimationParams(animation: Animation, duration: Long, accelerate: Boolean): Animation {
+fun setAnimationParams(
+    animation: Animation,
+    duration: Long,
+    accelerate: Boolean,
+): Animation {
     animation.duration = duration
     if (accelerate) {
         animation.interpolator = accelerateInterpolator

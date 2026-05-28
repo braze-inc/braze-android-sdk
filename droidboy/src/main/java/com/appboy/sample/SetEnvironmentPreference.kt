@@ -24,10 +24,13 @@ class SetEnvironmentPreference : CustomDialogBase() {
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View? = inflater.inflate(R.layout.set_environment_preference, container, false)
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+    override fun onViewCreated(
+        view: View,
+        savedInstanceState: Bundle?,
+    ) {
         super.onViewCreated(view, savedInstanceState)
         val context = requireContext()
 
@@ -64,15 +67,17 @@ class SetEnvironmentPreference : CustomDialogBase() {
         }
     }
 
-    private fun getApiKeyButton(alias: String, apiKey: String?): Button {
-        return Button(requireContext()).apply {
+    private fun getApiKeyButton(
+        alias: String,
+        apiKey: String?,
+    ): Button =
+        Button(requireContext()).apply {
             setOnClickListener {
                 apiKeyAliasTextView.text = alias
                 apiKeyTextView.text = apiKey
             }
             text = "$alias: $apiKey"
         }
-    }
 
     override fun onExitButtonPressed(clickedPositiveButton: Boolean) {
         if (clickedPositiveButton) {

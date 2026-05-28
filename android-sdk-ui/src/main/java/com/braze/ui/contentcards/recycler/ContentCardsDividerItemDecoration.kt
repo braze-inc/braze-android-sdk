@@ -16,7 +16,9 @@ import com.braze.ui.contentcards.adapters.ContentCardAdapter
  * For the item divider height: "R.dimen.com_braze_content_cards_divider_height"
  * For the item max width: "R.dimen.com_braze_content_cards_max_width"
  */
-open class ContentCardsDividerItemDecoration(context: Context) : RecyclerView.ItemDecoration() {
+open class ContentCardsDividerItemDecoration(
+    context: Context,
+) : RecyclerView.ItemDecoration() {
     private val appContext: Context = context.applicationContext
 
     /**
@@ -33,7 +35,7 @@ open class ContentCardsDividerItemDecoration(context: Context) : RecyclerView.It
         itemViewOutputRect: Rect,
         view: View,
         parent: RecyclerView,
-        state: RecyclerView.State
+        state: RecyclerView.State,
     ) {
         super.getItemOffsets(itemViewOutputRect, view, parent, state)
         val childAdapterPosition = parent.getChildAdapterPosition(view)

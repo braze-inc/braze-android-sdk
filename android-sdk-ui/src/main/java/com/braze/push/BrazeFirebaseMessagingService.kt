@@ -25,7 +25,6 @@ import com.google.firebase.messaging.RemoteMessage
  * automatic handling of Braze push messages delivered through FCM.
  */
 open class BrazeFirebaseMessagingService : FirebaseMessagingService() {
-
     override fun onNewToken(newToken: String) {
         super.onNewToken(newToken)
         handleOnNewToken(this, newToken)
@@ -52,7 +51,10 @@ open class BrazeFirebaseMessagingService : FirebaseMessagingService() {
          * @param newToken The new token received from Firebase.
          */
         @JvmStatic
-        fun handleOnNewToken(context: Context, newToken: String) {
+        fun handleOnNewToken(
+            context: Context,
+            newToken: String,
+        ) {
             BrazeInternal.applyPendingRuntimeConfiguration(context)
             val configurationProvider = BrazeInternal.getConfigurationProvider(context)
             if (Braze.getConfiguredApiKey(configurationProvider).isNullOrEmpty()) {
@@ -80,7 +82,10 @@ open class BrazeFirebaseMessagingService : FirebaseMessagingService() {
          * if the [RemoteMessage] did not originate from Braze or otherwise could not be handled by Braze.
          */
         @JvmStatic
-        fun handleBrazeRemoteMessage(context: Context, remoteMessage: RemoteMessage): Boolean {
+        fun handleBrazeRemoteMessage(
+            context: Context,
+            remoteMessage: RemoteMessage,
+        ): Boolean {
             if (!isBrazePushNotification(remoteMessage)) {
                 brazelog(I) {
                     "Remote message did not originate from Braze. Not " +
@@ -139,7 +144,11 @@ open class BrazeFirebaseMessagingService : FirebaseMessagingService() {
          * Invokes the [FCM_SERVICE_OMR_METHOD] method of the argument class with the provided
          * [RemoteMessage].
          */
-        internal fun invokeFallbackFirebaseService(classpath: String, remoteMessage: RemoteMessage, context: Context) {
+        internal fun invokeFallbackFirebaseService(
+            classpath: String,
+            remoteMessage: RemoteMessage,
+            context: Context,
+        ) {
             val fallbackObject = constructObjectQuietly(classpath)
             if (fallbackObject == null) {
                 brazelog {

@@ -16,6 +16,6 @@ open class InAppMessageButton : Button {
     constructor(context: Context?, attrs: AttributeSet?, defStyleAttr: Int) : super(
         context,
         attrs,
-        defStyleAttr
+        defStyleAttr,
     )
 }

@@ -22,9 +22,8 @@ import java.util.Locale
 class NetworkConsoleAdapter(
     context: Context,
     private val maxEntries: Int = DEFAULT_MAX_ENTRIES,
-    private val onEntryClick: (NetworkLogEntry) -> Unit = {}
+    private val onEntryClick: (NetworkLogEntry) -> Unit = {},
 ) : RecyclerView.Adapter<NetworkConsoleAdapter.ViewHolder>() {
-
     private val entries = ArrayDeque<NetworkLogEntry>(maxEntries)
     private val timeFormatter = SimpleDateFormat("HH:mm:ss.SSS", Locale.US)
     private val palette = DirectionPalette(context)
@@ -68,13 +67,21 @@ class NetworkConsoleAdapter(
         return didEvict
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val view = LayoutInflater.from(parent.context)
-            .inflate(R.layout.network_console_item, parent, false)
+    override fun onCreateViewHolder(
+        parent: ViewGroup,
+        viewType: Int,
+    ): ViewHolder {
+        val view =
+            LayoutInflater
+                .from(parent.context)
+                .inflate(R.layout.network_console_item, parent, false)
         return ViewHolder(view, palette)
     }
 
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+    override fun onBindViewHolder(
+        holder: ViewHolder,
+        position: Int,
+    ) {
         val entry = entries[position]
         holder.bind(entry, timeFormatter)
         holder.itemView.setOnClickListener { onEntryClick(entry) }
@@ -82,14 +89,20 @@ class NetworkConsoleAdapter(
 
     override fun getItemCount(): Int = entries.size
 
-    class ViewHolder(view: View, private val palette: DirectionPalette) : RecyclerView.ViewHolder(view) {
+    class ViewHolder(
+        view: View,
+        private val palette: DirectionPalette,
+    ) : RecyclerView.ViewHolder(view) {
         private val directionView: TextView = view.findViewById(R.id.network_console_item_direction)
         private val timestampView: TextView = view.findViewById(R.id.network_console_item_timestamp)
         private val statusView: TextView = view.findViewById(R.id.network_console_item_status)
         private val urlView: TextView = view.findViewById(R.id.network_console_item_url)
         private val messageView: TextView = view.findViewById(R.id.network_console_item_message)
 
-        fun bind(entry: NetworkLogEntry, timeFormatter: SimpleDateFormat) {
+        fun bind(
+            entry: NetworkLogEntry,
+            timeFormatter: SimpleDateFormat,
+        ) {
             directionView.text = entry.direction.name
             directionView.setTextColor(palette.colorFor(entry.direction))
             timestampView.text = timeFormatter.format(Date(entry.timestampMillis))
@@ -108,21 +121,28 @@ class NetworkConsoleAdapter(
      * Resolves direction-tag colors once at adapter construction so we don't hit the
      * resource system on every bind while the user scrolls a long history.
      */
-    class DirectionPalette(context: Context) {
+    class DirectionPalette(
+        context: Context,
+    ) {
         @ColorInt private val request = ContextCompat.getColor(context, R.color.network_console_request)
+
         @ColorInt private val response = ContextCompat.getColor(context, R.color.network_console_response)
+
         @ColorInt private val failure = ContextCompat.getColor(context, R.color.network_console_failure)
+
         @ColorInt private val dispatch = ContextCompat.getColor(context, R.color.network_console_dispatch)
+
         @ColorInt private val other = Color.DKGRAY
 
         @ColorInt
-        fun colorFor(direction: NetworkLogEntry.Direction): Int = when (direction) {
-            NetworkLogEntry.Direction.REQUEST -> request
-            NetworkLogEntry.Direction.RESPONSE -> response
-            NetworkLogEntry.Direction.FAILURE -> failure
-            NetworkLogEntry.Direction.DISPATCH -> dispatch
-            NetworkLogEntry.Direction.OTHER -> other
-        }
+        fun colorFor(direction: NetworkLogEntry.Direction): Int =
+            when (direction) {
+                NetworkLogEntry.Direction.REQUEST -> request
+                NetworkLogEntry.Direction.RESPONSE -> response
+                NetworkLogEntry.Direction.FAILURE -> failure
+                NetworkLogEntry.Direction.DISPATCH -> dispatch
+                NetworkLogEntry.Direction.OTHER -> other
+            }
     }
 
     companion object {

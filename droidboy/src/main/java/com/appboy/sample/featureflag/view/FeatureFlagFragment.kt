@@ -18,19 +18,22 @@ import com.braze.events.FeatureFlagsUpdatedEvent
 import com.braze.events.IEventSubscriber
 import com.braze.models.FeatureFlag
 
-class FeatureFlagFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
+class FeatureFlagFragment :
+    Fragment(),
+    SwipeRefreshLayout.OnRefreshListener {
     private lateinit var dataAdapter: FeatureFlagAdapter
     private lateinit var recyclerView: RecyclerView
     private lateinit var swipeRefreshLayout: SwipeRefreshLayout
 
-    private val updateListener = IEventSubscriber<FeatureFlagsUpdatedEvent> {
-        handleFeatureFlagUpdate(it.featureFlags)
-    }
+    private val updateListener =
+        IEventSubscriber<FeatureFlagsUpdatedEvent> {
+            handleFeatureFlagUpdate(it.featureFlags)
+        }
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View? {
         // Inflate the layout for this fragment
         val rootView = inflater.inflate(R.layout.feature_flag_fragment, container, false)

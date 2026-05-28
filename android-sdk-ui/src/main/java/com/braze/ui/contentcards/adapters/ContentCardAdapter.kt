@@ -23,9 +23,9 @@ open class ContentCardAdapter(
     private val context: Context,
     private val layoutManager: LinearLayoutManager,
     private val cardData: MutableList<Card>,
-    private val contentCardsViewBindingHandler: IContentCardsViewBindingHandler
-) : RecyclerView.Adapter<ContentCardViewHolder>(), ItemTouchHelperAdapter {
-
+    private val contentCardsViewBindingHandler: IContentCardsViewBindingHandler,
+) : RecyclerView.Adapter<ContentCardViewHolder>(),
+    ItemTouchHelperAdapter {
     // Handler is still used here instead of coroutines because it guarantees order
     private val handler: Handler = Handler(Looper.getMainLooper())
     private var impressedCardIdsInternal = mutableSetOf<String>()
@@ -44,18 +44,21 @@ open class ContentCardAdapter(
         setHasStableIds(true)
     }
 
-    override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int) =
-        contentCardsViewBindingHandler.onCreateViewHolder(context, cardData, viewGroup, viewType)
+    override fun onCreateViewHolder(
+        viewGroup: ViewGroup,
+        viewType: Int,
+    ) = contentCardsViewBindingHandler.onCreateViewHolder(context, cardData, viewGroup, viewType)
 
-    override fun onBindViewHolder(viewHolder: ContentCardViewHolder, position: Int) {
+    override fun onBindViewHolder(
+        viewHolder: ContentCardViewHolder,
+        position: Int,
+    ) {
         contentCardsViewBindingHandler.onBindViewHolder(context, cardData, viewHolder, position)
     }
 
-    override fun getItemViewType(position: Int) =
-        contentCardsViewBindingHandler.getItemViewType(context, cardData, position)
+    override fun getItemViewType(position: Int) = contentCardsViewBindingHandler.getItemViewType(context, cardData, position)
 
-    override fun getItemCount() =
-        cardData.size
+    override fun getItemCount() = cardData.size
 
     override fun onItemDismiss(position: Int) {
         // Note that the ordering of these operations is important. We can't notify of item removal until the item has
@@ -71,13 +74,12 @@ open class ContentCardAdapter(
         BrazeContentCardsManager.instance.contentCardsActionListener?.onContentCardDismissed(context, removedCard)
     }
 
-    override fun isItemDismissable(position: Int): Boolean {
-        return if (cardData.isEmpty() || isInvalidIndex(position)) {
+    override fun isItemDismissable(position: Int): Boolean =
+        if (cardData.isEmpty() || isInvalidIndex(position)) {
             false
         } else {
             cardData[position].isDismissibleByUser
         }
-    }
 
     override fun onViewAttachedToWindow(holder: ContentCardViewHolder) {
         // Note that onViewAttachedToWindow() is called right before a view is "visible".
@@ -89,8 +91,9 @@ open class ContentCardAdapter(
             return
         }
         val adapterPosition = holder.bindingAdapterPosition
-        if (adapterPosition == RecyclerView.NO_POSITION || !isAdapterPositionOnScreen(
-                adapterPosition
+        if (adapterPosition == RecyclerView.NO_POSITION ||
+            !isAdapterPositionOnScreen(
+                adapterPosition,
             )
         ) {
             brazelog(V) {
@@ -252,27 +255,33 @@ open class ContentCardAdapter(
         }
     }
 
-    private fun isInvalidIndex(index: Int) =
-        index < 0 || index >= cardData.size
+    private fun isInvalidIndex(index: Int) = index < 0 || index >= cardData.size
 
     /**
      * A [Card] based implementation of the [DiffUtil.Callback]. This implementation assumes cards with the same id
      * are equivalent content-wise and visually.
      */
-    private class CardListDiffCallback(private val oldCards: List<Card>, private val newCards: List<Card>) : DiffUtil.Callback() {
-        override fun getOldListSize() =
-            oldCards.size
+    private class CardListDiffCallback(
+        private val oldCards: List<Card>,
+        private val newCards: List<Card>,
+    ) : DiffUtil.Callback() {
+        override fun getOldListSize() = oldCards.size
 
-        override fun getNewListSize() =
-            newCards.size
+        override fun getNewListSize() = newCards.size
 
-        override fun areItemsTheSame(oldItemPosition: Int, newItemPosition: Int) =
-            doItemsShareIds(oldItemPosition, newItemPosition)
+        override fun areItemsTheSame(
+            oldItemPosition: Int,
+            newItemPosition: Int,
+        ) = doItemsShareIds(oldItemPosition, newItemPosition)
 
-        override fun areContentsTheSame(oldItemPosition: Int, newItemPosition: Int) =
-            doItemsShareIds(oldItemPosition, newItemPosition)
+        override fun areContentsTheSame(
+            oldItemPosition: Int,
+            newItemPosition: Int,
+        ) = doItemsShareIds(oldItemPosition, newItemPosition)
 
-        private fun doItemsShareIds(oldItemPosition: Int, newItemPosition: Int) =
-            oldCards[oldItemPosition].id == newCards[newItemPosition].id
+        private fun doItemsShareIds(
+            oldItemPosition: Int,
+            newItemPosition: Int,
+        ) = oldCards[oldItemPosition].id == newCards[newItemPosition].id
     }
 }

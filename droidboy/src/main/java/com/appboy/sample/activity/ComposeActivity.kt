@@ -60,11 +60,12 @@ import kotlinx.coroutines.launch
 class ComposeActivity : ComponentActivity() {
     private val viewModel: MainViewModel by viewModels()
 
-    private val screens = listOf(
-        DrawerScreens.ContentCardsScreen,
-        DrawerScreens.BannersScreen,
-        DrawerScreens.JavascriptBridgeScreen
-    )
+    private val screens =
+        listOf(
+            DrawerScreens.ContentCardsScreen,
+            DrawerScreens.BannersScreen,
+            DrawerScreens.JavascriptBridgeScreen,
+        )
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -105,8 +106,9 @@ class ComposeActivity : ComponentActivity() {
                     SnackbarHost(hostState = snackbarHostState)
                 }) { innerPadding ->
                     Column(
-                        modifier = Modifier
-                            .padding(innerPadding),
+                        modifier =
+                            Modifier
+                                .padding(innerPadding),
                         verticalArrangement = Arrangement.spacedBy(16.dp),
                     ) {
                         ModalNavigationDrawer(
@@ -116,10 +118,11 @@ class ComposeActivity : ComponentActivity() {
                                     Text(
                                         "Droidboy",
                                         fontSize = 24.sp,
-                                        modifier = Modifier
-                                            .fillMaxWidth()
-                                            .background(MaterialTheme.colorScheme.primary)
-                                            .padding(16.dp)
+                                        modifier =
+                                            Modifier
+                                                .fillMaxWidth()
+                                                .background(MaterialTheme.colorScheme.primary)
+                                                .padding(16.dp),
                                     )
 
                                     screens.forEach { screen ->
@@ -145,15 +148,15 @@ class ComposeActivity : ComponentActivity() {
                                                     // Restore state when reselecting a previously selected item
                                                     restoreState = true
                                                 }
-                                            }
+                                            },
                                         )
                                     }
                                 }
-                            }
+                            },
                         ) {
                             NavHost(
                                 navController = navController,
-                                startDestination = DrawerScreens.ContentCardsScreen.route
+                                startDestination = DrawerScreens.ContentCardsScreen.route,
                             ) {
                                 composable(DrawerScreens.ContentCardsScreen.route) {
                                     ContentCardsScreen(
@@ -164,7 +167,7 @@ class ComposeActivity : ComponentActivity() {
                                         },
                                         viewModel,
                                         scope,
-                                        snackbarHostState
+                                        snackbarHostState,
                                     )
                                 }
                                 composable(DrawerScreens.BannersScreen.route) {
@@ -176,7 +179,7 @@ class ComposeActivity : ComponentActivity() {
                                         },
                                         viewModel,
                                         scope,
-                                        snackbarHostState
+                                        snackbarHostState,
                                     )
                                 }
                                 composable(DrawerScreens.JavascriptBridgeScreen.route) {
@@ -188,7 +191,7 @@ class ComposeActivity : ComponentActivity() {
                                         },
                                         viewModel,
                                         scope,
-                                        snackbarHostState
+                                        snackbarHostState,
                                     )
                                 }
                             }
@@ -207,15 +210,16 @@ val myCustomCardRenderer: @Composable ((Card) -> Boolean) = { card ->
             Modifier
                 .padding(10.dp)
                 .fillMaxWidth()
-                .background(color = Color.Red)
+                .background(color = Color.Red),
         ) {
             Text(
-                modifier = Modifier
-                    .align(Alignment.Center)
-                    .fillMaxWidth()
-                    .basicMarquee(iterations = Int.MAX_VALUE),
+                modifier =
+                    Modifier
+                        .align(Alignment.Center)
+                        .fillMaxWidth()
+                        .basicMarquee(iterations = Int.MAX_VALUE),
                 fontSize = 35.sp,
-                text = textCard.description
+                text = textCard.description,
             )
         }
         true
@@ -228,13 +232,15 @@ val myCustomCardRenderer: @Composable ((Card) -> Boolean) = { card ->
 @Suppress("UnusedPrivateMember")
 private fun GetMyBrazeStyle(content: @Composable () -> Unit) {
     BrazeStyle(
-        contentCardStyle = ContentCardStyling(
-            cardBackgroundColor = Color.Blue,
-            textAnnouncementContentCardStyle = BrazeTextAnnouncementContentCardStyling(
-                cardBackgroundColor = Color.Red
+        contentCardStyle =
+            ContentCardStyling(
+                cardBackgroundColor = Color.Blue,
+                textAnnouncementContentCardStyle =
+                    BrazeTextAnnouncementContentCardStyling(
+                        cardBackgroundColor = Color.Red,
+                    ),
             ),
-        ),
-        content = content
+        content = content,
     )
 }
 
@@ -242,20 +248,22 @@ private fun GetMyBrazeStyle(content: @Composable () -> Unit) {
 @Suppress("UnusedPrivateMember")
 private fun GetMyOtherBrazeStyle(content: @Composable () -> Unit) {
     BrazeStyle(
-        contentCardStyle = ContentCardStyling(
-            pinnedComposable = {
-                Box(Modifier.fillMaxWidth()) {
-                    Text(
-                        modifier = Modifier
-                            .align(Alignment.Center)
-                            .width(50.dp)
-                            .basicMarquee(iterations = Int.MAX_VALUE),
-                        text = "This message is not read. Please read it."
-                    )
-                }
-            },
-            cardBackgroundColor = Color.Red
-        ),
-        content = content
+        contentCardStyle =
+            ContentCardStyling(
+                pinnedComposable = {
+                    Box(Modifier.fillMaxWidth()) {
+                        Text(
+                            modifier =
+                                Modifier
+                                    .align(Alignment.Center)
+                                    .width(50.dp)
+                                    .basicMarquee(iterations = Int.MAX_VALUE),
+                            text = "This message is not read. Please read it.",
+                        )
+                    }
+                },
+                cardBackgroundColor = Color.Red,
+            ),
+        content = content,
     )
 }

@@ -35,6 +35,7 @@ import com.braze.ui.support.isActivityRegisteredInManifest
 open class UriAction : IAction {
     /** Optional extras to pass to the launched intent. */
     val extras: Bundle?
+
     /** The [Channel] from which this action originated. */
     final override val channel: Channel
 
@@ -106,10 +107,16 @@ open class UriAction : IAction {
     /**
      * Opens the remote scheme Uri in [BrazeWebViewActivity].
      */
-    protected open fun openUriWithWebViewActivity(context: Context, uri: Uri, extras: Bundle?) {
+    protected open fun openUriWithWebViewActivity(
+        context: Context,
+        uri: Uri,
+        extras: Bundle?,
+    ) {
         val intent = getWebViewActivityIntent(context, uri, extras)
-        intent.flags = BrazeDeeplinkHandler.getInstance()
-            .getIntentFlags(IBrazeDeeplinkHandler.IntentFlagPurpose.URI_ACTION_OPEN_WITH_WEBVIEW_ACTIVITY)
+        intent.flags =
+            BrazeDeeplinkHandler
+                .getInstance()
+                .getIntentFlags(IBrazeDeeplinkHandler.IntentFlagPurpose.URI_ACTION_OPEN_WITH_WEBVIEW_ACTIVITY)
         try {
             context.startActivity(intent)
         } catch (e: Exception) {
@@ -120,10 +127,16 @@ open class UriAction : IAction {
     /**
      * Uses an Intent.ACTION_VIEW intent to open the Uri.
      */
-    protected open fun openUriWithActionView(context: Context, uri: Uri, extras: Bundle?) {
+    protected open fun openUriWithActionView(
+        context: Context,
+        uri: Uri,
+        extras: Bundle?,
+    ) {
         val intent = getActionViewIntent(context, uri, extras)
-        intent.flags = BrazeDeeplinkHandler.getInstance()
-            .getIntentFlags(IBrazeDeeplinkHandler.IntentFlagPurpose.URI_ACTION_OPEN_WITH_ACTION_VIEW)
+        intent.flags =
+            BrazeDeeplinkHandler
+                .getInstance()
+                .getIntentFlags(IBrazeDeeplinkHandler.IntentFlagPurpose.URI_ACTION_OPEN_WITH_ACTION_VIEW)
         try {
             context.startActivity(intent)
         } catch (e: Exception) {
@@ -136,7 +149,11 @@ open class UriAction : IAction {
      *
      * @see [UriAction.getIntentArrayWithConfiguredBackStack]
      */
-    protected open fun openUriWithWebViewActivityFromPush(context: Context, uri: Uri, extras: Bundle?) {
+    protected open fun openUriWithWebViewActivityFromPush(
+        context: Context,
+        uri: Uri,
+        extras: Bundle?,
+    ) {
         val configurationProvider = BrazeInternal.getConfigurationProvider(context)
         try {
             val webViewIntent = getWebViewActivityIntent(context, uri, extras)
@@ -145,8 +162,8 @@ open class UriAction : IAction {
                     context,
                     extras,
                     webViewIntent,
-                    configurationProvider
-                )
+                    configurationProvider,
+                ),
             )
         } catch (e: Exception) {
             brazelog(E, e) { "Braze WebView Activity not opened successfully." }
@@ -159,7 +176,11 @@ open class UriAction : IAction {
      *
      * @see [UriAction.getIntentArrayWithConfiguredBackStack]
      */
-    protected open fun openUriWithActionViewFromPush(context: Context, uri: Uri, extras: Bundle?) {
+    protected open fun openUriWithActionViewFromPush(
+        context: Context,
+        uri: Uri,
+        extras: Bundle?,
+    ) {
         val configurationProvider = BrazeInternal.getConfigurationProvider(context)
         try {
             val uriIntent = getActionViewIntent(context, uri, extras)
@@ -168,8 +189,8 @@ open class UriAction : IAction {
                     context,
                     extras,
                     uriIntent,
-                    configurationProvider
-                )
+                    configurationProvider,
+                ),
             )
         } catch (e: ActivityNotFoundException) {
             brazelog(W, e) { "Could not find appropriate activity to open for deep link $uri" }
@@ -179,23 +200,28 @@ open class UriAction : IAction {
     /**
      * Returns an intent that opens the uri inside of a [BrazeWebViewActivity].
      */
-    protected fun getWebViewActivityIntent(context: Context, uri: Uri, extras: Bundle?): Intent {
+    protected fun getWebViewActivityIntent(
+        context: Context,
+        uri: Uri,
+        extras: Bundle?,
+    ): Intent {
         val configurationProvider = BrazeInternal.getConfigurationProvider(context)
         val customWebViewActivityClassName = configurationProvider.customHtmlWebViewActivityClassName
 
         // If the class is valid and is manifest registered, use it as the launching intent
-        val webViewActivityIntent: Intent = if (!customWebViewActivityClassName.isNullOrBlank()
-            && isActivityRegisteredInManifest(
-                context,
-                customWebViewActivityClassName
-            )
-        ) {
-            brazelog { "Launching custom WebView Activity with class name: $customWebViewActivityClassName" }
-            Intent()
-                .setClassName(context, customWebViewActivityClassName)
-        } else {
-            Intent(context, BrazeWebViewActivity::class.java)
-        }
+        val webViewActivityIntent: Intent =
+            if (!customWebViewActivityClassName.isNullOrBlank() &&
+                isActivityRegisteredInManifest(
+                    context,
+                    customWebViewActivityClassName,
+                )
+            ) {
+                brazelog { "Launching custom WebView Activity with class name: $customWebViewActivityClassName" }
+                Intent()
+                    .setClassName(context, customWebViewActivityClassName)
+            } else {
+                Intent(context, BrazeWebViewActivity::class.java)
+            }
         if (extras != null) {
             webViewActivityIntent.putExtras(extras)
         }
@@ -204,7 +230,11 @@ open class UriAction : IAction {
     }
 
     @SuppressLint("QueryPermissionsNeeded")
-    protected fun getActionViewIntent(context: Context, uri: Uri, extras: Bundle?): Intent {
+    protected fun getActionViewIntent(
+        context: Context,
+        uri: Uri,
+        extras: Bundle?,
+    ): Intent {
         val intent = Intent(Intent.ACTION_VIEW)
         intent.data = uri
         if (extras != null) {
@@ -212,11 +242,12 @@ open class UriAction : IAction {
         }
 
         // If the current app can already handle the intent, default to using it
-        val resolveInfos = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-            context.packageManager.queryIntentActivities(intent, PackageManager.ResolveInfoFlags.of(0))
-        } else {
-            context.packageManager.queryIntentActivities(intent, 0)
-        }
+        val resolveInfos =
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+                context.packageManager.queryIntentActivities(intent, PackageManager.ResolveInfoFlags.of(0))
+            } else {
+                context.packageManager.queryIntentActivities(intent, 0)
+            }
         if (resolveInfos.size > 1) {
             for (resolveInfo in resolveInfos) {
                 if (resolveInfo.activityInfo.packageName == context.packageName) {
@@ -245,7 +276,7 @@ open class UriAction : IAction {
         context: Context,
         extras: Bundle?,
         targetIntent: Intent,
-        configurationProvider: BrazeConfigurationProvider
+        configurationProvider: BrazeConfigurationProvider,
     ): Array<Intent> {
         // The root intent will either point to the launcher activity,
         // some custom activity, or nothing if the back-stack is disabled.
@@ -260,15 +291,16 @@ open class UriAction : IAction {
                 // Check if the activity is registered in the manifest. If not, then add nothing to the back stack
                 if (isActivityRegisteredInManifest(context, activityClass)) {
                     brazelog(I) { "Adding custom back stack activity while opening uri from push: $activityClass" }
-                    rootIntent = extras?.let {
-                        Intent()
-                            .setClassName(context, activityClass)
-                            .setFlags(
-                                BrazeDeeplinkHandler.getInstance()
-                                    .getIntentFlags(IBrazeDeeplinkHandler.IntentFlagPurpose.URI_ACTION_BACK_STACK_GET_ROOT_INTENT)
-                            )
-                            .putExtras(it)
-                    }
+                    rootIntent =
+                        extras?.let {
+                            Intent()
+                                .setClassName(context, activityClass)
+                                .setFlags(
+                                    BrazeDeeplinkHandler
+                                        .getInstance()
+                                        .getIntentFlags(IBrazeDeeplinkHandler.IntentFlagPurpose.URI_ACTION_BACK_STACK_GET_ROOT_INTENT),
+                                ).putExtras(it)
+                        }
                 } else {
                     brazelog(I) { "Not adding unregistered activity to the back stack while opening uri from push: $activityClass" }
                 }
@@ -279,8 +311,10 @@ open class UriAction : IAction {
         return if (rootIntent == null) {
             // Calling startActivities() from outside of an Activity
             // context requires the FLAG_ACTIVITY_NEW_TASK flag on the first Intent
-            targetIntent.flags = BrazeDeeplinkHandler.getInstance()
-                .getIntentFlags(IBrazeDeeplinkHandler.IntentFlagPurpose.URI_ACTION_BACK_STACK_ONLY_GET_TARGET_INTENT)
+            targetIntent.flags =
+                BrazeDeeplinkHandler
+                    .getInstance()
+                    .getIntentFlags(IBrazeDeeplinkHandler.IntentFlagPurpose.URI_ACTION_BACK_STACK_ONLY_GET_TARGET_INTENT)
 
             // Just return the target intent by itself
             arrayOf(targetIntent)

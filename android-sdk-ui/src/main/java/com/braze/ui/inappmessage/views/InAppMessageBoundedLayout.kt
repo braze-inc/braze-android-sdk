@@ -3,8 +3,8 @@ package com.braze.ui.inappmessage.views
 import android.content.Context
 import android.util.AttributeSet
 import android.widget.RelativeLayout
-import com.braze.ui.R
 import androidx.core.content.withStyledAttributes
+import com.braze.ui.R
 
 /**
  * A [RelativeLayout] that respects maximum/minimum dimension bounds.
@@ -18,26 +18,33 @@ open class InAppMessageBoundedLayout : RelativeLayout {
     constructor(context: Context) : super(context)
     constructor(context: Context, attrs: AttributeSet?) : super(context, attrs) {
         context.withStyledAttributes(attrs, R.styleable.InAppMessageBoundedLayout) {
-            maxDefinedWidthPixels = getDimensionPixelSize(
-                R.styleable.InAppMessageBoundedLayout_inAppMessageBoundedLayoutMaxWidth,
-                0
-            )
-            minDefinedWidthPixels = getDimensionPixelSize(
-                R.styleable.InAppMessageBoundedLayout_inAppMessageBoundedLayoutMinWidth,
-                0
-            )
-            maxDefinedHeightPixels = getDimensionPixelSize(
-                R.styleable.InAppMessageBoundedLayout_inAppMessageBoundedLayoutMaxHeight,
-                0
-            )
-            minDefinedHeightPixels = getDimensionPixelSize(
-                R.styleable.InAppMessageBoundedLayout_inAppMessageBoundedLayoutMinHeight,
-                0
-            )
+            maxDefinedWidthPixels =
+                getDimensionPixelSize(
+                    R.styleable.InAppMessageBoundedLayout_inAppMessageBoundedLayoutMaxWidth,
+                    0,
+                )
+            minDefinedWidthPixels =
+                getDimensionPixelSize(
+                    R.styleable.InAppMessageBoundedLayout_inAppMessageBoundedLayoutMinWidth,
+                    0,
+                )
+            maxDefinedHeightPixels =
+                getDimensionPixelSize(
+                    R.styleable.InAppMessageBoundedLayout_inAppMessageBoundedLayoutMaxHeight,
+                    0,
+                )
+            minDefinedHeightPixels =
+                getDimensionPixelSize(
+                    R.styleable.InAppMessageBoundedLayout_inAppMessageBoundedLayoutMinHeight,
+                    0,
+                )
         }
     }
 
-    override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
+    override fun onMeasure(
+        widthMeasureSpec: Int,
+        heightMeasureSpec: Int,
+    ) {
         var newWidthMeasureSpec = widthMeasureSpec
         var newHeightMeasureSpec = heightMeasureSpec
 

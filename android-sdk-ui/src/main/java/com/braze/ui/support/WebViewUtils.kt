@@ -19,7 +19,10 @@ private val TAG = "WebViewUtils".getBrazeLogTag()
  * @param context The Android [Context] used for night mode detection.
  */
 @SuppressLint("SetJavaScriptEnabled")
-fun setWebViewSettings(settings: WebSettings, context: Context) {
+fun setWebViewSettings(
+    settings: WebSettings,
+    context: Context,
+) {
     settings.javaScriptEnabled = true
     settings.useWideViewPort = true
     settings.loadWithOverviewMode = true
@@ -30,18 +33,18 @@ fun setWebViewSettings(settings: WebSettings, context: Context) {
     try {
         // Note that this check is OS version agnostic since the Android WebView can be
         // updated independently
-        if (WebViewFeature.isFeatureSupported(WebViewFeature.FORCE_DARK)
-            && isDeviceInNightMode(context)
+        if (WebViewFeature.isFeatureSupported(WebViewFeature.FORCE_DARK) &&
+            isDeviceInNightMode(context)
         ) {
             WebSettingsCompat.setForceDark(
                 settings,
-                WebSettingsCompat.FORCE_DARK_ON
+                WebSettingsCompat.FORCE_DARK_ON,
             )
         }
         if (WebViewFeature.isFeatureSupported(WebViewFeature.FORCE_DARK_STRATEGY)) {
             WebSettingsCompat.setForceDarkStrategy(
                 settings,
-                WebSettingsCompat.DARK_STRATEGY_WEB_THEME_DARKENING_ONLY
+                WebSettingsCompat.DARK_STRATEGY_WEB_THEME_DARKENING_ONLY,
             )
         }
     } catch (e: Throwable) {

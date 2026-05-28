@@ -43,42 +43,47 @@ import com.braze.ui.inappmessage.config.BrazeInAppMessageParams
 import com.braze.ui.inappmessage.config.BrazeInAppMessageParams.graphicModalMaxHeightDp
 import com.braze.ui.inappmessage.config.BrazeInAppMessageParams.graphicModalMaxWidthDp
 import com.braze.ui.inappmessage.config.BrazeInAppMessageParams.modalizedImageRadiusDp
-import java.util.*
+import java.util.Collections
 
 @Suppress("LargeClass")
-class InAppMessageTesterFragment : Fragment(), AdapterView.OnItemSelectedListener {
-    private enum class HtmlMessageType(val fileName: String, val zippedAssetUrl: String?) {
+class InAppMessageTesterFragment :
+    Fragment(),
+    AdapterView.OnItemSelectedListener {
+    private enum class HtmlMessageType(
+        val fileName: String,
+        val zippedAssetUrl: String?,
+    ) {
         NO_JS(
             "html_inapp_message_body_no_js.html",
             "https://appboy-staging-dashboard-uploads.s3.amazonaws.com/zip_uploads/files/" +
-                "585c1776bf5cea3cbe1b36b2/124fae83d6ba4023d4ede28e9177980e6373747c/original.zip?1482430326"
+                "585c1776bf5cea3cbe1b36b2/124fae83d6ba4023d4ede28e9177980e6373747c/original.zip?1482430326",
         ),
         INLINE_JS("html_inapp_message_body_inline_js.html", null),
         EXTERNAL_JS(
             "html_inapp_message_body_external_js.html",
             "https://appboy-staging-dashboard-uploads.s3.amazonaws.com/zip_uploads/files/" +
-                "585c18c3bf5cea3c861b36ba/b0c7e536230b34ef800c8e0ef0747eaac53545a5/original.zip?1482430659"
+                "585c18c3bf5cea3c861b36ba/b0c7e536230b34ef800c8e0ef0747eaac53545a5/original.zip?1482430659",
         ),
         STAR_WARS(
             "html_inapp_message_body_star_wars.html",
-            null
+            null,
         ),
         YOUTUBE("html_inapp_message_body_youtube_iframe.html", null),
         BRIDGE_TESTER(
             "html_in_app_message_bridge_tester.html",
-            "https://appboy-images.com/HTML_ZIP_STOPWATCH.zip"
+            "https://appboy-images.com/HTML_ZIP_STOPWATCH.zip",
         ),
         SLOW_LOADING(
             "html_inapp_message_delayed_open.html",
-            null
+            null,
         ),
         DARK_MODE(
             "html_inapp_message_dark_mode.html",
-            null
+            null,
         ),
         UNIFIED_HTML_BOOTSTRAP_ALBUM(
             "html_in_app_message_unified_bootstrap_album.html",
-            null
+            null,
         ),
         SHARK_HTML("html_shark_unified.html", null),
         PUSH_PROMPT_HTML("html_request_push_prompt.html", null),
@@ -121,42 +126,44 @@ class InAppMessageTesterFragment : Fragment(), AdapterView.OnItemSelectedListene
     override fun onCreateView(
         layoutInflater: LayoutInflater,
         container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View {
         val view = layoutInflater.inflate(R.layout.inappmessage_tester, container, false)
         for (key in spinnerOptionMap.keys) {
             spinnerOptionMap[key]?.let {
                 SpinnerUtils.setUpSpinner(
-                    view.findViewById(key), this,
-                    it
+                    view.findViewById(key),
+                    this,
+                    it,
                 )
             }
         }
         setupCheckbox(
-            view.findViewById(R.id.custom_inappmessage_view_factory_checkbox)
+            view.findViewById(R.id.custom_inappmessage_view_factory_checkbox),
         ) { _: CompoundButton, isChecked: Boolean ->
             if (isChecked) {
-                BrazeInAppMessageManager.getInstance()
+                BrazeInAppMessageManager
+                    .getInstance()
                     .setCustomInAppMessageViewFactory(CustomInAppMessageViewFactory())
             } else {
                 BrazeInAppMessageManager.getInstance().setCustomInAppMessageViewFactory(null)
             }
         }
         setupCheckbox(
-            view.findViewById(R.id.custom_inappmessage_manager_listener_checkbox)
+            view.findViewById(R.id.custom_inappmessage_manager_listener_checkbox),
         ) { _: CompoundButton, isChecked: Boolean ->
             if (isChecked) {
                 BrazeInAppMessageManager.getInstance().setCustomInAppMessageManagerListener(
                     CustomInAppMessageManagerListener(
-                        activity
-                    )
+                        activity,
+                    ),
                 )
             } else {
                 BrazeInAppMessageManager.getInstance().setCustomInAppMessageManagerListener(null)
             }
         }
         setupCheckbox(
-            view.findViewById(R.id.custom_appboy_navigator_checkbox)
+            view.findViewById(R.id.custom_appboy_navigator_checkbox),
         ) { _: CompoundButton, isChecked: Boolean ->
             if (isChecked) {
                 setBrazeDeeplinkHandler(CustomBrazeDeeplinkHandler())
@@ -165,7 +172,7 @@ class InAppMessageTesterFragment : Fragment(), AdapterView.OnItemSelectedListene
             }
         }
         setupCheckbox(
-            view.findViewById(R.id.custom_appboy_graphic_modal_max_size_checkbox)
+            view.findViewById(R.id.custom_appboy_graphic_modal_max_size_checkbox),
         ) { _: CompoundButton, isChecked: Boolean ->
             if (isChecked) {
                 graphicModalMaxHeightDp = 420.0
@@ -176,16 +183,17 @@ class InAppMessageTesterFragment : Fragment(), AdapterView.OnItemSelectedListene
             }
         }
         setupCheckbox(
-            view.findViewById(R.id.custom_appboy_image_radius_checkbox)
+            view.findViewById(R.id.custom_appboy_image_radius_checkbox),
         ) { _: CompoundButton, isChecked: Boolean ->
-            modalizedImageRadiusDp = if (isChecked) {
-                0.0
-            } else {
-                BrazeInAppMessageParams.MODALIZED_IMAGE_RADIUS_DP
-            }
+            modalizedImageRadiusDp =
+                if (isChecked) {
+                    0.0
+                } else {
+                    BrazeInAppMessageParams.MODALIZED_IMAGE_RADIUS_DP
+                }
         }
         setupCheckbox(
-            view.findViewById(R.id.disable_back_button_dismiss_behavior)
+            view.findViewById(R.id.disable_back_button_dismiss_behavior),
         ) { _: CompoundButton, isChecked: Boolean ->
             if (isChecked) {
                 BrazeInAppMessageManager.getInstance().setBackButtonDismissesInAppMessageView(false)
@@ -194,40 +202,42 @@ class InAppMessageTesterFragment : Fragment(), AdapterView.OnItemSelectedListene
             }
         }
         setupCheckbox(
-            view.findViewById(R.id.enable_tap_outside_modal_dismiss_behavior)
+            view.findViewById(R.id.enable_tap_outside_modal_dismiss_behavior),
         ) { _: CompoundButton, isChecked: Boolean ->
             if (isChecked) {
                 BrazeInAppMessageManager.getInstance().setClickOutsideModalViewDismissInAppMessageView(true)
             } else {
-                BrazeInAppMessageManager.getInstance()
+                BrazeInAppMessageManager
+                    .getInstance()
                     .setClickOutsideModalViewDismissInAppMessageView(false)
             }
         }
         setupCheckbox(
-            view.findViewById(R.id.custom_appboy_animation_checkbox)
+            view.findViewById(R.id.custom_appboy_animation_checkbox),
         ) { _: CompoundButton, isChecked: Boolean ->
             if (isChecked) {
-                BrazeInAppMessageManager.getInstance()
+                BrazeInAppMessageManager
+                    .getInstance()
                     .setCustomInAppMessageAnimationFactory(CustomInAppMessageAnimationFactory())
             } else {
                 BrazeInAppMessageManager.getInstance().setCustomInAppMessageAnimationFactory(null)
             }
         }
         setupCheckbox(
-            view.findViewById(R.id.custom_appboy_html_inappmessage_action_listener_checkbox)
+            view.findViewById(R.id.custom_appboy_html_inappmessage_action_listener_checkbox),
         ) { _: CompoundButton, isChecked: Boolean ->
             if (isChecked) {
                 BrazeInAppMessageManager.getInstance().setCustomHtmlInAppMessageActionListener(
                     CustomHtmlInAppMessageActionListener(
-                        context
-                    )
+                        context,
+                    ),
                 )
             } else {
                 BrazeInAppMessageManager.getInstance().setCustomHtmlInAppMessageActionListener(null)
             }
         }
         setupCheckbox(
-            view.findViewById(R.id.enable_push_primer_in_html)
+            view.findViewById(R.id.enable_push_primer_in_html),
         ) { _: CompoundButton, isChecked: Boolean ->
             shouldSetPushPrimerInHtml = isChecked
         }
@@ -235,7 +245,8 @@ class InAppMessageTesterFragment : Fragment(), AdapterView.OnItemSelectedListene
             view.findViewById<Button>(R.id.create_and_add_inappmessage_button)
         createAndAddInAppMessageButton.setOnClickListener {
             if (settingsPreferences.getBoolean(
-                    CUSTOM_INAPPMESSAGE_VIEW_KEY, false
+                    CUSTOM_INAPPMESSAGE_VIEW_KEY,
+                    false,
                 )
             ) {
                 addInAppMessage(CustomInAppMessage())
@@ -259,51 +270,60 @@ class InAppMessageTesterFragment : Fragment(), AdapterView.OnItemSelectedListene
                     }
 
                     "html_full_no_js" -> addInAppMessage(InAppMessageHtmlFull(), HtmlMessageType.NO_JS)
-                    "html_full_inline_js" -> addInAppMessage(
-                        InAppMessageHtmlFull(),
-                        HtmlMessageType.INLINE_JS
-                    )
+                    "html_full_inline_js" ->
+                        addInAppMessage(
+                            InAppMessageHtmlFull(),
+                            HtmlMessageType.INLINE_JS,
+                        )
 
-                    "html_full_external_js" -> addInAppMessage(
-                        InAppMessageHtmlFull(),
-                        HtmlMessageType.EXTERNAL_JS
-                    )
+                    "html_full_external_js" ->
+                        addInAppMessage(
+                            InAppMessageHtmlFull(),
+                            HtmlMessageType.EXTERNAL_JS,
+                        )
 
-                    "html_full_star_wars" -> addInAppMessage(
-                        InAppMessageHtmlFull(),
-                        HtmlMessageType.STAR_WARS
-                    )
+                    "html_full_star_wars" ->
+                        addInAppMessage(
+                            InAppMessageHtmlFull(),
+                            HtmlMessageType.STAR_WARS,
+                        )
 
                     "html_full_youtube" -> addInAppMessage(InAppMessageHtmlFull(), HtmlMessageType.YOUTUBE)
-                    "html_full_bridge_tester" -> addInAppMessage(
-                        InAppMessageHtmlFull(),
-                        HtmlMessageType.BRIDGE_TESTER
-                    )
+                    "html_full_bridge_tester" ->
+                        addInAppMessage(
+                            InAppMessageHtmlFull(),
+                            HtmlMessageType.BRIDGE_TESTER,
+                        )
 
-                    "html_full_slow_loading" -> addInAppMessage(
-                        InAppMessageHtmlFull(),
-                        HtmlMessageType.SLOW_LOADING
-                    )
+                    "html_full_slow_loading" ->
+                        addInAppMessage(
+                            InAppMessageHtmlFull(),
+                            HtmlMessageType.SLOW_LOADING,
+                        )
 
-                    "html_full_unified_bootstrap" -> addInAppMessage(
-                        InAppMessageHtml(),
-                        HtmlMessageType.UNIFIED_HTML_BOOTSTRAP_ALBUM
-                    )
+                    "html_full_unified_bootstrap" ->
+                        addInAppMessage(
+                            InAppMessageHtml(),
+                            HtmlMessageType.UNIFIED_HTML_BOOTSTRAP_ALBUM,
+                        )
 
                     "html_shark_unified" -> addInAppMessage(InAppMessageHtml(), HtmlMessageType.SHARK_HTML)
                     "html_push_prompt" -> addInAppMessage(InAppMessageHtml(), HtmlMessageType.PUSH_PROMPT_HTML)
                     "html_dnd_target_text_link" -> addInAppMessage(InAppMessageHtml(), HtmlMessageType.DND_TEXT_TARGET_HTML)
-                    "html_full_dark_mode" -> addInAppMessage(
-                        InAppMessageHtmlFull(),
-                        HtmlMessageType.DARK_MODE
-                    )
+                    "html_full_dark_mode" ->
+                        addInAppMessage(
+                            InAppMessageHtmlFull(),
+                            HtmlMessageType.DARK_MODE,
+                        )
 
                     "modal_dark_theme" -> {
-                        val darkModeJson = context?.let { context ->
-                            getStringFromAssets(
-                                context, "modal_inapp_message_with_dark_theme.json"
-                            )
-                        }
+                        val darkModeJson =
+                            context?.let { context ->
+                                getStringFromAssets(
+                                    context,
+                                    "modal_inapp_message_with_dark_theme.json",
+                                )
+                            }
                         darkModeJson?.let { json -> addInAppMessageFromString(json) }
                     }
 
@@ -394,7 +414,7 @@ class InAppMessageTesterFragment : Fragment(), AdapterView.OnItemSelectedListene
 
     private fun addInAppMessageHtml(
         inAppMessage: IInAppMessageHtml,
-        htmlMessageType: HtmlMessageType
+        htmlMessageType: HtmlMessageType,
     ) {
         inAppMessage.message = context?.let { getStringFromAssets(it, htmlMessageType.fileName) }
         if (htmlMessageType.zippedAssetUrl != null && inAppMessage is IInAppMessageZippedAssetHtml) {
@@ -407,18 +427,22 @@ class InAppMessageTesterFragment : Fragment(), AdapterView.OnItemSelectedListene
         }
     }
 
-    private fun addInAppMessage(inAppMessage: IInAppMessage, messageType: HtmlMessageType? = null) {
+    private fun addInAppMessage(
+        inAppMessage: IInAppMessage,
+        messageType: HtmlMessageType? = null,
+    ) {
         // set orientation early to help determine which default image to use
         setOrientation(inAppMessage)
         when (inAppMessage.messageType) {
             MessageType.SLIDEUP -> addInAppMessageSlideup(inAppMessage as InAppMessageSlideup)
             MessageType.MODAL, MessageType.FULL -> addInAppMessageImmersive(inAppMessage as IInAppMessageImmersive)
-            MessageType.HTML, MessageType.HTML_FULL -> messageType?.let {
-                addInAppMessageHtml(
-                    inAppMessage as IInAppMessageHtml,
-                    it
-                )
-            }
+            MessageType.HTML, MessageType.HTML_FULL ->
+                messageType?.let {
+                    addInAppMessageHtml(
+                        inAppMessage as IInAppMessageHtml,
+                        it,
+                    )
+                }
 
             else -> addInAppMessageCustom(inAppMessage)
         }
@@ -632,14 +656,13 @@ class InAppMessageTesterFragment : Fragment(), AdapterView.OnItemSelectedListene
         }
     }
 
-    private fun parseTextAlign(textAlign: String): TextAlign {
-        return when (textAlign) {
+    private fun parseTextAlign(textAlign: String): TextAlign =
+        when (textAlign) {
             "start" -> TextAlign.START
             "end" -> TextAlign.END
             "center" -> TextAlign.CENTER
             else -> TextAlign.START
         }
-    }
 
     @Suppress("ComplexMethod")
     private fun addMessageButtons(inAppMessage: IInAppMessageImmersive) {
@@ -665,10 +688,11 @@ class InAppMessageTesterFragment : Fragment(), AdapterView.OnItemSelectedListene
                 }
 
                 "push_prompt_one" -> {
-                    val pushPromptBrazeActionUri = getStringFromAssets(
-                        requireContext(),
-                        "braze_actions/show_push_prompt.txt"
-                    ).toUri()
+                    val pushPromptBrazeActionUri =
+                        getStringFromAssets(
+                            requireContext(),
+                            "braze_actions/show_push_prompt.txt",
+                        ).toUri()
                     buttonOne.setClickBehavior(ClickAction.URI, pushPromptBrazeActionUri)
                     buttonOne.text = "Show Push Prompt"
                     messageButtons.add(buttonOne)
@@ -679,12 +703,12 @@ class InAppMessageTesterFragment : Fragment(), AdapterView.OnItemSelectedListene
                     buttonOne.text = "No Webview"
                     buttonOne.setClickBehavior(
                         ClickAction.URI,
-                        resources.getString(R.string.braze_homepage_url).toUri()
+                        resources.getString(R.string.braze_homepage_url).toUri(),
                     )
                     buttonTwo.text = "Webview"
                     buttonTwo.setClickBehavior(
                         ClickAction.URI,
-                        resources.getString(R.string.braze_homepage_url).toUri()
+                        resources.getString(R.string.braze_homepage_url).toUri(),
                     )
                     buttonTwo.openUriInWebview = true
                     if ("long" == buttons) {
@@ -699,12 +723,12 @@ class InAppMessageTesterFragment : Fragment(), AdapterView.OnItemSelectedListene
                     buttonOne.text = "TELEPHONE"
                     buttonOne.setClickBehavior(
                         ClickAction.URI,
-                        resources.getString(R.string.telephone_uri).toUri()
+                        resources.getString(R.string.telephone_uri).toUri(),
                     )
                     buttonTwo.text = "PLAY STORE"
                     buttonTwo.setClickBehavior(
                         ClickAction.URI,
-                        resources.getString(R.string.play_store_uri).toUri()
+                        resources.getString(R.string.play_store_uri).toUri(),
                     )
                     messageButtons.add(buttonOne)
                     messageButtons.add(buttonTwo)
@@ -730,7 +754,12 @@ class InAppMessageTesterFragment : Fragment(), AdapterView.OnItemSelectedListene
     }
 
     @Suppress("ComplexMethod")
-    override fun onItemSelected(parent: AdapterView<*>, view: View?, position: Int, id: Long) {
+    override fun onItemSelected(
+        parent: AdapterView<*>,
+        view: View?,
+        position: Int,
+        id: Long,
+    ) {
         when (parent.id) {
             R.id.inapp_set_message_type_spinner ->
                 messageType =
@@ -848,8 +877,8 @@ class InAppMessageTesterFragment : Fragment(), AdapterView.OnItemSelectedListene
         // Do nothing
     }
 
-    private fun parseColorFromString(colorString: String): Int {
-        return when (colorString) {
+    private fun parseColorFromString(colorString: String): Int =
+        when (colorString) {
             "red" -> BRAZE_RED
             "orange" -> GOOGLE_ORANGE
             "yellow" -> GOOGLE_YELLOW
@@ -864,11 +893,10 @@ class InAppMessageTesterFragment : Fragment(), AdapterView.OnItemSelectedListene
             "almost_transparent_blue" -> TRANSPARENT_BRAZE_BLUE
             else -> 0
         }
-    }
 
     private fun setupCheckbox(
         checkBoxView: CheckBox,
-        listener: CompoundButton.OnCheckedChangeListener
+        listener: CompoundButton.OnCheckedChangeListener,
     ) {
         // Generate the preferences id. Note that this will change
         // if the id changes but that is ok for this use-case
@@ -935,7 +963,10 @@ class InAppMessageTesterFragment : Fragment(), AdapterView.OnItemSelectedListene
             spinnerOptionMap = Collections.unmodifiableMap(spinnerMap)
         }
 
-        private fun getStringFromAssets(context: Context, filename: String): String =
+        private fun getStringFromAssets(
+            context: Context,
+            filename: String,
+        ): String =
             context.assets.open(filename).bufferedReader().use {
                 it.readText()
             }

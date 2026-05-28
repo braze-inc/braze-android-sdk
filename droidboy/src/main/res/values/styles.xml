@@ -52,6 +52,15 @@
         <item name="boxStrokeColor">@android:color/darker_gray</item>
     </style>
 
+    <style name="DroidboyOutlinedExposedDropdownBox" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_gravity">start</item>
+        <item name="android:textColorHint">@android:color/darker_gray</item>
+        <item name="android:textStyle">italic</item>
+        <item name="font">@font/sailec_regular</item>
+        <item name="boxStrokeColor">@android:color/darker_gray</item>
+    </style>
 
     <style name="BaseWidget.UserSingleLineText">
         <item name="android:inputType">text|textCapWords</item>

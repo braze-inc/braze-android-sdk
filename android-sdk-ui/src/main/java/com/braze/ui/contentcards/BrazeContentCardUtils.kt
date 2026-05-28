@@ -21,25 +21,27 @@ object BrazeContentCardUtils {
     fun defaultCardHandling(cards: List<Card>): List<Card> {
         // Sort by pinned, then by the 'updated' timestamp descending
         // Pinned before non-pinned
-        val cardComparator = Comparator { cardA: Card, cardB: Card ->
-            when {
-                // A displays above B since A is pinned and B isn't
-                cardA.isPinned && !cardB.isPinned -> -1
-                // B displays above A since B is pinned and A isn't
-                !cardA.isPinned && cardB.isPinned -> 1
-                // At this point, both A & B are pinned or both A & B are non-pinned
-                // A displays above B if A is newer
-                cardA.created > cardB.created -> -1
-                // B displays above A if B is newer
-                cardA.created < cardB.created -> 1
-                // Last chance with the card IDs
-                cardA.id > cardB.id -> -1
-                cardA.id < cardB.id -> 1
-                // They're considered equal at this point (although ID's should never match)
-                else -> 0
+        val cardComparator =
+            Comparator { cardA: Card, cardB: Card ->
+                when {
+                    // A displays above B since A is pinned and B isn't
+                    cardA.isPinned && !cardB.isPinned -> -1
+                    // B displays above A since B is pinned and A isn't
+                    !cardA.isPinned && cardB.isPinned -> 1
+                    // At this point, both A & B are pinned or both A & B are non-pinned
+                    // A displays above B if A is newer
+                    cardA.created > cardB.created -> -1
+                    // B displays above A if B is newer
+                    cardA.created < cardB.created -> 1
+                    // Last chance with the card IDs
+                    cardA.id > cardB.id -> -1
+                    cardA.id < cardB.id -> 1
+                    // They're considered equal at this point (although ID's should never match)
+                    else -> 0
+                }
             }
-        }
-        return cards.filter { card -> !card.containsInvalidBrazeAction() }
+        return cards
+            .filter { card -> !card.containsInvalidBrazeAction() }
             .sortedWith(cardComparator)
     }
 
@@ -57,14 +59,18 @@ object BrazeContentCardUtils {
             url,
             extras,
             card.openUriInWebView,
-            Channel.CONTENT_CARD
+            Channel.CONTENT_CARD,
         )
     }
 
     /**
      * This is used by Braze code to handle clicks. Clients should not call this directly.
      */
-    fun handleCardClick(context: Context, card: Card, clickHandler: ((Card) -> Boolean)?) {
+    fun handleCardClick(
+        context: Context,
+        card: Card,
+        clickHandler: ((Card) -> Boolean)?,
+    ) {
         brazelog(V) { "Handling card click for card: $card" }
         card.isIndicatorHighlighted = true
 

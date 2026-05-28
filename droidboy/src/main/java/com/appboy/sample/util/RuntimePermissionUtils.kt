@@ -20,23 +20,26 @@ object RuntimePermissionUtils {
         @DrawableRes val iconRes: Int = android.R.drawable.ic_dialog_info,
     )
 
-    val LOCATION_RATIONALE = Rationale(
-        titleRes = R.string.droidboy_required_location_prompt_title,
-        messageRes = R.string.droidboy_required_location_prompt_message,
-        iconRes = android.R.drawable.ic_dialog_map,
-    )
+    val LOCATION_RATIONALE =
+        Rationale(
+            titleRes = R.string.droidboy_required_location_prompt_title,
+            messageRes = R.string.droidboy_required_location_prompt_message,
+            iconRes = android.R.drawable.ic_dialog_map,
+        )
 
-    val BACKGROUND_LOCATION_RATIONALE = Rationale(
-        titleRes = R.string.droidboy_required_bg_location_prompt_title,
-        messageRes = R.string.droidboy_required_bg_location_prompt_message,
-        iconRes = android.R.drawable.ic_dialog_map,
-    )
+    val BACKGROUND_LOCATION_RATIONALE =
+        Rationale(
+            titleRes = R.string.droidboy_required_bg_location_prompt_title,
+            messageRes = R.string.droidboy_required_bg_location_prompt_message,
+            iconRes = android.R.drawable.ic_dialog_map,
+        )
 
-    val LOCAL_NETWORK_RATIONALE = Rationale(
-        titleRes = R.string.droidboy_required_local_network_prompt_title,
-        messageRes = R.string.droidboy_required_local_network_prompt_message,
-        iconRes = android.R.drawable.ic_dialog_info,
-    )
+    val LOCAL_NETWORK_RATIONALE =
+        Rationale(
+            titleRes = R.string.droidboy_required_local_network_prompt_title,
+            messageRes = R.string.droidboy_required_local_network_prompt_message,
+            iconRes = android.R.drawable.ic_dialog_info,
+        )
 
     /**
      * Requests a single runtime permission, optionally showing a rationale dialog first
@@ -47,7 +50,7 @@ object RuntimePermissionUtils {
         activity: Activity,
         permission: String,
         rationale: Rationale?,
-        singlePermissionLauncher: ActivityResultLauncher<String?>
+        singlePermissionLauncher: ActivityResultLauncher<String?>,
     ) {
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
             return
@@ -70,14 +73,15 @@ object RuntimePermissionUtils {
         activity: Activity,
         permissions: Array<String>,
         rationale: Rationale?,
-        multiplePermissionLauncher: ActivityResultLauncher<Array<String>>
+        multiplePermissionLauncher: ActivityResultLauncher<Array<String>>,
     ) {
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M || permissions.isEmpty()) {
             return
         }
-        val anyNeedsRationale = permissions.any { permission ->
-            activity.shouldShowRequestPermissionRationale(permission)
-        }
+        val anyNeedsRationale =
+            permissions.any { permission ->
+                activity.shouldShowRequestPermissionRationale(permission)
+            }
         if (rationale != null && anyNeedsRationale) {
             showRationaleDialog(activity, rationale) {
                 multiplePermissionLauncher.launch(permissions)
@@ -92,7 +96,8 @@ object RuntimePermissionUtils {
         rationale: Rationale,
         onAllow: () -> Unit,
     ) {
-        AlertDialog.Builder(activity)
+        AlertDialog
+            .Builder(activity)
             .setTitle(rationale.titleRes)
             .setMessage(rationale.messageRes)
             .setPositiveButton("allow") { _: DialogInterface?, _: Int -> onAllow() }

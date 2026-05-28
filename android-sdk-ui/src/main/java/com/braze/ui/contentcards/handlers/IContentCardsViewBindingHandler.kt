@@ -30,7 +30,7 @@ interface IContentCardsViewBindingHandler : Parcelable {
         context: Context,
         cards: List<Card>,
         viewGroup: ViewGroup,
-        viewType: Int
+        viewType: Int,
     ): ContentCardViewHolder
 
     /**
@@ -48,7 +48,7 @@ interface IContentCardsViewBindingHandler : Parcelable {
         context: Context,
         cards: List<Card>,
         viewHolder: ContentCardViewHolder,
-        adapterPosition: Int
+        adapterPosition: Int,
     )
 
     /**
@@ -62,6 +62,6 @@ interface IContentCardsViewBindingHandler : Parcelable {
     fun getItemViewType(
         context: Context,
         cards: List<Card>,
-        adapterPosition: Int
+        adapterPosition: Int,
     ): Int
 }

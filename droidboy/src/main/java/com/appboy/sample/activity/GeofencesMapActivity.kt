@@ -30,9 +30,13 @@ import com.google.android.gms.maps.model.MarkerOptions
 import org.json.JSONArray
 import org.json.JSONObject
 import java.text.SimpleDateFormat
-import java.util.*
+import java.util.Date
+import java.util.Locale
+import java.util.TimeZone
 
-class GeofencesMapActivity : AppCompatActivity(), OnMapReadyCallback {
+class GeofencesMapActivity :
+    AppCompatActivity(),
+    OnMapReadyCallback {
     private lateinit var map: GoogleMap
     private lateinit var fusedLocationClient: FusedLocationProviderClient
 
@@ -44,9 +48,10 @@ class GeofencesMapActivity : AppCompatActivity(), OnMapReadyCallback {
     private lateinit var btnHelp: Button
 
     private var isMockMode = false
-    private val dateFormat = SimpleDateFormat("HH:mm:ss", Locale.getDefault()).apply {
-        timeZone = TimeZone.getDefault()
-    }
+    private val dateFormat =
+        SimpleDateFormat("HH:mm:ss", Locale.getDefault()).apply {
+            timeZone = TimeZone.getDefault()
+        }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -136,25 +141,25 @@ class GeofencesMapActivity : AppCompatActivity(), OnMapReadyCallback {
             this,
             arrayOf(
                 Manifest.permission.ACCESS_FINE_LOCATION,
-                Manifest.permission.ACCESS_COARSE_LOCATION
+                Manifest.permission.ACCESS_COARSE_LOCATION,
             ),
-            LOCATION_PERMISSION_REQUEST_CODE
+            LOCATION_PERMISSION_REQUEST_CODE,
         )
     }
 
     override fun onRequestPermissionsResult(
         requestCode: Int,
         permissions: Array<out String>,
-        grantResults: IntArray
+        grantResults: IntArray,
     ) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         if (requestCode == LOCATION_PERMISSION_REQUEST_CODE) {
             if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 if (ActivityCompat.checkSelfPermission(
                         this,
-                        Manifest.permission.ACCESS_FINE_LOCATION
-                    ) == PackageManager.PERMISSION_GRANTED
-                    && this::map.isInitialized
+                        Manifest.permission.ACCESS_FINE_LOCATION,
+                    ) == PackageManager.PERMISSION_GRANTED &&
+                    this::map.isInitialized
                 ) {
                     map.isMyLocationEnabled = true
                     logToConsole("✅ Location permissions granted")
@@ -172,13 +177,13 @@ class GeofencesMapActivity : AppCompatActivity(), OnMapReadyCallback {
 
         // Disable mock mode first
         if (isMockMode) {
-            fusedLocationClient.setMockMode(false)
+            fusedLocationClient
+                .setMockMode(false)
                 .addOnSuccessListener {
                     isMockMode = false
                     logToConsole("Mock mode disabled")
                     fetchAndUseRealLocation()
-                }
-                .addOnFailureListener { e ->
+                }.addOnFailureListener { e ->
                     logToConsole("⚠️ Could not disable mock mode: ${e.message}")
                     fetchAndUseRealLocation()
                 }
@@ -202,11 +207,13 @@ class GeofencesMapActivity : AppCompatActivity(), OnMapReadyCallback {
                     logToConsole(
                         "📍 Real Location: ${String.format(
                             Locale.getDefault(),
-                            "%.4f", location.latitude
+                            "%.4f",
+                            location.latitude,
                         )}, ${String.format(
                             Locale.getDefault(),
-                            "%.4f", location.longitude
-                        )}"
+                            "%.4f",
+                            location.longitude,
+                        )}",
                     )
 
                     // Add marker
@@ -214,7 +221,7 @@ class GeofencesMapActivity : AppCompatActivity(), OnMapReadyCallback {
                         MarkerOptions()
                             .position(latLng)
                             .title("Real Location")
-                            .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_MAGENTA))
+                            .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_MAGENTA)),
                     )
                     map.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 15f))
 
@@ -224,8 +231,7 @@ class GeofencesMapActivity : AppCompatActivity(), OnMapReadyCallback {
                 } else {
                     logToConsole("❌ Could not get real location. Try again.")
                 }
-            }
-            .addOnFailureListener { e ->
+            }.addOnFailureListener { e ->
                 logToConsole("❌ Error getting location: ${e.message}")
             }
     }
@@ -235,11 +241,13 @@ class GeofencesMapActivity : AppCompatActivity(), OnMapReadyCallback {
         logToConsole(
             "📍 Teleporting to: ${String.format(
                 Locale.getDefault(),
-                "%.4f", target.latitude
+                "%.4f",
+                target.latitude,
             )}, ${String.format(
                 Locale.getDefault(),
-                "%.4f", target.longitude
-            )}"
+                "%.4f",
+                target.longitude,
+            )}",
         )
 
         // Create Cyan Marker
@@ -247,7 +255,7 @@ class GeofencesMapActivity : AppCompatActivity(), OnMapReadyCallback {
             MarkerOptions()
                 .position(target)
                 .title("Mock Location")
-                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_CYAN))
+                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_CYAN)),
         )
         map.animateCamera(CameraUpdateFactory.newLatLng(target))
 
@@ -257,36 +265,37 @@ class GeofencesMapActivity : AppCompatActivity(), OnMapReadyCallback {
 
     @SuppressLint("MissingPermission")
     private fun setMockLocation(latLng: LatLng) {
-        val mockLocation = Location("fused").apply {
-            latitude = latLng.latitude
-            longitude = latLng.longitude
-            altitude = 0.0
-            time = System.currentTimeMillis()
-            accuracy = 1.0f
-            elapsedRealtimeNanos = SystemClock.elapsedRealtimeNanos()
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                bearingAccuracyDegrees = 0.1f
-                verticalAccuracyMeters = 0.1f
-                speedAccuracyMetersPerSecond = 0.1f
+        val mockLocation =
+            Location("fused").apply {
+                latitude = latLng.latitude
+                longitude = latLng.longitude
+                altitude = 0.0
+                time = System.currentTimeMillis()
+                accuracy = 1.0f
+                elapsedRealtimeNanos = SystemClock.elapsedRealtimeNanos()
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                    bearingAccuracyDegrees = 0.1f
+                    verticalAccuracyMeters = 0.1f
+                    speedAccuracyMetersPerSecond = 0.1f
+                }
             }
-        }
 
         try {
-            fusedLocationClient.setMockMode(true)
+            fusedLocationClient
+                .setMockMode(true)
                 .addOnSuccessListener {
                     isMockMode = true
-                    fusedLocationClient.setMockLocation(mockLocation)
+                    fusedLocationClient
+                        .setMockLocation(mockLocation)
                         .addOnSuccessListener {
                             logToConsole("GPS Override: Success")
                             // Request Braze Geofences to update
                             logToConsole("Requesting Braze Geofences...")
                             Braze.getInstance(this).requestGeofences(latLng.latitude, latLng.longitude)
-                        }
-                        .addOnFailureListener { e ->
+                        }.addOnFailureListener { e ->
                             logToConsole("❌ Failed to set location: ${e.message}")
                         }
-                }
-                .addOnFailureListener {
+                }.addOnFailureListener {
                     logToConsole("❌ ERROR: Please enable 'Select Mock Location App' in Developer Options.")
                     Toast.makeText(this, "Enable Mock Location in Dev Options", Toast.LENGTH_LONG).show()
                 }
@@ -321,11 +330,12 @@ class GeofencesMapActivity : AppCompatActivity(), OnMapReadyCallback {
 
         return message.contains("geofence", ignoreCase = true) ||
             message.contains("geo_id", ignoreCase = true) ||
-            message.contains("RequestDispatchStartedEvent") && message.contains("geofence_event")
+            message.contains("RequestDispatchStartedEvent") &&
+            message.contains("geofence_event")
     }
 
-    private fun formatGeofenceLog(message: String): String? {
-        return try {
+    private fun formatGeofenceLog(message: String): String? =
+        try {
             when {
                 message.contains("\"event_type\": \"enter\"") -> {
                     val geoId = extractGeoId(message)
@@ -351,17 +361,15 @@ class GeofencesMapActivity : AppCompatActivity(), OnMapReadyCallback {
         } catch (_: Exception) {
             "ℹ️ Geofence event"
         }
-    }
 
-    private fun extractGeoId(message: String): String {
-        return try {
+    private fun extractGeoId(message: String): String =
+        try {
             val geoIdPattern = "\"geo_id\":\\s*\"([^\"]+)\"".toRegex()
             val match = geoIdPattern.find(message)
             match?.groupValues?.get(1)?.substringAfterLast("_") ?: "unknown"
         } catch (_: Exception) {
             "unknown"
         }
-    }
 
     private fun tryExtractAndDisplayGeofences(message: String) {
         try {
@@ -393,11 +401,12 @@ class GeofencesMapActivity : AppCompatActivity(), OnMapReadyCallback {
 
             val latitude = geofenceObj.optDouble("latitude", 0.0)
             val longitude = geofenceObj.optDouble("longitude", 0.0)
-            val radius = when {
-                geofenceObj.has("radiusMeters") -> geofenceObj.optDouble("radiusMeters", 0.0)
-                geofenceObj.has("radius") -> geofenceObj.optDouble("radius", 0.0)
-                else -> 0.0
-            }
+            val radius =
+                when {
+                    geofenceObj.has("radiusMeters") -> geofenceObj.optDouble("radiusMeters", 0.0)
+                    geofenceObj.has("radius") -> geofenceObj.optDouble("radius", 0.0)
+                    else -> 0.0
+                }
             val geofenceId = geofenceObj.optString("id", "unknown")
 
             if (latitude != 0.0 && longitude != 0.0 && radius > 0) {
@@ -420,11 +429,12 @@ class GeofencesMapActivity : AppCompatActivity(), OnMapReadyCallback {
 
                 val latitude = geofenceObj.optDouble("latitude", 0.0)
                 val longitude = geofenceObj.optDouble("longitude", 0.0)
-                val radius = when {
-                    geofenceObj.has("radiusMeters") -> geofenceObj.optDouble("radiusMeters", 0.0)
-                    geofenceObj.has("radius") -> geofenceObj.optDouble("radius", 0.0)
-                    else -> 0.0
-                }
+                val radius =
+                    when {
+                        geofenceObj.has("radiusMeters") -> geofenceObj.optDouble("radiusMeters", 0.0)
+                        geofenceObj.has("radius") -> geofenceObj.optDouble("radius", 0.0)
+                        else -> 0.0
+                    }
                 val geofenceId = geofenceObj.optString("id", "unknown")
 
                 if (latitude != 0.0 && longitude != 0.0 && radius > 0) {
@@ -445,7 +455,12 @@ class GeofencesMapActivity : AppCompatActivity(), OnMapReadyCallback {
         }
     }
 
-    private fun displayGeofenceOnMap(latitude: Double, longitude: Double, radius: Double, geofenceId: String) {
+    private fun displayGeofenceOnMap(
+        latitude: Double,
+        longitude: Double,
+        radius: Double,
+        geofenceId: String,
+    ) {
         if (!this::map.isInitialized) return
 
         val center = LatLng(latitude, longitude)
@@ -458,7 +473,7 @@ class GeofencesMapActivity : AppCompatActivity(), OnMapReadyCallback {
                     .radius(radius)
                     .strokeColor(getColor(R.color.geofence_circle_stroke_color))
                     .strokeWidth(3f)
-                    .fillColor(getColor(R.color.geofence_circle_fill_color))
+                    .fillColor(getColor(R.color.geofence_circle_fill_color)),
             )
         }
 
@@ -468,7 +483,7 @@ class GeofencesMapActivity : AppCompatActivity(), OnMapReadyCallback {
                 .position(center)
                 .title("Geofence")
                 .snippet("ID: ${geofenceId.substringAfterLast("_")}\nRadius: ${radius.toInt()}m")
-                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_VIOLET))
+                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_VIOLET)),
         )
     }
 

@@ -16,7 +16,12 @@ interface IInAppMessageImageView {
      * @param bottomLeft bottom-left corner radius in px
      * @param bottomRight bottom-right corner radius in px
      */
-    fun setCornersRadiiPx(topLeft: Float, topRight: Float, bottomLeft: Float, bottomRight: Float)
+    fun setCornersRadiiPx(
+        topLeft: Float,
+        topRight: Float,
+        bottomLeft: Float,
+        bottomRight: Float,
+    )
 
     /**
      * Instruct the view to use the given radius for its corners.

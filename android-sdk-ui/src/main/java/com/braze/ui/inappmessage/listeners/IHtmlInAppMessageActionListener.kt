@@ -13,7 +13,11 @@ interface IHtmlInAppMessageActionListener {
      * @param url the url clicked.
      * @param queryBundle a bundle of the query part of the url.
      */
-    fun onCloseClicked(inAppMessage: IInAppMessage, url: String, queryBundle: Bundle) {}
+    fun onCloseClicked(
+        inAppMessage: IInAppMessage,
+        url: String,
+        queryBundle: Bundle,
+    ) {}
 
     /**
      * @param inAppMessage the In-App Message being displayed.
@@ -25,7 +29,7 @@ interface IHtmlInAppMessageActionListener {
     fun onCustomEventFired(
         inAppMessage: IInAppMessage,
         url: String,
-        queryBundle: Bundle
+        queryBundle: Bundle,
     ): Boolean = false
 
     /**
@@ -35,5 +39,9 @@ interface IHtmlInAppMessageActionListener {
      * @return boolean flag to indicate to Braze whether the click has been manually handled. If
      * true, Braze will log a click and do nothing. If false, Braze will also handle the URL.
      */
-    fun onOtherUrlAction(inAppMessage: IInAppMessage, url: String, queryBundle: Bundle): Boolean = false
+    fun onOtherUrlAction(
+        inAppMessage: IInAppMessage,
+        url: String,
+        queryBundle: Bundle,
+    ): Boolean = false
 }

@@ -53,7 +53,10 @@ import kotlin.random.Random
  * when a [BroadcastReceiver] context is not available.
  */
 open class BrazePushReceiver : BroadcastReceiver() {
-    override fun onReceive(context: Context, intent: Intent) {
+    override fun onReceive(
+        context: Context,
+        intent: Intent,
+    ) {
         handleReceivedIntent(context, intent)
     }
 
@@ -83,7 +86,7 @@ open class BrazePushReceiver : BroadcastReceiver() {
 
         private fun handlePush(
             context: Context,
-            intent: Intent
+            intent: Intent,
         ) {
             val applicationContext = context.applicationContext
             val action: String? = intent.action
@@ -102,38 +105,46 @@ open class BrazePushReceiver : BroadcastReceiver() {
                     FIREBASE_MESSAGING_SERVICE_ROUTING_ACTION,
                     Constants.BRAZE_STORY_TRAVERSE_CLICKED_ACTION,
                     HMS_PUSH_SERVICE_ROUTING_ACTION,
-                    ADM_RECEIVE_INTENT_ACTION -> handlePushNotificationPayload(
-                        applicationContext,
-                        intent
-                    )
-                    ADM_REGISTRATION_INTENT_ACTION -> handleAdmRegistrationEventIfEnabled(
-                        BrazeConfigurationProvider(applicationContext),
-                        applicationContext,
-                        intent
-                    )
-                    Constants.BRAZE_CANCEL_NOTIFICATION_ACTION -> handleCancelNotificationAction(
-                        applicationContext,
-                        intent
-                    )
-                    Constants.BRAZE_PUSH_DELETED_ACTION -> handleNotificationDeleted(
-                        applicationContext,
-                        intent
-                    )
+                    ADM_RECEIVE_INTENT_ACTION,
+                    ->
+                        handlePushNotificationPayload(
+                            applicationContext,
+                            intent,
+                        )
+                    ADM_REGISTRATION_INTENT_ACTION ->
+                        handleAdmRegistrationEventIfEnabled(
+                            BrazeConfigurationProvider(applicationContext),
+                            applicationContext,
+                            intent,
+                        )
+                    Constants.BRAZE_CANCEL_NOTIFICATION_ACTION ->
+                        handleCancelNotificationAction(
+                            applicationContext,
+                            intent,
+                        )
+                    Constants.BRAZE_PUSH_DELETED_ACTION ->
+                        handleNotificationDeleted(
+                            applicationContext,
+                            intent,
+                        )
 
                     // Methods that later call "routeUserWithNotificationOpenedIntent"
                     // or equivalent and need the Activity context.
-                    Constants.BRAZE_STORY_CLICKED_ACTION -> handlePushStoryPageClicked(
-                        context,
-                        intent
-                    )
-                    Constants.BRAZE_ACTION_CLICKED_ACTION -> handleNotificationActionClicked(
-                        context,
-                        intent
-                    )
-                    Constants.BRAZE_PUSH_CLICKED_ACTION -> handleNotificationOpened(
-                        context,
-                        intent
-                    )
+                    Constants.BRAZE_STORY_CLICKED_ACTION ->
+                        handlePushStoryPageClicked(
+                            context,
+                            intent,
+                        )
+                    Constants.BRAZE_ACTION_CLICKED_ACTION ->
+                        handleNotificationActionClicked(
+                            context,
+                            intent,
+                        )
+                    Constants.BRAZE_PUSH_CLICKED_ACTION ->
+                        handleNotificationOpened(
+                            context,
+                            intent,
+                        )
                     else -> brazelog(W) { "Received a message not sent from Braze. Ignoring the message." }
                 }
             }
@@ -158,7 +169,11 @@ open class BrazePushReceiver : BroadcastReceiver() {
          */
         @JvmStatic
         @JvmOverloads
-        fun handleReceivedIntent(context: Context, intent: Intent, runOnThread: Boolean = true) {
+        fun handleReceivedIntent(
+            context: Context,
+            intent: Intent,
+            runOnThread: Boolean = true,
+        ) {
             if (runOnThread) {
                 // Don't pass an Activity context into a background thread
                 BrazeCoroutineScope.launch {
@@ -183,7 +198,7 @@ open class BrazePushReceiver : BroadcastReceiver() {
         fun handleAdmRegistrationEventIfEnabled(
             appConfigurationProvider: BrazeConfigurationProvider,
             context: Context,
-            intent: Intent
+            intent: Intent,
         ): Boolean {
             brazelog(I) { "Received ADM registration. Message: $intent" }
             // Only handle ADM registration events if ADM registration handling is turned on in the
@@ -208,7 +223,10 @@ open class BrazePushReceiver : BroadcastReceiver() {
          */
         @JvmStatic
         @VisibleForTesting
-        fun handleAdmRegistrationIntent(context: Context, intent: Intent): Boolean {
+        fun handleAdmRegistrationIntent(
+            context: Context,
+            intent: Intent,
+        ): Boolean {
             val error = intent.getStringExtra(ADM_ERROR_KEY)
             val errorDescription = intent.getStringExtra(ADM_ERROR_DESCRIPTION_KEY)
             val registrationId = intent.getStringExtra(ADM_REGISTRATION_ID_KEY)
@@ -246,7 +264,10 @@ open class BrazePushReceiver : BroadcastReceiver() {
         @JvmStatic
         @VisibleForTesting
         @Suppress("LongMethod", "ComplexMethod", "ReturnCount")
-        fun handlePushNotificationPayload(context: Context, intent: Intent): Boolean {
+        fun handlePushNotificationPayload(
+            context: Context,
+            intent: Intent,
+        ): Boolean {
             when {
                 !intent.isBrazePushMessage() -> {
                     brazelog { "Not handling non-Braze push message." }
@@ -270,7 +291,7 @@ open class BrazePushReceiver : BroadcastReceiver() {
             if (!notificationExtras.containsKey(Constants.BRAZE_PUSH_RECEIVED_TIMESTAMP_MILLIS)) {
                 notificationExtras.putLong(
                     Constants.BRAZE_PUSH_RECEIVED_TIMESTAMP_MILLIS,
-                    nowInMilliseconds()
+                    nowInMilliseconds(),
                 )
             }
 
@@ -300,9 +321,9 @@ open class BrazePushReceiver : BroadcastReceiver() {
             refreshFeatureFlagsIfAppropriate(payload)
             refreshBannersIfAppropriate(payload)
 
-            if (payload.shouldFetchTestTriggers
-                && appConfigurationProvider.isInAppMessageTestPushEagerDisplayEnabled
-                && BrazeInAppMessageManager.getInstance().activity != null
+            if (payload.shouldFetchTestTriggers &&
+                appConfigurationProvider.isInAppMessageTestPushEagerDisplayEnabled &&
+                BrazeInAppMessageManager.getInstance().activity != null
             ) {
                 // Pass this test in-app message along for
                 // eager display and bypass displaying a push
@@ -329,7 +350,7 @@ open class BrazePushReceiver : BroadcastReceiver() {
                         brazelog { "Received the initial Push Story notification." }
                         notificationExtras.putBoolean(
                             Constants.BRAZE_PUSH_STORY_IS_NEWLY_RECEIVED,
-                            true
+                            true,
                         )
                     }
                 }
@@ -344,11 +365,13 @@ open class BrazePushReceiver : BroadcastReceiver() {
                 brazelog {
                     "Value of notificationManager.areNotificationsEnabled() = ${notificationManager.areNotificationsEnabled()}"
                 }
-                if (ActivityCompat.checkSelfPermission(context, Manifest.permission.POST_NOTIFICATIONS) == PackageManager.PERMISSION_GRANTED) {
+                if (ActivityCompat.checkSelfPermission(context, Manifest.permission.POST_NOTIFICATIONS) ==
+                    PackageManager.PERMISSION_GRANTED
+                ) {
                     notificationManager.notify(
                         Constants.BRAZE_PUSH_NOTIFICATION_TAG,
                         notificationId,
-                        notification
+                        notification,
                     )
                 } else {
                     brazelog { "POST_NOTIFICATIONS permission has not been granted. Not posting notification." }
@@ -362,7 +385,7 @@ open class BrazePushReceiver : BroadcastReceiver() {
                         context,
                         BrazePushReceiver::class.java,
                         notificationId,
-                        duration
+                        duration,
                     )
                 }
 
@@ -391,23 +414,24 @@ open class BrazePushReceiver : BroadcastReceiver() {
             context: Context,
             appConfigurationProvider: BrazeConfigurationProvider,
             notificationExtras: Bundle,
-            brazeExtras: Bundle
+            brazeExtras: Bundle,
         ): BrazeNotificationPayload {
             // ADM uses a different constructor here because the data is already flattened.
             return if (isAmazonDevice) {
                 BrazeNotificationPayload(
                     notificationExtras,
                     getAttachedBrazeExtras(
-                        notificationExtras
+                        notificationExtras,
                     ),
-                    context, appConfigurationProvider
+                    context,
+                    appConfigurationProvider,
                 )
             } else {
                 BrazeNotificationPayload(
                     notificationExtras,
                     brazeExtras,
                     context,
-                    appConfigurationProvider
+                    appConfigurationProvider,
                 )
             }
         }
@@ -416,25 +440,29 @@ open class BrazePushReceiver : BroadcastReceiver() {
          * Log information from the push for Push Max support.
          */
         @VisibleForTesting
-        internal fun logNotificationMetadata(context: Context, payload: BrazeNotificationPayload) {
+        internal fun logNotificationMetadata(
+            context: Context,
+            payload: BrazeNotificationPayload,
+        ) {
             if (payload.isPushDeliveryEnabled) {
                 payload.campaignId?.let {
                     val min = payload.flushMinMinutes.coerceAtLeast(0)
                     val max = payload.flushMaxMinutes.coerceAtLeast(min)
                     val minToMillis = TimeUnit.MINUTES.toMillis(min)
-                    val waitTimeMs = if (max > min) {
-                        Random.nextLong(
-                            minToMillis,
-                            TimeUnit.MINUTES.toMillis(max)
-                        )
-                    } else {
-                        minToMillis
-                    }
+                    val waitTimeMs =
+                        if (max > min) {
+                            Random.nextLong(
+                                minToMillis,
+                                TimeUnit.MINUTES.toMillis(max),
+                            )
+                        } else {
+                            minToMillis
+                        }
 
                     BrazeInternal.logPushDelivery(
                         context,
                         it,
-                        waitTimeMs
+                        waitTimeMs,
                     )
                 }
             }

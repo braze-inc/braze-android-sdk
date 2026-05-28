@@ -4,8 +4,8 @@ package com.braze.ui.inappmessage.listeners
 
 import android.view.View
 import com.braze.models.inappmessage.IInAppMessage
-import com.braze.models.inappmessage.MessageButton
 import com.braze.models.inappmessage.IInAppMessageImmersive
+import com.braze.models.inappmessage.MessageButton
 
 /**
  * [IInAppMessageViewLifecycleListener] returns the in-app message view at specific events
@@ -20,7 +20,10 @@ interface IInAppMessageViewLifecycleListener {
      * @param inAppMessageView
      * @param inAppMessage
      */
-    fun beforeOpened(inAppMessageView: View, inAppMessage: IInAppMessage)
+    fun beforeOpened(
+        inAppMessageView: View,
+        inAppMessage: IInAppMessage,
+    )
 
     /**
      * Called after the in-app message View has been added to the root layout
@@ -28,7 +31,10 @@ interface IInAppMessageViewLifecycleListener {
      * @param inAppMessageView
      * @param inAppMessage
      */
-    fun afterOpened(inAppMessageView: View, inAppMessage: IInAppMessage)
+    fun afterOpened(
+        inAppMessageView: View,
+        inAppMessage: IInAppMessage,
+    )
 
     /**
      * Called before the in-app message View is removed (and before any closing
@@ -36,7 +42,10 @@ interface IInAppMessageViewLifecycleListener {
      * @param inAppMessageView
      * @param inAppMessage
      */
-    fun beforeClosed(inAppMessageView: View, inAppMessage: IInAppMessage)
+    fun beforeClosed(
+        inAppMessageView: View,
+        inAppMessage: IInAppMessage,
+    )
 
     /**
      * Called after the in-app message View has been removed from the root
@@ -52,7 +61,7 @@ interface IInAppMessageViewLifecycleListener {
      */
     fun onClicked(
         inAppMessageView: View,
-        inAppMessage: IInAppMessage
+        inAppMessage: IInAppMessage,
     )
 
     /**
@@ -62,7 +71,7 @@ interface IInAppMessageViewLifecycleListener {
      */
     fun onButtonClicked(
         messageButton: MessageButton,
-        inAppMessageImmersive: IInAppMessageImmersive
+        inAppMessageImmersive: IInAppMessageImmersive,
     )
 
     /**
@@ -70,5 +79,8 @@ interface IInAppMessageViewLifecycleListener {
      * @param inAppMessageView
      * @param inAppMessage
      */
-    fun onDismissed(inAppMessageView: View, inAppMessage: IInAppMessage)
+    fun onDismissed(
+        inAppMessageView: View,
+        inAppMessage: IInAppMessage,
+    )
 }

@@ -16,9 +16,7 @@ private val TAG = "HtmlUtils".getBrazeLogTag()
  * When disabled, returns the input text.
  */
 @Suppress("deprecation")
-fun String.getHtmlSpannedTextIfEnabled(
-    configurationProvider: BrazeConfigurationProvider
-): CharSequence {
+fun String.getHtmlSpannedTextIfEnabled(configurationProvider: BrazeConfigurationProvider): CharSequence {
     if (this.isBlank()) {
         brazelog(TAG) { "Cannot create html spanned text on blank text. Returning blank string." }
         return this

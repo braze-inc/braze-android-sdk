@@ -4,9 +4,9 @@ import android.content.Context
 import android.graphics.Bitmap
 import android.os.Bundle
 import android.widget.ImageView
-import com.braze.models.cards.Card
 import com.braze.enums.BrazeViewBounds
 import com.braze.images.IBrazeImageLoader
+import com.braze.models.cards.Card
 import com.braze.models.inappmessage.IInAppMessage
 import com.braze.support.BrazeLogger.Priority.E
 import com.braze.support.BrazeLogger.brazelog
@@ -30,7 +30,7 @@ class GlideImageLoader : IBrazeImageLoader {
         card: Card,
         imageUrl: String,
         imageView: ImageView,
-        viewBounds: BrazeViewBounds?
+        viewBounds: BrazeViewBounds?,
     ) {
         renderUrlIntoView(context, imageUrl, imageView)
     }
@@ -40,7 +40,7 @@ class GlideImageLoader : IBrazeImageLoader {
         inAppMessage: IInAppMessage,
         imageUrl: String,
         imageView: ImageView,
-        viewBounds: BrazeViewBounds?
+        viewBounds: BrazeViewBounds?,
     ) {
         renderUrlIntoView(context, imageUrl, imageView)
     }
@@ -49,33 +49,40 @@ class GlideImageLoader : IBrazeImageLoader {
         context: Context,
         extras: Bundle?,
         imageUrl: String,
-        viewBounds: BrazeViewBounds?
+        viewBounds: BrazeViewBounds?,
     ): Bitmap? = getBitmapFromUrl(context, imageUrl)
 
     override fun getInAppMessageBitmapFromUrl(
         context: Context,
         inAppMessage: IInAppMessage,
         imageUrl: String,
-        viewBounds: BrazeViewBounds?
+        viewBounds: BrazeViewBounds?,
     ): Bitmap? = getBitmapFromUrl(context, imageUrl)
 
     private fun renderUrlIntoView(
         context: Context,
         imageUrl: String,
-        imageView: ImageView
+        imageView: ImageView,
     ) {
-        Glide.with(context)
+        Glide
+            .with(context)
             .load(imageUrl)
             .apply(requestOptions)
             .into(imageView)
     }
 
-    private fun getBitmapFromUrl(context: Context, imageUrl: String): Bitmap? {
+    private fun getBitmapFromUrl(
+        context: Context,
+        imageUrl: String,
+    ): Bitmap? {
         try {
-            return Glide.with(context)
+            return Glide
+                .with(context)
                 .asBitmap()
                 .apply(requestOptions)
-                .load(imageUrl).submit().get()
+                .load(imageUrl)
+                .submit()
+                .get()
         } catch (e: Exception) {
             brazelog(E, e) { "Failed to retrieve bitmap at url: $imageUrl" }
         }

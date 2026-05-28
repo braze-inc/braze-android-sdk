@@ -111,15 +111,15 @@ open class ContentCardStyling(
     val shortNewsContentCardStyle: BrazeShortNewsContentCardStyling = BrazeShortNewsContentCardStyling(),
     val captionedImageContentCardStyle: BrazeCaptionedImageContentCardStyling = BrazeCaptionedImageContentCardStyling(),
 ) {
-
     @Composable
     fun imageComposable(type: CardType): @Composable ((Card) -> Unit)? {
-        val composable = when (type) {
-            CardType.IMAGE -> imageOnlyContentCardStyle.imageComposable
-            CardType.SHORT_NEWS -> shortNewsContentCardStyle.imageComposable
-            CardType.CAPTIONED_IMAGE -> captionedImageContentCardStyle.imageComposable
-            else -> null
-        }
+        val composable =
+            when (type) {
+                CardType.IMAGE -> imageOnlyContentCardStyle.imageComposable
+                CardType.SHORT_NEWS -> shortNewsContentCardStyle.imageComposable
+                CardType.CAPTIONED_IMAGE -> captionedImageContentCardStyle.imageComposable
+                else -> null
+            }
         if (composable != null) {
             return composable
         }
@@ -128,13 +128,14 @@ open class ContentCardStyling(
 
     @Composable
     fun pinnedComposable(type: CardType): @Composable (() -> Unit)? {
-        val pinned = when (type) {
-            CardType.IMAGE -> imageOnlyContentCardStyle.pinnedComposable
-            CardType.TEXT_ANNOUNCEMENT -> textAnnouncementContentCardStyle.pinnedComposable
-            CardType.SHORT_NEWS -> shortNewsContentCardStyle.pinnedComposable
-            CardType.CAPTIONED_IMAGE -> captionedImageContentCardStyle.pinnedComposable
-            else -> null
-        }
+        val pinned =
+            when (type) {
+                CardType.IMAGE -> imageOnlyContentCardStyle.pinnedComposable
+                CardType.TEXT_ANNOUNCEMENT -> textAnnouncementContentCardStyle.pinnedComposable
+                CardType.SHORT_NEWS -> shortNewsContentCardStyle.pinnedComposable
+                CardType.CAPTIONED_IMAGE -> captionedImageContentCardStyle.pinnedComposable
+                else -> null
+            }
         if (pinned != null) {
             return pinned
         }
@@ -143,13 +144,14 @@ open class ContentCardStyling(
 
     @Composable
     fun pinnedResourceId(type: CardType): Int {
-        val resourceId = when (type) {
-            CardType.IMAGE -> imageOnlyContentCardStyle.pinnedResourceId
-            CardType.TEXT_ANNOUNCEMENT -> textAnnouncementContentCardStyle.pinnedResourceId
-            CardType.SHORT_NEWS -> shortNewsContentCardStyle.pinnedResourceId
-            CardType.CAPTIONED_IMAGE -> captionedImageContentCardStyle.pinnedResourceId
-            else -> 0
-        }
+        val resourceId =
+            when (type) {
+                CardType.IMAGE -> imageOnlyContentCardStyle.pinnedResourceId
+                CardType.TEXT_ANNOUNCEMENT -> textAnnouncementContentCardStyle.pinnedResourceId
+                CardType.SHORT_NEWS -> shortNewsContentCardStyle.pinnedResourceId
+                CardType.CAPTIONED_IMAGE -> captionedImageContentCardStyle.pinnedResourceId
+                else -> 0
+            }
         if (resourceId != 0) {
             return resourceId
         }
@@ -158,13 +160,14 @@ open class ContentCardStyling(
 
     @Composable
     fun unreadIndicatorColor(type: CardType): Color {
-        val color = when (type) {
-            CardType.IMAGE -> imageOnlyContentCardStyle.unreadIndicatorColor
-            CardType.TEXT_ANNOUNCEMENT -> textAnnouncementContentCardStyle.unreadIndicatorColor
-            CardType.SHORT_NEWS -> shortNewsContentCardStyle.unreadIndicatorColor
-            CardType.CAPTIONED_IMAGE -> captionedImageContentCardStyle.unreadIndicatorColor
-            else -> Color.Unspecified
-        }
+        val color =
+            when (type) {
+                CardType.IMAGE -> imageOnlyContentCardStyle.unreadIndicatorColor
+                CardType.TEXT_ANNOUNCEMENT -> textAnnouncementContentCardStyle.unreadIndicatorColor
+                CardType.SHORT_NEWS -> shortNewsContentCardStyle.unreadIndicatorColor
+                CardType.CAPTIONED_IMAGE -> captionedImageContentCardStyle.unreadIndicatorColor
+                else -> Color.Unspecified
+            }
 
         return if (color != Color.Unspecified) {
             color
@@ -177,13 +180,14 @@ open class ContentCardStyling(
 
     @Composable
     fun cardBackgroundColor(type: CardType): Color {
-        val color = when (type) {
-            CardType.IMAGE -> imageOnlyContentCardStyle.cardBackgroundColor
-            CardType.TEXT_ANNOUNCEMENT -> textAnnouncementContentCardStyle.cardBackgroundColor
-            CardType.SHORT_NEWS -> shortNewsContentCardStyle.cardBackgroundColor
-            CardType.CAPTIONED_IMAGE -> captionedImageContentCardStyle.cardBackgroundColor
-            else -> Color.Unspecified
-        }
+        val color =
+            when (type) {
+                CardType.IMAGE -> imageOnlyContentCardStyle.cardBackgroundColor
+                CardType.TEXT_ANNOUNCEMENT -> textAnnouncementContentCardStyle.cardBackgroundColor
+                CardType.SHORT_NEWS -> shortNewsContentCardStyle.cardBackgroundColor
+                CardType.CAPTIONED_IMAGE -> captionedImageContentCardStyle.cardBackgroundColor
+                else -> Color.Unspecified
+            }
         return if (color != Color.Unspecified) {
             color
         } else if (cardBackgroundColor != Color.Unspecified) {
@@ -195,12 +199,13 @@ open class ContentCardStyling(
 
     @Composable
     fun titleTextColor(type: CardType): Color {
-        val color = when (type) {
-            CardType.TEXT_ANNOUNCEMENT -> textAnnouncementContentCardStyle.titleTextColor
-            CardType.SHORT_NEWS -> shortNewsContentCardStyle.titleTextColor
-            CardType.CAPTIONED_IMAGE -> captionedImageContentCardStyle.titleTextColor
-            else -> Color.Unspecified
-        }
+        val color =
+            when (type) {
+                CardType.TEXT_ANNOUNCEMENT -> textAnnouncementContentCardStyle.titleTextColor
+                CardType.SHORT_NEWS -> shortNewsContentCardStyle.titleTextColor
+                CardType.CAPTIONED_IMAGE -> captionedImageContentCardStyle.titleTextColor
+                else -> Color.Unspecified
+            }
         return if (color != Color.Unspecified) {
             color
         } else if (titleTextColor != Color.Unspecified) {
@@ -212,12 +217,13 @@ open class ContentCardStyling(
 
     @Composable
     fun descriptionTextColor(type: CardType): Color {
-        val color = when (type) {
-            CardType.TEXT_ANNOUNCEMENT -> textAnnouncementContentCardStyle.descriptionTextColor
-            CardType.SHORT_NEWS -> shortNewsContentCardStyle.descriptionTextColor
-            CardType.CAPTIONED_IMAGE -> captionedImageContentCardStyle.descriptionTextColor
-            else -> Color.Unspecified
-        }
+        val color =
+            when (type) {
+                CardType.TEXT_ANNOUNCEMENT -> textAnnouncementContentCardStyle.descriptionTextColor
+                CardType.SHORT_NEWS -> shortNewsContentCardStyle.descriptionTextColor
+                CardType.CAPTIONED_IMAGE -> captionedImageContentCardStyle.descriptionTextColor
+                else -> Color.Unspecified
+            }
         return if (color != Color.Unspecified) {
             color
         } else if (descriptionTextColor != Color.Unspecified) {
@@ -229,12 +235,13 @@ open class ContentCardStyling(
 
     @Composable
     fun actionHintTextColor(type: CardType): Color {
-        val color = when (type) {
-            CardType.TEXT_ANNOUNCEMENT -> textAnnouncementContentCardStyle.actionHintTextColor
-            CardType.SHORT_NEWS -> shortNewsContentCardStyle.actionHintTextColor
-            CardType.CAPTIONED_IMAGE -> captionedImageContentCardStyle.actionHintTextColor
-            else -> Color.Unspecified
-        }
+        val color =
+            when (type) {
+                CardType.TEXT_ANNOUNCEMENT -> textAnnouncementContentCardStyle.actionHintTextColor
+                CardType.SHORT_NEWS -> shortNewsContentCardStyle.actionHintTextColor
+                CardType.CAPTIONED_IMAGE -> captionedImageContentCardStyle.actionHintTextColor
+                else -> Color.Unspecified
+            }
         return if (color != Color.Unspecified) {
             color
         } else if (actionHintTextColor != Color.Unspecified) {
@@ -245,13 +252,14 @@ open class ContentCardStyling(
     }
 
     fun pinnedAlignment(card: Card): Alignment {
-        val alignment = when (card.cardType) {
-            CardType.IMAGE -> imageOnlyContentCardStyle.pinnedImageAlignment
-            CardType.TEXT_ANNOUNCEMENT -> textAnnouncementContentCardStyle.pinnedImageAlignment
-            CardType.SHORT_NEWS -> shortNewsContentCardStyle.pinnedImageAlignment
-            CardType.CAPTIONED_IMAGE -> captionedImageContentCardStyle.pinnedImageAlignment
-            else -> UndefinedAlignment
-        }
+        val alignment =
+            when (card.cardType) {
+                CardType.IMAGE -> imageOnlyContentCardStyle.pinnedImageAlignment
+                CardType.TEXT_ANNOUNCEMENT -> textAnnouncementContentCardStyle.pinnedImageAlignment
+                CardType.SHORT_NEWS -> shortNewsContentCardStyle.pinnedImageAlignment
+                CardType.CAPTIONED_IMAGE -> captionedImageContentCardStyle.pinnedImageAlignment
+                else -> UndefinedAlignment
+            }
         if (alignment != UndefinedAlignment) {
             return alignment
         }
@@ -260,13 +268,14 @@ open class ContentCardStyling(
 
     @Composable
     fun borderColor(type: CardType): Color {
-        val color = when (type) {
-            CardType.IMAGE -> captionedImageContentCardStyle.borderColor
-            CardType.TEXT_ANNOUNCEMENT -> textAnnouncementContentCardStyle.borderColor
-            CardType.SHORT_NEWS -> shortNewsContentCardStyle.borderColor
-            CardType.CAPTIONED_IMAGE -> captionedImageContentCardStyle.borderColor
-            else -> Color.Unspecified
-        }
+        val color =
+            when (type) {
+                CardType.IMAGE -> captionedImageContentCardStyle.borderColor
+                CardType.TEXT_ANNOUNCEMENT -> textAnnouncementContentCardStyle.borderColor
+                CardType.SHORT_NEWS -> shortNewsContentCardStyle.borderColor
+                CardType.CAPTIONED_IMAGE -> captionedImageContentCardStyle.borderColor
+                else -> Color.Unspecified
+            }
         return if (color != Color.Unspecified) {
             color
         } else if (borderColor != Color.Unspecified) {
@@ -277,13 +286,14 @@ open class ContentCardStyling(
     }
 
     fun borderSize(type: CardType): Dp {
-        val size = when (type) {
-            CardType.IMAGE -> imageOnlyContentCardStyle.borderSize
-            CardType.TEXT_ANNOUNCEMENT -> textAnnouncementContentCardStyle.borderSize
-            CardType.SHORT_NEWS -> shortNewsContentCardStyle.borderSize
-            CardType.CAPTIONED_IMAGE -> captionedImageContentCardStyle.borderSize
-            else -> Dp.Unspecified
-        }
+        val size =
+            when (type) {
+                CardType.IMAGE -> imageOnlyContentCardStyle.borderSize
+                CardType.TEXT_ANNOUNCEMENT -> textAnnouncementContentCardStyle.borderSize
+                CardType.SHORT_NEWS -> shortNewsContentCardStyle.borderSize
+                CardType.CAPTIONED_IMAGE -> captionedImageContentCardStyle.borderSize
+                else -> Dp.Unspecified
+            }
 
         if (size != Dp.Unspecified) {
             return size
@@ -297,13 +307,14 @@ open class ContentCardStyling(
 
     @Composable
     fun topBorderSize(type: CardType): Dp {
-        var size = when (type) {
-            CardType.IMAGE -> imageOnlyContentCardStyle.topBorderSize
-            CardType.TEXT_ANNOUNCEMENT -> textAnnouncementContentCardStyle.topBorderSize
-            CardType.SHORT_NEWS -> shortNewsContentCardStyle.topBorderSize
-            CardType.CAPTIONED_IMAGE -> captionedImageContentCardStyle.topBorderSize
-            else -> Dp.Unspecified
-        }
+        var size =
+            when (type) {
+                CardType.IMAGE -> imageOnlyContentCardStyle.topBorderSize
+                CardType.TEXT_ANNOUNCEMENT -> textAnnouncementContentCardStyle.topBorderSize
+                CardType.SHORT_NEWS -> shortNewsContentCardStyle.topBorderSize
+                CardType.CAPTIONED_IMAGE -> captionedImageContentCardStyle.topBorderSize
+                else -> Dp.Unspecified
+            }
 
         if (size != Dp.Unspecified) {
             return size
@@ -324,13 +335,14 @@ open class ContentCardStyling(
 
     @Composable
     fun startBorderSize(type: CardType): Dp {
-        var size = when (type) {
-            CardType.IMAGE -> imageOnlyContentCardStyle.startBorderSize
-            CardType.TEXT_ANNOUNCEMENT -> textAnnouncementContentCardStyle.startBorderSize
-            CardType.SHORT_NEWS -> shortNewsContentCardStyle.startBorderSize
-            CardType.CAPTIONED_IMAGE -> captionedImageContentCardStyle.startBorderSize
-            else -> Dp.Unspecified
-        }
+        var size =
+            when (type) {
+                CardType.IMAGE -> imageOnlyContentCardStyle.startBorderSize
+                CardType.TEXT_ANNOUNCEMENT -> textAnnouncementContentCardStyle.startBorderSize
+                CardType.SHORT_NEWS -> shortNewsContentCardStyle.startBorderSize
+                CardType.CAPTIONED_IMAGE -> captionedImageContentCardStyle.startBorderSize
+                else -> Dp.Unspecified
+            }
 
         if (size != Dp.Unspecified) {
             return size
@@ -351,13 +363,14 @@ open class ContentCardStyling(
 
     @Composable
     fun endBorderSize(type: CardType): Dp {
-        var size = when (type) {
-            CardType.IMAGE -> imageOnlyContentCardStyle.endBorderSize
-            CardType.TEXT_ANNOUNCEMENT -> textAnnouncementContentCardStyle.endBorderSize
-            CardType.SHORT_NEWS -> shortNewsContentCardStyle.endBorderSize
-            CardType.CAPTIONED_IMAGE -> captionedImageContentCardStyle.endBorderSize
-            else -> Dp.Unspecified
-        }
+        var size =
+            when (type) {
+                CardType.IMAGE -> imageOnlyContentCardStyle.endBorderSize
+                CardType.TEXT_ANNOUNCEMENT -> textAnnouncementContentCardStyle.endBorderSize
+                CardType.SHORT_NEWS -> shortNewsContentCardStyle.endBorderSize
+                CardType.CAPTIONED_IMAGE -> captionedImageContentCardStyle.endBorderSize
+                else -> Dp.Unspecified
+            }
 
         if (size != Dp.Unspecified) {
             return size
@@ -378,13 +391,14 @@ open class ContentCardStyling(
 
     @Composable
     fun bottomBorderSize(type: CardType): Dp {
-        var size = when (type) {
-            CardType.IMAGE -> imageOnlyContentCardStyle.bottomBorderSize
-            CardType.TEXT_ANNOUNCEMENT -> textAnnouncementContentCardStyle.bottomBorderSize
-            CardType.SHORT_NEWS -> shortNewsContentCardStyle.bottomBorderSize
-            CardType.CAPTIONED_IMAGE -> captionedImageContentCardStyle.bottomBorderSize
-            else -> Dp.Unspecified
-        }
+        var size =
+            when (type) {
+                CardType.IMAGE -> imageOnlyContentCardStyle.bottomBorderSize
+                CardType.TEXT_ANNOUNCEMENT -> textAnnouncementContentCardStyle.bottomBorderSize
+                CardType.SHORT_NEWS -> shortNewsContentCardStyle.bottomBorderSize
+                CardType.CAPTIONED_IMAGE -> captionedImageContentCardStyle.bottomBorderSize
+                else -> Dp.Unspecified
+            }
 
         if (size != Dp.Unspecified) {
             return size
@@ -405,13 +419,14 @@ open class ContentCardStyling(
 
     @Composable
     fun borderRadius(type: CardType): Dp {
-        var size = when (type) {
-            CardType.IMAGE -> imageOnlyContentCardStyle.borderRadius
-            CardType.TEXT_ANNOUNCEMENT -> textAnnouncementContentCardStyle.borderRadius
-            CardType.SHORT_NEWS -> shortNewsContentCardStyle.borderRadius
-            CardType.CAPTIONED_IMAGE -> captionedImageContentCardStyle.borderRadius
-            else -> Dp.Unspecified
-        }
+        var size =
+            when (type) {
+                CardType.IMAGE -> imageOnlyContentCardStyle.borderRadius
+                CardType.TEXT_ANNOUNCEMENT -> textAnnouncementContentCardStyle.borderRadius
+                CardType.SHORT_NEWS -> shortNewsContentCardStyle.borderRadius
+                CardType.CAPTIONED_IMAGE -> captionedImageContentCardStyle.borderRadius
+                else -> Dp.Unspecified
+            }
 
         if (size != Dp.Unspecified) {
             return size
@@ -427,13 +442,14 @@ open class ContentCardStyling(
 
     @Composable
     fun shadowColor(type: CardType): Color {
-        val color = when (type) {
-            CardType.IMAGE -> captionedImageContentCardStyle.shadowColor
-            CardType.TEXT_ANNOUNCEMENT -> textAnnouncementContentCardStyle.shadowColor
-            CardType.SHORT_NEWS -> shortNewsContentCardStyle.shadowColor
-            CardType.CAPTIONED_IMAGE -> captionedImageContentCardStyle.shadowColor
-            else -> Color.Unspecified
-        }
+        val color =
+            when (type) {
+                CardType.IMAGE -> captionedImageContentCardStyle.shadowColor
+                CardType.TEXT_ANNOUNCEMENT -> textAnnouncementContentCardStyle.shadowColor
+                CardType.SHORT_NEWS -> shortNewsContentCardStyle.shadowColor
+                CardType.CAPTIONED_IMAGE -> captionedImageContentCardStyle.shadowColor
+                else -> Color.Unspecified
+            }
         return if (color != Color.Unspecified) {
             color
         } else if (shadowColor != Color.Unspecified) {
@@ -445,13 +461,14 @@ open class ContentCardStyling(
 
     @Composable
     fun shadowSize(type: CardType): Dp {
-        val size = when (type) {
-            CardType.IMAGE -> imageOnlyContentCardStyle.shadowSize
-            CardType.TEXT_ANNOUNCEMENT -> textAnnouncementContentCardStyle.shadowSize
-            CardType.SHORT_NEWS -> shortNewsContentCardStyle.shadowSize
-            CardType.CAPTIONED_IMAGE -> captionedImageContentCardStyle.shadowSize
-            else -> Dp.Unspecified
-        }
+        val size =
+            when (type) {
+                CardType.IMAGE -> imageOnlyContentCardStyle.shadowSize
+                CardType.TEXT_ANNOUNCEMENT -> textAnnouncementContentCardStyle.shadowSize
+                CardType.SHORT_NEWS -> shortNewsContentCardStyle.shadowSize
+                CardType.CAPTIONED_IMAGE -> captionedImageContentCardStyle.shadowSize
+                else -> Dp.Unspecified
+            }
 
         return if (size != Dp.Unspecified) {
             size
@@ -464,13 +481,14 @@ open class ContentCardStyling(
 
     @Composable
     fun shadowRadius(type: CardType): Dp {
-        val size = when (type) {
-            CardType.IMAGE -> imageOnlyContentCardStyle.shadowRadius
-            CardType.TEXT_ANNOUNCEMENT -> textAnnouncementContentCardStyle.shadowRadius
-            CardType.SHORT_NEWS -> shortNewsContentCardStyle.shadowRadius
-            CardType.CAPTIONED_IMAGE -> captionedImageContentCardStyle.shadowRadius
-            else -> Dp.Unspecified
-        }
+        val size =
+            when (type) {
+                CardType.IMAGE -> imageOnlyContentCardStyle.shadowRadius
+                CardType.TEXT_ANNOUNCEMENT -> textAnnouncementContentCardStyle.shadowRadius
+                CardType.SHORT_NEWS -> shortNewsContentCardStyle.shadowRadius
+                CardType.CAPTIONED_IMAGE -> captionedImageContentCardStyle.shadowRadius
+                else -> Dp.Unspecified
+            }
 
         return if (size != Dp.Unspecified) {
             size
@@ -483,13 +501,14 @@ open class ContentCardStyling(
 
     @Composable
     fun titleTextStyle(type: CardType): TextStyle {
-        val textStyle = when (type) {
-            CardType.IMAGE -> imageOnlyContentCardStyle.titleTextStyle
-            CardType.TEXT_ANNOUNCEMENT -> textAnnouncementContentCardStyle.titleTextStyle
-            CardType.SHORT_NEWS -> shortNewsContentCardStyle.titleTextStyle
-            CardType.CAPTIONED_IMAGE -> captionedImageContentCardStyle.titleTextStyle
-            else -> null
-        }
+        val textStyle =
+            when (type) {
+                CardType.IMAGE -> imageOnlyContentCardStyle.titleTextStyle
+                CardType.TEXT_ANNOUNCEMENT -> textAnnouncementContentCardStyle.titleTextStyle
+                CardType.SHORT_NEWS -> shortNewsContentCardStyle.titleTextStyle
+                CardType.CAPTIONED_IMAGE -> captionedImageContentCardStyle.titleTextStyle
+                else -> null
+            }
 
         return textStyle
             ?: titleTextStyle
@@ -499,45 +518,49 @@ open class ContentCardStyling(
                         color = titleTextColor(type = type),
                         fontWeight = textAnnouncementContentCardStyle.titleFontWeight,
                         fontSize = textAnnouncementContentCardStyle.titleTextSize,
-                        platformStyle = PlatformTextStyle(
-                            includeFontPadding = textAnnouncementContentCardStyle.titleIncludeFontPadding
-                        )
+                        platformStyle =
+                            PlatformTextStyle(
+                                includeFontPadding = textAnnouncementContentCardStyle.titleIncludeFontPadding,
+                            ),
                     )
                 CardType.SHORT_NEWS ->
                     TextStyle(
                         color = titleTextColor(type = type),
                         fontWeight = shortNewsContentCardStyle.titleFontWeight,
                         fontSize = shortNewsContentCardStyle.titleTextSize,
-                        platformStyle = PlatformTextStyle(
-                            includeFontPadding = shortNewsContentCardStyle.titleIncludeFontPadding
-                        )
+                        platformStyle =
+                            PlatformTextStyle(
+                                includeFontPadding = shortNewsContentCardStyle.titleIncludeFontPadding,
+                            ),
                     )
                 CardType.CAPTIONED_IMAGE ->
                     TextStyle(
                         color = titleTextColor(type = type),
                         fontWeight = captionedImageContentCardStyle.titleFontWeight,
                         fontSize = captionedImageContentCardStyle.titleTextSize,
-                        platformStyle = PlatformTextStyle(
-                            includeFontPadding = captionedImageContentCardStyle.titleIncludeFontPadding
-                        )
+                        platformStyle =
+                            PlatformTextStyle(
+                                includeFontPadding = captionedImageContentCardStyle.titleIncludeFontPadding,
+                            ),
                     )
                 else ->
                     // We shouldn't actually ever get here
                     TextStyle(
-                        color = titleTextColor(type = type)
+                        color = titleTextColor(type = type),
                     )
             }
     }
 
     @Composable
     fun descriptionTextStyle(type: CardType): TextStyle {
-        val textStyle = when (type) {
-            CardType.IMAGE -> imageOnlyContentCardStyle.descriptionTextStyle
-            CardType.TEXT_ANNOUNCEMENT -> textAnnouncementContentCardStyle.descriptionTextStyle
-            CardType.SHORT_NEWS -> shortNewsContentCardStyle.descriptionTextStyle
-            CardType.CAPTIONED_IMAGE -> captionedImageContentCardStyle.descriptionTextStyle
-            else -> null
-        }
+        val textStyle =
+            when (type) {
+                CardType.IMAGE -> imageOnlyContentCardStyle.descriptionTextStyle
+                CardType.TEXT_ANNOUNCEMENT -> textAnnouncementContentCardStyle.descriptionTextStyle
+                CardType.SHORT_NEWS -> shortNewsContentCardStyle.descriptionTextStyle
+                CardType.CAPTIONED_IMAGE -> captionedImageContentCardStyle.descriptionTextStyle
+                else -> null
+            }
 
         return textStyle
             ?: descriptionTextStyle
@@ -546,43 +569,47 @@ open class ContentCardStyling(
                     TextStyle(
                         color = descriptionTextColor(type = type),
                         fontSize = textAnnouncementContentCardStyle.descriptionTextSize,
-                        platformStyle = PlatformTextStyle(
-                            includeFontPadding = textAnnouncementContentCardStyle.descriptionIncludeFontPadding
-                        )
+                        platformStyle =
+                            PlatformTextStyle(
+                                includeFontPadding = textAnnouncementContentCardStyle.descriptionIncludeFontPadding,
+                            ),
                     )
                 CardType.SHORT_NEWS ->
                     TextStyle(
                         color = descriptionTextColor(type = type),
                         fontSize = shortNewsContentCardStyle.descriptionTextSize,
-                        platformStyle = PlatformTextStyle(
-                            includeFontPadding = shortNewsContentCardStyle.descriptionIncludeFontPadding
-                        )
+                        platformStyle =
+                            PlatformTextStyle(
+                                includeFontPadding = shortNewsContentCardStyle.descriptionIncludeFontPadding,
+                            ),
                     )
                 CardType.CAPTIONED_IMAGE ->
                     TextStyle(
                         color = descriptionTextColor(type = type),
                         fontSize = captionedImageContentCardStyle.descriptionTextSize,
-                        platformStyle = PlatformTextStyle(
-                            includeFontPadding = captionedImageContentCardStyle.descriptionIncludeFontPadding
-                        )
+                        platformStyle =
+                            PlatformTextStyle(
+                                includeFontPadding = captionedImageContentCardStyle.descriptionIncludeFontPadding,
+                            ),
                     )
                 else ->
                     // We shouldn't actually ever get here
                     TextStyle(
-                        color = descriptionTextColor(type = type)
+                        color = descriptionTextColor(type = type),
                     )
             }
     }
 
     @Composable
     fun hintActionTextStyle(type: CardType): TextStyle {
-        val textStyle = when (type) {
-            CardType.IMAGE -> imageOnlyContentCardStyle.actionHintTextStyle
-            CardType.TEXT_ANNOUNCEMENT -> textAnnouncementContentCardStyle.actionHintTextStyle
-            CardType.SHORT_NEWS -> shortNewsContentCardStyle.actionHintTextStyle
-            CardType.CAPTIONED_IMAGE -> captionedImageContentCardStyle.actionHintTextStyle
-            else -> null
-        }
+        val textStyle =
+            when (type) {
+                CardType.IMAGE -> imageOnlyContentCardStyle.actionHintTextStyle
+                CardType.TEXT_ANNOUNCEMENT -> textAnnouncementContentCardStyle.actionHintTextStyle
+                CardType.SHORT_NEWS -> shortNewsContentCardStyle.actionHintTextStyle
+                CardType.CAPTIONED_IMAGE -> captionedImageContentCardStyle.actionHintTextStyle
+                else -> null
+            }
 
         return textStyle
             ?: actionHintTextStyle
@@ -591,42 +618,44 @@ open class ContentCardStyling(
                     TextStyle(
                         color = actionHintTextColor(type = type),
                         fontSize = textAnnouncementContentCardStyle.actionHintTextSize,
-                        platformStyle = PlatformTextStyle(
-                            includeFontPadding = textAnnouncementContentCardStyle.actionHintIncludeFontPadding
-                        )
+                        platformStyle =
+                            PlatformTextStyle(
+                                includeFontPadding = textAnnouncementContentCardStyle.actionHintIncludeFontPadding,
+                            ),
                     )
                 CardType.SHORT_NEWS ->
                     TextStyle(
                         color = actionHintTextColor(type = type),
                         fontSize = shortNewsContentCardStyle.actionHintTextSize,
-                        platformStyle = PlatformTextStyle(
-                            includeFontPadding = shortNewsContentCardStyle.actionHintIncludeFontPadding
-                        )
+                        platformStyle =
+                            PlatformTextStyle(
+                                includeFontPadding = shortNewsContentCardStyle.actionHintIncludeFontPadding,
+                            ),
                     )
                 CardType.CAPTIONED_IMAGE ->
                     TextStyle(
                         color = actionHintTextColor(type = type),
                         fontSize = captionedImageContentCardStyle.actionHintTextSize,
-                        platformStyle = PlatformTextStyle(
-                            includeFontPadding = captionedImageContentCardStyle.actionHintIncludeFontPadding
-                        )
+                        platformStyle =
+                            PlatformTextStyle(
+                                includeFontPadding = captionedImageContentCardStyle.actionHintIncludeFontPadding,
+                            ),
                     )
                 else ->
                     // We shouldn't actually ever get here
                     TextStyle(
-                        color = actionHintTextColor(type = type)
+                        color = actionHintTextColor(type = type),
                     )
             }
     }
 
     @Composable
-    fun maxCardWidth(): Dp {
-        return if (maxCardWidth != Dp.Unspecified) {
+    fun maxCardWidth(): Dp =
+        if (maxCardWidth != Dp.Unspecified) {
             maxCardWidth
         } else {
             dimensionResource(id = R.dimen.com_braze_content_cards_max_width)
         }
-    }
 
     /**
      * Return a modifier to be used for a specific card type.
@@ -643,7 +672,10 @@ open class ContentCardStyling(
      */
     @SuppressLint("ModifierFactoryExtensionFunction")
     @Composable
-    fun cardModifier(type: CardType, extraPadding: Dp): Modifier {
+    fun cardModifier(
+        type: CardType,
+        extraPadding: Dp,
+    ): Modifier {
         var cardModifier: Modifier?
         when (type) {
             CardType.IMAGE -> {
@@ -677,23 +709,23 @@ open class ContentCardStyling(
 
         // If we still don't have a modifier, then construct a modifier with the background color
         if (cardModifier == null) {
-            cardModifier = Modifier
-                .wrapContentHeight()
-                .fillMaxWidth()
-                .padding(horizontal = extraPadding)
-                .clip(RoundedCornerShape(cardShadowRadius))
-                .background(shadowColor(type))
-                .padding(bottom = shadowSize(type))
-                .clip(RoundedCornerShape(cardShadowRadius))
-                .background(borderColor(type))
-                .padding(
-                    start = startBorderSize(type),
-                    end = endBorderSize(type),
-                    top = topBorderSize(type),
-                    bottom = bottomBorderSize(type)
-                )
-                .clip(RoundedCornerShape(cardBorderRadius))
-                .background(cardBackgroundColor(type))
+            cardModifier =
+                Modifier
+                    .wrapContentHeight()
+                    .fillMaxWidth()
+                    .padding(horizontal = extraPadding)
+                    .clip(RoundedCornerShape(cardShadowRadius))
+                    .background(shadowColor(type))
+                    .padding(bottom = shadowSize(type))
+                    .clip(RoundedCornerShape(cardShadowRadius))
+                    .background(borderColor(type))
+                    .padding(
+                        start = startBorderSize(type),
+                        end = endBorderSize(type),
+                        top = topBorderSize(type),
+                        bottom = bottomBorderSize(type),
+                    ).clip(RoundedCornerShape(cardBorderRadius))
+                    .background(cardBackgroundColor(type))
         }
 
         return cardModifier
@@ -729,7 +761,7 @@ open class BrazeContentCardBaseStyling(
     val borderRadius: Dp = Dp.Unspecified,
     val shadowColor: Color = Color.Unspecified,
     val shadowSize: Dp = Dp.Unspecified,
-    val shadowRadius: Dp = Dp.Unspecified
+    val shadowRadius: Dp = Dp.Unspecified,
 )
 
 /**
@@ -756,26 +788,26 @@ class BrazeImageOnlyContentCardStyling(
     shadowSize: Dp = Dp.Unspecified,
     shadowRadius: Dp = Dp.Unspecified,
     imageComposable: @Composable ((Card) -> Unit)? = null,
-    val imageHeight: Dp = 250.dp
+    val imageHeight: Dp = 250.dp,
 ) : BrazeContentCardBaseStyling(
-    modifier = modifier,
-    pinnedResourceId = pinnedResourceId,
-    pinnedImageAlignment = pinnedImageAlignment,
-    unreadIndicatorColor = unreadIndicatorColor,
-    cardBackgroundColor = cardBackgroundColor,
-    pinnedComposable = pinnedComposable,
-    imageComposable = imageComposable,
-    borderColor = borderColor,
-    borderSize = borderSize,
-    topBorderSize = topBorderSize,
-    startBorderSize = startBorderSize,
-    endBorderSize = endBorderSize,
-    bottomBorderSize = bottomBorderSize,
-    borderRadius = borderRadius,
-    shadowColor = shadowColor,
-    shadowSize = shadowSize,
-    shadowRadius = shadowRadius
-)
+        modifier = modifier,
+        pinnedResourceId = pinnedResourceId,
+        pinnedImageAlignment = pinnedImageAlignment,
+        unreadIndicatorColor = unreadIndicatorColor,
+        cardBackgroundColor = cardBackgroundColor,
+        pinnedComposable = pinnedComposable,
+        imageComposable = imageComposable,
+        borderColor = borderColor,
+        borderSize = borderSize,
+        topBorderSize = topBorderSize,
+        startBorderSize = startBorderSize,
+        endBorderSize = endBorderSize,
+        bottomBorderSize = bottomBorderSize,
+        borderRadius = borderRadius,
+        shadowColor = shadowColor,
+        shadowSize = shadowSize,
+        shadowRadius = shadowRadius,
+    )
 
 /**
  * Styling configuration for Text Announcement Content Cards.
@@ -830,31 +862,31 @@ class BrazeTextAnnouncementContentCardStyling(
     actionHintTextColor: Color = Color.Unspecified,
     val actionHintTextSize: TextUnit = 13.sp,
     val actionHintIncludeFontPadding: Boolean = false,
-    val actionHintPaddingTop: Dp = 10.dp
+    val actionHintPaddingTop: Dp = 10.dp,
 ) : BrazeContentCardBaseStyling(
-    modifier = modifier,
-    pinnedResourceId = pinnedResourceId,
-    pinnedImageAlignment = pinnedImageAlignment,
-    unreadIndicatorColor = unreadIndicatorColor,
-    cardBackgroundColor = cardBackgroundColor,
-    pinnedComposable = pinnedComposable,
-    borderColor = borderColor,
-    borderSize = borderSize,
-    topBorderSize = topBorderSize,
-    startBorderSize = startBorderSize,
-    endBorderSize = endBorderSize,
-    bottomBorderSize = bottomBorderSize,
-    borderRadius = borderRadius,
-    shadowColor = shadowColor,
-    shadowSize = shadowSize,
-    shadowRadius = shadowRadius,
-    titleTextStyle = titleTextStyle,
-    descriptionTextStyle = descriptionTextStyle,
-    actionHintTextStyle = actionHintTextStyle,
-    titleTextColor = titleTextColor,
-    descriptionTextColor = descriptionTextColor,
-    actionHintTextColor = actionHintTextColor
-)
+        modifier = modifier,
+        pinnedResourceId = pinnedResourceId,
+        pinnedImageAlignment = pinnedImageAlignment,
+        unreadIndicatorColor = unreadIndicatorColor,
+        cardBackgroundColor = cardBackgroundColor,
+        pinnedComposable = pinnedComposable,
+        borderColor = borderColor,
+        borderSize = borderSize,
+        topBorderSize = topBorderSize,
+        startBorderSize = startBorderSize,
+        endBorderSize = endBorderSize,
+        bottomBorderSize = bottomBorderSize,
+        borderRadius = borderRadius,
+        shadowColor = shadowColor,
+        shadowSize = shadowSize,
+        shadowRadius = shadowRadius,
+        titleTextStyle = titleTextStyle,
+        descriptionTextStyle = descriptionTextStyle,
+        actionHintTextStyle = actionHintTextStyle,
+        titleTextColor = titleTextColor,
+        descriptionTextColor = descriptionTextColor,
+        actionHintTextColor = actionHintTextColor,
+    )
 
 /**
  * Styling configuration for Short News Content Cards.
@@ -922,32 +954,32 @@ class BrazeShortNewsContentCardStyling(
     actionHintTextColor: Color = Color.Unspecified,
     val actionHintTextSize: TextUnit = 13.sp,
     val actionHintIncludeFontPadding: Boolean = false,
-    val actionHintPaddingTop: Dp = 12.dp
+    val actionHintPaddingTop: Dp = 12.dp,
 ) : BrazeContentCardBaseStyling(
-    modifier = modifier,
-    pinnedResourceId = pinnedResourceId,
-    pinnedImageAlignment = pinnedImageAlignment,
-    unreadIndicatorColor = unreadIndicatorColor,
-    cardBackgroundColor = cardBackgroundColor,
-    pinnedComposable = pinnedComposable,
-    imageComposable = imageComposable,
-    borderColor = borderColor,
-    borderSize = borderSize,
-    topBorderSize = topBorderSize,
-    startBorderSize = startBorderSize,
-    endBorderSize = endBorderSize,
-    bottomBorderSize = bottomBorderSize,
-    borderRadius = borderRadius,
-    shadowColor = shadowColor,
-    shadowSize = shadowSize,
-    shadowRadius = shadowRadius,
-    titleTextStyle = titleTextStyle,
-    descriptionTextStyle = descriptionTextStyle,
-    actionHintTextStyle = actionHintTextStyle,
-    titleTextColor = titleTextColor,
-    descriptionTextColor = descriptionTextColor,
-    actionHintTextColor = actionHintTextColor
-)
+        modifier = modifier,
+        pinnedResourceId = pinnedResourceId,
+        pinnedImageAlignment = pinnedImageAlignment,
+        unreadIndicatorColor = unreadIndicatorColor,
+        cardBackgroundColor = cardBackgroundColor,
+        pinnedComposable = pinnedComposable,
+        imageComposable = imageComposable,
+        borderColor = borderColor,
+        borderSize = borderSize,
+        topBorderSize = topBorderSize,
+        startBorderSize = startBorderSize,
+        endBorderSize = endBorderSize,
+        bottomBorderSize = bottomBorderSize,
+        borderRadius = borderRadius,
+        shadowColor = shadowColor,
+        shadowSize = shadowSize,
+        shadowRadius = shadowRadius,
+        titleTextStyle = titleTextStyle,
+        descriptionTextStyle = descriptionTextStyle,
+        actionHintTextStyle = actionHintTextStyle,
+        titleTextColor = titleTextColor,
+        descriptionTextColor = descriptionTextColor,
+        actionHintTextColor = actionHintTextColor,
+    )
 
 /**
  * Styling configuration for Captioned Image Content Cards.
@@ -1003,29 +1035,29 @@ class BrazeCaptionedImageContentCardStyling(
     val actionHintTextSize: TextUnit = 13.sp,
     actionHintTextColor: Color = Color.Unspecified,
     val actionHintIncludeFontPadding: Boolean = false,
-    val actionHintPaddingTop: Dp = 12.dp
+    val actionHintPaddingTop: Dp = 12.dp,
 ) : BrazeContentCardBaseStyling(
-    modifier = modifier,
-    pinnedResourceId = pinnedResourceId,
-    pinnedImageAlignment = pinnedImageAlignment,
-    unreadIndicatorColor = unreadIndicatorColor,
-    cardBackgroundColor = cardBackgroundColor,
-    pinnedComposable = pinnedComposable,
-    imageComposable = imageComposable,
-    borderColor = borderColor,
-    borderSize = borderSize,
-    topBorderSize = topBorderSize,
-    startBorderSize = startBorderSize,
-    endBorderSize = endBorderSize,
-    bottomBorderSize = bottomBorderSize,
-    borderRadius = borderRadius,
-    shadowColor = shadowColor,
-    shadowSize = shadowSize,
-    shadowRadius = shadowRadius,
-    titleTextStyle = titleTextStyle,
-    descriptionTextStyle = descriptionTextStyle,
-    actionHintTextStyle = actionHintTextStyle,
-    titleTextColor = titleTextColor,
-    descriptionTextColor = descriptionTextColor,
-    actionHintTextColor = actionHintTextColor
-)
+        modifier = modifier,
+        pinnedResourceId = pinnedResourceId,
+        pinnedImageAlignment = pinnedImageAlignment,
+        unreadIndicatorColor = unreadIndicatorColor,
+        cardBackgroundColor = cardBackgroundColor,
+        pinnedComposable = pinnedComposable,
+        imageComposable = imageComposable,
+        borderColor = borderColor,
+        borderSize = borderSize,
+        topBorderSize = topBorderSize,
+        startBorderSize = startBorderSize,
+        endBorderSize = endBorderSize,
+        bottomBorderSize = bottomBorderSize,
+        borderRadius = borderRadius,
+        shadowColor = shadowColor,
+        shadowSize = shadowSize,
+        shadowRadius = shadowRadius,
+        titleTextStyle = titleTextStyle,
+        descriptionTextStyle = descriptionTextStyle,
+        actionHintTextStyle = actionHintTextStyle,
+        titleTextColor = titleTextColor,
+        descriptionTextColor = descriptionTextColor,
+        actionHintTextColor = actionHintTextColor,
+    )

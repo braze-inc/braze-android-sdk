@@ -14,6 +14,6 @@ internal sealed interface IBrazeActionStep {
      */
     fun run(
         context: Context,
-        data: StepData
+        data: StepData,
     )
 }

@@ -19,16 +19,18 @@ import com.braze.ui.support.isDeviceNotInTouchMode
 /**
  * An [IInAppMessageViewFactory] for [InAppMessageHtml] messages.
  */
-open class DefaultInAppMessageHtmlViewFactory(private val inAppMessageWebViewClientListener: IInAppMessageWebViewClientListener) :
-    IInAppMessageViewFactory {
+open class DefaultInAppMessageHtmlViewFactory(
+    private val inAppMessageWebViewClientListener: IInAppMessageWebViewClientListener,
+) : IInAppMessageViewFactory {
     @SuppressLint("AddJavascriptInterface")
     override fun createInAppMessageView(
         activity: Activity,
-        inAppMessage: IInAppMessage
+        inAppMessage: IInAppMessage,
     ): InAppMessageHtmlView? {
         val context = activity.applicationContext
-        val view = activity.layoutInflater
-            .inflate(R.layout.com_braze_inappmessage_html, null) as InAppMessageHtmlView
+        val view =
+            activity.layoutInflater
+                .inflate(R.layout.com_braze_inappmessage_html, null) as InAppMessageHtmlView
         val config = BrazeInternal.getConfigurationProvider(context)
         if (config.isTouchModeRequiredForHtmlInAppMessages && isDeviceNotInTouchMode(view)) {
             brazelog(W) {
@@ -45,12 +47,12 @@ open class DefaultInAppMessageHtmlViewFactory(private val inAppMessageWebViewCli
             InAppMessageWebViewClient(
                 activity.applicationContext,
                 inAppMessageHtml,
-                inAppMessageWebViewClientListener
-            )
+                inAppMessageWebViewClientListener,
+            ),
         )
         view.messageWebView?.addJavascriptInterface(
             javascriptInterface,
-            InAppMessageHtmlBaseView.BRAZE_BRIDGE_PREFIX
+            InAppMessageHtmlBaseView.BRAZE_BRIDGE_PREFIX,
         )
         view.setupDirectionalNavigation()
         return view

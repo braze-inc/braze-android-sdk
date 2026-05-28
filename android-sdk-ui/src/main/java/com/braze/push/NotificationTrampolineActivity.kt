@@ -24,7 +24,7 @@ class NotificationTrampolineActivity : Activity() {
         if (BrazeInternal.getConfigurationProvider(this).shouldUseWindowFlagSecureInActivities) {
             window.setFlags(
                 WindowManager.LayoutParams.FLAG_SECURE,
-                WindowManager.LayoutParams.FLAG_SECURE
+                WindowManager.LayoutParams.FLAG_SECURE,
             )
         }
         brazelog(V) { "NotificationTrampolineActivity created" }

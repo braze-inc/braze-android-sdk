@@ -31,7 +31,10 @@ object BrazeActionParser {
     internal const val TYPE = "type"
     internal const val BRAZE_ACTIONS_SCHEME = "brazeActions"
 
-    internal enum class ActionType(val key: String, val impl: IBrazeActionStep) {
+    internal enum class ActionType(
+        val key: String,
+        val impl: IBrazeActionStep,
+    ) {
         CONTAINER("container", ContainerStep),
         LOG_CUSTOM_EVENT("logCustomEvent", LogCustomEventStep),
         SET_CUSTOM_ATTRIBUTE("setCustomUserAttribute", SetCustomUserAttributeStep),
@@ -44,7 +47,8 @@ object BrazeActionParser {
         SET_PUSH_NOTIFICATION_SUBSCRIPTION("setPushNotificationSubscriptionType", SetPushNotificationSubscriptionStep),
         OPEN_LINK_IN_WEBVIEW("openLinkInWebview", OpenLinkInWebViewStep),
         OPEN_LINK_EXTERNALLY("openLink", OpenLinkExternallyStep),
-        INVALID("", NoOpStep);
+        INVALID("", NoOpStep),
+        ;
 
         companion object {
             private val map = entries.associateBy { it.key }
@@ -59,7 +63,11 @@ object BrazeActionParser {
     /**
      * Parses a Braze Actions [Uri].
      */
-    fun execute(context: Context, uri: Uri, channel: Channel = Channel.UNKNOWN) {
+    fun execute(
+        context: Context,
+        uri: Uri,
+        channel: Channel = Channel.UNKNOWN,
+    ) {
         brazelog(V) { "Attempting to parse Braze Action with channel $channel and uri:\n'$uri'" }
         try {
             val components = uri.getBrazeActionVersionAndJson()
@@ -93,7 +101,7 @@ object BrazeActionParser {
     @JvmSynthetic
     internal fun parse(
         context: Context,
-        data: StepData
+        data: StepData,
     ) {
         try {
             val actionType = getActionType(data)
@@ -158,12 +166,13 @@ object BrazeActionParser {
             return null
         }
 
-        val json = try {
-            parseEncodedActionToJson(encodedAction)
-        } catch (e: Exception) {
-            brazelog(E, e) { "Failed to decode action into json. Action:\n'$encodedAction'" }
-            null
-        } ?: return null
+        val json =
+            try {
+                parseEncodedActionToJson(encodedAction)
+            } catch (e: Exception) {
+                brazelog(E, e) { "Failed to decode action into json. Action:\n'$encodedAction'" }
+                null
+            } ?: return null
 
         return Pair(version, json)
     }

@@ -21,7 +21,7 @@ fun ContentCardsScreen(
     openDrawer: () -> Unit,
     viewModel: MainViewModel,
     scope: CoroutineScope? = null,
-    snackbarHostState: SnackbarHostState? = null
+    snackbarHostState: SnackbarHostState? = null,
 ) {
     val context = LocalContext.current
 
@@ -34,7 +34,7 @@ fun ContentCardsScreen(
         Column(
             modifier = Modifier.fillMaxSize(),
             verticalArrangement = Arrangement.Top,
-            horizontalAlignment = Alignment.Start
+            horizontalAlignment = Alignment.Start,
         ) {
             ContentCardsList()
         }

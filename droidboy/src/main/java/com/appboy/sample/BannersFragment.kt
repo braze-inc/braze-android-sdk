@@ -25,7 +25,6 @@ import com.google.android.material.chip.Chip
 import com.google.android.material.chip.ChipGroup
 
 class BannersFragment : Fragment() {
-
     private lateinit var refreshBannersTextInput: EditText
     private lateinit var refreshBannersButton: Button
     private lateinit var getBannerTextInput: EditText
@@ -48,20 +47,21 @@ class BannersFragment : Fragment() {
     private val slotBannerViews = mutableListOf<BannerView>()
 
     // Define property types and their display names for filters, null means no filter and show all
-    private val propertyFilterTypes = mapOf(
-        "All" to null,
-        "String" to IPropertiesObject.PROPERTIES_TYPE_STRING,
-        "Number" to IPropertiesObject.PROPERTIES_TYPE_NUMBER,
-        "Boolean" to IPropertiesObject.PROPERTIES_TYPE_BOOLEAN,
-        "Image" to IPropertiesObject.PROPERTIES_TYPE_IMAGE,
-        "JSON" to IPropertiesObject.PROPERTIES_TYPE_JSON,
-        "Timestamp" to IPropertiesObject.PROPERTIES_TYPE_DATETIME
-    )
+    private val propertyFilterTypes =
+        mapOf(
+            "All" to null,
+            "String" to IPropertiesObject.PROPERTIES_TYPE_STRING,
+            "Number" to IPropertiesObject.PROPERTIES_TYPE_NUMBER,
+            "Boolean" to IPropertiesObject.PROPERTIES_TYPE_BOOLEAN,
+            "Image" to IPropertiesObject.PROPERTIES_TYPE_IMAGE,
+            "JSON" to IPropertiesObject.PROPERTIES_TYPE_JSON,
+            "Timestamp" to IPropertiesObject.PROPERTIES_TYPE_DATETIME,
+        )
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View? {
         val view = inflater.inflate(R.layout.banners_fragment, container, false)
 
@@ -90,13 +90,15 @@ class BannersFragment : Fragment() {
         // Listener for "Request Banners Refresh" button (by list of placement IDs)
         refreshBannersButton.setOnClickListener {
             val placementIdsString = refreshBannersTextInput.text.toString().trim()
-            val inputPlacementIds = if (placementIdsString.isNotBlank()) {
-                placementIdsString.split(",")
-                    .map { it.trim() }
-                    .filter { it.isNotBlank() }
-            } else {
-                emptyList()
-            }
+            val inputPlacementIds =
+                if (placementIdsString.isNotBlank()) {
+                    placementIdsString
+                        .split(",")
+                        .map { it.trim() }
+                        .filter { it.isNotBlank() }
+                } else {
+                    emptyList()
+                }
             val combinedPlacementIds = combinePlacementIds(inputPlacementIds)
             if (combinedPlacementIds.isEmpty()) {
                 showToast("No banner placement IDs entered. Enter at least one banner placement ID.")
@@ -163,22 +165,23 @@ class BannersFragment : Fragment() {
 
     private fun subscribeToBannerUpdates() {
         if (bannerUpdateSubscriber == null) {
-            bannerUpdateSubscriber = IEventSubscriber { update ->
-                brazelog(I) {
-                    "BannersFragment: Received ${update.banners.size} banners with " +
-                        "placement IDs: ${update.banners.map { it.placementId }}"
-                }
-
-                val placementIds = update.banners.map { it.placementId }
-                cachedPlacementIdsChipGroup.post {
-                    updateCachedPlacementChips(placementIds)
-                    val combined = combinePlacementIds(placementIds)
-                    if (combined.isNotEmpty()) {
-                        renderSlotsForPlacements(combined)
+            bannerUpdateSubscriber =
+                IEventSubscriber { update ->
+                    brazelog(I) {
+                        "BannersFragment: Received ${update.banners.size} banners with " +
+                            "placement IDs: ${update.banners.map { it.placementId }}"
                     }
-                    refreshSlotBannerViews()
+
+                    val placementIds = update.banners.map { it.placementId }
+                    cachedPlacementIdsChipGroup.post {
+                        updateCachedPlacementChips(placementIds)
+                        val combined = combinePlacementIds(placementIds)
+                        if (combined.isNotEmpty()) {
+                            renderSlotsForPlacements(combined)
+                        }
+                        refreshSlotBannerViews()
+                    }
                 }
-            }
             bannerUpdateSubscriber?.let {
                 Braze.getInstance(requireContext()).subscribeToBannersUpdates(it)
             }
@@ -227,21 +230,25 @@ class BannersFragment : Fragment() {
         val minHeightPx = (100 * resources.displayMetrics.density).toInt()
 
         placementIds.forEachIndexed { index, placementId ->
-            val slotLabel = TextView(requireContext()).apply {
-                text = formatSlotLabel(index, placementId)
-                setPadding(0, if (index == 0) 0 else labelTopMarginPx, 0, 0)
-            }
+            val slotLabel =
+                TextView(requireContext()).apply {
+                    text = formatSlotLabel(index, placementId)
+                    setPadding(0, if (index == 0) 0 else labelTopMarginPx, 0, 0)
+                }
             bannersMultiContainer.addView(slotLabel)
 
-            val bannerView = BannerView(requireContext(), null).apply {
-                layoutParams = LinearLayout.LayoutParams(
-                    LinearLayout.LayoutParams.MATCH_PARENT,
-                    LinearLayout.LayoutParams.WRAP_CONTENT
-                ).apply { bottomMargin = bottomMarginPx }
-                setBackgroundResource(android.R.color.darker_gray)
-                minimumHeight = minHeightPx
-                this.placementId = placementId
-            }
+            val bannerView =
+                BannerView(requireContext(), null).apply {
+                    layoutParams =
+                        LinearLayout
+                            .LayoutParams(
+                                LinearLayout.LayoutParams.MATCH_PARENT,
+                                LinearLayout.LayoutParams.WRAP_CONTENT,
+                            ).apply { bottomMargin = bottomMarginPx }
+                    setBackgroundResource(android.R.color.darker_gray)
+                    minimumHeight = minHeightPx
+                    this.placementId = placementId
+                }
             bannersMultiContainer.addView(bannerView)
             slotBannerViews.add(bannerView)
         }
@@ -256,15 +263,20 @@ class BannersFragment : Fragment() {
         }
     }
 
-    private fun formatSlotLabel(index: Int, placementId: String): String {
+    private fun formatSlotLabel(
+        index: Int,
+        placementId: String,
+    ): String {
         val displayedId = if (placementId.isBlank()) "(empty)" else placementId
         return "Slot ${index + 1} — $displayedId"
     }
 
     private fun refreshSlotSpinner() {
-        val labels = slotPlacementIds.mapIndexed { index, placementId ->
-            "Slot ${index + 1}${if (placementId.isNotBlank()) " ($placementId)" else ""}"
-        }.toTypedArray()
+        val labels =
+            slotPlacementIds
+                .mapIndexed { index, placementId ->
+                    "Slot ${index + 1}${if (placementId.isNotBlank()) " ($placementId)" else ""}"
+                }.toTypedArray()
         val previousSelection = bannerSlotSpinner.selectedItemPosition
         val adapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, labels)
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
@@ -297,19 +309,25 @@ class BannersFragment : Fragment() {
         }
 
         // Listener for when property filter dropdown item is selected
-        propertyFilterSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-                val selectedDisplayName = filterOptions[position]
-                currentFilterType = propertyFilterTypes[selectedDisplayName]
-                // Re-display properties with the new filter
-                displayBannerProperties(currentlyDisplayedBanner)
-                brazelog { "onItemSelected - $parent" }
-            }
+        propertyFilterSpinner.onItemSelectedListener =
+            object : AdapterView.OnItemSelectedListener {
+                override fun onItemSelected(
+                    parent: AdapterView<*>?,
+                    view: View?,
+                    position: Int,
+                    id: Long,
+                ) {
+                    val selectedDisplayName = filterOptions[position]
+                    currentFilterType = propertyFilterTypes[selectedDisplayName]
+                    // Re-display properties with the new filter
+                    displayBannerProperties(currentlyDisplayedBanner)
+                    brazelog { "onItemSelected - $parent" }
+                }
 
-            override fun onNothingSelected(parent: AdapterView<*>?) {
-                brazelog { "onNothingSelected - $parent" }
+                override fun onNothingSelected(parent: AdapterView<*>?) {
+                    brazelog { "onNothingSelected - $parent" }
+                }
             }
-        }
     }
 
     /**
@@ -344,7 +362,11 @@ class BannersFragment : Fragment() {
         }
     }
 
-    private fun retrievePropertyValue(banner: Banner, key: String, type: String): String {
+    private fun retrievePropertyValue(
+        banner: Banner,
+        key: String,
+        type: String,
+    ): String {
         // Use the Banner object to retrieve
         var value = "Unknown"
         when (type) {
@@ -370,23 +392,31 @@ class BannersFragment : Fragment() {
         return value
     }
 
-    private fun addPropertyTextView(key: String?, value: String? = null, type: String? = null) {
-        val textView = TextView(context).apply {
-            layoutParams = LinearLayout.LayoutParams(
-                LinearLayout.LayoutParams.MATCH_PARENT,
-                LinearLayout.LayoutParams.WRAP_CONTENT
-            ).apply {
-                setMargins(0, 4, 0, 4)
+    private fun addPropertyTextView(
+        key: String?,
+        value: String? = null,
+        type: String? = null,
+    ) {
+        val textView =
+            TextView(context).apply {
+                layoutParams =
+                    LinearLayout
+                        .LayoutParams(
+                            LinearLayout.LayoutParams.MATCH_PARENT,
+                            LinearLayout.LayoutParams.WRAP_CONTENT,
+                        ).apply {
+                            setMargins(0, 4, 0, 4)
+                        }
+                text =
+                    if (key == null) {
+                        ""
+                        return
+                    } else {
+                        "Key: $key\nType: $type\nValue: $value\n"
+                    }
+                setPadding(8, 8, 8, 8)
+                setBackgroundResource(R.drawable.property_item_background)
             }
-            text = if (key == null) {
-                ""
-                return
-            } else {
-                "Key: $key\nType: $type\nValue: $value\n"
-            }
-            setPadding(8, 8, 8, 8)
-            setBackgroundResource(R.drawable.property_item_background)
-        }
         bannerPropertiesContainer.addView(textView)
     }
 
@@ -398,15 +428,16 @@ class BannersFragment : Fragment() {
         cachedPlacementIdsChipGroup.removeAllViews()
 
         placementIds.forEach { placementId ->
-            val chip = Chip(requireContext()).apply {
-                text = placementId
-                isClickable = true
-                isCheckable = false
-                setOnClickListener {
-                    getBannerTextInput.setText(placementId.trim())
-                    showToast("Selected placement ID: $placementId")
+            val chip =
+                Chip(requireContext()).apply {
+                    text = placementId
+                    isClickable = true
+                    isCheckable = false
+                    setOnClickListener {
+                        getBannerTextInput.setText(placementId.trim())
+                        showToast("Selected placement ID: $placementId")
+                    }
                 }
-            }
             cachedPlacementIdsChipGroup.addView(chip)
         }
     }

@@ -22,9 +22,11 @@ import com.braze.ui.support.getMaxSafeRightInset
 import com.braze.ui.support.getMaxSafeTopInset
 import com.braze.ui.support.isRunningOnTablet
 
-open class InAppMessageFullView(context: Context?, attrs: AttributeSet?) :
-    InAppMessageImmersiveBaseView(context, attrs), IInAppMessageBackEventListener {
-
+open class InAppMessageFullView(
+    context: Context?,
+    attrs: AttributeSet?,
+) : InAppMessageImmersiveBaseView(context, attrs),
+    IInAppMessageBackEventListener {
     private var inAppMessageImageView: InAppMessageImageView? = null
     private var isGraphic = false
 
@@ -68,7 +70,7 @@ open class InAppMessageFullView(context: Context?, attrs: AttributeSet?) :
     open fun createAppropriateViews(
         activity: Activity,
         inAppMessage: IInAppMessageImmersive,
-        isGraphic: Boolean
+        isGraphic: Boolean,
     ) {
         inAppMessageImageView = findViewById(R.id.com_braze_inappmessage_full_imageview)
         inAppMessageImageView?.let {
@@ -87,11 +89,11 @@ open class InAppMessageFullView(context: Context?, attrs: AttributeSet?) :
             } else {
                 setViewBackgroundColor(
                     findViewById(R.id.com_braze_inappmessage_full_all_content_parent),
-                    color
+                    color,
                 )
                 setViewBackgroundColor(
                     findViewById(R.id.com_braze_inappmessage_full_text_and_button_content_parent),
-                    color
+                    color,
                 )
             }
         }
@@ -184,7 +186,7 @@ open class InAppMessageFullView(context: Context?, attrs: AttributeSet?) :
     private fun setInAppMessageImageViewAttributes(
         activity: Activity,
         inAppMessage: IInAppMessageImmersive,
-        inAppMessageImageView: IInAppMessageImageView
+        inAppMessageImageView: IInAppMessageImageView,
     ) {
         inAppMessageImageView.setInAppMessageImageCropType(inAppMessage.cropType)
         inAppMessageImageView.setAltImageText(inAppMessage.altImageText)
@@ -208,7 +210,7 @@ open class InAppMessageFullView(context: Context?, attrs: AttributeSet?) :
      */
     private fun applyDisplayCutoutMarginsToCloseButton(
         windowInsets: WindowInsetsCompat,
-        closeButtonView: View
+        closeButtonView: View,
     ) {
         if (closeButtonView.layoutParams == null || closeButtonView.layoutParams !is MarginLayoutParams) {
             brazelog {
@@ -223,7 +225,7 @@ open class InAppMessageFullView(context: Context?, attrs: AttributeSet?) :
             getMaxSafeLeftInset(windowInsets) + layoutParams.leftMargin,
             getMaxSafeTopInset(windowInsets) + layoutParams.topMargin,
             getMaxSafeRightInset(windowInsets) + layoutParams.rightMargin,
-            getMaxSafeBottomInset(windowInsets) + layoutParams.bottomMargin
+            getMaxSafeBottomInset(windowInsets) + layoutParams.bottomMargin,
         )
     }
 
@@ -232,7 +234,7 @@ open class InAppMessageFullView(context: Context?, attrs: AttributeSet?) :
      */
     private fun applyDisplayCutoutMarginsToContentArea(
         windowInsets: WindowInsetsCompat,
-        contentAreaView: View
+        contentAreaView: View,
     ) {
         if (contentAreaView.layoutParams !is MarginLayoutParams) {
             brazelog {
@@ -247,7 +249,7 @@ open class InAppMessageFullView(context: Context?, attrs: AttributeSet?) :
             getMaxSafeLeftInset(windowInsets) + layoutParams.leftMargin,
             layoutParams.topMargin,
             getMaxSafeRightInset(windowInsets) + layoutParams.rightMargin,
-            getMaxSafeBottomInset(windowInsets) + layoutParams.bottomMargin
+            getMaxSafeBottomInset(windowInsets) + layoutParams.bottomMargin,
         )
     }
 }

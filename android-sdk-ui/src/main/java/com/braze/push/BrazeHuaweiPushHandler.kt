@@ -23,7 +23,7 @@ object BrazeHuaweiPushHandler {
     @JvmStatic
     fun handleHmsRemoteMessageData(
         context: Context,
-        hmsRemoteMessageData: Map<String, String>?
+        hmsRemoteMessageData: Map<String, String>?,
     ): Boolean {
         brazelog(V) { "Handling Huawei remote message: $hmsRemoteMessageData" }
 

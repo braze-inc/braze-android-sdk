@@ -19,8 +19,8 @@ open class DefaultInAppMessageAnimationFactory : IInAppMessageAnimationFactory {
     private val shortAnimationDurationMs =
         Resources.getSystem().getInteger(android.R.integer.config_shortAnimTime).toLong()
 
-    override fun getOpeningAnimation(inAppMessage: IInAppMessage): Animation? {
-        return if (inAppMessage is InAppMessageSlideup) {
+    override fun getOpeningAnimation(inAppMessage: IInAppMessage): Animation? =
+        if (inAppMessage is InAppMessageSlideup) {
             if (inAppMessage.slideFrom === SlideFrom.TOP) {
                 createVerticalAnimation(-1f, 0f, shortAnimationDurationMs, false)
             } else {
@@ -29,10 +29,9 @@ open class DefaultInAppMessageAnimationFactory : IInAppMessageAnimationFactory {
         } else {
             setAnimationParams(AlphaAnimation(0f, 1f), shortAnimationDurationMs, true)
         }
-    }
 
-    override fun getClosingAnimation(inAppMessage: IInAppMessage): Animation? {
-        return if (inAppMessage is InAppMessageSlideup) {
+    override fun getClosingAnimation(inAppMessage: IInAppMessage): Animation? =
+        if (inAppMessage is InAppMessageSlideup) {
             if (inAppMessage.slideFrom === SlideFrom.TOP) {
                 createVerticalAnimation(0f, -1f, shortAnimationDurationMs, false)
             } else {
@@ -41,5 +40,4 @@ open class DefaultInAppMessageAnimationFactory : IInAppMessageAnimationFactory {
         } else {
             setAnimationParams(AlphaAnimation(1f, 0f), shortAnimationDurationMs, false)
         }
-    }
 }

@@ -17,13 +17,13 @@ data class NetworkLogEntry(
     val message: String,
     val rawLine: String,
     val url: String? = null,
-    val statusCode: Int? = null
+    val statusCode: Int? = null,
 ) {
     enum class Direction {
         REQUEST,
         RESPONSE,
         FAILURE,
         DISPATCH,
-        OTHER
+        OTHER,
     }
 }

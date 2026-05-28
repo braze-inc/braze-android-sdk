@@ -19,6 +19,7 @@ import com.braze.events.IEventSubscriber
 import com.braze.managers.banners.IBannerView
 import com.braze.support.BrazeLogger.Priority.E
 import com.braze.support.BrazeLogger.Priority.V
+import com.braze.support.BrazeLogger.Priority.W
 import com.braze.support.BrazeLogger.brazelog
 import com.braze.ui.R
 import com.braze.ui.banners.jsinterface.BannerJavascriptInterface
@@ -31,7 +32,9 @@ import java.util.concurrent.atomic.AtomicReference
 /**
  * An Android View that displays a Braze banner.
  */
-class BannerView : WebView, IBannerView {
+class BannerView :
+    WebView,
+    IBannerView {
     private var _placementId: String? = null
     private var loadedHtml: String? = null
     private var currentUserId: String? = null
@@ -42,7 +45,7 @@ class BannerView : WebView, IBannerView {
      * [AtomicReference] because [initBanner] may run off the main thread while dismiss runs on the
      * main thread.
      */
-    private val dismissSnapshot = AtomicReference<BannerDismissSnapshot?>(null)
+    private val dismissSnapshot = AtomicReference<PendingBannerDismissSnapshot?>(null)
 
     /**
      * Callback invoked when the banner is dismissed (e.g. via Braze bridge closeMessage).
@@ -50,25 +53,27 @@ class BannerView : WebView, IBannerView {
      * Invoked after the view's visibility is set to [GONE] and its WebView processing is paused.
      * The view remains in the hierarchy so it can be reused if new content is loaded.
      *
-     * @param snapshot [BannerDismissSnapshot] with placement, stable key, and tracking id when known.
+     * @param snapshot [BannerDismissSnapshot] with placement, stable key, and tracking id.
      */
     var onDismissCallback: ((BannerDismissSnapshot) -> Unit)? = null
 
-    private val dismissSubscriber = IEventSubscriber<BannerDismissedEvent> { event ->
-        if (event.placementId == _placementId) {
-            dismiss()
-        }
-    }
-
-    private val attachStateListener = object : OnAttachStateChangeListener {
-        override fun onViewAttachedToWindow(v: View) {
-            BrazeInternal.subscribeToBannersDismissedEvent(context, dismissSubscriber)
+    private val dismissSubscriber =
+        IEventSubscriber<BannerDismissedEvent> { event ->
+            if (event.placementId == _placementId) {
+                dismiss()
+            }
         }
 
-        override fun onViewDetachedFromWindow(v: View) {
-            BrazeInternal.unsubscribeFromBannersDismissedEvent(context, dismissSubscriber)
+    private val attachStateListener =
+        object : OnAttachStateChangeListener {
+            override fun onViewAttachedToWindow(v: View) {
+                BrazeInternal.subscribeToBannersDismissedEvent(context, dismissSubscriber)
+            }
+
+            override fun onViewDetachedFromWindow(v: View) {
+                BrazeInternal.unsubscribeFromBannersDismissedEvent(context, dismissSubscriber)
+            }
         }
-    }
 
     var placementId: String?
         get() = _placementId
@@ -112,18 +117,24 @@ class BannerView : WebView, IBannerView {
         init(attrs, defStyle)
     }
 
-    private fun init(attrs: AttributeSet?, defStyle: Int) {
+    private fun init(
+        attrs: AttributeSet?,
+        defStyle: Int,
+    ) {
         setBackgroundColor(Color.TRANSPARENT)
 
         // Load attributes
         context.withStyledAttributes(
-            attrs, R.styleable.BannerView, defStyle, 0
+            attrs,
+            R.styleable.BannerView,
+            defStyle,
+            0,
         ) {
-
             if (hasValue(R.styleable.BannerView_placementId)) {
-                _placementId = getString(
-                    R.styleable.BannerView_placementId
-                )
+                _placementId =
+                    getString(
+                        R.styleable.BannerView_placementId,
+                    )
             }
         }
 
@@ -138,15 +149,15 @@ class BannerView : WebView, IBannerView {
         setLayerType(LAYER_TYPE_HARDWARE, null)
         setBackgroundColor(Color.TRANSPARENT)
 
-        webViewClient = BannerWebViewClient(context, createBannerWebViewClientListener())
+        webViewClient = BannerWebViewClient(context, createBannerWebViewClientListener(placementId))
 
         addJavascriptInterface(
             BannerJavascriptInterface(
                 context = context,
                 placementId = placementId,
-                setHeightCallback = internalHeightCallback
+                setHeightCallback = internalHeightCallback,
             ),
-            JS_BRIDGE_NAME
+            JS_BRIDGE_NAME,
         )
     }
 
@@ -156,9 +167,14 @@ class BannerView : WebView, IBannerView {
      * URL intercepts trigger [dismiss].
      */
     @VisibleForTesting
-    internal fun createBannerWebViewClientListener(): DefaultBannerWebViewClientListener =
-        object : DefaultBannerWebViewClientListener() {
-            override fun onCloseAction(context: Context, url: String, queryBundle: Bundle) {
+    internal fun createBannerWebViewClientListener(placementId: String): DefaultBannerWebViewClientListener =
+        object : DefaultBannerWebViewClientListener(placementId) {
+            override fun onCloseAction(
+                context: Context,
+                url: String,
+                queryBundle: Bundle,
+            ) {
+                super.onCloseAction(context, url, queryBundle)
                 dismiss()
             }
         }
@@ -179,11 +195,11 @@ class BannerView : WebView, IBannerView {
         }
 
         dismissSnapshot.set(
-            BannerDismissSnapshot(
+            PendingBannerDismissSnapshot(
                 placementId = banner.placementId,
                 stableKey = banner.stableKey,
                 trackingId = banner.trackingId,
-            )
+            ),
         )
 
         // Don't reload if the HTML is the same
@@ -217,7 +233,7 @@ class BannerView : WebView, IBannerView {
             loadData(
                 Base64.encodeToString(html.toByteArray(), Base64.NO_PADDING).orEmpty(),
                 "text/html",
-                "base64"
+                "base64",
             )
             invalidate()
         }
@@ -279,14 +295,7 @@ class BannerView : WebView, IBannerView {
             webViewClient = WebViewClient()
             onPause()
             visibility = GONE
-            val cached = dismissSnapshot.get()
-            onDismissCallback?.invoke(
-                BannerDismissSnapshot(
-                    placementId = cached?.placementId ?: _placementId,
-                    stableKey = cached?.stableKey,
-                    trackingId = cached?.trackingId,
-                )
-            )
+            fireOnDismissCallback()
             brazelog(V) { "Banner dismiss completed. placementId=$_placementId" }
         } catch (e: Exception) {
             brazelog(E, e) {
@@ -295,7 +304,35 @@ class BannerView : WebView, IBannerView {
         }
     }
 
+    private fun fireOnDismissCallback() {
+        val callback = onDismissCallback ?: return
+        val cached = dismissSnapshot.get()
+        val placementId = cached?.placementId ?: _placementId
+        val stableKey = cached?.stableKey
+        val trackingId = cached?.trackingId
+        val snapshot =
+            BannerDismissSnapshot.fromNullableFields(
+                placementId = placementId,
+                stableKey = stableKey,
+                trackingId = trackingId,
+            )
+        if (snapshot == null) {
+            brazelog(W) {
+                "Banner dismiss callback skipped because required snapshot fields were missing. " +
+                    "placementId=$placementId stableKey=$stableKey trackingId=$trackingId"
+            }
+            return
+        }
+        callback.invoke(snapshot)
+    }
+
     private companion object {
         private const val JS_BRIDGE_NAME = "brazeInternalBridge"
     }
 }
+
+private data class PendingBannerDismissSnapshot(
+    val placementId: String?,
+    val stableKey: String?,
+    val trackingId: String?,
+)

@@ -19,14 +19,16 @@ object InAppMessageUtils {
      * @param messageJSONString JSON representation of the in-app message, or null to return null.
      * @return The deserialized [IInAppMessage], or null if either parameter is null.
      */
-    fun inAppMessageFromString(context: Context?, messageJSONString: String?): IInAppMessage? {
-        return if (messageJSONString == null || context == null) {
+    fun inAppMessageFromString(
+        context: Context?,
+        messageJSONString: String?,
+    ): IInAppMessage? =
+        if (messageJSONString == null || context == null) {
             null
         } else {
             getInstance(context)
                 .deserializeInAppMessageString(messageJSONString)
         }
-    }
 
     /**
      * Logs a click event on the given in-app message.
@@ -49,7 +51,10 @@ object InAppMessageUtils {
      * @param inAppMessage The in-app message containing the button, or null to no-op.
      * @param buttonId The identifier of the button that was clicked.
      */
-    fun logInAppMessageButtonClick(inAppMessage: IInAppMessage?, buttonId: Int) {
+    fun logInAppMessageButtonClick(
+        inAppMessage: IInAppMessage?,
+        buttonId: Int,
+    ) {
         if (inAppMessage == null) {
             brazelog(W) { "The in-app message is null. Not logging in-app message button $buttonId click." }
             return

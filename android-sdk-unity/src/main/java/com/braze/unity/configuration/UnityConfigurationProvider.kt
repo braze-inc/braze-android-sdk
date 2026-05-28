@@ -1,21 +1,24 @@
 package com.braze.unity.configuration
 
 import android.content.Context
-import com.braze.unity.enums.UnityMessageType
 import com.braze.configuration.CachedConfigurationProvider
 import com.braze.enums.DataStoreKey
 import com.braze.support.BrazeLogger.brazelog
 import com.braze.ui.inappmessage.InAppMessageOperation
 import com.braze.ui.inappmessage.InAppMessageOperation.Companion.fromValue
+import com.braze.unity.enums.UnityMessageType
 
 /**
  * [CachedConfigurationProvider] that reads Unity-specific Braze configuration
  * from the `braze.xml` resource file, including GameObject names, callback
  * method names, and in-app message display behavior.
  */
-class UnityConfigurationProvider(context: Context) : CachedConfigurationProvider(
-    context, false
-) {
+class UnityConfigurationProvider(
+    context: Context,
+) : CachedConfigurationProvider(
+        context,
+        false,
+    ) {
     /** Unity GameObject name for the in-app message listener. */
     val inAppMessageListenerGameObjectName: String?
         get() = getStringValue(DataStoreKey.INAPP_LISTENER_GAME_OBJECT_NAME.key, null)
@@ -99,7 +102,11 @@ class UnityConfigurationProvider(context: Context) : CachedConfigurationProvider
      * @param methodName Unity method name to invoke on the GameObject.
      */
     @Suppress("LongMethod")
-    fun configureListener(messageTypeValue: Int, gameObject: String, methodName: String) {
+    fun configureListener(
+        messageTypeValue: Int,
+        gameObject: String,
+        methodName: String,
+    ) {
         val messageType = UnityMessageType.getTypeFromValue(messageTypeValue)
         if (messageType == null) {
             brazelog {
@@ -110,12 +117,13 @@ class UnityConfigurationProvider(context: Context) : CachedConfigurationProvider
         }
         when (messageType) {
             UnityMessageType.PUSH_PERMISSIONS_PROMPT_RESPONSE,
-            UnityMessageType.PUSH_TOKEN_RECEIVED_FROM_SYSTEM -> {}
+            UnityMessageType.PUSH_TOKEN_RECEIVED_FROM_SYSTEM,
+            -> {}
             UnityMessageType.PUSH_RECEIVED -> {
                 putStringIntoRuntimeConfiguration(DataStoreKey.PUSH_RECEIVED_GAME_OBJECT_NAME.key, gameObject)
                 putStringIntoRuntimeConfiguration(
                     DataStoreKey.PUSH_RECEIVED_CALLBACK_METHOD_NAME.key,
-                    methodName
+                    methodName,
                 )
             }
             UnityMessageType.PUSH_OPENED -> {
@@ -130,37 +138,46 @@ class UnityConfigurationProvider(context: Context) : CachedConfigurationProvider
                 putStringIntoRuntimeConfiguration(DataStoreKey.INAPP_LISTENER_GAME_OBJECT_NAME.key, gameObject)
                 putStringIntoRuntimeConfiguration(
                     DataStoreKey.INAPP_LISTENER_CALLBACK_METHOD_NAME.key,
-                    methodName
+                    methodName,
                 )
             }
             UnityMessageType.CONTENT_CARDS_UPDATED -> {
                 putStringIntoRuntimeConfiguration(
-                    DataStoreKey.CONTENT_CARDS_UPDATED_LISTENER_GAME_OBJECT_NAME.key, gameObject
+                    DataStoreKey.CONTENT_CARDS_UPDATED_LISTENER_GAME_OBJECT_NAME.key,
+                    gameObject,
                 )
                 putStringIntoRuntimeConfiguration(
-                    DataStoreKey.CONTENT_CARDS_UPDATED_LISTENER_CALLBACK_METHOD_NAME.key, methodName
+                    DataStoreKey.CONTENT_CARDS_UPDATED_LISTENER_CALLBACK_METHOD_NAME.key,
+                    methodName,
                 )
             }
             UnityMessageType.SDK_AUTHENTICATION_FAILURE -> {
                 putStringIntoRuntimeConfiguration(
-                    DataStoreKey.SDK_AUTHENTICATION_FAILURE_LISTENER_GAME_OBJECT_NAME.key, gameObject
+                    DataStoreKey.SDK_AUTHENTICATION_FAILURE_LISTENER_GAME_OBJECT_NAME.key,
+                    gameObject,
                 )
                 putStringIntoRuntimeConfiguration(
-                    DataStoreKey.SDK_AUTHENTICATION_FAILURE_LISTENER_CALLBACK_METHOD_NAME.key, methodName
+                    DataStoreKey.SDK_AUTHENTICATION_FAILURE_LISTENER_CALLBACK_METHOD_NAME.key,
+                    methodName,
                 )
             }
             UnityMessageType.FEATURE_FLAGS_UPDATED -> {
                 putStringIntoRuntimeConfiguration(
-                    DataStoreKey.FEATURE_FLAGS_UPDATED_LISTENER_GAME_OBJECT_NAME.key, gameObject
+                    DataStoreKey.FEATURE_FLAGS_UPDATED_LISTENER_GAME_OBJECT_NAME.key,
+                    gameObject,
                 )
                 putStringIntoRuntimeConfiguration(
-                    DataStoreKey.FEATURE_FLAGS_UPDATED_LISTENER_CALLBACK_METHOD_NAME.key, methodName
+                    DataStoreKey.FEATURE_FLAGS_UPDATED_LISTENER_CALLBACK_METHOD_NAME.key,
+                    methodName,
                 )
             }
         }
     }
 
-    private fun putStringIntoRuntimeConfiguration(key: String, value: String) {
+    private fun putStringIntoRuntimeConfiguration(
+        key: String,
+        value: String,
+    ) {
         runtimeAppConfigurationProvider.writeString(key, value)
     }
 }

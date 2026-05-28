@@ -50,18 +50,19 @@ class MainFragment : Fragment() {
     override fun onCreateView(
         layoutInflater: LayoutInflater,
         container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View? {
         val contentView = layoutInflater.inflate(R.layout.main_fragment, container, false)
         customEventTextView =
             contentView.findViewById(R.id.com_appboy_sample_custom_event_autocomplete_text_view)
         customPurchaseTextView =
             contentView.findViewById(R.id.com_appboy_sample_purchase_autocomplete_text_view)
-        customEventsAndPurchasesArrayAdapter = ArrayAdapter(
-            requireContext(),
-            android.R.layout.simple_list_item_1,
-            getLastSeenCustomEventsAndPurchasesFromLocalStorage()
-        )
+        customEventsAndPurchasesArrayAdapter =
+            ArrayAdapter(
+                requireContext(),
+                android.R.layout.simple_list_item_1,
+                getLastSeenCustomEventsAndPurchasesFromLocalStorage(),
+            )
         customEventTextView.setAdapter(customEventsAndPurchasesArrayAdapter)
         customPurchaseTextView.setAdapter(customEventsAndPurchasesArrayAdapter)
 
@@ -72,18 +73,20 @@ class MainFragment : Fragment() {
             val userId = userIdEditText.text.toString()
             if (userId.isNotBlank()) {
                 (requireActivity().applicationContext as DroidboyApplication).changeUserWithNewSdkAuthToken(userId)
-                Toast.makeText(requireContext(), "Set userId to: $userId", Toast.LENGTH_SHORT)
+                Toast
+                    .makeText(requireContext(), "Set userId to: $userId", Toast.LENGTH_SHORT)
                     .show()
                 requireContext().writePrefsString(DroidboyPreferenceKeys.USER_ID, userId)
             } else {
-                Toast.makeText(requireContext(), "Please enter a userId.", Toast.LENGTH_SHORT)
+                Toast
+                    .makeText(requireContext(), "Please enter a userId.", Toast.LENGTH_SHORT)
                     .show()
             }
         }
 
         contentView.setOnButtonClickWithEditableText(
             R.id.com_braze_sample_set_sdk_auth_signature_button,
-            R.id.com_braze_sample_set_sdk_auth_signature_edit_text
+            R.id.com_braze_sample_set_sdk_auth_signature_edit_text,
         ) { _, signature ->
             if (signature.isNotBlank()) {
                 Braze.getInstance(requireContext()).setSdkAuthenticationSignature(signature)
@@ -102,14 +105,16 @@ class MainFragment : Fragment() {
             val customEvent = customEventTextView.text.toString()
             if (customEvent.isNotBlank()) {
                 Braze.getInstance(requireContext()).logCustomEvent(customEvent)
-                Toast.makeText(
-                    requireContext(),
-                    String.format("Logged custom event %s.", customEvent),
-                    Toast.LENGTH_SHORT
-                ).show()
+                Toast
+                    .makeText(
+                        requireContext(),
+                        String.format("Logged custom event %s.", customEvent),
+                        Toast.LENGTH_SHORT,
+                    ).show()
                 onCustomEventOrPurchaseLogged(customEvent)
             } else {
-                Toast.makeText(requireContext(), "Please enter a custom event.", Toast.LENGTH_SHORT)
+                Toast
+                    .makeText(requireContext(), "Please enter a custom event.", Toast.LENGTH_SHORT)
                     .show()
             }
         }
@@ -118,114 +123,120 @@ class MainFragment : Fragment() {
             val purchase = customPurchaseTextView.text.toString()
             if (purchase.isNotBlank()) {
                 Braze.getInstance(requireContext()).logPurchase(purchase, "USD", BigDecimal.TEN)
-                Toast.makeText(
-                    requireContext(),
-                    String.format("Logged purchase %s.", purchase),
-                    Toast.LENGTH_SHORT
-                ).show()
+                Toast
+                    .makeText(
+                        requireContext(),
+                        String.format("Logged purchase %s.", purchase),
+                        Toast.LENGTH_SHORT,
+                    ).show()
                 onCustomEventOrPurchaseLogged(purchase)
             } else {
-                Toast.makeText(requireContext(), "Please enter a purchase.", Toast.LENGTH_SHORT)
+                Toast
+                    .makeText(requireContext(), "Please enter a purchase.", Toast.LENGTH_SHORT)
                     .show()
             }
         }
 
         contentView.setOnButtonClick(R.id.com_appboy_sample_set_user_attributes_button) {
-            Braze.getInstance(requireContext()).getCurrentUser(object : IValueCallback<BrazeUser> {
-                override fun onSuccess(value: BrazeUser) {
-                    value.setFirstName("first name least")
-                    value.setLastName("lastName")
-                    value.setEmail("email@test.com")
-                    value.setGender(Gender.FEMALE)
-                    value.setCountry("USA")
-                    value.setLanguage("cs")
-                    value.setHomeCity("New York")
-                    value.setPhoneNumber("1234567890")
-                    value.setLineId("U8189cf6745fc0d808977bdb0b9f22995")
-                    value.setDateOfBirth(1984, Month.AUGUST, 18)
-                    value.setPushNotificationSubscriptionType(NotificationSubscriptionType.OPTED_IN)
-                    value.setEmailNotificationSubscriptionType(NotificationSubscriptionType.OPTED_IN)
-                    value.setCustomUserAttribute(STRING_ATTRIBUTE_KEY, "stringValue")
-                    value.setCustomUserAttribute(FLOAT_ATTRIBUTE_KEY, 1.5f)
-                    value.setCustomUserAttribute(INT_ATTRIBUTE_KEY, 100)
-                    value.setCustomUserAttribute(BOOL_ATTRIBUTE_KEY, true)
-                    value.setCustomUserAttribute(LONG_ATTRIBUTE_KEY, 10L)
-                    value.setCustomUserAttribute(INCREMENT_ATTRIBUTE_KEY, 1)
-                    value.setCustomUserAttribute(DOUBLE_ATTRIBUTE_KEY, 3.1)
-                    value.incrementCustomUserAttribute(INCREMENT_ATTRIBUTE_KEY, 4)
-                    value.setCustomUserAttributeToSecondsFromEpoch(
-                        DATE_ATTRIBUTE_KEY,
-                        Date().time / 1000L
-                    )
-                    value.setCustomAttributeArray(
-                        STRING_ARRAY_ATTRIBUTE_KEY,
-                        arrayOf("a", "b")
-                    )
-                    value.addToCustomAttributeArray(ARRAY_ATTRIBUTE_KEY, "c")
-                    value.removeFromCustomAttributeArray(ARRAY_ATTRIBUTE_KEY, "b")
-                    value.addToCustomAttributeArray(PETS_ARRAY_ATTRIBUTE_KEY, "cat")
-                    value.addToCustomAttributeArray(PETS_ARRAY_ATTRIBUTE_KEY, "dog")
-                    value.removeFromCustomAttributeArray(PETS_ARRAY_ATTRIBUTE_KEY, "bird")
-                    value.removeFromCustomAttributeArray(PETS_ARRAY_ATTRIBUTE_KEY, "deer")
-                    value.setAttributionData(
-                        AttributionData(
-                            "network",
-                            "campaign",
-                            "ad group",
-                            "creative"
+            Braze.getInstance(requireContext()).getCurrentUser(
+                object : IValueCallback<BrazeUser> {
+                    override fun onSuccess(value: BrazeUser) {
+                        value.setFirstName("first name least")
+                        value.setLastName("lastName")
+                        value.setEmail("email@test.com")
+                        value.setGender(Gender.FEMALE)
+                        value.setCountry("USA")
+                        value.setLanguage("cs")
+                        value.setHomeCity("New York")
+                        value.setPhoneNumber("1234567890")
+                        value.setLineId("U8189cf6745fc0d808977bdb0b9f22995")
+                        value.setDateOfBirth(1984, Month.AUGUST, 18)
+                        value.setPushNotificationSubscriptionType(NotificationSubscriptionType.OPTED_IN)
+                        value.setEmailNotificationSubscriptionType(NotificationSubscriptionType.OPTED_IN)
+                        value.setCustomUserAttribute(STRING_ATTRIBUTE_KEY, "stringValue")
+                        value.setCustomUserAttribute(FLOAT_ATTRIBUTE_KEY, 1.5f)
+                        value.setCustomUserAttribute(INT_ATTRIBUTE_KEY, 100)
+                        value.setCustomUserAttribute(BOOL_ATTRIBUTE_KEY, true)
+                        value.setCustomUserAttribute(LONG_ATTRIBUTE_KEY, 10L)
+                        value.setCustomUserAttribute(INCREMENT_ATTRIBUTE_KEY, 1)
+                        value.setCustomUserAttribute(DOUBLE_ATTRIBUTE_KEY, 3.1)
+                        value.incrementCustomUserAttribute(INCREMENT_ATTRIBUTE_KEY, 4)
+                        value.setCustomUserAttributeToSecondsFromEpoch(
+                            DATE_ATTRIBUTE_KEY,
+                            Date().time / 1000L,
                         )
-                    )
-                    value.setLocationCustomAttribute(
-                        "Favorite Location",
-                        33.078883,
-                        -116.603131
-                    )
-                    showToast("Set user attributes.")
-                }
+                        value.setCustomAttributeArray(
+                            STRING_ARRAY_ATTRIBUTE_KEY,
+                            arrayOf("a", "b"),
+                        )
+                        value.addToCustomAttributeArray(ARRAY_ATTRIBUTE_KEY, "c")
+                        value.removeFromCustomAttributeArray(ARRAY_ATTRIBUTE_KEY, "b")
+                        value.addToCustomAttributeArray(PETS_ARRAY_ATTRIBUTE_KEY, "cat")
+                        value.addToCustomAttributeArray(PETS_ARRAY_ATTRIBUTE_KEY, "dog")
+                        value.removeFromCustomAttributeArray(PETS_ARRAY_ATTRIBUTE_KEY, "bird")
+                        value.removeFromCustomAttributeArray(PETS_ARRAY_ATTRIBUTE_KEY, "deer")
+                        value.setAttributionData(
+                            AttributionData(
+                                "network",
+                                "campaign",
+                                "ad group",
+                                "creative",
+                            ),
+                        )
+                        value.setLocationCustomAttribute(
+                            "Favorite Location",
+                            33.078883,
+                            -116.603131,
+                        )
+                        showToast("Set user attributes.")
+                    }
 
-                override fun onError() {
-                    showToast("Failed to set user attributes.")
-                }
-            })
+                    override fun onError() {
+                        showToast("Failed to set user attributes.")
+                    }
+                },
+            )
         }
 
         contentView.setOnButtonClick(R.id.com_appboy_sample_unset_user_attributes_button) {
-            Braze.getInstance(requireContext()).getCurrentUser(object : IValueCallback<BrazeUser> {
-                override fun onSuccess(value: BrazeUser) {
-                    // Unset current user default attributes
-                    value.setFirstName(null)
-                    value.setLastName(null)
-                    value.setEmail(null)
-                    value.setGender(null)
-                    value.setCountry(null)
-                    value.setLanguage(null)
-                    value.setHomeCity(null)
-                    value.setPhoneNumber(null)
-                    value.setLineId(null)
-                    value.setDateOfBirth(1970, Month.JANUARY, 1)
-                    value.setPushNotificationSubscriptionType(NotificationSubscriptionType.UNSUBSCRIBED)
-                    value.setEmailNotificationSubscriptionType(NotificationSubscriptionType.UNSUBSCRIBED)
-                    // Unset current user custom attributes
-                    value.unsetCustomUserAttribute(STRING_ATTRIBUTE_KEY)
-                    value.unsetCustomUserAttribute(FLOAT_ATTRIBUTE_KEY)
-                    value.unsetCustomUserAttribute(INT_ATTRIBUTE_KEY)
-                    value.unsetCustomUserAttribute(BOOL_ATTRIBUTE_KEY)
-                    value.unsetCustomUserAttribute(LONG_ATTRIBUTE_KEY)
-                    value.unsetCustomUserAttribute(DATE_ATTRIBUTE_KEY)
-                    value.unsetCustomUserAttribute(ARRAY_ATTRIBUTE_KEY)
-                    value.unsetCustomUserAttribute(STRING_ARRAY_ATTRIBUTE_KEY)
-                    value.unsetCustomUserAttribute(PETS_ARRAY_ATTRIBUTE_KEY)
-                    value.unsetCustomUserAttribute(INCREMENT_ATTRIBUTE_KEY)
-                    value.unsetCustomUserAttribute(DOUBLE_ATTRIBUTE_KEY)
-                    value.unsetCustomUserAttribute(ATTRIBUTION_DATA_KEY)
-                    value.unsetLocationCustomAttribute("Mediocre Location")
-                    showToast("Unset user attributes.")
-                }
+            Braze.getInstance(requireContext()).getCurrentUser(
+                object : IValueCallback<BrazeUser> {
+                    override fun onSuccess(value: BrazeUser) {
+                        // Unset current user default attributes
+                        value.setFirstName(null)
+                        value.setLastName(null)
+                        value.setEmail(null)
+                        value.setGender(null)
+                        value.setCountry(null)
+                        value.setLanguage(null)
+                        value.setHomeCity(null)
+                        value.setPhoneNumber(null)
+                        value.setLineId(null)
+                        value.setDateOfBirth(1970, Month.JANUARY, 1)
+                        value.setPushNotificationSubscriptionType(NotificationSubscriptionType.UNSUBSCRIBED)
+                        value.setEmailNotificationSubscriptionType(NotificationSubscriptionType.UNSUBSCRIBED)
+                        // Unset current user custom attributes
+                        value.unsetCustomUserAttribute(STRING_ATTRIBUTE_KEY)
+                        value.unsetCustomUserAttribute(FLOAT_ATTRIBUTE_KEY)
+                        value.unsetCustomUserAttribute(INT_ATTRIBUTE_KEY)
+                        value.unsetCustomUserAttribute(BOOL_ATTRIBUTE_KEY)
+                        value.unsetCustomUserAttribute(LONG_ATTRIBUTE_KEY)
+                        value.unsetCustomUserAttribute(DATE_ATTRIBUTE_KEY)
+                        value.unsetCustomUserAttribute(ARRAY_ATTRIBUTE_KEY)
+                        value.unsetCustomUserAttribute(STRING_ARRAY_ATTRIBUTE_KEY)
+                        value.unsetCustomUserAttribute(PETS_ARRAY_ATTRIBUTE_KEY)
+                        value.unsetCustomUserAttribute(INCREMENT_ATTRIBUTE_KEY)
+                        value.unsetCustomUserAttribute(DOUBLE_ATTRIBUTE_KEY)
+                        value.unsetCustomUserAttribute(ATTRIBUTION_DATA_KEY)
+                        value.unsetLocationCustomAttribute("Mediocre Location")
+                        showToast("Unset user attributes.")
+                    }
 
-                override fun onError() {
-                    showToast("Failed to unset user attributes.")
-                }
-            })
+                    override fun onError() {
+                        showToast("Failed to unset user attributes.")
+                    }
+                },
+            )
         }
 
         contentView.setOnButtonClick(R.id.com_appboy_sample_request_flush_button) {
@@ -249,7 +260,7 @@ class MainFragment : Fragment() {
                         AdvertisingIdClient.getAdvertisingIdInfo(requireContext())
                     Braze.getInstance(requireContext()).setGoogleAdvertisingId(
                         advertisingIdInfo.id,
-                        advertisingIdInfo.isLimitAdTrackingEnabled
+                        advertisingIdInfo.isLimitAdTrackingEnabled,
                     )
                     Braze.getInstance(requireContext()).requestImmediateDataFlush()
                 } catch (e: Exception) {
@@ -267,7 +278,7 @@ class MainFragment : Fragment() {
         try {
             if (serializedEvents != null) {
                 lastSeenCustomEventsAndPurchases.addAll(
-                    JSONArray(serializedEvents).convertStringJsonArrayToList()
+                    JSONArray(serializedEvents).convertStringJsonArrayToList(),
                 )
             }
         } catch (e: JSONException) {
@@ -286,7 +297,7 @@ class MainFragment : Fragment() {
         }
         requireContext().writePrefsString(
             DroidboyPreferenceKeys.LAST_SEEN_CUSTOM_EVENTS_AND_PURCHASES,
-            JSONArray(lastSeenCustomEventsAndPurchases).toString()
+            JSONArray(lastSeenCustomEventsAndPurchases).toString(),
         )
         customEventsAndPurchasesArrayAdapter.clear()
         customEventsAndPurchasesArrayAdapter.addAll(*lastSeenCustomEventsAndPurchases.toTypedArray())
@@ -295,21 +306,24 @@ class MainFragment : Fragment() {
     private fun handleAliasClick() {
         val alias = aliasEditText.text.toString()
         val label = aliasLabelEditText.text.toString()
-        Braze.getInstance(requireContext()).getCurrentUser(object : IValueCallback<BrazeUser> {
-            override fun onSuccess(value: BrazeUser) {
-                value.addAlias(alias, label)
-                Toast.makeText(
-                    requireContext(),
-                    "Added alias " + alias + " with label "
-                        + label,
-                    Toast.LENGTH_SHORT
-                ).show()
-            }
+        Braze.getInstance(requireContext()).getCurrentUser(
+            object : IValueCallback<BrazeUser> {
+                override fun onSuccess(value: BrazeUser) {
+                    value.addAlias(alias, label)
+                    Toast
+                        .makeText(
+                            requireContext(),
+                            "Added alias " + alias + " with label " +
+                                label,
+                            Toast.LENGTH_SHORT,
+                        ).show()
+                }
 
-            override fun onError() {
-                Toast.makeText(requireContext(), "Failed to add alias", Toast.LENGTH_SHORT).show()
-            }
-        })
+                override fun onError() {
+                    Toast.makeText(requireContext(), "Failed to add alias", Toast.LENGTH_SHORT).show()
+                }
+            },
+        )
     }
 
     /**
@@ -338,7 +352,10 @@ class MainFragment : Fragment() {
         private const val INCREMENT_ATTRIBUTE_KEY = "incrementAttribute"
         private const val ATTRIBUTION_DATA_KEY = "ab_install_attribution"
 
-        fun View.setOnButtonClick(id: Int, block: (view: View) -> Unit) {
+        fun View.setOnButtonClick(
+            id: Int,
+            block: (view: View) -> Unit,
+        ) {
             val view = this.findViewById<Button>(id)
             view.setOnClickListener { block(view) }
         }
@@ -349,7 +366,7 @@ class MainFragment : Fragment() {
         fun View.setOnButtonClickWithEditableText(
             buttonId: Int,
             editTextId: Int,
-            block: (view: View, textValue: String) -> Unit
+            block: (view: View, textValue: String) -> Unit,
         ) {
             val view = this.findViewById<Button>(buttonId)
             view.setOnClickListener {

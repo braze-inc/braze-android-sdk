@@ -31,7 +31,10 @@ class SettingsActivity : AppCompatActivity() {
             .commit()
     }
 
-    private fun applyEdgeToEdgeInsets(toolbar: Toolbar, fragmentContainer: FragmentContainerView) {
+    private fun applyEdgeToEdgeInsets(
+        toolbar: Toolbar,
+        fragmentContainer: FragmentContainerView,
+    ) {
         ViewCompat.setOnApplyWindowInsetsListener(toolbar) { view, windowInsets ->
             val bars = windowInsets.getInsets(WindowInsetsCompat.Type.systemBars())
             view.updatePadding(left = bars.left, top = bars.top, right = bars.right)

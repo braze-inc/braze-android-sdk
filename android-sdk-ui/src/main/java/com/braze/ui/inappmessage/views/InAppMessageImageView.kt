@@ -18,8 +18,10 @@ import kotlin.math.min
  * types.
  */
 @SuppressLint("AppCompatCustomView")
-open class InAppMessageImageView(context: Context?, attrs: AttributeSet?) :
-    ImageView(context, attrs),
+open class InAppMessageImageView(
+    context: Context?,
+    attrs: AttributeSet?,
+) : ImageView(context, attrs),
     IInAppMessageImageView {
     /**
      * Clip path that will be set to a closed round-rectangle contour based on the radii in
@@ -40,6 +42,7 @@ open class InAppMessageImageView(context: Context?, attrs: AttributeSet?) :
     lateinit var inAppRadii: FloatArray
         private set
     private var aspectRatio = -1f
+
     @Suppress("BooleanPropertyNaming")
     private var setToHalfParentHeight = false
 
@@ -52,14 +55,19 @@ open class InAppMessageImageView(context: Context?, attrs: AttributeSet?) :
         topLeft: Float,
         topRight: Float,
         bottomLeft: Float,
-        bottomRight: Float
+        bottomRight: Float,
     ) {
-        inAppRadii = floatArrayOf(
-            topLeft, topLeft,
-            topRight, topRight,
-            bottomLeft, bottomLeft,
-            bottomRight, bottomRight
-        )
+        inAppRadii =
+            floatArrayOf(
+                topLeft,
+                topLeft,
+                topRight,
+                topRight,
+                bottomLeft,
+                bottomLeft,
+                bottomRight,
+                bottomRight,
+            )
     }
 
     override fun setCornersRadiusPx(cornersRadius: Float) {
@@ -90,7 +98,10 @@ open class InAppMessageImageView(context: Context?, attrs: AttributeSet?) :
     }
 
     @Suppress("MagicNumber")
-    override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
+    override fun onMeasure(
+        widthMeasureSpec: Int,
+        heightMeasureSpec: Int,
+    ) {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec)
 
         // If the View isn't large enough, don't set the aspect ratio. This will prevent Glide from
@@ -126,7 +137,11 @@ open class InAppMessageImageView(context: Context?, attrs: AttributeSet?) :
      * @param heightPx
      * @return whether the canvas was successfully clipped
      */
-    fun clipCanvasToPath(canvas: Canvas, widthPx: Int, heightPx: Int): Boolean {
+    fun clipCanvasToPath(
+        canvas: Canvas,
+        widthPx: Int,
+        heightPx: Int,
+    ): Boolean {
         if (!this::inAppRadii.isInitialized) {
             brazelog { "In-app message radii is uninitialized, not clipping path." }
             return false

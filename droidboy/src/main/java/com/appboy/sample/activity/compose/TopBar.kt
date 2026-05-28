@@ -34,20 +34,21 @@ fun TopBar(
     modifier: Modifier = Modifier,
     title: String = "",
     buttonIcon: ImageVector,
-    onButtonClicked: () -> Unit
+    onButtonClicked: () -> Unit,
 ) {
     var shouldShowOverflow by remember { mutableStateOf(false) }
     val application = LocalContext.current.applicationContext as DroidboyApplication
 
     TopAppBar(
         modifier = modifier,
-        windowInsets = WindowInsets(
-            top = dimensionResource(id = R.dimen.size_0dp),
-            bottom = dimensionResource(id = R.dimen.size_0dp)
-        ),
+        windowInsets =
+            WindowInsets(
+                top = dimensionResource(id = R.dimen.size_0dp),
+                bottom = dimensionResource(id = R.dimen.size_0dp),
+            ),
         title = {
             Text(
-                text = title
+                text = title,
             )
         },
         navigationIcon = {
@@ -55,10 +56,11 @@ fun TopBar(
                 Icon(buttonIcon, contentDescription = "")
             }
         },
-        colors = TopAppBarDefaults.topAppBarColors(
-            containerColor = MaterialTheme.colorScheme.primaryContainer,
-            titleContentColor = MaterialTheme.colorScheme.primary,
-        ),
+        colors =
+            TopAppBarDefaults.topAppBarColors(
+                containerColor = MaterialTheme.colorScheme.primaryContainer,
+                titleContentColor = MaterialTheme.colorScheme.primary,
+            ),
         actions = {
             Box {
                 IconButton(onClick = { shouldShowOverflow = true }) {
@@ -66,17 +68,17 @@ fun TopBar(
                 }
                 DropdownMenu(
                     expanded = shouldShowOverflow,
-                    onDismissRequest = { shouldShowOverflow = false }
+                    onDismissRequest = { shouldShowOverflow = false },
                 ) {
                     DropdownMenuItem(
                         text = { Text("Change to random user ID") },
                         onClick = {
                             val newUserId = "droidboy-${Date().formatDate(BrazeDateFormat.SHORT)}-${(1000..9999).random()}"
                             application.changeUserWithNewSdkAuthToken(newUserId)
-                        }
+                        },
                     )
                 }
             }
-        }
+        },
     )
 }

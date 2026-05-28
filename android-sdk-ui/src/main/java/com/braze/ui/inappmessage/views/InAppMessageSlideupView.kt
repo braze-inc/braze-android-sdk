@@ -8,10 +8,10 @@ import android.widget.ImageView
 import android.widget.RelativeLayout
 import android.widget.TextView
 import androidx.core.view.WindowInsetsCompat
-import com.braze.ui.R
 import com.braze.enums.inappmessage.ClickAction
 import com.braze.models.inappmessage.IInAppMessage
 import com.braze.support.BrazeLogger.brazelog
+import com.braze.ui.R
 import com.braze.ui.inappmessage.utils.InAppMessageViewUtils.setViewBackgroundColorFilter
 import com.braze.ui.support.getMaxSafeBottomInset
 import com.braze.ui.support.getMaxSafeLeftInset
@@ -19,8 +19,10 @@ import com.braze.ui.support.getMaxSafeRightInset
 import com.braze.ui.support.getMaxSafeTopInset
 import com.braze.ui.support.removeViewFromParent
 
-open class InAppMessageSlideupView(context: Context?, attrs: AttributeSet?) :
-    InAppMessageBaseView(context, attrs) {
+open class InAppMessageSlideupView(
+    context: Context?,
+    attrs: AttributeSet?,
+) : InAppMessageBaseView(context, attrs) {
     private var inAppMessageImageView: InAppMessageImageView? = null
 
     override val messageTextView: TextView?
@@ -40,7 +42,10 @@ open class InAppMessageSlideupView(context: Context?, attrs: AttributeSet?) :
         inAppMessageImageView?.setAltImageText(inAppMessage.altImageText)
     }
 
-    fun setMessageChevron(color: Int, clickAction: ClickAction) {
+    fun setMessageChevron(
+        color: Int,
+        clickAction: ClickAction,
+    ) {
         if (clickAction == ClickAction.NONE) {
             messageChevronView?.visibility = GONE
         } else {
@@ -95,7 +100,7 @@ open class InAppMessageSlideupView(context: Context?, attrs: AttributeSet?) :
             getMaxSafeLeftInset(insets) + layoutParams.leftMargin,
             getMaxSafeTopInset(insets) + layoutParams.topMargin,
             getMaxSafeRightInset(insets) + layoutParams.rightMargin,
-            getMaxSafeBottomInset(insets) + layoutParams.bottomMargin
+            getMaxSafeBottomInset(insets) + layoutParams.bottomMargin,
         )
     }
 }

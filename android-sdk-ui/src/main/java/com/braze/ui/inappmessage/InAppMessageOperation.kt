@@ -1,7 +1,7 @@
 package com.braze.ui.inappmessage
 
 import androidx.annotation.Keep
-import java.util.*
+import java.util.Locale
 
 /**
  * Specifies how the [BrazeInAppMessageManager][com.braze.ui.inappmessage.BrazeInAppMessageManager]
@@ -18,12 +18,13 @@ enum class InAppMessageOperation {
     DISCARD,
 
     /** Return the in-app message to the front of the display stack. */
-    REENQUEUE;
+    REENQUEUE,
+
+    ;
 
     @Keep
     companion object {
         @JvmStatic
-        fun fromValue(value: String?): InAppMessageOperation? =
-            entries.firstOrNull { it.name == value?.uppercase(Locale.US) }
+        fun fromValue(value: String?): InAppMessageOperation? = entries.firstOrNull { it.name == value?.uppercase(Locale.US) }
     }
 }

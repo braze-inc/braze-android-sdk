@@ -14,6 +14,7 @@ import android.webkit.WebResourceRequest
 import android.webkit.WebSettings
 import android.webkit.WebView
 import android.webkit.WebViewClient
+import androidx.core.graphics.createBitmap
 import androidx.core.net.toUri
 import androidx.fragment.app.FragmentActivity
 import com.braze.BrazeInternal
@@ -26,7 +27,6 @@ import com.braze.support.REMOTE_SCHEMES
 import com.braze.ui.BrazeDeeplinkHandler.Companion.getInstance
 import com.braze.ui.actions.IAction
 import com.braze.ui.support.isDeviceInNightMode
-import androidx.core.graphics.createBitmap
 
 /**
  * Note that this Activity is not and should not be exported by default in
@@ -48,12 +48,12 @@ open class BrazeWebViewActivity : FragmentActivity() {
             // With this flag, we can view Youtube videos since HTML5 requires hardware acceleration.
             window.setFlags(
                 WindowManager.LayoutParams.FLAG_HARDWARE_ACCELERATED,
-                WindowManager.LayoutParams.FLAG_HARDWARE_ACCELERATED
+                WindowManager.LayoutParams.FLAG_HARDWARE_ACCELERATED,
             )
             if (BrazeInternal.getConfigurationProvider(this).shouldUseWindowFlagSecureInActivities) {
                 window.setFlags(
                     WindowManager.LayoutParams.FLAG_SECURE,
-                    WindowManager.LayoutParams.FLAG_SECURE
+                    WindowManager.LayoutParams.FLAG_SECURE,
                 )
             }
             setContentView(R.layout.com_braze_webview_activity)
@@ -105,8 +105,7 @@ open class BrazeWebViewActivity : FragmentActivity() {
              * This bitmap is used to eliminate the default
              * black & white play icon used as the default poster.
              */
-            override fun getDefaultVideoPoster(): Bitmap =
-                createBitmap(1, 1)
+            override fun getDefaultVideoPoster(): Bitmap = createBitmap(1, 1)
         }
     }
 
@@ -116,14 +115,20 @@ open class BrazeWebViewActivity : FragmentActivity() {
      */
     open fun createWebViewClient(): WebViewClient {
         return object : WebViewClient() {
-            override fun shouldOverrideUrlLoading(view: WebView, request: WebResourceRequest): Boolean {
+            override fun shouldOverrideUrlLoading(
+                view: WebView,
+                request: WebResourceRequest,
+            ): Boolean {
                 val didHandleUrl = handleUrlOverride(view.context, request.url.toString())
                 return didHandleUrl ?: super.shouldOverrideUrlLoading(view, request)
             }
 
             @Deprecated("Deprecated in API 24")
             @Suppress("deprecation", "OVERRIDE_DEPRECATION")
-            override fun shouldOverrideUrlLoading(view: WebView, url: String): Boolean {
+            override fun shouldOverrideUrlLoading(
+                view: WebView,
+                url: String,
+            ): Boolean {
                 val didHandleUrl = handleUrlOverride(view.context, url)
                 return didHandleUrl ?: super.shouldOverrideUrlLoading(view, url)
             }
@@ -138,7 +143,10 @@ open class BrazeWebViewActivity : FragmentActivity() {
              * @return True/False when this URL override was handled. Returns null when the super implementation of
              * [WebViewClient.shouldOverrideUrlLoading] should be called instead.
              */
-            private fun handleUrlOverride(context: Context, url: String): Boolean? {
+            private fun handleUrlOverride(
+                context: Context,
+                url: String,
+            ): Boolean? {
                 try {
                     if (REMOTE_SCHEMES.contains(url.toUri().scheme)) {
                         return null
@@ -160,7 +168,10 @@ open class BrazeWebViewActivity : FragmentActivity() {
                 return null
             }
 
-            override fun onRenderProcessGone(view: WebView, detail: RenderProcessGoneDetail): Boolean {
+            override fun onRenderProcessGone(
+                view: WebView,
+                detail: RenderProcessGoneDetail,
+            ): Boolean {
                 brazelog(I) { "The webview rendering process crashed, returning true" }
 
                 // The app crashes after detecting the renderer crashed. Returning true to avoid app crash.

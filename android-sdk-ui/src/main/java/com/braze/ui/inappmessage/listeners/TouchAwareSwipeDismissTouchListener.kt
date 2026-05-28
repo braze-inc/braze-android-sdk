@@ -10,12 +10,13 @@ class TouchAwareSwipeDismissTouchListener(
     view: View,
     token: Any?,
     callbacks: DismissCallbacks?,
-    verticalDismissDirection: VerticalDismissDirection
+    verticalDismissDirection: VerticalDismissDirection,
 ) : SwipeDismissTouchListener(view, token, callbacks, verticalDismissDirection) {
     private var touchListener: ITouchListener? = null
 
     interface ITouchListener {
         fun onTouchStartedOrContinued()
+
         fun onTouchEnded()
     }
 
@@ -32,7 +33,10 @@ class TouchAwareSwipeDismissTouchListener(
         touchListener = newTouchListener
     }
 
-    override fun onTouch(view: View, motionEvent: MotionEvent): Boolean {
+    override fun onTouch(
+        view: View,
+        motionEvent: MotionEvent,
+    ): Boolean {
         when (motionEvent.action) {
             MotionEvent.ACTION_DOWN -> touchListener?.onTouchStartedOrContinued()
             MotionEvent.ACTION_UP, MotionEvent.ACTION_CANCEL -> touchListener?.onTouchEnded()

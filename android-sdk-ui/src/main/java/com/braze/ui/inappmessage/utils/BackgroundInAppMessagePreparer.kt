@@ -54,13 +54,14 @@ object BackgroundInAppMessagePreparer {
         }
         brazelog { "Starting asynchronous in-app message preparation for message." }
         when (inAppMessageToPrepare.messageType) {
-            MessageType.HTML_FULL -> if (!prepareInAppMessageWithZippedAssetHtml(
-                    inAppMessageToPrepare as IInAppMessageZippedAssetHtml
-                )
-            ) {
-                brazelog(W) { "Html in-app message zip asset download failed. Cannot display in-app message." }
-                return null
-            }
+            MessageType.HTML_FULL ->
+                if (!prepareInAppMessageWithZippedAssetHtml(
+                        inAppMessageToPrepare as IInAppMessageZippedAssetHtml,
+                    )
+                ) {
+                    brazelog(W) { "Html in-app message zip asset download failed. Cannot display in-app message." }
+                    return null
+                }
             MessageType.HTML -> prepareInAppMessageWithHtml(inAppMessageToPrepare as InAppMessageHtml)
             else -> {
                 val didImageDownloadSucceed =
@@ -111,10 +112,11 @@ object BackgroundInAppMessagePreparer {
 
         val internalStorageCacheDirectory =
             getHtmlInAppMessageAssetCacheDirectory(applicationContext)
-        val localWebContentUrl = getLocalHtmlUrlFromRemoteUrl(
-            internalStorageCacheDirectory,
-            assetsZipRemoteUrl
-        )
+        val localWebContentUrl =
+            getLocalHtmlUrlFromRemoteUrl(
+                internalStorageCacheDirectory,
+                assetsZipRemoteUrl,
+            )
         return if (!localWebContentUrl.isNullOrBlank()) {
             brazelog { "Local url for html in-app message assets is $localWebContentUrl" }
             inAppMessageHtml.localAssetsDirectoryUrl = localWebContentUrl
@@ -166,7 +168,7 @@ object BackgroundInAppMessagePreparer {
                     imageLoader,
                     applicationContext,
                     inAppMessage,
-                    viewBounds
+                    viewBounds,
                 )
             ) {
                 return true
@@ -177,12 +179,13 @@ object BackgroundInAppMessagePreparer {
         val remoteImageUrl = inAppMessageWithImage.remoteImageUrl
         if (!remoteImageUrl.isNullOrBlank()) {
             brazelog(I) { "In-app message has remote image url. Downloading image at url: $remoteImageUrl" }
-            inAppMessageWithImage.bitmap = imageLoader.getInAppMessageBitmapFromUrl(
-                applicationContext,
-                inAppMessage,
-                remoteImageUrl,
-                viewBounds
-            )
+            inAppMessageWithImage.bitmap =
+                imageLoader.getInAppMessageBitmapFromUrl(
+                    applicationContext,
+                    inAppMessage,
+                    remoteImageUrl,
+                    viewBounds,
+                )
         } else {
             brazelog(W) { "In-app message has no remote image url. Not downloading image." }
             if (inAppMessageWithImage is InAppMessageFull) {
@@ -213,15 +216,16 @@ object BackgroundInAppMessagePreparer {
         imageLoader: IBrazeImageLoader,
         applicationContext: Context,
         inAppMessage: IInAppMessage,
-        viewBounds: BrazeViewBounds
+        viewBounds: BrazeViewBounds,
     ): Boolean {
         brazelog(I) { "Passing in-app message local image url to image loader: $localImageUrl" }
-        inAppMessageWithImage.bitmap = imageLoader.getInAppMessageBitmapFromUrl(
-            applicationContext,
-            inAppMessage,
-            localImageUrl,
-            viewBounds
-        )
+        inAppMessageWithImage.bitmap =
+            imageLoader.getInAppMessageBitmapFromUrl(
+                applicationContext,
+                inAppMessage,
+                localImageUrl,
+                viewBounds,
+            )
         if (inAppMessageWithImage.bitmap != null) {
             // Got the image, we're done
             inAppMessageWithImage.imageDownloadSuccessful = true
@@ -255,20 +259,20 @@ object BackgroundInAppMessagePreparer {
             }
             return
         }
-        val transformedHtml = replacePrefetchedUrlsWithLocalAssets(
-            message,
-            inAppMessage.getLocalPrefetchedAssetPaths()
-        )
+        val transformedHtml =
+            replacePrefetchedUrlsWithLocalAssets(
+                message,
+                inAppMessage.getLocalPrefetchedAssetPaths(),
+            )
         inAppMessage.message = transformedHtml
     }
 
-    private fun getViewBoundsByType(inAppMessage: IInAppMessage): BrazeViewBounds {
-        return when (inAppMessage.messageType) {
+    private fun getViewBoundsByType(inAppMessage: IInAppMessage): BrazeViewBounds =
+        when (inAppMessage.messageType) {
             MessageType.SLIDEUP -> BrazeViewBounds.IN_APP_MESSAGE_SLIDEUP
             MessageType.MODAL -> BrazeViewBounds.IN_APP_MESSAGE_MODAL
             else -> BrazeViewBounds.NO_BOUNDS
         }
-    }
 
     private suspend fun displayPreparedInAppMessage(inAppMessage: IInAppMessage) {
         withContext(Dispatchers.Main) {

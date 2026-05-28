@@ -10,7 +10,10 @@ internal object RequestPushPermissionStep : BaseBrazeActionStep() {
      */
     override fun isValid(data: StepData): Boolean = true
 
-    override fun run(context: Context, data: StepData) {
+    override fun run(
+        context: Context,
+        data: StepData,
+    ) {
         BrazeInAppMessageManager.getInstance().activity.requestPushPermissionPrompt()
     }
 }

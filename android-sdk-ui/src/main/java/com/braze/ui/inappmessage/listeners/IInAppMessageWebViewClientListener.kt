@@ -20,7 +20,11 @@ interface IInAppMessageWebViewClientListener {
      * @param url          the url that triggered the close
      * @param queryBundle a bundle of the query part of url
      */
-    fun onCloseAction(inAppMessage: IInAppMessage, url: String, queryBundle: Bundle)
+    fun onCloseAction(
+        inAppMessage: IInAppMessage,
+        url: String,
+        queryBundle: Bundle,
+    )
 
     /**
      * Called when the window location is set to a Custom Event URL (appboy://customEvent) in an HTML In App Message.
@@ -29,7 +33,11 @@ interface IInAppMessageWebViewClientListener {
      * @param url          the url that triggered the action
      * @param queryBundle a bundle of the query part of url
      */
-    fun onCustomEventAction(inAppMessage: IInAppMessage, url: String, queryBundle: Bundle)
+    fun onCustomEventAction(
+        inAppMessage: IInAppMessage,
+        url: String,
+        queryBundle: Bundle,
+    )
 
     /**
      * Called when a non `appboy` scheme url is encountered.
@@ -38,5 +46,9 @@ interface IInAppMessageWebViewClientListener {
      * @param url          the url pressed
      * @param queryBundle a bundle of the query part of url
      */
-    fun onOtherUrlAction(inAppMessage: IInAppMessage, url: String, queryBundle: Bundle)
+    fun onOtherUrlAction(
+        inAppMessage: IInAppMessage,
+        url: String,
+        queryBundle: Bundle,
+    )
 }

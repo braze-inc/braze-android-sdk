@@ -20,43 +20,48 @@ import java.lang.ref.WeakReference
  */
 open class InAppMessageBackEventHandler(
     activity: Activity,
-    private val inAppMessageView: IInAppMessageBackEventListener?
+    private val inAppMessageView: IInAppMessageBackEventListener?,
 ) {
-
     private var activityRef: WeakReference<Activity>? = null
     private var backAnimationCallback: OnBackAnimationCallback? = null
 
     init {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.UPSIDE_DOWN_CAKE && BrazeInAppMessageManager.getInstance().doesBackButtonDismissInAppMessageView) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.UPSIDE_DOWN_CAKE &&
+            BrazeInAppMessageManager.getInstance().doesBackButtonDismissInAppMessageView
+        ) {
             activity.let {
-                val inAppMessageBackAnimationCallback = object : OnBackAnimationCallback {
-                    override fun onBackInvoked() {
-                        brazelog { "Back button intercepted by in-app message back animation callback, closing in-app message." }
-                        InAppMessageViewUtils.closeInAppMessageOnKeycodeBack()
-                    }
+                val inAppMessageBackAnimationCallback =
+                    object : OnBackAnimationCallback {
+                        override fun onBackInvoked() {
+                            brazelog { "Back button intercepted by in-app message back animation callback, closing in-app message." }
+                            InAppMessageViewUtils.closeInAppMessageOnKeycodeBack()
+                        }
 
-                    override fun onBackStarted(backEvent: BackEvent) {
-                        brazelog { "Back button intercepted by in-app message back animation callback, back event started." }
-                        super.onBackStarted(backEvent)
-                        inAppMessageView?.onBackStarted(backEvent)
-                    }
+                        override fun onBackStarted(backEvent: BackEvent) {
+                            brazelog { "Back button intercepted by in-app message back animation callback, back event started." }
+                            super.onBackStarted(backEvent)
+                            inAppMessageView?.onBackStarted(backEvent)
+                        }
 
-                    override fun onBackProgressed(backEvent: BackEvent) {
-                        brazelog { "Back button intercepted by in-app message back animation callback, back event in progress." }
-                        super.onBackProgressed(backEvent)
-                        inAppMessageView?.onBackProgressed(backEvent)
-                    }
+                        override fun onBackProgressed(backEvent: BackEvent) {
+                            brazelog { "Back button intercepted by in-app message back animation callback, back event in progress." }
+                            super.onBackProgressed(backEvent)
+                            inAppMessageView?.onBackProgressed(backEvent)
+                        }
 
-                    override fun onBackCancelled() {
-                        brazelog { "Back button intercepted by in-app message back animation callback, back event cancelled." }
-                        super.onBackCancelled()
-                        inAppMessageView?.onBackCancelled()
+                        override fun onBackCancelled() {
+                            brazelog { "Back button intercepted by in-app message back animation callback, back event cancelled." }
+                            super.onBackCancelled()
+                            inAppMessageView?.onBackCancelled()
+                        }
                     }
-                }
 
                 backAnimationCallback = inAppMessageBackAnimationCallback
                 activityRef = WeakReference(it)
-                it.onBackInvokedDispatcher.registerOnBackInvokedCallback(OnBackInvokedDispatcher.PRIORITY_OVERLAY, inAppMessageBackAnimationCallback)
+                it.onBackInvokedDispatcher.registerOnBackInvokedCallback(
+                    OnBackInvokedDispatcher.PRIORITY_OVERLAY,
+                    inAppMessageBackAnimationCallback,
+                )
             }
         }
     }

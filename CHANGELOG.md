@@ -1,11 +1,24 @@
+## 42.3.0
+
+[Release Date](https://github.com/braze-inc/braze-android-sdk/releases/tag/v42.3.0)
+
+#### Breaking
+- **BannerView**: `BannerDismissSnapshot` fields passed to `onDismissCallback` are now non-null. If the SDK cannot resolve `placementId`, `stableKey`, or `trackingId`, the callback is skipped and a warning is logged.
+
+##### Fixed
+- Fixed the `android-sdk-jetpack-compose` Maven metadata to publish BOM-managed Compose dependencies, including `androidx.compose.material:material`, so `ContentCardsList` can resolve Material pull refresh classes without requiring apps to add Material 2 manually.
+- Fixed a potential ANR when backgrounding the app while a default HTML In-App Message WebView is visible (for example when using `BrazeActivityLifecycleCallbackListener` with the default persist-WebView-on-background behavior). `WebView.onPause()` is now deferred until after `onActivityPaused` returns.
+
+##### Added
+- **Banners**: Added `Braze.dismissBanner(placementId)` / `IBraze.dismissBanner` to dismiss a Banner by placement ID programmatically.
+- Added structured eCommerce event logging via `IBraze.logEcommerceEvent` / `Braze.logEcommerceEvent` with `eCommerceEvent: EcommerceEvent`. Includes `EcommerceEvent`, `EcommerceProduct`, and concrete events `CheckoutStartedEvent`, `CartUpdatedEvent`, `OrderPlacedEvent`, and `ProductViewedEvent`, with built-in field validation, ISO 4217 currency enforcement, and automatic serialization.
+
 ## 42.2.0
 
 [Release Date](https://github.com/braze-inc/braze-android-sdk/releases/tag/v42.2.0)
 
-#### Breaking
-- **BannerView**: `onDismissCallback` is now invoked with a single `BannerDismissSnapshot` argument (`placementId`, `stableKey`, and `trackingId`, each nullable when unknown) instead of a no-argument callback. Integrators must update assignments to use the new signature.
-
 ##### Changed
+- **BannerView**: `onDismissCallback` is now invoked with a single `BannerDismissSnapshot` argument (`placementId`, `stableKey`, and `trackingId`, each nullable when unknown) instead of a no-argument callback. Integrators must update assignments to use the new signature.
 - Removed the hardcoded `Toast` shown by `ContentCardsFragment` when the network is unavailable, aligning with `ContentCardsList` (Jetpack Compose) which only logs. The empty-state view is still displayed. Integrators that want to surface a custom network-error UI should handle it at the app layer using their own connectivity signals.
 
 ## 42.1.0

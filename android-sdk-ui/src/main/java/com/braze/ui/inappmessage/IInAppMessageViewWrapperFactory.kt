@@ -31,7 +31,7 @@ interface IInAppMessageViewWrapperFactory {
         configurationProvider: BrazeConfigurationProvider,
         openingAnimation: Animation?,
         closingAnimation: Animation?,
-        clickableInAppMessageView: View?
+        clickableInAppMessageView: View?,
     ): IInAppMessageViewWrapper
 
     /**
@@ -64,6 +64,6 @@ interface IInAppMessageViewWrapperFactory {
         closingAnimation: Animation?,
         clickableInAppMessageView: View?,
         buttons: List<View>?,
-        closeButton: View?
+        closeButton: View?,
     ): IInAppMessageViewWrapper
 }

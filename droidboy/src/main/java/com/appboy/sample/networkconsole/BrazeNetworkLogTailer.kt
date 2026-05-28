@@ -29,13 +29,13 @@ import kotlinx.coroutines.flow.asSharedFlow
  */
 class BrazeNetworkLogTailer(
     private val applicationContext: Context,
-    private val classifier: BrazeLogEntryClassifier = BrazeLogEntryClassifier()
+    private val classifier: BrazeLogEntryClassifier = BrazeLogEntryClassifier(),
 ) {
-
-    private val _events = MutableSharedFlow<NetworkLogEntry>(
-        replay = 0,
-        extraBufferCapacity = EXTRA_BUFFER
-    )
+    private val _events =
+        MutableSharedFlow<NetworkLogEntry>(
+            replay = 0,
+            extraBufferCapacity = EXTRA_BUFFER,
+        )
 
     /**
      * Hot stream of network entries. Carries only newly emitted entries; recent history is
@@ -121,16 +121,18 @@ class BrazeNetworkLogTailer(
 
     private fun registerFailureSubscriber() {
         if (failureSubscriber != null) return
-        val subscriber = IEventSubscriber<BrazeNetworkFailureEvent> { event ->
-            publish(buildFailureEntry(event))
-        }
+        val subscriber =
+            IEventSubscriber<BrazeNetworkFailureEvent> { event ->
+                publish(buildFailureEntry(event))
+            }
         failureSubscriber = subscriber
         Braze.getInstance(applicationContext).subscribeToNetworkFailures(subscriber)
     }
 
     private fun unregisterFailureSubscriber() {
         val subscriber = failureSubscriber ?: return
-        Braze.getInstance(applicationContext)
+        Braze
+            .getInstance(applicationContext)
             .removeSingleSubscription(subscriber, BrazeNetworkFailureEvent::class.java)
         failureSubscriber = null
     }
@@ -142,7 +144,7 @@ class BrazeNetworkLogTailer(
             direction = NetworkLogEntry.Direction.FAILURE,
             tag = "BrazeNetworkFailureEvent",
             message = text,
-            rawLine = text
+            rawLine = text,
         )
     }
 

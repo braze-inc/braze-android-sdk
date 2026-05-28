@@ -53,7 +53,7 @@ interface IBrazeDeeplinkHandler {
          * Used in push notifications when only opening the main
          * Activity and not a deeplink.
          */
-        URI_UTILS_GET_MAIN_ACTIVITY_INTENT
+        URI_UTILS_GET_MAIN_ACTIVITY_INTENT,
     }
 
     /**
@@ -64,7 +64,10 @@ interface IBrazeDeeplinkHandler {
      * @param context   The current context.
      * @param uriAction The Uri action to execute.
      */
-    fun gotoUri(context: Context, uriAction: UriAction)
+    fun gotoUri(
+        context: Context,
+        uriAction: UriAction,
+    )
 
     /**
      * Get the flag mask used for [android.content.Intent.setFlags] based
@@ -76,10 +79,20 @@ interface IBrazeDeeplinkHandler {
      * Convenience method for creating [UriAction] instances. Returns null if the supplied url
      * is blank or can not be parsed into a valid Uri.
      */
-    fun createUriActionFromUrlString(url: String, extras: Bundle?, openInWebView: Boolean, channel: Channel): UriAction?
+    fun createUriActionFromUrlString(
+        url: String,
+        extras: Bundle?,
+        openInWebView: Boolean,
+        channel: Channel,
+    ): UriAction?
 
     /**
      * Convenience method for creating [UriAction] instances.
      */
-    fun createUriActionFromUri(uri: Uri, extras: Bundle?, openInWebView: Boolean, channel: Channel): UriAction
+    fun createUriActionFromUri(
+        uri: Uri,
+        extras: Bundle?,
+        openInWebView: Boolean,
+        channel: Channel,
+    ): UriAction
 }

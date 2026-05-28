@@ -3,7 +3,6 @@ package com.braze.ui.banners.jsinterface
 import android.content.Context
 import android.webkit.JavascriptInterface
 import com.braze.Braze
-import com.braze.BrazeInternal
 import com.braze.coroutine.BrazeCoroutineScope
 import com.braze.support.BrazeLogger.Priority.I
 import com.braze.support.BrazeLogger.Priority.V
@@ -23,9 +22,8 @@ import kotlinx.coroutines.launch
 class BannerJavascriptInterface(
     context: Context,
     val placementId: String,
-    val setHeightCallback: (Double) -> Unit = {}
+    val setHeightCallback: (Double) -> Unit = {},
 ) : JavascriptInterfaceBase(context) {
-
     @get:JavascriptInterface
     val user: BannerUserJavascriptInterface = BannerUserJavascriptInterface(context)
 
@@ -65,6 +63,6 @@ class BannerJavascriptInterface(
     @JavascriptInterface
     fun beforeMessageClosed() {
         brazelog(V) { "Banner dismiss triggered from WebView bridge (beforeMessageClosed). placementId=$placementId" }
-        BrazeInternal.dismissBanner(context, placementId)
+        Braze.getInstance(context).dismissBanner(placementId)
     }
 }

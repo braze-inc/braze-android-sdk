@@ -8,8 +8,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.braze.ui.R
 import java.util.Locale
 
-open class ContentCardViewHolder(view: View, showUnreadIndicator: Boolean) :
-    RecyclerView.ViewHolder(view) {
+open class ContentCardViewHolder(
+    view: View,
+    showUnreadIndicator: Boolean,
+) : RecyclerView.ViewHolder(view) {
     private val unreadBar: View? = view.findViewById(R.id.com_braze_content_cards_unread_bar)
     private val pinnedIcon: ImageView? = view.findViewById(R.id.com_braze_content_cards_pinned_icon)
     private val actionHint: TextView? = view.findViewById(R.id.com_braze_content_cards_action_hint)

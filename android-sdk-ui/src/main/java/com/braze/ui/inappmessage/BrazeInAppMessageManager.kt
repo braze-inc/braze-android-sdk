@@ -6,6 +6,7 @@ import android.content.Context
 import android.content.pm.ActivityInfo
 import android.os.Build
 import android.os.Looper
+import android.webkit.WebView
 import androidx.annotation.RestrictTo
 import androidx.annotation.VisibleForTesting
 import com.braze.Braze.Companion.getInstance
@@ -85,10 +86,10 @@ import kotlin.concurrent.withLock
  * must be called in the Activity.onResume() and Activity.onPause()
  * methods of every Activity.
  */
-// Static field leak doesn't apply to this singleton since the activity is nullified after the manager is unregistered.
 @SuppressLint("StaticFieldLeak")
 @Suppress("TooManyFunctions")
 open class BrazeInAppMessageManager : InAppMessageManagerBase() {
+    // Static field leak doesn't apply to this singleton since the activity is nullified after the manager is unregistered.
     private val inAppMessageViewLifecycleListener: IInAppMessageViewLifecycleListener =
         DefaultInAppMessageViewLifecycleListener()
 
@@ -108,6 +109,20 @@ open class BrazeInAppMessageManager : InAppMessageManagerBase() {
     private var originalOrientation: Int? = null
     private var configurationProvider: BrazeConfigurationProvider? = null
     private var inAppMessageViewWrapper: IInAppMessageViewWrapper? = null
+
+    /**
+     * Runnable posted to [pendingWebViewPauseTarget] that invokes [WebView.onPause] for a displayed
+     * HTML in-app message. Cleared when the runnable runs or when [cancelPendingWebViewPause] runs.
+     */
+    @VisibleForTesting
+    internal var pendingWebViewPauseRunnable: Runnable? = null
+
+    /**
+     * [WebView] that owns the message queue for [pendingWebViewPauseRunnable]. Used to post the
+     * deferred pause and to call [WebView.removeCallbacks] when pausing is cancelled on resume or
+     * teardown.
+     */
+    private var pendingWebViewPauseTarget: WebView? = null
 
     /**
      * The back animation callback handler for full in-app messages on API 34+.
@@ -165,46 +180,50 @@ open class BrazeInAppMessageManager : InAppMessageManagerBase() {
             }
             getInstance(context).removeSingleSubscription(
                 inAppMessageEventSubscriber,
-                InAppMessageEvent::class.java
+                InAppMessageEvent::class.java,
             )
         }
         brazelog { "Subscribing in-app message event subscriber" }
-        inAppMessageEventSubscriber = createInAppMessageEventSubscriber().also {
-            getInstance(context).subscribeToNewInAppMessages(it)
-        }
+        inAppMessageEventSubscriber =
+            createInAppMessageEventSubscriber().also {
+                getInstance(context).subscribeToNewInAppMessages(it)
+            }
 
         if (sdkDataWipeEventSubscriber != null) {
             brazelog(V) { "Removing existing sdk data wipe event subscriber before subscribing a new one." }
             getInstance(context).removeSingleSubscription(
                 sdkDataWipeEventSubscriber,
-                SdkDataWipeEvent::class.java
+                SdkDataWipeEvent::class.java,
             )
         }
         brazelog(V) { "Subscribing sdk data wipe subscriber" }
-        sdkDataWipeEventSubscriber = IEventSubscriber<SdkDataWipeEvent> {
-            if (displayingInAppMessage.get()) {
-                hideCurrentlyDisplayingInAppMessage(false)
+        sdkDataWipeEventSubscriber =
+            IEventSubscriber<SdkDataWipeEvent> {
+                if (displayingInAppMessage.get()) {
+                    hideCurrentlyDisplayingInAppMessage(false)
+                }
+                inAppMessageStack.clear()
+                carryoverInAppMessage = null
+                unregisteredInAppMessage = null
+            }.also {
+                getInstance(context).addSingleSynchronousSubscription(
+                    it,
+                    SdkDataWipeEvent::class.java,
+                )
             }
-            inAppMessageStack.clear()
-            carryoverInAppMessage = null
-            unregisteredInAppMessage = null
-        }.also {
-            getInstance(context).addSingleSynchronousSubscription(
-                it, SdkDataWipeEvent::class.java
-            )
-        }
 
         if (brazeUserChangeEventSubscriber != null) {
             brazelog(V) { "Removing existing user change event subscriber before subscribing a new one." }
             getInstance(context).removeSingleSubscription(
                 brazeUserChangeEventSubscriber,
-                BrazeUserChangeEvent::class.java
+                BrazeUserChangeEvent::class.java,
             )
         }
 
-        brazeUserChangeEventSubscriber = createBrazeUserChangeEventSubscriber().also {
-            getInstance(context).subscribeToChangeUserEvents(it)
-        }
+        brazeUserChangeEventSubscriber =
+            createBrazeUserChangeEventSubscriber().also {
+                getInstance(context).subscribeToChangeUserEvents(it)
+            }
     }
 
     /**
@@ -305,15 +324,17 @@ open class BrazeInAppMessageManager : InAppMessageManagerBase() {
                 inAppMessageView.removeViewFromParent()
 
                 // Only continue if we're not animating a close
-                carryoverInAppMessage = if (viewWrapper.isAnimatingClose) {
-                    // Note that mInAppMessageViewWrapper may be null after this call
-                    inAppMessageViewLifecycleListener.afterClosed(viewWrapper.inAppMessage)
-                    null
-                } else {
-                    viewWrapper.inAppMessage
-                }
+                carryoverInAppMessage =
+                    if (viewWrapper.isAnimatingClose) {
+                        // Note that mInAppMessageViewWrapper may be null after this call
+                        inAppMessageViewLifecycleListener.afterClosed(viewWrapper.inAppMessage)
+                        null
+                    } else {
+                        viewWrapper.inAppMessage
+                    }
                 currentBackEventHandler?.unregister()
                 currentBackEventHandler = null
+                cancelPendingWebViewPause()
                 inAppMessageViewWrapper = null
             } else {
                 carryoverInAppMessage = null
@@ -373,17 +394,19 @@ open class BrazeInAppMessageManager : InAppMessageManagerBase() {
                 return false
             }
             val inAppMessage = inAppMessageStack.pop()
-            val inAppMessageOperation: InAppMessageOperation = if (!inAppMessage.isControl) {
-                inAppMessageManagerListener.beforeInAppMessageDisplayed(inAppMessage)
-            } else {
-                brazelog { "Using the control in-app message manager listener." }
-                controlInAppMessageManagerListener.beforeInAppMessageDisplayed(inAppMessage)
-            }
-            when (inAppMessageOperation) {
-                InAppMessageOperation.DISPLAY_NOW -> brazelog {
-                    "The IInAppMessageManagerListener method beforeInAppMessageDisplayed returned DISPLAY_NOW. The " +
-                        "in-app message will be displayed."
+            val inAppMessageOperation: InAppMessageOperation =
+                if (!inAppMessage.isControl) {
+                    inAppMessageManagerListener.beforeInAppMessageDisplayed(inAppMessage)
+                } else {
+                    brazelog { "Using the control in-app message manager listener." }
+                    controlInAppMessageManagerListener.beforeInAppMessageDisplayed(inAppMessage)
                 }
+            when (inAppMessageOperation) {
+                InAppMessageOperation.DISPLAY_NOW ->
+                    brazelog {
+                        "The IInAppMessageManagerListener method beforeInAppMessageDisplayed returned DISPLAY_NOW. The " +
+                            "in-app message will be displayed."
+                    }
 
                 InAppMessageOperation.DISPLAY_LATER -> {
                     brazelog {
@@ -442,7 +465,7 @@ open class BrazeInAppMessageManager : InAppMessageManagerBase() {
             if (dismissed) {
                 inAppMessageViewLifecycleListener.onDismissed(
                     inAppMessageWrapperView.inAppMessageView,
-                    inAppMessageWrapperView.inAppMessage
+                    inAppMessageWrapperView.inAppMessage,
                 )
             }
 
@@ -468,6 +491,7 @@ open class BrazeInAppMessageManager : InAppMessageManagerBase() {
         brazelog(V) { "Resetting after in-app message close." }
         currentBackEventHandler?.unregister()
         currentBackEventHandler = null
+        cancelPendingWebViewPause()
         inAppMessageViewWrapper = null
         val activity = mActivity?.get()
         val origOrientation = originalOrientation
@@ -480,8 +504,7 @@ open class BrazeInAppMessageManager : InAppMessageManagerBase() {
     }
 
     // For backwards compatibility
-    open fun getIsCurrentlyDisplayingInAppMessage() =
-        displayingInAppMessage.get()
+    open fun getIsCurrentlyDisplayingInAppMessage() = displayingInAppMessage.get()
 
     /**
      * Internal method, do not call as part of an integration!
@@ -516,7 +539,7 @@ open class BrazeInAppMessageManager : InAppMessageManagerBase() {
                 throw Exception(
                     "No Activity is currently registered to receive in-app messages. Registering " +
                         "in-app message as carry-over in-app message. It will automatically be " +
-                        "displayed when the next Activity registers to receive in-app messages."
+                        "displayed when the next Activity registers to receive in-app messages.",
                 )
             }
 
@@ -526,7 +549,7 @@ open class BrazeInAppMessageManager : InAppMessageManagerBase() {
                 if (currentTimeMillis > inAppMessageExpirationTimestamp) {
                     throw Exception(
                         "In-app message is expired. Doing nothing. Expiration: " +
-                            "$inAppMessageExpirationTimestamp. Current time: $currentTimeMillis"
+                            "$inAppMessageExpirationTimestamp. Current time: $currentTimeMillis",
                     )
                 }
             } else {
@@ -539,16 +562,17 @@ open class BrazeInAppMessageManager : InAppMessageManagerBase() {
             }
 
             // Verify this message is for the intended user
-            val configProvider = configurationProvider
-                ?: throw Exception(
-                    "configurationProvider is null. The in-app message will not be displayed and will not be" +
-                        "put back on the stack."
-                )
+            val configProvider =
+                configurationProvider
+                    ?: throw Exception(
+                        "configurationProvider is null. The in-app message will not be displayed and will not be" +
+                            "put back on the stack.",
+                    )
             if (!isInAppMessageForTheSameUser(inAppMessage, currentUserId)) {
                 throw Exception(
                     "The last identified user '$currentUserId' does not match the incoming " +
                         "in-app message's user '${inAppMessageEventMap[inAppMessage]?.userId}'. " +
-                        "The in-app message will not be displayed and will not be put back on the stack."
+                        "The in-app message will not be displayed and will not be put back on the stack.",
                 )
             }
 
@@ -572,8 +596,8 @@ open class BrazeInAppMessageManager : InAppMessageManagerBase() {
                 resetAfterInAppMessageClose()
                 return
             }
-            if (inAppMessage.containsPushPermissionPrompt()
-                && !activity.wouldPushPermissionPromptDisplay()
+            if (inAppMessage.containsPushPermissionPrompt() &&
+                !activity.wouldPushPermissionPromptDisplay()
             ) {
                 val inAppMessageEvent = inAppMessageEventMap[inAppMessage]
                 brazelog(I) {
@@ -587,15 +611,18 @@ open class BrazeInAppMessageManager : InAppMessageManagerBase() {
                 resetAfterInAppMessageClose()
                 return
             }
-            val inAppMessageViewFactory = getInAppMessageViewFactory(inAppMessage) ?: throw Exception("ViewFactory from getInAppMessageViewFactory was null.")
+            val inAppMessageViewFactory =
+                getInAppMessageViewFactory(inAppMessage) ?: throw Exception("ViewFactory from getInAppMessageViewFactory was null.")
 
-            val inAppMessageView = inAppMessageViewFactory.createInAppMessageView(
-                activity, inAppMessage
-            )
+            val inAppMessageView =
+                inAppMessageViewFactory.createInAppMessageView(
+                    activity,
+                    inAppMessage,
+                )
             if (inAppMessageView == null) {
                 throw Exception(
                     "The in-app message view returned from the IInAppMessageViewFactory was null. " +
-                        "The in-app message will not be displayed and will not be put back on the stack."
+                        "The in-app message will not be displayed and will not be put back on the stack.",
                 )
             }
             if (inAppMessageView.parent != null) {
@@ -603,59 +630,60 @@ open class BrazeInAppMessageManager : InAppMessageManagerBase() {
                     "The in-app message view returned from the IInAppMessageViewFactory already has a parent. This " +
                         "is a sign that the view is being reused. The IInAppMessageViewFactory method createInAppMessageView" +
                         "must return a new view without a parent. The in-app message will not be displayed and will not " +
-                        "be put back on the stack."
+                        "be put back on the stack.",
                 )
             }
 
             val openingAnimation = inAppMessageAnimationFactory.getOpeningAnimation(inAppMessage)
             val closingAnimation = inAppMessageAnimationFactory.getClosingAnimation(inAppMessage)
             val viewWrapperFactory = inAppMessageViewWrapperFactory
-            inAppMessageViewWrapper = when (inAppMessageView) {
-                is IInAppMessageImmersiveView -> {
-                    brazelog { "Creating view wrapper for immersive in-app message." }
-                    val inAppMessageViewImmersive = inAppMessageView as IInAppMessageImmersiveView
-                    val inAppMessageImmersiveBase = inAppMessage as InAppMessageImmersiveBase
-                    val numButtons = inAppMessageImmersiveBase.messageButtons.size
-                    viewWrapperFactory.createInAppMessageViewWrapper(
-                        inAppMessageView,
-                        inAppMessage,
-                        inAppMessageViewLifecycleListener,
-                        configProvider,
-                        openingAnimation,
-                        closingAnimation,
-                        inAppMessageViewImmersive.messageClickableView,
-                        inAppMessageViewImmersive.getMessageButtonViews(numButtons),
-                        inAppMessageViewImmersive.messageCloseButtonView
-                    )
-                }
+            inAppMessageViewWrapper =
+                when (inAppMessageView) {
+                    is IInAppMessageImmersiveView -> {
+                        brazelog { "Creating view wrapper for immersive in-app message." }
+                        val inAppMessageViewImmersive = inAppMessageView as IInAppMessageImmersiveView
+                        val inAppMessageImmersiveBase = inAppMessage as InAppMessageImmersiveBase
+                        val numButtons = inAppMessageImmersiveBase.messageButtons.size
+                        viewWrapperFactory.createInAppMessageViewWrapper(
+                            inAppMessageView,
+                            inAppMessage,
+                            inAppMessageViewLifecycleListener,
+                            configProvider,
+                            openingAnimation,
+                            closingAnimation,
+                            inAppMessageViewImmersive.messageClickableView,
+                            inAppMessageViewImmersive.getMessageButtonViews(numButtons),
+                            inAppMessageViewImmersive.messageCloseButtonView,
+                        )
+                    }
 
-                is IInAppMessageView -> {
-                    brazelog { "Creating view wrapper for base in-app message." }
-                    val inAppMessageViewBase = inAppMessageView as IInAppMessageView
-                    viewWrapperFactory.createInAppMessageViewWrapper(
-                        inAppMessageView,
-                        inAppMessage,
-                        inAppMessageViewLifecycleListener,
-                        configProvider,
-                        openingAnimation,
-                        closingAnimation,
-                        inAppMessageViewBase.messageClickableView
-                    )
-                }
+                    is IInAppMessageView -> {
+                        brazelog { "Creating view wrapper for base in-app message." }
+                        val inAppMessageViewBase = inAppMessageView as IInAppMessageView
+                        viewWrapperFactory.createInAppMessageViewWrapper(
+                            inAppMessageView,
+                            inAppMessage,
+                            inAppMessageViewLifecycleListener,
+                            configProvider,
+                            openingAnimation,
+                            closingAnimation,
+                            inAppMessageViewBase.messageClickableView,
+                        )
+                    }
 
-                else -> {
-                    brazelog { "Creating view wrapper for in-app message." }
-                    viewWrapperFactory.createInAppMessageViewWrapper(
-                        inAppMessageView,
-                        inAppMessage,
-                        inAppMessageViewLifecycleListener,
-                        configProvider,
-                        openingAnimation,
-                        closingAnimation,
-                        inAppMessageView
-                    )
+                    else -> {
+                        brazelog { "Creating view wrapper for in-app message." }
+                        viewWrapperFactory.createInAppMessageViewWrapper(
+                            inAppMessageView,
+                            inAppMessage,
+                            inAppMessageViewLifecycleListener,
+                            configProvider,
+                            openingAnimation,
+                            closingAnimation,
+                            inAppMessageView,
+                        )
+                    }
                 }
-            }
 
             val viewWrapper = inAppMessageViewWrapper
 
@@ -692,17 +720,16 @@ open class BrazeInAppMessageManager : InAppMessageManagerBase() {
         }
     }
 
-    private fun createInAppMessageEventSubscriber(): IEventSubscriber<InAppMessageEvent> {
-        return IEventSubscriber { event: InAppMessageEvent ->
+    private fun createInAppMessageEventSubscriber(): IEventSubscriber<InAppMessageEvent> =
+        IEventSubscriber { event: InAppMessageEvent ->
             val inAppMessage = event.inAppMessage
             inAppMessageEventMap[inAppMessage] = event
             addInAppMessage(inAppMessage)
         }
-    }
 
     @VisibleForTesting
-    internal fun createBrazeUserChangeEventSubscriber(): IEventSubscriber<BrazeUserChangeEvent> {
-        return IEventSubscriber { event: BrazeUserChangeEvent ->
+    internal fun createBrazeUserChangeEventSubscriber(): IEventSubscriber<BrazeUserChangeEvent> =
+        IEventSubscriber { event: BrazeUserChangeEvent ->
             brazelog(V) { "InAppMessage manager handling user change event. New user id: '${event.currentUserId}'" }
             val previousUserId = this.currentUserId
             this.currentUserId = event.currentUserId
@@ -718,7 +745,6 @@ open class BrazeInAppMessageManager : InAppMessageManagerBase() {
                 unregisteredInAppMessage = null
             }
         }
-    }
 
     /**
      * For in-app messages that have a preferred orientation, locks the screen orientation and
@@ -764,7 +790,10 @@ open class BrazeInAppMessageManager : InAppMessageManagerBase() {
      * user, false otherwise. Returns false if the message is null.
      */
     @VisibleForTesting
-    open fun isInAppMessageForTheSameUser(inAppMessage: IInAppMessage?, currentUserId: String?): Boolean {
+    open fun isInAppMessageForTheSameUser(
+        inAppMessage: IInAppMessage?,
+        currentUserId: String?,
+    ): Boolean {
         // If we don't have a user id or in-app message, we can't verify the user
         if (inAppMessage == null || currentUserId == null) return true
 
@@ -772,26 +801,73 @@ open class BrazeInAppMessageManager : InAppMessageManagerBase() {
         return inAppMessageUserId == null || inAppMessageUserId == currentUserId
     }
 
+    /**
+     * Defers [WebView.onPause] to the next main-loop iteration so lifecycle callbacks such as
+     * [android.app.Application.ActivityLifecycleCallbacks.onActivityPaused] return promptly.
+     *
+     * We assume [WebView.onPause] can block the main thread for a non-trivial duration when the
+     * WebView is loading or running JavaScript; calling it synchronously from
+     * [android.app.Application.ActivityLifecycleCallbacks.onActivityPaused] has been observed to
+     * contribute to ANRs.
+     */
     internal fun pauseWebviewIfNecessary() {
-        brazelog { "Pausing InAppMessage WebView" }
-        val inAppMessageViewWrapper = inAppMessageViewWrapper
-        if (inAppMessageViewWrapper != null) {
-            val inAppMessageView = inAppMessageViewWrapper.inAppMessageView
-            if (inAppMessageView is InAppMessageHtmlBaseView) {
-                inAppMessageView.messageWebView?.onPause()
-            }
+        brazelog(V) { "Scheduling deferred InAppMessage WebView pause via pendingWebViewPauseRunnable" }
+        val viewWrapper = inAppMessageViewWrapper ?: return
+        val inAppMessageView = viewWrapper.inAppMessageView
+        if (inAppMessageView !is InAppMessageHtmlBaseView) {
+            return
         }
+        val webView = inAppMessageView.messageWebView ?: return
+
+        cancelPendingWebViewPause()
+
+        val pauseRunnable =
+            Runnable {
+                brazelog(V) { "pendingWebViewPauseRunnable running" }
+                pendingWebViewPauseRunnable = null
+                pendingWebViewPauseTarget = null
+                val currentWrapper = this.inAppMessageViewWrapper
+                if (currentWrapper == null) {
+                    brazelog(V) {
+                        "pendingWebViewPauseRunnable finished without calling WebView.onPause: in-app message no longer displayed"
+                    }
+                    return@Runnable
+                }
+                val currentView = currentWrapper.inAppMessageView
+                if (currentView is InAppMessageHtmlBaseView && currentView.messageWebView === webView) {
+                    brazelog(V) { "pendingWebViewPauseRunnable calling WebView.onPause" }
+                    // Assumed blocking on a busy WebView; deferred via post() so onActivityPaused returns first.
+                    webView.onPause()
+                } else {
+                    brazelog(V) {
+                        "pendingWebViewPauseRunnable finished without calling WebView.onPause: HTML WebView no longer matches"
+                    }
+                }
+            }
+        pendingWebViewPauseRunnable = pauseRunnable
+        pendingWebViewPauseTarget = webView
+        webView.post(pauseRunnable)
     }
 
     internal fun resumeWebviewIfNecessary() {
         brazelog { "Resuming InAppMessage WebView" }
-        val inAppMessageViewWrapper = inAppMessageViewWrapper
-        if (inAppMessageViewWrapper != null) {
-            val inAppMessageView = inAppMessageViewWrapper.inAppMessageView
-            if (inAppMessageView is InAppMessageHtmlBaseView) {
-                inAppMessageView.messageWebView?.onResume()
-            }
+        cancelPendingWebViewPause()
+        val inAppMessageViewWrapper = inAppMessageViewWrapper ?: return
+        val inAppMessageView = inAppMessageViewWrapper.inAppMessageView
+        if (inAppMessageView is InAppMessageHtmlBaseView) {
+            inAppMessageView.messageWebView?.onResume()
         }
+    }
+
+    private fun cancelPendingWebViewPause() {
+        val pauseRunnable = pendingWebViewPauseRunnable
+        val webView = pendingWebViewPauseTarget
+        if (pauseRunnable != null && webView != null) {
+            brazelog(V) { "Cancelling pendingWebViewPauseRunnable before it runs WebView.onPause" }
+            webView.removeCallbacks(pauseRunnable)
+        }
+        pendingWebViewPauseRunnable = null
+        pendingWebViewPauseTarget = null
     }
 
     companion object {

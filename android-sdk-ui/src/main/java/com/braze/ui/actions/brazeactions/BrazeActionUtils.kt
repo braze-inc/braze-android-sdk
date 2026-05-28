@@ -26,17 +26,15 @@ internal fun IInAppMessage.containsAnyPushPermissionBrazeActions(): Boolean =
  * Determines whether any [Uri] in the message and/or buttons
  * contains an invalid action.
  */
-internal fun IInAppMessage.containsInvalidBrazeAction() =
-    doAnyTypesMatch(ActionType.INVALID, this.getAllUris())
+internal fun IInAppMessage.containsInvalidBrazeAction() = doAnyTypesMatch(ActionType.INVALID, this.getAllUris())
 
 /**
  * Determines whether any [Uri] in the card contains an invalid action.
  */
-internal fun Card.containsInvalidBrazeAction(): Boolean {
-    return this.url?.let { url ->
+internal fun Card.containsInvalidBrazeAction(): Boolean =
+    this.url?.let { url ->
         doAnyTypesMatch(ActionType.INVALID, listOf(url.toUri()))
     } ?: false
-}
 
 /**
  * Retrieves all [Uri]'s from the main
@@ -54,7 +52,7 @@ internal fun IInAppMessage?.getAllUris(): List<Uri> {
     // Add all of the message button Uris
     if (this is IInAppMessageImmersive) {
         uris.addAll(
-            this.messageButtons.mapNotNull { it.uri }
+            this.messageButtons.mapNotNull { it.uri },
         )
     }
     return uris
@@ -67,7 +65,8 @@ internal fun getAllBrazeActionStepTypes(json: JSONObject): List<ActionType> {
     when (val actionType = BrazeActionParser.getActionType(stepData)) {
         // Break out the container steps and iterate them all
         ActionType.CONTAINER -> {
-            ContainerStep.getChildStepIterator(stepData)
+            ContainerStep
+                .getChildStepIterator(stepData)
                 .forEach { allStepTypes.addAll(getAllBrazeActionStepTypes(it)) }
         }
 
@@ -80,7 +79,10 @@ internal fun getAllBrazeActionStepTypes(json: JSONObject): List<ActionType> {
 /**
  * Determines if any of the [Uri] in the list contain the given [ActionType].
  */
-internal fun doAnyTypesMatch(actionType: ActionType, uriList: List<Uri>): Boolean =
+internal fun doAnyTypesMatch(
+    actionType: ActionType,
+    uriList: List<Uri>,
+): Boolean =
     uriList
         .filter { it.isBrazeActionUri() }
         // If the parsed json is null, then return an empty json

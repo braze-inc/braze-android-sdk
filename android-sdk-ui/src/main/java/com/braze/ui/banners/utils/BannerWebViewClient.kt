@@ -12,12 +12,5 @@ import com.braze.ui.banners.listeners.IBannerWebViewClientListener
  */
 class BannerWebViewClient(
     context: Context,
-    bannerWebViewClientListener: IBannerWebViewClientListener?
-) : BrazeWebViewClient(
-    context,
-    Type.BANNER,
-    null,
-    null,
-    bannerWebViewClientListener,
-    null
-)
+    bannerWebViewClientListener: IBannerWebViewClientListener?,
+) : BrazeWebViewClient(context, Type.BANNER, null, null, bannerWebViewClientListener, null)

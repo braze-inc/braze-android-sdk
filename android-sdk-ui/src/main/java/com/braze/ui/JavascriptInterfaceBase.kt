@@ -19,9 +19,8 @@ import java.math.BigDecimal
  * @param context The Android [Context] for Braze SDK access.
  */
 abstract class JavascriptInterfaceBase(
-    protected val context: Context
+    protected val context: Context,
 ) {
-
     /**
      * Logs a button click for the given button identifier.
      *
@@ -43,7 +42,10 @@ abstract class JavascriptInterfaceBase(
      * @param sdkAuthSignature Optional SDK authentication signature.
      */
     @JavascriptInterface
-    fun changeUser(userId: String, sdkAuthSignature: String?) {
+    fun changeUser(
+        userId: String,
+        sdkAuthSignature: String?,
+    ) {
         Braze.getInstance(context).changeUser(userId, sdkAuthSignature)
     }
 
@@ -62,7 +64,10 @@ abstract class JavascriptInterfaceBase(
      * @param propertiesJSON Optional JSON string of event properties.
      */
     @JavascriptInterface
-    fun logCustomEventWithJSON(eventName: String?, propertiesJSON: String?) {
+    fun logCustomEventWithJSON(
+        eventName: String?,
+        propertiesJSON: String?,
+    ) {
         val brazeProperties = parseProperties(propertiesJSON)
         Braze.getInstance(context).logCustomEvent(eventName, brazeProperties)
     }
@@ -83,7 +88,7 @@ abstract class JavascriptInterfaceBase(
         price: String,
         currencyCode: String?,
         quantity: String,
-        propertiesJSON: String?
+        propertiesJSON: String?,
     ) {
         val brazeProperties = parseProperties(propertiesJSON)
         val priceValue = price.toDoubleOrNull()
@@ -103,15 +108,16 @@ abstract class JavascriptInterfaceBase(
             currencyCode,
             BigDecimal(priceValue.toString()),
             quantityValue,
-            brazeProperties
+            brazeProperties,
         )
     }
 
     @VisibleForTesting
     fun parseProperties(propertiesJSON: String?): BrazeProperties? {
         try {
-            if (propertiesJSON != null && propertiesJSON != "undefined"
-                && propertiesJSON != "null"
+            if (propertiesJSON != null &&
+                propertiesJSON != "undefined" &&
+                propertiesJSON != "null"
             ) {
                 return BrazeProperties(JSONObject(propertiesJSON))
             }

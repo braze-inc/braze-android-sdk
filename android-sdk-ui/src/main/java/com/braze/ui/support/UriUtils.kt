@@ -36,10 +36,12 @@ fun Uri.getQueryParameters(): Map<String, String> {
         if (uri.isOpaque) {
             // Convert the opaque uri into a parseable hierarchical one
             // This is basically copying the query from the original uri onto a new one
-            uri = "://".toUri()
-                .buildUpon()
-                .encodedQuery(encodedQuery)
-                .build()
+            uri =
+                "://"
+                    .toUri()
+                    .buildUpon()
+                    .encodedQuery(encodedQuery)
+                    .build()
         }
         val queryParameterNames = uri.queryParameterNames.filter { !it.isNullOrEmpty() }
         for (queryParameterKey in queryParameterNames) {
@@ -54,10 +56,15 @@ fun Uri.getQueryParameters(): Map<String, String> {
     return parameterValues
 }
 
-fun getMainActivityIntent(context: Context, extras: Bundle? = null): Intent? {
+fun getMainActivityIntent(
+    context: Context,
+    extras: Bundle? = null,
+): Intent? {
     val startActivityIntent = context.packageManager.getLaunchIntentForPackage(context.packageName)
-    startActivityIntent?.flags = BrazeDeeplinkHandler.getInstance()
-        .getIntentFlags(IBrazeDeeplinkHandler.IntentFlagPurpose.URI_UTILS_GET_MAIN_ACTIVITY_INTENT)
+    startActivityIntent?.flags =
+        BrazeDeeplinkHandler
+            .getInstance()
+            .getIntentFlags(IBrazeDeeplinkHandler.IntentFlagPurpose.URI_UTILS_GET_MAIN_ACTIVITY_INTENT)
     if (extras != null) {
         startActivityIntent?.putExtras(extras)
     }
@@ -69,8 +76,11 @@ fun getMainActivityIntent(context: Context, extras: Bundle? = null): Intent? {
  * @param className The class name for a registered activity with the given context
  * @return true if the class name matches a registered activity in the Android Manifest.
  */
-fun isActivityRegisteredInManifest(context: Context, className: String): Boolean {
-    return try {
+fun isActivityRegisteredInManifest(
+    context: Context,
+    className: String,
+): Boolean =
+    try {
         // If the activity is registered, then a non-null ActivityInfo is returned by the package manager.
         // If unregistered, then an exception is thrown by the package manager.
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
@@ -83,4 +93,3 @@ fun isActivityRegisteredInManifest(context: Context, className: String): Boolean
         brazelog(TAG, W, e) { "Could not find activity info for class with name: $className" }
         false
     }
-}

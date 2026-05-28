@@ -16,7 +16,7 @@ open class BrazeBaseFragmentActivity : FragmentActivity() {
         if (BrazeInternal.getConfigurationProvider(this).shouldUseWindowFlagSecureInActivities) {
             window.setFlags(
                 WindowManager.LayoutParams.FLAG_SECURE,
-                WindowManager.LayoutParams.FLAG_SECURE
+                WindowManager.LayoutParams.FLAG_SECURE,
             )
         }
         // Opens (or reopens) a Braze session.

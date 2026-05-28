@@ -11,9 +11,10 @@ import com.braze.ui.inappmessage.utils.InAppMessageViewUtils.isApiBelowBaklava
 /**
  * WebView embedded in Braze html in-app messages.
  */
-open class InAppMessageWebView(context: Context, attrs: AttributeSet?) : WebView(
-    context, attrs
-) {
+open class InAppMessageWebView(
+    context: Context,
+    attrs: AttributeSet?,
+) : WebView(context, attrs) {
     /**
      * If the back button is pressed while this WebView is in focus,
      * close the current in-app message.
@@ -24,7 +25,10 @@ open class InAppMessageWebView(context: Context, attrs: AttributeSet?) : WebView
      * @return If the button pressed was the back button, close the in-app message
      * and return true to indicate that the event was handled.
      */
-    override fun onKeyDown(keyCode: Int, event: KeyEvent): Boolean {
+    override fun onKeyDown(
+        keyCode: Int,
+        event: KeyEvent,
+    ): Boolean {
         if (isApiBelowBaklava &&
             keyCode == KeyEvent.KEYCODE_BACK &&
             BrazeInAppMessageManager.getInstance().doesBackButtonDismissInAppMessageView

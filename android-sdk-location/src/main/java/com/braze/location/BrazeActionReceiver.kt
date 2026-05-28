@@ -29,7 +29,10 @@ import kotlinx.coroutines.launch
 @Keep
 class BrazeActionReceiver : BroadcastReceiver() {
     @OptIn(DelicateCoroutinesApi::class)
-    override fun onReceive(context: Context?, intent: Intent?) {
+    override fun onReceive(
+        context: Context?,
+        intent: Intent?,
+    ) {
         if (intent == null) {
             brazelog(W) { "BrazeActionReceiver received null intent. Doing nothing." }
             return
@@ -53,9 +56,10 @@ class BrazeActionReceiver : BroadcastReceiver() {
     @VisibleForTesting
     internal class ActionReceiver(
         private val applicationContext: Context,
-        private val intent: Intent
+        private val intent: Intent,
     ) {
         private val action: String? = intent.action
+
         fun run() {
             try {
                 performWork()
@@ -85,12 +89,13 @@ class BrazeActionReceiver : BroadcastReceiver() {
                 }
                 Constants.BRAZE_ACTION_RECEIVER_SINGLE_LOCATION_UPDATE_INTENT_ACTION -> {
                     brazelog { "BrazeActionReceiver received intent with single location update: $action" }
-                    val location = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-                        intent.extras?.getParcelable(LocationManager.KEY_LOCATION_CHANGED, Location::class.java)
-                    } else {
-                        @Suppress("DEPRECATION")
-                        intent.extras?.get(LocationManager.KEY_LOCATION_CHANGED) as Location?
-                    }
+                    val location =
+                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+                            intent.extras?.getParcelable(LocationManager.KEY_LOCATION_CHANGED, Location::class.java)
+                        } else {
+                            @Suppress("DEPRECATION")
+                            intent.extras?.get(LocationManager.KEY_LOCATION_CHANGED) as Location?
+                        }
                     location?.let { handleSingleLocationUpdate(applicationContext, it) }
                 }
                 else -> {
@@ -100,7 +105,10 @@ class BrazeActionReceiver : BroadcastReceiver() {
         }
 
         companion object {
-            private fun handleSingleLocationUpdate(applicationContext: Context, location: Location): Boolean {
+            private fun handleSingleLocationUpdate(
+                applicationContext: Context,
+                location: Location,
+            ): Boolean {
                 try {
                     BrazeInternal.logLocationRecordedEvent(applicationContext, BrazeLocation(location))
                 } catch (e: Exception) {
@@ -118,7 +126,10 @@ class BrazeActionReceiver : BroadcastReceiver() {
              * @return true if a geofence transition was recorded
              */
             @VisibleForTesting
-            fun handleGeofenceEvent(applicationContext: Context, geofenceEvent: GeofencingEvent): Boolean {
+            fun handleGeofenceEvent(
+                applicationContext: Context,
+                geofenceEvent: GeofencingEvent,
+            ): Boolean {
                 if (geofenceEvent.hasError()) {
                     val errorCode = geofenceEvent.errorCode
                     brazelog(W) { "Location Services error: $errorCode" }
@@ -133,7 +144,7 @@ class BrazeActionReceiver : BroadcastReceiver() {
                             BrazeInternal.recordGeofenceTransition(
                                 applicationContext,
                                 geofence.requestId,
-                                GeofenceTransitionType.ENTER
+                                GeofenceTransitionType.ENTER,
                             )
                         }
                         true
@@ -143,7 +154,7 @@ class BrazeActionReceiver : BroadcastReceiver() {
                             BrazeInternal.recordGeofenceTransition(
                                 applicationContext,
                                 geofence.requestId,
-                                GeofenceTransitionType.EXIT
+                                GeofenceTransitionType.EXIT,
                             )
                         }
                         true

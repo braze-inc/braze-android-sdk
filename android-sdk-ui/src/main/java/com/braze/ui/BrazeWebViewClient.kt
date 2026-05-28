@@ -9,18 +9,20 @@ import android.webkit.WebResourceResponse
 import android.webkit.WebView
 import android.webkit.WebViewClient
 import androidx.annotation.VisibleForTesting
+import androidx.core.net.toUri
 import androidx.webkit.WebViewAssetLoader
 import com.braze.BrazeInternal
 import com.braze.Constants
 import com.braze.coroutine.BrazeCoroutineScope
 import com.braze.models.inappmessage.IInAppMessage
 import com.braze.models.outgoing.BrazeProperties
-import com.braze.support.BrazeLogger.brazelog
 import com.braze.support.BrazeLogger.Priority.E
-import com.braze.support.BrazeLogger.Priority.V
 import com.braze.support.BrazeLogger.Priority.I
+import com.braze.support.BrazeLogger.Priority.V
+import com.braze.support.BrazeLogger.brazelog
 import com.braze.support.WebContentUtils
 import com.braze.support.getAssetFileStringContents
+import com.braze.ui.banners.listeners.IBannerWebViewClientListener
 import com.braze.ui.inappmessage.BrazeInAppMessageManager
 import com.braze.ui.inappmessage.listeners.IInAppMessageWebViewClientListener
 import com.braze.ui.inappmessage.listeners.IWebViewClientStateListener
@@ -30,8 +32,6 @@ import kotlinx.coroutines.Job
 import kotlinx.coroutines.withContext
 import java.io.File
 import java.util.concurrent.atomic.AtomicBoolean
-import com.braze.ui.banners.listeners.IBannerWebViewClientListener
-import androidx.core.net.toUri
 
 /**
  * [WebViewClient] for Braze HTML content that intercepts URL loading to handle
@@ -51,16 +51,15 @@ open class BrazeWebViewClient(
     private val inAppMessage: IInAppMessage? = null,
     private val inAppMessageWebViewClientListener: IInAppMessageWebViewClientListener? = null,
     private val bannerWebViewClientListener: IBannerWebViewClientListener? = null,
-    assetDirectoryUrl: String? = null
+    assetDirectoryUrl: String? = null,
 ) : WebViewClient() {
-
     /** Identifies the Braze message type this [BrazeWebViewClient] is serving. */
     enum class Type {
         /** HTML Banner content. */
         BANNER,
 
         /** HTML In-App Message content. */
-        IN_APP_MESSAGE
+        IN_APP_MESSAGE,
     }
 
     private var webViewClientStateListener: IWebViewClientStateListener? = null
@@ -73,37 +72,40 @@ open class BrazeWebViewClient(
 
     private val assetLoader =
         if (assetDirectoryUrl != null) {
-            WebViewAssetLoader.Builder()
+            WebViewAssetLoader
+                .Builder()
                 .setDomain(WebContentUtils.ASSET_LOADER_DUMMY_DOMAIN)
                 .addPathHandler(
                     "/",
                     WebViewAssetLoader.InternalStoragePathHandler(
                         this.context,
-                        File(assetDirectoryUrl)
-                    )
-                )
-                .build()
+                        File(assetDirectoryUrl),
+                    ),
+                ).build()
         } else {
             val triggerAssetsDir = File(context.cacheDir, Constants.TRIGGERS_ASSETS_FOLDER)
 
-            WebViewAssetLoader.Builder()
+            WebViewAssetLoader
+                .Builder()
                 .setDomain(WebContentUtils.ASSET_LOADER_DUMMY_DOMAIN)
                 .addPathHandler(
                     "/${Constants.TRIGGERS_ASSETS_FOLDER}/",
-                    WebViewAssetLoader.InternalStoragePathHandler(this.context, triggerAssetsDir)
-                )
-                .build()
+                    WebViewAssetLoader.InternalStoragePathHandler(this.context, triggerAssetsDir),
+                ).build()
         }
 
     override fun shouldInterceptRequest(
         view: WebView?,
-        request: WebResourceRequest?
+        request: WebResourceRequest?,
     ): WebResourceResponse? =
         request?.let {
             assetLoader.shouldInterceptRequest(request.url)
         }
 
-    override fun onPageFinished(view: WebView, url: String) {
+    override fun onPageFinished(
+        view: WebView,
+        url: String,
+    ) {
         super.onPageFinished(view, url)
         appendBridgeJavascript(view)
         webViewClientStateListener?.let { stateListener ->
@@ -120,16 +122,17 @@ open class BrazeWebViewClient(
     }
 
     private fun appendBridgeJavascript(view: WebView) {
-        val javascriptString: String = try {
-            context.assets.getAssetFileStringContents(BRIDGE_JS_FILE)
-        } catch (e: Exception) {
-            // Fail instead of presenting a broken WebView
-            if (type == Type.IN_APP_MESSAGE) {
-                BrazeInAppMessageManager.getInstance().hideCurrentlyDisplayingInAppMessage(false)
+        val javascriptString: String =
+            try {
+                context.assets.getAssetFileStringContents(BRIDGE_JS_FILE)
+            } catch (e: Exception) {
+                // Fail instead of presenting a broken WebView
+                if (type == Type.IN_APP_MESSAGE) {
+                    BrazeInAppMessageManager.getInstance().hideCurrentlyDisplayingInAppMessage(false)
+                }
+                brazelog(E, e) { "Failed to get HTML ${type.name} javascript additions" }
+                return
             }
-            brazelog(E, e) { "Failed to get HTML ${type.name} javascript additions" }
-            return
-        }
         view.loadUrl(JAVASCRIPT_PREFIX + javascriptString)
     }
 
@@ -154,11 +157,16 @@ open class BrazeWebViewClient(
      *
      * @return true since all actions in Html In-App Messages are handled outside of the In-App Message itself.
      */
-    override fun shouldOverrideUrlLoading(view: WebView, request: WebResourceRequest) =
-        handleUrlOverride(request.url.toString())
+    override fun shouldOverrideUrlLoading(
+        view: WebView,
+        request: WebResourceRequest,
+    ) = handleUrlOverride(request.url.toString())
 
     @Deprecated("Deprecated in API 24")
-    override fun shouldOverrideUrlLoading(view: WebView, url: String) = handleUrlOverride(url)
+    override fun shouldOverrideUrlLoading(
+        view: WebView,
+        url: String,
+    ) = handleUrlOverride(url)
 
     /**
      * Sets a [IWebViewClientStateListener] to receive page load completion callbacks.
@@ -174,32 +182,33 @@ open class BrazeWebViewClient(
         ) {
             listener.onPageFinished()
         } else {
-            markPageFinishedJob = BrazeCoroutineScope.launchDelayed(maxOnPageFinishedWaitTimeMs) {
-                withContext(Dispatchers.Main) {
-                    markPageFinished()
+            markPageFinishedJob =
+                BrazeCoroutineScope.launchDelayed(maxOnPageFinishedWaitTimeMs) {
+                    withContext(Dispatchers.Main) {
+                        markPageFinished()
+                    }
                 }
-            }
         }
         webViewClientStateListener = listener
     }
 
     private fun handleUrlOverride(url: String): Boolean {
-
         // When given a null listener or a blank url, log message and return early.
-        val logMessage = when {
-            type == Type.IN_APP_MESSAGE && inAppMessageWebViewClientListener == null -> {
-                "BrazeWebViewClient was given null IInAppMessageWebViewClientListener listener. Returning true."
+        val logMessage =
+            when {
+                type == Type.IN_APP_MESSAGE && inAppMessageWebViewClientListener == null -> {
+                    "BrazeWebViewClient was given null IInAppMessageWebViewClientListener listener. Returning true."
+                }
+                type == Type.BANNER && bannerWebViewClientListener == null -> {
+                    "BrazeWebViewClient was given null IBannerWebViewClientListener listener. Returning true."
+                }
+                url.isBlank() -> {
+                    // Blank urls shouldn't be passed back to the WebView. We return true here to indicate
+                    // to the WebView that we handled the url.
+                    "BrazeWebViewClient.shouldOverrideUrlLoading was given blank url. Returning true."
+                }
+                else -> null
             }
-            type == Type.BANNER && bannerWebViewClientListener == null -> {
-                "BrazeWebViewClient was given null IBannerWebViewClientListener listener. Returning true."
-            }
-            url.isBlank() -> {
-                // Blank urls shouldn't be passed back to the WebView. We return true here to indicate
-                // to the WebView that we handled the url.
-                "BrazeWebViewClient.shouldOverrideUrlLoading was given blank url. Returning true."
-            }
-            else -> null
-        }
         logMessage?.let {
             brazelog(I) { it }
             return true
@@ -225,7 +234,11 @@ open class BrazeWebViewClient(
         return true
     }
 
-    private fun handleQueryAction(url: String, uri: Uri, queryBundle: Bundle) {
+    private fun handleQueryAction(
+        url: String,
+        uri: Uri,
+        queryBundle: Bundle,
+    ) {
         // Check the authority
         when (uri.authority) {
             null -> brazelog { "Uri authority was null. Uri: $uri" }
@@ -235,7 +248,7 @@ open class BrazeWebViewClient(
                         inAppMessageWebViewClientListener?.onCloseAction(
                             it,
                             url,
-                            queryBundle
+                            queryBundle,
                         )
                     }
                 } else if (type == Type.BANNER) {
@@ -248,7 +261,7 @@ open class BrazeWebViewClient(
                         inAppMessageWebViewClientListener?.onCustomEventAction(
                             it,
                             url,
-                            queryBundle
+                            queryBundle,
                         )
                     }
                 } else if (type == Type.BANNER) {
@@ -257,7 +270,10 @@ open class BrazeWebViewClient(
         }
     }
 
-    override fun onRenderProcessGone(view: WebView, detail: RenderProcessGoneDetail): Boolean {
+    override fun onRenderProcessGone(
+        view: WebView,
+        detail: RenderProcessGoneDetail,
+    ): Boolean {
         brazelog(I) { "The webview rendering process crashed, returning true" }
 
         // The app crashes after detecting the renderer crashed. Returning true to avoid app crash.
@@ -320,8 +336,7 @@ open class BrazeWebViewClient(
          * @return The custom event name, or null if not present.
          */
         @JvmStatic
-        fun parseCustomEventNameFromQueryBundle(queryBundle: Bundle): String? =
-            queryBundle.getString(BRAZE_CUSTOM_EVENT_NAME_KEY)
+        fun parseCustomEventNameFromQueryBundle(queryBundle: Bundle): String? = queryBundle.getString(BRAZE_CUSTOM_EVENT_NAME_KEY)
 
         /**
          * Extracts event properties from a query parameter [Bundle], excluding the event name key.

@@ -21,13 +21,14 @@ import kotlinx.coroutines.runBlocking
  * This replaces the multiple SharedPreferences files previously used.
  */
 val Context.prefsDataStore: DataStore<Preferences> by preferencesDataStore(
-    name = "droidboy_prefs"
+    name = "droidboy_prefs",
 )
 
 internal val dataStoreScope: CoroutineScope
-    get() = CoroutineScope(
-        BrazeCoroutineScope.coroutineContext + SupervisorJob()
-    )
+    get() =
+        CoroutineScope(
+            BrazeCoroutineScope.coroutineContext + SupervisorJob(),
+        )
 
 /**
  * Keys for all preferences stored in the DataStore.
@@ -68,44 +69,55 @@ object DroidboyPreferenceKeys {
  * For new code, prefer using the suspend functions directly with coroutines.
  */
 object DroidboyDataStoreUtils {
-
     /**
      * Synchronously reads a string value from the DataStore.
      */
-    fun Context.readPrefsString(key: Preferences.Key<String>, defaultValue: String? = null): String? {
-        return runBlocking {
-            prefsDataStore.data.map { preferences ->
-                preferences[key] ?: defaultValue
-            }.first()
+    fun Context.readPrefsString(
+        key: Preferences.Key<String>,
+        defaultValue: String? = null,
+    ): String? =
+        runBlocking {
+            prefsDataStore.data
+                .map { preferences ->
+                    preferences[key] ?: defaultValue
+                }.first()
         }
-    }
 
     /**
      * Synchronously reads an int value from the DataStore.
      */
-    fun Context.readPrefsInt(key: Preferences.Key<Int>, defaultValue: Int): Int {
-        return runBlocking {
-            prefsDataStore.data.map { preferences ->
-                preferences[key] ?: defaultValue
-            }.first()
+    fun Context.readPrefsInt(
+        key: Preferences.Key<Int>,
+        defaultValue: Int,
+    ): Int =
+        runBlocking {
+            prefsDataStore.data
+                .map { preferences ->
+                    preferences[key] ?: defaultValue
+                }.first()
         }
-    }
 
     /**
      * Synchronously reads a boolean value from the DataStore.
      */
-    fun Context.readPrefsBoolean(key: Preferences.Key<Boolean>, defaultValue: Boolean): Boolean {
-        return runBlocking {
-            prefsDataStore.data.map { preferences ->
-                preferences[key] ?: defaultValue
-            }.first()
+    fun Context.readPrefsBoolean(
+        key: Preferences.Key<Boolean>,
+        defaultValue: Boolean,
+    ): Boolean =
+        runBlocking {
+            prefsDataStore.data
+                .map { preferences ->
+                    preferences[key] ?: defaultValue
+                }.first()
         }
-    }
 
     /**
      * Asynchronously writes a string value to the DataStore.
      */
-    fun Context.writePrefsString(key: Preferences.Key<String>, value: String?) {
+    fun Context.writePrefsString(
+        key: Preferences.Key<String>,
+        value: String?,
+    ) {
         dataStoreScope.launch {
             prefsDataStore.edit { preferences ->
                 if (value != null) {
@@ -120,7 +132,10 @@ object DroidboyDataStoreUtils {
     /**
      * Asynchronously writes an int value to the DataStore.
      */
-    fun Context.writePrefsInt(key: Preferences.Key<Int>, value: Int) {
+    fun Context.writePrefsInt(
+        key: Preferences.Key<Int>,
+        value: Int,
+    ) {
         dataStoreScope.launch {
             prefsDataStore.edit { preferences ->
                 preferences[key] = value
@@ -131,7 +146,10 @@ object DroidboyDataStoreUtils {
     /**
      * Asynchronously writes a boolean value to the DataStore.
      */
-    fun Context.writePrefsBoolean(key: Preferences.Key<Boolean>, value: Boolean) {
+    fun Context.writePrefsBoolean(
+        key: Preferences.Key<Boolean>,
+        value: Boolean,
+    ) {
         dataStoreScope.launch {
             prefsDataStore.edit { preferences ->
                 preferences[key] = value
@@ -153,21 +171,25 @@ object DroidboyDataStoreUtils {
     /**
      * Synchronously reads all stored API keys (alias -> key mappings).
      */
-    fun Context.readAllPrefsApiKeys(): Map<String, String> {
-        return runBlocking {
-            prefsDataStore.data.map { preferences ->
-                preferences.asMap()
-                    .filter { (key, value) -> key.name.startsWith(DroidboyPreferenceKeys.API_KEY_PREFIX) && value is String }
-                    .mapKeys { (key, _) -> key.name.removePrefix(DroidboyPreferenceKeys.API_KEY_PREFIX) }
-                    .mapValues { (_, value) -> value as String }
-            }.first()
+    fun Context.readAllPrefsApiKeys(): Map<String, String> =
+        runBlocking {
+            prefsDataStore.data
+                .map { preferences ->
+                    preferences
+                        .asMap()
+                        .filter { (key, value) -> key.name.startsWith(DroidboyPreferenceKeys.API_KEY_PREFIX) && value is String }
+                        .mapKeys { (key, _) -> key.name.removePrefix(DroidboyPreferenceKeys.API_KEY_PREFIX) }
+                        .mapValues { (_, value) -> value as String }
+                }.first()
         }
-    }
 
     /**
      * Asynchronously writes an API key with its alias.
      */
-    fun Context.writePrefsApiKey(alias: String, apiKey: String) {
+    fun Context.writePrefsApiKey(
+        alias: String,
+        apiKey: String,
+    ) {
         val key = stringPreferencesKey("${DroidboyPreferenceKeys.API_KEY_PREFIX}$alias")
         dataStoreScope.launch {
             prefsDataStore.edit { preferences ->

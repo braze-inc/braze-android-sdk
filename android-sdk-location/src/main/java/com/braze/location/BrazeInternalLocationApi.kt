@@ -41,7 +41,7 @@ class BrazeInternalLocationApi : IBrazeLocationApi {
     override fun initWithContext(
         context: Context,
         allowedProviders: EnumSet<LocationProviderName>,
-        appConfigurationProvider: BrazeConfigurationProvider
+        appConfigurationProvider: BrazeConfigurationProvider,
     ) {
         this.context = context
         this.appConfigurationProvider = appConfigurationProvider
@@ -74,12 +74,13 @@ class BrazeInternalLocationApi : IBrazeLocationApi {
                 return true
             }
         }
-        val provider = getSuitableLocationProvider(
-            locationManager,
-            allowedLocationProviders,
-            hasFinePermission,
-            hasCoarsePermission
-        )
+        val provider =
+            getSuitableLocationProvider(
+                locationManager,
+                allowedLocationProviders,
+                hasFinePermission,
+                hasCoarsePermission,
+            )
         if (provider == null) {
             brazelog { "Could not request single location update. Could not find suitable location provider." }
             return false
@@ -90,7 +91,7 @@ class BrazeInternalLocationApi : IBrazeLocationApi {
                 locationManager.getCurrentLocation(
                     provider,
                     null,
-                    Dispatchers.IO.asExecutor()
+                    Dispatchers.IO.asExecutor(),
                 ) { location: Location? ->
                     brazelog { "Location manager getCurrentLocation got location: $location" }
                     if (location != null) {
@@ -120,24 +121,24 @@ class BrazeInternalLocationApi : IBrazeLocationApi {
         locationManager: LocationManager,
         allowedProviders: EnumSet<LocationProviderName>,
         hasFinePermission: Boolean,
-        hasCoarsePermission: Boolean
+        hasCoarsePermission: Boolean,
     ): String? {
         var provider: String? = null
         // Check for our preferred providers in order.
         // Order set in accordance with https://stackoverflow.com/a/6775456/3745724
-        if (hasFinePermission
-            && allowedProviders.contains(LocationProviderName.GPS)
-            && locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)
+        if (hasFinePermission &&
+            allowedProviders.contains(LocationProviderName.GPS) &&
+            locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)
         ) {
             provider = LocationManager.GPS_PROVIDER
-        } else if ((hasCoarsePermission || hasFinePermission)
-            && allowedProviders.contains(LocationProviderName.NETWORK)
-            && locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER)
+        } else if ((hasCoarsePermission || hasFinePermission) &&
+            allowedProviders.contains(LocationProviderName.NETWORK) &&
+            locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER)
         ) {
             provider = LocationManager.NETWORK_PROVIDER
-        } else if (hasFinePermission
-            && allowedProviders.contains(LocationProviderName.PASSIVE)
-            && locationManager.isProviderEnabled(LocationManager.PASSIVE_PROVIDER)
+        } else if (hasFinePermission &&
+            allowedProviders.contains(LocationProviderName.PASSIVE) &&
+            locationManager.isProviderEnabled(LocationManager.PASSIVE_PROVIDER)
         ) {
             provider = LocationManager.PASSIVE_PROVIDER
         }
@@ -155,8 +156,9 @@ class BrazeInternalLocationApi : IBrazeLocationApi {
         if (!locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
             return null
         }
-        val lastKnownGpsLocation = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER)
-            ?: return null
+        val lastKnownGpsLocation =
+            locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER)
+                ?: return null
 
         val ageMs = nowInMilliseconds() - lastKnownGpsLocation.time
         if (ageMs > LAST_KNOWN_GPS_LOCATION_MAX_AGE_MS) {

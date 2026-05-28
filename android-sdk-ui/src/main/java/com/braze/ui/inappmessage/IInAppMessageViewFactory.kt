@@ -16,5 +16,8 @@ interface IInAppMessageViewFactory {
      *
      * @return View that will be used to display the in-app message.
      */
-    fun createInAppMessageView(activity: Activity, inAppMessage: IInAppMessage): View?
+    fun createInAppMessageView(
+        activity: Activity,
+        inAppMessage: IInAppMessage,
+    ): View?
 }

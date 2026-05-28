@@ -20,22 +20,26 @@ import androidx.activity.result.contract.ActivityResultContracts.RequestPermissi
 import androidx.core.content.FileProvider
 import androidx.fragment.app.DialogFragment
 import androidx.preference.EditTextPreference
+import androidx.preference.ListPreference
 import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
 import androidx.preference.PreferenceManager
+import androidx.preference.SwitchPreferenceCompat
 import com.appboy.sample.BuildConfig
 import com.appboy.sample.DroidboyApplication
 import com.appboy.sample.R
 import com.appboy.sample.SetEnvironmentPreference
 import com.appboy.sample.UserProfileDialog
+import com.appboy.sample.environment.EnvironmentQrDialog
 import com.appboy.sample.imageloading.GlideImageLoader
 import com.appboy.sample.logging.CustomEventDialog
 import com.appboy.sample.logging.CustomPurchaseDialog
-import com.appboy.sample.networkconsole.NetworkConsoleDialogFragment
 import com.appboy.sample.logging.CustomUserAttributeDialog
+import com.appboy.sample.networkconsole.NetworkConsoleDialogFragment
 import com.appboy.sample.subscriptions.EmailSubscriptionStateDialog
 import com.appboy.sample.subscriptions.PushSubscriptionStateDialog
 import com.appboy.sample.util.ContentCardsTestingUtil.Companion.createRandomCards
+import com.appboy.sample.util.DroidboyDataStoreUtils.readPrefsBoolean
 import com.appboy.sample.util.DroidboyDataStoreUtils.removePrefsKey
 import com.appboy.sample.util.DroidboyDataStoreUtils.writePrefsBoolean
 import com.appboy.sample.util.DroidboyDataStoreUtils.writePrefsString
@@ -59,11 +63,12 @@ import java.io.File
 class SettingsFragment : PreferenceFragmentCompat() {
     private val requestPermissionLauncher =
         registerForActivityResult(RequestPermission()) { result ->
-            Toast.makeText(
-                context,
-                "Location permission ${if (result) "granted" else "denied"}",
-                Toast.LENGTH_SHORT
-            ).show()
+            Toast
+                .makeText(
+                    context,
+                    "Location permission ${if (result) "granted" else "denied"}",
+                    Toast.LENGTH_SHORT,
+                ).show()
         }
 
     private var environmentQrPhotoUri: Uri? = null
@@ -74,18 +79,19 @@ class SettingsFragment : PreferenceFragmentCompat() {
                 environmentQrPhotoUri?.let { uri ->
                     try {
                         val contentResolver = requireActivity().contentResolver
-                        val bitmap: Bitmap = if (Build.VERSION.SDK_INT < 28) {
-                            @Suppress("DEPRECATION")
-                            MediaStore.Images.Media.getBitmap(contentResolver, uri)
-                        } else {
-                            val source: ImageDecoder.Source = ImageDecoder.createSource(contentResolver, uri)
-                            // The copy() removes HARDWARE from the Bitmap.config, which prevents processing
-                            ImageDecoder.decodeBitmap(source).copy(Bitmap.Config.ARGB_8888, true)
-                        }
+                        val bitmap: Bitmap =
+                            if (Build.VERSION.SDK_INT < 28) {
+                                @Suppress("DEPRECATION")
+                                MediaStore.Images.Media.getBitmap(contentResolver, uri)
+                            } else {
+                                val source: ImageDecoder.Source = ImageDecoder.createSource(contentResolver, uri)
+                                // The copy() removes HARDWARE from the Bitmap.config, which prevents processing
+                                ImageDecoder.decodeBitmap(source).copy(Bitmap.Config.ARGB_8888, true)
+                            }
 
                         EnvironmentUtils.analyzeBitmapForEnvironmentBarcode(
                             this.requireActivity(),
-                            bitmap
+                            bitmap,
                         )
                     } catch (e: Exception) {
                         brazelog(E, e) { "Error getting image" }
@@ -94,7 +100,10 @@ class SettingsFragment : PreferenceFragmentCompat() {
             }
         }
 
-    override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
+    override fun onCreatePreferences(
+        savedInstanceState: Bundle?,
+        rootKey: String?,
+    ) {
         setPreferencesFromResource(R.xml.preferences, rootKey)
         val context = this.requireContext()
 
@@ -115,13 +124,12 @@ class SettingsFragment : PreferenceFragmentCompat() {
     }
 
     private fun setSdkAuthPrefs(context: Context) {
-        setClickPreference("enable_sdk_auth") {
-            context.writePrefsBoolean(DroidboyPreferenceKeys.ENABLE_SDK_AUTH, true)
+        val pref = findPreference<SwitchPreferenceCompat>("sdk_auth_enabled") ?: return
+        pref.isChecked = context.readPrefsBoolean(DroidboyPreferenceKeys.ENABLE_SDK_AUTH, true)
+        pref.setOnPreferenceChangeListener { _, newValue ->
+            context.writePrefsBoolean(DroidboyPreferenceKeys.ENABLE_SDK_AUTH, newValue as Boolean)
             LifecycleUtils.restartApp(context)
-        }
-        setClickPreference("disable_sdk_auth") {
-            context.writePrefsBoolean(DroidboyPreferenceKeys.ENABLE_SDK_AUTH, false)
-            LifecycleUtils.restartApp(context)
+            true
         }
     }
 
@@ -154,17 +162,17 @@ class SettingsFragment : PreferenceFragmentCompat() {
      */
     private fun getTmpFileUri(): Uri {
         val context = requireContext()
-        val tmpFile = File.createTempFile("tmp_image_file", ".jpg", context.cacheDir).apply {
-            createNewFile()
-            deleteOnExit()
-        }
+        val tmpFile =
+            File.createTempFile("tmp_image_file", ".jpg", context.cacheDir).apply {
+                createNewFile()
+                deleteOnExit()
+            }
 
         return FileProvider.getUriForFile(context, "${context.packageName}.fileprovider", tmpFile)
     }
 
     private fun setEnvironmentPrefs(context: Context) {
         setClickPreference("environment_barcode_picture_intent_key") {
-            // Set this here because we'll have context now
             environmentQrPhotoUri = getTmpFileUri()
             cameraActivityLauncher.launch(environmentQrPhotoUri)
         }
@@ -172,6 +180,9 @@ class SettingsFragment : PreferenceFragmentCompat() {
             context.removePrefsKey(DroidboyPreferenceKeys.OVERRIDE_API_KEY)
             context.removePrefsKey(DroidboyPreferenceKeys.OVERRIDE_ENDPOINT)
             LifecycleUtils.restartApp(context)
+        }
+        setClickPreference("show_current_environment_qr") {
+            EnvironmentQrDialog.newInstance().show(childFragmentManager, EnvironmentQrDialog.TAG)
         }
         setClickPreference("environment_switch_dev") { changeEndpointToDevelopment() }
         showDialogOnClick("show_set_environment_dialog", SetEnvironmentPreference())
@@ -195,8 +206,8 @@ class SettingsFragment : PreferenceFragmentCompat() {
                         "network_val_$uniqueInt",
                         "campaign_val_$uniqueInt",
                         "adgroup_val_$uniqueInt",
-                        "creative_val_$uniqueInt"
-                    )
+                        "creative_val_$uniqueInt",
+                    ),
                 )
                 showToast("Attribution data sent to server")
             }
@@ -226,7 +237,7 @@ class SettingsFragment : PreferenceFragmentCompat() {
                     activity as Activity,
                     Manifest.permission.ACCESS_FINE_LOCATION,
                     RuntimePermissionUtils.LOCATION_RATIONALE,
-                    requestPermissionLauncher
+                    requestPermissionLauncher,
                 )
             } else {
                 showToast("Below Android M there is no need to check for runtime permissions.")
@@ -262,24 +273,32 @@ class SettingsFragment : PreferenceFragmentCompat() {
     }
 
     private fun setImageDisplayPrefs(context: Context) {
-        setClickPreference("glide_image_loader_enable_setting_key") {
-            Braze.getInstance(context).imageLoader = GlideImageLoader()
-            showToast("Glide enabled")
-        }
-        setClickPreference("glide_image_loader_disable_setting_key") {
-            Braze.getInstance(context).imageLoader = DefaultBrazeImageLoader(context)
-            showToast("Glide disabled. Default Image loader in use.")
+        val pref = findPreference<SwitchPreferenceCompat>("glide_image_loader_enabled") ?: return
+        pref.setOnPreferenceChangeListener { _, newValue ->
+            if (newValue as Boolean) {
+                Braze.getInstance(context).imageLoader = GlideImageLoader()
+                showToast("Glide enabled")
+            } else {
+                Braze.getInstance(context).imageLoader = DefaultBrazeImageLoader(context)
+                showToast("Glide disabled. Default Image loader in use.")
+            }
+            true
         }
     }
 
     private fun setNetworkPrefs(context: Context) {
-        setClickPreference("disable_outbound_network_requests") {
-            Braze.outboundNetworkRequestsOffline = true
-            showToast(getString(R.string.disabled_outbound_network_requests_toast))
-        }
-        setClickPreference("enable_outbound_network_requests") {
-            Braze.outboundNetworkRequestsOffline = false
-            showToast(getString(R.string.enabled_outbound_network_requests_toast))
+        val outboundPref = findPreference<SwitchPreferenceCompat>("outbound_network_enabled")
+        outboundPref?.setOnPreferenceChangeListener { _, newValue ->
+            val isEnabled = newValue as Boolean
+            Braze.outboundNetworkRequestsOffline = !isEnabled
+            val toastMessage =
+                if (isEnabled) {
+                    getString(R.string.enabled_outbound_network_requests_toast)
+                } else {
+                    getString(R.string.disabled_outbound_network_requests_toast)
+                }
+            showToast(toastMessage)
+            true
         }
         setClickPreference("data_flush") {
             Braze.getInstance(context).requestImmediateDataFlush()
@@ -297,18 +316,29 @@ class SettingsFragment : PreferenceFragmentCompat() {
 
     private fun setGdprPrefs(context: Context) {
         setClickPreference("wipe_data_preference_key") { Braze.wipeData(context) }
-        setClickPreference("enable_sdk_key") { Braze.enableSdk(context) }
-        setClickPreference("disable_sdk_key") { Braze.disableSdk(context) }
+        val sdkEnabledPref = findPreference<SwitchPreferenceCompat>("sdk_enabled")
+        sdkEnabledPref?.setOnPreferenceChangeListener { _, newValue ->
+            if (newValue as Boolean) {
+                Braze.enableSdk(context)
+                showToast("Braze SDK enabled")
+            } else {
+                Braze.disableSdk(context)
+                showToast("Braze SDK disabled")
+            }
+            true
+        }
     }
 
     private fun setDelayedInitPrefs(context: Context) {
-        setClickPreference("enable_delayed_init_queue") {
-            Braze.enableDelayedInitialization(context, DelayedInitializationAnalyticsBehavior.QUEUE)
+        val pref = findPreference<ListPreference>("delayed_init_mode") ?: return
+        pref.setOnPreferenceChangeListener { _, newValue ->
+            when (newValue as String) {
+                DELAYED_INIT_QUEUE -> Braze.enableDelayedInitialization(context, DelayedInitializationAnalyticsBehavior.QUEUE)
+                DELAYED_INIT_DROP -> Braze.enableDelayedInitialization(context, DelayedInitializationAnalyticsBehavior.DROP)
+                else -> Braze.disableDelayedInitialization(context)
+            }
+            true
         }
-        setClickPreference("enable_delayed_init_drop") {
-            Braze.enableDelayedInitialization(context, DelayedInitializationAnalyticsBehavior.DROP)
-        }
-        setClickPreference("disable_delayed_init") { Braze.disableDelayedInitialization(context) }
     }
 
     private fun setContentCardsPrefs(context: Context) {
@@ -334,7 +364,9 @@ class SettingsFragment : PreferenceFragmentCompat() {
         setSwitchPreference("display_in_full_cutout_setting_key") { newValue: Boolean ->
             // Restart the app to force onCreate() to re-run
             // Note that an app restart won't commit prefs changes so we have to do it manually
-            PreferenceManager.getDefaultSharedPreferences(context).edit()
+            PreferenceManager
+                .getDefaultSharedPreferences(context)
+                .edit()
                 .putBoolean("display_in_full_cutout_setting_key", newValue)
                 .commit()
             LifecycleUtils.restartApp(context)
@@ -342,7 +374,9 @@ class SettingsFragment : PreferenceFragmentCompat() {
         setSwitchPreference("display_no_limits_setting_key") { newValue: Boolean ->
             // Restart the app to force onCreate() to re-run
             // Note that an app restart won't commit prefs changes so we have to do it manually
-            PreferenceManager.getDefaultSharedPreferences(context).edit()
+            PreferenceManager
+                .getDefaultSharedPreferences(context)
+                .edit()
                 .putBoolean("display_no_limits_setting_key", newValue)
                 .commit()
             LifecycleUtils.restartApp(context)
@@ -352,6 +386,15 @@ class SettingsFragment : PreferenceFragmentCompat() {
     private fun showToast(message: String) {
         Handler(this.requireActivity().mainLooper).post {
             Toast.makeText(this.requireContext(), message, Toast.LENGTH_LONG).show()
+        }
+    }
+
+    private fun showDialogOnClick(
+        key: String,
+        dialog: DialogFragment,
+    ) {
+        setClickPreference(key) {
+            dialog.show(childFragmentManager, "")
         }
     }
 
@@ -368,13 +411,9 @@ class SettingsFragment : PreferenceFragmentCompat() {
         LifecycleUtils.restartApp(context)
     }
 
-    private fun showDialogOnClick(key: String, dialog: DialogFragment) {
-        setClickPreference(key) {
-            dialog.show(childFragmentManager, "")
-        }
-    }
-
     companion object {
+        private const val DELAYED_INIT_QUEUE = "queue"
+        private const val DELAYED_INIT_DROP = "drop"
         private const val DEV_DROIDBOY_API_KEY = "da8f263e-1483-4e9f-ac0c-7b40030c8f40"
         private const val DEV_FIREOS_DROIDBOY_API_KEY = "ecb81855-149f-465c-bab0-0254d6512133"
         private const val DEV_SDK_ENDPOINT = "https://elsa.braze.com/"
@@ -382,23 +421,41 @@ class SettingsFragment : PreferenceFragmentCompat() {
         /**
          * Extension function for preferences that are only clicked
          */
-        fun PreferenceFragmentCompat.setClickPreference(key: String, block: () -> Unit) {
+        fun PreferenceFragmentCompat.setClickPreference(
+            key: String,
+            block: () -> Unit,
+        ) {
             this.findPreference<Preference>(key)?.setOnPreferenceClickListener {
                 block.invoke()
                 return@setOnPreferenceClickListener true
             }
         }
 
-        fun PreferenceFragmentCompat.setSwitchPreference(key: String, block: (newValue: Boolean) -> Unit) {
+        fun PreferenceFragmentCompat.setSwitchPreference(
+            key: String,
+            block: (newValue: Boolean) -> Unit,
+        ) {
             this.findPreference<Preference>(key)?.setOnPreferenceChangeListener { _, newValue ->
-                block.invoke(newValue as @kotlin.ParameterName(name = "newValue") Boolean)
+                block.invoke(
+                    newValue as
+                        @kotlin.ParameterName(name = "newValue")
+                        Boolean,
+                )
                 return@setOnPreferenceChangeListener true
             }
         }
 
-        fun PreferenceFragmentCompat.setEditTextPreference(key: String, numberOnly: Boolean = false, block: (newValue: String) -> Unit) {
+        fun PreferenceFragmentCompat.setEditTextPreference(
+            key: String,
+            numberOnly: Boolean = false,
+            block: (newValue: String) -> Unit,
+        ) {
             this.findPreference<Preference>(key)?.setOnPreferenceChangeListener { _, newValue ->
-                block.invoke(newValue as @kotlin.ParameterName(name = "newValue") String)
+                block.invoke(
+                    newValue as
+                        @kotlin.ParameterName(name = "newValue")
+                        String,
+                )
                 return@setOnPreferenceChangeListener true
             }
 
@@ -409,7 +466,10 @@ class SettingsFragment : PreferenceFragmentCompat() {
             }
         }
 
-        fun PreferenceFragmentCompat.setSummary(key: String, summary: String) {
+        fun PreferenceFragmentCompat.setSummary(
+            key: String,
+            summary: String,
+        ) {
             this.findPreference<Preference>(key)?.summary = summary
         }
 

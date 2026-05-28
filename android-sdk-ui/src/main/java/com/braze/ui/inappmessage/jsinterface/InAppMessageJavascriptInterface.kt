@@ -17,9 +17,8 @@ import kotlinx.coroutines.withTimeout
  */
 class InAppMessageJavascriptInterface(
     context: Context,
-    private val inAppMessage: IInAppMessageHtml
+    private val inAppMessage: IInAppMessageHtml,
 ) : JavascriptInterfaceBase(context) {
-
     @get:JavascriptInterface
     val user: InAppMessageUserJavascriptInterface = InAppMessageUserJavascriptInterface(context)
 

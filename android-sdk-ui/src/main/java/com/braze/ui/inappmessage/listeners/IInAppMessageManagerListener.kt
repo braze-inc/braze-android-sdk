@@ -1,4 +1,5 @@
 @file:Suppress("DEPRECATION")
+
 package com.braze.ui.inappmessage.listeners
 
 import android.view.View
@@ -39,7 +40,10 @@ interface IInAppMessageManagerListener {
      * If true, Braze will only log a click and do nothing else. If false, Braze will
      * log a click and also close the in-app message automatically.
      */
-    fun onInAppMessageButtonClicked(inAppMessage: IInAppMessage, button: MessageButton) = false
+    fun onInAppMessageButtonClicked(
+        inAppMessage: IInAppMessage,
+        button: MessageButton,
+    ) = false
 
     /**
      * @param inAppMessage the in-app message that was closed.
@@ -56,7 +60,10 @@ interface IInAppMessageManagerListener {
      * @param inAppMessageView The [View] representing the [IInAppMessage].
      * @param inAppMessage     The [IInAppMessage] being displayed.
      */
-    fun beforeInAppMessageViewOpened(inAppMessageView: View, inAppMessage: IInAppMessage) {}
+    fun beforeInAppMessageViewOpened(
+        inAppMessageView: View,
+        inAppMessage: IInAppMessage,
+    ) {}
 
     /**
      * Called after the in-app message View has been added to the layout
@@ -69,7 +76,10 @@ interface IInAppMessageManagerListener {
      * @param inAppMessageView The [View] representing the [IInAppMessage].
      * @param inAppMessage     The [IInAppMessage] being displayed.
      */
-    fun afterInAppMessageViewOpened(inAppMessageView: View, inAppMessage: IInAppMessage) {}
+    fun afterInAppMessageViewOpened(
+        inAppMessageView: View,
+        inAppMessage: IInAppMessage,
+    ) {}
 
     /**
      * Called before the in-app message View is removed from the layout
@@ -82,7 +92,10 @@ interface IInAppMessageManagerListener {
      * @param inAppMessageView The [View] representing the [IInAppMessage].
      * @param inAppMessage     The [IInAppMessage] being displayed.
      */
-    fun beforeInAppMessageViewClosed(inAppMessageView: View, inAppMessage: IInAppMessage) {}
+    fun beforeInAppMessageViewClosed(
+        inAppMessageView: View,
+        inAppMessage: IInAppMessage,
+    ) {}
 
     /**
      * Called after the in-app message View has been removed from the

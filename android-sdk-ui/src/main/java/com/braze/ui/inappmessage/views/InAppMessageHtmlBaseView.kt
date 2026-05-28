@@ -34,9 +34,11 @@ import com.braze.ui.support.getMaxSafeTopInset
 import com.braze.ui.support.setFocusableInTouchModeAndRequestFocus
 import com.braze.ui.support.setWebViewSettings
 
-abstract class InAppMessageHtmlBaseView(context: Context?, attrs: AttributeSet?) :
-    RelativeLayout(context, attrs), IInAppMessageView {
-
+abstract class InAppMessageHtmlBaseView(
+    context: Context?,
+    attrs: AttributeSet?,
+) : RelativeLayout(context, attrs),
+    IInAppMessageView {
     /**
      * This should be accessed through [messageWebView] to ensure that the [WebView]
      * is configured with all the various settings once and only once.
@@ -84,73 +86,70 @@ abstract class InAppMessageHtmlBaseView(context: Context?, attrs: AttributeSet?)
                 brazelog(V) { "HtmlInAppMessageHtmlLinkTarget not enabled" }
             }
             // Set the client for console logging. See https://developer.android.com/guide/webapps/debugging.html
-            webView.webChromeClient = object : WebChromeClient() {
-                override fun onConsoleMessage(cm: ConsoleMessage): Boolean {
-                    this@InAppMessageHtmlBaseView.brazelog {
-                        (
-                            "Braze HTML In-app Message log. Line: " + cm.lineNumber()
-                                + ". SourceId: " + cm.sourceId()
-                                + ". Log Level: " + cm.messageLevel()
-                                + ". Message: " + cm.message()
-                            )
+            webView.webChromeClient =
+                object : WebChromeClient() {
+                    override fun onConsoleMessage(cm: ConsoleMessage): Boolean {
+                        this@InAppMessageHtmlBaseView.brazelog {
+                            "Braze HTML In-app Message log. Line: " + cm.lineNumber() +
+                                ". SourceId: " + cm.sourceId() +
+                                ". Log Level: " + cm.messageLevel() +
+                                ". Message: " + cm.message()
+                        }
+                        return true
                     }
-                    return true
-                }
 
-                override fun onCreateWindow(
-                    view: WebView?,
-                    isDialog: Boolean,
-                    isUserGesture: Boolean,
-                    resultMsg: Message?
-                ): Boolean {
-                    return if (!isLinkTargetSupported) {
-                        brazelog(V) { "linkTargetSupport not enabled, passing to super.onCreateWindow()" }
-                        super.onCreateWindow(view, isDialog, isUserGesture, resultMsg)
-                    } else if (view == null) {
-                        brazelog(V) { "onCreateWindow webView is null, not opening link" }
-                        false
-                    } else {
-                        val result = view.hitTestResult
-                        brazelog(V) { "onCreateWindow HitTestResult is $result" }
-                        try {
-                            when (result.type) {
-                                HitTestResult.SRC_ANCHOR_TYPE -> {
-                                    val data = result.extra
-                                    val browserIntent = Intent(Intent.ACTION_VIEW, data?.toUri())
-                                    context.startActivity(browserIntent)
-                                }
+                    override fun onCreateWindow(
+                        view: WebView?,
+                        isDialog: Boolean,
+                        isUserGesture: Boolean,
+                        resultMsg: Message?,
+                    ): Boolean =
+                        if (!isLinkTargetSupported) {
+                            brazelog(V) { "linkTargetSupport not enabled, passing to super.onCreateWindow()" }
+                            super.onCreateWindow(view, isDialog, isUserGesture, resultMsg)
+                        } else if (view == null) {
+                            brazelog(V) { "onCreateWindow webView is null, not opening link" }
+                            false
+                        } else {
+                            val result = view.hitTestResult
+                            brazelog(V) { "onCreateWindow HitTestResult is $result" }
+                            try {
+                                when (result.type) {
+                                    HitTestResult.SRC_ANCHOR_TYPE -> {
+                                        val data = result.extra
+                                        val browserIntent = Intent(Intent.ACTION_VIEW, data?.toUri())
+                                        context.startActivity(browserIntent)
+                                    }
 
-                                HitTestResult.EMAIL_TYPE -> {
-                                    val data = WebView.SCHEME_MAILTO + result.extra
-                                    val emailIntent = Intent(Intent.ACTION_VIEW, data.toUri())
-                                    context.startActivity(emailIntent)
-                                }
+                                    HitTestResult.EMAIL_TYPE -> {
+                                        val data = WebView.SCHEME_MAILTO + result.extra
+                                        val emailIntent = Intent(Intent.ACTION_VIEW, data.toUri())
+                                        context.startActivity(emailIntent)
+                                    }
 
-                                HitTestResult.PHONE_TYPE -> {
-                                    val data = WebView.SCHEME_TEL + result.extra
-                                    val telIntent = Intent(Intent.ACTION_VIEW, data.toUri())
-                                    context.startActivity(telIntent)
-                                }
+                                    HitTestResult.PHONE_TYPE -> {
+                                        val data = WebView.SCHEME_TEL + result.extra
+                                        val telIntent = Intent(Intent.ACTION_VIEW, data.toUri())
+                                        context.startActivity(telIntent)
+                                    }
 
-                                else -> {
-                                    brazelog(V) {
-                                        "onCreateWindow: hitTestResult type was ${result.type}. " +
-                                            "Not doing anything."
+                                    else -> {
+                                        brazelog(V) {
+                                            "onCreateWindow: hitTestResult type was ${result.type}. " +
+                                                "Not doing anything."
+                                        }
                                     }
                                 }
+                            } catch (e: Exception) {
+                                brazelog(E, e) { "Failed to open link in new window. $result" }
                             }
-                        } catch (e: Exception) {
-                            brazelog(E, e) { "Failed to open link in new window. $result" }
+                            false
                         }
-                        false
-                    }
-                }
 
-                // This bitmap is used to eliminate the default black & white
-                // play icon used as the default poster.
-                override fun getDefaultVideoPoster() =
-                    createBitmap(1, 1)
-            }
+                    // This bitmap is used to eliminate the default black & white
+                    // play icon used as the default poster.
+                    override fun getDefaultVideoPoster() = createBitmap(1, 1)
+                }
             configuredMessageWebView = webView
             return configuredMessageWebView
         }
@@ -182,7 +181,10 @@ abstract class InAppMessageHtmlBaseView(context: Context?, attrs: AttributeSet?)
      * @param assetDirectoryUrl path to the local assets file
      */
     @JvmOverloads
-    open fun setWebViewContent(htmlBody: String?, assetDirectoryUrl: String? = null) {
+    open fun setWebViewContent(
+        htmlBody: String?,
+        assetDirectoryUrl: String? = null,
+    ) {
         // For files, we use a dummy URL and the [WebViewAssetLoader] uses the same URL for local files. This allows
         // us to load local files without the security risks of settings [allowFileAccess] to true.
         if (htmlBody != null) {
@@ -191,7 +193,7 @@ abstract class InAppMessageHtmlBaseView(context: Context?, attrs: AttributeSet?)
                 htmlBody,
                 HTML_MIME_TYPE,
                 HTML_ENCODING,
-                null
+                null,
             )
         } else {
             brazelog { "Cannot load WebView. htmlBody was null." }
@@ -216,7 +218,10 @@ abstract class InAppMessageHtmlBaseView(context: Context?, attrs: AttributeSet?)
      * @return If the button pressed was the back button, close the in-app message
      * and return true to indicate that the event was handled.
      */
-    override fun onKeyDown(keyCode: Int, event: KeyEvent): Boolean {
+    override fun onKeyDown(
+        keyCode: Int,
+        event: KeyEvent,
+    ): Boolean {
         // API 36 = Android 16 (BAKLAVA). On API 36+ back is handled only by the dispatcher.
         if (isApiBelowBaklava &&
             keyCode == KeyEvent.KEYCODE_BACK &&
@@ -272,7 +277,7 @@ abstract class InAppMessageHtmlBaseView(context: Context?, attrs: AttributeSet?)
             getMaxSafeLeftInset(insets) + layoutParams.leftMargin,
             getMaxSafeTopInset(insets) + layoutParams.topMargin,
             getMaxSafeRightInset(insets) + layoutParams.rightMargin,
-            getMaxSafeBottomInset(insets) + layoutParams.bottomMargin
+            getMaxSafeBottomInset(insets) + layoutParams.bottomMargin,
         )
     }
 

@@ -5,13 +5,13 @@ import android.app.Activity
 import android.view.View
 import android.view.ViewGroup.MarginLayoutParams
 import android.widget.RelativeLayout
-import com.braze.ui.R
 import com.braze.Braze
 import com.braze.enums.BrazeViewBounds
 import com.braze.enums.inappmessage.ImageStyle
 import com.braze.enums.inappmessage.Orientation
 import com.braze.models.inappmessage.IInAppMessage
 import com.braze.models.inappmessage.InAppMessageFull
+import com.braze.ui.R
 import com.braze.ui.inappmessage.IInAppMessageViewFactory
 import com.braze.ui.inappmessage.views.InAppMessageBaseView
 import com.braze.ui.inappmessage.views.InAppMessageFullView
@@ -25,7 +25,7 @@ open class DefaultInAppMessageFullViewFactory : IInAppMessageViewFactory {
     @Suppress("LongMethod")
     override fun createInAppMessageView(
         activity: Activity,
-        inAppMessage: IInAppMessage
+        inAppMessage: IInAppMessage,
     ): InAppMessageFullView {
         val applicationContext = activity.applicationContext
         val inAppMessageFull = inAppMessage as InAppMessageFull
@@ -43,7 +43,7 @@ open class DefaultInAppMessageFullViewFactory : IInAppMessageViewFactory {
                     inAppMessage,
                     imageUrl,
                     it,
-                    BrazeViewBounds.NO_BOUNDS
+                    BrazeViewBounds.NO_BOUNDS,
                 )
             }
         }
@@ -88,10 +88,11 @@ open class DefaultInAppMessageFullViewFactory : IInAppMessageViewFactory {
                 var nonScrollViewHeight = layoutParams.bottomMargin + layoutParams.topMargin
                 if (inAppMessageFull.messageButtons.isNotEmpty()) {
                     // Account for all appropriate height / margins
-                    nonScrollViewHeight += convertDpToPixels(
-                        applicationContext,
-                        BUTTONS_PRESENT_SCROLLVIEW_EXCESS_HEIGHT_VALUE_IN_DP.toDouble()
-                    ).toInt()
+                    nonScrollViewHeight +=
+                        convertDpToPixels(
+                            applicationContext,
+                            BUTTONS_PRESENT_SCROLLVIEW_EXCESS_HEIGHT_VALUE_IN_DP.toDouble(),
+                        ).toInt()
                 }
 
                 // The remaining height is the MOST that the scrollView can take up
@@ -122,7 +123,7 @@ open class DefaultInAppMessageFullViewFactory : IInAppMessageViewFactory {
     private fun resetLayoutParamsIfAppropriate(
         activity: Activity,
         inAppMessage: IInAppMessage,
-        view: InAppMessageFullView
+        view: InAppMessageFullView,
     ): Boolean {
         if (!activity.isRunningOnTablet()) {
             return false
@@ -133,11 +134,12 @@ open class DefaultInAppMessageFullViewFactory : IInAppMessageViewFactory {
         val longEdge = view.longEdge
         val shortEdge = view.shortEdge
         if (longEdge > 0 && shortEdge > 0) {
-            val layoutParams: RelativeLayout.LayoutParams = if (inAppMessage.orientation === Orientation.LANDSCAPE) {
-                RelativeLayout.LayoutParams(longEdge, shortEdge)
-            } else {
-                RelativeLayout.LayoutParams(shortEdge, longEdge)
-            }
+            val layoutParams: RelativeLayout.LayoutParams =
+                if (inAppMessage.orientation === Orientation.LANDSCAPE) {
+                    RelativeLayout.LayoutParams(longEdge, shortEdge)
+                } else {
+                    RelativeLayout.LayoutParams(shortEdge, longEdge)
+                }
             layoutParams.addRule(RelativeLayout.CENTER_IN_PARENT, RelativeLayout.TRUE)
             view.messageBackgroundObject?.layoutParams = layoutParams
             return true
@@ -146,19 +148,21 @@ open class DefaultInAppMessageFullViewFactory : IInAppMessageViewFactory {
     }
 
     @SuppressLint("InflateParams")
-    fun getAppropriateFullView(activity: Activity, isGraphic: Boolean): InAppMessageFullView {
-        return if (isGraphic) {
+    fun getAppropriateFullView(
+        activity: Activity,
+        isGraphic: Boolean,
+    ): InAppMessageFullView =
+        if (isGraphic) {
             activity.layoutInflater.inflate(
                 R.layout.com_braze_inappmessage_full_graphic,
-                null
+                null,
             ) as InAppMessageFullView
         } else {
             activity.layoutInflater.inflate(
                 R.layout.com_braze_inappmessage_full,
-                null
+                null,
             ) as InAppMessageFullView
         }
-    }
 
     companion object {
         /**

@@ -31,13 +31,13 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
-import androidx.lifecycle.compose.LocalLifecycleOwner
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleEventObserver
+import androidx.lifecycle.compose.LocalLifecycleOwner
 import com.braze.Braze
 import com.braze.coroutine.BrazeCoroutineScope
 import com.braze.enums.CardType
@@ -61,14 +61,19 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 private sealed interface CardListMutation {
-    data class ReplaceCards(val newCards: List<Card>) : CardListMutation
-    data class DismissCard(val card: Card) : CardListMutation
-    data class InitializeFromCache(val cachedCards: List<Card>) : CardListMutation
+    data class ReplaceCards(
+        val newCards: List<Card>,
+    ) : CardListMutation
+
+    data class DismissCard(
+        val card: Card,
+    ) : CardListMutation
+
+    data class InitializeFromCache(
+        val cachedCards: List<Card>,
+    ) : CardListMutation
 }
 
-@Suppress("LongMethod", "ComplexMethod", "LongParameterList", "VariableNaming", "MagicNumber", "NestedBlockDepth")
-@OptIn(ExperimentalMaterialApi::class)
-@Composable
 /**
  * BrazeContentCardsList displays a list of Content Cards.
  *
@@ -86,6 +91,9 @@ private sealed interface CardListMutation {
  * @param cardStyle The styling for the individual content cards.
  * @param enablePullToRefresh If true, the user can pull down to refresh the list of content cards.
  */
+@Suppress("LongMethod", "ComplexMethod", "LongParameterList", "VariableNaming", "MagicNumber", "NestedBlockDepth")
+@OptIn(ExperimentalMaterialApi::class)
+@Composable
 fun ContentCardsList(
     cards: List<Card>? = null,
     emptyComposable: @Composable (() -> Unit)? = null,
@@ -104,12 +112,14 @@ fun ContentCardsList(
 
     var myCards by remember { mutableStateOf<List<Card>>(emptyList()) }
 
-    val controlCardInference = remember {
-        mutableStateListOf<Pair<String, Card>>()
-    }
-    val cardListMutationChannel = remember {
-        Channel<CardListMutation>(Channel.UNLIMITED)
-    }
+    val controlCardInference =
+        remember {
+            mutableStateListOf<Pair<String, Card>>()
+        }
+    val cardListMutationChannel =
+        remember {
+            Channel<CardListMutation>(Channel.UNLIMITED)
+        }
 
     var didInitialLoad by remember { mutableStateOf(false) }
 
@@ -124,18 +134,20 @@ fun ContentCardsList(
     val NETWORK_PROBLEM_WARNING_MS = 5000L
     val AUTO_HIDE_REFRESH_INDICATOR_DELAY_MS = 2500L
 
-    fun refresh() = refreshScope.launch {
-        isRefreshing = true
-        Braze.getInstance(context).requestContentCardsRefresh()
-        delay(AUTO_HIDE_REFRESH_INDICATOR_DELAY_MS)
-        isRefreshing = false
-    }
+    fun refresh() =
+        refreshScope.launch {
+            isRefreshing = true
+            Braze.getInstance(context).requestContentCardsRefresh()
+            delay(AUTO_HIDE_REFRESH_INDICATOR_DELAY_MS)
+            isRefreshing = false
+        }
 
     val refreshState = rememberPullRefreshState(isRefreshing, ::refresh)
 
-    val impressedCards = remember {
-        mutableStateListOf<String>()
-    }
+    val impressedCards =
+        remember {
+            mutableStateListOf<String>()
+        }
 
     fun networkUnavailable() {
         brazelog(TAG) { "Network is unavailable." }
@@ -285,51 +297,57 @@ fun ContentCardsList(
     if (cards == null) {
         val lifecycleOwner = LocalLifecycleOwner.current
         DisposableEffect(LocalLifecycleOwner.current) {
-            val observer = LifecycleEventObserver { _, event ->
-                when (event) {
-                    Lifecycle.Event.ON_PAUSE -> {
-                        brazelog { "OnPause called in BrazeContentCardList" }
-                        Braze.getInstance(context).removeSingleSubscription(
-                            contentCardsUpdatedSubscriber,
-                            ContentCardsUpdatedEvent::class.java
-                        )
-                        Braze.getInstance(context)
-                            .removeSingleSubscription(sdkDataWipeEventSubscriber, SdkDataWipeEvent::class.java)
-                        networkUnavailableJob?.cancel()
-                        networkUnavailableJob = null
-                    }
-
-                    Lifecycle.Event.ON_RESUME -> {
-                        brazelog { "OnResume called in BrazeContentCardList" }
-                        // Remove the previous subscriber before rebuilding a new one with our new activity.
-                        Braze.getInstance(context).removeSingleSubscription(
-                            contentCardsUpdatedSubscriber,
-                            ContentCardsUpdatedEvent::class.java
-                        )
-                        if (contentCardsUpdatedSubscriber == null) {
-                            contentCardsUpdatedSubscriber = IEventSubscriber {
-                                handleContentCardsUpdatedEvent(it)
-                            }
-                        }
-                        contentCardsUpdatedSubscriber?.let {
-                            Braze.getInstance(context)
-                                .addSingleSynchronousSubscription(it, ContentCardsUpdatedEvent::class.java)
+            val observer =
+                LifecycleEventObserver { _, event ->
+                    when (event) {
+                        Lifecycle.Event.ON_PAUSE -> {
+                            brazelog { "OnPause called in BrazeContentCardList" }
+                            Braze.getInstance(context).removeSingleSubscription(
+                                contentCardsUpdatedSubscriber,
+                                ContentCardsUpdatedEvent::class.java,
+                            )
+                            Braze
+                                .getInstance(context)
+                                .removeSingleSubscription(sdkDataWipeEventSubscriber, SdkDataWipeEvent::class.java)
+                            networkUnavailableJob?.cancel()
+                            networkUnavailableJob = null
                         }
 
-                        if (sdkDataWipeEventSubscriber == null) {
-                            // If the SDK data is wiped, then we want to clear any cached Content Cards
-                            sdkDataWipeEventSubscriber = IEventSubscriber {
-                                handleContentCardsUpdatedEvent(ContentCardsUpdatedEvent.emptyUpdate)
+                        Lifecycle.Event.ON_RESUME -> {
+                            brazelog { "OnResume called in BrazeContentCardList" }
+                            // Remove the previous subscriber before rebuilding a new one with our new activity.
+                            Braze.getInstance(context).removeSingleSubscription(
+                                contentCardsUpdatedSubscriber,
+                                ContentCardsUpdatedEvent::class.java,
+                            )
+                            if (contentCardsUpdatedSubscriber == null) {
+                                contentCardsUpdatedSubscriber =
+                                    IEventSubscriber {
+                                        handleContentCardsUpdatedEvent(it)
+                                    }
+                            }
+                            contentCardsUpdatedSubscriber?.let {
+                                Braze
+                                    .getInstance(context)
+                                    .addSingleSynchronousSubscription(it, ContentCardsUpdatedEvent::class.java)
+                            }
+
+                            if (sdkDataWipeEventSubscriber == null) {
+                                // If the SDK data is wiped, then we want to clear any cached Content Cards
+                                sdkDataWipeEventSubscriber =
+                                    IEventSubscriber {
+                                        handleContentCardsUpdatedEvent(ContentCardsUpdatedEvent.emptyUpdate)
+                                    }
+                            }
+                            sdkDataWipeEventSubscriber?.let {
+                                Braze
+                                    .getInstance(context)
+                                    .addSingleSynchronousSubscription(it, SdkDataWipeEvent::class.java)
                             }
                         }
-                        sdkDataWipeEventSubscriber?.let {
-                            Braze.getInstance(context)
-                                .addSingleSynchronousSubscription(it, SdkDataWipeEvent::class.java)
-                        }
+                        else -> Unit
                     }
-                    else -> Unit
                 }
-            }
             lifecycleOwner.lifecycle.addObserver(observer)
 
             onDispose {
@@ -389,25 +407,26 @@ fun ContentCardsList(
         }
     }
 
-    val modifier = style.modifier
-        .background(style.listBackgroundColor())
-        .let {
-            // Don't enable pull-to-refresh if we were given a list of cards.
-            if (enablePullToRefresh && cards == null) {
-                it.pullRefresh(refreshState)
-            } else {
-                it
+    val modifier =
+        style.modifier
+            .background(style.listBackgroundColor())
+            .let {
+                // Don't enable pull-to-refresh if we were given a list of cards.
+                if (enablePullToRefresh && cards == null) {
+                    it.pullRefresh(refreshState)
+                } else {
+                    it
+                }
             }
-        }
 
     Box(
-        modifier
+        modifier,
     ) {
         LazyColumn(
             state = listState,
             modifier = Modifier.matchParentSize(),
             verticalArrangement = Arrangement.spacedBy(style.spacerSize),
-            contentPadding = PaddingValues(vertical = style.listPadding)
+            contentPadding = PaddingValues(vertical = style.listPadding),
         ) {
             if (myCards.isNotEmpty()) {
                 items(items = myCards, key = { card -> card.id }) { card ->
@@ -427,20 +446,21 @@ fun ContentCardsList(
                         val dismissThreshold = 0.50f
 
                         var hasCardBeenDismissed by remember { mutableStateOf(false) }
-                        val dismissState = rememberDismissState(
-                            confirmStateChange = {
-                                // SwipeToDismiss handles flings very sensitively, so we do this to disable accidental dismisses
-                                // https://stackoverflow.com/questions/72676541/compose-swipetodismiss-confirmstatechange-applies-only-threshold
-                                var willDismiss = false
-                                if (it == DismissValue.DismissedToStart || it == DismissValue.DismissedToEnd) {
-                                    if (currentFraction.floatValue >= dismissThreshold && currentFraction.floatValue < 1.0f) {
-                                        willDismiss = true
-                                        hasCardBeenDismissed = true
+                        val dismissState =
+                            rememberDismissState(
+                                confirmStateChange = {
+                                    // SwipeToDismiss handles flings very sensitively, so we do this to disable accidental dismisses
+                                    // https://stackoverflow.com/questions/72676541/compose-swipetodismiss-confirmstatechange-applies-only-threshold
+                                    var willDismiss = false
+                                    if (it == DismissValue.DismissedToStart || it == DismissValue.DismissedToEnd) {
+                                        if (currentFraction.floatValue >= dismissThreshold && currentFraction.floatValue < 1.0f) {
+                                            willDismiss = true
+                                            hasCardBeenDismissed = true
+                                        }
                                     }
-                                }
-                                willDismiss
-                            }
-                        )
+                                    willDismiss
+                                },
+                            )
 
                         if (hasCardBeenDismissed) {
                             LaunchedEffect(Unit) {
@@ -455,7 +475,7 @@ fun ContentCardsList(
                                 @Suppress("DEPRECATION")
                                 androidx.compose.material.FractionalThreshold(0.5f)
                             },
-                            background = {}
+                            background = {},
                         ) {
                             currentFraction.floatValue = dismissState.progress.fraction
                             renderCard(card)
@@ -476,17 +496,19 @@ fun ContentCardsList(
                         // message just yet.
                         val emptyStringToUse = emptyString ?: stringResource(com.braze.ui.R.string.com_braze_feed_empty)
                         Text(
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .fillParentMaxHeight()
-                                .background(color = cardStyle.cardBackgroundColor(type = CardType.DEFAULT))
-                                .wrapContentSize(align = Alignment.Center),
+                            modifier =
+                                Modifier
+                                    .fillMaxWidth()
+                                    .fillParentMaxHeight()
+                                    .background(color = cardStyle.cardBackgroundColor(type = CardType.DEFAULT))
+                                    .wrapContentSize(align = Alignment.Center),
                             text = emptyStringToUse,
-                            style = style.emptyTextStyle ?: TextStyle(
-                                fontSize = 18.sp,
-                                textAlign = TextAlign.Center,
-                                color = cardStyle.titleTextColor(type = CardType.DEFAULT)
-                            )
+                            style =
+                                style.emptyTextStyle ?: TextStyle(
+                                    fontSize = 18.sp,
+                                    textAlign = TextAlign.Center,
+                                    color = cardStyle.titleTextColor(type = CardType.DEFAULT),
+                                ),
                         )
                     }
                 }

@@ -53,7 +53,7 @@ object GooglePlayLocationUtils {
         },
         registerFunction: (List<BrazeGeofence>) -> Unit = {
             registerGeofencesWithGeofencingClient(context, it, geofenceRequestIntent, dataStoreProvider)
-        }
+        },
     ) {
         brazelog(V) { "registerGeofencesWithGooglePlayIfNecessary called with $desiredGeofencesToRegister" }
         try {
@@ -67,11 +67,13 @@ object GooglePlayLocationUtils {
             // An obsolete Geofence is one that is registered with Google Play Services but is not in the desired list.
 
             // If any previously registered Geofence is missing from the desired list, it is obsolete.
-            val obsoleteGeofenceIds = registeredGeofences.filter { registeredGeofence ->
-                desiredGeofencesToRegister.none { desiredGeofence ->
-                    desiredGeofence.id == registeredGeofence.id
-                }
-            }.map { it.id }
+            val obsoleteGeofenceIds =
+                registeredGeofences
+                    .filter { registeredGeofence ->
+                        desiredGeofencesToRegister.none { desiredGeofence ->
+                            desiredGeofence.id == registeredGeofence.id
+                        }
+                    }.map { it.id }
 
             // If any desired Geofence is not already registered, it is new and needs to be registered.
             // Additionally, any previously registered geofence that has received updates should be re-registered.
@@ -102,9 +104,10 @@ object GooglePlayLocationUtils {
     }
 
     internal fun retrieveRegisteredGeofencesFromLocalStorage(dataStoreProvider: GeofenceDataStoreProvider): List<BrazeGeofence> {
-        val storedGeofences = dataStoreProvider.readList<BrazeGeofence>(
-            DataStoreKey.REGISTERED_GEOFENCES
-        )
+        val storedGeofences =
+            dataStoreProvider.readList<BrazeGeofence>(
+                DataStoreKey.REGISTERED_GEOFENCES,
+            )
         if (storedGeofences.isEmpty()) {
             brazelog { "Did not find stored geofences." }
         }
@@ -121,17 +124,17 @@ object GooglePlayLocationUtils {
     @JvmStatic
     fun requestSingleLocationUpdateFromGooglePlay(
         context: Context,
-        resultListener: IBrazeGeofenceLocationUpdateListener
+        resultListener: IBrazeGeofenceLocationUpdateListener,
     ) {
         try {
             brazelog { "Requesting single location update from Google Play Services." }
-            LocationServices.getFusedLocationProviderClient(context)
+            LocationServices
+                .getFusedLocationProviderClient(context)
                 .getCurrentLocation(Priority.PRIORITY_HIGH_ACCURACY, null)
                 .addOnSuccessListener {
                     brazelog(V) { "Single location request from Google Play services was successful." }
                     resultListener.onLocationRequestComplete(BrazeLocation(it))
-                }
-                .addOnFailureListener { error: Exception? ->
+                }.addOnFailureListener { error: Exception? ->
                     brazelog(E, error) { "Failed to get single location update from Google Play services." }
                     resultListener.onLocationRequestComplete(null)
                 }
@@ -146,9 +149,7 @@ object GooglePlayLocationUtils {
      * on the next call to that method to be registered.
      */
     @JvmStatic
-    fun deleteRegisteredGeofenceCache(
-        dataStoreProvider: GeofenceDataStoreProvider
-    ) {
+    fun deleteRegisteredGeofenceCache(dataStoreProvider: GeofenceDataStoreProvider) {
         brazelog { "Deleting registered geofence cache." }
         dataStoreProvider.clearData(DataStoreKey.REGISTERED_GEOFENCES)
     }
@@ -165,30 +166,36 @@ object GooglePlayLocationUtils {
         context: Context,
         newGeofencesToRegister: List<BrazeGeofence>,
         geofenceRequestIntent: PendingIntent,
-        dataStoreProvider: GeofenceDataStoreProvider
+        dataStoreProvider: GeofenceDataStoreProvider,
     ) {
         val newGooglePlayGeofencesToRegister = newGeofencesToRegister.map { it.toGeofence() }
-        val geofencingRequest = GeofencingRequest.Builder()
-            .addGeofences(newGooglePlayGeofencesToRegister) // no initial trigger
-            .setInitialTrigger(0)
-            .build()
-        LocationServices.getGeofencingClient(context).addGeofences(geofencingRequest, geofenceRequestIntent)
+        val geofencingRequest =
+            GeofencingRequest
+                .Builder()
+                .addGeofences(newGooglePlayGeofencesToRegister) // no initial trigger
+                .setInitialTrigger(0)
+                .build()
+        LocationServices
+            .getGeofencingClient(context)
+            .addGeofences(geofencingRequest, geofenceRequestIntent)
             .addOnSuccessListener {
                 brazelog { "Geofences successfully registered with Google Play Services." }
                 storeRegisteredGeofencesToLocalStorage(newGeofencesToRegister, dataStoreProvider)
-            }
-            .addOnFailureListener { geofenceError: Exception? ->
+            }.addOnFailureListener { geofenceError: Exception? ->
                 if (geofenceError is ApiException) {
                     when (val statusCode = geofenceError.statusCode) {
-                        GeofenceStatusCodes.GEOFENCE_TOO_MANY_GEOFENCES -> brazelog(W) {
-                            "Geofences not registered with Google Play Services due to GEOFENCE_TOO_MANY_GEOFENCES: $statusCode"
-                        }
-                        GeofenceStatusCodes.GEOFENCE_TOO_MANY_PENDING_INTENTS -> brazelog(W) {
-                            "Geofences not registered with Google Play Services due to GEOFENCE_TOO_MANY_PENDING_INTENTS: $statusCode"
-                        }
-                        GeofenceStatusCodes.GEOFENCE_NOT_AVAILABLE -> brazelog(W) {
-                            "Geofences not registered with Google Play Services due to GEOFENCE_NOT_AVAILABLE: $statusCode"
-                        }
+                        GeofenceStatusCodes.GEOFENCE_TOO_MANY_GEOFENCES ->
+                            brazelog(W) {
+                                "Geofences not registered with Google Play Services due to GEOFENCE_TOO_MANY_GEOFENCES: $statusCode"
+                            }
+                        GeofenceStatusCodes.GEOFENCE_TOO_MANY_PENDING_INTENTS ->
+                            brazelog(W) {
+                                "Geofences not registered with Google Play Services due to GEOFENCE_TOO_MANY_PENDING_INTENTS: $statusCode"
+                            }
+                        GeofenceStatusCodes.GEOFENCE_NOT_AVAILABLE ->
+                            brazelog(W) {
+                                "Geofences not registered with Google Play Services due to GEOFENCE_NOT_AVAILABLE: $statusCode"
+                            }
                         GeofenceStatusCodes.SUCCESS ->
                             // Since we're in the failure listener, we don't expect this status code to appear. Nonetheless, it would
                             // be good to not surface this status code as unknown
@@ -213,25 +220,29 @@ object GooglePlayLocationUtils {
     internal fun removeGeofencesRegisteredWithGeofencingClient(
         context: Context,
         obsoleteGeofenceIds: List<String>,
-        dataStoreProvider: GeofenceDataStoreProvider
+        dataStoreProvider: GeofenceDataStoreProvider,
     ) {
-        LocationServices.getGeofencingClient(context).removeGeofences(obsoleteGeofenceIds)
+        LocationServices
+            .getGeofencingClient(context)
+            .removeGeofences(obsoleteGeofenceIds)
             .addOnSuccessListener {
                 brazelog { "Geofences successfully un-registered with Google Play Services." }
                 removeGeofencesFromLocalStorage(obsoleteGeofenceIds, dataStoreProvider)
-            }
-            .addOnFailureListener { geofenceError: Exception? ->
+            }.addOnFailureListener { geofenceError: Exception? ->
                 if (geofenceError is ApiException) {
                     when (val statusCode = geofenceError.statusCode) {
-                        GeofenceStatusCodes.GEOFENCE_TOO_MANY_GEOFENCES -> brazelog(W) {
-                            "Geofences cannot be un-registered with Google Play Services due to GEOFENCE_TOO_MANY_GEOFENCES: $statusCode"
-                        }
-                        GeofenceStatusCodes.GEOFENCE_TOO_MANY_PENDING_INTENTS -> brazelog(W) {
-                            "Geofences cannot be un-registered with Google Play Services due to GEOFENCE_TOO_MANY_PENDING_INTENTS: $statusCode"
-                        }
-                        GeofenceStatusCodes.GEOFENCE_NOT_AVAILABLE -> brazelog(W) {
-                            "Geofences cannot be un-registered with Google Play Services due to GEOFENCE_NOT_AVAILABLE: $statusCode"
-                        }
+                        GeofenceStatusCodes.GEOFENCE_TOO_MANY_GEOFENCES ->
+                            brazelog(W) {
+                                "Geofences cannot be un-registered with Google Play Services due to GEOFENCE_TOO_MANY_GEOFENCES: $statusCode"
+                            }
+                        GeofenceStatusCodes.GEOFENCE_TOO_MANY_PENDING_INTENTS ->
+                            brazelog(W) {
+                                "Geofences cannot be un-registered with Google Play Services due to GEOFENCE_TOO_MANY_PENDING_INTENTS: $statusCode"
+                            }
+                        GeofenceStatusCodes.GEOFENCE_NOT_AVAILABLE ->
+                            brazelog(W) {
+                                "Geofences cannot be un-registered with Google Play Services due to GEOFENCE_NOT_AVAILABLE: $statusCode"
+                            }
                         GeofenceStatusCodes.SUCCESS ->
                             // Since we're in the failure listener, we don't expect this status code to appear. Nonetheless, it would
                             // be good to not surface this status code as unknown
@@ -253,11 +264,14 @@ object GooglePlayLocationUtils {
      * @param newGeofencesToRegister List of [BrazeGeofence]s to store in DataStore
      */
     @VisibleForTesting
-    internal fun storeRegisteredGeofencesToLocalStorage(newGeofencesToRegister: List<BrazeGeofence>, dataStoreProvider: GeofenceDataStoreProvider) {
+    internal fun storeRegisteredGeofencesToLocalStorage(
+        newGeofencesToRegister: List<BrazeGeofence>,
+        dataStoreProvider: GeofenceDataStoreProvider,
+    ) {
         brazelog { "Writing registered geofences: $newGeofencesToRegister to local storage." }
         dataStoreProvider.writeList(
             DataStoreKey.REGISTERED_GEOFENCES,
-            newGeofencesToRegister
+            newGeofencesToRegister,
         )
     }
 
@@ -267,8 +281,14 @@ object GooglePlayLocationUtils {
      * @param context
      * @param obsoleteGeofenceIds List of [String]s containing Geofence IDs that are un-registered
      */
-    private fun removeGeofencesFromLocalStorage(obsoleteGeofenceIds: List<String>, dataStoreProvider: GeofenceDataStoreProvider) {
-        val storedRegisteredGeofences: MutableList<BrazeGeofence> = retrieveRegisteredGeofencesFromLocalStorage(dataStoreProvider).toMutableList()
+    private fun removeGeofencesFromLocalStorage(
+        obsoleteGeofenceIds: List<String>,
+        dataStoreProvider: GeofenceDataStoreProvider,
+    ) {
+        val storedRegisteredGeofences: MutableList<BrazeGeofence> =
+            retrieveRegisteredGeofencesFromLocalStorage(
+                dataStoreProvider,
+            ).toMutableList()
         val geofencesToStore: MutableList<BrazeGeofence> = mutableListOf()
         for (geofence in storedRegisteredGeofences) {
             if (!obsoleteGeofenceIds.contains(geofence.id)) {
@@ -277,7 +297,7 @@ object GooglePlayLocationUtils {
         }
         dataStoreProvider.writeList(
             DataStoreKey.REGISTERED_GEOFENCES,
-            geofencesToStore
+            geofencesToStore,
         )
     }
 }

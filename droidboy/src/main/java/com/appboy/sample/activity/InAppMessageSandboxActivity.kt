@@ -18,7 +18,6 @@ import java.util.Random
  * Activity whose sole purpose is to host a button that shows a basic IAM on screen.
  */
 class InAppMessageSandboxActivity : AppCompatActivity() {
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_in_app_message_sandbox)
@@ -73,13 +72,15 @@ class InAppMessageSandboxActivity : AppCompatActivity() {
     }
 
     private fun displayHtmlMessage() {
-        val htmlString = this.assets.open(THE_WAY_HTML).bufferedReader().use {
-            it.readText()
-        }
-        val htmlMessage = InAppMessageHtml().apply {
-            message = htmlString
-            dismissType = DismissType.MANUAL
-        }
+        val htmlString =
+            this.assets.open(THE_WAY_HTML).bufferedReader().use {
+                it.readText()
+            }
+        val htmlMessage =
+            InAppMessageHtml().apply {
+                message = htmlString
+                dismissType = DismissType.MANUAL
+            }
         BrazeInAppMessageManager.getInstance().addInAppMessage(htmlMessage)
         BrazeInAppMessageManager.getInstance().requestDisplayInAppMessage()
     }

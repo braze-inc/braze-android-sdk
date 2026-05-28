@@ -20,17 +20,19 @@ object InAppMessageButtonViewUtils {
     @JvmStatic
     fun setButtons(
         buttonViews: List<View>,
-        messageButtons: List<MessageButton>
+        messageButtons: List<MessageButton>,
     ) {
         for (i in buttonViews.indices) {
             val buttonView = buttonViews[i]
             val messageButton = messageButtons[i]
-            val strokeWidth = buttonView.context
-                .resources
-                .getDimensionPixelSize(R.dimen.com_braze_inappmessage_button_border_stroke)
-            val strokeFocusedWidth = buttonView.context
-                .resources
-                .getDimensionPixelSize(R.dimen.com_braze_inappmessage_button_border_stroke_focused)
+            val strokeWidth =
+                buttonView.context
+                    .resources
+                    .getDimensionPixelSize(R.dimen.com_braze_inappmessage_button_border_stroke)
+            val strokeFocusedWidth =
+                buttonView.context
+                    .resources
+                    .getDimensionPixelSize(R.dimen.com_braze_inappmessage_button_border_stroke_focused)
             if (messageButtons.size <= i) {
                 buttonView.visibility = View.GONE
             } else {
@@ -46,7 +48,7 @@ object InAppMessageButtonViewUtils {
         button: Button,
         messageButton: MessageButton,
         strokeWidth: Int,
-        strokeFocusedWidth: Int
+        strokeFocusedWidth: Int,
     ) {
         button.text = messageButton.text
         button.contentDescription = messageButton.text
@@ -65,11 +67,11 @@ object InAppMessageButtonViewUtils {
         // The focused state MUST be added before the enabled state to work properly
         stateListDrawableBackground.addState(
             intArrayOf(android.R.attr.state_focused),
-            focusedButtonDrawable
+            focusedButtonDrawable,
         )
         stateListDrawableBackground.addState(
             intArrayOf(android.R.attr.state_enabled),
-            defaultButtonDrawable
+            defaultButtonDrawable,
         )
         button.background = stateListDrawableBackground
     }
@@ -77,9 +79,8 @@ object InAppMessageButtonViewUtils {
     @JvmStatic
     fun getDrawable(
         context: Context,
-        drawableId: Int
-    ): Drawable =
-        context.resources.getDrawable(drawableId, null)
+        drawableId: Int,
+    ): Drawable = context.resources.getDrawable(drawableId, null)
 
     @JvmStatic
     fun getButtonDrawable(
@@ -87,7 +88,7 @@ object InAppMessageButtonViewUtils {
         messageButton: MessageButton,
         newStrokeWidth: Int,
         strokeFocusedWidth: Int,
-        isFocused: Boolean
+        isFocused: Boolean,
     ): Drawable {
         val buttonDrawable = getDrawable(context, R.drawable.com_braze_inappmessage_button_background)
         buttonDrawable.mutate()

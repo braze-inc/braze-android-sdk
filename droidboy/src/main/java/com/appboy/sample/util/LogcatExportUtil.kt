@@ -7,7 +7,9 @@ import androidx.core.content.FileProvider
 import java.io.File
 import java.io.IOException
 import java.text.SimpleDateFormat
-import java.util.*
+import java.util.Date
+import java.util.Locale
+import java.util.TimeZone
 
 class LogcatExportUtil private constructor() {
     companion object {
@@ -37,7 +39,10 @@ class LogcatExportUtil private constructor() {
 
         private fun getLogcat(): String {
             // The process id is used to filter the messages. This Test runner and the test itself run in the same process.
-            val currentProcessId = android.os.Process.myPid().toString()
+            val currentProcessId =
+                android.os.Process
+                    .myPid()
+                    .toString()
             val process = Runtime.getRuntime().exec(LOGCAT_CAPTURE_COMMAND)
 
             var firstLine = ""

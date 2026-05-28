@@ -12,15 +12,19 @@ import com.braze.ui.banners.BannerView
  * @param heightCallback Optional callback invoked with the rendered Banner height in dp.
  */
 @Composable
-fun Banner(placementId: String? = null, heightCallback: ((Double) -> Unit)? = null) {
+fun Banner(
+    placementId: String? = null,
+    heightCallback: ((Double) -> Unit)? = null,
+) {
     // Adding a BannerView inside AndroidView
     // with layout as full screen
     AndroidView(factory = {
         BannerView(it, placementId).apply {
-            layoutParams = ViewGroup.LayoutParams(
-                ViewGroup.LayoutParams.MATCH_PARENT,
-                ViewGroup.LayoutParams.WRAP_CONTENT
-            )
+            layoutParams =
+                ViewGroup.LayoutParams(
+                    ViewGroup.LayoutParams.MATCH_PARENT,
+                    ViewGroup.LayoutParams.WRAP_CONTENT,
+                )
             this.heightCallback = heightCallback
         }
     }, update = { it.placementId = placementId })

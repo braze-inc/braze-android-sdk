@@ -14,13 +14,13 @@ import com.google.android.gms.location.LocationServices
  * module that clients don't need to include if they don't want location services.
  */
 class BrazeInternalGeofenceApi : IBrazeGeofenceApi {
-
     /**
      * @return the PendingIntent that should be fired when a geofence is triggered.
      */
     override fun getGeofenceTransitionPendingIntent(context: Context): PendingIntent {
-        val geofenceIntent = Intent(Constants.BRAZE_ACTION_RECEIVER_GEOFENCE_UPDATE_INTENT_ACTION)
-            .setClass(context, BrazeActionReceiver::class.java)
+        val geofenceIntent =
+            Intent(Constants.BRAZE_ACTION_RECEIVER_GEOFENCE_UPDATE_INTENT_ACTION)
+                .setClass(context, BrazeActionReceiver::class.java)
         val flags = PendingIntent.FLAG_UPDATE_CURRENT or IntentUtils.getMutablePendingIntentFlags()
         return PendingIntent.getBroadcast(context, 0, geofenceIntent, flags)
     }
@@ -28,8 +28,12 @@ class BrazeInternalGeofenceApi : IBrazeGeofenceApi {
     /**
      * Teardown all geofences associated with the given intent.
      */
-    override fun teardownGeofences(applicationContext: Context, intent: PendingIntent) {
-        LocationServices.getGeofencingClient(applicationContext)
+    override fun teardownGeofences(
+        applicationContext: Context,
+        intent: PendingIntent,
+    ) {
+        LocationServices
+            .getGeofencingClient(applicationContext)
             .removeGeofences(intent)
     }
 
@@ -44,9 +48,14 @@ class BrazeInternalGeofenceApi : IBrazeGeofenceApi {
         context: Context,
         geofenceList: List<BrazeGeofence>,
         geofenceRequestIntent: PendingIntent,
-        dataStoreProvider: GeofenceDataStoreProvider
+        dataStoreProvider: GeofenceDataStoreProvider,
     ) {
-        GooglePlayLocationUtils.registerGeofencesWithGooglePlayIfNecessary(context, geofenceList, geofenceRequestIntent, dataStoreProvider = dataStoreProvider)
+        GooglePlayLocationUtils.registerGeofencesWithGooglePlayIfNecessary(
+            context,
+            geofenceList,
+            geofenceRequestIntent,
+            dataStoreProvider = dataStoreProvider,
+        )
     }
 
     /**

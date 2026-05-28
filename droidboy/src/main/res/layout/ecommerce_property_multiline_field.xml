@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.textfield.TextInputLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/DroidboyOutlinedBox"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="12dp">
+
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/ecommerce_property_input"
+        style="@style/BaseWidget.DroidboyTextInput"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="top|start"
+        android:inputType="textMultiLine"
+        android:minLines="8"
+        android:maxLines="20"
+        android:scrollbars="vertical"
+        android:overScrollMode="always" />
+
+</com.google.android.material.textfield.TextInputLayout>

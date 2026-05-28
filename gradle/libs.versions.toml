@@ -10,6 +10,10 @@ javaToolchain = "17"
 # Checkstyle
 checkstyle = "8.35"
 
+# KtLint (CLI version is synced to ktlint-plugins.properties for the IntelliJ plugin)
+ktlint = "1.5.0"
+ktlintGradlePlugin = "14.2.0"
+
 # Play Services
 playServicesBase = "18.3.0"
 playServicesLocation = "21.3.0"
@@ -44,16 +48,16 @@ androidxNavigationCompose = "2.7.7"
 androidxDatastorePreferences = "1.1.7"
 
 # Test
-androidxTestCore = "1.5.0"
-androidxTestRunner = "1.5.2"
-androidxTestRules = "1.5.0"
+androidxTestCore = "1.7.0"
+androidxTestRunner = "1.7.0"
+androidxTestRules = "1.7.0"
 androidxTestEspressoCore = "3.7.0"
 androidxTestEspressoContrib = "3.7.0"
-androidxTestEspressoIdlingResource = "3.5.1"
-androidxTestEspressoWeb = "3.5.1"
-androidxTestEspressoIntents = "3.5.1"
+androidxTestEspressoIdlingResource = "3.7.0"
+androidxTestEspressoWeb = "3.7.0"
+androidxTestEspressoIntents = "3.7.0"
 androidxTestUiAutomator = "2.3.0"
-androidxTestExtJunit = "1.1.5"
+androidxTestExtJunit = "1.3.0"
 mockitoCore = "5.21.0"
 mockitoAndroid = "5.21.0"
 mockitoKotlin = "6.2.3"
@@ -70,9 +74,6 @@ kotlinSerialization = "1.9.0"
 kotlinDetektFormatter = "1.23.6"
 kotlinDokka = "2.1.0"
 
-# Kover
-kover = "0.9.7"
-
 # Compose
 compose = "1.5.4"
 coil = "3.2.0"
@@ -84,6 +85,7 @@ huaweiHmsPush = "6.13.0.301"
 nexusPublish = "1.3.0"
 javaJwt = "4.5.1"
 leakcanary = "2.14"
+zxingCore = "3.5.3"
 
 [libraries]
 
@@ -177,6 +179,7 @@ moshi-kotlin = { module = "com.squareup.moshi:moshi-kotlin", version.ref = "mosh
 huawei-hms-push = { module = "com.huawei.hms:push", version.ref = "huaweiHmsPush" }
 java-jwt = { module = "com.auth0:java-jwt", version.ref = "javaJwt" }
 leakcanary = { module = "com.squareup.leakcanary:leakcanary-android", version.ref = "leakcanary" }
+zxing-core = { module = "com.google.zxing:core", version.ref = "zxingCore" }
 detekt-formatting = { module = "io.gitlab.arturbosch.detekt:detekt-formatting", version.ref = "kotlinDetektFormatter" }
 
 # Gradle plugin artifacts (for build-logic classpath)
@@ -186,6 +189,7 @@ dokka-gradle-plugin = { module = "org.jetbrains.dokka:dokka-gradle-plugin", vers
 kotlin-allopen-plugin = { module = "org.jetbrains.kotlin:kotlin-allopen", version.ref = "kotlin" }
 google-services-plugin = { module = "com.google.gms:google-services", version.ref = "googleServicesPlugin" }
 detekt-gradle-plugin = { module = "io.gitlab.arturbosch.detekt:detekt-gradle-plugin", version.ref = "kotlinDetektFormatter" }
+ktlint-gradle-plugin = { module = "org.jlleitschuh.gradle.ktlint:org.jlleitschuh.gradle.ktlint.gradle.plugin", version.ref = "ktlintGradlePlugin" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "androidGradlePlugin" }
@@ -196,6 +200,6 @@ kotlin-compose = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "ko
 kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
 kotlin-allopen = { id = "org.jetbrains.kotlin.plugin.allopen", version.ref = "kotlin" }
 detekt = { id = "io.gitlab.arturbosch.detekt", version.ref = "kotlinDetektFormatter" }
+ktlint = { id = "org.jlleitschuh.gradle.ktlint", version.ref = "ktlintGradlePlugin" }
 dokka = { id = "org.jetbrains.dokka", version.ref = "kotlinDokka" }
 nexus-publish = { id = "io.github.gradle-nexus.publish-plugin", version.ref = "nexusPublish" }
-kover = { id = "org.jetbrains.kotlinx.kover", version.ref = "kover" }

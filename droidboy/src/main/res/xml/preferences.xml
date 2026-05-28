@@ -1,16 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
   xmlns:app="http://schemas.android.com/apk/res-auto">
+
+  <!-- 1. About -->
   <PreferenceCategory
     android:key="settings_about_key"
     android:title="@string/about_title"
-    app:initialExpandedChildrenCount="5">
+    app:initialExpandedChildrenCount="6">
     <Preference
       android:key="build_time_and_info"
       android:title="Build Time and Info" />
     <Preference
       android:key="current_user_id"
       android:title="Current User ID" />
+    <Preference
+      android:key="api_key"
+      android:title="Configured API Key" />
     <Preference
       android:key="sdk_version"
       android:title="SDK Version" />
@@ -30,26 +35,30 @@
       android:key="build_name"
       android:title="Build Name" />
   </PreferenceCategory>
-  <PreferenceCategory
-    android:title="@string/sdk_auth">
+
+  <!-- 2. Environment (most-configured for testing) -->
+  <PreferenceCategory android:title="@string/environment_preference_category">
     <Preference
-      android:key="enable_sdk_auth"
-      android:title="Enable SDK Auth"
-      android:summary="Will restart the app"/>
+      android:key="environment_switch_dev"
+      android:title="❄️ Change to Dev endpoint (Olaf) ❄️" />
     <Preference
-      android:key="disable_sdk_auth"
-      android:title="Disable SDK Auth"
-      android:summary="Will restart the app"/>
+      android:key="show_set_environment_dialog"
+      android:summary="@string/set_environment_summary"
+      android:title="@string/set_environment_title" />
+    <Preference
+      android:key="show_current_environment_qr"
+      android:summary="Share this QR with a teammate to mirror your endpoint and API key"
+      android:title="Show current environment as QR" />
+    <Preference
+      android:key="environment_barcode_picture_intent_key"
+      android:summary="Scan a Braze environment QR. Expected URI: braze://environment?endpoint=…&amp;api_key=…"
+      android:title="Set Environment via barcode" />
+    <Preference
+      android:key="environment_reset_key"
+      android:title="Reset environment override" />
   </PreferenceCategory>
-  <PreferenceCategory android:title="@string/content_card_preference_category">
-    <Preference
-      android:key="content_card_populate_random_cards_setting_key"
-      android:summary="Does not alter existing saved cards"
-      android:title="Add random cards" />
-    <Preference
-      android:key="content_card_dismiss_all_cards_setting_key"
-      android:title="Dismiss all Cached Content Cards" />
-  </PreferenceCategory>
+
+  <!-- 3. Custom logging / user actions -->
   <PreferenceCategory android:title="@string/custom_logging_category_title">
     <Preference
       android:key="show_user_dialog"
@@ -70,29 +79,19 @@
       android:key="show_email_subscription_state_dialog"
       android:title="@string/set_email_subscription_state_title" />
   </PreferenceCategory>
-  <PreferenceCategory android:title="@string/sdk_state_change_settings_title">
+
+  <!-- 4. Content Cards -->
+  <PreferenceCategory android:title="@string/content_card_preference_category">
     <Preference
-      android:key="enable_sdk_key"
-      android:title="Re-Enable SDK" />
+      android:key="content_card_populate_random_cards_setting_key"
+      android:summary="Does not alter existing saved cards"
+      android:title="Add random cards" />
     <Preference
-      android:key="disable_sdk_key"
-      android:title="Disable SDK" />
-    <Preference
-      android:key="wipe_data_preference_key"
-      android:summary="Wipes all data from the SDK"
-      android:title="Wipe Data from the SDK" />
+      android:key="content_card_dismiss_all_cards_setting_key"
+      android:title="Dismiss all Cached Content Cards" />
   </PreferenceCategory>
-  <PreferenceCategory android:title="@string/delayed_init_title">
-    <Preference
-      android:key="enable_delayed_init_queue"
-      android:title="Enable Delayed Initialization (Queue Push Analytics)" />
-    <Preference
-        android:key="enable_delayed_init_drop"
-        android:title="Enable Delayed Initialization (Drop Push Analytics)" />
-    <Preference
-      android:key="disable_delayed_init"
-      android:title="Disable Delayed Initialization" />
-  </PreferenceCategory>
+
+  <!-- 5. Network control -->
   <PreferenceCategory
     android:key="settings_network_control_key"
     android:title="@string/network_control_title"
@@ -106,39 +105,32 @@
     <Preference
       android:key="request_ff_sync"
       android:title="Request Feature Flag Sync" />
-    <Preference
-      android:key="enable_outbound_network_requests"
-      android:title="Re-Enable Outbound Network Requests" />
-    <Preference
-      android:key="disable_outbound_network_requests"
-      android:title="Disable Outbound Network Requests" />
+    <SwitchPreferenceCompat
+      android:defaultValue="true"
+      android:key="outbound_network_enabled"
+      android:summaryOff="Outbound Braze network requests are disabled"
+      android:summaryOn="Outbound Braze network requests are enabled"
+      android:title="Outbound Network Requests" />
   </PreferenceCategory>
-  <PreferenceCategory android:title="@string/image_loading_preference_category">
-    <Preference
-      android:key="glide_image_loader_enable_setting_key"
-      android:summary="Enables GIFs to display"
-      android:title="Enable Glide Image Library" />
-    <Preference
-      android:key="glide_image_loader_disable_setting_key"
-      android:summary="Disables GIF display"
-      android:title="Disable Glide Image Library" />
-  </PreferenceCategory>
-  <PreferenceCategory android:title="@string/environment_preference_category">
-    <Preference
-      android:key="environment_barcode_picture_intent_key"
-      android:summary="Takes a picture of a braze environment barcode"
-      android:title="Set Environment via barcode" />
-    <Preference
-      android:key="environment_reset_key"
-      android:title="Reset environment override" />
-    <Preference
-      android:key="environment_switch_dev"
-      android:title="❄️ Change to Dev endpoint (Olaf) ❄️" />
-    <Preference
-      android:key="show_set_environment_dialog"
-      android:title="@string/set_environment_title" />
-  </PreferenceCategory>
+
+  <!-- 6. In-app messages -->
   <PreferenceCategory
+    android:key="settings_inappmessage_section_key"
+    android:title="@string/inappmessage">
+    <EditTextPreference
+      android:defaultValue=""
+      android:digits="0123456789"
+      android:inputType="numberDecimal"
+      android:key="min_trigger_interval"
+      android:title="@string/min_trigger_interval"
+      app:useSimpleSummaryProvider="true" />
+    <SwitchPreferenceCompat
+      android:defaultValue="false"
+      android:key="show_own_message_when_inapp_msg_not_triggered"
+      android:summary="Shows our own message when an open, custom event, or purchase does not trigger an in-app message"
+      android:summaryOff="Will not display our own message"
+      android:summaryOn="Will display our own message"
+      android:title="In-App Message Not Triggered Handler" />
     android:key="settings_misc_section_key"
     android:title="@string/misc_preference_category"
     app:initialExpandedChildrenCount="1">
@@ -159,6 +151,19 @@
       android:summary="Will cause an app restart."
       android:title="Revert to Anonymous User" />
   </PreferenceCategory>
+
+  <!-- 7. SDK Auth -->
+  <PreferenceCategory android:title="@string/sdk_auth">
+    <SwitchPreferenceCompat
+      android:defaultValue="true"
+      android:key="sdk_auth_enabled"
+      android:summary="Toggling will restart the app"
+      android:summaryOff="SDK Auth is disabled"
+      android:summaryOn="SDK Auth is enabled"
+      android:title="SDK Auth" />
+  </PreferenceCategory>
+
+  <!-- 8. Session -->
   <PreferenceCategory android:title="@string/session_title">
     <Preference
       android:key="open_session"
@@ -167,6 +172,8 @@
       android:key="close_session"
       android:title="Close Session" />
   </PreferenceCategory>
+
+  <!-- 9. Location -->
   <PreferenceCategory android:title="@string/location_title">
     <Preference
       android:key="set_manual_location"
@@ -177,6 +184,49 @@
       android:summary="Request Runtime Permission"
       android:title="Location Permission Dialog" />
   </PreferenceCategory>
+
+  <!-- 10. Image loading -->
+  <PreferenceCategory android:title="@string/image_loading_preference_category">
+    <SwitchPreferenceCompat
+      android:defaultValue="false"
+      android:key="glide_image_loader_enabled"
+      android:summaryOff="Default image loader in use (no GIFs)"
+      android:summaryOn="Glide image loader in use (GIFs supported)"
+      android:title="Glide Image Library" />
+  </PreferenceCategory>
+
+  <!-- 11. SDK state -->
+  <PreferenceCategory
+    android:key="settings_sdk_state_key"
+    android:title="@string/sdk_state_change_settings_title"
+    app:initialExpandedChildrenCount="0">
+    <SwitchPreferenceCompat
+      android:defaultValue="true"
+      android:key="sdk_enabled"
+      android:summaryOff="Braze SDK is disabled"
+      android:summaryOn="Braze SDK is enabled"
+      android:title="Braze SDK Enabled" />
+    <Preference
+      android:key="wipe_data_preference_key"
+      android:summary="Wipes all data from the SDK"
+      android:title="Wipe Data from the SDK" />
+  </PreferenceCategory>
+
+  <!-- 12. Delayed initialization -->
+  <PreferenceCategory
+    android:key="settings_delayed_init_key"
+    android:title="@string/delayed_init_title"
+    app:initialExpandedChildrenCount="0">
+    <ListPreference
+      android:defaultValue="disabled"
+      android:entries="@array/delayed_init_mode_entries"
+      android:entryValues="@array/delayed_init_mode_values"
+      android:key="delayed_init_mode"
+      android:title="Delayed Initialization Mode"
+      app:useSimpleSummaryProvider="true" />
+  </PreferenceCategory>
+
+  <!-- 13. Display / notch -->
   <PreferenceCategory
     android:key="settings_notch_section_key"
     android:title="@string/notch_settings_category"
@@ -196,22 +246,24 @@
       android:summaryOn="Displaying content with no limits"
       android:title="Enable Display No Limits Mode" />
   </PreferenceCategory>
+
+  <!-- 14. Misc -->
   <PreferenceCategory
-    android:key="settings_inappmessage_section_key"
-    android:title="@string/inappmessage">
-      <EditTextPreference
-        android:defaultValue=""
-        android:inputType="numberDecimal"
-        android:digits="0123456789"
-        android:key="min_trigger_interval"
-        app:useSimpleSummaryProvider="true"
-        android:title="@string/min_trigger_interval" />
-      <SwitchPreferenceCompat
-        android:defaultValue="false"
-        android:key="show_own_message_when_inapp_msg_not_triggered"
-        android:summary="Shows our own message when an open, custom event, or purchase does not trigger an in-app message"
-        android:summaryOff="Will not display our own message"
-        android:summaryOn="Will display our own message"
-        android:title="In-App Message Not Triggered Handler" />
+    android:key="settings_misc_section_key"
+    android:title="@string/misc_preference_category"
+    app:initialExpandedChildrenCount="1">
+    <Preference
+      android:key="logcat_export_file_key"
+      android:summary="Will reset the logcat after click!"
+      android:title="Export Droidboy Logcat to a File" />
+    <Preference
+      android:key="log_attribution"
+      android:summary="@string/log_attribution_summary"
+      android:title="@string/log_attribution_title" />
+    <Preference
+      android:key="anonymous_revert"
+      android:summary="Will cause an app restart."
+      android:title="Revert to Anonymous User" />
   </PreferenceCategory>
+
 </PreferenceScreen>

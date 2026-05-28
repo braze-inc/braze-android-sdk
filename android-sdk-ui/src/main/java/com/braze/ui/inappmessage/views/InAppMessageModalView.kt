@@ -7,19 +7,20 @@ import android.view.View
 import android.widget.ImageView
 import android.widget.RelativeLayout
 import android.widget.TextView
-import com.braze.ui.R
 import com.braze.enums.inappmessage.ImageStyle
 import com.braze.models.inappmessage.IInAppMessageImmersive
 import com.braze.models.inappmessage.InAppMessageModal
+import com.braze.support.BrazeLogger.brazelog
+import com.braze.ui.R
 import com.braze.ui.inappmessage.config.BrazeInAppMessageParams.modalizedImageRadiusDp
 import com.braze.ui.inappmessage.utils.InAppMessageViewUtils.setViewBackgroundColorFilter
 import com.braze.ui.support.convertDpToPixels
-import com.braze.support.BrazeLogger.brazelog
 import kotlin.math.min
 
-open class InAppMessageModalView(context: Context?, attrs: AttributeSet?) :
-    InAppMessageImmersiveBaseView(context, attrs) {
-
+open class InAppMessageModalView(
+    context: Context?,
+    attrs: AttributeSet?,
+) : InAppMessageImmersiveBaseView(context, attrs) {
     protected var inAppMessageImageView: InAppMessageImageView? = null
     protected var inAppMessage: InAppMessageModal? = null
 
@@ -98,12 +99,21 @@ open class InAppMessageModalView(context: Context?, attrs: AttributeSet?) :
         return buttonViews
     }
 
-    override fun onLayout(changed: Boolean, left: Int, top: Int, right: Int, bottom: Int) {
+    override fun onLayout(
+        changed: Boolean,
+        left: Int,
+        top: Int,
+        right: Int,
+        bottom: Int,
+    ) {
         super.onLayout(changed, left, top, right, bottom)
         resizeGraphicFrameIfAppropriate(this.context, inAppMessage)
     }
 
-    open fun applyInAppMessageParameters(context: Context, inAppMessage: InAppMessageModal) {
+    open fun applyInAppMessageParameters(
+        context: Context,
+        inAppMessage: InAppMessageModal,
+    ) {
         this.inAppMessage = inAppMessage
         inAppMessageImageView = findViewById(R.id.com_braze_inappmessage_modal_imageview)
         inAppMessageImageView?.let { setInAppMessageImageViewAttributes(context, inAppMessage, it) }
@@ -116,7 +126,7 @@ open class InAppMessageModalView(context: Context?, attrs: AttributeSet?) :
     protected open fun setInAppMessageImageViewAttributes(
         context: Context,
         inAppMessage: IInAppMessageImmersive,
-        inAppMessageImageView: IInAppMessageImageView
+        inAppMessageImageView: IInAppMessageImageView,
     ) {
         val pixelRadius = convertDpToPixels(context, modalizedImageRadiusDp).toFloat()
         if (inAppMessage.imageStyle == ImageStyle.GRAPHIC) {
@@ -134,7 +144,7 @@ open class InAppMessageModalView(context: Context?, attrs: AttributeSet?) :
      */
     protected open fun resizeGraphicFrameIfAppropriate(
         context: Context,
-        inAppMessage: InAppMessageModal?
+        inAppMessage: InAppMessageModal?,
     ) {
         val bitmap = inAppMessage?.bitmap ?: return
         if (inAppMessage.imageStyle != ImageStyle.GRAPHIC) {

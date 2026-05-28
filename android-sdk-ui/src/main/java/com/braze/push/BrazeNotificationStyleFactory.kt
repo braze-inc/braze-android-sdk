@@ -13,6 +13,7 @@ import android.widget.RemoteViews
 import androidx.annotation.RequiresApi
 import androidx.annotation.VisibleForTesting
 import androidx.core.app.NotificationCompat
+import androidx.core.graphics.scale
 import com.braze.Braze
 import com.braze.BrazeInternal
 import com.braze.Constants
@@ -34,7 +35,6 @@ import com.braze.support.getDisplayWidthPixels
 import com.braze.support.getPixelsFromDensityAndDp
 import com.braze.ui.BrazeDeeplinkHandler.Companion.getInstance
 import com.braze.ui.R
-import androidx.core.graphics.scale
 
 /**
  * Factory for creating [NotificationCompat.Style] instances for Braze push notifications.
@@ -71,7 +71,7 @@ open class BrazeNotificationStyleFactory {
         @JvmStatic
         fun setStyleIfSupported(
             notificationBuilder: NotificationCompat.Builder,
-            payload: BrazeNotificationPayload
+            payload: BrazeNotificationPayload,
         ) {
             val style = getNotificationStyle(notificationBuilder, payload)
             if (style !is NoOpSentinelStyle) {
@@ -86,7 +86,7 @@ open class BrazeNotificationStyleFactory {
          */
         fun getNotificationStyle(
             notificationBuilder: NotificationCompat.Builder,
-            payload: BrazeNotificationPayload
+            payload: BrazeNotificationPayload,
         ): NotificationCompat.Style {
             var style: NotificationCompat.Style? = null
             if (payload.isPushStory && payload.context != null) {
@@ -132,16 +132,16 @@ open class BrazeNotificationStyleFactory {
             payload.bigSummaryText?.let {
                 bigTextNotificationStyle.setSummaryText(
                     it.getHtmlSpannedTextIfEnabled(
-                        appConfigProvider
-                    )
+                        appConfigProvider,
+                    ),
                 )
             }
 
             payload.bigTitleText?.let {
                 bigTextNotificationStyle.setBigContentTitle(
                     it.getHtmlSpannedTextIfEnabled(
-                        appConfigProvider
-                    )
+                        appConfigProvider,
+                    ),
                 )
             }
             return bigTextNotificationStyle
@@ -156,7 +156,7 @@ open class BrazeNotificationStyleFactory {
          */
         fun getStoryStyle(
             notificationBuilder: NotificationCompat.Builder,
-            payload: BrazeNotificationPayload
+            payload: BrazeNotificationPayload,
         ): NotificationCompat.DecoratedCustomViewStyle? {
             val context = payload.context
             if (context == null) {
@@ -175,23 +175,25 @@ open class BrazeNotificationStyleFactory {
             val notificationExtras = payload.notificationExtras
             val style = NotificationCompat.DecoratedCustomViewStyle()
             val numPages = pushStoryPages.size
-            val previousButtonPendingIntent = createStoryTraversedPendingIntent(
-                context,
-                notificationExtras,
-                (pageIndex - 1 + numPages) % numPages
-            )
+            val previousButtonPendingIntent =
+                createStoryTraversedPendingIntent(
+                    context,
+                    notificationExtras,
+                    (pageIndex - 1 + numPages) % numPages,
+                )
             storyView.setOnClickPendingIntent(
                 R.id.com_braze_story_button_previous,
-                previousButtonPendingIntent
+                previousButtonPendingIntent,
             )
-            val nextButtonPendingIntent = createStoryTraversedPendingIntent(
-                context,
-                notificationExtras,
-                (pageIndex + 1) % numPages
-            )
+            val nextButtonPendingIntent =
+                createStoryTraversedPendingIntent(
+                    context,
+                    notificationExtras,
+                    (pageIndex + 1) % numPages,
+                )
             storyView.setOnClickPendingIntent(
                 R.id.com_braze_story_button_next,
-                nextButtonPendingIntent
+                nextButtonPendingIntent,
             )
             notificationBuilder.setCustomBigContentView(storyView)
 
@@ -212,7 +214,7 @@ open class BrazeNotificationStyleFactory {
         @RequiresApi(api = Build.VERSION_CODES.M)
         fun getInlineImageStyle(
             payload: BrazeNotificationPayload,
-            notificationBuilder: NotificationCompat.Builder
+            notificationBuilder: NotificationCompat.Builder,
         ): NotificationCompat.Style? {
             val context = payload.context
             if (context == null) {
@@ -227,30 +229,41 @@ open class BrazeNotificationStyleFactory {
             val notificationExtras = payload.notificationExtras
 
             // Set the image
-            val largeNotificationBitmap = Braze.getInstance(context).imageLoader
-                .getPushBitmapFromUrl(
-                    context,
-                    notificationExtras,
-                    imageUrl,
-                    BrazeViewBounds.NOTIFICATION_INLINE_PUSH_IMAGE
-                )
+            val largeNotificationBitmap =
+                Braze
+                    .getInstance(context)
+                    .imageLoader
+                    .getPushBitmapFromUrl(
+                        context,
+                        notificationExtras,
+                        imageUrl,
+                        BrazeViewBounds.NOTIFICATION_INLINE_PUSH_IMAGE,
+                    )
             if (largeNotificationBitmap == null) {
                 brazelog { "Inline Image Push failed to get image bitmap" }
                 return null
             }
             val isNotificationSpaceConstrained =
                 isRemoteViewNotificationAvailableSpaceConstrained(context)
-            val remoteView = RemoteViews(
-                context.packageName,
-                if (isNotificationSpaceConstrained) R.layout.com_braze_push_inline_image_constrained else R.layout.com_braze_notification_inline_image
-            )
+            val inlineImageLayout =
+                if (isNotificationSpaceConstrained) {
+                    R.layout.com_braze_push_inline_image_constrained
+                } else {
+                    R.layout.com_braze_notification_inline_image
+                }
+            val remoteView =
+                RemoteViews(
+                    context.packageName,
+                    inlineImageLayout,
+                )
             val configurationProvider = BrazeInternal.getConfigurationProvider(context)
 
             // Set the app icon drawable
-            val appIcon = Icon.createWithResource(
-                context,
-                configurationProvider.smallNotificationIconResourceId
-            )
+            val appIcon =
+                Icon.createWithResource(
+                    context,
+                    configurationProvider.smallNotificationIconResourceId,
+                )
 
             payload.accentColor?.let { color ->
                 appIcon.setTint(color)
@@ -259,35 +272,37 @@ open class BrazeNotificationStyleFactory {
 
             // Set the app name
             val packageManager = context.packageManager
-            val applicationInfo: ApplicationInfo = try {
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-                    packageManager.getApplicationInfo(context.packageName, PackageManager.ApplicationInfoFlags.of(0))
-                } else {
-                    @Suppress("DEPRECATION") packageManager.getApplicationInfo(context.packageName, 0)
+            val applicationInfo: ApplicationInfo =
+                try {
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+                        packageManager.getApplicationInfo(context.packageName, PackageManager.ApplicationInfoFlags.of(0))
+                    } else {
+                        @Suppress("DEPRECATION")
+                        packageManager.getApplicationInfo(context.packageName, 0)
+                    }
+                } catch (e: PackageManager.NameNotFoundException) {
+                    brazelog(E, e) { "Inline Image Push application info was null" }
+                    return null
                 }
-            } catch (e: PackageManager.NameNotFoundException) {
-                brazelog(E, e) { "Inline Image Push application info was null" }
-                return null
-            }
             val applicationName = packageManager.getApplicationLabel(applicationInfo) as String
             val htmlSpannedAppName =
                 applicationName.getHtmlSpannedTextIfEnabled(configurationProvider)
             remoteView.setTextViewText(
                 R.id.com_braze_inline_image_push_app_name_text,
-                htmlSpannedAppName
+                htmlSpannedAppName,
             )
 
             // Set the current time
             remoteView.setTextViewText(
                 R.id.com_braze_inline_image_push_time_text,
-                formatDateNow(BrazeDateFormat.CLOCK_12_HOUR)
+                formatDateNow(BrazeDateFormat.CLOCK_12_HOUR),
             )
 
             // Set the text area title
             notificationExtras.getString(Constants.BRAZE_PUSH_TITLE_KEY)?.let { title ->
                 remoteView.setTextViewText(
                     R.id.com_braze_inline_image_push_title_text,
-                    title.getHtmlSpannedTextIfEnabled(configurationProvider)
+                    title.getHtmlSpannedTextIfEnabled(configurationProvider),
                 )
             }
 
@@ -295,7 +310,7 @@ open class BrazeNotificationStyleFactory {
             notificationExtras.getString(Constants.BRAZE_PUSH_CONTENT_KEY)?.let { content ->
                 remoteView.setTextViewText(
                     R.id.com_braze_inline_image_push_content_text,
-                    content.getHtmlSpannedTextIfEnabled(configurationProvider)
+                    content.getHtmlSpannedTextIfEnabled(configurationProvider),
                 )
             }
             notificationBuilder.setCustomContentView(remoteView)
@@ -307,7 +322,7 @@ open class BrazeNotificationStyleFactory {
             } else {
                 remoteView.setImageViewBitmap(
                     R.id.com_braze_inline_image_push_side_image,
-                    largeNotificationBitmap
+                    largeNotificationBitmap,
                 )
                 // Since this is entirely custom, no decorated
                 // style is returned to the system.
@@ -330,13 +345,16 @@ open class BrazeNotificationStyleFactory {
                 return null
             }
             val notificationExtras = payload.notificationExtras
-            var imageBitmap = Braze.getInstance(context).imageLoader
-                .getPushBitmapFromUrl(
-                    context,
-                    notificationExtras,
-                    imageUrl,
-                    BrazeViewBounds.NOTIFICATION_EXPANDED_IMAGE
-                )
+            var imageBitmap =
+                Braze
+                    .getInstance(context)
+                    .imageLoader
+                    .getPushBitmapFromUrl(
+                        context,
+                        notificationExtras,
+                        imageUrl,
+                        BrazeViewBounds.NOTIFICATION_EXPANDED_IMAGE,
+                    )
             if (imageBitmap == null) {
                 brazelog {
                     "Failed to download image bitmap for big picture notification style. Url: $imageUrl"
@@ -349,10 +367,11 @@ open class BrazeNotificationStyleFactory {
                 // Note: if the height is greater than the width it's going to look poor, so we might
                 // as well let the system modify it and not complicate things by trying to smoosh it here.
                 if (imageBitmap.width > imageBitmap.height) {
-                    val bigPictureHeightPixels = getPixelsFromDensityAndDp(
-                        getDensityDpi(context),
-                        BIG_PICTURE_STYLE_IMAGE_HEIGHT
-                    )
+                    val bigPictureHeightPixels =
+                        getPixelsFromDensityAndDp(
+                            getDensityDpi(context),
+                            BIG_PICTURE_STYLE_IMAGE_HEIGHT,
+                        )
                     // 2:1 aspect ratio
                     var bigPictureWidthPixels = 2 * bigPictureHeightPixels
                     val displayWidthPixels = getDisplayWidthPixels(context)
@@ -386,7 +405,7 @@ open class BrazeNotificationStyleFactory {
          */
         fun getConversationalPushStyle(
             notificationBuilder: NotificationCompat.Builder,
-            payload: BrazeNotificationPayload
+            payload: BrazeNotificationPayload,
         ): NotificationCompat.MessagingStyle? {
             return try {
                 val conversationPersonMap = payload.conversationPersonMap
@@ -418,10 +437,11 @@ open class BrazeNotificationStyleFactory {
         private fun createStoryPageClickedPendingIntent(
             context: Context,
             payload: BrazeNotificationPayload,
-            pushStoryPage: PushStoryPage
+            pushStoryPage: PushStoryPage,
         ): PendingIntent {
-            val storyClickedIntent = Intent(Constants.BRAZE_STORY_CLICKED_ACTION)
-                .setClass(context, NotificationTrampolineActivity::class.java)
+            val storyClickedIntent =
+                Intent(Constants.BRAZE_STORY_CLICKED_ACTION)
+                    .setClass(context, NotificationTrampolineActivity::class.java)
             storyClickedIntent.flags =
                 storyClickedIntent.flags or getInstance().getIntentFlags(IntentFlagPurpose.NOTIFICATION_PUSH_STORY_PAGE_CLICK)
             payload.notificationExtras.let {
@@ -430,7 +450,7 @@ open class BrazeNotificationStyleFactory {
             storyClickedIntent.putExtra(Constants.BRAZE_ACTION_URI_KEY, pushStoryPage.deeplink)
             storyClickedIntent.putExtra(
                 Constants.BRAZE_ACTION_USE_WEBVIEW_KEY,
-                pushStoryPage.useWebview
+                pushStoryPage.useWebview,
             )
             storyClickedIntent.putExtra(Constants.BRAZE_STORY_PAGE_ID, pushStoryPage.storyPageId)
             storyClickedIntent.putExtra(Constants.BRAZE_CAMPAIGN_ID, pushStoryPage.campaignId)
@@ -440,17 +460,18 @@ open class BrazeNotificationStyleFactory {
                 context,
                 getRequestCode(),
                 storyClickedIntent,
-                getImmutablePendingIntentFlags()
+                getImmutablePendingIntentFlags(),
             )
         }
 
         private fun createStoryTraversedPendingIntent(
             context: Context,
             notificationExtras: Bundle?,
-            pageIndex: Int
+            pageIndex: Int,
         ): PendingIntent {
-            val storyNextClickedIntent = Intent(Constants.BRAZE_STORY_TRAVERSE_CLICKED_ACTION)
-                .setClass(context, BrazeNotificationUtils.notificationReceiverClass)
+            val storyNextClickedIntent =
+                Intent(Constants.BRAZE_STORY_TRAVERSE_CLICKED_ACTION)
+                    .setClass(context, BrazeNotificationUtils.notificationReceiverClass)
             if (notificationExtras != null) {
                 notificationExtras.putInt(Constants.BRAZE_STORY_INDEX_KEY, pageIndex)
                 storyNextClickedIntent.putExtras(notificationExtras)
@@ -460,7 +481,7 @@ open class BrazeNotificationStyleFactory {
                 context,
                 getRequestCode(),
                 storyNextClickedIntent,
-                flags
+                flags,
             )
         }
 
@@ -476,7 +497,7 @@ open class BrazeNotificationStyleFactory {
         private fun populatePushStoryPage(
             view: RemoteViews,
             payload: BrazeNotificationPayload,
-            pushStoryPage: PushStoryPage
+            pushStoryPage: PushStoryPage,
         ): Boolean {
             val context = payload.context
             if (context == null) {
@@ -496,14 +517,17 @@ open class BrazeNotificationStyleFactory {
             val notificationExtras = payload.notificationExtras
 
             // Set up bitmap url
-            val largeNotificationBitmap = Braze.getInstance(context).imageLoader
-                .getPushBitmapFromUrl(
-                    context,
-                    notificationExtras,
-                    bitmapUrl,
-                    BrazeViewBounds.NOTIFICATION_ONE_IMAGE_STORY
-                )
-                ?: return false
+            val largeNotificationBitmap =
+                Braze
+                    .getInstance(context)
+                    .imageLoader
+                    .getPushBitmapFromUrl(
+                        context,
+                        notificationExtras,
+                        bitmapUrl,
+                        BrazeViewBounds.NOTIFICATION_ONE_IMAGE_STORY,
+                    )
+                    ?: return false
             view.setImageViewBitmap(R.id.com_braze_story_image_view, largeNotificationBitmap)
 
             // Set up title
@@ -517,13 +541,13 @@ open class BrazeNotificationStyleFactory {
                 view.setInt(
                     R.id.com_braze_story_text_view_container,
                     STORY_SET_GRAVITY,
-                    titleGravity
+                    titleGravity,
                 )
             } else {
                 view.setInt(
                     R.id.com_braze_story_text_view_container,
                     STORY_SET_VISIBILITY,
-                    View.GONE
+                    View.GONE,
                 )
             }
 
@@ -539,13 +563,13 @@ open class BrazeNotificationStyleFactory {
                 view.setInt(
                     R.id.com_braze_story_text_view_small_container,
                     STORY_SET_GRAVITY,
-                    subtitleGravity
+                    subtitleGravity,
                 )
             } else {
                 view.setInt(
                     R.id.com_braze_story_text_view_small_container,
                     STORY_SET_VISIBILITY,
-                    View.GONE
+                    View.GONE,
                 )
             }
 
@@ -554,7 +578,7 @@ open class BrazeNotificationStyleFactory {
                 createStoryPageClickedPendingIntent(context, payload, pushStoryPage)
             view.setOnClickPendingIntent(
                 R.id.com_braze_story_relative_layout,
-                storyClickedPendingIntent
+                storyClickedPendingIntent,
             )
             return true
         }
@@ -563,7 +587,7 @@ open class BrazeNotificationStyleFactory {
         @VisibleForTesting
         fun setBigPictureSummaryAndTitle(
             bigPictureNotificationStyle: NotificationCompat.BigPictureStyle,
-            payload: BrazeNotificationPayload
+            payload: BrazeNotificationPayload,
         ) {
             val appConfigProvider = payload.configurationProvider ?: return
             val bigSummaryText = payload.bigSummaryText
@@ -573,15 +597,15 @@ open class BrazeNotificationStyleFactory {
             if (bigSummaryText != null) {
                 bigPictureNotificationStyle.setSummaryText(
                     bigSummaryText.getHtmlSpannedTextIfEnabled(
-                        appConfigProvider
-                    )
+                        appConfigProvider,
+                    ),
                 )
             }
             if (bigTitleText != null) {
                 bigPictureNotificationStyle.setBigContentTitle(
                     bigTitleText.getHtmlSpannedTextIfEnabled(
-                        appConfigProvider
-                    )
+                        appConfigProvider,
+                    ),
                 )
             }
 
@@ -591,8 +615,8 @@ open class BrazeNotificationStyleFactory {
                 payload.contentText?.let {
                     bigPictureNotificationStyle.setSummaryText(
                         it.getHtmlSpannedTextIfEnabled(
-                            appConfigProvider
-                        )
+                            appConfigProvider,
+                        ),
                     )
                 }
             }

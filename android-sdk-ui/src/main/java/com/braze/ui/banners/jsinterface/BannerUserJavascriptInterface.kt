@@ -11,4 +11,6 @@ import com.braze.ui.UserJavascriptInterfaceBase
  * @param context The Android [Context] for Braze SDK access.
  */
 @Suppress("TooManyFunctions")
-class BannerUserJavascriptInterface(private val context: Context) : UserJavascriptInterfaceBase(context)
+class BannerUserJavascriptInterface(
+    private val context: Context,
+) : UserJavascriptInterfaceBase(context)

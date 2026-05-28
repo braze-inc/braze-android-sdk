@@ -18,7 +18,9 @@ import org.json.JSONObject
 import java.util.Locale
 
 @Suppress("TooManyFunctions")
-open class UserJavascriptInterfaceBase(private val context: Context) {
+open class UserJavascriptInterfaceBase(
+    private val context: Context,
+) {
     @JavascriptInterface
     fun setFirstName(firstName: String?) {
         Braze.getInstance(context).runOnUser {
@@ -56,7 +58,11 @@ open class UserJavascriptInterfaceBase(private val context: Context) {
     }
 
     @JavascriptInterface
-    fun setDateOfBirth(year: String, month: String, day: String) {
+    fun setDateOfBirth(
+        year: String,
+        month: String,
+        day: String,
+    ) {
         val yearValue = year.toIntOrNull()
         if (yearValue == null) {
             brazelog(W) { "Failed to parse setDateOfBirth year value '$year'" }
@@ -146,14 +152,21 @@ open class UserJavascriptInterfaceBase(private val context: Context) {
     }
 
     @JavascriptInterface
-    fun setCustomUserAttributeJSON(key: String, jsonStringValue: String, merge: Boolean) {
+    fun setCustomUserAttributeJSON(
+        key: String,
+        jsonStringValue: String,
+        merge: Boolean,
+    ) {
         Braze.getInstance(context).runOnUser {
             setCustomAttribute(it, key, jsonStringValue, merge)
         }
     }
 
     @JavascriptInterface
-    fun setCustomUserAttributeArray(key: String, jsonArrayString: String?) {
+    fun setCustomUserAttributeArray(
+        key: String,
+        jsonArrayString: String?,
+    ) {
         val arrayValue = parseStringArrayFromJsonString(jsonArrayString)
         if (arrayValue == null) {
             brazelog(W) { "Failed to set custom attribute array for key $key" }
@@ -165,21 +178,30 @@ open class UserJavascriptInterfaceBase(private val context: Context) {
     }
 
     @JavascriptInterface
-    fun addToCustomAttributeArray(key: String, value: String) {
+    fun addToCustomAttributeArray(
+        key: String,
+        value: String,
+    ) {
         Braze.getInstance(context).runOnUser {
             it.addToCustomAttributeArray(key, value)
         }
     }
 
     @JavascriptInterface
-    fun removeFromCustomAttributeArray(key: String, value: String) {
+    fun removeFromCustomAttributeArray(
+        key: String,
+        value: String,
+    ) {
         Braze.getInstance(context).runOnUser {
             it.removeFromCustomAttributeArray(key, value)
         }
     }
 
     @JavascriptInterface
-    fun incrementCustomUserAttribute(attribute: String, value: String) {
+    fun incrementCustomUserAttribute(
+        attribute: String,
+        value: String,
+    ) {
         val incValue = value.toIntOrNull()
         if (incValue == null) {
             brazelog(W) { "Failed to parse incrementCustomUserAttribute increment value '$value'" }
@@ -191,7 +213,11 @@ open class UserJavascriptInterfaceBase(private val context: Context) {
     }
 
     @JavascriptInterface
-    fun setCustomLocationAttribute(attribute: String, latitude: String, longitude: String) {
+    fun setCustomLocationAttribute(
+        attribute: String,
+        latitude: String,
+        longitude: String,
+    ) {
         val latitudeValue = latitude.toDoubleOrNull()
         if (latitudeValue == null) {
             brazelog(W) { "Failed to parse setCustomLocationAttribute latitude value '$latitude'" }
@@ -210,7 +236,10 @@ open class UserJavascriptInterfaceBase(private val context: Context) {
     }
 
     @JavascriptInterface
-    fun addAlias(alias: String, label: String) {
+    fun addAlias(
+        alias: String,
+        label: String,
+    ) {
         Braze.getInstance(context).runOnUser {
             it.addAlias(alias, label)
         }
@@ -248,11 +277,15 @@ open class UserJavascriptInterfaceBase(private val context: Context) {
     }
 
     @VisibleForTesting
-    fun subscriptionTypeFromJavascriptString(subscriptionType: String?): NotificationSubscriptionType? =
-        fromValue(subscriptionType)
+    fun subscriptionTypeFromJavascriptString(subscriptionType: String?): NotificationSubscriptionType? = fromValue(subscriptionType)
 
     @VisibleForTesting
-    fun setCustomAttribute(user: BrazeUser, key: String, jsonStringValue: String, merge: Boolean) {
+    fun setCustomAttribute(
+        user: BrazeUser,
+        key: String,
+        jsonStringValue: String,
+        merge: Boolean,
+    ) {
         try {
             val jsonObject = JSONObject(jsonStringValue)
             // JSONObject in Android never deals with float values, which

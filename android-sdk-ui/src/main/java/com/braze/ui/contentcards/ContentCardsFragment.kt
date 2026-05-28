@@ -38,7 +38,9 @@ import kotlinx.coroutines.launch
  * A fragment to display Braze ContentCards.
  */
 @Suppress("TooManyFunctions")
-open class ContentCardsFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
+open class ContentCardsFragment :
+    Fragment(),
+    SwipeRefreshLayout.OnRefreshListener {
     /**
      * A runnable to execute when the network is determined
      * to be unavailable.
@@ -75,11 +77,11 @@ open class ContentCardsFragment : Fragment(), SwipeRefreshLayout.OnRefreshListen
 
     // Since the get always returns non-null, but we want to allow passing null into the setter to
     // clear the instance, we split this out into a custom getter and setter rather than using a var
+
     /**
      * @return the [IContentCardsUpdateHandler] for this [ContentCardsFragment].
      */
-    fun getContentCardUpdateHandler() =
-        customContentCardUpdateHandler ?: defaultContentCardUpdateHandler
+    fun getContentCardUpdateHandler() = customContentCardUpdateHandler ?: defaultContentCardUpdateHandler
 
     /**
      * Set the [IContentCardsUpdateHandler] for this [ContentCardsFragment]. This handler is for doing
@@ -92,11 +94,11 @@ open class ContentCardsFragment : Fragment(), SwipeRefreshLayout.OnRefreshListen
 
     // Since the get always returns non-null, but we want to allow passing null into the setter to
     // clear the instance, we split this out into a custom getter and setter rather than using a var
+
     /**
      * @return the [IContentCardsViewBindingHandler] responsible for rendering each [Card] in the [RecyclerView].
      */
-    fun getContentCardsViewBindingHandler() =
-        customContentCardsViewBindingHandler ?: defaultContentCardsViewBindingHandler
+    fun getContentCardsViewBindingHandler() = customContentCardsViewBindingHandler ?: defaultContentCardsViewBindingHandler
 
     /**
      * Set the [IContentCardsViewBindingHandler] responsible for rendering each [Card] in the [RecyclerView].
@@ -110,7 +112,7 @@ open class ContentCardsFragment : Fragment(), SwipeRefreshLayout.OnRefreshListen
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View? {
         val rootView = inflater.inflate(R.layout.com_braze_content_cards, container, false)
         contentCardsRecyclerView = rootView.findViewById(R.id.com_braze_content_cards_recycler)
@@ -120,7 +122,7 @@ open class ContentCardsFragment : Fragment(), SwipeRefreshLayout.OnRefreshListen
             R.color.com_braze_content_cards_swipe_refresh_color_1,
             R.color.com_braze_content_cards_swipe_refresh_color_2,
             R.color.com_braze_content_cards_swipe_refresh_color_3,
-            R.color.com_braze_content_cards_swipe_refresh_color_4
+            R.color.com_braze_content_cards_swipe_refresh_color_4,
         )
         return rootView
     }
@@ -198,7 +200,10 @@ open class ContentCardsFragment : Fragment(), SwipeRefreshLayout.OnRefreshListen
             }
             val viewBindingHandlerParcelable: IContentCardsViewBindingHandler? =
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-                    savedInstanceState.getParcelable(VIEW_BINDING_HANDLER_SAVED_INSTANCE_STATE_KEY, IContentCardsViewBindingHandler::class.java)
+                    savedInstanceState.getParcelable(
+                        VIEW_BINDING_HANDLER_SAVED_INSTANCE_STATE_KEY,
+                        IContentCardsViewBindingHandler::class.java,
+                    )
                 } else {
                     @Suppress("DEPRECATION")
                     savedInstanceState.getParcelable(VIEW_BINDING_HANDLER_SAVED_INSTANCE_STATE_KEY)
@@ -221,7 +226,10 @@ open class ContentCardsFragment : Fragment(), SwipeRefreshLayout.OnRefreshListen
                     }
                 }
                 cardAdapter?.let {
-                    val savedCardIdImpressions: List<String>? = savedInstanceState.getStringArrayList(KNOWN_CARD_IMPRESSIONS_SAVED_INSTANCE_STATE_KEY)
+                    val savedCardIdImpressions: List<String>? =
+                        savedInstanceState.getStringArrayList(
+                            KNOWN_CARD_IMPRESSIONS_SAVED_INSTANCE_STATE_KEY,
+                        )
                     if (savedCardIdImpressions != null) {
                         it.impressedCardIds = savedCardIdImpressions
                     }
@@ -233,12 +241,13 @@ open class ContentCardsFragment : Fragment(), SwipeRefreshLayout.OnRefreshListen
 
     protected fun initializeRecyclerView() {
         val layoutManager = LinearLayoutManager(activity)
-        cardAdapter = ContentCardAdapter(
-            requireContext(),
-            layoutManager,
-            mutableListOf(),
-            getContentCardsViewBindingHandler()
-        )
+        cardAdapter =
+            ContentCardAdapter(
+                requireContext(),
+                layoutManager,
+                mutableListOf(),
+                getContentCardsViewBindingHandler(),
+            )
         contentCardsRecyclerView?.adapter = cardAdapter
         contentCardsRecyclerView?.layoutManager = layoutManager
         attachSwipeHelperCallback()
@@ -307,9 +316,10 @@ open class ContentCardsFragment : Fragment(), SwipeRefreshLayout.OnRefreshListen
                 }
 
                 networkUnavailableJob?.cancel()
-                networkUnavailableJob = BrazeCoroutineScope.launchDelayed(NETWORK_PROBLEM_WARNING_MS, Dispatchers.Main) {
-                    networkUnavailable()
-                }
+                networkUnavailableJob =
+                    BrazeCoroutineScope.launchDelayed(NETWORK_PROBLEM_WARNING_MS, Dispatchers.Main) {
+                        networkUnavailable()
+                    }
                 return
             }
         }

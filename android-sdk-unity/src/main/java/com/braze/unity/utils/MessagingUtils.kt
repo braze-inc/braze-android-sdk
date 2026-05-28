@@ -23,12 +23,14 @@ object MessagingUtils {
     private const val BRAZE_INTERNAL_GAME_OBJECT = "BrazeInternalCallback"
 
     /** C# method names on the internal Braze Unity component that receive in-app message lifecycle events. */
-    enum class BrazeInternalComponentMethod(val methodName: String) {
+    enum class BrazeInternalComponentMethod(
+        val methodName: String,
+    ) {
         BEFORE_IAM_DISPLAYED("beforeInAppMessageDisplayed"),
         ON_IAM_DISMISSED("onInAppMessageDismissed"),
         ON_IAM_CLICKED("onInAppMessageClicked"),
         ON_IAM_BUTTON_CLICKED("onInAppMessageButtonClicked"),
-        ON_IAM_HTML_CLICKED("onInAppMessageHTMLClicked")
+        ON_IAM_HTML_CLICKED("onInAppMessageHTMLClicked"),
     }
 
     /**
@@ -42,7 +44,7 @@ object MessagingUtils {
     fun sendInAppMessageReceivedMessage(
         unityGameObjectName: String?,
         unityCallbackFunctionName: String?,
-        inAppMessage: IInAppMessage
+        inAppMessage: IInAppMessage,
     ): Boolean {
         if (unityGameObjectName.isNullOrBlank()) {
             brazelog(TAG) {
@@ -74,7 +76,7 @@ object MessagingUtils {
     fun sendPushEventToUnity(
         unityGameObjectName: String?,
         unityCallbackFunctionName: String?,
-        event: BrazePushEvent
+        event: BrazePushEvent,
     ): Boolean {
         if (unityGameObjectName.isNullOrBlank()) {
             brazelog(TAG) {
@@ -94,7 +96,7 @@ object MessagingUtils {
         UnityPlayer.UnitySendMessage(
             unityGameObjectName,
             unityCallbackFunctionName,
-            getPushBundleExtras(event.notificationPayload.notificationExtras).toString()
+            getPushBundleExtras(event.notificationPayload.notificationExtras).toString(),
         )
         return true
     }
@@ -110,7 +112,7 @@ object MessagingUtils {
     fun sendContentCardsUpdatedEventToUnity(
         unityGameObjectName: String?,
         unityCallbackFunctionName: String?,
-        contentCardsUpdatedEvent: ContentCardsUpdatedEvent
+        contentCardsUpdatedEvent: ContentCardsUpdatedEvent,
     ): Boolean {
         if (unityGameObjectName.isNullOrBlank()) {
             brazelog(TAG) {
@@ -126,9 +128,10 @@ object MessagingUtils {
             }
             return false
         }
-        val json = JSONObject()
-            .put("mContentCards", contentCardsUpdatedEvent.allCards.constructJsonArray())
-            .put("mFromOfflineStorage", contentCardsUpdatedEvent.isFromOfflineStorage)
+        val json =
+            JSONObject()
+                .put("mContentCards", contentCardsUpdatedEvent.allCards.constructJsonArray())
+                .put("mFromOfflineStorage", contentCardsUpdatedEvent.isFromOfflineStorage)
         brazelog(TAG) { "Sending a Content Cards update message to $unityGameObjectName:$unityCallbackFunctionName." }
         UnityPlayer.UnitySendMessage(unityGameObjectName, unityCallbackFunctionName, json.toString())
         return true
@@ -145,7 +148,7 @@ object MessagingUtils {
     fun sendFeatureFlagsUpdatedEventToUnity(
         unityGameObjectName: String?,
         unityCallbackFunctionName: String?,
-        featureFlagsUpdatedEvent: FeatureFlagsUpdatedEvent
+        featureFlagsUpdatedEvent: FeatureFlagsUpdatedEvent,
     ): Boolean {
         if (unityGameObjectName.isNullOrBlank()) {
             brazelog(TAG) {
@@ -161,8 +164,9 @@ object MessagingUtils {
             }
             return false
         }
-        val json = JSONObject()
-            .put("featureFlags", featureFlagsUpdatedEvent.featureFlags.constructJsonArray())
+        val json =
+            JSONObject()
+                .put("featureFlags", featureFlagsUpdatedEvent.featureFlags.constructJsonArray())
         brazelog(TAG) { "Sending Feature Flags update message to $unityGameObjectName:$unityCallbackFunctionName." }
         UnityPlayer.UnitySendMessage(unityGameObjectName, unityCallbackFunctionName, json.toString())
         return true
@@ -179,7 +183,7 @@ object MessagingUtils {
     fun sendSdkAuthErrorEventToUnity(
         unityGameObjectName: String?,
         unityCallbackFunctionName: String?,
-        sdkAuthError: BrazeSdkAuthenticationErrorEvent
+        sdkAuthError: BrazeSdkAuthenticationErrorEvent,
     ): Boolean {
         if (unityGameObjectName.isNullOrBlank()) {
             brazelog(TAG) {
@@ -195,11 +199,12 @@ object MessagingUtils {
             }
             return false
         }
-        val json = JSONObject()
-            .put("code", sdkAuthError.errorCode)
-            .put("reason", sdkAuthError.errorReason)
-            .put("userId", sdkAuthError.userId)
-            .put("signature", sdkAuthError.signature)
+        val json =
+            JSONObject()
+                .put("code", sdkAuthError.errorCode)
+                .put("reason", sdkAuthError.errorReason)
+                .put("userId", sdkAuthError.userId)
+                .put("signature", sdkAuthError.signature)
 
         brazelog(TAG) { "Sending an SDK Authentication Failure message to $unityGameObjectName:$unityCallbackFunctionName." }
         UnityPlayer.UnitySendMessage(unityGameObjectName, unityCallbackFunctionName, json.toString())
@@ -209,7 +214,10 @@ object MessagingUtils {
     /**
      * Sends some structured data to the BrazeInternalComponent in C# in the Unity binding.
      */
-    fun sendToBrazeInternalComponent(method: BrazeInternalComponentMethod, json: String) {
+    fun sendToBrazeInternalComponent(
+        method: BrazeInternalComponentMethod,
+        json: String,
+    ) {
         brazelog(TAG, V) {
             "Sending a Braze Internal Component message to $BRAZE_INTERNAL_GAME_OBJECT:${method.methodName} with json: $json"
         }

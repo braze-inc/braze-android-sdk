@@ -145,8 +145,8 @@ open class InAppMessageManagerBase {
      *
      * @return The [IInAppMessageViewFactory] or null if the message type does not have a [IInAppMessageViewFactory].
      */
-    open fun getDefaultInAppMessageViewFactory(inAppMessage: IInAppMessage): IInAppMessageViewFactory? {
-        return when (inAppMessage.messageType) {
+    open fun getDefaultInAppMessageViewFactory(inAppMessage: IInAppMessage): IInAppMessageViewFactory? =
+        when (inAppMessage.messageType) {
             MessageType.SLIDEUP -> inAppMessageSlideupViewFactory
             MessageType.MODAL -> inAppMessageModalViewFactory
             MessageType.FULL -> inAppMessageFullViewFactory
@@ -159,7 +159,6 @@ open class InAppMessageManagerBase {
                 null
             }
         }
-    }
 
     open fun getInAppMessageViewFactory(inAppMessage: IInAppMessage): IInAppMessageViewFactory? =
         customInAppMessageViewFactory ?: getDefaultInAppMessageViewFactory(inAppMessage)

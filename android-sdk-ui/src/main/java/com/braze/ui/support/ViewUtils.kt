@@ -47,17 +47,17 @@ fun View.setFocusableInTouchModeAndRequestFocus() {
     }
 }
 
-fun convertDpToPixels(context: Context, valueInDp: Double): Double {
-    val density = context.resources.displayMetrics.density.toDouble()
+fun convertDpToPixels(
+    context: Context,
+    valueInDp: Double,
+): Double {
+    val density =
+        context.resources.displayMetrics.density
+            .toDouble()
     return valueInDp * density
 }
 
-fun Activity.isRunningOnTablet(): Boolean {
-    return (
-        this.resources.configuration.smallestScreenWidthDp
-            >= TABLET_SMALLEST_WIDTH_DP
-        )
-}
+fun Activity.isRunningOnTablet(): Boolean = this.resources.configuration.smallestScreenWidthDp >= TABLET_SMALLEST_WIDTH_DP
 
 /**
  * Safely calls [Activity.setRequestedOrientation].
@@ -72,7 +72,10 @@ fun Activity.setActivityRequestedOrientation(requestedOrientation: Int) {
     }
 }
 
-fun setHeightOnViewLayoutParams(view: View, height: Int) {
+fun setHeightOnViewLayoutParams(
+    view: View,
+    height: Int,
+) {
     val layoutParams = view.layoutParams
     layoutParams.height = height
     view.layoutParams = layoutParams
@@ -93,15 +96,15 @@ fun isDeviceInNightMode(context: Context): Boolean {
  */
 fun isCurrentOrientationValid(
     currentScreenOrientation: Int,
-    preferredOrientation: Orientation
-): Boolean {
-    return if (currentScreenOrientation == Configuration.ORIENTATION_LANDSCAPE
-        && preferredOrientation === Orientation.LANDSCAPE
+    preferredOrientation: Orientation,
+): Boolean =
+    if (currentScreenOrientation == Configuration.ORIENTATION_LANDSCAPE &&
+        preferredOrientation === Orientation.LANDSCAPE
     ) {
         brazelog(TAG, D) { "Current and preferred orientation are landscape." }
         true
-    } else if (currentScreenOrientation == Configuration.ORIENTATION_PORTRAIT
-        && preferredOrientation === Orientation.PORTRAIT
+    } else if (currentScreenOrientation == Configuration.ORIENTATION_PORTRAIT &&
+        preferredOrientation === Orientation.PORTRAIT
     ) {
         brazelog(TAG, D) { "Current and preferred orientation are portrait." }
         true
@@ -112,53 +115,47 @@ fun isCurrentOrientationValid(
         }
         false
     }
-}
 
 /**
  * @return The maximum of the display cutout left inset and the system window left inset.
  */
-fun getMaxSafeLeftInset(windowInsets: WindowInsetsCompat): Int {
-    return max(
+fun getMaxSafeLeftInset(windowInsets: WindowInsetsCompat): Int =
+    max(
         windowInsets.displayCutout?.safeInsetLeft ?: 0,
-        windowInsets.getInsets(WindowInsetsCompat.Type.systemBars()).left
+        windowInsets.getInsets(WindowInsetsCompat.Type.systemBars()).left,
     )
-}
 
 /**
  * @return The maximum of the display cutout right inset and the system window right inset.
  */
-fun getMaxSafeRightInset(windowInsets: WindowInsetsCompat): Int {
-    return max(
+fun getMaxSafeRightInset(windowInsets: WindowInsetsCompat): Int =
+    max(
         windowInsets.displayCutout?.safeInsetRight ?: 0,
-        windowInsets.getInsets(WindowInsetsCompat.Type.systemBars()).right
+        windowInsets.getInsets(WindowInsetsCompat.Type.systemBars()).right,
     )
-}
 
 /**
  * @return The maximum of the display cutout top inset and the system window top inset.
  */
-fun getMaxSafeTopInset(windowInsets: WindowInsetsCompat): Int {
-    return max(
+fun getMaxSafeTopInset(windowInsets: WindowInsetsCompat): Int =
+    max(
         windowInsets.displayCutout?.safeInsetTop ?: 0,
-        windowInsets.getInsets(WindowInsetsCompat.Type.systemBars()).top
+        windowInsets.getInsets(WindowInsetsCompat.Type.systemBars()).top,
     )
-}
 
 /**
  * @return The maximum of the display cutout bottom inset and the system window bottom inset.
  */
-fun getMaxSafeBottomInset(windowInsets: WindowInsetsCompat): Int {
-    return max(
+fun getMaxSafeBottomInset(windowInsets: WindowInsetsCompat): Int =
+    max(
         windowInsets.displayCutout?.safeInsetBottom ?: 0,
-        windowInsets.getInsets(WindowInsetsCompat.Type.systemBars()).bottom
+        windowInsets.getInsets(WindowInsetsCompat.Type.systemBars()).bottom,
     )
-}
 
 /**
  * Detects if this device is currently in touch mode given a [View].
  */
-fun isDeviceNotInTouchMode(view: View) =
-    !view.isInTouchMode
+fun isDeviceNotInTouchMode(view: View) = !view.isInTouchMode
 
 fun getStatusBarHeight(context: Context): Int {
     // We can't access this directly with android.R.dimen.status_bar_height, so we must get it this way.

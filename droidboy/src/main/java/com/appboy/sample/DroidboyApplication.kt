@@ -96,7 +96,11 @@ class DroidboyApplication : Application() {
                 message.userId?.let { setNewSdkAuthToken(it) }
             }
             // Fire off an update to start off
-            Braze.getInstance(applicationContext).currentUser?.userId?.let { setNewSdkAuthToken(it) }
+            Braze
+                .getInstance(applicationContext)
+                .currentUser
+                ?.userId
+                ?.let { setNewSdkAuthToken(it) }
         }
 
         Braze.getInstance(applicationContext).subscribeToNetworkFailures { event ->
@@ -152,16 +156,20 @@ class DroidboyApplication : Application() {
 
         try {
             // Read the private key from the file
-            val privateKeyPEM = applicationContext.assets.open(SDK_AUTH_KEY_FILE_PATH)
-                .bufferedReader().use {
-                    it.readText()
-                }
+            val privateKeyPEM =
+                applicationContext.assets
+                    .open(SDK_AUTH_KEY_FILE_PATH)
+                    .bufferedReader()
+                    .use {
+                        it.readText()
+                    }
 
             // Load the private key from the string resource
-            val privateKeyPEMFormatted = privateKeyPEM
-                .replace("-----BEGIN RSA PRIVATE KEY-----", "")
-                .replace("-----END RSA PRIVATE KEY-----", "")
-                .replace("\\s".toRegex(), "")
+            val privateKeyPEMFormatted =
+                privateKeyPEM
+                    .replace("-----BEGIN RSA PRIVATE KEY-----", "")
+                    .replace("-----END RSA PRIVATE KEY-----", "")
+                    .replace("\\s".toRegex(), "")
 
             @OptIn(ExperimentalEncodingApi::class)
             val encoded = Base64.decode(privateKeyPEMFormatted)
@@ -170,11 +178,13 @@ class DroidboyApplication : Application() {
 
             // Create the JWT
             val algorithm = Algorithm.RSA256(null, privateKey as RSAPrivateKey?)
-            val jwt = JWT.create()
-                .withAudience("braze")
-                .withSubject(userId)
-                .withExpiresAt(Date(System.currentTimeMillis() + TimeUnit.HOURS.toMillis(12)))
-                .sign(algorithm)
+            val jwt =
+                JWT
+                    .create()
+                    .withAudience("braze")
+                    .withSubject(userId)
+                    .withExpiresAt(Date(System.currentTimeMillis() + TimeUnit.HOURS.toMillis(12)))
+                    .sign(algorithm)
             brazelog(I) { "Generated JWT: $jwt" }
             return jwt
         } catch (e: Exception) {
@@ -185,16 +195,18 @@ class DroidboyApplication : Application() {
 
     @RequiresApi(Build.VERSION_CODES.N_MR1)
     private fun setupChatDynamicShortcut() {
-        val builder = ShortcutInfo.Builder(this, "droidboy_dynamic_shortcut_chat_id")
-            .setShortLabel("Braze Chat")
-            .setLongLabel("Conversational Push")
-            .setIcon(Icon.createWithResource(this, android.R.drawable.ic_menu_send))
-            .setIntent(
-                Intent(
-                    Intent.ACTION_VIEW,
-                    "https://www.braze.com?dynamicshortcut=true".toUri()
+        val builder =
+            ShortcutInfo
+                .Builder(this, "droidboy_dynamic_shortcut_chat_id")
+                .setShortLabel("Braze Chat")
+                .setLongLabel("Conversational Push")
+                .setIcon(Icon.createWithResource(this, android.R.drawable.ic_menu_send))
+                .setIntent(
+                    Intent(
+                        Intent.ACTION_VIEW,
+                        "https://www.braze.com?dynamicshortcut=true".toUri(),
+                    ),
                 )
-            )
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
             builder.setLongLived(true)
         }
@@ -207,43 +219,66 @@ class DroidboyApplication : Application() {
         val notificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
         createNotificationGroup(notificationManager, R.string.droidboy_notification_group_01_id, R.string.droidboy_notification_group_01_name)
         createNotificationChannel(
-            notificationManager, R.string.droidboy_notification_channel_01_id, R.string.droidboy_notification_channel_messages_name,
-            R.string.droidboy_notification_channel_messages_desc, R.string.droidboy_notification_group_01_id
+            notificationManager,
+            R.string.droidboy_notification_channel_01_id,
+            R.string.droidboy_notification_channel_messages_name,
+            R.string.droidboy_notification_channel_messages_desc,
+            R.string.droidboy_notification_group_01_id,
         )
         createNotificationChannel(
-            notificationManager, R.string.droidboy_notification_channel_02_id, R.string.droidboy_notification_channel_matches_name,
-            R.string.droidboy_notification_channel_matches_desc, R.string.droidboy_notification_group_01_id
+            notificationManager,
+            R.string.droidboy_notification_channel_02_id,
+            R.string.droidboy_notification_channel_matches_name,
+            R.string.droidboy_notification_channel_matches_desc,
+            R.string.droidboy_notification_group_01_id,
         )
         createNotificationChannel(
-            notificationManager, R.string.droidboy_notification_channel_03_id, R.string.droidboy_notification_channel_offers_name,
-            R.string.droidboy_notification_channel_offers_desc, R.string.droidboy_notification_group_01_id
+            notificationManager,
+            R.string.droidboy_notification_channel_03_id,
+            R.string.droidboy_notification_channel_offers_name,
+            R.string.droidboy_notification_channel_offers_desc,
+            R.string.droidboy_notification_group_01_id,
         )
         createNotificationChannel(
-            notificationManager, R.string.droidboy_notification_channel_04_id, R.string.droidboy_notification_channel_recommendations_name,
-            R.string.droidboy_notification_channel_recommendations_desc, R.string.droidboy_notification_group_01_id
+            notificationManager,
+            R.string.droidboy_notification_channel_04_id,
+            R.string.droidboy_notification_channel_recommendations_name,
+            R.string.droidboy_notification_channel_recommendations_desc,
+            R.string.droidboy_notification_group_01_id,
         )
     }
 
     @SuppressLint("NewApi")
-    private fun createNotificationGroup(notificationManager: NotificationManager, idResource: Int, nameResource: Int) {
+    private fun createNotificationGroup(
+        notificationManager: NotificationManager,
+        idResource: Int,
+        nameResource: Int,
+    ) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             notificationManager.createNotificationChannelGroup(
                 NotificationChannelGroup(
                     getString(idResource),
-                    getString(nameResource)
-                )
+                    getString(nameResource),
+                ),
             )
         }
     }
 
     @SuppressLint("NewApi")
-    private fun createNotificationChannel(notificationManager: NotificationManager, idResource: Int, nameResource: Int, descResource: Int, groupResource: Int) {
+    private fun createNotificationChannel(
+        notificationManager: NotificationManager,
+        idResource: Int,
+        nameResource: Int,
+        descResource: Int,
+        groupResource: Int,
+    ) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            val channel = NotificationChannel(
-                getString(idResource),
-                getString(nameResource),
-                NotificationManager.IMPORTANCE_LOW
-            )
+            val channel =
+                NotificationChannel(
+                    getString(idResource),
+                    getString(nameResource),
+                    NotificationManager.IMPORTANCE_LOW,
+                )
             channel.description = getString(descResource)
             channel.enableLights(true)
             channel.lightColor = Color.RED
@@ -256,16 +291,20 @@ class DroidboyApplication : Application() {
 
     @SuppressLint("NewApi")
     private fun activateStrictMode() {
-        val threadPolicyBuilder = StrictMode.ThreadPolicy.Builder()
-            .detectAll()
-            .penaltyLog()
+        val threadPolicyBuilder =
+            StrictMode.ThreadPolicy
+                .Builder()
+                .detectAll()
+                .penaltyLog()
 
         // We are explicitly not detecting detectLeakedClosableObjects(), detectLeakedSqlLiteObjects(), and detectUntaggedSockets()
         // The okhttp library used on most https calls trips the detectUntaggedSockets() check
         // com.google.android.gms.internal trips both the detectLeakedClosableObjects() and detectLeakedSqlLiteObjects() checks
-        val vmPolicyBuilder = VmPolicy.Builder()
-            .detectAll()
-            .penaltyLog()
+        val vmPolicyBuilder =
+            VmPolicy
+                .Builder()
+                .detectAll()
+                .penaltyLog()
 
         // Note that some detections require a specific sdk version or higher to enable.
         vmPolicyBuilder.detectLeakedRegistrationObjects()
@@ -323,8 +362,9 @@ class DroidboyApplication : Application() {
             val specialTabFlag = Braze.getInstance(applicationContext).getFeatureFlag(specialTabFeatureFlagId)
 
             if (specialTabFlag?.enabled == true) {
-                val imageUrl = specialTabFlag.getStringProperty("image_url")
-                    ?: "https://raw.githubusercontent.com/Appboy/braze-android-sdk/master/braze-logo.png"
+                val imageUrl =
+                    specialTabFlag.getStringProperty("image_url")
+                        ?: "https://raw.githubusercontent.com/Appboy/braze-android-sdk/master/braze-logo.png"
                 val title = specialTabFlag.getStringProperty("helpful_title") ?: "title"
                 val desc = specialTabFlag.getStringProperty("helpful_description") ?: "description"
                 val altImageText = specialTabFlag.getStringProperty("helpful_alt_image") ?: "alternate image text"
@@ -351,16 +391,19 @@ class DroidboyApplication : Application() {
             listOf<String>("placement_1", "placement_2", "sdk-test-1", "sdk-test-2", "custom_html")
 
         @JvmStatic
-        fun getApiKeyInUse(context: Context): String? {
-            return if (!overrideApiKeyInUse.isNullOrBlank()) {
+        fun getApiKeyInUse(context: Context): String? =
+            if (!overrideApiKeyInUse.isNullOrBlank()) {
                 overrideApiKeyInUse
             } else {
                 // Check if the api key is in resources
                 readStringResourceValue(context, "com_braze_api_key", "NO-API-KEY-SET")
             }
-        }
 
-        private fun readStringResourceValue(context: Context, key: String?, defaultValue: String): String {
+        private fun readStringResourceValue(
+            context: Context,
+            key: String?,
+            defaultValue: String,
+        ): String {
             return try {
                 if (key == null) {
                     return defaultValue

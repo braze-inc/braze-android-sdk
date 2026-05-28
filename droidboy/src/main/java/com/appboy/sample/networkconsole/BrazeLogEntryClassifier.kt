@@ -15,7 +15,6 @@ import com.braze.support.BrazeLogger
  * preserves the complete multi-line body that the SDK logged.
  */
 class BrazeLogEntryClassifier {
-
     /**
      * Returns a [NetworkLogEntry] when [message] is a Braze network log we want to show,
      * otherwise null.
@@ -23,7 +22,7 @@ class BrazeLogEntryClassifier {
     fun classify(
         priority: BrazeLogger.Priority,
         message: String,
-        throwable: Throwable?
+        throwable: Throwable?,
     ): NetworkLogEntry? {
         val classification = classifyMessage(message) ?: return null
         return NetworkLogEntry(
@@ -31,13 +30,14 @@ class BrazeLogEntryClassifier {
             direction = classification.direction,
             tag = classification.tag,
             message = message,
-            rawLine = if (throwable == null) {
-                "[${priority.name}] $message"
-            } else {
-                "[${priority.name}] $message\n${throwable.stackTraceToString()}"
-            },
+            rawLine =
+                if (throwable == null) {
+                    "[${priority.name}] $message"
+                } else {
+                    "[${priority.name}] $message\n${throwable.stackTraceToString()}"
+                },
             url = extractUrl(message),
-            statusCode = extractStatusCode(message)
+            statusCode = extractStatusCode(message),
         )
     }
 
@@ -84,7 +84,8 @@ class BrazeLogEntryClassifier {
     }
 
     private fun extractUrl(message: String): String? =
-        URL_REGEX.find(message)
+        URL_REGEX
+            .find(message)
             ?.value
             ?.trimEnd(*URL_TRAILING_PUNCTUATION)
             ?.takeIf { it.isNotEmpty() }
@@ -96,7 +97,7 @@ class BrazeLogEntryClassifier {
 
     private data class Classification(
         val direction: NetworkLogEntry.Direction,
-        val tag: String
+        val tag: String,
     )
 
     companion object {

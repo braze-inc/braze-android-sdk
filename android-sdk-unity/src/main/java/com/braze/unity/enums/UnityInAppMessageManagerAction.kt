@@ -12,7 +12,7 @@ import com.braze.ui.inappmessage.InAppMessageOperation
 @Suppress("MagicNumber")
 enum class UnityInAppMessageManagerAction(
     private val value: Int,
-    val inAppMessageOperation: InAppMessageOperation?
+    val inAppMessageOperation: InAppMessageOperation?,
 ) {
     /** Unrecognized action value. */
     UNKNOWN(-1, null),
@@ -35,11 +35,11 @@ enum class UnityInAppMessageManagerAction(
     /**
      * Maps to [InAppMessageOperation.REENQUEUE].
      */
-    IAM_REENQUEUE(3, InAppMessageOperation.REENQUEUE);
+    IAM_REENQUEUE(3, InAppMessageOperation.REENQUEUE),
+    ;
 
     companion object {
         /** Returns the [UnityInAppMessageManagerAction] matching [value], or null if none match. */
-        fun getTypeFromValue(value: Int): UnityInAppMessageManagerAction? =
-            entries.firstOrNull { it.value == value }
+        fun getTypeFromValue(value: Int): UnityInAppMessageManagerAction? = entries.firstOrNull { it.value == value }
     }
 }

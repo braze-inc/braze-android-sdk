@@ -8,6 +8,15 @@
   <string name="tab_banners">Banners</string>
   <string name="tab_ecommerce">eCommerce</string>
 
+  <!-- eCommerce fragment -->
+  <string name="ecommerce_events_header">eCommerce Events</string>
+  <string name="ecommerce_event_type_hint">Event type</string>
+  <string name="ecommerce_sample_hint">Sample</string>
+  <string name="ecommerce_send_event">Send Event</string>
+  <string name="ecommerce_select_event_first">Select an eCommerce event first</string>
+  <string name="ecommerce_event_dispatched">Dispatched %1$s</string>
+  <string name="ecommerce_event_invalid">Invalid event: %1$s</string>
+
   <!-- Banners fragment -->
   <string name="banners_refresh_header">Refresh Banners by Placement ID</string>
   <string name="banners_refresh_input_hint">List of placement ID(s) (comma-separated)</string>

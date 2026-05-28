@@ -21,18 +21,17 @@ open class DefaultInAppMessageViewWrapperFactory : IInAppMessageViewWrapperFacto
         configurationProvider: BrazeConfigurationProvider,
         openingAnimation: Animation?,
         closingAnimation: Animation?,
-        clickableInAppMessageView: View?
-    ): IInAppMessageViewWrapper {
-        return DefaultInAppMessageViewWrapper(
+        clickableInAppMessageView: View?,
+    ): IInAppMessageViewWrapper =
+        DefaultInAppMessageViewWrapper(
             inAppMessageView,
             inAppMessage,
             inAppMessageViewLifecycleListener,
             configurationProvider,
             openingAnimation,
             closingAnimation,
-            clickableInAppMessageView
+            clickableInAppMessageView,
         )
-    }
 
     override fun createInAppMessageViewWrapper(
         inAppMessageView: View,
@@ -43,9 +42,9 @@ open class DefaultInAppMessageViewWrapperFactory : IInAppMessageViewWrapperFacto
         closingAnimation: Animation?,
         clickableInAppMessageView: View?,
         buttons: List<View>?,
-        closeButton: View?
-    ): IInAppMessageViewWrapper {
-        return DefaultInAppMessageViewWrapper(
+        closeButton: View?,
+    ): IInAppMessageViewWrapper =
+        DefaultInAppMessageViewWrapper(
             inAppMessageView,
             inAppMessage,
             inAppMessageViewLifecycleListener,
@@ -54,7 +53,6 @@ open class DefaultInAppMessageViewWrapperFactory : IInAppMessageViewWrapperFacto
             closingAnimation,
             clickableInAppMessageView,
             buttons,
-            closeButton
+            closeButton,
         )
-    }
 }

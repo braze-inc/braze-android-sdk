@@ -1,11 +1,11 @@
 package com.appboy.sample.activity
 
 import android.app.Activity
+import android.graphics.Color
 import android.os.Bundle
 import android.view.Gravity
 import android.widget.LinearLayout
 import android.widget.TextView
-import android.graphics.Color
 
 class SampleActivity : Activity() {
     override fun onCreate(savedInstanceState: Bundle?) {

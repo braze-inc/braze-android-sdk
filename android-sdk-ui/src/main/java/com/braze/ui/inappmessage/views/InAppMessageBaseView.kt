@@ -24,8 +24,12 @@ import com.braze.ui.inappmessage.utils.InAppMessageViewUtils.setViewBackgroundCo
 import com.braze.ui.support.removeViewFromParent
 import java.io.File
 
-abstract class InAppMessageBaseView(context: Context?, attrs: AttributeSet?) :
-    RelativeLayout(context, attrs), IInAppMessageView, IInAppMessageBackEventListener {
+abstract class InAppMessageBaseView(
+    context: Context?,
+    attrs: AttributeSet?,
+) : RelativeLayout(context, attrs),
+    IInAppMessageView,
+    IInAppMessageBackEventListener {
     override val messageClickableView: View?
         get() = this
 
@@ -56,7 +60,11 @@ abstract class InAppMessageBaseView(context: Context?, attrs: AttributeSet?) :
         messageImageView?.let { setImage(bitmap, it) }
     }
 
-    open fun setMessageIcon(icon: String, iconColor: Int, iconBackgroundColor: Int) {
+    open fun setMessageIcon(
+        icon: String,
+        iconColor: Int,
+        iconBackgroundColor: Int,
+    ) {
         messageIconView?.let { setIcon(context, icon, iconColor, iconBackgroundColor, it) }
     }
 
@@ -98,7 +106,7 @@ abstract class InAppMessageBaseView(context: Context?, attrs: AttributeSet?) :
                 ObjectAnimator.ofFloat(this, "scaleX", PREDICTIVE_BACK_MAX_SCALE_FACTOR),
                 ObjectAnimator.ofFloat(this, "scaleY", PREDICTIVE_BACK_MAX_SCALE_FACTOR),
                 ObjectAnimator.ofFloat(this, "translationX", (originalWidth - scaledWidth) / TRANSLATE_X_FACTOR),
-                ObjectAnimator.ofFloat(this, "translationY", (originalHeight - scaledHeight) / TRANSLATE_Y_FACTOR)
+                ObjectAnimator.ofFloat(this, "translationY", (originalHeight - scaledHeight) / TRANSLATE_Y_FACTOR),
             )
             animatorSet.start()
         }
@@ -116,7 +124,7 @@ abstract class InAppMessageBaseView(context: Context?, attrs: AttributeSet?) :
         animatorSet.playTogether(
             ObjectAnimator.ofFloat(this, "scaleX", 1.0f),
             ObjectAnimator.ofFloat(this, "scaleY", 1.0f),
-            ObjectAnimator.ofFloat(this, "translationX", 0.0f)
+            ObjectAnimator.ofFloat(this, "translationX", 0.0f),
         )
         animatorSet.start()
     }

@@ -7,31 +7,34 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import com.braze.models.cards.Card
 import com.braze.ui.R
-import com.braze.ui.widget.BaseCardView
 import com.braze.ui.actions.IAction
 import com.braze.ui.contentcards.BrazeContentCardUtils
 import com.braze.ui.contentcards.managers.BrazeContentCardsManager.Companion.instance
+import com.braze.ui.widget.BaseCardView
 
 /**
  * Base class for ContentCard views.
  */
-abstract class BaseContentCardView<T : Card>(context: Context) : BaseCardView<T>(
-    context
-) {
+abstract class BaseContentCardView<T : Card>(
+    context: Context,
+) : BaseCardView<T>(context) {
     abstract fun createViewHolder(viewGroup: ViewGroup): ContentCardViewHolder
 
-    open fun bindViewHolder(viewHolder: ContentCardViewHolder, card: Card) {
+    open fun bindViewHolder(
+        viewHolder: ContentCardViewHolder,
+        card: Card,
+    ) {
         viewHolder.setPinnedIconVisible(card.isPinned)
         viewHolder.setUnreadBarVisible(
-            configurationProvider.isContentCardsUnreadVisualIndicatorEnabled
-                && !card.isIndicatorHighlighted
+            configurationProvider.isContentCardsUnreadVisualIndicatorEnabled &&
+                !card.isIndicatorHighlighted,
         )
         val cardAction = BrazeContentCardUtils.getUriActionForCard(card)
         viewHolder.itemView.setOnClickListener {
             handleCardClick(
                 applicationContext,
                 card,
-                cardAction
+                cardAction,
             )
         }
 
@@ -53,7 +56,7 @@ abstract class BaseContentCardView<T : Card>(context: Context) : BaseCardView<T>
         cardAspectRatio: Float,
         cardImageUrl: String?,
         cardAltImageText: String?,
-        card: Card
+        card: Card,
     ) {
         if (imageView != null && cardImageUrl != null) {
             setImageViewToUrl(imageView, cardImageUrl, cardAspectRatio, card)
@@ -63,8 +66,11 @@ abstract class BaseContentCardView<T : Card>(context: Context) : BaseCardView<T>
         }
     }
 
-    override fun isClickHandled(context: Context, card: Card, cardAction: IAction?): Boolean =
-        instance.contentCardsActionListener?.onContentCardClicked(context, card, cardAction) == true
+    override fun isClickHandled(
+        context: Context,
+        card: Card,
+        cardAction: IAction?,
+    ): Boolean = instance.contentCardsActionListener?.onContentCardClicked(context, card, cardAction) == true
 
     @Suppress("MagicNumber")
     protected fun safeSetClipToOutline(imageView: ImageView?) {

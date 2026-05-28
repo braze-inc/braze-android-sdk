@@ -28,12 +28,14 @@ import com.appboy.sample.BannersFragment
 import com.appboy.sample.BuildConfig
 import com.appboy.sample.InAppMessageTesterFragment
 import com.appboy.sample.MainFragment
-import com.appboy.sample.networkconsole.NetworkConsoleDialogFragment
 import com.appboy.sample.PushTesterFragment
 import com.appboy.sample.R
+import com.appboy.sample.ecommerce.EcommerceFragment
 import com.appboy.sample.featureflag.view.FeatureFlagFragment
+import com.appboy.sample.networkconsole.NetworkConsoleDialogFragment
 import com.appboy.sample.util.DroidboyDataStoreUtils.readPrefsString
 import com.appboy.sample.util.DroidboyPreferenceKeys
+import com.appboy.sample.util.EnvironmentUtils
 import com.appboy.sample.util.RuntimePermissionUtils
 import com.appboy.sample.util.RuntimePermissionUtils.requestPermissionWithRationale
 import com.appboy.sample.util.RuntimePermissionUtils.requestPermissionsWithRationale
@@ -58,12 +60,12 @@ class DroidBoyActivity : AppCompatActivity() {
 
     private val requestMultiplePermissionLauncher =
         registerForActivityResult(RequestMultiplePermissions()) { result: Map<String, Boolean> ->
-            if (result.containsKey(Manifest.permission.ACCESS_FINE_LOCATION)
-                && result[Manifest.permission.ACCESS_FINE_LOCATION] != true
+            if (result.containsKey(Manifest.permission.ACCESS_FINE_LOCATION) &&
+                result[Manifest.permission.ACCESS_FINE_LOCATION] != true
             ) {
                 showToast("Location permissions denied.")
-            } else if (result.containsKey(Manifest.permission.ACCESS_BACKGROUND_LOCATION)
-                && result[Manifest.permission.ACCESS_BACKGROUND_LOCATION] != true
+            } else if (result.containsKey(Manifest.permission.ACCESS_BACKGROUND_LOCATION) &&
+                result[Manifest.permission.ACCESS_BACKGROUND_LOCATION] != true
             ) {
                 showToast("Background location permissions denied.")
             } else {
@@ -114,19 +116,23 @@ class DroidBoyActivity : AppCompatActivity() {
         fun handlePref(value: Boolean) {
             if (value) {
                 if (noMatchingTriggerEventSubscriber == null) {
-                    noMatchingTriggerEventSubscriber = IEventSubscriber { message ->
-                        runOnUiThread {
-                            // A simple non-Braze created message that we do on our own
-                            val dialog = AlertDialog.Builder(this)
-                                .setMessage("Received no trigger for ${message.sourceEventType}")
-                                .setTitle("Non-Braze Message")
-                                .setPositiveButton(R.string.user_dialog_okay) { _, _ -> }
-                                .create()
-                            dialog.show()
+                    noMatchingTriggerEventSubscriber =
+                        IEventSubscriber { message ->
+                            runOnUiThread {
+                                // A simple non-Braze created message that we do on our own
+                                val dialog =
+                                    AlertDialog
+                                        .Builder(this)
+                                        .setMessage("Received no trigger for ${message.sourceEventType}")
+                                        .setTitle("Non-Braze Message")
+                                        .setPositiveButton(R.string.user_dialog_okay) { _, _ -> }
+                                        .create()
+                                dialog.show()
+                            }
                         }
-                    }
                     noMatchingTriggerEventSubscriber?.let {
-                        Braze.getInstance(this)
+                        Braze
+                            .getInstance(this)
                             .subscribeToNoMatchingTriggerForEvent(it)
                     }
                 }
@@ -148,18 +154,18 @@ class DroidBoyActivity : AppCompatActivity() {
                 handlePref(
                     sharedPrefs.getBoolean(
                         "show_own_message_when_inapp_msg_not_triggered",
-                        false
-                    )
+                        false,
+                    ),
                 )
             }
         inAppMessagesSharedPrefs.registerOnSharedPreferenceChangeListener(
-            noInAppMessageTriggeredPrefListener
+            noInAppMessageTriggeredPrefListener,
         )
         handlePref(
             inAppMessagesSharedPrefs.getBoolean(
                 "show_own_message_when_inapp_msg_not_triggered",
-                false
-            )
+                false,
+            ),
         )
     }
 
@@ -178,10 +184,11 @@ class DroidBoyActivity : AppCompatActivity() {
                     locationPermissionsToRequest.add(Manifest.permission.ACCESS_BACKGROUND_LOCATION)
                 }
             } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+                @Suppress("UnnecessaryParentheses")
                 val hasAllPermissions = (
-                    applicationContext.hasPermission(Manifest.permission.ACCESS_BACKGROUND_LOCATION)
-                        && applicationContext.hasPermission(Manifest.permission.ACCESS_FINE_LOCATION)
-                    )
+                    applicationContext.hasPermission(Manifest.permission.ACCESS_BACKGROUND_LOCATION) &&
+                        applicationContext.hasPermission(Manifest.permission.ACCESS_FINE_LOCATION)
+                )
                 if (!hasAllPermissions) {
                     // Request both BACKGROUND and FINE location permissions
                     locationPermissionsToRequest.add(Manifest.permission.ACCESS_FINE_LOCATION)
@@ -200,7 +207,7 @@ class DroidBoyActivity : AppCompatActivity() {
             this,
             locationPermissionsToRequest.toTypedArray(),
             RuntimePermissionUtils.LOCATION_RATIONALE,
-            requestMultiplePermissionLauncher
+            requestMultiplePermissionLauncher,
         )
 
         if (shouldRequestLocalNetworkPermission()) {
@@ -208,7 +215,7 @@ class DroidBoyActivity : AppCompatActivity() {
                 this,
                 ACCESS_LOCAL_NETWORK_PERMISSION,
                 RuntimePermissionUtils.LOCAL_NETWORK_RATIONALE,
-                requestLocalNetworkPermissionLauncher
+                requestLocalNetworkPermissionLauncher,
             )
         }
     }
@@ -222,9 +229,10 @@ class DroidBoyActivity : AppCompatActivity() {
      */
     private fun shouldRequestLocalNetworkPermission(): Boolean {
         if (Build.VERSION.SDK_INT < ANDROID_17_API_LEVEL) return false
-        val overrideEndpoint = applicationContext.readPrefsString(
-            DroidboyPreferenceKeys.OVERRIDE_ENDPOINT
-        )
+        val overrideEndpoint =
+            applicationContext.readPrefsString(
+                DroidboyPreferenceKeys.OVERRIDE_ENDPOINT,
+            )
         if (overrideEndpoint.isNullOrBlank() || isLoopbackEndpoint(overrideEndpoint)) return false
         if (applicationContext.hasPermission(ACCESS_LOCAL_NETWORK_PERMISSION)) return false
         return true
@@ -232,7 +240,11 @@ class DroidBoyActivity : AppCompatActivity() {
 
     private fun isLoopbackEndpoint(endpoint: String): Boolean {
         val withScheme = if (endpoint.contains("://")) endpoint else "http://$endpoint"
-        val host = android.net.Uri.parse(withScheme).host?.lowercase() ?: return false
+        val host =
+            android.net.Uri
+                .parse(withScheme)
+                .host
+                ?.lowercase() ?: return false
         return host == "localhost" || host == "127.0.0.1" || host == "::1" || host == "[::1]"
     }
 
@@ -251,13 +263,14 @@ class DroidBoyActivity : AppCompatActivity() {
         super.onResume()
         processIntent()
         val configurationProvider = BrazeConfigurationProvider(this)
-        val endpoint = configurationProvider.customEndpoint.let {
-            if (it.isNullOrEmpty()) {
-                configurationProvider.baseUrlForRequests
-            } else {
-                it
+        val endpoint =
+            configurationProvider.customEndpoint.let {
+                if (it.isNullOrEmpty()) {
+                    configurationProvider.baseUrlForRequests
+                } else {
+                    it
+                }
             }
-        }
 
         (findViewById<View>(R.id.toolbar_info_endpoint) as TextView).text = "endpoint: $endpoint"
         val configuredApiKey = Braze.getConfiguredApiKey(configurationProvider)
@@ -279,10 +292,11 @@ class DroidBoyActivity : AppCompatActivity() {
                 startActivity(Intent(applicationContext, GeofencesMapActivity::class.java))
             }
             R.id.iam_sandbox -> startActivity(Intent(applicationContext, InAppMessageSandboxActivity::class.java))
-            R.id.action_network_console -> NetworkConsoleDialogFragment().show(
-                supportFragmentManager,
-                NetworkConsoleDialogFragment.TAG
-            )
+            R.id.action_network_console ->
+                NetworkConsoleDialogFragment().show(
+                    supportFragmentManager,
+                    NetworkConsoleDialogFragment.TAG,
+                )
             R.id.action_flush -> {
                 Braze.getInstance(this).requestContentCardsRefresh()
                 Braze.getInstance(this).requestImmediateDataFlush()
@@ -309,8 +323,10 @@ class DroidBoyActivity : AppCompatActivity() {
         hideSoftKeyboard()
         val fragmentTransaction = fragmentManager.beginTransaction()
         fragmentTransaction.setCustomAnimations(
-            android.R.anim.fade_in, android.R.anim.fade_out,
-            android.R.anim.fade_in, android.R.anim.fade_out
+            android.R.anim.fade_in,
+            android.R.anim.fade_out,
+            android.R.anim.fade_in,
+            android.R.anim.fade_out,
         )
         fragmentTransaction.replace(R.id.root, newFragment, newFragment.javaClass.toString())
         if (currentFragment != null) {
@@ -322,6 +338,16 @@ class DroidBoyActivity : AppCompatActivity() {
     }
 
     private fun processIntent() {
+        val data = intent.data
+        if (data != null &&
+            data.scheme == EnvironmentUtils.BRAZE_ENVIRONMENT_DEEPLINK_SCHEME &&
+            data.host == EnvironmentUtils.BRAZE_ENVIRONMENT_DEEPLINK_HOST
+        ) {
+            EnvironmentUtils.setEnvironmentViaDeepLink(this, data)
+            intent = Intent()
+            return
+        }
+
         // Check to see if the Activity was opened by the Broadcast Receiver. If it was, navigate to the
         // correct fragment.
         val extras = intent.extras
@@ -349,7 +375,7 @@ class DroidBoyActivity : AppCompatActivity() {
             val inputMethodManager = getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
             inputMethodManager.hideSoftInputFromWindow(
                 it.windowToken,
-                InputMethodManager.HIDE_IMPLICIT_ONLY
+                InputMethodManager.HIDE_IMPLICIT_ONLY,
             )
         }
     }
@@ -361,39 +387,47 @@ class DroidBoyActivity : AppCompatActivity() {
     /**
      * Adapter that has all the information for the Fragments to feed the ViewPager2
      */
-    internal class Adapter(fm: FragmentManager, lifecycle: Lifecycle, val context: Context) :
-        FragmentStateAdapter(fm, lifecycle) {
+    internal class Adapter(
+        fm: FragmentManager,
+        lifecycle: Lifecycle,
+        val context: Context,
+    ) : FragmentStateAdapter(fm, lifecycle) {
         data class FragmentInfo(
             val fragmentConstructor: () -> Fragment,
-            val title: String
+            val title: String,
         )
 
-        private val fragmentInfo = arrayOf(
-            FragmentInfo(
-                { MainFragment() },
-                context.getString(R.string.tab_user)
-            ),
-            FragmentInfo(
-                { ContentCardsFragment() },
-                context.getString(R.string.tab_cards)
-            ),
-            FragmentInfo(
-                { InAppMessageTesterFragment() },
-                context.getString(R.string.inappmessage_tester_tab_title)
-            ),
-            FragmentInfo(
-                { PushTesterFragment() },
-                context.getString(R.string.tab_push)
-            ),
-            FragmentInfo(
-                { FeatureFlagFragment() },
-                context.getString(R.string.tab_flags)
-            ),
-            FragmentInfo(
-                { BannersFragment() },
-                "Banners"
+        private val fragmentInfo =
+            arrayOf(
+                FragmentInfo(
+                    { MainFragment() },
+                    context.getString(R.string.tab_user),
+                ),
+                FragmentInfo(
+                    { ContentCardsFragment() },
+                    context.getString(R.string.tab_cards),
+                ),
+                FragmentInfo(
+                    { InAppMessageTesterFragment() },
+                    context.getString(R.string.inappmessage_tester_tab_title),
+                ),
+                FragmentInfo(
+                    { PushTesterFragment() },
+                    context.getString(R.string.tab_push),
+                ),
+                FragmentInfo(
+                    { FeatureFlagFragment() },
+                    context.getString(R.string.tab_flags),
+                ),
+                FragmentInfo(
+                    { BannersFragment() },
+                    context.getString(R.string.tab_banners),
+                ),
+                FragmentInfo(
+                    { EcommerceFragment() },
+                    context.getString(R.string.tab_ecommerce),
+                ),
             )
-        )
 
         override fun getItemCount() = fragmentInfo.size
 

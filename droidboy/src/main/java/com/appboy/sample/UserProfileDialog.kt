@@ -26,7 +26,9 @@ import com.braze.enums.Month.Companion.getMonth
 import com.braze.support.BrazeLogger.getBrazeLogTag
 import java.util.Calendar
 
-class UserProfileDialog : CustomDialogBase(), View.OnClickListener {
+class UserProfileDialog :
+    CustomDialogBase(),
+    View.OnClickListener {
     private lateinit var firstName: EditText
     private lateinit var lastName: EditText
     private lateinit var email: EditText
@@ -44,7 +46,11 @@ class UserProfileDialog : CustomDialogBase(), View.OnClickListener {
     private val birthdayDisplayValue: String
         get() = (birthMonth + 1).toString() + "/" + birthDay + "/" + birthYear
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?,
+    ): View? {
         val view = inflater.inflate(R.layout.user_preferences, container, false)
         firstName = view.findViewById(R.id.first_name)
         lastName = view.findViewById(R.id.last_name)
@@ -56,7 +62,10 @@ class UserProfileDialog : CustomDialogBase(), View.OnClickListener {
         return view
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+    override fun onViewCreated(
+        view: View,
+        savedInstanceState: Bundle?,
+    ) {
         super.onViewCreated(view, savedInstanceState)
 
         val context = requireContext()
@@ -70,25 +79,33 @@ class UserProfileDialog : CustomDialogBase(), View.OnClickListener {
 
         ButtonUtils.setUpPopulateButton(
             view,
-            R.id.first_name_button, firstName, context.readPrefsString(DroidboyPreferenceKeys.USER_FIRST_NAME) ?: SAMPLE_FIRST_NAME
+            R.id.first_name_button,
+            firstName,
+            context.readPrefsString(DroidboyPreferenceKeys.USER_FIRST_NAME) ?: SAMPLE_FIRST_NAME,
         )
         ButtonUtils.setUpPopulateButton(
             view,
-            R.id.last_name_button, lastName, context.readPrefsString(DroidboyPreferenceKeys.USER_LAST_NAME) ?: SAMPLE_LAST_NAME
+            R.id.last_name_button,
+            lastName,
+            context.readPrefsString(DroidboyPreferenceKeys.USER_LAST_NAME) ?: SAMPLE_LAST_NAME,
         )
         ButtonUtils.setUpPopulateButton(
             view,
-            R.id.email_button, email, context.readPrefsString(DroidboyPreferenceKeys.USER_EMAIL) ?: SAMPLE_EMAIL
+            R.id.email_button,
+            email,
+            context.readPrefsString(DroidboyPreferenceKeys.USER_EMAIL) ?: SAMPLE_EMAIL,
         )
         ButtonUtils.setUpPopulateButton(
             view,
-            R.id.language_button, language, context.readPrefsString(DroidboyPreferenceKeys.USER_LANGUAGE) ?: SAMPLE_LANGUAGE
+            R.id.language_button,
+            language,
+            context.readPrefsString(DroidboyPreferenceKeys.USER_LANGUAGE) ?: SAMPLE_LANGUAGE,
         )
         ButtonUtils.setUpPopulateButton(
             view,
             R.id.phone_number_button,
             phoneNumber,
-            context.readPrefsString(DroidboyPreferenceKeys.USER_PHONE_NUMBER) ?: SAMPLE_PHONE_NUMBER
+            context.readPrefsString(DroidboyPreferenceKeys.USER_PHONE_NUMBER) ?: SAMPLE_PHONE_NUMBER,
         )
 
         val populateButton = view.findViewById<Button>(R.id.user_dialog_button_populate)
@@ -99,16 +116,20 @@ class UserProfileDialog : CustomDialogBase(), View.OnClickListener {
         clearButton.setOnClickListener(this)
         birthdayButton.setOnClickListener(this)
 
-        datePickerDialog = DatePickerDialog(
-            requireContext(), { _: DatePicker?, year: Int, monthOfYear: Int, dayOfMonth: Int ->
-                birthYear = year
-                birthMonth = monthOfYear
-                birthDay = dayOfMonth
-                birthdayText.text = birthdayDisplayValue
-                isBirthdaySet = true
-            }, calendar[Calendar.YEAR], calendar[Calendar.MONTH],
-            calendar[Calendar.DAY_OF_MONTH]
-        )
+        datePickerDialog =
+            DatePickerDialog(
+                requireContext(),
+                { _: DatePicker?, year: Int, monthOfYear: Int, dayOfMonth: Int ->
+                    birthYear = year
+                    birthMonth = monthOfYear
+                    birthDay = dayOfMonth
+                    birthdayText.text = birthdayDisplayValue
+                    isBirthdaySet = true
+                },
+                calendar[Calendar.YEAR],
+                calendar[Calendar.MONTH],
+                calendar[Calendar.DAY_OF_MONTH],
+            )
     }
 
     override fun onClick(view: View) {
@@ -212,7 +233,11 @@ class UserProfileDialog : CustomDialogBase(), View.OnClickListener {
         this.dismiss()
     }
 
-    private fun saveGenderToDataStore(genderId: Int, brazeUser: BrazeUser, context: Context) {
+    private fun saveGenderToDataStore(
+        genderId: Int,
+        brazeUser: BrazeUser,
+        context: Context,
+    ) {
         when (genderId) {
             GENDER_MALE_INDEX -> {
                 brazeUser.setGender(Gender.MALE)
@@ -248,8 +273,8 @@ class UserProfileDialog : CustomDialogBase(), View.OnClickListener {
         }
     }
 
-    private fun parseGenderFromDataStore(): Int {
-        return when (requireContext().readPrefsInt(DroidboyPreferenceKeys.USER_GENDER, GENDER_UNSPECIFIED_INDEX)) {
+    private fun parseGenderFromDataStore(): Int =
+        when (requireContext().readPrefsInt(DroidboyPreferenceKeys.USER_GENDER, GENDER_UNSPECIFIED_INDEX)) {
             GENDER_UNSPECIFIED_INDEX -> R.id.unspecified
             GENDER_MALE_INDEX -> R.id.male
             GENDER_FEMALE_INDEX -> R.id.female
@@ -262,7 +287,6 @@ class UserProfileDialog : CustomDialogBase(), View.OnClickListener {
                 R.id.unspecified
             }
         }
-    }
 
     companion object {
         private val TAG = getBrazeLogTag(UserProfileDialog::class.java)

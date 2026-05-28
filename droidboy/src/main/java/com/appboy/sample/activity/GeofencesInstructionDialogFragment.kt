@@ -7,18 +7,16 @@ import androidx.fragment.app.DialogFragment
 import com.appboy.sample.R
 
 class GeofencesInstructionDialogFragment : DialogFragment() {
-
     private val instructions: String by lazy {
         getString(R.string.geofence_instructions)
     }
 
-    override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-        return AlertDialog.Builder(requireContext())
+    override fun onCreateDialog(savedInstanceState: Bundle?): Dialog =
+        AlertDialog
+            .Builder(requireContext())
             .setTitle(R.string.geofence_dialog_title)
             .setMessage(instructions)
             .setPositiveButton(R.string.geofence_dialog_positive_button) { dialog, _ ->
                 dialog.dismiss()
-            }
-            .create()
-    }
+            }.create()
 }

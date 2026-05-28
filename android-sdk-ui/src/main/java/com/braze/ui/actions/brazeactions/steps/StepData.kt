@@ -14,10 +14,11 @@ import org.json.JSONObject
  */
 internal data class StepData(
     val srcJson: JSONObject,
-    val channel: Channel = Channel.UNKNOWN
+    val channel: Channel = Channel.UNKNOWN,
 ) {
     private val args: List<Any> by lazy {
-        srcJson.optJSONArray(ARGS)
+        srcJson
+            .optJSONArray(ARGS)
             .iterator<Any>()
             .asSequence()
             .toList()
@@ -65,14 +66,13 @@ internal data class StepData(
         return true
     }
 
-    fun isArgString(index: Int): Boolean {
-        return if (getArg(index) is String) {
+    fun isArgString(index: Int): Boolean =
+        if (getArg(index) is String) {
             true
         } else {
             brazelog { "Argument [$index] is not a String. Source: $srcJson" }
             false
         }
-    }
 
     /**
      * @return True if the argument is either null or [JSONObject].

@@ -19,7 +19,11 @@ interface IContentCardsActionListener {
      * the host app. If true, Braze will log a card click and do nothing else. If false,
      * Braze will continue its typical handling of the click.
      */
-    fun onContentCardClicked(context: Context, card: Card, cardAction: IAction?): Boolean = false
+    fun onContentCardClicked(
+        context: Context,
+        card: Card,
+        cardAction: IAction?,
+    ): Boolean = false
 
     /**
      * Note that the [Card] will be off-screen by the time this function is called.
@@ -27,7 +31,10 @@ interface IContentCardsActionListener {
      * @param context The context.
      * @param card The card that has been dismissed.
      */
-    fun onContentCardDismissed(context: Context, card: Card) {
+    fun onContentCardDismissed(
+        context: Context,
+        card: Card,
+    ) {
         // The default implementation of this is "do nothing"
     }
 }

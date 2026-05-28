@@ -15,7 +15,6 @@ import com.braze.ui.contentcards.view.DefaultContentCardView
 import com.braze.ui.contentcards.view.ImageOnlyContentCardView
 import com.braze.ui.contentcards.view.ShortNewsContentCardView
 import com.braze.ui.contentcards.view.TextAnnouncementContentCardView
-import java.util.*
 
 open class DefaultContentCardsViewBindingHandler : IContentCardsViewBindingHandler {
     /**
@@ -27,7 +26,7 @@ open class DefaultContentCardsViewBindingHandler : IContentCardsViewBindingHandl
         context: Context,
         cards: List<Card>,
         viewGroup: ViewGroup,
-        viewType: Int
+        viewType: Int,
     ): ContentCardViewHolder {
         val cardType = fromValue(viewType)
         return getContentCardsViewFromCache(context, cardType).createViewHolder(viewGroup)
@@ -37,23 +36,24 @@ open class DefaultContentCardsViewBindingHandler : IContentCardsViewBindingHandl
         context: Context,
         cards: List<Card>,
         viewHolder: ContentCardViewHolder,
-        adapterPosition: Int
+        adapterPosition: Int,
     ) {
         if (adapterPosition < 0 || adapterPosition >= cards.size) {
             return
         }
         val cardAtPosition = cards[adapterPosition]
-        val contentCardView = getContentCardsViewFromCache(
-            context,
-            cardAtPosition.cardType
-        )
+        val contentCardView =
+            getContentCardsViewFromCache(
+                context,
+                cardAtPosition.cardType,
+            )
         contentCardView.bindViewHolder(viewHolder, cardAtPosition)
     }
 
     override fun getItemViewType(
         context: Context,
         cards: List<Card>,
-        adapterPosition: Int
+        adapterPosition: Int,
     ): Int {
         if (adapterPosition < 0 || adapterPosition >= cards.size) {
             return -1
@@ -68,16 +68,20 @@ open class DefaultContentCardsViewBindingHandler : IContentCardsViewBindingHandl
      * is created and added to the cache.
      */
     @VisibleForTesting
-    fun getContentCardsViewFromCache(context: Context, cardType: CardType): BaseContentCardView<*> {
+    fun getContentCardsViewFromCache(
+        context: Context,
+        cardType: CardType,
+    ): BaseContentCardView<*> {
         if (!contentCardViewCache.containsKey(cardType) || contentCardViewCache[cardType] == null) {
             // Create the view here
-            val contentCardView: BaseContentCardView<*> = when (cardType) {
-                CardType.IMAGE -> ImageOnlyContentCardView(context)
-                CardType.CAPTIONED_IMAGE -> CaptionedImageContentCardView(context)
-                CardType.SHORT_NEWS -> ShortNewsContentCardView(context)
-                CardType.TEXT_ANNOUNCEMENT -> TextAnnouncementContentCardView(context)
-                else -> DefaultContentCardView(context)
-            }
+            val contentCardView: BaseContentCardView<*> =
+                when (cardType) {
+                    CardType.IMAGE -> ImageOnlyContentCardView(context)
+                    CardType.CAPTIONED_IMAGE -> CaptionedImageContentCardView(context)
+                    CardType.SHORT_NEWS -> ShortNewsContentCardView(context)
+                    CardType.TEXT_ANNOUNCEMENT -> TextAnnouncementContentCardView(context)
+                    else -> DefaultContentCardView(context)
+                }
             contentCardViewCache[cardType] = contentCardView
         }
         return contentCardViewCache[cardType] ?: DefaultContentCardView(context)
@@ -87,7 +91,10 @@ open class DefaultContentCardsViewBindingHandler : IContentCardsViewBindingHandl
     override fun describeContents(): Int = 0
 
     // Parcelable interface method
-    override fun writeToParcel(dest: Parcel, flags: Int) {
+    override fun writeToParcel(
+        dest: Parcel,
+        flags: Int,
+    ) {
         // Retaining views across a transition could lead to a
         // resource leak so the parcel is left unmodified
     }
@@ -98,11 +105,9 @@ open class DefaultContentCardsViewBindingHandler : IContentCardsViewBindingHandl
         @JvmField
         val CREATOR: Parcelable.Creator<DefaultContentCardsViewBindingHandler> =
             object : Parcelable.Creator<DefaultContentCardsViewBindingHandler> {
-                override fun createFromParcel(source: Parcel) =
-                    DefaultContentCardsViewBindingHandler()
+                override fun createFromParcel(source: Parcel) = DefaultContentCardsViewBindingHandler()
 
-                override fun newArray(size: Int): Array<DefaultContentCardsViewBindingHandler?> =
-                    arrayOfNulls(size)
+                override fun newArray(size: Int): Array<DefaultContentCardsViewBindingHandler?> = arrayOfNulls(size)
             }
     }
 }

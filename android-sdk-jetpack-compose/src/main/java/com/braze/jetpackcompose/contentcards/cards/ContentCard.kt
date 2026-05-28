@@ -29,12 +29,12 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.scale
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
-import androidx.lifecycle.compose.LocalLifecycleOwner
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.core.text.layoutDirection
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleEventObserver
+import androidx.lifecycle.compose.LocalLifecycleOwner
 import coil3.compose.AsyncImage
 import coil3.compose.LocalPlatformContext
 import coil3.request.ImageRequest
@@ -63,7 +63,7 @@ import java.util.Locale
 fun ContentCard(
     card: Card,
     clickHandler: ((Card) -> Boolean)? = null,
-    style: ContentCardStyling = LocalContentCardStyling.current
+    style: ContentCardStyling = LocalContentCardStyling.current,
 ) {
     val context = LocalContext.current
 
@@ -80,17 +80,18 @@ fun ContentCard(
     if (isUnread) {
         val lifecycleOwner = LocalLifecycleOwner.current
         DisposableEffect(LocalLifecycleOwner.current) {
-            val observer = LifecycleEventObserver { _, event ->
-                if (event == Lifecycle.Event.ON_PAUSE) {
-                    brazelog(TAG) { "OnPause called in ContentCardComposable" }
-                    if (!card.isIndicatorHighlighted) {
-                        card.isIndicatorHighlighted = true
-                        isUnread = false
+            val observer =
+                LifecycleEventObserver { _, event ->
+                    if (event == Lifecycle.Event.ON_PAUSE) {
+                        brazelog(TAG) { "OnPause called in ContentCardComposable" }
+                        if (!card.isIndicatorHighlighted) {
+                            card.isIndicatorHighlighted = true
+                            isUnread = false
+                        }
+                    } else {
+                        Unit
                     }
-                } else {
-                    Unit
                 }
-            }
             lifecycleOwner.lifecycle.addObserver(observer)
 
             onDispose {
@@ -106,9 +107,9 @@ fun ContentCard(
             .padding(
                 PaddingValues(
                     start = style.listPadding,
-                    end = style.listPadding
-                )
-            )
+                    end = style.listPadding,
+                ),
+            ),
     ) {
         val configurationProvider = remember { BrazeConfigurationProvider(context) }
 
@@ -120,33 +121,35 @@ fun ContentCard(
         }
 
         Box(
-            modifier = style
-                .cardModifier(type = card.cardType, extraPadding)
-                .clickable {
-                    if (!card.isIndicatorHighlighted) {
-                        card.isIndicatorHighlighted = true
-                        isUnread = false
-                    }
-                    BrazeContentCardUtils.handleCardClick(context, card, clickHandler)
-                }
+            modifier =
+                style
+                    .cardModifier(type = card.cardType, extraPadding)
+                    .clickable {
+                        if (!card.isIndicatorHighlighted) {
+                            card.isIndicatorHighlighted = true
+                            isUnread = false
+                        }
+                        BrazeContentCardUtils.handleCardClick(context, card, clickHandler)
+                    },
         ) {
             if (card.cardType == CardType.TEXT_ANNOUNCEMENT) {
                 val textAnnouncementCard = card as TextAnnouncementCard
                 Column(
-                    modifier = Modifier.padding(
-                        PaddingValues(
-                            top = style.textAnnouncementContentCardStyle.textColumnPaddingTop,
-                            bottom = style.textAnnouncementContentCardStyle.textColumnPaddingBottom,
-                            start = style.textAnnouncementContentCardStyle.textColumnPaddingStart,
-                            end = style.textAnnouncementContentCardStyle.textColumnPaddingEnd
-                        )
-                    )
+                    modifier =
+                        Modifier.padding(
+                            PaddingValues(
+                                top = style.textAnnouncementContentCardStyle.textColumnPaddingTop,
+                                bottom = style.textAnnouncementContentCardStyle.textColumnPaddingBottom,
+                                start = style.textAnnouncementContentCardStyle.textColumnPaddingStart,
+                                end = style.textAnnouncementContentCardStyle.textColumnPaddingEnd,
+                            ),
+                        ),
                 ) {
                     textAnnouncementCard.title?.let {
                         Text(
                             text = it,
                             style = style.titleTextStyle(type = card.cardType),
-                            modifier = Modifier.padding(PaddingValues(bottom = style.textAnnouncementContentCardStyle.titlePaddingBottom))
+                            modifier = Modifier.padding(PaddingValues(bottom = style.textAnnouncementContentCardStyle.titlePaddingBottom)),
                         )
                     }
                     Text(
@@ -160,7 +163,10 @@ fun ContentCard(
                             Text(
                                 text = hintActionText,
                                 style = style.hintActionTextStyle(type = card.cardType),
-                                modifier = Modifier.padding(PaddingValues(top = style.textAnnouncementContentCardStyle.actionHintPaddingTop))
+                                modifier =
+                                    Modifier.padding(
+                                        PaddingValues(top = style.textAnnouncementContentCardStyle.actionHintPaddingTop),
+                                    ),
                             )
                         }
                     }
@@ -174,20 +180,23 @@ fun ContentCard(
                     customComposable.invoke(card)
                 } else {
                     AsyncImage(
-                        model = ImageRequest.Builder(LocalPlatformContext.current)
-                            .data(imageOnlyCard.imageUrl)
-                            .build(),
+                        model =
+                            ImageRequest
+                                .Builder(LocalPlatformContext.current)
+                                .data(imageOnlyCard.imageUrl)
+                                .build(),
                         contentDescription = imageOnlyCard.altImageText,
                         contentScale = ContentScale.Crop,
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .run {
-                                if (imageOnlyCard.aspectRatio > 0) {
-                                    aspectRatio(imageOnlyCard.aspectRatio)
-                                } else {
-                                    this
-                                }
-                            }
+                        modifier =
+                            Modifier
+                                .fillMaxWidth()
+                                .run {
+                                    if (imageOnlyCard.aspectRatio > 0) {
+                                        aspectRatio(imageOnlyCard.aspectRatio)
+                                    } else {
+                                        this
+                                    }
+                                },
                     )
                 }
             }
@@ -200,46 +209,50 @@ fun ContentCard(
                         customComposable.invoke(card)
                     } else {
                         AsyncImage(
-                            model = ImageRequest.Builder(LocalPlatformContext.current)
-                                .data(captionedImageCard.imageUrl)
-                                .build(),
+                            model =
+                                ImageRequest
+                                    .Builder(LocalPlatformContext.current)
+                                    .data(captionedImageCard.imageUrl)
+                                    .build(),
                             contentDescription = captionedImageCard.altImageText,
                             contentScale = ContentScale.Crop,
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .wrapContentHeight()
-                                .run {
-                                    if (captionedImageCard.aspectRatio > 0) {
-                                        aspectRatio(captionedImageCard.aspectRatio)
-                                    } else {
-                                        this
-                                    }
-                                }
+                            modifier =
+                                Modifier
+                                    .fillMaxWidth()
+                                    .wrapContentHeight()
+                                    .run {
+                                        if (captionedImageCard.aspectRatio > 0) {
+                                            aspectRatio(captionedImageCard.aspectRatio)
+                                        } else {
+                                            this
+                                        }
+                                    },
                         )
                     }
                     Column(
-                        modifier = Modifier.padding(
-                            PaddingValues(
-                                top = style.captionedImageContentCardStyle.textColumnPaddingTop,
-                                bottom = style.captionedImageContentCardStyle.textColumnPaddingBottom,
-                                start = style.captionedImageContentCardStyle.textColumnPaddingStart,
-                                end = style.captionedImageContentCardStyle.textColumnPaddingEnd
-                            )
-                        )
+                        modifier =
+                            Modifier.padding(
+                                PaddingValues(
+                                    top = style.captionedImageContentCardStyle.textColumnPaddingTop,
+                                    bottom = style.captionedImageContentCardStyle.textColumnPaddingBottom,
+                                    start = style.captionedImageContentCardStyle.textColumnPaddingStart,
+                                    end = style.captionedImageContentCardStyle.textColumnPaddingEnd,
+                                ),
+                            ),
                     ) {
                         Text(
                             text = captionedImageCard.title,
-                            style = style.titleTextStyle(type = card.cardType)
+                            style = style.titleTextStyle(type = card.cardType),
                         )
                         Text(
                             text = captionedImageCard.description,
                             style = style.descriptionTextStyle(type = card.cardType),
-                            modifier = Modifier.padding(
-                                PaddingValues(
-                                    top = style.captionedImageContentCardStyle.descriptionPaddingTop
-                                )
-
-                            )
+                            modifier =
+                                Modifier.padding(
+                                    PaddingValues(
+                                        top = style.captionedImageContentCardStyle.descriptionPaddingTop,
+                                    ),
+                                ),
                         )
                         if (captionedImageCard.url != null) {
                             val hintActionText =
@@ -248,7 +261,10 @@ fun ContentCard(
                                 Text(
                                     text = hintActionText,
                                     style = style.hintActionTextStyle(type = card.cardType),
-                                    modifier = Modifier.padding(PaddingValues(top = style.captionedImageContentCardStyle.actionHintPaddingTop))
+                                    modifier =
+                                        Modifier.padding(
+                                            PaddingValues(top = style.captionedImageContentCardStyle.actionHintPaddingTop),
+                                        ),
                                 )
                             }
                         }
@@ -264,33 +280,36 @@ fun ContentCard(
                         customComposable.invoke(card)
                     } else {
                         AsyncImage(
-                            model = ImageRequest.Builder(LocalPlatformContext.current)
-                                .data(shortNewsCard.imageUrl)
-                                .build(),
+                            model =
+                                ImageRequest
+                                    .Builder(LocalPlatformContext.current)
+                                    .data(shortNewsCard.imageUrl)
+                                    .build(),
                             contentScale = ContentScale.Crop,
                             contentDescription = shortNewsCard.altImageText,
-                            modifier = Modifier
-                                .padding(
-                                    PaddingValues(
-                                        top = style.shortNewsContentCardStyle.imagePaddingTop,
-                                        start = style.shortNewsContentCardStyle.imagePaddingStart,
-                                        bottom = style.shortNewsContentCardStyle.imagePaddingBottom
-                                    )
-                                )
-                                .width(style.shortNewsContentCardStyle.imageWidth)
-                                .height(style.shortNewsContentCardStyle.imageHeight)
-                                .clip(RoundedCornerShape(3.0.dp))
+                            modifier =
+                                Modifier
+                                    .padding(
+                                        PaddingValues(
+                                            top = style.shortNewsContentCardStyle.imagePaddingTop,
+                                            start = style.shortNewsContentCardStyle.imagePaddingStart,
+                                            bottom = style.shortNewsContentCardStyle.imagePaddingBottom,
+                                        ),
+                                    ).width(style.shortNewsContentCardStyle.imageWidth)
+                                    .height(style.shortNewsContentCardStyle.imageHeight)
+                                    .clip(RoundedCornerShape(3.0.dp)),
                         )
                     }
                     Column(
-                        modifier = Modifier.padding(
-                            PaddingValues(
-                                top = style.shortNewsContentCardStyle.textColumnPaddingTop,
-                                bottom = style.shortNewsContentCardStyle.textColumnPaddingBottom,
-                                start = style.shortNewsContentCardStyle.textColumnPaddingStart,
-                                end = style.shortNewsContentCardStyle.textColumnPaddingEnd
-                            )
-                        )
+                        modifier =
+                            Modifier.padding(
+                                PaddingValues(
+                                    top = style.shortNewsContentCardStyle.textColumnPaddingTop,
+                                    bottom = style.shortNewsContentCardStyle.textColumnPaddingBottom,
+                                    start = style.shortNewsContentCardStyle.textColumnPaddingStart,
+                                    end = style.shortNewsContentCardStyle.textColumnPaddingEnd,
+                                ),
+                            ),
                     ) {
                         shortNewsCard.title?.let {
                             Text(
@@ -302,11 +321,12 @@ fun ContentCard(
                         Text(
                             text = shortNewsCard.description,
                             style = style.descriptionTextStyle(type = card.cardType),
-                            modifier = Modifier.padding(
-                                PaddingValues(
-                                    top = style.shortNewsContentCardStyle.descriptionPaddingTop
-                                )
-                            )
+                            modifier =
+                                Modifier.padding(
+                                    PaddingValues(
+                                        top = style.shortNewsContentCardStyle.descriptionPaddingTop,
+                                    ),
+                                ),
                         )
                         if (shortNewsCard.url != null) {
                             val hintActionText =
@@ -315,7 +335,7 @@ fun ContentCard(
                                 Text(
                                     text = hintActionText,
                                     style = style.hintActionTextStyle(type = card.cardType),
-                                    modifier = Modifier.padding(PaddingValues(top = style.shortNewsContentCardStyle.actionHintPaddingTop))
+                                    modifier = Modifier.padding(PaddingValues(top = style.shortNewsContentCardStyle.actionHintPaddingTop)),
                                 )
                             }
                         }
@@ -324,15 +344,16 @@ fun ContentCard(
             }
 
             if (
-                configurationProvider.isContentCardsUnreadVisualIndicatorEnabled
-                && isUnread
+                configurationProvider.isContentCardsUnreadVisualIndicatorEnabled &&
+                isUnread
             ) {
                 Divider(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .align(Alignment.BottomCenter),
+                    modifier =
+                        Modifier
+                            .fillMaxWidth()
+                            .align(Alignment.BottomCenter),
                     color = style.unreadIndicatorColor(card.cardType),
-                    thickness = 4.dp
+                    thickness = 4.dp,
                 )
             }
 
@@ -344,16 +365,17 @@ fun ContentCard(
                     Image(
                         painter = painterResource(id = style.pinnedResourceId(card.cardType)),
                         contentDescription = null,
-                        modifier = Modifier
-                            .align(style.pinnedAlignment(card))
-                            .padding(horizontal = extraPadding)
-                            .run {
-                                if (Locale.getDefault().layoutDirection == LayoutDirection.RTL) {
-                                    this.scale(scaleX = -1f, scaleY = 1f)
-                                } else {
-                                    this
-                                }
-                            }
+                        modifier =
+                            Modifier
+                                .align(style.pinnedAlignment(card))
+                                .padding(horizontal = extraPadding)
+                                .run {
+                                    if (Locale.getDefault().layoutDirection == LayoutDirection.RTL) {
+                                        this.scale(scaleX = -1f, scaleY = 1f)
+                                    } else {
+                                        this
+                                    }
+                                },
                     )
                 }
             }

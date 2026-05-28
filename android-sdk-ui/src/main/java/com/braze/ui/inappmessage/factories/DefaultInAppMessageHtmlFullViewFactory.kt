@@ -23,15 +23,17 @@ import com.braze.ui.support.isDeviceNotInTouchMode
  *
  * @param inAppMessageWebViewClientListener Listener for WebView client URL actions.
  */
-open class DefaultInAppMessageHtmlFullViewFactory(private val inAppMessageWebViewClientListener: IInAppMessageWebViewClientListener) :
-    IInAppMessageViewFactory {
+open class DefaultInAppMessageHtmlFullViewFactory(
+    private val inAppMessageWebViewClientListener: IInAppMessageWebViewClientListener,
+) : IInAppMessageViewFactory {
     @SuppressLint("AddJavascriptInterface")
     override fun createInAppMessageView(
         activity: Activity,
-        inAppMessage: IInAppMessage
+        inAppMessage: IInAppMessage,
     ): InAppMessageHtmlFullView? {
-        val view = activity.layoutInflater
-            .inflate(R.layout.com_braze_inappmessage_html_full, null) as InAppMessageHtmlFullView
+        val view =
+            activity.layoutInflater
+                .inflate(R.layout.com_braze_inappmessage_html_full, null) as InAppMessageHtmlFullView
         val config = BrazeConfigurationProvider(activity.applicationContext)
         if (config.isTouchModeRequiredForHtmlInAppMessages && isDeviceNotInTouchMode(view)) {
             brazelog(W) {
@@ -46,19 +48,19 @@ open class DefaultInAppMessageHtmlFullViewFactory(private val inAppMessageWebVie
         val javascriptInterface = InAppMessageJavascriptInterface(context, inAppMessageHtmlFull)
         view.setWebViewContent(
             inAppMessage.message,
-            inAppMessageHtmlFull.localAssetsDirectoryUrl
+            inAppMessageHtmlFull.localAssetsDirectoryUrl,
         )
         view.setInAppMessageWebViewClient(
             InAppMessageWebViewClient(
                 context,
                 inAppMessage,
                 inAppMessageWebViewClientListener,
-                inAppMessageHtmlFull.localAssetsDirectoryUrl
-            )
+                inAppMessageHtmlFull.localAssetsDirectoryUrl,
+            ),
         )
         view.messageWebView?.addJavascriptInterface(
             javascriptInterface,
-            InAppMessageHtmlBaseView.BRAZE_BRIDGE_PREFIX
+            InAppMessageHtmlBaseView.BRAZE_BRIDGE_PREFIX,
         )
         view.setupDirectionalNavigation()
         return view

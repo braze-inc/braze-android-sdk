@@ -39,26 +39,26 @@ class BrazeUnityActivityWrapper {
         val config = getUnityConfigurationProvider(applicationContext)
         braze.subscribeToNewInAppMessages(
             EventSubscriberFactory.createInAppMessageEventSubscriber(
-                config
-            )
+                config,
+            ),
         )
         braze.subscribeToContentCardsUpdates(
             EventSubscriberFactory.createContentCardsEventSubscriber(
-                config
-            )
+                config,
+            ),
         )
         braze.subscribeToFeatureFlagsUpdates(
             EventSubscriberFactory.createFeatureFlagsEventSubscriber(
-                config
-            )
+                config,
+            ),
         )
         braze.subscribeToPushNotificationEvents(
             EventSubscriberFactory.createPushEventSubscriber(
-                config
-            )
+                config,
+            ),
         )
         braze.subscribeToSdkAuthenticationFailures(
-            EventSubscriberFactory.createSdkAuthenticationFailureSubscriber(config)
+            EventSubscriberFactory.createSdkAuthenticationFailureSubscriber(config),
         )
         if (config.autoSetInAppMessageManagerListener) {
             brazelog(I) { "Automatically setting In App Message Manager listener in BrazeUnityActivityWrapper." }
@@ -107,7 +107,10 @@ class BrazeUnityActivityWrapper {
     /**
      * Call from [Activity.onNewIntent].
      */
-    fun onNewIntentCalled(intent: Intent?, activity: Activity) {
+    fun onNewIntentCalled(
+        intent: Intent?,
+        activity: Activity,
+    ) {
         // If the Activity is already open and we receive an intent to open the Activity again, we set
         // the new intent as the current one (which has the new intent extras).
         activity.intent = intent
@@ -124,7 +127,8 @@ class BrazeUnityActivityWrapper {
             UnityInAppMessageManagerAction.IAM_DISPLAY_NOW,
             UnityInAppMessageManagerAction.IAM_DISPLAY_LATER,
             UnityInAppMessageManagerAction.IAM_DISCARD,
-            UnityInAppMessageManagerAction.IAM_REENQUEUE ->
+            UnityInAppMessageManagerAction.IAM_REENQUEUE,
+            ->
                 action.inAppMessageOperation?.let { nextInAppMessageDisplayOperation = it }
             else -> {
                 brazelog(V) { "Failed to map unity IAM manager action value: $action" }
@@ -162,7 +166,7 @@ class BrazeUnityActivityWrapper {
                     brazelog(V) { "Unity custom IAM listener method beforeInAppMessageDisplayed called." }
                     MessagingUtils.sendToBrazeInternalComponent(
                         BrazeInternalComponentMethod.BEFORE_IAM_DISPLAYED,
-                        inAppMessage.forJsonPut().toString()
+                        inAppMessage.forJsonPut().toString(),
                     )
                     // If this was requested, override whatever was set previously
                     return if (wasInAppMessageDisplayRequested) {
@@ -182,36 +186,35 @@ class BrazeUnityActivityWrapper {
                     brazelog(V) { "Unity custom IAM listener method onInAppMessageDismissed called." }
                     MessagingUtils.sendToBrazeInternalComponent(
                         BrazeInternalComponentMethod.ON_IAM_DISMISSED,
-                        inAppMessage.forJsonPut().toString()
+                        inAppMessage.forJsonPut().toString(),
                     )
                 }
 
-                override fun onInAppMessageClicked(
-                    inAppMessage: IInAppMessage,
-                ): Boolean {
+                override fun onInAppMessageClicked(inAppMessage: IInAppMessage): Boolean {
                     brazelog(V) { "Unity custom IAM listener method onInAppMessageClicked called." }
                     MessagingUtils.sendToBrazeInternalComponent(
                         BrazeInternalComponentMethod.ON_IAM_CLICKED,
-                        inAppMessage.forJsonPut().toString()
+                        inAppMessage.forJsonPut().toString(),
                     )
                     return super.onInAppMessageClicked(inAppMessage)
                 }
 
                 override fun onInAppMessageButtonClicked(
                     inAppMessage: IInAppMessage,
-                    button: MessageButton
+                    button: MessageButton,
                 ): Boolean {
                     brazelog(V) { "Unity custom IAM listener method onInAppMessageButtonClicked called." }
-                    val jsonArray = JSONArray()
-                        .put(inAppMessage.forJsonPut().toString())
-                        .put(button.id)
+                    val jsonArray =
+                        JSONArray()
+                            .put(inAppMessage.forJsonPut().toString())
+                            .put(button.id)
                     MessagingUtils.sendToBrazeInternalComponent(
                         BrazeInternalComponentMethod.ON_IAM_BUTTON_CLICKED,
-                        jsonArray.toString()
+                        jsonArray.toString(),
                     )
                     return super.onInAppMessageButtonClicked(inAppMessage, button)
                 }
-            }
+            },
         )
 
         BrazeInAppMessageManager.getInstance().setCustomHtmlInAppMessageActionListener(
@@ -219,18 +222,19 @@ class BrazeUnityActivityWrapper {
                 override fun onOtherUrlAction(
                     inAppMessage: IInAppMessage,
                     url: String,
-                    queryBundle: Bundle
+                    queryBundle: Bundle,
                 ): Boolean {
-                    val jsonArray = JSONArray()
-                        .put(inAppMessage.forJsonPut())
-                        .put(url)
+                    val jsonArray =
+                        JSONArray()
+                            .put(inAppMessage.forJsonPut())
+                            .put(url)
                     MessagingUtils.sendToBrazeInternalComponent(
                         BrazeInternalComponentMethod.ON_IAM_HTML_CLICKED,
-                        jsonArray.toString()
+                        jsonArray.toString(),
                     )
                     return super.onOtherUrlAction(inAppMessage, url, queryBundle)
                 }
-            }
+            },
         )
     }
 

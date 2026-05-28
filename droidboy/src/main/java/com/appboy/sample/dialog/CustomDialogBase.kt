@@ -11,8 +11,10 @@ import com.appboy.sample.R
  * Requires R.layout.dialog_footer_navigation in the dialog to work properly.
  */
 abstract class CustomDialogBase : DialogFragment() {
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+    override fun onViewCreated(
+        view: View,
+        savedInstanceState: Bundle?,
+    ) {
         super.onViewCreated(view, savedInstanceState)
 
         view.findViewById<Button>(R.id.bDialogNegative).setOnClickListener { onExitButtonPressed(false) }

@@ -1,7 +1,7 @@
 <!--
 Thank you for opening an issue with Braze!
 
-If you are experiencing issues with our product, please consider directing your issue to support@braze.com, as that is the best channel for solving integration issues. Please see the bottom for more explanation.
+If you are experiencing issues with our product, please contact Braze Technical Support for assistance, as that is the best channel for solving integration issues. Please see the bottom for more explanation.
 
 For other items, like requests for modifications to our SDK or bug reports, please use the following format:
 -->
@@ -63,7 +63,7 @@ Please link to a project we can download that reproduces the issue.
 -->
 
 <!--
-Note: We recommend e-mailing support@braze.com with any integration issues, as our team actively optimizes this support channel to provide efficient and robust resolutions. Integration issues also often require logs and other information that may contain private data, and our main support channel ensures no risk of leaking sensitive data.
+Note: We recommend contacting Braze Technical Support for assistance with any integration issues, as our team actively optimizes this support channel to provide efficient and robust resolutions. Integration issues also often require logs and other information that may contain private data, and our main support channel ensures no risk of leaking sensitive data.
 -->
 
 # ANR Reporting

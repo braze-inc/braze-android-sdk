@@ -18,7 +18,7 @@ open class ContentCardsActivity : BrazeBaseFragmentActivity() {
         if (BrazeInternal.getConfigurationProvider(this).shouldUseWindowFlagSecureInActivities) {
             window.setFlags(
                 WindowManager.LayoutParams.FLAG_SECURE,
-                WindowManager.LayoutParams.FLAG_SECURE
+                WindowManager.LayoutParams.FLAG_SECURE,
             )
         }
         setContentView(R.layout.com_braze_content_cards_activity)

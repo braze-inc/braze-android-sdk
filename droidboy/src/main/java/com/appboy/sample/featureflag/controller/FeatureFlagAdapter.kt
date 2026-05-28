@@ -12,13 +12,15 @@ import com.braze.models.FeatureFlag
 import com.braze.support.getPrettyPrintedString
 
 class FeatureFlagAdapter(
-    private val featureFlags: MutableList<FeatureFlag>
+    private val featureFlags: MutableList<FeatureFlag>,
 ) : RecyclerView.Adapter<FeatureFlagAdapter.ViewHolder>() {
     /**
      * Provide a reference to the type of views that you are using
      * (custom ViewHolder)
      */
-    class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+    class ViewHolder(
+        view: View,
+    ) : RecyclerView.ViewHolder(view) {
         private var areDetailsVisible = false
         val tvIdentifier: TextView
         val tvInfo: TextView
@@ -42,16 +44,24 @@ class FeatureFlagAdapter(
     }
 
     // Create new views (invoked by the layout manager)
-    override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): ViewHolder {
+    override fun onCreateViewHolder(
+        viewGroup: ViewGroup,
+        viewType: Int,
+    ): ViewHolder {
         // Create a new view, which defines the UI of the list item
-        val view = LayoutInflater.from(viewGroup.context)
-            .inflate(R.layout.feature_flag_overview_item, viewGroup, false)
+        val view =
+            LayoutInflater
+                .from(viewGroup.context)
+                .inflate(R.layout.feature_flag_overview_item, viewGroup, false)
 
         return ViewHolder(view)
     }
 
     // Replace the contents of a view (invoked by the layout manager)
-    override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
+    override fun onBindViewHolder(
+        viewHolder: ViewHolder,
+        position: Int,
+    ) {
         // Get element from your dataset at this position and replace the
         // contents of the view with that element
         val featureFlag = featureFlags[position]
@@ -86,21 +96,25 @@ class FeatureFlagAdapter(
 
     private class DiffCallback(
         private val oldFlags: List<FeatureFlag>,
-        private val newFlags: List<FeatureFlag>
+        private val newFlags: List<FeatureFlag>,
     ) : DiffUtil.Callback() {
-        override fun getOldListSize() =
-            oldFlags.size
+        override fun getOldListSize() = oldFlags.size
 
-        override fun getNewListSize() =
-            newFlags.size
+        override fun getNewListSize() = newFlags.size
 
-        override fun areItemsTheSame(oldItemPosition: Int, newItemPosition: Int) =
-            doItemsShareIds(oldItemPosition, newItemPosition)
+        override fun areItemsTheSame(
+            oldItemPosition: Int,
+            newItemPosition: Int,
+        ) = doItemsShareIds(oldItemPosition, newItemPosition)
 
-        override fun areContentsTheSame(oldItemPosition: Int, newItemPosition: Int) =
-            oldFlags[oldItemPosition].forJsonPut() == newFlags[newItemPosition].forJsonPut()
+        override fun areContentsTheSame(
+            oldItemPosition: Int,
+            newItemPosition: Int,
+        ) = oldFlags[oldItemPosition].forJsonPut() == newFlags[newItemPosition].forJsonPut()
 
-        private fun doItemsShareIds(oldItemPosition: Int, newItemPosition: Int) =
-            oldFlags[oldItemPosition].id == newFlags[newItemPosition].id
+        private fun doItemsShareIds(
+            oldItemPosition: Int,
+            newItemPosition: Int,
+        ) = oldFlags[oldItemPosition].id == newFlags[newItemPosition].id
     }
 }

@@ -1,8 +1,8 @@
 package com.braze.ui.contentcards.handlers
 
 import android.os.Parcelable
-import com.braze.models.cards.Card
 import com.braze.events.ContentCardsUpdatedEvent
+import com.braze.models.cards.Card
 
 /**
  * An interface to handle card updates for the [Card]. Handles the

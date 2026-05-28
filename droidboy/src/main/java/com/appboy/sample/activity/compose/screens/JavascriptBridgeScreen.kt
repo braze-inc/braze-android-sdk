@@ -20,7 +20,7 @@ fun JavascriptBridgeScreen(
     openDrawer: () -> Unit,
     viewModel: MainViewModel,
     scope: CoroutineScope? = null,
-    snackbarHostState: SnackbarHostState? = null
+    snackbarHostState: SnackbarHostState? = null,
 ) {
     Column(modifier = Modifier.fillMaxSize()) {
         TopBar(
@@ -31,7 +31,7 @@ fun JavascriptBridgeScreen(
         Column(
             modifier = Modifier.fillMaxSize(),
             verticalArrangement = Arrangement.Top,
-            horizontalAlignment = Alignment.Start
+            horizontalAlignment = Alignment.Start,
         ) {
             Banner(placementId = "custom_html")
         }
