@@ -59,7 +59,6 @@ open class DefaultInAppMessageViewLifecycleListener : IInAppMessageViewLifecycle
 
     override fun afterClosed(inAppMessage: IInAppMessage) {
         brazelog { "IInAppMessageViewLifecycleListener.afterClosed called." }
-        inAppMessageManager.resetAfterInAppMessageClose()
         if (inAppMessage is IInAppMessageHtml) {
             startClearHtmlInAppMessageAssetsThread()
         }

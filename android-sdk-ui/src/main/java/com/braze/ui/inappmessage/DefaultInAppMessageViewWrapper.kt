@@ -69,6 +69,11 @@ open class DefaultInAppMessageViewWrapper @JvmOverloads constructor(
     open var dismissRunnable: Runnable? = null
 
     /**
+     * When true, [prepareForActivityTransitionCarryover] ran and delayed open/close callbacks must be ignored.
+     */
+    private var shouldIgnoreOpenAndCloseLifecycleCallbacks = false
+
+    /**
      * The [View] that previously held focus before a message is displayed as
      * given via [Activity.getCurrentFocus].
      */
@@ -235,7 +240,17 @@ open class DefaultInAppMessageViewWrapper @JvmOverloads constructor(
         }
     }
 
+    override fun prepareForActivityTransitionCarryover() {
+        shouldIgnoreOpenAndCloseLifecycleCallbacks = true
+        inAppMessageView.clearAnimation()
+        dismissRunnable?.let { inAppMessageView.removeCallbacks(it) }
+    }
+
     override fun close() {
+        if (shouldIgnoreOpenAndCloseLifecycleCallbacks) {
+            brazelog { "Ignoring close on in-app message wrapper prepared for activity transition carryover." }
+            return
+        }
         brazelog { "Closing in-app message view wrapper" }
         if (configurationProvider.isInAppMessageAccessibilityExclusiveModeEnabled) {
             resetAllViewGroupChildrenToPreviousAccessibilityFlagOrAuto(
@@ -457,6 +472,12 @@ open class DefaultInAppMessageViewWrapper @JvmOverloads constructor(
      * [IInAppMessageViewLifecycleListener.afterClosed] is called.
      */
     open fun closeInAppMessageView() {
+        if (shouldIgnoreOpenAndCloseLifecycleCallbacks) {
+            brazelog {
+                "Ignoring closeInAppMessageView on in-app message wrapper prepared for activity transition carryover."
+            }
+            return
+        }
         brazelog { "Closing in-app message view" }
         inAppMessageView.removeViewFromParent()
         // In the case of HTML in-app messages, we need to make sure the
@@ -472,7 +493,9 @@ open class DefaultInAppMessageViewWrapper @JvmOverloads constructor(
                 brazelog(E, e) { "Failed to request focus on previous view" }
             }
         }
-        inAppMessageViewLifecycleListener.afterClosed(inAppMessage)
+        if (BrazeInAppMessageManager.getInstance().resetAfterInAppMessageClose(this)) {
+            inAppMessageViewLifecycleListener.afterClosed(inAppMessage)
+        }
     }
 
     /**
@@ -533,6 +556,12 @@ open class DefaultInAppMessageViewWrapper @JvmOverloads constructor(
                 // This lifecycle callback has been observed to not be called during slideup animations
                 // on occasion. Do not add any code that *MUST* be executed here.
                 override fun onAnimationEnd(animation: Animation?) {
+                    if (shouldIgnoreOpenAndCloseLifecycleCallbacks) {
+                        brazelog {
+                            "Ignoring opening animation end for in-app message wrapper prepared for activity transition carryover."
+                        }
+                        return
+                    }
                     if (inAppMessage.dismissType === DismissType.AUTO_DISMISS) {
                         addDismissRunnable()
                     }

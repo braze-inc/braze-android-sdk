@@ -41,4 +41,12 @@ interface IInAppMessageViewWrapper {
      * on the main UI thread and should run synchronously.
      */
     fun close()
+
+    /**
+     * Prepares this wrapper when its message is saved for display on the next [Activity]
+     * during an [BrazeInAppMessageManager.unregisterInAppMessageManager] transition.
+     *
+     * Custom implementations may override this to cancel pending close animations or dismiss callbacks.
+     */
+    fun prepareForActivityTransitionCarryover()
 }

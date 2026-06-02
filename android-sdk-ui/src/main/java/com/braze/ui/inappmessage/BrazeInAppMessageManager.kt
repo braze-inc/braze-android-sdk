@@ -41,7 +41,6 @@ import com.braze.ui.inappmessage.views.InAppMessageFullView
 import com.braze.ui.inappmessage.views.InAppMessageHtmlBaseView
 import com.braze.ui.support.isCurrentOrientationValid
 import com.braze.ui.support.isRunningOnTablet
-import com.braze.ui.support.removeViewFromParent
 import com.braze.ui.support.setActivityRequestedOrientation
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -92,6 +91,7 @@ open class BrazeInAppMessageManager : InAppMessageManagerBase() {
     // Static field leak doesn't apply to this singleton since the activity is nullified after the manager is unregistered.
     private val inAppMessageViewLifecycleListener: IInAppMessageViewLifecycleListener =
         DefaultInAppMessageViewLifecycleListener()
+    private val activityTransitionCoordinator = InAppMessageActivityTransitionCoordinator()
 
     @JvmField
     @VisibleForTesting
@@ -304,46 +304,30 @@ open class BrazeInAppMessageManager : InAppMessageManagerBase() {
                 shouldNextUnregisterBeSkipped = false
                 return
             }
-            if (activity == null) {
-                // The activity is not needed to unregister so we can continue unregistration with it being null.
-                brazelog(W) { "Null Activity passed to unregisterInAppMessageManager." }
-            } else {
-                brazelog(V) { "Unregistering InAppMessageManager from activity: ${activity.localClassName}" }
-            }
-
-            // If there is an in-app message being displayed when the host app transitions to another Activity (or
-            // requests an orientation change), we save it in memory so that we can redisplay it when the
-            // operation is done.
-            val viewWrapper = inAppMessageViewWrapper
-            if (viewWrapper != null) {
-                val inAppMessageView = viewWrapper.inAppMessageView
-                if (inAppMessageView is InAppMessageHtmlBaseView) {
-                    brazelog { "In-app message view includes HTML. Removing the page finished listener." }
-                    inAppMessageView.setHtmlPageFinishedListener(null)
-                }
-                inAppMessageView.removeViewFromParent()
-
-                // Only continue if we're not animating a close
-                carryoverInAppMessage =
-                    if (viewWrapper.isAnimatingClose) {
-                        // Note that mInAppMessageViewWrapper may be null after this call
-                        inAppMessageViewLifecycleListener.afterClosed(viewWrapper.inAppMessage)
-                        null
-                    } else {
-                        viewWrapper.inAppMessage
-                    }
-                currentBackEventHandler?.unregister()
-                currentBackEventHandler = null
-                cancelPendingWebViewPause()
-                inAppMessageViewWrapper = null
-            } else {
-                carryoverInAppMessage = null
-            }
+            activityTransitionCoordinator.logUnregisterActivity(activity)
+            applyUnregisterDisplayedMessageResult(
+                activityTransitionCoordinator.resolveUnregisterDisplayedMessage(
+                    viewWrapper = inAppMessageViewWrapper,
+                    resetAfterClose = ::resetAfterInAppMessageClose,
+                    notifyAfterClosed = inAppMessageViewLifecycleListener::afterClosed,
+                ),
+            )
             mActivity = null
             displayingInAppMessage.set(false)
         } catch (e: Exception) {
             brazelog(E, e) { "Error while calling attempting to unregister the InAppMessageManager" }
         }
+    }
+
+    private fun applyUnregisterDisplayedMessageResult(result: InAppMessageActivityTransitionCoordinator.UnregisterDisplayedMessageResult) {
+        carryoverInAppMessage = result.carryoverInAppMessage
+        if (!result.shouldClearActiveWrapper) {
+            return
+        }
+        currentBackEventHandler?.unregister()
+        currentBackEventHandler = null
+        cancelPendingWebViewPause()
+        inAppMessageViewWrapper = null
     }
 
     /**
@@ -486,8 +470,21 @@ open class BrazeInAppMessageManager : InAppMessageManagerBase() {
      * was displayed. This allows for a new in-app message to be displayed after calling this method.
      * [ViewUtils.setActivityRequestedOrientation] is called with the original
      * orientation before the last in-app message was displayed.
+     *
+     * @param closedWrapper When non-null, reset is skipped unless this wrapper is still the active
+     * [inAppMessageViewWrapper]. This prevents stale wrapper teardown during carryover from clearing
+     * manager state for a replacement wrapper.
+     *
+     * @return Whether manager state was reset.
      */
-    open fun resetAfterInAppMessageClose() {
+    @JvmOverloads
+    open fun resetAfterInAppMessageClose(closedWrapper: IInAppMessageViewWrapper? = null): Boolean {
+        if (closedWrapper != null && inAppMessageViewWrapper !== closedWrapper) {
+            brazelog {
+                "Skipping manager reset for stale in-app message wrapper close."
+            }
+            return false
+        }
         brazelog(V) { "Resetting after in-app message close." }
         currentBackEventHandler?.unregister()
         currentBackEventHandler = null
@@ -501,6 +498,7 @@ open class BrazeInAppMessageManager : InAppMessageManagerBase() {
             activity.setActivityRequestedOrientation(origOrientation)
             originalOrientation = null
         }
+        return true
     }
 
     // For backwards compatibility
@@ -695,6 +693,15 @@ open class BrazeInAppMessageManager : InAppMessageManagerBase() {
                 inAppMessageView.setHtmlPageFinishedListener {
                     try {
                         if (viewWrapper != null) {
+                            if (inAppMessageViewWrapper == null) {
+                                brazelog(W) {
+                                    "Re-attaching in-app message wrapper after HTML page load."
+                                }
+                                inAppMessageViewWrapper = viewWrapper
+                            }
+                            if (!displayingInAppMessage.get()) {
+                                displayingInAppMessage.set(true)
+                            }
                             brazelog {
                                 "Page has finished loading. Opening in-app message view wrapper."
                             }

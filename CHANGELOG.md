@@ -1,3 +1,10 @@
+## 42.3.1
+
+[Release Date](https://github.com/braze-inc/braze-android-sdk/releases/tag/v42.3.1)
+
+##### Fixed
+- Fixed an issue where HTML In-App Messages displayed during an Activity transition could remain visible but not dismissable after carryover.
+
 ## 42.3.0
 
 [Release Date](https://github.com/braze-inc/braze-android-sdk/releases/tag/v42.3.0)
