@@ -44,7 +44,7 @@
         </button>
         <div class="navigation-controls--break ui-kit_mobile-only"></div>
         <div class="library-version" id="library-version">
-42.3.1        </div>
+43.0.0        </div>
         <div class="navigation-controls">
         <ul class="filter-section filter-section_loading" id="filter-section" aria-label="Target filter">
                 <button class="platform-tag platform-selector jvm-like" data-active="" aria-pressed="true"
@@ -110,26 +110,30 @@
     <h1 class="cover"><span>Default</span><wbr></wbr><span>Braze</span><wbr></wbr><span>Image</span><wbr></wbr><span><span>Loader</span></span></h1>
     <div class="platform-hinted  with-platform-tabs" data-platform-hinted="data-platform-hinted">
       <div class="platform-bookmarks-row" data-toggle-list="data-toggle-list"><button class="platform-bookmark" data-filterable-current=":android-sdk-ui/release" data-filterable-set=":android-sdk-ui/release" data-active="" data-toggle=":android-sdk-ui/release">release</button></div>
-<div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui/release"><div class="symbol monospace"><span class="token keyword">class </span><a href="index.html">DefaultBrazeImageLoader</a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">context<span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/android/content/Context.html">Context</a></span></span><span class="token punctuation">)</span> : <a href="../-i-braze-image-loader/index.html">IBrazeImageLoader</a></div><p class="paragraph">Default <a href="../-i-braze-image-loader/index.html">IBrazeImageLoader</a> implementation that uses an in-memory LRU cache backed by a disk LRU cache for bitmap storage.</p></div>    </div>
+<div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui/release"><div class="symbol monospace"><span class="token keyword">class </span><a href="index.html">DefaultBrazeImageLoader</a> <span><span class="token annotation builtin">@</span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.jvm/-jvm-overloads/index.html"><span class="token annotation builtin">JvmOverloads</span></a> </span><span class="token keyword">constructor</span><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">context<span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/android/content/Context.html">Context</a><span class="token punctuation">, </span></span><span class="parameter ">imageDownloadRetryPolicy<span class="token operator">: </span><a href="../-image-download-retry-policy/index.html">ImageDownloadRetryPolicy</a><span class="token operator">?</span><span class="token operator"> = </span>null<span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>bitmapDownloader<span class="token operator">: </span><span class="token punctuation">(</span><a href="https://developer.android.com/reference/kotlin/android/content/Context.html">Context</a><span class="token punctuation">, </span><a href="https://developer.android.com/reference/kotlin/android/net/Uri.html">Uri</a><span class="token punctuation">, </span><a href="../../com.braze.enums/-braze-view-bounds/index.html">BrazeViewBounds</a><span class="token operator">?</span><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><a href="../../com.braze.support/-bitmap-and-headers/index.html">BitmapAndHeaders</a><span class="token operator"> = </span>{ downloadContext, imageUri, bounds -&gt;
+                getBitmap(downloadContext, imageUri, bounds ?: BrazeViewBounds.NO_BOUNDS)
+            }</span></span><span class="token punctuation">)</span> : <a href="../-i-braze-image-loader/index.html">IBrazeImageLoader</a></div><p class="paragraph">Default <a href="../-i-braze-image-loader/index.html">IBrazeImageLoader</a> implementation that uses an in-memory LRU cache backed by a disk LRU cache for bitmap storage.</p></div>    </div>
   </div>
   <div class="tabbedcontent">
     <div class="tabs-section" tabs-section="tabs-section"><button class="section-tab" data-active="" data-togglable="CONSTRUCTOR,TYPE,PROPERTY,FUNCTION">Members</button></div>
     <div class="tabs-section-body">
       <div data-togglable="CONSTRUCTOR">
         <h2 class="tableheader">Constructors</h2>
-        <div class="table"><a data-name="-1523403863%2FConstructors%2F-1369171853" anchor-label="DefaultBrazeImageLoader" id="-1523403863%2FConstructors%2F-1369171853" data-filterable-set=":android-sdk-ui/release"></a>
+        <div class="table"><a data-name="1165195489%2FConstructors%2F-1369171853" anchor-label="DefaultBrazeImageLoader" id="1165195489%2FConstructors%2F-1369171853" data-filterable-set=":android-sdk-ui/release"></a>
           <div class="table-row table-row_content" data-togglable="CONSTRUCTOR" data-filterable-current=":android-sdk-ui/release" data-filterable-set=":android-sdk-ui/release">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="-default-braze-image-loader.html"><span>Default</span><wbr></wbr><span>Braze</span><wbr></wbr><span>Image</span><wbr></wbr><span><span>Loader</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1523403863%2FConstructors%2F-1369171853"></span>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1165195489%2FConstructors%2F-1369171853"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
                   <div class="platform-hinted  with-platform-tabs" data-platform-hinted="data-platform-hinted">
                     <div class="platform-bookmarks-row" data-toggle-list="data-toggle-list"><button class="platform-bookmark" data-filterable-current=":android-sdk-ui/release" data-filterable-set=":android-sdk-ui/release" data-active="" data-toggle=":android-sdk-ui/release">release</button></div>
-<div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui/release"><div class="symbol monospace"><span class="token keyword">constructor</span><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">context<span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/android/content/Context.html">Context</a></span></span><span class="token punctuation">)</span></div></div>                  </div>
+<div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui/release"><div class="symbol monospace"><div class="block"><div class="block"><span class="token annotation builtin">@</span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.jvm/-jvm-overloads/index.html"><span class="token annotation builtin">JvmOverloads</span></a></div></div><span class="token keyword">constructor</span><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">context<span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/android/content/Context.html">Context</a><span class="token punctuation">, </span></span><span class="parameter ">imageDownloadRetryPolicy<span class="token operator">: </span><a href="../-image-download-retry-policy/index.html">ImageDownloadRetryPolicy</a><span class="token operator">?</span><span class="token operator"> = </span>null<span class="token punctuation">, </span></span><span class="parameter ">bitmapDownloader<span class="token operator">: </span><span class="token punctuation">(</span><a href="https://developer.android.com/reference/kotlin/android/content/Context.html">Context</a><span class="token punctuation">, </span><a href="https://developer.android.com/reference/kotlin/android/net/Uri.html">Uri</a><span class="token punctuation">, </span><a href="../../com.braze.enums/-braze-view-bounds/index.html">BrazeViewBounds</a><span class="token operator">?</span><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><a href="../../com.braze.support/-bitmap-and-headers/index.html">BitmapAndHeaders</a><span class="token operator"> = </span>{ downloadContext, imageUri, bounds -&gt;
+                getBitmap(downloadContext, imageUri, bounds ?: BrazeViewBounds.NO_BOUNDS)
+            }</span></span><span class="token punctuation">)</span></div></div>                  </div>
                 </div>
               </div>
             </div>
@@ -159,7 +163,24 @@
       </div>
       <div data-togglable="PROPERTY">
         <h2 class="tableheader">Properties</h2>
-        <div class="table"><a data-name="229226433%2FProperties%2F-1369171853" anchor-label="diskCacheLock" id="229226433%2FProperties%2F-1369171853" data-filterable-set=":android-sdk-ui/release"></a>
+        <div class="table"><a data-name="-1166085819%2FProperties%2F-1369171853" anchor-label="bitmapDownloader" id="-1166085819%2FProperties%2F-1369171853" data-filterable-set=":android-sdk-ui/release"></a>
+          <div class="table-row table-row_content" data-filterable-current=":android-sdk-ui/release" data-filterable-set=":android-sdk-ui/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="bitmap-downloader.html"><span>bitmap</span><wbr></wbr><span><span>Downloader</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1166085819%2FProperties%2F-1369171853"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted  with-platform-tabs" data-platform-hinted="data-platform-hinted">
+                    <div class="platform-bookmarks-row" data-toggle-list="data-toggle-list"><button class="platform-bookmark" data-filterable-current=":android-sdk-ui/release" data-filterable-set=":android-sdk-ui/release" data-active="" data-toggle=":android-sdk-ui/release">release</button></div>
+<div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui/release"><div class="symbol monospace"><div class="block"><div class="block"><span class="token annotation builtin">@get:</span><a href="https://developer.android.com/reference/kotlin/androidx/annotation/VisibleForTesting.html"><span class="token annotation builtin">VisibleForTesting</span></a></div></div><span class="token keyword">internal </span><span class="token keyword">val </span><a href="bitmap-downloader.html">bitmapDownloader</a><span class="token operator">: </span><span class="token punctuation">(</span><a href="https://developer.android.com/reference/kotlin/android/content/Context.html">Context</a><span class="token punctuation">, </span><a href="https://developer.android.com/reference/kotlin/android/net/Uri.html">Uri</a><span class="token punctuation">, </span><a href="../../com.braze.enums/-braze-view-bounds/index.html">BrazeViewBounds</a><span class="token operator">?</span><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><a href="../../com.braze.support/-bitmap-and-headers/index.html">BitmapAndHeaders</a></div></div>                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="229226433%2FProperties%2F-1369171853" anchor-label="diskCacheLock" id="229226433%2FProperties%2F-1369171853" data-filterable-set=":android-sdk-ui/release"></a>
           <div class="table-row table-row_content" data-filterable-current=":android-sdk-ui/release" data-filterable-set=":android-sdk-ui/release">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
@@ -189,6 +210,23 @@
                   <div class="platform-hinted  with-platform-tabs" data-platform-hinted="data-platform-hinted">
                     <div class="platform-bookmarks-row" data-toggle-list="data-toggle-list"><button class="platform-bookmark" data-filterable-current=":android-sdk-ui/release" data-filterable-set=":android-sdk-ui/release" data-active="" data-toggle=":android-sdk-ui/release">release</button></div>
 <div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui/release"><div class="symbol monospace"><span class="token keyword">private </span><span class="token keyword">lateinit </span><span class="token keyword">var </span><a href="disk-lru-cache.html">diskLruCache</a><span class="token operator">: </span><span data-unresolved-link="com.braze.images/BitmapDiskLruCacheWrapper///PointingToDeclaration/">BitmapDiskLruCacheWrapper</span></div></div>                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1656341362%2FProperties%2F-1369171853" anchor-label="imageDownloadRetryPolicy" id="1656341362%2FProperties%2F-1369171853" data-filterable-set=":android-sdk-ui/release"></a>
+          <div class="table-row table-row_content" data-filterable-current=":android-sdk-ui/release" data-filterable-set=":android-sdk-ui/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="image-download-retry-policy.html"><span>image</span><wbr></wbr><span>Download</span><wbr></wbr><span>Retry</span><wbr></wbr><span><span>Policy</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1656341362%2FProperties%2F-1369171853"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted  with-platform-tabs" data-platform-hinted="data-platform-hinted">
+                    <div class="platform-bookmarks-row" data-toggle-list="data-toggle-list"><button class="platform-bookmark" data-filterable-current=":android-sdk-ui/release" data-filterable-set=":android-sdk-ui/release" data-active="" data-toggle=":android-sdk-ui/release">release</button></div>
+<div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui/release"><div class="symbol monospace"><div class="block"><div class="block"><span class="token annotation builtin">@get:</span><a href="https://developer.android.com/reference/kotlin/androidx/annotation/VisibleForTesting.html"><span class="token annotation builtin">VisibleForTesting</span></a></div></div><span class="token keyword">internal </span><span class="token keyword">var </span><a href="image-download-retry-policy.html">imageDownloadRetryPolicy</a><span class="token operator">: </span><a href="../-image-download-retry-policy/index.html">ImageDownloadRetryPolicy</a></div><div class="brief "><p class="paragraph">Retry policy used for push image downloads. Defaults to server-configured request backoff values from <span data-unresolved-link="com.braze.storage/ServerConfigStorageProvider///PointingToDeclaration/">ServerConfigStorageProvider</span> once <a href="configure-server-config-storage-provider.html">configureServerConfigStorageProvider</a> is called.</p></div></div>                  </div>
                 </div>
               </div>
             </div>
@@ -244,11 +282,45 @@
               </div>
             </div>
           </div>
+<a data-name="151253597%2FProperties%2F-1369171853" anchor-label="serverConfigStorageProviderRef" id="151253597%2FProperties%2F-1369171853" data-filterable-set=":android-sdk-ui/release"></a>
+          <div class="table-row table-row_content" data-filterable-current=":android-sdk-ui/release" data-filterable-set=":android-sdk-ui/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="server-config-storage-provider-ref.html"><span>server</span><wbr></wbr><span>Config</span><wbr></wbr><span>Storage</span><wbr></wbr><span>Provider</span><wbr></wbr><span><span>Ref</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="151253597%2FProperties%2F-1369171853"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted  with-platform-tabs" data-platform-hinted="data-platform-hinted">
+                    <div class="platform-bookmarks-row" data-toggle-list="data-toggle-list"><button class="platform-bookmark" data-filterable-current=":android-sdk-ui/release" data-filterable-set=":android-sdk-ui/release" data-active="" data-toggle=":android-sdk-ui/release">release</button></div>
+<div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui/release"><div class="symbol monospace"><span class="token keyword">private </span><span class="token keyword">val </span><a href="server-config-storage-provider-ref.html">serverConfigStorageProviderRef</a><span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/java/util/concurrent/atomic/AtomicReference.html">AtomicReference</a><span class="token operator">&lt;</span><span data-unresolved-link="com.braze.storage/ServerConfigStorageProvider///PointingToDeclaration/">ServerConfigStorageProvider</span><span class="token operator">?</span><span class="token operator">&gt;</span></div></div>                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
       <div data-togglable="FUNCTION">
         <h2 class="tableheader">Functions</h2>
-        <div class="table"><a data-name="1607839760%2FFunctions%2F-1369171853" anchor-label="downloadBitmapFromUrl" id="1607839760%2FFunctions%2F-1369171853" data-filterable-set=":android-sdk-ui/release"></a>
+        <div class="table"><a data-name="1845240997%2FFunctions%2F-1369171853" anchor-label="configureServerConfigStorageProvider" id="1845240997%2FFunctions%2F-1369171853" data-filterable-set=":android-sdk-ui/release"></a>
+          <div class="table-row table-row_content" data-filterable-current=":android-sdk-ui/release" data-filterable-set=":android-sdk-ui/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="configure-server-config-storage-provider.html"><span>configure</span><wbr></wbr><span>Server</span><wbr></wbr><span>Config</span><wbr></wbr><span>Storage</span><wbr></wbr><span><span>Provider</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1845240997%2FFunctions%2F-1369171853"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted  with-platform-tabs" data-platform-hinted="data-platform-hinted">
+                    <div class="platform-bookmarks-row" data-toggle-list="data-toggle-list"><button class="platform-bookmark" data-filterable-current=":android-sdk-ui/release" data-filterable-set=":android-sdk-ui/release" data-active="" data-toggle=":android-sdk-ui/release">release</button></div>
+<div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui/release"><div class="symbol monospace"><span class="token keyword">fun </span><a href="configure-server-config-storage-provider.html"><span class="token function">configureServerConfigStorageProvider</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">serverConfigStorageProvider<span class="token operator">: </span><span data-unresolved-link="com.braze.storage/ServerConfigStorageProvider///PointingToDeclaration/">ServerConfigStorageProvider</span></span></span><span class="token punctuation">)</span></div><div class="brief "><p class="paragraph">Supplies the <span data-unresolved-link="com.braze.storage/ServerConfigStorageProvider///PointingToDeclaration/">ServerConfigStorageProvider</span> used to resolve request-backoff values for image download retries. Safe to call after SDK user-dependency initialization.</p></div></div>                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1607839760%2FFunctions%2F-1369171853" anchor-label="downloadBitmapFromUrl" id="1607839760%2FFunctions%2F-1369171853" data-filterable-set=":android-sdk-ui/release"></a>
           <div class="table-row table-row_content" data-filterable-current=":android-sdk-ui/release" data-filterable-set=":android-sdk-ui/release">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
@@ -261,6 +333,23 @@
                   <div class="platform-hinted  with-platform-tabs" data-platform-hinted="data-platform-hinted">
                     <div class="platform-bookmarks-row" data-toggle-list="data-toggle-list"><button class="platform-bookmark" data-filterable-current=":android-sdk-ui/release" data-filterable-set=":android-sdk-ui/release" data-active="" data-toggle=":android-sdk-ui/release">release</button></div>
 <div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui/release"><div class="symbol monospace"><div class="block"><div class="block"><span class="token annotation builtin">@</span><a href="https://developer.android.com/reference/kotlin/androidx/annotation/VisibleForTesting.html"><span class="token annotation builtin">VisibleForTesting</span></a></div></div><span class="token keyword">fun </span><a href="download-bitmap-from-url.html"><span class="token function">downloadBitmapFromUrl</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">context<span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/android/content/Context.html">Context</a><span class="token punctuation">, </span></span><span class="parameter ">imageUri<span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/android/net/Uri.html">Uri</a><span class="token punctuation">, </span></span><span class="parameter ">viewBounds<span class="token operator">: </span><a href="../../com.braze.enums/-braze-view-bounds/index.html">BrazeViewBounds</a><span class="token operator">?</span><span class="token operator"> = </span>BrazeViewBounds.NO_BOUNDS</span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../../com.braze.support/-bitmap-and-headers/index.html">BitmapAndHeaders</a></div></div>                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="408384482%2FFunctions%2F-1369171853" anchor-label="downloadBitmapFromUrlWithOptionalRetry" id="408384482%2FFunctions%2F-1369171853" data-filterable-set=":android-sdk-ui/release"></a>
+          <div class="table-row table-row_content" data-filterable-current=":android-sdk-ui/release" data-filterable-set=":android-sdk-ui/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="download-bitmap-from-url-with-optional-retry.html"><span>download</span><wbr></wbr><span>Bitmap</span><wbr></wbr><span>From</span><wbr></wbr><span>Url</span><wbr></wbr><span>With</span><wbr></wbr><span>Optional</span><wbr></wbr><span><span>Retry</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="408384482%2FFunctions%2F-1369171853"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted  with-platform-tabs" data-platform-hinted="data-platform-hinted">
+                    <div class="platform-bookmarks-row" data-toggle-list="data-toggle-list"><button class="platform-bookmark" data-filterable-current=":android-sdk-ui/release" data-filterable-set=":android-sdk-ui/release" data-active="" data-toggle=":android-sdk-ui/release">release</button></div>
+<div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui/release"><div class="symbol monospace"><span class="token keyword">private </span><span class="token keyword">fun </span><a href="download-bitmap-from-url-with-optional-retry.html"><span class="token function">downloadBitmapFromUrlWithOptionalRetry</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">context<span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/android/content/Context.html">Context</a><span class="token punctuation">, </span></span><span class="parameter ">imageUri<span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/android/net/Uri.html">Uri</a><span class="token punctuation">, </span></span><span class="parameter ">viewBounds<span class="token operator">: </span><a href="../../com.braze.enums/-braze-view-bounds/index.html">BrazeViewBounds</a><span class="token operator">?</span><span class="token punctuation">, </span></span><span class="parameter ">retryOnFailure<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../../com.braze.support/-bitmap-and-headers/index.html">BitmapAndHeaders</a></div></div>                  </div>
                 </div>
               </div>
             </div>
@@ -316,19 +405,19 @@
               </div>
             </div>
           </div>
-<a data-name="-1557014728%2FFunctions%2F-1369171853" anchor-label="getBitmapFromUrl" id="-1557014728%2FFunctions%2F-1369171853" data-filterable-set=":android-sdk-ui/release"></a>
+<a data-name="793404748%2FFunctions%2F-1369171853" anchor-label="getBitmapFromUrl" id="793404748%2FFunctions%2F-1369171853" data-filterable-set=":android-sdk-ui/release"></a>
           <div class="table-row table-row_content" data-filterable-current=":android-sdk-ui/release" data-filterable-set=":android-sdk-ui/release">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="get-bitmap-from-url.html"><span>get</span><wbr></wbr><span>Bitmap</span><wbr></wbr><span>From</span><wbr></wbr><span><span>Url</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1557014728%2FFunctions%2F-1369171853"></span>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="793404748%2FFunctions%2F-1369171853"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
                   <div class="platform-hinted  with-platform-tabs" data-platform-hinted="data-platform-hinted">
                     <div class="platform-bookmarks-row" data-toggle-list="data-toggle-list"><button class="platform-bookmark" data-filterable-current=":android-sdk-ui/release" data-filterable-set=":android-sdk-ui/release" data-active="" data-toggle=":android-sdk-ui/release">release</button></div>
-<div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui/release"><div class="symbol monospace"><div class="block"><div class="block"><span class="token annotation builtin">@</span><a href="https://developer.android.com/reference/kotlin/androidx/annotation/VisibleForTesting.html"><span class="token annotation builtin">VisibleForTesting</span></a></div></div><span class="token keyword">fun </span><a href="get-bitmap-from-url.html"><span class="token function">getBitmapFromUrl</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">context<span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/android/content/Context.html">Context</a><span class="token punctuation">, </span></span><span class="parameter ">imageUrl<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span></span><span class="parameter ">viewBounds<span class="token operator">: </span><a href="../../com.braze.enums/-braze-view-bounds/index.html">BrazeViewBounds</a><span class="token operator">?</span></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/android/graphics/Bitmap.html">Bitmap</a><span class="token operator">?</span></div></div>                  </div>
+<div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui/release"><div class="symbol monospace"><div class="block"><div class="block"><span class="token annotation builtin">@</span><a href="https://developer.android.com/reference/kotlin/androidx/annotation/VisibleForTesting.html"><span class="token annotation builtin">VisibleForTesting</span></a></div><div class="block"><span class="token annotation builtin">@</span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.jvm/-jvm-overloads/index.html"><span class="token annotation builtin">JvmOverloads</span></a></div></div><span class="token keyword">fun </span><a href="get-bitmap-from-url.html"><span class="token function">getBitmapFromUrl</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">context<span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/android/content/Context.html">Context</a><span class="token punctuation">, </span></span><span class="parameter ">imageUrl<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span></span><span class="parameter ">viewBounds<span class="token operator">: </span><a href="../../com.braze.enums/-braze-view-bounds/index.html">BrazeViewBounds</a><span class="token operator">?</span><span class="token punctuation">, </span></span><span class="parameter ">retryOnFailure<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a><span class="token operator"> = </span><span class="token boolean">false</span></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/android/graphics/Bitmap.html">Bitmap</a><span class="token operator">?</span></div></div>                  </div>
                 </div>
               </div>
             </div>

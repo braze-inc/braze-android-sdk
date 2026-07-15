@@ -44,11 +44,13 @@
         </button>
         <div class="navigation-controls--break ui-kit_mobile-only"></div>
         <div class="library-version" id="library-version">
-42.3.1        </div>
+43.0.0        </div>
         <div class="navigation-controls">
         <ul class="filter-section filter-section_loading" id="filter-section" aria-label="Target filter">
                 <button class="platform-tag platform-selector jvm-like" data-active="" aria-pressed="true"
                         data-filter=":android-sdk-ui/main">androidJvm</button>
+                <button class="platform-tag platform-selector jvm-like" data-active="" aria-pressed="true"
+                        data-filter=":android-sdk-ui/release">release</button>
             <div class="dropdown filter-section--dropdown" data-role="dropdown" id="filter-section-dropdown">
                 <button class="button button_dropdown filter-section--dropdown-toggle" role="combobox"
                         data-role="dropdown-toggle"
@@ -69,6 +71,14 @@
                                        data-filter=":android-sdk-ui/main"/>
                                 <span class="checkbox--icon"></span>
                                 androidJvm
+                            </label>
+                        </li>
+                        <li role="option" class="dropdown--option platform-selector-option jvm-like" tabindex="0">
+                            <label class="checkbox">
+                                <input type="checkbox" class="checkbox--input" id=":android-sdk-ui/release"
+                                       data-filter=":android-sdk-ui/release"/>
+                                <span class="checkbox--icon"></span>
+                                release
                             </label>
                         </li>
                 </ul>
@@ -104,7 +114,7 @@
         </nav>
         <div id="resizer" class="resizer" data-item-type="BAR"></div>
         <div id="main" data-item-type="SECTION" role="main">
-<div class="main-content" data-page-type="package" id="content" pageIds="braze-android-sdk::com.braze.push////PointingToDeclaration//1102423332">
+<div class="main-content" data-page-type="package" id="content" pageIds="braze-android-sdk::com.braze.push////PointingToDeclaration//-888934437">
   <div class="breadcrumbs"><a href="../../index.html">braze-android-sdk</a><span class="delimiter">/</span><span class="current">com.braze.push</span></div>
   <div class="cover ">
     <h1 class="cover"><span><span>Package-level</span></span> <span><span>declarations</span></span></h1>
@@ -246,6 +256,23 @@
                   <div class="platform-hinted  with-platform-tabs" data-platform-hinted="data-platform-hinted">
                     <div class="platform-bookmarks-row" data-toggle-list="data-toggle-list"><button class="platform-bookmark" data-filterable-current=":android-sdk-ui/main" data-filterable-set=":android-sdk-ui/main" data-active="" data-toggle=":android-sdk-ui/main">androidJvm</button></div>
 <div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui/main"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">class </span><a href="-braze-push-receiver/index.html">BrazePushReceiver</a> : <a href="https://developer.android.com/reference/kotlin/android/content/BroadcastReceiver.html">BroadcastReceiver</a></div><div class="brief "><p class="paragraph"><a href="https://developer.android.com/reference/kotlin/android/content/BroadcastReceiver.html">BroadcastReceiver</a> that handles all Braze push notification intents including message receipt, click, dismissal, story traversal, and action button clicks.</p></div></div>                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1463314124%2FClasslikes%2F-1369171853" anchor-label="BrazePushUnregistrationException" id="-1463314124%2FClasslikes%2F-1369171853" data-filterable-set=":android-sdk-ui/release"></a>
+          <div class="table-row table-row_content" data-filterable-current=":android-sdk-ui/release" data-filterable-set=":android-sdk-ui/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-braze-push-unregistration-exception/index.html"><span>Braze</span><wbr></wbr><span>Push</span><wbr></wbr><span>Unregistration</span><wbr></wbr><span><span>Exception</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1463314124%2FClasslikes%2F-1369171853"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted  with-platform-tabs" data-platform-hinted="data-platform-hinted">
+                    <div class="platform-bookmarks-row" data-toggle-list="data-toggle-list"><button class="platform-bookmark" data-filterable-current=":android-sdk-ui/release" data-filterable-set=":android-sdk-ui/release" data-active="" data-toggle=":android-sdk-ui/release">release</button></div>
+<div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui/release"><div class="symbol monospace"><span class="token keyword">class </span><a href="-braze-push-unregistration-exception/index.html">BrazePushUnregistrationException</a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">message<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>isRetriable<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a><span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>httpStatusCode<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a><span class="token operator">?</span><span class="token operator"> = </span>null</span></span><span class="token punctuation">)</span> : <a href="https://developer.android.com/reference/kotlin/java/lang/Exception.html">Exception</a></div><div class="brief "><p class="paragraph">The error surfaced when <a href="../com.braze/-braze/unregister-push.html">com.braze.Braze.unregisterPush</a> fails to unregister this device's push token with Braze.</p></div></div>                  </div>
                 </div>
               </div>
             </div>
