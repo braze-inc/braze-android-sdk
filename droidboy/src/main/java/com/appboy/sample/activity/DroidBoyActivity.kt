@@ -29,6 +29,7 @@ import com.appboy.sample.BuildConfig
 import com.appboy.sample.InAppMessageTesterFragment
 import com.appboy.sample.MainFragment
 import com.appboy.sample.PushTesterFragment
+import com.appboy.sample.PushUnregisterFragment
 import com.appboy.sample.R
 import com.appboy.sample.ecommerce.EcommerceFragment
 import com.appboy.sample.featureflag.view.FeatureFlagFragment
@@ -292,6 +293,8 @@ class DroidBoyActivity : AppCompatActivity() {
                 startActivity(Intent(applicationContext, GeofencesMapActivity::class.java))
             }
             R.id.iam_sandbox -> startActivity(Intent(applicationContext, InAppMessageSandboxActivity::class.java))
+            R.id.edge_to_edge_html_iam ->
+                startActivity(Intent(applicationContext, EdgeToEdgeHtmlIamActivity::class.java))
             R.id.action_network_console ->
                 NetworkConsoleDialogFragment().show(
                     supportFragmentManager,
@@ -305,7 +308,10 @@ class DroidBoyActivity : AppCompatActivity() {
             R.id.sample_activity -> startActivity(Intent(this, SampleActivity::class.java))
             R.id.sample_appcompatactivity -> startActivity(Intent(this, SampleAppCompatActivity::class.java))
             R.id.translucent_activity -> startActivity(Intent(this, TranslucentActivity::class.java))
-            else -> brazelog(E) { "The ${item.title} options item was not found. Ignoring." }
+            else -> {
+                brazelog(E) { "The ${item.title} options item was not found. Ignoring." }
+                return super.onOptionsItemSelected(item)
+            }
         }
         return true
     }
@@ -414,6 +420,10 @@ class DroidBoyActivity : AppCompatActivity() {
                 FragmentInfo(
                     { PushTesterFragment() },
                     context.getString(R.string.tab_push),
+                ),
+                FragmentInfo(
+                    { PushUnregisterFragment() },
+                    context.getString(R.string.tab_push_unregister),
                 ),
                 FragmentInfo(
                     { FeatureFlagFragment() },

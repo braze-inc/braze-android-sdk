@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html, body {
+      width: 100%;
+      height: 100%;
+      background: #2e7d32;
+      color: #ffffff;
+      font-family: sans-serif;
+    }
+
+    .fill {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding:
+        var(--braze-safe-area-inset-top, 0px)
+        var(--braze-safe-area-inset-right, 0px)
+        var(--braze-safe-area-inset-bottom, 0px)
+        var(--braze-safe-area-inset-left, 0px);
+    }
+
+    .edge-label {
+      font-size: 20px;
+      font-weight: bold;
+      text-align: center;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      padding: 12px;
+      border: 2px dashed rgba(255, 255, 255, 0.8);
+      background: rgba(0, 0, 0, 0.25);
+    }
+
+    .center-copy {
+      text-align: center;
+      font-size: 16px;
+      line-height: 1.5;
+      padding: 24px 12px;
+    }
+
+    .close {
+      position: absolute;
+      top: calc(16px + var(--braze-safe-area-inset-top, 0px));
+      right: calc(16px + var(--braze-safe-area-inset-right, 0px));
+      color: #ffffff;
+      font-size: 28px;
+      font-weight: bold;
+      text-decoration: none;
+      z-index: 1;
+    }
+  </style>
+</head>
+<body>
+  <a class="close" href="appboy://close">X</a>
+  <div class="fill">
+    <div class="edge-label">HTML top edge</div>
+    <div class="center-copy">
+      Full-screen HTML IAM test asset.<br/>
+      If you see red/blue host stripes above or below this green area,<br/>
+      inset margins are shrinking the WebView instead of drawing edge-to-edge.<br/>
+      With safe-area injection enabled, labels and close should clear system bars.
+    </div>
+    <div class="edge-label">HTML bottom edge</div>
+  </div>
+</body>
+</html>

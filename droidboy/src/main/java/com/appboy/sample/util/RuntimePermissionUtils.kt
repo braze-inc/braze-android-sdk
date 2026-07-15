@@ -50,7 +50,7 @@ object RuntimePermissionUtils {
         activity: Activity,
         permission: String,
         rationale: Rationale?,
-        singlePermissionLauncher: ActivityResultLauncher<String?>,
+        singlePermissionLauncher: ActivityResultLauncher<String>,
     ) {
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
             return

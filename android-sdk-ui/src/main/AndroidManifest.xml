@@ -3,7 +3,8 @@
   xmlns:tools="http://schemas.android.com/tools">
   <uses-permission android:name="android.permission.POST_NOTIFICATIONS"/>
 
-  <uses-sdk tools:overrideLibrary="com.google.firebase.messaging"/>
+  <uses-sdk tools:overrideLibrary="com.google.firebase.components,com.google.android.gms.common,com.google.firebase.messaging,com.google.firebase.installations,com.google.firebase,com.google.android.gms.cloudmessaging,com.google.android.gms.base,com.google.firebase.installations.interop,com.google.android.gms.tasks"/>
+
   <application>
     <activity
       android:name="com.braze.ui.BrazeWebViewActivity"
@@ -22,5 +23,11 @@
     <receiver
       android:name="com.braze.push.BrazePushReceiver"
       android:exported="false" />
+
+    <!--  This behavior can be optionally overwritten via
+      <meta-data android:name="firebase_messaging_installation_id_enabled" android:value="false" tools:replace="android:value" />
+    -->
+    <meta-data android:name="firebase_messaging_installation_id_enabled" android:value="true" />
   </application>
 </manifest>
+

@@ -60,6 +60,14 @@ object DroidboyPreferenceKeys {
 
     // Log level from log_level_dialog_title prefs
     val CURRENT_LOG_LEVEL = intPreferencesKey("current_log_level")
+
+    // Push unregister / logout QA harness
+    val PUSH_UNREGISTER_QA_SCENARIO = stringPreferencesKey("push_unregister_qa_scenario")
+    val PUSH_UNREGISTER_QA_FAILURES_BEFORE_SUCCESS = intPreferencesKey("push_unregister_qa_failures_before_success")
+    val PUSH_UNREGISTER_QA_MAX_RETRY_ATTEMPTS = intPreferencesKey("push_unregister_qa_max_retry_attempts")
+    val PUSH_UNREGISTER_QA_RETRY_DELAY_MS = intPreferencesKey("push_unregister_qa_retry_delay_ms")
+    val PUSH_UNREGISTER_QA_TARGET_API = stringPreferencesKey("push_unregister_qa_target_api")
+    val PUSH_UNREGISTER_QA_LAST_LOG = stringPreferencesKey("push_unregister_qa_last_log")
 }
 
 /**

@@ -20,6 +20,7 @@ import com.braze.enums.inappmessage.MessageType
 import com.braze.enums.inappmessage.SlideFrom
 import com.braze.models.inappmessage.IInAppMessage
 import com.braze.models.inappmessage.IInAppMessageImmersive
+import com.braze.models.inappmessage.InAppMessageHtmlFull
 import com.braze.models.inappmessage.InAppMessageSlideup
 import com.braze.support.BrazeLogger.Priority.E
 import com.braze.support.BrazeLogger.Priority.V
@@ -313,8 +314,20 @@ open class DefaultInAppMessageViewWrapper @JvmOverloads constructor(
             layoutParams.gravity =
                 if (inAppMessage.slideFrom === SlideFrom.TOP) Gravity.TOP else Gravity.BOTTOM
         }
+        if (inAppMessage is InAppMessageHtmlFull) {
+            layoutParams.height = FrameLayout.LayoutParams.MATCH_PARENT
+        }
         return layoutParams
     }
+
+    /**
+     * Transforms window insets before they are passed to [IInAppMessageView.applyWindowInsets].
+     * Subclasses can override to adjust inset values for demo or host-specific behavior.
+     */
+    protected open fun resolveWindowInsetsForInAppMessage(
+        inAppMessageView: View,
+        insets: WindowInsetsCompat,
+    ): WindowInsetsCompat = insets
 
     /**
      * Adds the [IInAppMessageView] to the parent [ViewGroup]. Also
@@ -351,12 +364,10 @@ open class DefaultInAppMessageViewWrapper @JvmOverloads constructor(
                         return@setOnApplyWindowInsetsListener WindowInsetsCompat(insets)
                     }
                     val castInAppMessageView = inAppMessageView as IInAppMessageView
-                    if (!castInAppMessageView.hasAppliedWindowInsets) {
-                        brazelog(V) { "Calling applyWindowInsets on in-app message view." }
-                        castInAppMessageView.applyWindowInsets(insets)
-                    } else {
-                        brazelog { "Not reapplying window insets to in-app message view." }
-                    }
+                    val resolvedInsets =
+                        resolveWindowInsetsForInAppMessage(inAppMessageView, insets)
+                    brazelog(V) { "Calling applyWindowInsets on in-app message view." }
+                    castInAppMessageView.applyWindowInsets(resolvedInsets)
                     insets
                 }
                 brazelog { "Requesting to apply insets." }

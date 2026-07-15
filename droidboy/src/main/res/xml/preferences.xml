@@ -131,25 +131,6 @@
       android:summaryOff="Will not display our own message"
       android:summaryOn="Will display our own message"
       android:title="In-App Message Not Triggered Handler" />
-    android:key="settings_misc_section_key"
-    android:title="@string/misc_preference_category"
-    app:initialExpandedChildrenCount="1">
-    <Preference
-      android:key="open_network_console"
-      android:summary="Live view of Braze SDK network activity"
-      android:title="Open Network Console" />
-    <Preference
-      android:key="logcat_export_file_key"
-      android:summary="Will reset the logcat after click!"
-      android:title="Export Droidboy Logcat to a File" />
-    <Preference
-      android:key="log_attribution"
-      android:summary="@string/log_attribution_summary"
-      android:title="@string/log_attribution_title" />
-    <Preference
-      android:key="anonymous_revert"
-      android:summary="Will cause an app restart."
-      android:title="Revert to Anonymous User" />
   </PreferenceCategory>
 
   <!-- 7. SDK Auth -->
@@ -252,6 +233,10 @@
     android:key="settings_misc_section_key"
     android:title="@string/misc_preference_category"
     app:initialExpandedChildrenCount="1">
+    <Preference
+      android:key="open_network_console"
+      android:summary="Live view of Braze SDK network activity"
+      android:title="Open Network Console" />
     <Preference
       android:key="logcat_export_file_key"
       android:summary="Will reset the logcat after click!"

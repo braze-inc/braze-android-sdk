@@ -8,6 +8,7 @@ import android.os.Message
 import android.util.AttributeSet
 import android.view.KeyEvent
 import android.view.View
+import android.view.ViewGroup.MarginLayoutParams
 import android.webkit.ConsoleMessage
 import android.webkit.WebChromeClient
 import android.webkit.WebView
@@ -23,14 +24,13 @@ import com.braze.support.BrazeLogger.Priority.W
 import com.braze.support.BrazeLogger.brazelog
 import com.braze.support.WebContentUtils.ASSET_LOADER_DUMMY_DOMAIN
 import com.braze.ui.inappmessage.BrazeInAppMessageManager
+import com.braze.ui.inappmessage.HtmlInAppMessageSafeAreaInjector
 import com.braze.ui.inappmessage.listeners.IWebViewClientStateListener
 import com.braze.ui.inappmessage.utils.InAppMessageViewUtils.closeInAppMessageOnKeycodeBack
 import com.braze.ui.inappmessage.utils.InAppMessageViewUtils.isApiBelowBaklava
 import com.braze.ui.inappmessage.utils.InAppMessageWebViewClient
-import com.braze.ui.support.getMaxSafeBottomInset
-import com.braze.ui.support.getMaxSafeLeftInset
-import com.braze.ui.support.getMaxSafeRightInset
-import com.braze.ui.support.getMaxSafeTopInset
+import com.braze.ui.support.MarginBaseline
+import com.braze.ui.support.applySafeAreaMargins
 import com.braze.ui.support.setFocusableInTouchModeAndRequestFocus
 import com.braze.ui.support.setWebViewSettings
 
@@ -46,6 +46,8 @@ abstract class InAppMessageHtmlBaseView(
     private var configuredMessageWebView: WebView? = null
     private var inAppMessageWebViewClient: InAppMessageWebViewClient? = null
     private var isFinished = false
+    private var lastWindowInsets: WindowInsetsCompat? = null
+    private val containerMarginBaseline = MarginBaseline()
     override var hasAppliedWindowInsets: Boolean = false
 
     override val messageClickableView: View?
@@ -205,8 +207,36 @@ abstract class InAppMessageHtmlBaseView(
         this.inAppMessageWebViewClient = inAppMessageWebViewClient
     }
 
+    /**
+     * Registers a listener that is invoked when the HTML [WebView] finishes loading a page.
+     *
+     * The SDK uses this to delay opening an HTML in-app message until
+     * [android.webkit.WebViewClient.onPageFinished] has fired. When
+     * [BrazeConfigurationProvider.isHtmlInAppMessageApplyWindowInsetsEnabled] is
+     * false (edge-to-edge hosts), the registered listener is wrapped so safe-area CSS custom
+     * properties are injected into the WebView on each page finish before the caller's listener
+     * runs. Pass `null` to clear the listener.
+     *
+     * @param listener Listener to invoke after page load, or `null` to remove the listener.
+     */
     open fun setHtmlPageFinishedListener(listener: IWebViewClientStateListener?) {
-        inAppMessageWebViewClient?.setWebViewClientStateListener(listener)
+        inAppMessageWebViewClient?.setWebViewClientStateListener(
+            listener?.let { wrappedListener ->
+                IWebViewClientStateListener {
+                    injectSafeAreaInsetsIfNeeded()
+                    wrappedListener.onPageFinished()
+                }
+            },
+        )
+    }
+
+    internal fun injectSafeAreaInsetsIfNeeded() {
+        if (BrazeConfigurationProvider(context).isHtmlInAppMessageApplyWindowInsetsEnabled) {
+            return
+        }
+        val insets = lastWindowInsets ?: return
+        val webView = messageWebView ?: return
+        HtmlInAppMessageSafeAreaInjector.inject(webView, insets)
     }
 
     /**
@@ -263,22 +293,14 @@ abstract class InAppMessageHtmlBaseView(
     }
 
     override fun applyWindowInsets(insets: WindowInsetsCompat) {
+        lastWindowInsets = insets
         hasAppliedWindowInsets = true
         if (!BrazeConfigurationProvider(this.context).isHtmlInAppMessageApplyWindowInsetsEnabled) {
+            injectSafeAreaInsetsIfNeeded()
             return
         }
-        if (layoutParams == null || layoutParams !is MarginLayoutParams) {
-            return
-        }
-
-        // Offset the existing margin with whatever the inset margins safe area values are
-        val layoutParams = layoutParams as MarginLayoutParams
-        layoutParams.setMargins(
-            getMaxSafeLeftInset(insets) + layoutParams.leftMargin,
-            getMaxSafeTopInset(insets) + layoutParams.topMargin,
-            getMaxSafeRightInset(insets) + layoutParams.rightMargin,
-            getMaxSafeBottomInset(insets) + layoutParams.bottomMargin,
-        )
+        val layoutParams = layoutParams as? MarginLayoutParams ?: return
+        layoutParams.applySafeAreaMargins(insets, containerMarginBaseline)
     }
 
     /**

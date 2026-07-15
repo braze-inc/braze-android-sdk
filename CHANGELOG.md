@@ -1,3 +1,37 @@
+## 43.0.0
+
+[Release Date](https://github.com/braze-inc/braze-android-sdk/releases/tag/v43.0.0)
+
+#### Breaking
+- Renames `ProductViewedEvent.typeIdentifiers` to `type`.
+- Added support for registering for Firebase Cloud Messaging using the Firebase Installation ID in version `25.1.0` and higher of the `firebase-messaging` library.
+  - To disable this feature, set `com_appboy_firebase_cloud_messaging_registration_enabled` to `false` in your `appboy.xml` file.
+  - The Braze SDK will automatically enable Firebase Cloud Messaging auto-initialization via the Firebase Installation ID. To disable this set `<meta-data android:name="firebase_messaging_installation_id_enabled" android:value="false" tools:replace="android:value" />` in your `AndroidManifest.xml` file.
+  - If you are using a custom `FirebaseMessagingService` implementation, you will need to override the `onRegistered` method to handle the Firebase Installation ID and then call `Braze.getInstance(context).registeredPushToken = installationId` to register it with the Braze SDK.
+
+##### Fixed
+- Fixed an issue where setting a custom attribute with an array of JSON objects via the HTML In-App Message or Banner JS bridge would incorrectly store the elements as strings instead of structured objects. Arrays of objects passed to `brazeBridge.getUser().setCustomUserAttribute()` are now routed to the native `setCustomUserAttribute(key, JSONArray)` API, matching the behavior of the iOS SDK.
+- Fixed a potential ANR in `Card.logImpression()` and `Card.logClick()` where synchronous disk I/O on the calling thread could block the main thread. Both operations are now dispatched asynchronously via `BrazeCoroutineScope`.
+- Fixed an issue where HTML In-App Messages did not render correctly in edge-to-edge host activities when `BrazeConfig.setIsHtmlInAppMessageApplyWindowInsetsEnabled()` was enabled, leaving visible gaps around the WebView. When this setting is disabled, the SDK now injects system safe-area insets into the WebView as CSS custom properties (`--braze-safe-area-inset-*`) so HTML content can respect status bar, navigation bar, and display cutout areas. See [#90](https://github.com/braze-inc/braze-android-sdk/issues/90) for details.
+- Fixed an issue where HTML Full In-App Messages used `WRAP_CONTENT` height when added to the host view, preventing them from filling the screen.
+- Fixed an issue where `IInAppMessageManagerListener.beforeInAppMessageViewOpened()` was not called after `beforeInAppMessageDisplayed()` when `Braze.changeUser()` and in-app message display overlapped.
+
+##### Added
+- Added `Braze.unregisterPush` / `IBraze.unregisterPush` to unregister this device's push token with Braze.
+  - The API sends a single request to the `push/unregister` endpoint with no retry logic, adhering to global and per-endpoint rate limits.
+  - On success, the push token is cleared both locally and on the server.
+  - On failure, a `BrazePushUnregistrationException` is surfaced carrying an error message and an `isRetriable` flag so integrators can implement their own retry behavior.
+  - Both a suspending variant (`suspend fun unregisterPush()`, which throws `BrazePushUnregistrationException` on failure) and a callback variant (`unregisterPush { result: Result<Unit> -> }`) are available.
+- Added `Braze.logout` / `IBraze.logout` to perform a full device logout.
+  - Flushes pending requests, unregisters push, then calls `Braze.wipeData()` and `Braze.disableSdk()` on success.
+  - On failure, a `BrazePushUnregistrationException` is surfaced and local data is not wiped nor the SDK disabled, so integrators can implement their own retry behavior.
+  - Both suspending and callback variants are available.
+- Added optional `subtotalValue`, `tax`, and `shipping` fields to `CartUpdatedEvent`, `CheckoutStartedEvent`, and `OrderPlacedEvent`.
+
+##### Changed
+- Upgraded a broad set of third-party and AndroidX dependencies to their latest `minSdkVersion 21`-compatible releases, including Google Play Services, AndroidX (Core, Annotation, WebKit, Activity, DataStore, Navigation, Lifecycle), Jetpack Compose (BOM and runtime), Kotlin Coroutines, Robolectric, Mockito, and various utility libraries. These are maintenance updates that do not change the public API or the minimum supported SDK.
+- Push notification image downloads now retry with exponential backoff (up to 3 attempts) using the SDK request-backoff settings when available. In-app message, Content Card, and other non-push image loads remain single-attempt. Failed push large-icon URL downloads now fall back to the configured drawable resource instead of setting a null bitmap.
+
 ## 42.3.1
 
 [Release Date](https://github.com/braze-inc/braze-android-sdk/releases/tag/v42.3.1)

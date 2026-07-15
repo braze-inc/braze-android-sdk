@@ -6,7 +6,6 @@ import android.content.Context
 import android.content.pm.ActivityInfo
 import android.os.Build
 import android.os.Looper
-import android.webkit.WebView
 import androidx.annotation.RestrictTo
 import androidx.annotation.VisibleForTesting
 import com.braze.Braze.Companion.getInstance
@@ -109,20 +108,8 @@ open class BrazeInAppMessageManager : InAppMessageManagerBase() {
     private var originalOrientation: Int? = null
     private var configurationProvider: BrazeConfigurationProvider? = null
     private var inAppMessageViewWrapper: IInAppMessageViewWrapper? = null
-
-    /**
-     * Runnable posted to [pendingWebViewPauseTarget] that invokes [WebView.onPause] for a displayed
-     * HTML in-app message. Cleared when the runnable runs or when [cancelPendingWebViewPause] runs.
-     */
-    @VisibleForTesting
-    internal var pendingWebViewPauseRunnable: Runnable? = null
-
-    /**
-     * [WebView] that owns the message queue for [pendingWebViewPauseRunnable]. Used to post the
-     * deferred pause and to call [WebView.removeCallbacks] when pausing is cancelled on resume or
-     * teardown.
-     */
-    private var pendingWebViewPauseTarget: WebView? = null
+    private val webViewPauseCoordinator =
+        InAppMessageWebViewPauseCoordinator { inAppMessageViewWrapper }
 
     /**
      * The back animation callback handler for full in-app messages on API 34+.
@@ -135,6 +122,14 @@ open class BrazeInAppMessageManager : InAppMessageManagerBase() {
      * to account for the case where the current user ID is not yet known.
      */
     private var currentUserId: String? = null
+
+    /**
+     * The in-app message approved for display via [requestDisplayInAppMessage] that has not yet
+     * entered [displayInAppMessage]. Used to retain [inAppMessageEventMap] metadata during user
+     * changes so [isInAppMessageForTheSameUser] can reject stale messages without a global flag.
+     */
+    @VisibleForTesting
+    internal var inAppMessagePendingDisplay: IInAppMessage? = null
 
     /**
      * An In-App Message being carried over during the
@@ -326,7 +321,7 @@ open class BrazeInAppMessageManager : InAppMessageManagerBase() {
         }
         currentBackEventHandler?.unregister()
         currentBackEventHandler = null
-        cancelPendingWebViewPause()
+        webViewPauseCoordinator.cancelPendingWebViewPause()
         inAppMessageViewWrapper = null
     }
 
@@ -426,6 +421,7 @@ open class BrazeInAppMessageManager : InAppMessageManagerBase() {
                     return false
                 }
             }
+            inAppMessagePendingDisplay = inAppMessage
             prepareInAppMessageForDisplay(inAppMessage)
             true
         } catch (e: Exception) {
@@ -486,9 +482,10 @@ open class BrazeInAppMessageManager : InAppMessageManagerBase() {
             return false
         }
         brazelog(V) { "Resetting after in-app message close." }
+        inAppMessagePendingDisplay = null
         currentBackEventHandler?.unregister()
         currentBackEventHandler = null
-        cancelPendingWebViewPause()
+        webViewPauseCoordinator.cancelPendingWebViewPause()
         inAppMessageViewWrapper = null
         val activity = mActivity?.get()
         val origOrientation = originalOrientation
@@ -568,8 +565,8 @@ open class BrazeInAppMessageManager : InAppMessageManagerBase() {
                     )
             if (!isInAppMessageForTheSameUser(inAppMessage, currentUserId)) {
                 throw Exception(
-                    "The last identified user '$currentUserId' does not match the incoming " +
-                        "in-app message's user '${inAppMessageEventMap[inAppMessage]?.userId}'. " +
+                    "The current user '$currentUserId' does not match the incoming in-app message's user " +
+                        "'${inAppMessageEventMap[inAppMessage]?.userId}'. " +
                         "The in-app message will not be displayed and will not be put back on the stack.",
                 )
             }
@@ -737,21 +734,40 @@ open class BrazeInAppMessageManager : InAppMessageManagerBase() {
     @VisibleForTesting
     internal fun createBrazeUserChangeEventSubscriber(): IEventSubscriber<BrazeUserChangeEvent> =
         IEventSubscriber { event: BrazeUserChangeEvent ->
-            brazelog(V) { "InAppMessage manager handling user change event. New user id: '${event.currentUserId}'" }
-            val previousUserId = this.currentUserId
-            this.currentUserId = event.currentUserId
+            val eventUserId = event.currentUserId
+            brazelog(V) { "InAppMessage manager handling user change event. New user id: '$eventUserId'" }
+            if (eventUserId.isBlank()) {
+                brazelog(W) { "Ignoring user change event with blank user id." }
+                return@IEventSubscriber
+            }
 
-            if (previousUserId != null && previousUserId != event.currentUserId) {
-                brazelog { "User changed from '$previousUserId' to '${event.currentUserId}'. Clearing in-app message state." }
+            val previousUserId = this.currentUserId
+            this.currentUserId = eventUserId
+
+            if (previousUserId != null && previousUserId != eventUserId) {
+                brazelog { "User changed from '$previousUserId' to '$eventUserId'. Clearing in-app message state." }
                 if (displayingInAppMessage.get()) {
                     hideCurrentlyDisplayingInAppMessage(false)
                 }
                 inAppMessageStack.clear()
-                inAppMessageEventMap.clear()
+                removeInAppMessageEventMapEntriesForUserId(previousUserId)
                 carryoverInAppMessage = null
                 unregisteredInAppMessage = null
             }
         }
+
+    /**
+     * Removes [InAppMessageEvent] entries for [userId], except the message currently pending display.
+     * The pending entry is retained so [isInAppMessageForTheSameUser] can reject it when
+     * [displayInAppMessage] runs after a user change.
+     */
+    private fun removeInAppMessageEventMapEntriesForUserId(userId: String) {
+        val pendingDisplay = inAppMessagePendingDisplay
+        inAppMessageEventMap.keys
+            .filter { inAppMessage ->
+                inAppMessage != pendingDisplay && inAppMessageEventMap[inAppMessage]?.userId == userId
+            }.forEach { inAppMessageEventMap.remove(it) }
+    }
 
     /**
      * For in-app messages that have a preferred orientation, locks the screen orientation and
@@ -808,73 +824,12 @@ open class BrazeInAppMessageManager : InAppMessageManagerBase() {
         return inAppMessageUserId == null || inAppMessageUserId == currentUserId
     }
 
-    /**
-     * Defers [WebView.onPause] to the next main-loop iteration so lifecycle callbacks such as
-     * [android.app.Application.ActivityLifecycleCallbacks.onActivityPaused] return promptly.
-     *
-     * We assume [WebView.onPause] can block the main thread for a non-trivial duration when the
-     * WebView is loading or running JavaScript; calling it synchronously from
-     * [android.app.Application.ActivityLifecycleCallbacks.onActivityPaused] has been observed to
-     * contribute to ANRs.
-     */
     internal fun pauseWebviewIfNecessary() {
-        brazelog(V) { "Scheduling deferred InAppMessage WebView pause via pendingWebViewPauseRunnable" }
-        val viewWrapper = inAppMessageViewWrapper ?: return
-        val inAppMessageView = viewWrapper.inAppMessageView
-        if (inAppMessageView !is InAppMessageHtmlBaseView) {
-            return
-        }
-        val webView = inAppMessageView.messageWebView ?: return
-
-        cancelPendingWebViewPause()
-
-        val pauseRunnable =
-            Runnable {
-                brazelog(V) { "pendingWebViewPauseRunnable running" }
-                pendingWebViewPauseRunnable = null
-                pendingWebViewPauseTarget = null
-                val currentWrapper = this.inAppMessageViewWrapper
-                if (currentWrapper == null) {
-                    brazelog(V) {
-                        "pendingWebViewPauseRunnable finished without calling WebView.onPause: in-app message no longer displayed"
-                    }
-                    return@Runnable
-                }
-                val currentView = currentWrapper.inAppMessageView
-                if (currentView is InAppMessageHtmlBaseView && currentView.messageWebView === webView) {
-                    brazelog(V) { "pendingWebViewPauseRunnable calling WebView.onPause" }
-                    // Assumed blocking on a busy WebView; deferred via post() so onActivityPaused returns first.
-                    webView.onPause()
-                } else {
-                    brazelog(V) {
-                        "pendingWebViewPauseRunnable finished without calling WebView.onPause: HTML WebView no longer matches"
-                    }
-                }
-            }
-        pendingWebViewPauseRunnable = pauseRunnable
-        pendingWebViewPauseTarget = webView
-        webView.post(pauseRunnable)
+        webViewPauseCoordinator.pauseWebviewIfNecessary()
     }
 
     internal fun resumeWebviewIfNecessary() {
-        brazelog { "Resuming InAppMessage WebView" }
-        cancelPendingWebViewPause()
-        val inAppMessageViewWrapper = inAppMessageViewWrapper ?: return
-        val inAppMessageView = inAppMessageViewWrapper.inAppMessageView
-        if (inAppMessageView is InAppMessageHtmlBaseView) {
-            inAppMessageView.messageWebView?.onResume()
-        }
-    }
-
-    private fun cancelPendingWebViewPause() {
-        val pauseRunnable = pendingWebViewPauseRunnable
-        val webView = pendingWebViewPauseTarget
-        if (pauseRunnable != null && webView != null) {
-            brazelog(V) { "Cancelling pendingWebViewPauseRunnable before it runs WebView.onPause" }
-            webView.removeCallbacks(pauseRunnable)
-        }
-        pendingWebViewPauseRunnable = null
-        pendingWebViewPauseTarget = null
+        webViewPauseCoordinator.resumeWebviewIfNecessary()
     }
 
     companion object {

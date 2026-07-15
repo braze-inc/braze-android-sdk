@@ -13,10 +13,8 @@ import com.braze.models.inappmessage.IInAppMessage
 import com.braze.support.BrazeLogger.brazelog
 import com.braze.ui.R
 import com.braze.ui.inappmessage.utils.InAppMessageViewUtils.setViewBackgroundColorFilter
-import com.braze.ui.support.getMaxSafeBottomInset
-import com.braze.ui.support.getMaxSafeLeftInset
-import com.braze.ui.support.getMaxSafeRightInset
-import com.braze.ui.support.getMaxSafeTopInset
+import com.braze.ui.support.MarginBaseline
+import com.braze.ui.support.applySafeAreaMargins
 import com.braze.ui.support.removeViewFromParent
 
 open class InAppMessageSlideupView(
@@ -24,6 +22,7 @@ open class InAppMessageSlideupView(
     attrs: AttributeSet?,
 ) : InAppMessageBaseView(context, attrs) {
     private var inAppMessageImageView: InAppMessageImageView? = null
+    private val containerMarginBaseline = MarginBaseline()
 
     override val messageTextView: TextView?
         get() = findViewById(R.id.com_braze_inappmessage_slideup_message)
@@ -94,13 +93,7 @@ open class InAppMessageSlideupView(
             return
         }
 
-        // Offset the existing margin with whatever the inset margins safe area values are
         val layoutParams = layoutParams as MarginLayoutParams
-        layoutParams.setMargins(
-            getMaxSafeLeftInset(insets) + layoutParams.leftMargin,
-            getMaxSafeTopInset(insets) + layoutParams.topMargin,
-            getMaxSafeRightInset(insets) + layoutParams.rightMargin,
-            getMaxSafeBottomInset(insets) + layoutParams.bottomMargin,
-        )
+        layoutParams.applySafeAreaMargins(insets, containerMarginBaseline)
     }
 }

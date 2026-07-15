@@ -6,9 +6,15 @@
 #
 # For more details, see
 #   http://developer.android.com/guide/developing/tools/proguard.html
+
+# Keep names for XML-inflated views and manifest-declared components
 -keepnames class com.braze.ui.** { *; }
--keepnames class com.braze.** { *; }
+-keepnames class com.braze.push.** { *; }
 -keepnames class bo.app.** { *; }
+
+# Public integration entry points outside com.braze.ui / com.braze.push
+-keepnames class com.braze.IBrazeDeeplinkHandler
+-keepnames class com.braze.BrazeActivityLifecycleCallbackListener
 
 -dontwarn com.braze.ui.**
 -dontwarn com.google.firebase.messaging.**

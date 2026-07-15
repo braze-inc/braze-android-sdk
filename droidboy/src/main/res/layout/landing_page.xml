@@ -22,8 +22,9 @@
         android:background="?attr/colorPrimary"
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
         <LinearLayout
-          android:layout_width="match_parent"
+          android:layout_width="wrap_content"
           android:layout_height="match_parent"
+          android:layout_gravity="center_vertical|start"
           android:orientation="vertical"
           android:gravity="center_vertical">
           <TextView

@@ -67,8 +67,7 @@ fun ContentCard(
 ) {
     val context = LocalContext.current
 
-    @Suppress("VariableNaming")
-    val TAG = "ContentCardComposable"
+    val tag = "ContentCardComposable"
 
     // Track the unread with this so we can dynamically change it if needed
     var isUnread by remember { mutableStateOf(!card.isIndicatorHighlighted) }
@@ -83,7 +82,7 @@ fun ContentCard(
             val observer =
                 LifecycleEventObserver { _, event ->
                     if (event == Lifecycle.Event.ON_PAUSE) {
-                        brazelog(TAG) { "OnPause called in ContentCardComposable" }
+                        brazelog(tag) { "OnPause called in ContentCardComposable" }
                         if (!card.isIndicatorHighlighted) {
                             card.isIndicatorHighlighted = true
                             isUnread = false

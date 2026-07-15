@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:id="@+id/edgeToEdgeHtmlIamRoot"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  tools:ignore="HardcodedText">
+
+  <TextView
+    android:id="@+id/edgeToEdgeHostTopIndicator"
+    android:layout_width="0dp"
+    android:layout_height="wrap_content"
+    android:background="#d32f2f"
+    android:gravity="center"
+    android:padding="12dp"
+    android:text="HOST: status bar region (shows through IAM gap when broken)"
+    android:textColor="#ffffff"
+    android:textStyle="bold"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent" />
+
+  <TextView
+    android:id="@+id/edgeToEdgeHostBottomIndicator"
+    android:layout_width="0dp"
+    android:layout_height="wrap_content"
+    android:background="#1565c0"
+    android:gravity="center"
+    android:padding="12dp"
+    android:text="HOST: navigation bar region (shows through IAM gap when broken)"
+    android:textColor="#ffffff"
+    android:textStyle="bold"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent" />
+
+  <TextView
+    android:id="@+id/edgeToEdgeHostLeftIndicator"
+    android:layout_width="@dimen/edge_to_edge_host_side_indicator_width"
+    android:layout_height="0dp"
+    android:background="#f57c00"
+    android:gravity="center"
+    android:padding="8dp"
+    android:text="HOST\nLEFT"
+    android:textColor="#ffffff"
+    android:textSize="11sp"
+    android:textStyle="bold"
+    app:layout_constraintBottom_toTopOf="@id/edgeToEdgeHostBottomIndicator"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@id/edgeToEdgeHostTopIndicator" />
+
+  <TextView
+    android:id="@+id/edgeToEdgeHostRightIndicator"
+    android:layout_width="@dimen/edge_to_edge_host_side_indicator_width"
+    android:layout_height="0dp"
+    android:background="#7b1fa2"
+    android:gravity="center"
+    android:padding="8dp"
+    android:text="HOST\nRIGHT"
+    android:textColor="#ffffff"
+    android:textSize="11sp"
+    android:textStyle="bold"
+    app:layout_constraintBottom_toTopOf="@id/edgeToEdgeHostBottomIndicator"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintTop_toBottomOf="@id/edgeToEdgeHostTopIndicator" />
+
+  <ScrollView
+    android:id="@+id/edgeToEdgeHtmlIamControls"
+    android:layout_width="0dp"
+    android:layout_height="0dp"
+    android:clipToPadding="false"
+    android:fillViewport="true"
+    app:layout_constraintBottom_toTopOf="@id/edgeToEdgeHostBottomIndicator"
+    app:layout_constraintEnd_toStartOf="@id/edgeToEdgeHostRightIndicator"
+    app:layout_constraintStart_toEndOf="@id/edgeToEdgeHostLeftIndicator"
+    app:layout_constraintTop_toBottomOf="@id/edgeToEdgeHostTopIndicator">
+
+    <LinearLayout
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:orientation="vertical"
+      android:padding="16dp">
+
+      <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Edge-to-edge HTML IAM tester"
+        android:textSize="20sp"
+        android:textStyle="bold" />
+
+      <TextView
+        android:id="@+id/edgeToEdgeHtmlIamStatus"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:lineSpacingExtra="4dp"
+        android:textSize="14sp" />
+
+      <com.google.android.material.switchmaterial.SwitchMaterial
+        android:id="@+id/edgeToEdgeApplyInsetsSwitch"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Apply window insets to HTML IAM (SDK default: on)" />
+
+      <com.google.android.material.switchmaterial.SwitchMaterial
+        android:id="@+id/edgeToEdgeForceZeroIamInsetsSwitch"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="Force zero IAM inset values (0 margins / 0 CSS insets)" />
+
+      <com.google.android.material.switchmaterial.SwitchMaterial
+        android:id="@+id/edgeToEdgeDemoHorizontalInsetsSwitch"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:checked="true"
+        android:text="Demo 32dp left/right insets (for emulator screenshots)" />
+
+      <Button
+        android:id="@+id/edgeToEdgeShowHtmlIamButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Show HTML IAM" />
+
+      <Button
+        android:id="@+id/edgeToEdgeShowHtmlFullIamButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="Show HTML Full IAM" />
+
+      <Button
+        android:id="@+id/edgeToEdgeShowCenteredHtmlIamButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="Show Centered HTML IAM" />
+
+      <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:lineSpacingExtra="4dp"
+        android:text="Broken letterbox screenshots: apply insets ON, force zero OFF, demo horizontal ON.\n\nForce zero does not recreate letterboxing — it makes the IAM full-screen by passing 0 for all inset values.\n\nFixed screenshots: apply insets OFF, force zero OFF."
+        android:textSize="13sp" />
+    </LinearLayout>
+  </ScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>

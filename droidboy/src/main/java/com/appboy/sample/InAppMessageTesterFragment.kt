@@ -69,10 +69,7 @@ class InAppMessageTesterFragment :
             null,
         ),
         YOUTUBE("html_inapp_message_body_youtube_iframe.html", null),
-        BRIDGE_TESTER(
-            "html_in_app_message_bridge_tester.html",
-            "https://appboy-images.com/HTML_ZIP_STOPWATCH.zip",
-        ),
+        BRIDGE_TESTER("html_in_app_message_bridge_tester.html", null),
         SLOW_LOADING(
             "html_inapp_message_delayed_open.html",
             null,
@@ -88,6 +85,7 @@ class InAppMessageTesterFragment :
         SHARK_HTML("html_shark_unified.html", null),
         PUSH_PROMPT_HTML("html_request_push_prompt.html", null),
         DND_TEXT_TARGET_HTML("html_inapp_dnd_tester.html", null),
+        EDGE_TO_EDGE_TESTER("html_inapp_edge_to_edge_tester.html", null),
     }
 
     private var messageType: String? = null
@@ -310,6 +308,11 @@ class InAppMessageTesterFragment :
                     "html_shark_unified" -> addInAppMessage(InAppMessageHtml(), HtmlMessageType.SHARK_HTML)
                     "html_push_prompt" -> addInAppMessage(InAppMessageHtml(), HtmlMessageType.PUSH_PROMPT_HTML)
                     "html_dnd_target_text_link" -> addInAppMessage(InAppMessageHtml(), HtmlMessageType.DND_TEXT_TARGET_HTML)
+                    "html_edge_to_edge_tester" ->
+                        addInAppMessage(
+                            InAppMessageHtmlFull(),
+                            HtmlMessageType.EDGE_TO_EDGE_TESTER,
+                        )
                     "html_full_dark_mode" ->
                         addInAppMessage(
                             InAppMessageHtmlFull(),

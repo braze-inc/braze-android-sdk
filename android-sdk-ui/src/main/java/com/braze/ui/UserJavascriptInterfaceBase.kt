@@ -178,6 +178,21 @@ open class UserJavascriptInterfaceBase(
     }
 
     @JavascriptInterface
+    fun setCustomUserAttributeJSONArray(
+        key: String,
+        jsonArrayString: String?,
+    ) {
+        val jsonArray = parseArrayFromJsonString(jsonArrayString)
+        if (jsonArray == null) {
+            brazelog(W) { "Failed to set custom attribute JSON array for key $key with value: $jsonArrayString" }
+            return
+        }
+        Braze.getInstance(context).runOnUser {
+            it.setCustomUserAttribute(key, jsonArray)
+        }
+    }
+
+    @JavascriptInterface
     fun addToCustomAttributeArray(
         key: String,
         value: String,
@@ -331,6 +346,16 @@ open class UserJavascriptInterfaceBase(
         try {
             val parsedArray = JSONArray(jsonArrayString)
             return MutableList<String?>(parsedArray.length()) { i -> parsedArray.getString(i) }.toTypedArray()
+        } catch (e: Exception) {
+            brazelog(E, e) { "Failed to parse custom attribute array" }
+        }
+        return null
+    }
+
+    @VisibleForTesting
+    fun parseArrayFromJsonString(jsonArrayString: String?): JSONArray? {
+        try {
+            return JSONArray(jsonArrayString)
         } catch (e: Exception) {
             brazelog(E, e) { "Failed to parse custom attribute array" }
         }

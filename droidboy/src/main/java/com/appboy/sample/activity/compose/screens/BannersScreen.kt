@@ -6,14 +6,15 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.unit.dp
+import com.appboy.sample.R
 import com.appboy.sample.activity.compose.TopBar
 import com.appboy.sample.activity.compose.viewmodel.MainViewModel
 import com.braze.jetpackcompose.banners.Banner
@@ -30,7 +31,7 @@ fun BannersScreen(
     Column(modifier = Modifier.fillMaxSize()) {
         TopBar(
             title = "Banners",
-            buttonIcon = Icons.Filled.Menu,
+            buttonIcon = ImageVector.vectorResource(R.drawable.ic_menu),
             onButtonClicked = { openDrawer() },
         )
         Column(

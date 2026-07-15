@@ -43,8 +43,17 @@ var brazeBridge = {
           }
           return Object.prototype.toString.call(value) === '[object Array]';
       };
+      var isArrayOfObjects = function(arr) {
+          return arr.length > 0 && Object.prototype.toString.call(arr[0]) === '[object Object]';
+      };
       if (isArray(value)) {
-        brazeInternalBridge.getUser().setCustomUserAttributeArray(key, JSON.stringify(value));
+        if (isArrayOfObjects(value)) {
+          console.debug('brazeBridge: setCustomUserAttribute routing array of objects for key: ' + key);
+          brazeInternalBridge.getUser().setCustomUserAttributeJSONArray(key, JSON.stringify(value));
+        } else {
+          console.debug('brazeBridge: setCustomUserAttribute routing string array for key: ' + key);
+          brazeInternalBridge.getUser().setCustomUserAttributeArray(key, JSON.stringify(value));
+        }
       } else {
         brazeInternalBridge.getUser().setCustomUserAttributeJSON(key, JSON.stringify({"value":value}), merge);
       }

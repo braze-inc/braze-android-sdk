@@ -7,6 +7,44 @@
   <string name="tab_flags">Flags</string>
   <string name="tab_banners">Banners</string>
   <string name="tab_ecommerce">eCommerce</string>
+  <string name="tab_push_unregister">Logout</string>
+
+  <!-- Push unregister / logout tester -->
+  <string name="push_unregister_status_header">Status</string>
+  <string name="push_unregister_status_push_token">Push token:\n%1$s</string>
+  <string name="push_unregister_status_sdk_enabled">SDK: %1$s</string>
+  <string name="push_unregister_status_sdk_enabled_value">enabled</string>
+  <string name="push_unregister_status_sdk_disabled_value">disabled</string>
+  <string name="push_unregister_status_no_token">(none)</string>
+  <string name="push_unregister_reenable_sdk_button">Re-enable SDK</string>
+  <string name="push_unregister_disable_sdk_button">Disable SDK</string>
+  <string name="push_unregister_reenable_sdk_success">SDK re-enabled and push registration restarted.</string>
+  <string name="push_unregister_reenable_sdk_no_user">SDK re-enabled. Set a user on the Home tab to call changeUser.</string>
+  <string name="push_unregister_disable_sdk_success">SDK disabled.</string>
+  <string name="push_unregister_primitive_header">Primitive actions (single attempt, no auto-retry)</string>
+  <string name="push_unregister_primitive_unregister">Unregister Push</string>
+  <string name="push_unregister_primitive_logout">Logout</string>
+  <string name="push_unregister_qa_header">QA scenario (reference integrator retry)</string>
+  <string name="push_unregister_qa_scenario_label">Failure scenario</string>
+  <string name="push_unregister_qa_failures_before_success_label">Failures before success</string>
+  <string name="push_unregister_qa_max_retries_label">Max retry attempts</string>
+  <string name="push_unregister_qa_retry_delay_label">Retry delay (ms)</string>
+  <string name="push_unregister_qa_target_api_label">Target API</string>
+  <string name="push_unregister_qa_run_button">Run QA scenario</string>
+  <string name="push_unregister_qa_log_header">Attempt log</string>
+  <string name="push_unregister_qa_log_empty">No QA run yet.</string>
+  <string name="push_unregister_qa_default_zero">0</string>
+  <string name="push_unregister_qa_default_max_retries">3</string>
+  <string name="push_unregister_qa_default_retry_delay">1000</string>
+  <string name="push_unregister_qa_precondition_sdk_disabled">Cannot run: SDK is disabled.</string>
+  <string name="push_unregister_qa_precondition_no_token">Cannot run: no push token is registered.</string>
+  <string name="push_unregister_qa_running">Running QA scenario…</string>
+  <string name="push_unregister_qa_running_attempt">Waiting for attempt %1$d…</string>
+  <string name="push_unregister_qa_run_failed">QA run failed: %1$s</string>
+  <string name="push_unregister_unregister_success">Push unregistered successfully.</string>
+  <string name="push_unregister_unregister_failed">Unregister push failed (retriable=%1$s): %2$s</string>
+  <string name="push_unregister_logout_success">Logout complete. Push unregistered, data wiped, and SDK disabled.</string>
+  <string name="push_unregister_logout_failed">Logout failed (retriable=%1$s): %2$s</string>
 
   <!-- eCommerce fragment -->
   <string name="ecommerce_events_header">eCommerce Events</string>
@@ -106,6 +144,7 @@
   <string name="red">Red</string>
   <string name="blue">Blue</string>
   <string name="inappmessage_tester_tab_title">IAMs</string>
+  <string name="edge_to_edge_html_iam_title">Edge-to-Edge HTML IAM</string>
   <string name="create_and_add_inappmessage">Create and Add In-App Message</string>
   <string name="display_next_inappmessage">Display Next In-App Message</string>
   <string name="hide_current_inappmessage">Hide Current In-App Message</string>

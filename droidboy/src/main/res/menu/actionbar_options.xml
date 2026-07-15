@@ -34,6 +34,10 @@
       android:title="IAM Sandbox"
       app:showAsAction="never" />
     <item
+      android:id="@+id/edge_to_edge_html_iam"
+      android:title="@string/edge_to_edge_html_iam_title"
+      app:showAsAction="never" />
+    <item
       android:id="@+id/action_network_console"
       android:title="Network Console"
       app:showAsAction="never" />

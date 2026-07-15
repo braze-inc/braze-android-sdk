@@ -3,12 +3,13 @@ package com.appboy.sample.activity.compose.screens
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.res.vectorResource
+import com.appboy.sample.R
 import com.appboy.sample.activity.compose.TopBar
 import com.appboy.sample.activity.compose.viewmodel.MainViewModel
 import com.braze.jetpackcompose.banners.Banner
@@ -25,7 +26,7 @@ fun JavascriptBridgeScreen(
     Column(modifier = Modifier.fillMaxSize()) {
         TopBar(
             title = " Banners - JavaScript Bridge",
-            buttonIcon = Icons.Filled.Menu,
+            buttonIcon = ImageVector.vectorResource(R.drawable.ic_menu),
             onButtonClicked = { openDrawer() },
         )
         Column(

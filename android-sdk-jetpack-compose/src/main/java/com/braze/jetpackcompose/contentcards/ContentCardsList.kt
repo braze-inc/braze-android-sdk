@@ -128,17 +128,17 @@ fun ContentCardsList(
 
     var networkUnavailableJob: Job? = null
 
-    val TAG = "BrazeContentCardList"
-    brazelog(TAG) { "Doing compose of BrazeContentCardsList" }
+    val tag = "BrazeContentCardList"
+    brazelog(tag) { "Doing compose of BrazeContentCardsList" }
 
-    val NETWORK_PROBLEM_WARNING_MS = 5000L
-    val AUTO_HIDE_REFRESH_INDICATOR_DELAY_MS = 2500L
+    val networkProblemWarningMs = 5000L
+    val autoHideRefreshIndicatorDelayMs = 2500L
 
     fun refresh() =
         refreshScope.launch {
             isRefreshing = true
             Braze.getInstance(context).requestContentCardsRefresh()
-            delay(AUTO_HIDE_REFRESH_INDICATOR_DELAY_MS)
+            delay(autoHideRefreshIndicatorDelayMs)
             isRefreshing = false
         }
 
@@ -150,7 +150,7 @@ fun ContentCardsList(
         }
 
     fun networkUnavailable() {
-        brazelog(TAG) { "Network is unavailable." }
+        brazelog(tag) { "Network is unavailable." }
         networkUnavailableJob = null
         isRefreshing = false
     }
@@ -160,7 +160,7 @@ fun ContentCardsList(
         var isCustomRendered = false
         if (customCardComposer != null) {
             isCustomRendered = customCardComposer.invoke(card)
-            brazelog(TAG, V) { "Attempted to render custom card ${card.id} and received a result of $isCustomRendered" }
+            brazelog(tag, V) { "Attempted to render custom card ${card.id} and received a result of $isCustomRendered" }
         }
 
         if (!isCustomRendered) {
@@ -172,9 +172,9 @@ fun ContentCardsList(
                             if (!card.isIndicatorHighlighted) {
                                 card.isIndicatorHighlighted = true
                             }
-                            brazelog(TAG, V) { "DisposableEffect Card ${card.id} left view" }
+                            brazelog(tag, V) { "DisposableEffect Card ${card.id} left view" }
                         } else {
-                            brazelog(TAG, V) { "DisposableEffect Card left view, but was never actually seen. Not marking as viewed." }
+                            brazelog(tag, V) { "DisposableEffect Card left view, but was never actually seen. Not marking as viewed." }
                         }
                     }
                 }
@@ -186,7 +186,7 @@ fun ContentCardsList(
     fun enqueueCardListMutation(mutation: CardListMutation) {
         val sendResult = cardListMutationChannel.trySend(mutation)
         if (sendResult.isFailure) {
-            brazelog(TAG, W) { "Failed to enqueue card list mutation: ${sendResult.exceptionOrNull()}" }
+            brazelog(tag, W) { "Failed to enqueue card list mutation: ${sendResult.exceptionOrNull()}" }
         }
     }
 
@@ -200,13 +200,13 @@ fun ContentCardsList(
             if (card.isControl) {
                 val idCardPair = Pair(lastCardId, card)
                 if (lastCardId.isBlank()) {
-                    brazelog(TAG) { "Control card $card.id is at the front. Logging impression immediately" }
+                    brazelog(tag) { "Control card $card.id is at the front. Logging impression immediately" }
                     card.logImpression()
                 } else {
                     controlCardPairsToAdd.add(idCardPair)
                 }
             } else if (cardIDs.contains(card.id)) {
-                brazelog(TAG, W) { "Card ID ${card.id} already exists. Skipping card $card." }
+                brazelog(tag, W) { "Card ID ${card.id} already exists. Skipping card $card." }
             } else {
                 cardIDs.add(card.id)
                 cardsToAdd.add(card)
@@ -228,7 +228,7 @@ fun ContentCardsList(
             if (networkUnavailableJob == null) {
                 isRefreshing = true
                 networkUnavailableJob =
-                    BrazeCoroutineScope.launchDelayed(NETWORK_PROBLEM_WARNING_MS, Dispatchers.Main) {
+                    BrazeCoroutineScope.launchDelayed(networkProblemWarningMs, Dispatchers.Main) {
                         networkUnavailable()
                     }
             }
@@ -251,7 +251,7 @@ fun ContentCardsList(
             }
             is CardListMutation.DismissCard -> {
                 myCards = myCards.filterNot { it.id == mutation.card.id }
-                brazelog(TAG) { "Removing card ${mutation.card.id}. Total size is now ${myCards.size}" }
+                brazelog(tag) { "Removing card ${mutation.card.id}. Total size is now ${myCards.size}" }
                 mutation.card.isDismissed = true
                 onCardDismissed?.invoke(mutation.card)
             }
@@ -259,24 +259,24 @@ fun ContentCardsList(
     }
 
     fun handleContentCardsUpdatedEvent(event: ContentCardsUpdatedEvent) {
-        brazelog(TAG) { "Handling ContentCardsUpdatedEvent" }
+        brazelog(tag) { "Handling ContentCardsUpdatedEvent" }
         replaceCards(event.allCards)
     }
 
     fun logCardImpression(card: Card) {
         if (impressedCards.contains(card.id)) {
-            brazelog(TAG) { "Card ${card.id} already logged. Skipping." }
+            brazelog(tag) { "Card ${card.id} already logged. Skipping." }
         } else {
-            brazelog(TAG) { "Logging impression for card ${card.id}" }
+            brazelog(tag) { "Logging impression for card ${card.id}" }
             impressedCards.add(card.id)
             card.logImpression()
         }
         controlCardInference.filter { it.first == card.id }.forEach {
             val controlCard = it.second
             if (impressedCards.contains(controlCard.id)) {
-                brazelog(TAG) { "Control Card ${controlCard.id} (via ${card.id}) already logged. Skipping." }
+                brazelog(tag) { "Control Card ${controlCard.id} (via ${card.id}) already logged. Skipping." }
             } else {
-                brazelog(TAG) { "Logging impression for control card ${controlCard.id} (via ${card.id})" }
+                brazelog(tag) { "Logging impression for control card ${controlCard.id} (via ${card.id})" }
                 impressedCards.add(controlCard.id)
                 controlCard.logImpression()
             }
@@ -364,14 +364,14 @@ fun ContentCardsList(
             }
             didInitialLoad = true
         } else {
-            brazelog(TAG) { "Doing a recomposition, so skipping loading of cards from cache" }
+            brazelog(tag) { "Doing a recomposition, so skipping loading of cards from cache" }
         }
     } else {
         if (!didInitialLoad) {
             replaceCards(cards)
             didInitialLoad = true
         } else {
-            brazelog(TAG) { "Doing a recomposition, so skipping loading of cards" }
+            brazelog(tag) { "Doing a recomposition, so skipping loading of cards" }
         }
     }
 

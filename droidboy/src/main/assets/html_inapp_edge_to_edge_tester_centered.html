@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background: transparent;
+      color: #ffffff;
+      font-family: sans-serif;
+      padding:
+        var(--braze-safe-area-inset-top, 0px)
+        var(--braze-safe-area-inset-right, 0px)
+        var(--braze-safe-area-inset-bottom, 0px)
+        var(--braze-safe-area-inset-left, 0px);
+    }
+
+    .card {
+      width: min(88vw, 320px);
+      margin: 24px auto;
+      padding: 20px;
+      background: #00897b;
+      border-radius: 12px;
+      border: 2px dashed rgba(255, 255, 255, 0.85);
+      text-align: center;
+      line-height: 1.5;
+    }
+
+    .title {
+      font-size: 18px;
+      font-weight: bold;
+      margin-bottom: 12px;
+      text-transform: uppercase;
+    }
+
+    .close {
+      display: inline-block;
+      margin-top: 16px;
+      color: #ffffff;
+      font-size: 24px;
+      font-weight: bold;
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <div class="title">Centered HTML IAM</div>
+    <p>
+      Non-full HTML with WRAP_CONTENT height.<br/>
+      Host stripes should remain visible around this card.
+    </p>
+    <a class="close" href="appboy://close">X</a>
+  </div>
+</body>
+</html>

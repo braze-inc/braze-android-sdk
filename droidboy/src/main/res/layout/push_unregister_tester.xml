@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  android:fillViewport="true">
+  <LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="12dp"
+    android:orientation="vertical">
+
+    <TextView
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:text="@string/push_unregister_status_header"
+      android:textStyle="bold" />
+    <TextView
+      android:id="@+id/push_unregister_status_push_token"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="4dp"
+      android:fontFamily="monospace"
+      android:textIsSelectable="true"
+      tools:text="Push token:\nabc123" />
+    <TextView
+      android:id="@+id/push_unregister_status_sdk_enabled"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="4dp"
+      tools:text="SDK: enabled" />
+    <Button
+      android:id="@+id/push_unregister_toggle_sdk_button"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="8dp"
+      android:text="@string/push_unregister_disable_sdk_button" />
+
+    <TextView
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="16dp"
+      android:text="@string/push_unregister_primitive_header"
+      android:textStyle="bold" />
+    <Button
+      android:id="@+id/push_unregister_primitive_button"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="8dp"
+      android:text="@string/push_unregister_primitive_unregister" />
+    <Button
+      android:id="@+id/push_unregister_primitive_logout_button"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="8dp"
+      android:text="@string/push_unregister_primitive_logout" />
+
+    <TextView
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="16dp"
+      android:text="@string/push_unregister_qa_header"
+      android:textStyle="bold" />
+    <TextView
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="8dp"
+      android:text="@string/push_unregister_qa_scenario_label" />
+    <Spinner
+      android:id="@+id/push_unregister_qa_scenario_spinner"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content" />
+    <TextView
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="8dp"
+      android:text="@string/push_unregister_qa_failures_before_success_label" />
+    <EditText
+      android:id="@+id/push_unregister_qa_failures_before_success"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:inputType="numberSigned"
+      android:text="@string/push_unregister_qa_default_zero" />
+    <TextView
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="8dp"
+      android:text="@string/push_unregister_qa_max_retries_label" />
+    <EditText
+      android:id="@+id/push_unregister_qa_max_retries"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:inputType="numberSigned"
+      android:text="@string/push_unregister_qa_default_max_retries" />
+    <TextView
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="8dp"
+      android:text="@string/push_unregister_qa_retry_delay_label" />
+    <EditText
+      android:id="@+id/push_unregister_qa_retry_delay_ms"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:inputType="numberSigned"
+      android:text="@string/push_unregister_qa_default_retry_delay" />
+    <TextView
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="8dp"
+      android:text="@string/push_unregister_qa_target_api_label" />
+    <Spinner
+      android:id="@+id/push_unregister_qa_target_api_spinner"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content" />
+    <Button
+      android:id="@+id/push_unregister_qa_run_button"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="12dp"
+      android:text="@string/push_unregister_qa_run_button" />
+
+    <TextView
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="16dp"
+      android:text="@string/push_unregister_qa_log_header"
+      android:textStyle="bold" />
+    <TextView
+      android:id="@+id/push_unregister_qa_attempt_log"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="8dp"
+      android:fontFamily="monospace"
+      android:text="@string/push_unregister_qa_log_empty"
+      android:textIsSelectable="true"
+      android:textSize="12sp" />
+  </LinearLayout>
+</ScrollView>

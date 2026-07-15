@@ -33,6 +33,7 @@ class FirebaseApplication : Application() {
 
         // Example of how to register for Firebase Cloud Messaging manually.
         val applicationContext: Context = this
+        @Suppress("DEPRECATION") // Deprecated in 25.1.0 of the `firebase-messaging` API in favor of "Firebase Installations"
         FirebaseMessaging.getInstance().token.addOnCompleteListener { task: Task<String> ->
             if (!task.isSuccessful) {
                 Log.w(TAG, "Fetching FCM registration token failed", task.exception)

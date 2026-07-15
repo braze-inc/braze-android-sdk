@@ -4,8 +4,21 @@
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
   </head>
-  <body style="background-color: rgba(0, 115, 213, .90)">
+  <body style="background-color: rgba(0, 115, 213, .90); font-family: sans-serif; padding: 16px;">
     <button id="color-change" onclick="document.getElementById('color-change').style.backgroundColor='red'; console.log('Just a debug log message');">Change Color To Red</button>
     <a onclick="window.location='appboy://customEvent?name=htmlIAMCustomEvent&p1=p2'">Custom Event</a>
+
+    <hr/>
+    <p style="font-weight:bold;">Array of Objects Custom Attribute</p>
+    <button onclick="brazeBridge.getUser().setCustomUserAttribute('testObjectArray', [{key:'a',val:'1'},{key:'b',val:'2'}]); document.getElementById('status').innerText='Set!';">
+      Set array of objects
+    </button>
+    <button onclick="brazeBridge.getUser().setCustomUserAttribute('testStringArray', ['x','y','z']); document.getElementById('status').innerText='Set!';">
+      Set string array
+    </button>
+    <button onclick="brazeBridge.getUser().setCustomUserAttribute('testEmptyObjectArray', []); document.getElementById('status').innerText='Set!';">
+      Set empty array
+    </button>
+    <p id="status" style="color:white;"></p>
   </body>
 </html>

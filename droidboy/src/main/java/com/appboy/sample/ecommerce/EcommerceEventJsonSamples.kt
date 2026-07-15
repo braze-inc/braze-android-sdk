@@ -11,22 +11,22 @@ object EcommerceEventJsonSamples {
                     eventName = "ecommerce.checkout_started",
                     propertiesJson =
                         """
-                {
-                  "checkout_id": "checkout-123",
-                  "cart_id": "cart-456",
-                  "currency": "USD",
-                  "source": "droidboy",
-                  "total_value": 49.99,
-                  "products": [
-                    {
-                      "product_id": "SKU-001",
-                      "product_name": "Test Widget",
-                      "variant_id": "widget_blue_lg",
-                      "price": 49.99,
-                      "quantity": 1
-                    }
-                  ]
-                }
+                        {
+                          "checkout_id": "checkout-123",
+                          "cart_id": "cart-456",
+                          "currency": "USD",
+                          "source": "droidboy",
+                          "total_value": 49.99,
+                          "products": [
+                            {
+                              "product_id": "SKU-001",
+                              "product_name": "Test Widget",
+                              "variant_id": "widget_blue_lg",
+                              "price": 49.99,
+                              "quantity": 1
+                            }
+                          ]
+                        }
                         """.trimIndent(),
                 ),
             EcommerceEventType.CART_UPDATED to
@@ -34,22 +34,22 @@ object EcommerceEventJsonSamples {
                     eventName = "ecommerce.cart_updated",
                     propertiesJson =
                         """
-                {
-                  "cart_id": "cart-456",
-                  "action": "replace",
-                  "currency": "USD",
-                  "source": "droidboy",
-                  "total_value": 49.99,
-                  "products": [
-                    {
-                      "product_id": "SKU-001",
-                      "product_name": "Test Widget",
-                      "variant_id": "widget_blue_lg",
-                      "price": 49.99,
-                      "quantity": 1
-                    }
-                  ]
-                }
+                        {
+                          "cart_id": "cart-456",
+                          "action": "replace",
+                          "currency": "USD",
+                          "source": "droidboy",
+                          "total_value": 49.99,
+                          "products": [
+                            {
+                              "product_id": "SKU-001",
+                              "product_name": "Test Widget",
+                              "variant_id": "widget_blue_lg",
+                              "price": 49.99,
+                              "quantity": 1
+                            }
+                          ]
+                        }
                         """.trimIndent(),
                 ),
             EcommerceEventType.ORDER_PLACED to
@@ -57,23 +57,23 @@ object EcommerceEventJsonSamples {
                     eventName = "ecommerce.order_placed",
                     propertiesJson =
                         """
-                {
-                  "order_id": "order-789",
-                  "cart_id": "cart-456",
-                  "total_discounts": 5.0,
-                  "currency": "USD",
-                  "source": "droidboy",
-                  "total_value": 49.99,
-                  "products": [
-                    {
-                      "product_id": "SKU-001",
-                      "product_name": "Test Widget",
-                      "variant_id": "widget_blue_lg",
-                      "price": 49.99,
-                      "quantity": 1
-                    }
-                  ]
-                }
+                        {
+                          "order_id": "order-789",
+                          "cart_id": "cart-456",
+                          "total_discounts": 5.0,
+                          "currency": "USD",
+                          "source": "droidboy",
+                          "total_value": 49.99,
+                          "products": [
+                            {
+                              "product_id": "SKU-001",
+                              "product_name": "Test Widget",
+                              "variant_id": "widget_blue_lg",
+                              "price": 49.99,
+                              "quantity": 1
+                            }
+                          ]
+                        }
                         """.trimIndent(),
                 ),
             EcommerceEventType.PRODUCT_VIEWED to
@@ -81,16 +81,16 @@ object EcommerceEventJsonSamples {
                     eventName = "ecommerce.product_viewed",
                     propertiesJson =
                         """
-                {
-                  "product_id": "SKU-001",
-                  "product_name": "Test Widget",
-                  "variant_id": "widget_blue_lg",
-                  "price": 49.99,
-                  "currency": "USD",
-                  "source": "droidboy",
-                  "image_url": "https://example.com/widget.jpg",
-                  "product_url": "https://example.com/products/widget"
-                }
+                        {
+                          "product_id": "SKU-001",
+                          "product_name": "Test Widget",
+                          "variant_id": "widget_blue_lg",
+                          "price": 49.99,
+                          "currency": "USD",
+                          "source": "droidboy",
+                          "image_url": "https://example.com/widget.jpg",
+                          "product_url": "https://example.com/products/widget"
+                        }
                         """.trimIndent(),
                 ),
         )

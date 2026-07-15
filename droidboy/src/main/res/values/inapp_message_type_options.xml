@@ -19,6 +19,7 @@
     <item>Message Type: HTML Slow Loading</item>
     <item>Message Type: HTML DnD Target Text Link</item>
     <item>Message Type: HTML Push Prompt</item>
+    <item>Message Type: HTML Edge-to-Edge Tester</item>
   </string-array>
   <string-array name="inapp_message_type_values">
     <item>slideup</item>
@@ -39,5 +40,6 @@
     <item>html_full_slow_loading</item>
     <item>html_dnd_target_text_link</item>
     <item>html_push_prompt</item>
+    <item>html_edge_to_edge_tester</item>
   </string-array>
 </resources>

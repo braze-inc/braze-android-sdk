@@ -25,9 +25,20 @@ import com.google.firebase.messaging.RemoteMessage
  * automatic handling of Braze push messages delivered through FCM.
  */
 open class BrazeFirebaseMessagingService : FirebaseMessagingService() {
+    // Deprecated in 25.1.0 of the `firebase-messaging` API in favor of "Firebase Installations"
+    // See https://firebase.google.com/docs/cloud-messaging/android/get-started#enable-registration-via-firebase-installation-id
+    @Deprecated("Deprecated in Java")
+    @Suppress("DEPRECATION")
     override fun onNewToken(newToken: String) {
         super.onNewToken(newToken)
+        brazelog { "Firebase Cloud Messaging token received via onNewToken: $newToken" }
         handleOnNewToken(this, newToken)
+    }
+
+    override fun onRegistered(installationId: String) {
+        super.onRegistered(installationId)
+        brazelog { "Firebase Installation ID received via onRegistered: $installationId" }
+        handleOnNewToken(this, installationId)
     }
 
     override fun onMessageReceived(remoteMessage: RemoteMessage) {

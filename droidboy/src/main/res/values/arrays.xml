@@ -10,4 +10,26 @@
         <item>queue</item>
         <item>drop</item>
     </string-array>
+    <string-array name="push_unregister_qa_scenario_entries">
+        <item>Off (real network)</item>
+        <item>No network</item>
+        <item>HTTP 400</item>
+        <item>HTTP 429</item>
+        <item>HTTP 503</item>
+    </string-array>
+    <string-array name="push_unregister_qa_scenario_values">
+        <item>Off</item>
+        <item>NoNetwork</item>
+        <item>Http400</item>
+        <item>Http429</item>
+        <item>Http503</item>
+    </string-array>
+    <string-array name="push_unregister_qa_target_api_entries">
+        <item>Unregister Push</item>
+        <item>Logout</item>
+    </string-array>
+    <string-array name="push_unregister_qa_target_api_values">
+        <item>UnregisterPush</item>
+        <item>Logout</item>
+    </string-array>
 </resources>

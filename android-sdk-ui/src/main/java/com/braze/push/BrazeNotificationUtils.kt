@@ -599,8 +599,9 @@ object BrazeNotificationUtils {
     }
 
     /**
-     * Set large icon. We use the large icon URL if it exists in the notificationExtras.
-     * Otherwise we search for a drawable defined in braze.xml. If that doesn't exists, we do nothing.
+     * Set large icon. We use the large icon URL if it exists in the notificationExtras and downloads
+     * successfully. If the URL is absent or the download fails, we fall back to a drawable defined in
+     * braze.xml. If that doesn't exist, we do nothing.
      *
      * @return whether a large icon was successfully set.
      */
@@ -619,7 +620,7 @@ object BrazeNotificationUtils {
 
         try {
             brazelog { "Setting large icon for notification" }
-            payload.largeIcon?.let {
+            payload.largeIcon?.let { largeIconUrl ->
                 val largeNotificationBitmap =
                     Braze
                         .getInstance(context)
@@ -627,19 +628,26 @@ object BrazeNotificationUtils {
                         .getPushBitmapFromUrl(
                             context,
                             extras = null,
-                            imageUrl = it,
+                            imageUrl = largeIconUrl,
                             BrazeViewBounds.NOTIFICATION_LARGE_ICON,
                         )
-                notificationBuilder.setLargeIcon(largeNotificationBitmap)
-                return true
-            }
+                if (largeNotificationBitmap != null) {
+                    notificationBuilder.setLargeIcon(largeNotificationBitmap)
+                    return true
+                }
+                brazelog {
+                    "Failed to download large icon from url. Falling back to resource id if present. Url: $largeIconUrl"
+                }
+            } ?: brazelog { "Large icon bitmap url not present in extras. Attempting to use resource id instead." }
 
-            brazelog { "Large icon bitmap url not present in extras. Attempting to use resource id instead." }
             val largeNotificationIconResourceId = appConfigurationProvider.largeNotificationIconResourceId
             if (largeNotificationIconResourceId != 0) {
                 val largeNotificationBitmap = BitmapFactory.decodeResource(context.resources, largeNotificationIconResourceId)
-                notificationBuilder.setLargeIcon(largeNotificationBitmap)
-                return true
+                if (largeNotificationBitmap != null) {
+                    notificationBuilder.setLargeIcon(largeNotificationBitmap)
+                    return true
+                }
+                brazelog { "Large icon resource id present but bitmap could not be decoded" }
             } else {
                 brazelog { "Large icon resource id not present for notification" }
             }

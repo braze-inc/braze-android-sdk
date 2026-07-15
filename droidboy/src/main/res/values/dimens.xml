@@ -2,4 +2,5 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
   <dimen name="design_fab_image_size" tools:override="true">36dp</dimen>
     <dimen name="size_0dp">0dp</dimen>
+  <dimen name="edge_to_edge_host_side_indicator_width">32dp</dimen>
 </resources>

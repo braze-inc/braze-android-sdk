@@ -2,8 +2,6 @@ package com.appboy.sample.activity.compose
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.WindowInsets
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.MoreVert
 import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -22,6 +20,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.dimensionResource
+import androidx.compose.ui.res.vectorResource
 import com.appboy.sample.DroidboyApplication
 import com.appboy.sample.R
 import com.braze.enums.BrazeDateFormat
@@ -64,7 +63,10 @@ fun TopBar(
         actions = {
             Box {
                 IconButton(onClick = { shouldShowOverflow = true }) {
-                    Icon(Icons.Default.MoreVert, contentDescription = "More options")
+                    Icon(
+                        ImageVector.vectorResource(R.drawable.ic_more_vert),
+                        contentDescription = "More options",
+                    )
                 }
                 DropdownMenu(
                     expanded = shouldShowOverflow,

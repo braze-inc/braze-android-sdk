@@ -15,11 +15,9 @@ import com.braze.ui.R
 import com.braze.ui.inappmessage.config.BrazeInAppMessageParams.modalizedImageRadiusDp
 import com.braze.ui.inappmessage.utils.InAppMessageViewUtils.setViewBackgroundColor
 import com.braze.ui.inappmessage.utils.InAppMessageViewUtils.setViewBackgroundColorFilter
+import com.braze.ui.support.MarginBaseline
+import com.braze.ui.support.applySafeAreaMargins
 import com.braze.ui.support.convertDpToPixels
-import com.braze.ui.support.getMaxSafeBottomInset
-import com.braze.ui.support.getMaxSafeLeftInset
-import com.braze.ui.support.getMaxSafeRightInset
-import com.braze.ui.support.getMaxSafeTopInset
 import com.braze.ui.support.isRunningOnTablet
 
 open class InAppMessageFullView(
@@ -28,6 +26,8 @@ open class InAppMessageFullView(
 ) : InAppMessageImmersiveBaseView(context, attrs),
     IInAppMessageBackEventListener {
     private var inAppMessageImageView: InAppMessageImageView? = null
+    private val closeButtonMarginBaseline = MarginBaseline()
+    private val contentAreaMarginBaseline = MarginBaseline()
     private var isGraphic = false
 
     override val messageTextView: TextView?
@@ -219,14 +219,8 @@ open class InAppMessageFullView(
             return
         }
 
-        // Offset the existing margin with whatever the inset margins safe area values are
         val layoutParams = closeButtonView.layoutParams as MarginLayoutParams
-        layoutParams.setMargins(
-            getMaxSafeLeftInset(windowInsets) + layoutParams.leftMargin,
-            getMaxSafeTopInset(windowInsets) + layoutParams.topMargin,
-            getMaxSafeRightInset(windowInsets) + layoutParams.rightMargin,
-            getMaxSafeBottomInset(windowInsets) + layoutParams.bottomMargin,
-        )
+        layoutParams.applySafeAreaMargins(windowInsets, closeButtonMarginBaseline)
     }
 
     /**
@@ -243,13 +237,11 @@ open class InAppMessageFullView(
             return
         }
 
-        // Offset the existing margin with whatever the inset margins safe area values are
         val layoutParams = contentAreaView.layoutParams as MarginLayoutParams
-        layoutParams.setMargins(
-            getMaxSafeLeftInset(windowInsets) + layoutParams.leftMargin,
-            layoutParams.topMargin,
-            getMaxSafeRightInset(windowInsets) + layoutParams.rightMargin,
-            getMaxSafeBottomInset(windowInsets) + layoutParams.bottomMargin,
+        layoutParams.applySafeAreaMargins(
+            windowInsets,
+            contentAreaMarginBaseline,
+            applyTopInset = false,
         )
     }
 }
