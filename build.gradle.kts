@@ -1,7 +1,6 @@
 plugins {
     alias(libs.plugins.android.library) apply false
     alias(libs.plugins.android.application) apply false
-    alias(libs.plugins.kotlin.android) apply false
     alias(libs.plugins.kotlin.compose) apply false
     alias(libs.plugins.google.services) apply false
 }
@@ -9,7 +8,7 @@ plugins {
 extra["compileSdkVersion"] = 37
 extra["minSdkVersion"] = 21
 extra["targetSdkVersion"] = 37
-extra["appVersionName"] = "43.0.0"
+extra["appVersionName"] = "43.1.0"
 
 subprojects {
     repositories {
@@ -20,5 +19,5 @@ subprojects {
     }
 
     group = "com.braze"
-    version = "43.0.0"
+    version = "43.1.0"
 }

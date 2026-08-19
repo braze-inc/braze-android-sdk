@@ -308,10 +308,14 @@ open class BrazePushReceiver : BroadcastReceiver() {
                 return false
             }
 
-            payload.pushUniqueId?.let {
-                if (!BrazeInternal.validateAndStorePushId(context, it)) {
-                    brazelog(I) { "Push with identifier '$it' has already been seen. Not displaying or forwarding push." }
-                    return false
+            // Story traverse re-delivers the original extras (including br_p_id) to redraw at a
+            // new page index. Skip dedupe so Push Max campaigns can advance pages.
+            if (intent.action != Constants.BRAZE_STORY_TRAVERSE_CLICKED_ACTION) {
+                payload.pushUniqueId?.let {
+                    if (!BrazeInternal.validateAndStorePushId(context, it)) {
+                        brazelog(I) { "Push with identifier '$it' has already been seen. Not displaying or forwarding push." }
+                        return false
+                    }
                 }
             }
 

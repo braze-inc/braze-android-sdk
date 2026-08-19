@@ -1,12 +1,20 @@
+import org.jetbrains.kotlin.gradle.dsl.JvmDefaultMode
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
     id("com.android.application")
-    id("kotlin-android")
     id("com.google.gms.google-services")
 }
 
 apply(from = rootProject.file("config/buildscript/break-compile-on-deprecations.gradle"))
+
+tasks.withType<KotlinCompile>().configureEach {
+    val taskName = name.lowercase()
+    compilerOptions.allWarningsAsErrors.set(
+        !taskName.contains("debug") && !taskName.contains("unittest")
+    )
+}
 
 android {
     namespace = "com.braze.firebasepush"
@@ -53,7 +61,7 @@ android {
 kotlin {
     compilerOptions {
         jvmTarget.set(JvmTarget.JVM_1_8)
-        freeCompilerArgs.addAll("-Xjvm-default=all")
+        jvmDefault.set(JvmDefaultMode.NO_COMPATIBILITY)
     }
 }
 

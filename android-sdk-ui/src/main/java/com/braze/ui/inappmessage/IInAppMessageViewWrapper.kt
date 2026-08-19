@@ -46,6 +46,9 @@ interface IInAppMessageViewWrapper {
      * Prepares this wrapper when its message is saved for display on the next [Activity]
      * during an [BrazeInAppMessageManager.unregisterInAppMessageManager] transition.
      *
+     * Implementations must unregister any platform or AndroidX Back callbacks that would
+     * otherwise keep intercepting system Back after the message view is removed.
+     *
      * Custom implementations may override this to cancel pending close animations or dismiss callbacks.
      */
     fun prepareForActivityTransitionCarryover()

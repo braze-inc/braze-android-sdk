@@ -36,7 +36,6 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleEventObserver
 import androidx.lifecycle.compose.LocalLifecycleOwner
 import coil3.compose.AsyncImage
-import coil3.compose.LocalPlatformContext
 import coil3.request.ImageRequest
 import com.braze.configuration.BrazeConfigurationProvider
 import com.braze.enums.CardType
@@ -181,7 +180,7 @@ fun ContentCard(
                     AsyncImage(
                         model =
                             ImageRequest
-                                .Builder(LocalPlatformContext.current)
+                                .Builder(LocalContext.current)
                                 .data(imageOnlyCard.imageUrl)
                                 .build(),
                         contentDescription = imageOnlyCard.altImageText,
@@ -210,7 +209,7 @@ fun ContentCard(
                         AsyncImage(
                             model =
                                 ImageRequest
-                                    .Builder(LocalPlatformContext.current)
+                                    .Builder(LocalContext.current)
                                     .data(captionedImageCard.imageUrl)
                                     .build(),
                             contentDescription = captionedImageCard.altImageText,
@@ -281,7 +280,7 @@ fun ContentCard(
                         AsyncImage(
                             model =
                                 ImageRequest
-                                    .Builder(LocalPlatformContext.current)
+                                    .Builder(LocalContext.current)
                                     .data(shortNewsCard.imageUrl)
                                     .build(),
                             contentScale = ContentScale.Crop,

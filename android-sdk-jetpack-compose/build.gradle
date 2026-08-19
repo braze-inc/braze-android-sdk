@@ -1,6 +1,8 @@
+import org.jetbrains.kotlin.gradle.dsl.JvmDefaultMode
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
+
 plugins {
   alias(libs.plugins.android.library)
-  alias(libs.plugins.kotlin.android)
   alias(libs.plugins.kotlin.compose)
 }
 
@@ -10,12 +12,6 @@ android {
   defaultConfig {
     compileSdk rootProject.ext.compileSdkVersion
     minSdkVersion rootProject.ext.minSdkVersion
-    targetSdkVersion rootProject.ext.targetSdkVersion
-  }
-
-  kotlinOptions {
-    freeCompilerArgs = ["-Xjvm-default=all", "-opt-in=kotlin.RequiresOptIn"]
-    jvmTarget = "1.8"
   }
 
   buildFeatures {
@@ -27,17 +23,12 @@ android {
     targetCompatibility JavaVersion.VERSION_1_8
   }
 
-  testOptions {
-    unitTests {
-      compileOptions {
-        sourceCompatibility JavaVersion.VERSION_11
-        targetCompatibility JavaVersion.VERSION_11
-      }
+}
 
-      kotlinOptions {
-        jvmTarget = "11"
-      }
-    }
+kotlin {
+  compilerOptions {
+    jvmDefault.set(JvmDefaultMode.NO_COMPATIBILITY)
+    jvmTarget.set(JvmTarget.JVM_1_8)
   }
 }
 

@@ -315,10 +315,12 @@ open class BrazeInAppMessageManager : InAppMessageManagerBase() {
     }
 
     private fun applyUnregisterDisplayedMessageResult(result: InAppMessageActivityTransitionCoordinator.UnregisterDisplayedMessageResult) {
-        carryoverInAppMessage = result.carryoverInAppMessage
+        // When no wrapper is displayed (e.g. a second unregister on a blocklisted Activity after
+        // persist=false already saved carryover), leave existing carryover untouched.
         if (!result.shouldClearActiveWrapper) {
             return
         }
+        carryoverInAppMessage = result.carryoverInAppMessage
         currentBackEventHandler?.unregister()
         currentBackEventHandler = null
         webViewPauseCoordinator.cancelPendingWebViewPause()

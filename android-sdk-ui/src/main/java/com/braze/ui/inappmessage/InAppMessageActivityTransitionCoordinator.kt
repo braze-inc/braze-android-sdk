@@ -18,7 +18,9 @@ internal class InAppMessageActivityTransitionCoordinator {
      * Result of tearing down a displayed in-app message during Activity unregister.
      *
      * @property carryoverInAppMessage Message to redisplay on the next Activity, or null when none should carry over.
+     * Only applied by the manager when [shouldClearActiveWrapper] is true.
      * @property shouldClearActiveWrapper Whether active wrapper/back-handler/WebView pause state should be cleared.
+     * When false, an existing carryover message must be left unchanged.
      */
     data class UnregisterDisplayedMessageResult(
         val carryoverInAppMessage: IInAppMessage?,

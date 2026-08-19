@@ -242,7 +242,11 @@ open class DefaultInAppMessageViewWrapper @JvmOverloads constructor(
     }
 
     override fun prepareForActivityTransitionCarryover() {
+        brazelog(V) { "Preparing in-app message view wrapper for activity transition carryover" }
         shouldIgnoreOpenAndCloseLifecycleCallbacks = true
+        // View is removed without close(); tear down back callbacks so they cannot
+        // intercept system Back after the message is no longer visible.
+        unregisterBackButtonCallbacks()
         inAppMessageView.clearAnimation()
         dismissRunnable?.let { inAppMessageView.removeCallbacks(it) }
     }
@@ -259,19 +263,7 @@ open class DefaultInAppMessageViewWrapper @JvmOverloads constructor(
                 viewAccessibilityFlagMap,
             )
         }
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-            onBackInvokedCallback?.let {
-                brazelog { "Unregistering iam back invoked callback" }
-                BrazeInAppMessageManager
-                    .getInstance()
-                    .activity
-                    ?.onBackInvokedDispatcher
-                    ?.unregisterOnBackInvokedCallback(it)
-                onBackInvokedCallback = null
-            }
-        }
-        onBackPressedDispatcherFallbackCallback?.remove()
-        onBackPressedDispatcherFallbackCallback = null
+        unregisterBackButtonCallbacks()
 
         inAppMessageView.removeCallbacks(dismissRunnable)
         inAppMessageViewLifecycleListener.beforeClosed(inAppMessageView, inAppMessage)
@@ -281,6 +273,29 @@ open class DefaultInAppMessageViewWrapper @JvmOverloads constructor(
         } else {
             closeInAppMessageView()
         }
+    }
+
+    /**
+     * Unregisters platform and AndroidX Back callbacks registered in [open].
+     *
+     * Must run on activity-transition carryover as well as [close], because carryover
+     * removes the message view without invoking [close].
+     */
+    private fun unregisterBackButtonCallbacks() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            onBackInvokedCallback?.let {
+                brazelog { "Unregistering iam back invoked callback" }
+                val registeredActivity =
+                    BrazeInAppMessageManager.getInstance().activity
+                        ?: inAppMessageView.context as? Activity
+                registeredActivity
+                    ?.onBackInvokedDispatcher
+                    ?.unregisterOnBackInvokedCallback(it)
+                onBackInvokedCallback = null
+            }
+        }
+        onBackPressedDispatcherFallbackCallback?.remove()
+        onBackPressedDispatcherFallbackCallback = null
     }
 
     /**

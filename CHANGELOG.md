@@ -1,3 +1,22 @@
+## 43.1.0
+
+[Release Date](https://github.com/braze-inc/braze-android-sdk/releases/tag/v43.1.0)
+
+##### Fixed
+- Fixed an issue where `BannerView` could call `WebView` APIs after `destroy()` when async banner HTML loading ran after an embedder tore down the view (e.g. Flutter or React Native platform views).
+- Fixed a potential ANR when setting `BannerView.placementId` (including during Compose `AndroidView` composition). Banner resolution via `Braze.getBanner` now runs off the main thread; WebView updates still apply on the main thread.
+- Fixed `Braze.unregisterPush` hanging when local SDK request rate limiting denied a send. Local rate-limit denial rejects enqueue (retriable failure, no HTTP status) instead of waiting for a token.
+- Fixed an issue where Back callbacks from an In-App Message could remain registered after transitioning through a blocklisted Activity, causing Back navigation to be intercepted after the message was no longer visible.
+- Fixed an issue where Banner test sends from the dashboard were not included in `BannersUpdatedEvent` published to `Braze.subscribeToBannersUpdates()` subscribers.
+- Fixed an issue where sse connections wouldn't check for expired auth tokens and could reconnect with a cached token that had already expired.
+- Fixed an issue in the sse stream reader where a closed socket could cause heavy CPU usage until the stream timeout fired.
+- Fixed an issue where a Content Cards full sync with only malformed cards could clear the local card cache. Cached cards are now preserved when a full sync contains no processable cards.
+- Fixed Push Story left/right navigation failing when Push Max attached a push dedupe id (`br_p_id`).
+
+##### Changed
+- Updated the Android Gradle Plugin from 8.12.3 to 9.2.1.
+- Migrated to AGP 9 built-in Kotlin and removed the separate `kotlin-android` / `org.jetbrains.kotlin.android` plugin.
+
 ## 43.0.0
 
 [Release Date](https://github.com/braze-inc/braze-android-sdk/releases/tag/v43.0.0)

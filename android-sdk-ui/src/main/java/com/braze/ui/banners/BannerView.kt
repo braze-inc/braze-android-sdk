@@ -10,13 +10,16 @@ import android.util.Base64
 import android.view.View
 import android.webkit.WebView
 import android.webkit.WebViewClient
+import androidx.annotation.MainThread
 import androidx.annotation.VisibleForTesting
 import androidx.core.content.withStyledAttributes
 import com.braze.Braze
 import com.braze.BrazeInternal
+import com.braze.coroutine.BrazeCoroutineScope
 import com.braze.events.BannerDismissedEvent
 import com.braze.events.IEventSubscriber
 import com.braze.managers.banners.IBannerView
+import com.braze.models.Banner
 import com.braze.support.BrazeLogger.Priority.E
 import com.braze.support.BrazeLogger.Priority.V
 import com.braze.support.BrazeLogger.Priority.W
@@ -26,6 +29,9 @@ import com.braze.ui.banners.jsinterface.BannerJavascriptInterface
 import com.braze.ui.banners.listeners.DefaultBannerWebViewClientListener
 import com.braze.ui.banners.utils.BannerWebViewClient
 import com.braze.ui.support.setWebViewSettings
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.isActive
+import kotlinx.coroutines.launch
 import java.util.concurrent.atomic.AtomicBoolean
 import java.util.concurrent.atomic.AtomicReference
 
@@ -39,6 +45,10 @@ class BannerView :
     private var loadedHtml: String? = null
     private var currentUserId: String? = null
     private val isDismissed = AtomicBoolean(false)
+    private val isDestroyed = AtomicBoolean(false)
+    private val mainHandler = Handler(Looper.getMainLooper())
+    private val initJobLock = Any()
+    private var initJob: Job? = null
 
     /**
      * Latest resolved banner identity from [initBanner] when banner data was present. Held in an
@@ -78,6 +88,9 @@ class BannerView :
     var placementId: String?
         get() = _placementId
         set(value) {
+            // Compose AndroidView `update` often reassigns the same placementId after factory
+            // construction. Skip so we do not cancel an in-flight resolve for the same placement.
+            if (_placementId == value) return
             _placementId = value
             initBanner(value)
         }
@@ -141,6 +154,45 @@ class BannerView :
         initBanner(placementId)
     }
 
+    /**
+     * Tears down banner resources for embedders that destroy the underlying [WebView].
+     * Unregisters from banner monitoring and ensures pending async HTML loads no-op safely.
+     * Idempotent — safe to call more than once.
+     */
+    override fun destroy() {
+        if (!isDestroyed.compareAndSet(false, true)) return
+        cancelPendingInit()
+        mainHandler.removeCallbacksAndMessages(null)
+        if (Looper.myLooper() == Looper.getMainLooper()) {
+            teardownForRelease()
+            super.destroy()
+        } else {
+            mainHandler.post {
+                teardownForRelease()
+                super.destroy()
+            }
+        }
+    }
+
+    @MainThread
+    private fun teardownForRelease() {
+        BrazeInternal.removeBannerViewMonitor(this)
+        BrazeInternal.unsubscribeFromBannersDismissedEvent(context, dismissSubscriber)
+        removeOnAttachStateChangeListener(attachStateListener)
+        heightCallback = null
+        onDismissCallback = null
+        try {
+            stopLoading()
+            removeJavascriptInterface(JS_BRIDGE_NAME)
+            webViewClient = WebViewClient()
+        } catch (e: Exception) {
+            brazelog(E, e) {
+                "Banner release: error during WebView teardown for placementId=$_placementId"
+            }
+        }
+    }
+
+    @MainThread
     private fun configureWebView(placementId: String) {
         setWebViewSettings(settings, context)
 
@@ -179,8 +231,82 @@ class BannerView :
             }
         }
 
+    /**
+     * Resolves banner data off the calling thread, then applies WebView updates on the main thread.
+     *
+     * [Braze.getBanner] uses a blocking serial dispatcher and may perform disk-backed SDK-enablement
+     * reads. Calling it inline from a View setter or Compose `AndroidView` factory on the main thread
+     * can ANR; this method never invokes that path on the main thread.
+     */
     override fun initBanner(placementId: String?) {
-        val banner = placementId?.let { Braze.getInstance(context).getBanner(it) }
+        if (isDestroyed.get()) return
+        // BannersManager may call initBanner with a prior monitor placement after the view's
+        // placementId has already changed. Ignore those so we do not cancel the newer resolve.
+        if (placementId != _placementId) {
+            brazelog(V) {
+                "Ignoring initBanner for placementId=$placementId; current placementId=$_placementId"
+            }
+            return
+        }
+        if (placementId == null) {
+            cancelPendingInit()
+            runOnMainThread {
+                performInitBanner(placementId = null, banner = null)
+            }
+            return
+        }
+        synchronized(initJobLock) {
+            initJob?.cancel()
+            brazelog(V) { "Resolving Banner off main thread for placementId=$placementId" }
+            initJob =
+                BrazeCoroutineScope.launch {
+                    if (isDestroyed.get()) return@launch
+                    val banner =
+                        try {
+                            resolveBanner(placementId)
+                        } catch (e: Exception) {
+                            brazelog(E, e) {
+                                "Failed to resolve Banner for placementId=$placementId"
+                            }
+                            null
+                        }
+                    brazelog(V) {
+                        "Banner resolve finished for placementId=$placementId; " +
+                            "found=${banner != null}"
+                    }
+                    if (!isActive || isDestroyed.get()) {
+                        brazelog(V) {
+                            "Skipping Banner apply for placementId=$placementId; " +
+                                "init cancelled or view destroyed"
+                        }
+                        return@launch
+                    }
+                    runOnMainThread {
+                        // Drop stale results if placementId changed while resolving.
+                        if (placementId != _placementId) {
+                            brazelog(V) {
+                                "Dropping stale Banner resolve for placementId=$placementId; " +
+                                    "current placementId=$_placementId"
+                            }
+                            return@runOnMainThread
+                        }
+                        performInitBanner(placementId, banner)
+                    }
+                }
+        }
+    }
+
+    /**
+     * Looks up the cached Banner for [placementId]. Overridable in tests to assert calling thread.
+     */
+    @VisibleForTesting
+    internal fun resolveBanner(placementId: String): Banner? = Braze.getInstance(context).getBanner(placementId)
+
+    @MainThread
+    private fun performInitBanner(
+        placementId: String?,
+        banner: Banner?,
+    ) {
         if (banner == null) {
             dismissSnapshot.set(null)
             currentUserId = null
@@ -209,18 +335,23 @@ class BannerView :
             if (banner.isControl) {
                 setWebviewToEmpty()
             } else {
-                if (Looper.myLooper() != Looper.getMainLooper()) {
-                    Handler(Looper.getMainLooper()).post {
-                        loadHtmlData(placementId)
-                    }
-                } else {
-                    loadHtmlData(placementId)
-                }
+                loadHtmlData(banner.placementId)
             }
             BrazeInternal.addBannerViewMonitor(banner.placementId, this, skipImpressionMonitoring = false)
         }
     }
 
+    /**
+     * Cancels any in-flight [initBanner] resolve job.
+     */
+    private fun cancelPendingInit() {
+        synchronized(initJobLock) {
+            initJob?.cancel()
+            initJob = null
+        }
+    }
+
+    @MainThread
     private fun loadHtmlData(placementId: String) {
         val wasDismissed = isDismissed.getAndSet(false)
         if (wasDismissed) {
@@ -239,20 +370,12 @@ class BannerView :
         }
     }
 
+    @MainThread
     private fun setWebviewToEmpty() {
         loadedHtml = null
-
-        if (Looper.myLooper() != Looper.getMainLooper()) {
-            Handler(Looper.getMainLooper()).post {
-                loadData("", "text/html", "base64")
-                invalidate()
-                internalHeightCallback(0.0)
-            }
-        } else {
-            loadData("", "text/html", "base64")
-            invalidate()
-            internalHeightCallback(0.0)
-        }
+        loadData("", "text/html", "base64")
+        invalidate()
+        internalHeightCallback(0.0)
     }
 
     /**
@@ -271,20 +394,17 @@ class BannerView :
      * subscriber) are safe.
      */
     private fun dismiss() {
+        if (isDestroyed.get()) return
         if (!isDismissed.compareAndSet(false, true)) return
-        if (Looper.myLooper() == Looper.getMainLooper()) {
+        runDismissOnMainThread {
             performDismissTeardown()
-        } else {
-            Handler(Looper.getMainLooper()).post {
-                if (!isDismissed.get()) return@post
-                performDismissTeardown()
-            }
         }
     }
 
     /**
      * Performs the actual teardown. Must be called on the main thread.
      */
+    @MainThread
     private fun performDismissTeardown() {
         try {
             stopLoading()
@@ -304,6 +424,7 @@ class BannerView :
         }
     }
 
+    @MainThread
     private fun fireOnDismissCallback() {
         val callback = onDismissCallback ?: return
         val cached = dismissSnapshot.get()
@@ -324,6 +445,31 @@ class BannerView :
             return
         }
         callback.invoke(snapshot)
+    }
+
+    private inline fun runOnMainThread(crossinline block: () -> Unit) {
+        if (isDestroyed.get()) return
+        if (Looper.myLooper() == Looper.getMainLooper()) {
+            if (isDestroyed.get()) return
+            block()
+        } else {
+            mainHandler.post {
+                if (isDestroyed.get()) return@post
+                block()
+            }
+        }
+    }
+
+    private inline fun runDismissOnMainThread(crossinline block: () -> Unit) {
+        if (Looper.myLooper() == Looper.getMainLooper()) {
+            if (!isDismissed.get() || isDestroyed.get()) return
+            block()
+        } else {
+            mainHandler.post {
+                if (!isDismissed.get() || isDestroyed.get()) return@post
+                block()
+            }
+        }
     }
 
     private companion object {

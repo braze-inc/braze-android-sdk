@@ -1,5 +1,5 @@
-apply plugin: 'kotlin-android'
-
+// Java deprecation failures. Kotlin allWarningsAsErrors is configured in BrazeAndroidModulePlugin
+// (KotlinCompile is not on the Groovy apply-from classpath under AGP built-in Kotlin).
 tasks.withType(JavaCompile) {
   options.deprecation = true
   options.compilerArgs += ['-Xlint:deprecation']
@@ -7,14 +7,5 @@ tasks.withType(JavaCompile) {
   // Only print warnings for tests, don't break the build
   if (!it.name.toLowerCase().contains("debug")) {
     options.compilerArgs += ['-Werror']
-  }
-}
-
-project.tasks.whenTaskAdded { task ->
-  var tn = task.name.toLowerCase()
-  if (tn.contains("kotlin")) {
-    kotlinOptions {
-      allWarningsAsErrors = !tn.contains("debug") && !tn.contains("unittest")
-    }
   }
 }

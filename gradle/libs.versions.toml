@@ -1,8 +1,8 @@
 [versions]
 
 # Gradle plugins
-androidGradlePlugin = "8.12.3"
-googleServicesPlugin = "4.4.4"
+androidGradlePlugin = "9.2.1"
+googleServicesPlugin = "4.5.0"
 
 # Java
 javaToolchain = "17"
@@ -21,7 +21,7 @@ playServicesMaps = "17.0.1"
 playServicesTagManager = "17.0.1"
 
 # Firebase
-firebaseMessaging = "25.1.0"
+firebaseMessaging = "25.1.1"
 firebaseCore = "17.5.1"
 googleMlVisionBarcode = "16.2.1"
 
@@ -34,7 +34,7 @@ googleMaterial = "1.13.0"
 androidxFragment = "1.8.9"
 androidxCore = "1.16.0"
 androidxRecyclerview = "1.4.0"
-androidxAnnotations = "1.8.1"
+androidxAnnotations = "1.10.0"
 androidxSwipeRefreshLayout = "1.2.0"
 androidxWebkit = "1.14.0"
 androidxConstraintLayout = "2.2.1"
@@ -60,7 +60,7 @@ androidxTestUiAutomator = "2.3.0"
 androidxTestExtJunit = "1.3.0"
 mockitoCore = "5.22.0"
 mockitoAndroid = "5.22.0"
-mockitoKotlin = "6.3.0"
+mockitoKotlin = "4.1.0"
 junit = "4.13.2"
 robolectric = "4.15.1"
 hamcrestLibrary = "1.3"
@@ -71,8 +71,8 @@ kotlin = "2.2.20"
 kotlinCoroutines = "1.11.0"
 kotlinLifecycleRuntimeKtx = "2.9.4"
 kotlinSerialization = "1.9.0"
-kotlinDetektFormatter = "1.23.6"
-kotlinDokka = "2.1.0"
+kotlinDetektFormatter = "1.23.8"
+kotlinDokka = "2.2.0"
 
 # Compose
 compose = "1.9.5"
@@ -83,7 +83,7 @@ okhttp = "4.12.0"
 moshiKotlin = "1.15.2"
 huaweiHmsPush = "6.13.0.301"
 nexusPublish = "1.3.0"
-javaJwt = "4.5.2"
+javaJwt = "4.6.0"
 leakcanary = "2.14"
 zxingCore = "3.5.4"
 
@@ -195,7 +195,6 @@ ktlint-gradle-plugin = { module = "org.jlleitschuh.gradle.ktlint:org.jlleitschuh
 android-application = { id = "com.android.application", version.ref = "androidGradlePlugin" }
 android-library = { id = "com.android.library", version.ref = "androidGradlePlugin" }
 google-services = { id = "com.google.gms.google-services", version.ref = "googleServicesPlugin" }
-kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 kotlin-compose = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
 kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
 kotlin-allopen = { id = "org.jetbrains.kotlin.plugin.allopen", version.ref = "kotlin" }

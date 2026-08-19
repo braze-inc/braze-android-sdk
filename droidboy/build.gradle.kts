@@ -1,9 +1,9 @@
 import java.util.Date
+import org.jetbrains.kotlin.gradle.dsl.JvmDefaultMode
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
 plugins {
     alias(libs.plugins.android.application)
-    alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
 }
 
@@ -36,14 +36,16 @@ android {
     }
 
     buildFeatures {
+        buildConfig = true
         compose = true
+        resValues = true
     }
 
 }
 
 kotlin {
     compilerOptions {
-        freeCompilerArgs.addAll("-Xjvm-default=all")
+        jvmDefault.set(JvmDefaultMode.NO_COMPATIBILITY)
         jvmTarget.set(JvmTarget.JVM_1_8)
     }
 }
