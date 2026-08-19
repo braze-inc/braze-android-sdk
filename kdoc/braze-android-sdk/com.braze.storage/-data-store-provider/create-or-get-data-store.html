@@ -19,7 +19,6 @@
         }
       }
     </script>
-<script type="text/javascript" src="https://unpkg.com/kotlin-playground@1/dist/playground.min.js" async="async"></script>
 <script type="text/javascript" src="../../../scripts/sourceset_dependencies.js" async="async"></script>
 <link href="../../../styles/style.css" rel="Stylesheet">
 <link href="../../../styles/main.css" rel="Stylesheet">
@@ -44,7 +43,7 @@
         </button>
         <div class="navigation-controls--break ui-kit_mobile-only"></div>
         <div class="library-version" id="library-version">
-43.0.0        </div>
+43.1.0        </div>
         <div class="navigation-controls">
         <ul class="filter-section filter-section_loading" id="filter-section" aria-label="Target filter">
                 <button class="platform-tag platform-selector jvm-like" data-active="" aria-pressed="true"
@@ -109,9 +108,7 @@
   <div class="cover ">
     <h1 class="cover"><span>create</span><wbr></wbr><span>Or</span><wbr></wbr><span>Get</span><wbr></wbr><span>Data</span><wbr></wbr><span><span>Store</span></span></h1>
   </div>
-  <div class="platform-hinted  with-platform-tabs" data-platform-hinted="data-platform-hinted">
-    <div class="platform-bookmarks-row" data-toggle-list="data-toggle-list"><button class="platform-bookmark" data-filterable-current=":android-sdk-ui/release" data-filterable-set=":android-sdk-ui/release" data-active="" data-toggle=":android-sdk-ui/release">release</button></div>
-<div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui/release"><div class="symbol monospace"><span class="token keyword">protected </span><span class="token keyword">fun </span><a href="create-or-get-data-store.html"><span class="token function">createOrGetDataStore</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">migrations<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-list/index.html">List</a><span class="token operator">&lt;</span>ERROR CLASS: Symbol not found for DataMigration&lt;ERROR CLASS: Symbol not found for Preferences&gt;<span class="token operator">&gt;</span><span class="token operator"> = </span>emptyList()</span></span><span class="token punctuation">)</span><span class="token operator">: </span>ERROR CLASS: Symbol not found for DataStore&lt;ERROR CLASS: Symbol not found for Preferences&gt;</div><p class="paragraph">Helper to create or return an existing DataStore with proper scope management for a given filename.</p><p class="paragraph"><strong>All subclasses MUST use this method instead of PreferenceDataStoreFactory.create() directly to ensure the DataStore is created with the provider's coroutine scope.</strong></p><p class="paragraph">This is critical for proper lifecycle management and cleanup during <a href="-companion/shutdown-all-data-stores.html">shutdownAllDataStores</a>.</p></div>  </div>
+  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui/release"><div class="symbol monospace"><span class="token keyword">protected </span><span class="token keyword">fun </span><a href="create-or-get-data-store.html"><span class="token function">createOrGetDataStore</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">migrations<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-list/index.html">List</a><span class="token operator">&lt;</span>ERROR CLASS: Symbol not found for DataMigration&lt;ERROR CLASS: Symbol not found for Preferences&gt;<span class="token operator">&gt;</span><span class="token operator"> = </span>emptyList()</span></span><span class="token punctuation">)</span><span class="token operator">: </span>ERROR CLASS: Symbol not found for DataStore&lt;ERROR CLASS: Symbol not found for Preferences&gt;</div><p class="paragraph">Helper to create or return an existing DataStore with proper scope management for a given DataStore file path.</p><p class="paragraph"><strong>All subclasses MUST use this method instead of PreferenceDataStoreFactory.create() directly to ensure the DataStore is created with the provider's coroutine scope.</strong></p><p class="paragraph">Instances are cached by absolute file path so distinct Context filesDir values (e.g. per-test Robolectric roots) do not share DataStore instances.</p><p class="paragraph">This is critical for proper lifecycle management and cleanup during <a href="-companion/shutdown-all-data-stores.html">shutdownAllDataStores</a>.</p></div></div>
 </div>
     <div class="footer">
         <div class="footer--container">

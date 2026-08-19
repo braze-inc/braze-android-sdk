@@ -19,7 +19,6 @@
         }
       }
     </script>
-<script type="text/javascript" src="https://unpkg.com/kotlin-playground@1/dist/playground.min.js" async="async"></script>
 <script type="text/javascript" src="../../../scripts/sourceset_dependencies.js" async="async"></script>
 <link href="../../../styles/style.css" rel="Stylesheet">
 <link href="../../../styles/main.css" rel="Stylesheet">
@@ -44,11 +43,11 @@
         </button>
         <div class="navigation-controls--break ui-kit_mobile-only"></div>
         <div class="library-version" id="library-version">
-43.0.0        </div>
+43.1.0        </div>
         <div class="navigation-controls">
         <ul class="filter-section filter-section_loading" id="filter-section" aria-label="Target filter">
                 <button class="platform-tag platform-selector jvm-like" data-active="" aria-pressed="true"
-                        data-filter=":android-sdk-ui/main">androidJvm</button>
+                        data-filter=":android-sdk-ui/release">release</button>
             <div class="dropdown filter-section--dropdown" data-role="dropdown" id="filter-section-dropdown">
                 <button class="button button_dropdown filter-section--dropdown-toggle" role="combobox"
                         data-role="dropdown-toggle"
@@ -65,10 +64,10 @@
                     </div>
                         <li role="option" class="dropdown--option platform-selector-option jvm-like" tabindex="0">
                             <label class="checkbox">
-                                <input type="checkbox" class="checkbox--input" id=":android-sdk-ui/main"
-                                       data-filter=":android-sdk-ui/main"/>
+                                <input type="checkbox" class="checkbox--input" id=":android-sdk-ui/release"
+                                       data-filter=":android-sdk-ui/release"/>
                                 <span class="checkbox--icon"></span>
-                                androidJvm
+                                release
                             </label>
                         </li>
                 </ul>
@@ -104,32 +103,28 @@
         </nav>
         <div id="resizer" class="resizer" data-item-type="BAR"></div>
         <div id="main" data-item-type="SECTION" role="main">
-<div class="main-content" data-page-type="classlike" id="content" pageIds="braze-android-sdk::com.braze.ui/BrazeWebViewClient///PointingToDeclaration//1102423332">
+<div class="main-content" data-page-type="classlike" id="content" pageIds="braze-android-sdk::com.braze.ui/BrazeWebViewClient///PointingToDeclaration//-1369171853">
   <div class="breadcrumbs"><a href="../../../index.html">braze-android-sdk</a><span class="delimiter">/</span><a href="../index.html">com.braze.ui</a><span class="delimiter">/</span><span class="current">BrazeWebViewClient</span></div>
   <div class="cover ">
     <h1 class="cover"><span>Braze</span><wbr></wbr><span>Web</span><wbr></wbr><span>View</span><wbr></wbr><span><span>Client</span></span></h1>
-    <div class="platform-hinted  with-platform-tabs" data-platform-hinted="data-platform-hinted">
-      <div class="platform-bookmarks-row" data-toggle-list="data-toggle-list"><button class="platform-bookmark" data-filterable-current=":android-sdk-ui/main" data-filterable-set=":android-sdk-ui/main" data-active="" data-toggle=":android-sdk-ui/main">androidJvm</button></div>
-<div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui/main"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">class </span><a href="index.html">BrazeWebViewClient</a><span class="token punctuation">(</span><span class="parameters "><span class="parameter "><span class="token keyword">val </span>context<span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/android/content/Context.html">Context</a><span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>type<span class="token operator">: </span><a href="-type/index.html">BrazeWebViewClient.Type</a><span class="token punctuation">, </span></span><span class="parameter ">inAppMessage<span class="token operator">: </span><span data-unresolved-link="com.braze.models.inappmessage/IInAppMessage///PointingToDeclaration/">IInAppMessage</span><span class="token operator">?</span><span class="token operator"> = </span>null<span class="token punctuation">, </span></span><span class="parameter ">inAppMessageWebViewClientListener<span class="token operator">: </span><a href="../../com.braze.ui.inappmessage.listeners/-i-in-app-message-web-view-client-listener/index.html">IInAppMessageWebViewClientListener</a><span class="token operator">?</span><span class="token operator"> = </span>null<span class="token punctuation">, </span></span><span class="parameter ">bannerWebViewClientListener<span class="token operator">: </span><a href="../../com.braze.ui.banners.listeners/-i-banner-web-view-client-listener/index.html">IBannerWebViewClientListener</a><span class="token operator">?</span><span class="token operator"> = </span>null<span class="token punctuation">, </span></span><span class="parameter ">assetDirectoryUrl<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token operator">?</span><span class="token operator"> = </span>null</span></span><span class="token punctuation">)</span> : <a href="https://developer.android.com/reference/kotlin/android/webkit/WebViewClient.html">WebViewClient</a></div><p class="paragraph"><a href="https://developer.android.com/reference/kotlin/android/webkit/WebViewClient.html">WebViewClient</a> for Braze HTML content that intercepts URL loading to handle Braze scheme actions (close, custom events), injects the JavaScript bridge, and delegates URL actions to the appropriate listener based on the <a href="-type/index.html">Type</a>.</p><h4 class="tableheader">Parameters</h4><div class="table"><div class="table-row table-row_content" data-filterable-current=":android-sdk-ui/main" data-filterable-set=":android-sdk-ui/main"><div class="main-subrow keyValue "><div class=""><span class="inline-flex"><div><u><span><span>context</span></span></u></div></span></div><div><div class="title"><p class="paragraph">The Android <a href="https://developer.android.com/reference/kotlin/android/content/Context.html">Context</a>.</p></div></div></div></div><div class="table-row table-row_content" data-filterable-current=":android-sdk-ui/main" data-filterable-set=":android-sdk-ui/main"><div class="main-subrow keyValue "><div class=""><span class="inline-flex"><div><u><span><span>type</span></span></u></div></span></div><div><div class="title"><p class="paragraph">Whether this client serves a <a href="-type/-b-a-n-n-e-r/index.html">Type.BANNER</a> or <a href="-type/-i-n_-a-p-p_-m-e-s-s-a-g-e/index.html">Type.IN_APP_MESSAGE</a>.</p></div></div></div></div><div class="table-row table-row_content" data-filterable-current=":android-sdk-ui/main" data-filterable-set=":android-sdk-ui/main"><div class="main-subrow keyValue "><div class=""><span class="inline-flex"><div><u><span>in</span><wbr></wbr><span>App</span><wbr></wbr><span><span>Message</span></span></u></div></span></div><div><div class="title"><p class="paragraph">The in-app message model, required when <span data-unresolved-link="com.braze.ui/BrazeWebViewClient//#android.content.Context#com.braze.ui.BrazeWebViewClient.Type#com.braze.models.inappmessage.IInAppMessage?#com.braze.ui.inappmessage.listeners.IInAppMessageWebViewClientListener?#com.braze.ui.banners.listeners.IBannerWebViewClientListener?#kotlin.String?/PointingToCallableParameters(1)/">type</span> is <a href="-type/-i-n_-a-p-p_-m-e-s-s-a-g-e/index.html">Type.IN_APP_MESSAGE</a>.</p></div></div></div></div><div class="table-row table-row_content" data-filterable-current=":android-sdk-ui/main" data-filterable-set=":android-sdk-ui/main"><div class="main-subrow keyValue "><div class=""><span class="inline-flex"><div><u><span>in</span><wbr></wbr><span>App</span><wbr></wbr><span>Message</span><wbr></wbr><span>Web</span><wbr></wbr><span>View</span><wbr></wbr><span>Client</span><wbr></wbr><span><span>Listener</span></span></u></div></span></div><div><div class="title"><p class="paragraph">Listener for in-app message URL actions.</p></div></div></div></div><div class="table-row table-row_content" data-filterable-current=":android-sdk-ui/main" data-filterable-set=":android-sdk-ui/main"><div class="main-subrow keyValue "><div class=""><span class="inline-flex"><div><u><span>banner</span><wbr></wbr><span>Web</span><wbr></wbr><span>View</span><wbr></wbr><span>Client</span><wbr></wbr><span><span>Listener</span></span></u></div></span></div><div><div class="title"><p class="paragraph">Listener for banner URL actions.</p></div></div></div></div><div class="table-row table-row_content" data-filterable-current=":android-sdk-ui/main" data-filterable-set=":android-sdk-ui/main"><div class="main-subrow keyValue "><div class=""><span class="inline-flex"><div><u><span>asset</span><wbr></wbr><span>Directory</span><wbr></wbr><span><span>Url</span></span></u></div></span></div><div><div class="title"><p class="paragraph">Optional local asset directory for WebView asset loading.</p></div></div></div></div></div><h4 class="tableheader">Inheritors</h4><div class="table"><div class="table-row table-row_content" data-filterable-current=":android-sdk-ui/main" data-filterable-set=":android-sdk-ui/main"><div class="main-subrow keyValue "><div class=""><span class="inline-flex"><div><a href="../../com.braze.ui.banners.utils/-banner-web-view-client/index.html">BannerWebViewClient</a></div></span></div><div></div></div></div><div class="table-row table-row_content" data-filterable-current=":android-sdk-ui/main" data-filterable-set=":android-sdk-ui/main"><div class="main-subrow keyValue "><div class=""><span class="inline-flex"><div><a href="../../com.braze.ui.inappmessage.utils/-in-app-message-web-view-client/index.html">InAppMessageWebViewClient</a></div></span></div><div></div></div></div></div></div>    </div>
+    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui/release"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">class </span><a href="index.html">BrazeWebViewClient</a><span class="token punctuation">(</span><span class="parameters "><span class="parameter "><span class="token keyword">val </span>context<span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/android/content/Context.html">Context</a><span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>type<span class="token operator">: </span><a href="-type/index.html">BrazeWebViewClient.Type</a><span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>inAppMessage<span class="token operator">: </span><a href="../../com.braze.models.inappmessage/-i-in-app-message/index.html">IInAppMessage</a><span class="token operator">?</span><span class="token operator"> = </span>null<span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>inAppMessageWebViewClientListener<span class="token operator">: </span><a href="../../com.braze.ui.inappmessage.listeners/-i-in-app-message-web-view-client-listener/index.html">IInAppMessageWebViewClientListener</a><span class="token operator">?</span><span class="token operator"> = </span>null<span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>bannerWebViewClientListener<span class="token operator">: </span><a href="../../com.braze.ui.banners.listeners/-i-banner-web-view-client-listener/index.html">IBannerWebViewClientListener</a><span class="token operator">?</span><span class="token operator"> = </span>null<span class="token punctuation">, </span></span><span class="parameter ">assetDirectoryUrl<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token operator">?</span><span class="token operator"> = </span>null</span></span><span class="token punctuation">)</span> : <a href="https://developer.android.com/reference/kotlin/android/webkit/WebViewClient.html">WebViewClient</a></div><p class="paragraph"><a href="https://developer.android.com/reference/kotlin/android/webkit/WebViewClient.html">WebViewClient</a> for Braze HTML content that intercepts URL loading to handle Braze scheme actions (close, custom events), injects the JavaScript bridge, and delegates URL actions to the appropriate listener based on the <a href="-type/index.html">Type</a>.</p><h4 class="tableheader">Parameters</h4><div class="table"><div class="table-row table-row_content" data-filterable-current=":android-sdk-ui/release" data-filterable-set=":android-sdk-ui/release"><div class="main-subrow keyValue "><div class=""><span class="inline-flex"><div><u><span><span>context</span></span></u></div></span></div><div><div class="title"><p class="paragraph">The Android <a href="https://developer.android.com/reference/kotlin/android/content/Context.html">Context</a>.</p></div></div></div></div><div class="table-row table-row_content" data-filterable-current=":android-sdk-ui/release" data-filterable-set=":android-sdk-ui/release"><div class="main-subrow keyValue "><div class=""><span class="inline-flex"><div><u><span><span>type</span></span></u></div></span></div><div><div class="title"><p class="paragraph">Whether this client serves a <a href="-type/-b-a-n-n-e-r/index.html">Type.BANNER</a> or <a href="-type/-i-n_-a-p-p_-m-e-s-s-a-g-e/index.html">Type.IN_APP_MESSAGE</a>.</p></div></div></div></div><div class="table-row table-row_content" data-filterable-current=":android-sdk-ui/release" data-filterable-set=":android-sdk-ui/release"><div class="main-subrow keyValue "><div class=""><span class="inline-flex"><div><u><span>in</span><wbr></wbr><span>App</span><wbr></wbr><span><span>Message</span></span></u></div></span></div><div><div class="title"><p class="paragraph">The in-app message model, required when <span data-unresolved-link="com.braze.ui/BrazeWebViewClient//#android.content.Context#com.braze.ui.BrazeWebViewClient.Type#com.braze.models.inappmessage.IInAppMessage?#com.braze.ui.inappmessage.listeners.IInAppMessageWebViewClientListener?#com.braze.ui.banners.listeners.IBannerWebViewClientListener?#kotlin.String?/PointingToCallableParameters(1)/">type</span> is <a href="-type/-i-n_-a-p-p_-m-e-s-s-a-g-e/index.html">Type.IN_APP_MESSAGE</a>.</p></div></div></div></div><div class="table-row table-row_content" data-filterable-current=":android-sdk-ui/release" data-filterable-set=":android-sdk-ui/release"><div class="main-subrow keyValue "><div class=""><span class="inline-flex"><div><u><span>in</span><wbr></wbr><span>App</span><wbr></wbr><span>Message</span><wbr></wbr><span>Web</span><wbr></wbr><span>View</span><wbr></wbr><span>Client</span><wbr></wbr><span><span>Listener</span></span></u></div></span></div><div><div class="title"><p class="paragraph">Listener for in-app message URL actions.</p></div></div></div></div><div class="table-row table-row_content" data-filterable-current=":android-sdk-ui/release" data-filterable-set=":android-sdk-ui/release"><div class="main-subrow keyValue "><div class=""><span class="inline-flex"><div><u><span>banner</span><wbr></wbr><span>Web</span><wbr></wbr><span>View</span><wbr></wbr><span>Client</span><wbr></wbr><span><span>Listener</span></span></u></div></span></div><div><div class="title"><p class="paragraph">Listener for banner URL actions.</p></div></div></div></div><div class="table-row table-row_content" data-filterable-current=":android-sdk-ui/release" data-filterable-set=":android-sdk-ui/release"><div class="main-subrow keyValue "><div class=""><span class="inline-flex"><div><u><span>asset</span><wbr></wbr><span>Directory</span><wbr></wbr><span><span>Url</span></span></u></div></span></div><div><div class="title"><p class="paragraph">Optional local asset directory for WebView asset loading.</p></div></div></div></div></div><h4 class="tableheader">Inheritors</h4><div class="table"><div class="table-row table-row_content" data-filterable-current=":android-sdk-ui/release" data-filterable-set=":android-sdk-ui/release"><div class="main-subrow keyValue "><div class=""><span class="inline-flex"><div><a href="../../com.braze.ui.banners.utils/-banner-web-view-client/index.html">BannerWebViewClient</a></div></span></div><div></div></div></div><div class="table-row table-row_content" data-filterable-current=":android-sdk-ui/release" data-filterable-set=":android-sdk-ui/release"><div class="main-subrow keyValue "><div class=""><span class="inline-flex"><div><a href="../../com.braze.ui.inappmessage.utils/-in-app-message-web-view-client/index.html">InAppMessageWebViewClient</a></div></span></div><div></div></div></div></div></div></div>
   </div>
   <div class="tabbedcontent">
     <div class="tabs-section" tabs-section="tabs-section"><button class="section-tab" data-active="" data-togglable="CONSTRUCTOR,TYPE,PROPERTY,FUNCTION">Members</button></div>
     <div class="tabs-section-body">
       <div data-togglable="CONSTRUCTOR">
         <h2 class="tableheader">Constructors</h2>
-        <div class="table"><a data-name="1483671906%2FConstructors%2F1102423332" anchor-label="BrazeWebViewClient" id="1483671906%2FConstructors%2F1102423332" data-filterable-set=":android-sdk-ui/main"></a>
-          <div class="table-row table-row_content" data-togglable="CONSTRUCTOR" data-filterable-current=":android-sdk-ui/main" data-filterable-set=":android-sdk-ui/main">
+        <div class="table"><a data-name="1483671906%2FConstructors%2F-1369171853" anchor-label="BrazeWebViewClient" id="1483671906%2FConstructors%2F-1369171853" data-filterable-set=":android-sdk-ui/release"></a>
+          <div class="table-row table-row_content" data-togglable="CONSTRUCTOR" data-filterable-current=":android-sdk-ui/release" data-filterable-set=":android-sdk-ui/release">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="-braze-web-view-client.html"><span>Braze</span><wbr></wbr><span>Web</span><wbr></wbr><span>View</span><wbr></wbr><span><span>Client</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1483671906%2FConstructors%2F1102423332"></span>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1483671906%2FConstructors%2F-1369171853"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted  with-platform-tabs" data-platform-hinted="data-platform-hinted">
-                    <div class="platform-bookmarks-row" data-toggle-list="data-toggle-list"><button class="platform-bookmark" data-filterable-current=":android-sdk-ui/main" data-filterable-set=":android-sdk-ui/main" data-active="" data-toggle=":android-sdk-ui/main">androidJvm</button></div>
-<div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui/main"><div class="symbol monospace"><span class="token keyword">constructor</span><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">context<span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/android/content/Context.html">Context</a><span class="token punctuation">, </span></span><span class="parameter ">type<span class="token operator">: </span><a href="-type/index.html">BrazeWebViewClient.Type</a><span class="token punctuation">, </span></span><span class="parameter ">inAppMessage<span class="token operator">: </span><span data-unresolved-link="com.braze.models.inappmessage/IInAppMessage///PointingToDeclaration/">IInAppMessage</span><span class="token operator">?</span><span class="token operator"> = </span>null<span class="token punctuation">, </span></span><span class="parameter ">inAppMessageWebViewClientListener<span class="token operator">: </span><a href="../../com.braze.ui.inappmessage.listeners/-i-in-app-message-web-view-client-listener/index.html">IInAppMessageWebViewClientListener</a><span class="token operator">?</span><span class="token operator"> = </span>null<span class="token punctuation">, </span></span><span class="parameter ">bannerWebViewClientListener<span class="token operator">: </span><a href="../../com.braze.ui.banners.listeners/-i-banner-web-view-client-listener/index.html">IBannerWebViewClientListener</a><span class="token operator">?</span><span class="token operator"> = </span>null<span class="token punctuation">, </span></span><span class="parameter ">assetDirectoryUrl<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token operator">?</span><span class="token operator"> = </span>null</span></span><span class="token punctuation">)</span></div></div>                  </div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui/release"><div class="symbol monospace"><span class="token keyword">constructor</span><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">context<span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/android/content/Context.html">Context</a><span class="token punctuation">, </span></span><span class="parameter ">type<span class="token operator">: </span><a href="-type/index.html">BrazeWebViewClient.Type</a><span class="token punctuation">, </span></span><span class="parameter ">inAppMessage<span class="token operator">: </span><a href="../../com.braze.models.inappmessage/-i-in-app-message/index.html">IInAppMessage</a><span class="token operator">?</span><span class="token operator"> = </span>null<span class="token punctuation">, </span></span><span class="parameter ">inAppMessageWebViewClientListener<span class="token operator">: </span><a href="../../com.braze.ui.inappmessage.listeners/-i-in-app-message-web-view-client-listener/index.html">IInAppMessageWebViewClientListener</a><span class="token operator">?</span><span class="token operator"> = </span>null<span class="token punctuation">, </span></span><span class="parameter ">bannerWebViewClientListener<span class="token operator">: </span><a href="../../com.braze.ui.banners.listeners/-i-banner-web-view-client-listener/index.html">IBannerWebViewClientListener</a><span class="token operator">?</span><span class="token operator"> = </span>null<span class="token punctuation">, </span></span><span class="parameter ">assetDirectoryUrl<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token operator">?</span><span class="token operator"> = </span>null</span></span><span class="token punctuation">)</span></div></div></div>
                 </div>
               </div>
             </div>
@@ -138,36 +133,32 @@
       </div>
       <div data-togglable="TYPE">
         <h2 class="tableheader">Types</h2>
-        <div class="table"><a data-name="-2097617873%2FClasslikes%2F1102423332" anchor-label="Companion" id="-2097617873%2FClasslikes%2F1102423332" data-filterable-set=":android-sdk-ui/main"></a>
-          <div class="table-row table-row_content" data-filterable-current=":android-sdk-ui/main" data-filterable-set=":android-sdk-ui/main">
+        <div class="table"><a data-name="-2097617873%2FClasslikes%2F-1369171853" anchor-label="Companion" id="-2097617873%2FClasslikes%2F-1369171853" data-filterable-set=":android-sdk-ui/release"></a>
+          <div class="table-row table-row_content" data-filterable-current=":android-sdk-ui/release" data-filterable-set=":android-sdk-ui/release">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="-companion/index.html"><span><span>Companion</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-2097617873%2FClasslikes%2F1102423332"></span>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-2097617873%2FClasslikes%2F-1369171853"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted  with-platform-tabs" data-platform-hinted="data-platform-hinted">
-                    <div class="platform-bookmarks-row" data-toggle-list="data-toggle-list"><button class="platform-bookmark" data-filterable-current=":android-sdk-ui/main" data-filterable-set=":android-sdk-ui/main" data-active="" data-toggle=":android-sdk-ui/main">androidJvm</button></div>
-<div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui/main"><div class="symbol monospace"><span class="token keyword">object </span><a href="-companion/index.html">Companion</a></div></div>                  </div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui/release"><div class="symbol monospace"><span class="token keyword">object </span><a href="-companion/index.html">Companion</a></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="225297005%2FClasslikes%2F1102423332" anchor-label="Type" id="225297005%2FClasslikes%2F1102423332" data-filterable-set=":android-sdk-ui/main"></a>
-          <div class="table-row table-row_content" data-filterable-current=":android-sdk-ui/main" data-filterable-set=":android-sdk-ui/main">
+<a data-name="225297005%2FClasslikes%2F-1369171853" anchor-label="Type" id="225297005%2FClasslikes%2F-1369171853" data-filterable-set=":android-sdk-ui/release"></a>
+          <div class="table-row table-row_content" data-filterable-current=":android-sdk-ui/release" data-filterable-set=":android-sdk-ui/release">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="-type/index.html"><span><span>Type</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="225297005%2FClasslikes%2F1102423332"></span>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="225297005%2FClasslikes%2F-1369171853"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted  with-platform-tabs" data-platform-hinted="data-platform-hinted">
-                    <div class="platform-bookmarks-row" data-toggle-list="data-toggle-list"><button class="platform-bookmark" data-filterable-current=":android-sdk-ui/main" data-filterable-set=":android-sdk-ui/main" data-active="" data-toggle=":android-sdk-ui/main">androidJvm</button></div>
-<div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui/main"><div class="symbol monospace"><span class="token keyword">enum </span><a href="-type/index.html">Type</a> : <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-enum/index.html">Enum</a><span class="token operator">&lt;</span><a href="-type/index.html">BrazeWebViewClient.Type</a><span class="token operator">&gt; </span></div><div class="brief "><p class="paragraph">Identifies the Braze message type this <a href="index.html">BrazeWebViewClient</a> is serving.</p></div></div>                  </div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui/release"><div class="symbol monospace"><span class="token keyword">enum </span><a href="-type/index.html">Type</a> : <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-enum/index.html">Enum</a><span class="token operator">&lt;</span><a href="-type/index.html">BrazeWebViewClient.Type</a><span class="token operator">&gt; </span></div><div class="brief "><p class="paragraph">Identifies the Braze message type this <a href="index.html">BrazeWebViewClient</a> is serving.</p></div></div></div>
                 </div>
               </div>
             </div>
@@ -176,36 +167,167 @@
       </div>
       <div data-togglable="PROPERTY">
         <h2 class="tableheader">Properties</h2>
-        <div class="table"><a data-name="763502297%2FProperties%2F1102423332" anchor-label="context" id="763502297%2FProperties%2F1102423332" data-filterable-set=":android-sdk-ui/main"></a>
-          <div class="table-row table-row_content" data-filterable-current=":android-sdk-ui/main" data-filterable-set=":android-sdk-ui/main">
+        <div class="table"><a data-name="475504229%2FProperties%2F-1369171853" anchor-label="assetLoader" id="475504229%2FProperties%2F-1369171853" data-filterable-set=":android-sdk-ui/release"></a>
+          <div class="table-row table-row_content" data-filterable-current=":android-sdk-ui/release" data-filterable-set=":android-sdk-ui/release">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
-                  <div><a href="context.html"><span><span>context</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="763502297%2FProperties%2F1102423332"></span>
+                  <div><a href="asset-loader.html"><span>asset</span><wbr></wbr><span><span>Loader</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="475504229%2FProperties%2F-1369171853"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted  with-platform-tabs" data-platform-hinted="data-platform-hinted">
-                    <div class="platform-bookmarks-row" data-toggle-list="data-toggle-list"><button class="platform-bookmark" data-filterable-current=":android-sdk-ui/main" data-filterable-set=":android-sdk-ui/main" data-active="" data-toggle=":android-sdk-ui/main">androidJvm</button></div>
-<div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui/main"><div class="symbol monospace"><span class="token keyword">val </span><a href="context.html">context</a><span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/android/content/Context.html">Context</a></div></div>                  </div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui/release"><div class="symbol monospace"><span class="token keyword">private </span><span class="token keyword">val </span><a href="asset-loader.html">assetLoader</a><span class="token operator">: </span><span><span class="token annotation builtin">@</span><span data-unresolved-link="org.jspecify.annotations/NonNull///PointingToDeclaration/"><span class="token annotation builtin">NonNull</span></span> </span><a href="https://developer.android.com/reference/kotlin/androidx/webkit/WebViewAssetLoader.html">WebViewAssetLoader</a></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="1745111992%2FProperties%2F1102423332" anchor-label="type" id="1745111992%2FProperties%2F1102423332" data-filterable-set=":android-sdk-ui/main"></a>
-          <div class="table-row table-row_content" data-filterable-current=":android-sdk-ui/main" data-filterable-set=":android-sdk-ui/main">
+<a data-name="885680476%2FProperties%2F-1369171853" anchor-label="bannerWebViewClientListener" id="885680476%2FProperties%2F-1369171853" data-filterable-set=":android-sdk-ui/release"></a>
+          <div class="table-row table-row_content" data-filterable-current=":android-sdk-ui/release" data-filterable-set=":android-sdk-ui/release">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
-                  <div><a href="type.html"><span><span>type</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1745111992%2FProperties%2F1102423332"></span>
+                  <div><a href="banner-web-view-client-listener.html"><span>banner</span><wbr></wbr><span>Web</span><wbr></wbr><span>View</span><wbr></wbr><span>Client</span><wbr></wbr><span><span>Listener</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="885680476%2FProperties%2F-1369171853"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted  with-platform-tabs" data-platform-hinted="data-platform-hinted">
-                    <div class="platform-bookmarks-row" data-toggle-list="data-toggle-list"><button class="platform-bookmark" data-filterable-current=":android-sdk-ui/main" data-filterable-set=":android-sdk-ui/main" data-active="" data-toggle=":android-sdk-ui/main">androidJvm</button></div>
-<div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui/main"><div class="symbol monospace"><span class="token keyword">val </span><a href="type.html">type</a><span class="token operator">: </span><a href="-type/index.html">BrazeWebViewClient.Type</a></div></div>                  </div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui/release"><div class="symbol monospace"><span class="token keyword">private </span><span class="token keyword">val </span><a href="banner-web-view-client-listener.html">bannerWebViewClientListener</a><span class="token operator">: </span><a href="../../com.braze.ui.banners.listeners/-i-banner-web-view-client-listener/index.html">IBannerWebViewClientListener</a><span class="token operator">?</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="763502297%2FProperties%2F-1369171853" anchor-label="context" id="763502297%2FProperties%2F-1369171853" data-filterable-set=":android-sdk-ui/release"></a>
+          <div class="table-row table-row_content" data-filterable-current=":android-sdk-ui/release" data-filterable-set=":android-sdk-ui/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="context.html"><span><span>context</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="763502297%2FProperties%2F-1369171853"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui/release"><div class="symbol monospace"><span class="token keyword">val </span><a href="context.html">context</a><span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/android/content/Context.html">Context</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1206063293%2FProperties%2F-1369171853" anchor-label="hasCalledPageFinishedOnListener" id="1206063293%2FProperties%2F-1369171853" data-filterable-set=":android-sdk-ui/release"></a>
+          <div class="table-row table-row_content" data-filterable-current=":android-sdk-ui/release" data-filterable-set=":android-sdk-ui/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="has-called-page-finished-on-listener.html"><span>has</span><wbr></wbr><span>Called</span><wbr></wbr><span>Page</span><wbr></wbr><span>Finished</span><wbr></wbr><span>On</span><wbr></wbr><span><span>Listener</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1206063293%2FProperties%2F-1369171853"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui/release"><div class="symbol monospace"><span class="token keyword">private </span><span class="token keyword">val </span><a href="has-called-page-finished-on-listener.html">hasCalledPageFinishedOnListener</a><span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/java/util/concurrent/atomic/AtomicBoolean.html">AtomicBoolean</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="892034225%2FProperties%2F-1369171853" anchor-label="hasPageFinishedLoading" id="892034225%2FProperties%2F-1369171853" data-filterable-set=":android-sdk-ui/release"></a>
+          <div class="table-row table-row_content" data-filterable-current=":android-sdk-ui/release" data-filterable-set=":android-sdk-ui/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="has-page-finished-loading.html"><span>has</span><wbr></wbr><span>Page</span><wbr></wbr><span>Finished</span><wbr></wbr><span><span>Loading</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="892034225%2FProperties%2F-1369171853"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui/release"><div class="symbol monospace"><span class="token keyword">private </span><span class="token keyword">var </span><a href="has-page-finished-loading.html">hasPageFinishedLoading</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1846845081%2FProperties%2F-1369171853" anchor-label="inAppMessage" id="-1846845081%2FProperties%2F-1369171853" data-filterable-set=":android-sdk-ui/release"></a>
+          <div class="table-row table-row_content" data-filterable-current=":android-sdk-ui/release" data-filterable-set=":android-sdk-ui/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="in-app-message.html"><span>in</span><wbr></wbr><span>App</span><wbr></wbr><span><span>Message</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1846845081%2FProperties%2F-1369171853"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui/release"><div class="symbol monospace"><span class="token keyword">private </span><span class="token keyword">val </span><a href="in-app-message.html">inAppMessage</a><span class="token operator">: </span><a href="../../com.braze.models.inappmessage/-i-in-app-message/index.html">IInAppMessage</a><span class="token operator">?</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1686752603%2FProperties%2F-1369171853" anchor-label="inAppMessageWebViewClientListener" id="1686752603%2FProperties%2F-1369171853" data-filterable-set=":android-sdk-ui/release"></a>
+          <div class="table-row table-row_content" data-filterable-current=":android-sdk-ui/release" data-filterable-set=":android-sdk-ui/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="in-app-message-web-view-client-listener.html"><span>in</span><wbr></wbr><span>App</span><wbr></wbr><span>Message</span><wbr></wbr><span>Web</span><wbr></wbr><span>View</span><wbr></wbr><span>Client</span><wbr></wbr><span><span>Listener</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1686752603%2FProperties%2F-1369171853"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui/release"><div class="symbol monospace"><span class="token keyword">private </span><span class="token keyword">val </span><a href="in-app-message-web-view-client-listener.html">inAppMessageWebViewClientListener</a><span class="token operator">: </span><a href="../../com.braze.ui.inappmessage.listeners/-i-in-app-message-web-view-client-listener/index.html">IInAppMessageWebViewClientListener</a><span class="token operator">?</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-55253319%2FProperties%2F-1369171853" anchor-label="markPageFinishedJob" id="-55253319%2FProperties%2F-1369171853" data-filterable-set=":android-sdk-ui/release"></a>
+          <div class="table-row table-row_content" data-filterable-current=":android-sdk-ui/release" data-filterable-set=":android-sdk-ui/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="mark-page-finished-job.html"><span>mark</span><wbr></wbr><span>Page</span><wbr></wbr><span>Finished</span><wbr></wbr><span><span>Job</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-55253319%2FProperties%2F-1369171853"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui/release"><div class="symbol monospace"><span class="token keyword">private </span><span class="token keyword">var </span><a href="mark-page-finished-job.html">markPageFinishedJob</a><span class="token operator">: </span><span data-unresolved-link="kotlinx.coroutines/Job///PointingToDeclaration/">Job</span><span class="token operator">?</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1393417020%2FProperties%2F-1369171853" anchor-label="maxOnPageFinishedWaitTimeMs" id="1393417020%2FProperties%2F-1369171853" data-filterable-set=":android-sdk-ui/release"></a>
+          <div class="table-row table-row_content" data-filterable-current=":android-sdk-ui/release" data-filterable-set=":android-sdk-ui/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="max-on-page-finished-wait-time-ms.html"><span>max</span><wbr></wbr><span>On</span><wbr></wbr><span>Page</span><wbr></wbr><span>Finished</span><wbr></wbr><span>Wait</span><wbr></wbr><span>Time</span><wbr></wbr><span><span>Ms</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1393417020%2FProperties%2F-1369171853"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui/release"><div class="symbol monospace"><span class="token keyword">private </span><span class="token keyword">val </span><a href="max-on-page-finished-wait-time-ms.html">maxOnPageFinishedWaitTimeMs</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1745111992%2FProperties%2F-1369171853" anchor-label="type" id="1745111992%2FProperties%2F-1369171853" data-filterable-set=":android-sdk-ui/release"></a>
+          <div class="table-row table-row_content" data-filterable-current=":android-sdk-ui/release" data-filterable-set=":android-sdk-ui/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="type.html"><span><span>type</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1745111992%2FProperties%2F-1369171853"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui/release"><div class="symbol monospace"><span class="token keyword">val </span><a href="type.html">type</a><span class="token operator">: </span><a href="-type/index.html">BrazeWebViewClient.Type</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1046102417%2FProperties%2F-1369171853" anchor-label="webViewClientStateListener" id="1046102417%2FProperties%2F-1369171853" data-filterable-set=":android-sdk-ui/release"></a>
+          <div class="table-row table-row_content" data-filterable-current=":android-sdk-ui/release" data-filterable-set=":android-sdk-ui/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="web-view-client-state-listener.html"><span>web</span><wbr></wbr><span>View</span><wbr></wbr><span>Client</span><wbr></wbr><span>State</span><wbr></wbr><span><span>Listener</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1046102417%2FProperties%2F-1369171853"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui/release"><div class="symbol monospace"><span class="token keyword">private </span><span class="token keyword">var </span><a href="web-view-client-state-listener.html">webViewClientStateListener</a><span class="token operator">: </span><a href="../../com.braze.ui.inappmessage.listeners/-i-web-view-client-state-listener/index.html">IWebViewClientStateListener</a><span class="token operator">?</span></div></div></div>
                 </div>
               </div>
             </div>
@@ -214,359 +336,377 @@
       </div>
       <div data-togglable="FUNCTION">
         <h2 class="tableheader">Functions</h2>
-        <div class="table"><a data-name="-803139611%2FFunctions%2F1102423332" anchor-label="doUpdateVisitedHistory" id="-803139611%2FFunctions%2F1102423332" data-filterable-set=":android-sdk-ui/main"></a>
-          <div class="table-row table-row_content" data-filterable-current=":android-sdk-ui/main" data-filterable-set=":android-sdk-ui/main">
+        <div class="table"><a data-name="997193910%2FFunctions%2F-1369171853" anchor-label="appendBridgeJavascript" id="997193910%2FFunctions%2F-1369171853" data-filterable-set=":android-sdk-ui/release"></a>
+          <div class="table-row table-row_content" data-filterable-current=":android-sdk-ui/release" data-filterable-set=":android-sdk-ui/release">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
-                  <div><a href="../../com.braze.ui.inappmessage.utils/-in-app-message-web-view-client/index.html#-803139611%2FFunctions%2F1102423332"><span>do</span><wbr></wbr><span>Update</span><wbr></wbr><span>Visited</span><wbr></wbr><span><span>History</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-803139611%2FFunctions%2F1102423332"></span>
+                  <div><a href="append-bridge-javascript.html"><span>append</span><wbr></wbr><span>Bridge</span><wbr></wbr><span><span>Javascript</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="997193910%2FFunctions%2F-1369171853"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted  with-platform-tabs" data-platform-hinted="data-platform-hinted">
-                    <div class="platform-bookmarks-row" data-toggle-list="data-toggle-list"><button class="platform-bookmark" data-filterable-current=":android-sdk-ui/main" data-filterable-set=":android-sdk-ui/main" data-active="" data-toggle=":android-sdk-ui/main">androidJvm</button></div>
-<div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui/main"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">fun </span><a href="../../com.braze.ui.inappmessage.utils/-in-app-message-web-view-client/index.html#-803139611%2FFunctions%2F1102423332"><span class="token function">doUpdateVisitedHistory</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">view<span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/android/webkit/WebView.html">WebView</a><span class="token operator">?</span><span class="token punctuation">, </span></span><span class="parameter ">url<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token operator">?</span><span class="token punctuation">, </span></span><span class="parameter ">isReload<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a></span></span><span class="token punctuation">)</span></div></div>                  </div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui/release"><div class="symbol monospace"><span class="token keyword">private </span><span class="token keyword">fun </span><a href="append-bridge-javascript.html"><span class="token function">appendBridgeJavascript</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">view<span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/android/webkit/WebView.html">WebView</a></span></span><span class="token punctuation">)</span></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="-613795914%2FFunctions%2F1102423332" anchor-label="onFormResubmission" id="-613795914%2FFunctions%2F1102423332" data-filterable-set=":android-sdk-ui/main"></a>
-          <div class="table-row table-row_content" data-filterable-current=":android-sdk-ui/main" data-filterable-set=":android-sdk-ui/main">
+<a data-name="-803139611%2FFunctions%2F-1369171853" anchor-label="doUpdateVisitedHistory" id="-803139611%2FFunctions%2F-1369171853" data-filterable-set=":android-sdk-ui/release"></a>
+          <div class="table-row table-row_content" data-filterable-current=":android-sdk-ui/release" data-filterable-set=":android-sdk-ui/release">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
-                  <div><a href="../../com.braze.ui.inappmessage.utils/-in-app-message-web-view-client/index.html#-613795914%2FFunctions%2F1102423332"><span>on</span><wbr></wbr><span>Form</span><wbr></wbr><span><span>Resubmission</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-613795914%2FFunctions%2F1102423332"></span>
+                  <div><a href="../../com.braze.ui.inappmessage.utils/-in-app-message-web-view-client/index.html#-803139611%2FFunctions%2F-1369171853"><span>do</span><wbr></wbr><span>Update</span><wbr></wbr><span>Visited</span><wbr></wbr><span><span>History</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-803139611%2FFunctions%2F-1369171853"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted  with-platform-tabs" data-platform-hinted="data-platform-hinted">
-                    <div class="platform-bookmarks-row" data-toggle-list="data-toggle-list"><button class="platform-bookmark" data-filterable-current=":android-sdk-ui/main" data-filterable-set=":android-sdk-ui/main" data-active="" data-toggle=":android-sdk-ui/main">androidJvm</button></div>
-<div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui/main"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">fun </span><a href="../../com.braze.ui.inappmessage.utils/-in-app-message-web-view-client/index.html#-613795914%2FFunctions%2F1102423332"><span class="token function">onFormResubmission</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">view<span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/android/webkit/WebView.html">WebView</a><span class="token operator">?</span><span class="token punctuation">, </span></span><span class="parameter ">dontResend<span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/android/os/Message.html">Message</a><span class="token operator">?</span><span class="token punctuation">, </span></span><span class="parameter ">resend<span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/android/os/Message.html">Message</a><span class="token operator">?</span></span></span><span class="token punctuation">)</span></div></div>                  </div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui/release"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">fun </span><a href="../../com.braze.ui.inappmessage.utils/-in-app-message-web-view-client/index.html#-803139611%2FFunctions%2F-1369171853"><span class="token function">doUpdateVisitedHistory</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">view<span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/android/webkit/WebView.html">WebView</a><span class="token operator">?</span><span class="token punctuation">, </span></span><span class="parameter ">url<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token operator">?</span><span class="token punctuation">, </span></span><span class="parameter ">isReload<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a></span></span><span class="token punctuation">)</span></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="-1623018838%2FFunctions%2F1102423332" anchor-label="onLoadResource" id="-1623018838%2FFunctions%2F1102423332" data-filterable-set=":android-sdk-ui/main"></a>
-          <div class="table-row table-row_content" data-filterable-current=":android-sdk-ui/main" data-filterable-set=":android-sdk-ui/main">
+<a data-name="345719855%2FFunctions%2F-1369171853" anchor-label="handleQueryAction" id="345719855%2FFunctions%2F-1369171853" data-filterable-set=":android-sdk-ui/release"></a>
+          <div class="table-row table-row_content" data-filterable-current=":android-sdk-ui/release" data-filterable-set=":android-sdk-ui/release">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
-                  <div><a href="../../com.braze.ui.inappmessage.utils/-in-app-message-web-view-client/index.html#-1623018838%2FFunctions%2F1102423332"><span>on</span><wbr></wbr><span>Load</span><wbr></wbr><span><span>Resource</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1623018838%2FFunctions%2F1102423332"></span>
+                  <div><a href="handle-query-action.html"><span>handle</span><wbr></wbr><span>Query</span><wbr></wbr><span><span>Action</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="345719855%2FFunctions%2F-1369171853"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted  with-platform-tabs" data-platform-hinted="data-platform-hinted">
-                    <div class="platform-bookmarks-row" data-toggle-list="data-toggle-list"><button class="platform-bookmark" data-filterable-current=":android-sdk-ui/main" data-filterable-set=":android-sdk-ui/main" data-active="" data-toggle=":android-sdk-ui/main">androidJvm</button></div>
-<div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui/main"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">fun </span><a href="../../com.braze.ui.inappmessage.utils/-in-app-message-web-view-client/index.html#-1623018838%2FFunctions%2F1102423332"><span class="token function">onLoadResource</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">view<span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/android/webkit/WebView.html">WebView</a><span class="token operator">?</span><span class="token punctuation">, </span></span><span class="parameter ">url<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token operator">?</span></span></span><span class="token punctuation">)</span></div></div>                  </div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui/release"><div class="symbol monospace"><span class="token keyword">private </span><span class="token keyword">fun </span><a href="handle-query-action.html"><span class="token function">handleQueryAction</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">url<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span></span><span class="parameter ">uri<span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/android/net/Uri.html">Uri</a><span class="token punctuation">, </span></span><span class="parameter ">queryBundle<span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/android/os/Bundle.html">Bundle</a></span></span><span class="token punctuation">)</span></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="-1143994814%2FFunctions%2F1102423332" anchor-label="onPageCommitVisible" id="-1143994814%2FFunctions%2F1102423332" data-filterable-set=":android-sdk-ui/main"></a>
-          <div class="table-row table-row_content" data-filterable-current=":android-sdk-ui/main" data-filterable-set=":android-sdk-ui/main">
+<a data-name="-1126939921%2FFunctions%2F-1369171853" anchor-label="handleUrlOverride" id="-1126939921%2FFunctions%2F-1369171853" data-filterable-set=":android-sdk-ui/release"></a>
+          <div class="table-row table-row_content" data-filterable-current=":android-sdk-ui/release" data-filterable-set=":android-sdk-ui/release">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
-                  <div><a href="../../com.braze.ui.inappmessage.utils/-in-app-message-web-view-client/index.html#-1143994814%2FFunctions%2F1102423332"><span>on</span><wbr></wbr><span>Page</span><wbr></wbr><span>Commit</span><wbr></wbr><span><span>Visible</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1143994814%2FFunctions%2F1102423332"></span>
+                  <div><a href="handle-url-override.html"><span>handle</span><wbr></wbr><span>Url</span><wbr></wbr><span><span>Override</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1126939921%2FFunctions%2F-1369171853"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted  with-platform-tabs" data-platform-hinted="data-platform-hinted">
-                    <div class="platform-bookmarks-row" data-toggle-list="data-toggle-list"><button class="platform-bookmark" data-filterable-current=":android-sdk-ui/main" data-filterable-set=":android-sdk-ui/main" data-active="" data-toggle=":android-sdk-ui/main">androidJvm</button></div>
-<div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui/main"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">fun </span><a href="../../com.braze.ui.inappmessage.utils/-in-app-message-web-view-client/index.html#-1143994814%2FFunctions%2F1102423332"><span class="token function">onPageCommitVisible</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">view<span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/android/webkit/WebView.html">WebView</a><span class="token operator">?</span><span class="token punctuation">, </span></span><span class="parameter ">url<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token operator">?</span></span></span><span class="token punctuation">)</span></div></div>                  </div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui/release"><div class="symbol monospace"><span class="token keyword">private </span><span class="token keyword">fun </span><a href="handle-url-override.html"><span class="token function">handleUrlOverride</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">url<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="1554300811%2FFunctions%2F1102423332" anchor-label="onPageFinished" id="1554300811%2FFunctions%2F1102423332" data-filterable-set=":android-sdk-ui/main"></a>
-          <div class="table-row table-row_content" data-filterable-current=":android-sdk-ui/main" data-filterable-set=":android-sdk-ui/main">
+<a data-name="-1595030940%2FFunctions%2F-1369171853" anchor-label="markPageFinished" id="-1595030940%2FFunctions%2F-1369171853" data-filterable-set=":android-sdk-ui/release"></a>
+          <div class="table-row table-row_content" data-filterable-current=":android-sdk-ui/release" data-filterable-set=":android-sdk-ui/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="mark-page-finished.html"><span>mark</span><wbr></wbr><span>Page</span><wbr></wbr><span><span>Finished</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1595030940%2FFunctions%2F-1369171853"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui/release"><div class="symbol monospace"><span class="token keyword">private </span><span class="token keyword">fun </span><a href="mark-page-finished.html"><span class="token function">markPageFinished</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-613795914%2FFunctions%2F-1369171853" anchor-label="onFormResubmission" id="-613795914%2FFunctions%2F-1369171853" data-filterable-set=":android-sdk-ui/release"></a>
+          <div class="table-row table-row_content" data-filterable-current=":android-sdk-ui/release" data-filterable-set=":android-sdk-ui/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="../../com.braze.ui.inappmessage.utils/-in-app-message-web-view-client/index.html#-613795914%2FFunctions%2F-1369171853"><span>on</span><wbr></wbr><span>Form</span><wbr></wbr><span><span>Resubmission</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-613795914%2FFunctions%2F-1369171853"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui/release"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">fun </span><a href="../../com.braze.ui.inappmessage.utils/-in-app-message-web-view-client/index.html#-613795914%2FFunctions%2F-1369171853"><span class="token function">onFormResubmission</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">view<span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/android/webkit/WebView.html">WebView</a><span class="token operator">?</span><span class="token punctuation">, </span></span><span class="parameter ">dontResend<span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/android/os/Message.html">Message</a><span class="token operator">?</span><span class="token punctuation">, </span></span><span class="parameter ">resend<span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/android/os/Message.html">Message</a><span class="token operator">?</span></span></span><span class="token punctuation">)</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1623018838%2FFunctions%2F-1369171853" anchor-label="onLoadResource" id="-1623018838%2FFunctions%2F-1369171853" data-filterable-set=":android-sdk-ui/release"></a>
+          <div class="table-row table-row_content" data-filterable-current=":android-sdk-ui/release" data-filterable-set=":android-sdk-ui/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="../../com.braze.ui.inappmessage.utils/-in-app-message-web-view-client/index.html#-1623018838%2FFunctions%2F-1369171853"><span>on</span><wbr></wbr><span>Load</span><wbr></wbr><span><span>Resource</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1623018838%2FFunctions%2F-1369171853"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui/release"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">fun </span><a href="../../com.braze.ui.inappmessage.utils/-in-app-message-web-view-client/index.html#-1623018838%2FFunctions%2F-1369171853"><span class="token function">onLoadResource</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">view<span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/android/webkit/WebView.html">WebView</a><span class="token operator">?</span><span class="token punctuation">, </span></span><span class="parameter ">url<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token operator">?</span></span></span><span class="token punctuation">)</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1143994814%2FFunctions%2F-1369171853" anchor-label="onPageCommitVisible" id="-1143994814%2FFunctions%2F-1369171853" data-filterable-set=":android-sdk-ui/release"></a>
+          <div class="table-row table-row_content" data-filterable-current=":android-sdk-ui/release" data-filterable-set=":android-sdk-ui/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="../../com.braze.ui.inappmessage.utils/-in-app-message-web-view-client/index.html#-1143994814%2FFunctions%2F-1369171853"><span>on</span><wbr></wbr><span>Page</span><wbr></wbr><span>Commit</span><wbr></wbr><span><span>Visible</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1143994814%2FFunctions%2F-1369171853"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui/release"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">fun </span><a href="../../com.braze.ui.inappmessage.utils/-in-app-message-web-view-client/index.html#-1143994814%2FFunctions%2F-1369171853"><span class="token function">onPageCommitVisible</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">view<span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/android/webkit/WebView.html">WebView</a><span class="token operator">?</span><span class="token punctuation">, </span></span><span class="parameter ">url<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token operator">?</span></span></span><span class="token punctuation">)</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1554300811%2FFunctions%2F-1369171853" anchor-label="onPageFinished" id="1554300811%2FFunctions%2F-1369171853" data-filterable-set=":android-sdk-ui/release"></a>
+          <div class="table-row table-row_content" data-filterable-current=":android-sdk-ui/release" data-filterable-set=":android-sdk-ui/release">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="on-page-finished.html"><span>on</span><wbr></wbr><span>Page</span><wbr></wbr><span><span>Finished</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1554300811%2FFunctions%2F1102423332"></span>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1554300811%2FFunctions%2F-1369171853"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted  with-platform-tabs" data-platform-hinted="data-platform-hinted">
-                    <div class="platform-bookmarks-row" data-toggle-list="data-toggle-list"><button class="platform-bookmark" data-filterable-current=":android-sdk-ui/main" data-filterable-set=":android-sdk-ui/main" data-active="" data-toggle=":android-sdk-ui/main">androidJvm</button></div>
-<div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui/main"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="on-page-finished.html"><span class="token function">onPageFinished</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">view<span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/android/webkit/WebView.html">WebView</a><span class="token punctuation">, </span></span><span class="parameter ">url<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></span></span><span class="token punctuation">)</span></div></div>                  </div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui/release"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="on-page-finished.html"><span class="token function">onPageFinished</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">view<span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/android/webkit/WebView.html">WebView</a><span class="token punctuation">, </span></span><span class="parameter ">url<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></span></span><span class="token punctuation">)</span></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="84180972%2FFunctions%2F1102423332" anchor-label="onPageStarted" id="84180972%2FFunctions%2F1102423332" data-filterable-set=":android-sdk-ui/main"></a>
-          <div class="table-row table-row_content" data-filterable-current=":android-sdk-ui/main" data-filterable-set=":android-sdk-ui/main">
+<a data-name="84180972%2FFunctions%2F-1369171853" anchor-label="onPageStarted" id="84180972%2FFunctions%2F-1369171853" data-filterable-set=":android-sdk-ui/release"></a>
+          <div class="table-row table-row_content" data-filterable-current=":android-sdk-ui/release" data-filterable-set=":android-sdk-ui/release">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
-                  <div><a href="../../com.braze.ui.inappmessage.utils/-in-app-message-web-view-client/index.html#84180972%2FFunctions%2F1102423332"><span>on</span><wbr></wbr><span>Page</span><wbr></wbr><span><span>Started</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="84180972%2FFunctions%2F1102423332"></span>
+                  <div><a href="../../com.braze.ui.inappmessage.utils/-in-app-message-web-view-client/index.html#84180972%2FFunctions%2F-1369171853"><span>on</span><wbr></wbr><span>Page</span><wbr></wbr><span><span>Started</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="84180972%2FFunctions%2F-1369171853"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted  with-platform-tabs" data-platform-hinted="data-platform-hinted">
-                    <div class="platform-bookmarks-row" data-toggle-list="data-toggle-list"><button class="platform-bookmark" data-filterable-current=":android-sdk-ui/main" data-filterable-set=":android-sdk-ui/main" data-active="" data-toggle=":android-sdk-ui/main">androidJvm</button></div>
-<div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui/main"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">fun </span><a href="../../com.braze.ui.inappmessage.utils/-in-app-message-web-view-client/index.html#84180972%2FFunctions%2F1102423332"><span class="token function">onPageStarted</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">view<span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/android/webkit/WebView.html">WebView</a><span class="token operator">?</span><span class="token punctuation">, </span></span><span class="parameter ">url<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token operator">?</span><span class="token punctuation">, </span></span><span class="parameter ">favicon<span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/android/graphics/Bitmap.html">Bitmap</a><span class="token operator">?</span></span></span><span class="token punctuation">)</span></div></div>                  </div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui/release"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">fun </span><a href="../../com.braze.ui.inappmessage.utils/-in-app-message-web-view-client/index.html#84180972%2FFunctions%2F-1369171853"><span class="token function">onPageStarted</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">view<span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/android/webkit/WebView.html">WebView</a><span class="token operator">?</span><span class="token punctuation">, </span></span><span class="parameter ">url<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token operator">?</span><span class="token punctuation">, </span></span><span class="parameter ">favicon<span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/android/graphics/Bitmap.html">Bitmap</a><span class="token operator">?</span></span></span><span class="token punctuation">)</span></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="1854066498%2FFunctions%2F1102423332" anchor-label="onReceivedClientCertRequest" id="1854066498%2FFunctions%2F1102423332" data-filterable-set=":android-sdk-ui/main"></a>
-          <div class="table-row table-row_content" data-filterable-current=":android-sdk-ui/main" data-filterable-set=":android-sdk-ui/main">
+<a data-name="1854066498%2FFunctions%2F-1369171853" anchor-label="onReceivedClientCertRequest" id="1854066498%2FFunctions%2F-1369171853" data-filterable-set=":android-sdk-ui/release"></a>
+          <div class="table-row table-row_content" data-filterable-current=":android-sdk-ui/release" data-filterable-set=":android-sdk-ui/release">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
-                  <div><a href="../../com.braze.ui.inappmessage.utils/-in-app-message-web-view-client/index.html#1854066498%2FFunctions%2F1102423332"><span>on</span><wbr></wbr><span>Received</span><wbr></wbr><span>Client</span><wbr></wbr><span>Cert</span><wbr></wbr><span><span>Request</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1854066498%2FFunctions%2F1102423332"></span>
+                  <div><a href="../../com.braze.ui.inappmessage.utils/-in-app-message-web-view-client/index.html#1854066498%2FFunctions%2F-1369171853"><span>on</span><wbr></wbr><span>Received</span><wbr></wbr><span>Client</span><wbr></wbr><span>Cert</span><wbr></wbr><span><span>Request</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1854066498%2FFunctions%2F-1369171853"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted  with-platform-tabs" data-platform-hinted="data-platform-hinted">
-                    <div class="platform-bookmarks-row" data-toggle-list="data-toggle-list"><button class="platform-bookmark" data-filterable-current=":android-sdk-ui/main" data-filterable-set=":android-sdk-ui/main" data-active="" data-toggle=":android-sdk-ui/main">androidJvm</button></div>
-<div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui/main"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">fun </span><a href="../../com.braze.ui.inappmessage.utils/-in-app-message-web-view-client/index.html#1854066498%2FFunctions%2F1102423332"><span class="token function">onReceivedClientCertRequest</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">view<span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/android/webkit/WebView.html">WebView</a><span class="token operator">?</span><span class="token punctuation">, </span></span><span class="parameter ">request<span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/android/webkit/ClientCertRequest.html">ClientCertRequest</a><span class="token operator">?</span></span></span><span class="token punctuation">)</span></div></div>                  </div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui/release"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">fun </span><a href="../../com.braze.ui.inappmessage.utils/-in-app-message-web-view-client/index.html#1854066498%2FFunctions%2F-1369171853"><span class="token function">onReceivedClientCertRequest</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">view<span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/android/webkit/WebView.html">WebView</a><span class="token operator">?</span><span class="token punctuation">, </span></span><span class="parameter ">request<span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/android/webkit/ClientCertRequest.html">ClientCertRequest</a><span class="token operator">?</span></span></span><span class="token punctuation">)</span></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="1363179156%2FFunctions%2F1102423332" anchor-label="onReceivedError" id="1363179156%2FFunctions%2F1102423332" data-filterable-set=":android-sdk-ui/main"></a>
-          <div class="table-row table-row_content" data-filterable-current=":android-sdk-ui/main" data-filterable-set=":android-sdk-ui/main">
+<a data-name="1363179156%2FFunctions%2F-1369171853" anchor-label="onReceivedError" id="1363179156%2FFunctions%2F-1369171853" data-filterable-set=":android-sdk-ui/release"></a>
+          <div class="table-row table-row_content" data-filterable-current=":android-sdk-ui/release" data-filterable-set=":android-sdk-ui/release">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
-                  <div><a href="../../com.braze.ui.inappmessage.utils/-in-app-message-web-view-client/index.html#-1297440773%2FFunctions%2F1102423332"><span>on</span><wbr></wbr><span>Received</span><wbr></wbr><span><span>Error</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1363179156%2FFunctions%2F1102423332"></span>
+                  <div><a href="../../com.braze.ui.inappmessage.utils/-in-app-message-web-view-client/index.html#-1297440773%2FFunctions%2F-1369171853"><span>on</span><wbr></wbr><span>Received</span><wbr></wbr><span><span>Error</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1363179156%2FFunctions%2F-1369171853"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted  with-platform-tabs" data-platform-hinted="data-platform-hinted">
-                    <div class="platform-bookmarks-row" data-toggle-list="data-toggle-list"><button class="platform-bookmark" data-filterable-current=":android-sdk-ui/main" data-filterable-set=":android-sdk-ui/main" data-active="" data-toggle=":android-sdk-ui/main">androidJvm</button></div>
-<div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui/main"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">fun </span><a href="../../com.braze.ui.inappmessage.utils/-in-app-message-web-view-client/index.html#-1297440773%2FFunctions%2F1102423332"><span class="token function">onReceivedError</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">view<span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/android/webkit/WebView.html">WebView</a><span class="token operator">?</span><span class="token punctuation">, </span></span><span class="parameter ">request<span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/android/webkit/WebResourceRequest.html">WebResourceRequest</a><span class="token operator">?</span><span class="token punctuation">, </span></span><span class="parameter ">error<span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/android/webkit/WebResourceError.html">WebResourceError</a><span class="token operator">?</span></span></span><span class="token punctuation">)</span></div><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">fun </span><a href="../../com.braze.ui.inappmessage.utils/-in-app-message-web-view-client/index.html#1106625445%2FFunctions%2F1102423332"><span class="token function"><strike>onReceivedError</strike></span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">view<span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/android/webkit/WebView.html">WebView</a><span class="token operator">?</span><span class="token punctuation">, </span></span><span class="parameter ">errorCode<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a><span class="token punctuation">, </span></span><span class="parameter ">description<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token operator">?</span><span class="token punctuation">, </span></span><span class="parameter ">failingUrl<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token operator">?</span></span></span><span class="token punctuation">)</span></div></div>                  </div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui/release"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">fun </span><a href="../../com.braze.ui.inappmessage.utils/-in-app-message-web-view-client/index.html#-1297440773%2FFunctions%2F-1369171853"><span class="token function">onReceivedError</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">view<span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/android/webkit/WebView.html">WebView</a><span class="token operator">?</span><span class="token punctuation">, </span></span><span class="parameter ">request<span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/android/webkit/WebResourceRequest.html">WebResourceRequest</a><span class="token operator">?</span><span class="token punctuation">, </span></span><span class="parameter ">error<span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/android/webkit/WebResourceError.html">WebResourceError</a><span class="token operator">?</span></span></span><span class="token punctuation">)</span></div><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">fun </span><a href="../../com.braze.ui.inappmessage.utils/-in-app-message-web-view-client/index.html#1106625445%2FFunctions%2F-1369171853"><span class="token function"><strike>onReceivedError</strike></span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">view<span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/android/webkit/WebView.html">WebView</a><span class="token operator">?</span><span class="token punctuation">, </span></span><span class="parameter ">errorCode<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a><span class="token punctuation">, </span></span><span class="parameter ">description<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token operator">?</span><span class="token punctuation">, </span></span><span class="parameter ">failingUrl<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token operator">?</span></span></span><span class="token punctuation">)</span></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="1830378897%2FFunctions%2F1102423332" anchor-label="onReceivedHttpAuthRequest" id="1830378897%2FFunctions%2F1102423332" data-filterable-set=":android-sdk-ui/main"></a>
-          <div class="table-row table-row_content" data-filterable-current=":android-sdk-ui/main" data-filterable-set=":android-sdk-ui/main">
+<a data-name="1830378897%2FFunctions%2F-1369171853" anchor-label="onReceivedHttpAuthRequest" id="1830378897%2FFunctions%2F-1369171853" data-filterable-set=":android-sdk-ui/release"></a>
+          <div class="table-row table-row_content" data-filterable-current=":android-sdk-ui/release" data-filterable-set=":android-sdk-ui/release">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
-                  <div><a href="../../com.braze.ui.inappmessage.utils/-in-app-message-web-view-client/index.html#1830378897%2FFunctions%2F1102423332"><span>on</span><wbr></wbr><span>Received</span><wbr></wbr><span>Http</span><wbr></wbr><span>Auth</span><wbr></wbr><span><span>Request</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1830378897%2FFunctions%2F1102423332"></span>
+                  <div><a href="../../com.braze.ui.inappmessage.utils/-in-app-message-web-view-client/index.html#1830378897%2FFunctions%2F-1369171853"><span>on</span><wbr></wbr><span>Received</span><wbr></wbr><span>Http</span><wbr></wbr><span>Auth</span><wbr></wbr><span><span>Request</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1830378897%2FFunctions%2F-1369171853"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted  with-platform-tabs" data-platform-hinted="data-platform-hinted">
-                    <div class="platform-bookmarks-row" data-toggle-list="data-toggle-list"><button class="platform-bookmark" data-filterable-current=":android-sdk-ui/main" data-filterable-set=":android-sdk-ui/main" data-active="" data-toggle=":android-sdk-ui/main">androidJvm</button></div>
-<div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui/main"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">fun </span><a href="../../com.braze.ui.inappmessage.utils/-in-app-message-web-view-client/index.html#1830378897%2FFunctions%2F1102423332"><span class="token function">onReceivedHttpAuthRequest</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">view<span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/android/webkit/WebView.html">WebView</a><span class="token operator">?</span><span class="token punctuation">, </span></span><span class="parameter ">handler<span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/android/webkit/HttpAuthHandler.html">HttpAuthHandler</a><span class="token operator">?</span><span class="token punctuation">, </span></span><span class="parameter ">host<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token operator">?</span><span class="token punctuation">, </span></span><span class="parameter ">realm<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token operator">?</span></span></span><span class="token punctuation">)</span></div></div>                  </div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui/release"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">fun </span><a href="../../com.braze.ui.inappmessage.utils/-in-app-message-web-view-client/index.html#1830378897%2FFunctions%2F-1369171853"><span class="token function">onReceivedHttpAuthRequest</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">view<span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/android/webkit/WebView.html">WebView</a><span class="token operator">?</span><span class="token punctuation">, </span></span><span class="parameter ">handler<span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/android/webkit/HttpAuthHandler.html">HttpAuthHandler</a><span class="token operator">?</span><span class="token punctuation">, </span></span><span class="parameter ">host<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token operator">?</span><span class="token punctuation">, </span></span><span class="parameter ">realm<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token operator">?</span></span></span><span class="token punctuation">)</span></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="-1163853994%2FFunctions%2F1102423332" anchor-label="onReceivedHttpError" id="-1163853994%2FFunctions%2F1102423332" data-filterable-set=":android-sdk-ui/main"></a>
-          <div class="table-row table-row_content" data-filterable-current=":android-sdk-ui/main" data-filterable-set=":android-sdk-ui/main">
+<a data-name="-1163853994%2FFunctions%2F-1369171853" anchor-label="onReceivedHttpError" id="-1163853994%2FFunctions%2F-1369171853" data-filterable-set=":android-sdk-ui/release"></a>
+          <div class="table-row table-row_content" data-filterable-current=":android-sdk-ui/release" data-filterable-set=":android-sdk-ui/release">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
-                  <div><a href="../../com.braze.ui.inappmessage.utils/-in-app-message-web-view-client/index.html#-1163853994%2FFunctions%2F1102423332"><span>on</span><wbr></wbr><span>Received</span><wbr></wbr><span>Http</span><wbr></wbr><span><span>Error</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1163853994%2FFunctions%2F1102423332"></span>
+                  <div><a href="../../com.braze.ui.inappmessage.utils/-in-app-message-web-view-client/index.html#-1163853994%2FFunctions%2F-1369171853"><span>on</span><wbr></wbr><span>Received</span><wbr></wbr><span>Http</span><wbr></wbr><span><span>Error</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1163853994%2FFunctions%2F-1369171853"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted  with-platform-tabs" data-platform-hinted="data-platform-hinted">
-                    <div class="platform-bookmarks-row" data-toggle-list="data-toggle-list"><button class="platform-bookmark" data-filterable-current=":android-sdk-ui/main" data-filterable-set=":android-sdk-ui/main" data-active="" data-toggle=":android-sdk-ui/main">androidJvm</button></div>
-<div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui/main"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">fun </span><a href="../../com.braze.ui.inappmessage.utils/-in-app-message-web-view-client/index.html#-1163853994%2FFunctions%2F1102423332"><span class="token function">onReceivedHttpError</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">view<span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/android/webkit/WebView.html">WebView</a><span class="token operator">?</span><span class="token punctuation">, </span></span><span class="parameter ">request<span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/android/webkit/WebResourceRequest.html">WebResourceRequest</a><span class="token operator">?</span><span class="token punctuation">, </span></span><span class="parameter ">errorResponse<span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/android/webkit/WebResourceResponse.html">WebResourceResponse</a><span class="token operator">?</span></span></span><span class="token punctuation">)</span></div></div>                  </div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui/release"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">fun </span><a href="../../com.braze.ui.inappmessage.utils/-in-app-message-web-view-client/index.html#-1163853994%2FFunctions%2F-1369171853"><span class="token function">onReceivedHttpError</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">view<span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/android/webkit/WebView.html">WebView</a><span class="token operator">?</span><span class="token punctuation">, </span></span><span class="parameter ">request<span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/android/webkit/WebResourceRequest.html">WebResourceRequest</a><span class="token operator">?</span><span class="token punctuation">, </span></span><span class="parameter ">errorResponse<span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/android/webkit/WebResourceResponse.html">WebResourceResponse</a><span class="token operator">?</span></span></span><span class="token punctuation">)</span></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="-940909780%2FFunctions%2F1102423332" anchor-label="onReceivedLoginRequest" id="-940909780%2FFunctions%2F1102423332" data-filterable-set=":android-sdk-ui/main"></a>
-          <div class="table-row table-row_content" data-filterable-current=":android-sdk-ui/main" data-filterable-set=":android-sdk-ui/main">
+<a data-name="-940909780%2FFunctions%2F-1369171853" anchor-label="onReceivedLoginRequest" id="-940909780%2FFunctions%2F-1369171853" data-filterable-set=":android-sdk-ui/release"></a>
+          <div class="table-row table-row_content" data-filterable-current=":android-sdk-ui/release" data-filterable-set=":android-sdk-ui/release">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
-                  <div><a href="../../com.braze.ui.inappmessage.utils/-in-app-message-web-view-client/index.html#-940909780%2FFunctions%2F1102423332"><span>on</span><wbr></wbr><span>Received</span><wbr></wbr><span>Login</span><wbr></wbr><span><span>Request</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-940909780%2FFunctions%2F1102423332"></span>
+                  <div><a href="../../com.braze.ui.inappmessage.utils/-in-app-message-web-view-client/index.html#-940909780%2FFunctions%2F-1369171853"><span>on</span><wbr></wbr><span>Received</span><wbr></wbr><span>Login</span><wbr></wbr><span><span>Request</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-940909780%2FFunctions%2F-1369171853"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted  with-platform-tabs" data-platform-hinted="data-platform-hinted">
-                    <div class="platform-bookmarks-row" data-toggle-list="data-toggle-list"><button class="platform-bookmark" data-filterable-current=":android-sdk-ui/main" data-filterable-set=":android-sdk-ui/main" data-active="" data-toggle=":android-sdk-ui/main">androidJvm</button></div>
-<div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui/main"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">fun </span><a href="../../com.braze.ui.inappmessage.utils/-in-app-message-web-view-client/index.html#-940909780%2FFunctions%2F1102423332"><span class="token function">onReceivedLoginRequest</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">view<span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/android/webkit/WebView.html">WebView</a><span class="token operator">?</span><span class="token punctuation">, </span></span><span class="parameter ">realm<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token operator">?</span><span class="token punctuation">, </span></span><span class="parameter ">account<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token operator">?</span><span class="token punctuation">, </span></span><span class="parameter ">args<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token operator">?</span></span></span><span class="token punctuation">)</span></div></div>                  </div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui/release"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">fun </span><a href="../../com.braze.ui.inappmessage.utils/-in-app-message-web-view-client/index.html#-940909780%2FFunctions%2F-1369171853"><span class="token function">onReceivedLoginRequest</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">view<span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/android/webkit/WebView.html">WebView</a><span class="token operator">?</span><span class="token punctuation">, </span></span><span class="parameter ">realm<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token operator">?</span><span class="token punctuation">, </span></span><span class="parameter ">account<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token operator">?</span><span class="token punctuation">, </span></span><span class="parameter ">args<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token operator">?</span></span></span><span class="token punctuation">)</span></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="2121006195%2FFunctions%2F1102423332" anchor-label="onReceivedSslError" id="2121006195%2FFunctions%2F1102423332" data-filterable-set=":android-sdk-ui/main"></a>
-          <div class="table-row table-row_content" data-filterable-current=":android-sdk-ui/main" data-filterable-set=":android-sdk-ui/main">
+<a data-name="2121006195%2FFunctions%2F-1369171853" anchor-label="onReceivedSslError" id="2121006195%2FFunctions%2F-1369171853" data-filterable-set=":android-sdk-ui/release"></a>
+          <div class="table-row table-row_content" data-filterable-current=":android-sdk-ui/release" data-filterable-set=":android-sdk-ui/release">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
-                  <div><a href="../../com.braze.ui.inappmessage.utils/-in-app-message-web-view-client/index.html#2121006195%2FFunctions%2F1102423332"><span>on</span><wbr></wbr><span>Received</span><wbr></wbr><span>Ssl</span><wbr></wbr><span><span>Error</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="2121006195%2FFunctions%2F1102423332"></span>
+                  <div><a href="../../com.braze.ui.inappmessage.utils/-in-app-message-web-view-client/index.html#2121006195%2FFunctions%2F-1369171853"><span>on</span><wbr></wbr><span>Received</span><wbr></wbr><span>Ssl</span><wbr></wbr><span><span>Error</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="2121006195%2FFunctions%2F-1369171853"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted  with-platform-tabs" data-platform-hinted="data-platform-hinted">
-                    <div class="platform-bookmarks-row" data-toggle-list="data-toggle-list"><button class="platform-bookmark" data-filterable-current=":android-sdk-ui/main" data-filterable-set=":android-sdk-ui/main" data-active="" data-toggle=":android-sdk-ui/main">androidJvm</button></div>
-<div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui/main"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">fun </span><a href="../../com.braze.ui.inappmessage.utils/-in-app-message-web-view-client/index.html#2121006195%2FFunctions%2F1102423332"><span class="token function">onReceivedSslError</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">view<span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/android/webkit/WebView.html">WebView</a><span class="token operator">?</span><span class="token punctuation">, </span></span><span class="parameter ">handler<span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/android/webkit/SslErrorHandler.html">SslErrorHandler</a><span class="token operator">?</span><span class="token punctuation">, </span></span><span class="parameter ">error<span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/android/net/http/SslError.html">SslError</a><span class="token operator">?</span></span></span><span class="token punctuation">)</span></div></div>                  </div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui/release"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">fun </span><a href="../../com.braze.ui.inappmessage.utils/-in-app-message-web-view-client/index.html#2121006195%2FFunctions%2F-1369171853"><span class="token function">onReceivedSslError</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">view<span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/android/webkit/WebView.html">WebView</a><span class="token operator">?</span><span class="token punctuation">, </span></span><span class="parameter ">handler<span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/android/webkit/SslErrorHandler.html">SslErrorHandler</a><span class="token operator">?</span><span class="token punctuation">, </span></span><span class="parameter ">error<span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/android/net/http/SslError.html">SslError</a><span class="token operator">?</span></span></span><span class="token punctuation">)</span></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="-2062129312%2FFunctions%2F1102423332" anchor-label="onRenderProcessGone" id="-2062129312%2FFunctions%2F1102423332" data-filterable-set=":android-sdk-ui/main"></a>
-          <div class="table-row table-row_content" data-filterable-current=":android-sdk-ui/main" data-filterable-set=":android-sdk-ui/main">
+<a data-name="-2062129312%2FFunctions%2F-1369171853" anchor-label="onRenderProcessGone" id="-2062129312%2FFunctions%2F-1369171853" data-filterable-set=":android-sdk-ui/release"></a>
+          <div class="table-row table-row_content" data-filterable-current=":android-sdk-ui/release" data-filterable-set=":android-sdk-ui/release">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="on-render-process-gone.html"><span>on</span><wbr></wbr><span>Render</span><wbr></wbr><span>Process</span><wbr></wbr><span><span>Gone</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-2062129312%2FFunctions%2F1102423332"></span>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-2062129312%2FFunctions%2F-1369171853"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted  with-platform-tabs" data-platform-hinted="data-platform-hinted">
-                    <div class="platform-bookmarks-row" data-toggle-list="data-toggle-list"><button class="platform-bookmark" data-filterable-current=":android-sdk-ui/main" data-filterable-set=":android-sdk-ui/main" data-active="" data-toggle=":android-sdk-ui/main">androidJvm</button></div>
-<div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui/main"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="on-render-process-gone.html"><span class="token function">onRenderProcessGone</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">view<span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/android/webkit/WebView.html">WebView</a><span class="token punctuation">, </span></span><span class="parameter ">detail<span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/android/webkit/RenderProcessGoneDetail.html">RenderProcessGoneDetail</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a></div></div>                  </div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui/release"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="on-render-process-gone.html"><span class="token function">onRenderProcessGone</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">view<span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/android/webkit/WebView.html">WebView</a><span class="token punctuation">, </span></span><span class="parameter ">detail<span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/android/webkit/RenderProcessGoneDetail.html">RenderProcessGoneDetail</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="1743945835%2FFunctions%2F1102423332" anchor-label="onSafeBrowsingHit" id="1743945835%2FFunctions%2F1102423332" data-filterable-set=":android-sdk-ui/main"></a>
-          <div class="table-row table-row_content" data-filterable-current=":android-sdk-ui/main" data-filterable-set=":android-sdk-ui/main">
+<a data-name="1743945835%2FFunctions%2F-1369171853" anchor-label="onSafeBrowsingHit" id="1743945835%2FFunctions%2F-1369171853" data-filterable-set=":android-sdk-ui/release"></a>
+          <div class="table-row table-row_content" data-filterable-current=":android-sdk-ui/release" data-filterable-set=":android-sdk-ui/release">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
-                  <div><a href="../../com.braze.ui.inappmessage.utils/-in-app-message-web-view-client/index.html#1743945835%2FFunctions%2F1102423332"><span>on</span><wbr></wbr><span>Safe</span><wbr></wbr><span>Browsing</span><wbr></wbr><span><span>Hit</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1743945835%2FFunctions%2F1102423332"></span>
+                  <div><a href="../../com.braze.ui.inappmessage.utils/-in-app-message-web-view-client/index.html#1743945835%2FFunctions%2F-1369171853"><span>on</span><wbr></wbr><span>Safe</span><wbr></wbr><span>Browsing</span><wbr></wbr><span><span>Hit</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1743945835%2FFunctions%2F-1369171853"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted  with-platform-tabs" data-platform-hinted="data-platform-hinted">
-                    <div class="platform-bookmarks-row" data-toggle-list="data-toggle-list"><button class="platform-bookmark" data-filterable-current=":android-sdk-ui/main" data-filterable-set=":android-sdk-ui/main" data-active="" data-toggle=":android-sdk-ui/main">androidJvm</button></div>
-<div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui/main"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">fun </span><a href="../../com.braze.ui.inappmessage.utils/-in-app-message-web-view-client/index.html#1743945835%2FFunctions%2F1102423332"><span class="token function">onSafeBrowsingHit</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">view<span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/android/webkit/WebView.html">WebView</a><span class="token operator">?</span><span class="token punctuation">, </span></span><span class="parameter ">request<span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/android/webkit/WebResourceRequest.html">WebResourceRequest</a><span class="token operator">?</span><span class="token punctuation">, </span></span><span class="parameter ">threatType<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a><span class="token punctuation">, </span></span><span class="parameter ">callback<span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/android/webkit/SafeBrowsingResponse.html">SafeBrowsingResponse</a><span class="token operator">?</span></span></span><span class="token punctuation">)</span></div></div>                  </div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui/release"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">fun </span><a href="../../com.braze.ui.inappmessage.utils/-in-app-message-web-view-client/index.html#1743945835%2FFunctions%2F-1369171853"><span class="token function">onSafeBrowsingHit</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">view<span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/android/webkit/WebView.html">WebView</a><span class="token operator">?</span><span class="token punctuation">, </span></span><span class="parameter ">request<span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/android/webkit/WebResourceRequest.html">WebResourceRequest</a><span class="token operator">?</span><span class="token punctuation">, </span></span><span class="parameter ">threatType<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a><span class="token punctuation">, </span></span><span class="parameter ">callback<span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/android/webkit/SafeBrowsingResponse.html">SafeBrowsingResponse</a><span class="token operator">?</span></span></span><span class="token punctuation">)</span></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="1451810319%2FFunctions%2F1102423332" anchor-label="onScaleChanged" id="1451810319%2FFunctions%2F1102423332" data-filterable-set=":android-sdk-ui/main"></a>
-          <div class="table-row table-row_content" data-filterable-current=":android-sdk-ui/main" data-filterable-set=":android-sdk-ui/main">
+<a data-name="1451810319%2FFunctions%2F-1369171853" anchor-label="onScaleChanged" id="1451810319%2FFunctions%2F-1369171853" data-filterable-set=":android-sdk-ui/release"></a>
+          <div class="table-row table-row_content" data-filterable-current=":android-sdk-ui/release" data-filterable-set=":android-sdk-ui/release">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
-                  <div><a href="../../com.braze.ui.inappmessage.utils/-in-app-message-web-view-client/index.html#1451810319%2FFunctions%2F1102423332"><span>on</span><wbr></wbr><span>Scale</span><wbr></wbr><span><span>Changed</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1451810319%2FFunctions%2F1102423332"></span>
+                  <div><a href="../../com.braze.ui.inappmessage.utils/-in-app-message-web-view-client/index.html#1451810319%2FFunctions%2F-1369171853"><span>on</span><wbr></wbr><span>Scale</span><wbr></wbr><span><span>Changed</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1451810319%2FFunctions%2F-1369171853"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted  with-platform-tabs" data-platform-hinted="data-platform-hinted">
-                    <div class="platform-bookmarks-row" data-toggle-list="data-toggle-list"><button class="platform-bookmark" data-filterable-current=":android-sdk-ui/main" data-filterable-set=":android-sdk-ui/main" data-active="" data-toggle=":android-sdk-ui/main">androidJvm</button></div>
-<div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui/main"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">fun </span><a href="../../com.braze.ui.inappmessage.utils/-in-app-message-web-view-client/index.html#1451810319%2FFunctions%2F1102423332"><span class="token function">onScaleChanged</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">view<span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/android/webkit/WebView.html">WebView</a><span class="token operator">?</span><span class="token punctuation">, </span></span><span class="parameter ">oldScale<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a><span class="token punctuation">, </span></span><span class="parameter ">newScale<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a></span></span><span class="token punctuation">)</span></div></div>                  </div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui/release"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">fun </span><a href="../../com.braze.ui.inappmessage.utils/-in-app-message-web-view-client/index.html#1451810319%2FFunctions%2F-1369171853"><span class="token function">onScaleChanged</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">view<span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/android/webkit/WebView.html">WebView</a><span class="token operator">?</span><span class="token punctuation">, </span></span><span class="parameter ">oldScale<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a><span class="token punctuation">, </span></span><span class="parameter ">newScale<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a></span></span><span class="token punctuation">)</span></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="-1416939659%2FFunctions%2F1102423332" anchor-label="onTooManyRedirects" id="-1416939659%2FFunctions%2F1102423332" data-filterable-set=":android-sdk-ui/main"></a>
-          <div class="table-row table-row_content" data-filterable-current=":android-sdk-ui/main" data-filterable-set=":android-sdk-ui/main">
+<a data-name="-1416939659%2FFunctions%2F-1369171853" anchor-label="onTooManyRedirects" id="-1416939659%2FFunctions%2F-1369171853" data-filterable-set=":android-sdk-ui/release"></a>
+          <div class="table-row table-row_content" data-filterable-current=":android-sdk-ui/release" data-filterable-set=":android-sdk-ui/release">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
-                  <div><a href="../../com.braze.ui.inappmessage.utils/-in-app-message-web-view-client/index.html#-1416939659%2FFunctions%2F1102423332"><span>on</span><wbr></wbr><span>Too</span><wbr></wbr><span>Many</span><wbr></wbr><span><span>Redirects</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1416939659%2FFunctions%2F1102423332"></span>
+                  <div><a href="../../com.braze.ui.inappmessage.utils/-in-app-message-web-view-client/index.html#-1416939659%2FFunctions%2F-1369171853"><span>on</span><wbr></wbr><span>Too</span><wbr></wbr><span>Many</span><wbr></wbr><span><span>Redirects</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1416939659%2FFunctions%2F-1369171853"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted  with-platform-tabs" data-platform-hinted="data-platform-hinted">
-                    <div class="platform-bookmarks-row" data-toggle-list="data-toggle-list"><button class="platform-bookmark" data-filterable-current=":android-sdk-ui/main" data-filterable-set=":android-sdk-ui/main" data-active="" data-toggle=":android-sdk-ui/main">androidJvm</button></div>
-<div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui/main"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">fun </span><a href="../../com.braze.ui.inappmessage.utils/-in-app-message-web-view-client/index.html#-1416939659%2FFunctions%2F1102423332"><span class="token function"><strike>onTooManyRedirects</strike></span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">view<span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/android/webkit/WebView.html">WebView</a><span class="token operator">?</span><span class="token punctuation">, </span></span><span class="parameter ">cancelMsg<span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/android/os/Message.html">Message</a><span class="token operator">?</span><span class="token punctuation">, </span></span><span class="parameter ">continueMsg<span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/android/os/Message.html">Message</a><span class="token operator">?</span></span></span><span class="token punctuation">)</span></div></div>                  </div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui/release"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">fun </span><a href="../../com.braze.ui.inappmessage.utils/-in-app-message-web-view-client/index.html#-1416939659%2FFunctions%2F-1369171853"><span class="token function"><strike>onTooManyRedirects</strike></span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">view<span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/android/webkit/WebView.html">WebView</a><span class="token operator">?</span><span class="token punctuation">, </span></span><span class="parameter ">cancelMsg<span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/android/os/Message.html">Message</a><span class="token operator">?</span><span class="token punctuation">, </span></span><span class="parameter ">continueMsg<span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/android/os/Message.html">Message</a><span class="token operator">?</span></span></span><span class="token punctuation">)</span></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="-127956311%2FFunctions%2F1102423332" anchor-label="onUnhandledKeyEvent" id="-127956311%2FFunctions%2F1102423332" data-filterable-set=":android-sdk-ui/main"></a>
-          <div class="table-row table-row_content" data-filterable-current=":android-sdk-ui/main" data-filterable-set=":android-sdk-ui/main">
+<a data-name="-127956311%2FFunctions%2F-1369171853" anchor-label="onUnhandledKeyEvent" id="-127956311%2FFunctions%2F-1369171853" data-filterable-set=":android-sdk-ui/release"></a>
+          <div class="table-row table-row_content" data-filterable-current=":android-sdk-ui/release" data-filterable-set=":android-sdk-ui/release">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
-                  <div><a href="../../com.braze.ui.inappmessage.utils/-in-app-message-web-view-client/index.html#-127956311%2FFunctions%2F1102423332"><span>on</span><wbr></wbr><span>Unhandled</span><wbr></wbr><span>Key</span><wbr></wbr><span><span>Event</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-127956311%2FFunctions%2F1102423332"></span>
+                  <div><a href="../../com.braze.ui.inappmessage.utils/-in-app-message-web-view-client/index.html#-127956311%2FFunctions%2F-1369171853"><span>on</span><wbr></wbr><span>Unhandled</span><wbr></wbr><span>Key</span><wbr></wbr><span><span>Event</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-127956311%2FFunctions%2F-1369171853"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted  with-platform-tabs" data-platform-hinted="data-platform-hinted">
-                    <div class="platform-bookmarks-row" data-toggle-list="data-toggle-list"><button class="platform-bookmark" data-filterable-current=":android-sdk-ui/main" data-filterable-set=":android-sdk-ui/main" data-active="" data-toggle=":android-sdk-ui/main">androidJvm</button></div>
-<div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui/main"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">fun </span><a href="../../com.braze.ui.inappmessage.utils/-in-app-message-web-view-client/index.html#-127956311%2FFunctions%2F1102423332"><span class="token function">onUnhandledKeyEvent</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">view<span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/android/webkit/WebView.html">WebView</a><span class="token operator">?</span><span class="token punctuation">, </span></span><span class="parameter ">event<span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/android/view/KeyEvent.html">KeyEvent</a><span class="token operator">?</span></span></span><span class="token punctuation">)</span></div></div>                  </div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui/release"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">fun </span><a href="../../com.braze.ui.inappmessage.utils/-in-app-message-web-view-client/index.html#-127956311%2FFunctions%2F-1369171853"><span class="token function">onUnhandledKeyEvent</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">view<span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/android/webkit/WebView.html">WebView</a><span class="token operator">?</span><span class="token punctuation">, </span></span><span class="parameter ">event<span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/android/view/KeyEvent.html">KeyEvent</a><span class="token operator">?</span></span></span><span class="token punctuation">)</span></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="171870169%2FFunctions%2F1102423332" anchor-label="setWebViewClientStateListener" id="171870169%2FFunctions%2F1102423332" data-filterable-set=":android-sdk-ui/main"></a>
-          <div class="table-row table-row_content" data-filterable-current=":android-sdk-ui/main" data-filterable-set=":android-sdk-ui/main">
+<a data-name="171870169%2FFunctions%2F-1369171853" anchor-label="setWebViewClientStateListener" id="171870169%2FFunctions%2F-1369171853" data-filterable-set=":android-sdk-ui/release"></a>
+          <div class="table-row table-row_content" data-filterable-current=":android-sdk-ui/release" data-filterable-set=":android-sdk-ui/release">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="set-web-view-client-state-listener.html"><span>set</span><wbr></wbr><span>Web</span><wbr></wbr><span>View</span><wbr></wbr><span>Client</span><wbr></wbr><span>State</span><wbr></wbr><span><span>Listener</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="171870169%2FFunctions%2F1102423332"></span>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="171870169%2FFunctions%2F-1369171853"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted  with-platform-tabs" data-platform-hinted="data-platform-hinted">
-                    <div class="platform-bookmarks-row" data-toggle-list="data-toggle-list"><button class="platform-bookmark" data-filterable-current=":android-sdk-ui/main" data-filterable-set=":android-sdk-ui/main" data-active="" data-toggle=":android-sdk-ui/main">androidJvm</button></div>
-<div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="set-web-view-client-state-listener.html"><span class="token function">setWebViewClientStateListener</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">listener<span class="token operator">: </span><a href="../../com.braze.ui.inappmessage.listeners/-i-web-view-client-state-listener/index.html">IWebViewClientStateListener</a><span class="token operator">?</span></span></span><span class="token punctuation">)</span></div><div class="brief "><p class="paragraph">Sets a <a href="../../com.braze.ui.inappmessage.listeners/-i-web-view-client-state-listener/index.html">IWebViewClientStateListener</a> to receive page load completion callbacks. If the page has already finished loading, the listener is notified immediately.</p></div></div>                  </div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui/release"><div class="symbol monospace"><span class="token keyword">fun </span><a href="set-web-view-client-state-listener.html"><span class="token function">setWebViewClientStateListener</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">listener<span class="token operator">: </span><a href="../../com.braze.ui.inappmessage.listeners/-i-web-view-client-state-listener/index.html">IWebViewClientStateListener</a><span class="token operator">?</span></span></span><span class="token punctuation">)</span></div><div class="brief "><p class="paragraph">Sets a <a href="../../com.braze.ui.inappmessage.listeners/-i-web-view-client-state-listener/index.html">IWebViewClientStateListener</a> to receive page load completion callbacks. If the page has already finished loading, the listener is notified immediately.</p></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="-397220628%2FFunctions%2F1102423332" anchor-label="shouldInterceptRequest" id="-397220628%2FFunctions%2F1102423332" data-filterable-set=":android-sdk-ui/main"></a>
-          <div class="table-row table-row_content" data-filterable-current=":android-sdk-ui/main" data-filterable-set=":android-sdk-ui/main">
+<a data-name="-397220628%2FFunctions%2F-1369171853" anchor-label="shouldInterceptRequest" id="-397220628%2FFunctions%2F-1369171853" data-filterable-set=":android-sdk-ui/release"></a>
+          <div class="table-row table-row_content" data-filterable-current=":android-sdk-ui/release" data-filterable-set=":android-sdk-ui/release">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
-                  <div><a href="../../com.braze.ui.inappmessage.utils/-in-app-message-web-view-client/index.html#598375965%2FFunctions%2F1102423332"><span>should</span><wbr></wbr><span>Intercept</span><wbr></wbr><span><span>Request</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-397220628%2FFunctions%2F1102423332"></span>
+                  <div><a href="../../com.braze.ui.inappmessage.utils/-in-app-message-web-view-client/index.html#598375965%2FFunctions%2F-1369171853"><span>should</span><wbr></wbr><span>Intercept</span><wbr></wbr><span><span>Request</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-397220628%2FFunctions%2F-1369171853"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted  with-platform-tabs" data-platform-hinted="data-platform-hinted">
-                    <div class="platform-bookmarks-row" data-toggle-list="data-toggle-list"><button class="platform-bookmark" data-filterable-current=":android-sdk-ui/main" data-filterable-set=":android-sdk-ui/main" data-active="" data-toggle=":android-sdk-ui/main">androidJvm</button></div>
-<div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui/main"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">fun </span><a href="../../com.braze.ui.inappmessage.utils/-in-app-message-web-view-client/index.html#598375965%2FFunctions%2F1102423332"><span class="token function"><strike>shouldInterceptRequest</strike></span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">view<span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/android/webkit/WebView.html">WebView</a><span class="token operator">?</span><span class="token punctuation">, </span></span><span class="parameter ">url<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token operator">?</span></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/android/webkit/WebResourceResponse.html">WebResourceResponse</a><span class="token operator">?</span></div><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="should-intercept-request.html"><span class="token function">shouldInterceptRequest</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">view<span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/android/webkit/WebView.html">WebView</a><span class="token operator">?</span><span class="token punctuation">, </span></span><span class="parameter ">request<span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/android/webkit/WebResourceRequest.html">WebResourceRequest</a><span class="token operator">?</span></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/android/webkit/WebResourceResponse.html">WebResourceResponse</a><span class="token operator">?</span></div></div>                  </div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui/release"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">fun </span><a href="../../com.braze.ui.inappmessage.utils/-in-app-message-web-view-client/index.html#598375965%2FFunctions%2F-1369171853"><span class="token function"><strike>shouldInterceptRequest</strike></span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">view<span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/android/webkit/WebView.html">WebView</a><span class="token operator">?</span><span class="token punctuation">, </span></span><span class="parameter ">url<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token operator">?</span></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/android/webkit/WebResourceResponse.html">WebResourceResponse</a><span class="token operator">?</span></div><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="should-intercept-request.html"><span class="token function">shouldInterceptRequest</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">view<span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/android/webkit/WebView.html">WebView</a><span class="token operator">?</span><span class="token punctuation">, </span></span><span class="parameter ">request<span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/android/webkit/WebResourceRequest.html">WebResourceRequest</a><span class="token operator">?</span></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/android/webkit/WebResourceResponse.html">WebResourceResponse</a><span class="token operator">?</span></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="1841628860%2FFunctions%2F1102423332" anchor-label="shouldOverrideKeyEvent" id="1841628860%2FFunctions%2F1102423332" data-filterable-set=":android-sdk-ui/main"></a>
-          <div class="table-row table-row_content" data-filterable-current=":android-sdk-ui/main" data-filterable-set=":android-sdk-ui/main">
+<a data-name="1841628860%2FFunctions%2F-1369171853" anchor-label="shouldOverrideKeyEvent" id="1841628860%2FFunctions%2F-1369171853" data-filterable-set=":android-sdk-ui/release"></a>
+          <div class="table-row table-row_content" data-filterable-current=":android-sdk-ui/release" data-filterable-set=":android-sdk-ui/release">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
-                  <div><a href="../../com.braze.ui.inappmessage.utils/-in-app-message-web-view-client/index.html#1841628860%2FFunctions%2F1102423332"><span>should</span><wbr></wbr><span>Override</span><wbr></wbr><span>Key</span><wbr></wbr><span><span>Event</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1841628860%2FFunctions%2F1102423332"></span>
+                  <div><a href="../../com.braze.ui.inappmessage.utils/-in-app-message-web-view-client/index.html#1841628860%2FFunctions%2F-1369171853"><span>should</span><wbr></wbr><span>Override</span><wbr></wbr><span>Key</span><wbr></wbr><span><span>Event</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1841628860%2FFunctions%2F-1369171853"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted  with-platform-tabs" data-platform-hinted="data-platform-hinted">
-                    <div class="platform-bookmarks-row" data-toggle-list="data-toggle-list"><button class="platform-bookmark" data-filterable-current=":android-sdk-ui/main" data-filterable-set=":android-sdk-ui/main" data-active="" data-toggle=":android-sdk-ui/main">androidJvm</button></div>
-<div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui/main"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">fun </span><a href="../../com.braze.ui.inappmessage.utils/-in-app-message-web-view-client/index.html#1841628860%2FFunctions%2F1102423332"><span class="token function">shouldOverrideKeyEvent</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">view<span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/android/webkit/WebView.html">WebView</a><span class="token operator">?</span><span class="token punctuation">, </span></span><span class="parameter ">event<span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/android/view/KeyEvent.html">KeyEvent</a><span class="token operator">?</span></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a></div></div>                  </div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui/release"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">fun </span><a href="../../com.braze.ui.inappmessage.utils/-in-app-message-web-view-client/index.html#1841628860%2FFunctions%2F-1369171853"><span class="token function">shouldOverrideKeyEvent</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">view<span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/android/webkit/WebView.html">WebView</a><span class="token operator">?</span><span class="token punctuation">, </span></span><span class="parameter ">event<span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/android/view/KeyEvent.html">KeyEvent</a><span class="token operator">?</span></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="-2056142872%2FFunctions%2F1102423332" anchor-label="shouldOverrideUrlLoading" id="-2056142872%2FFunctions%2F1102423332" data-filterable-set=":android-sdk-ui/main"></a>
-          <div class="table-row table-row_content" data-filterable-current=":android-sdk-ui/main" data-filterable-set=":android-sdk-ui/main">
+<a data-name="-2056142872%2FFunctions%2F-1369171853" anchor-label="shouldOverrideUrlLoading" id="-2056142872%2FFunctions%2F-1369171853" data-filterable-set=":android-sdk-ui/release"></a>
+          <div class="table-row table-row_content" data-filterable-current=":android-sdk-ui/release" data-filterable-set=":android-sdk-ui/release">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="should-override-url-loading.html"><span>should</span><wbr></wbr><span>Override</span><wbr></wbr><span>Url</span><wbr></wbr><span><span>Loading</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-2056142872%2FFunctions%2F1102423332"></span>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-2056142872%2FFunctions%2F-1369171853"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted  with-platform-tabs" data-platform-hinted="data-platform-hinted">
-                    <div class="platform-bookmarks-row" data-toggle-list="data-toggle-list"><button class="platform-bookmark" data-filterable-current=":android-sdk-ui/main" data-filterable-set=":android-sdk-ui/main" data-active="" data-toggle=":android-sdk-ui/main">androidJvm</button></div>
-<div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui/main"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="should-override-url-loading.html"><span class="token function">shouldOverrideUrlLoading</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">view<span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/android/webkit/WebView.html">WebView</a><span class="token punctuation">, </span></span><span class="parameter ">request<span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/android/webkit/WebResourceRequest.html">WebResourceRequest</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a></div><div class="brief "><p class="paragraph">Handles <code class="lang-kotlin">appboy</code> schemed (&quot;appboy://&quot;) urls in the HTML content WebViews. If the url isn't <code class="lang-kotlin">appboy</code> schemed, then the url is passed to the attached IInAppMessageWebViewClientListener.</p></div><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="should-override-url-loading.html"><span class="token function"><strike>shouldOverrideUrlLoading</strike></span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">view<span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/android/webkit/WebView.html">WebView</a><span class="token punctuation">, </span></span><span class="parameter ">url<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a></div></div>                  </div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui/release"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="should-override-url-loading.html"><span class="token function">shouldOverrideUrlLoading</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">view<span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/android/webkit/WebView.html">WebView</a><span class="token punctuation">, </span></span><span class="parameter ">request<span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/android/webkit/WebResourceRequest.html">WebResourceRequest</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a></div><div class="brief "><p class="paragraph">Handles <code class="lang-kotlin">appboy</code> schemed (&quot;appboy://&quot;) urls in the HTML content WebViews. If the url isn't <code class="lang-kotlin">appboy</code> schemed, then the url is passed to the attached IInAppMessageWebViewClientListener.</p></div><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="should-override-url-loading.html"><span class="token function"><strike>shouldOverrideUrlLoading</strike></span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">view<span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/android/webkit/WebView.html">WebView</a><span class="token punctuation">, </span></span><span class="parameter ">url<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a></div></div></div>
                 </div>
               </div>
             </div>

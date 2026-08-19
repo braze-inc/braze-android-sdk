@@ -19,7 +19,6 @@
         }
       }
     </script>
-<script type="text/javascript" src="https://unpkg.com/kotlin-playground@1/dist/playground.min.js" async="async"></script>
 <script type="text/javascript" src="../../../scripts/sourceset_dependencies.js" async="async"></script>
 <link href="../../../styles/style.css" rel="Stylesheet">
 <link href="../../../styles/main.css" rel="Stylesheet">
@@ -44,11 +43,11 @@
         </button>
         <div class="navigation-controls--break ui-kit_mobile-only"></div>
         <div class="library-version" id="library-version">
-43.0.0        </div>
+43.1.0        </div>
         <div class="navigation-controls">
         <ul class="filter-section filter-section_loading" id="filter-section" aria-label="Target filter">
                 <button class="platform-tag platform-selector jvm-like" data-active="" aria-pressed="true"
-                        data-filter=":android-sdk-ui/main">androidJvm</button>
+                        data-filter=":android-sdk-ui/release">release</button>
             <div class="dropdown filter-section--dropdown" data-role="dropdown" id="filter-section-dropdown">
                 <button class="button button_dropdown filter-section--dropdown-toggle" role="combobox"
                         data-role="dropdown-toggle"
@@ -65,10 +64,10 @@
                     </div>
                         <li role="option" class="dropdown--option platform-selector-option jvm-like" tabindex="0">
                             <label class="checkbox">
-                                <input type="checkbox" class="checkbox--input" id=":android-sdk-ui/main"
-                                       data-filter=":android-sdk-ui/main"/>
+                                <input type="checkbox" class="checkbox--input" id=":android-sdk-ui/release"
+                                       data-filter=":android-sdk-ui/release"/>
                                 <span class="checkbox--icon"></span>
-                                androidJvm
+                                release
                             </label>
                         </li>
                 </ul>
@@ -104,32 +103,47 @@
         </nav>
         <div id="resizer" class="resizer" data-item-type="BAR"></div>
         <div id="main" data-item-type="SECTION" role="main">
-<div class="main-content" data-page-type="classlike" id="content" pageIds="braze-android-sdk::com.braze.ui.banners.jsinterface/BannerUserJavascriptInterface///PointingToDeclaration//1102423332">
+<div class="main-content" data-page-type="classlike" id="content" pageIds="braze-android-sdk::com.braze.ui.banners.jsinterface/BannerUserJavascriptInterface///PointingToDeclaration//-1369171853">
   <div class="breadcrumbs"><a href="../../../index.html">braze-android-sdk</a><span class="delimiter">/</span><a href="../index.html">com.braze.ui.banners.jsinterface</a><span class="delimiter">/</span><span class="current">BannerUserJavascriptInterface</span></div>
   <div class="cover ">
     <h1 class="cover"><span>Banner</span><wbr></wbr><span>User</span><wbr></wbr><span>Javascript</span><wbr></wbr><span><span>Interface</span></span></h1>
-    <div class="platform-hinted  with-platform-tabs" data-platform-hinted="data-platform-hinted">
-      <div class="platform-bookmarks-row" data-toggle-list="data-toggle-list"><button class="platform-bookmark" data-filterable-current=":android-sdk-ui/main" data-filterable-set=":android-sdk-ui/main" data-active="" data-toggle=":android-sdk-ui/main">androidJvm</button></div>
-<div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui/main"><div class="symbol monospace"><span class="token keyword">class </span><a href="index.html">BannerUserJavascriptInterface</a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">context<span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/android/content/Context.html">Context</a></span></span><span class="token punctuation">)</span> : <a href="../../com.braze.ui/-user-javascript-interface-base/index.html">UserJavascriptInterfaceBase</a></div><p class="paragraph">JavaScript bridge interface exposed to Banner HTML WebViews. Delegates user-level operations (attribute setting, event logging, etc.) to <a href="../../com.braze.ui/-user-javascript-interface-base/index.html">UserJavascriptInterfaceBase</a>.</p><h4 class="tableheader">Parameters</h4><div class="table"><div class="table-row table-row_content" data-filterable-current=":android-sdk-ui/main" data-filterable-set=":android-sdk-ui/main"><div class="main-subrow keyValue "><div class=""><span class="inline-flex"><div><u><span><span>context</span></span></u></div></span></div><div><div class="title"><p class="paragraph">The Android <a href="https://developer.android.com/reference/kotlin/android/content/Context.html">Context</a> for Braze SDK access.</p></div></div></div></div></div></div>    </div>
+    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui/release"><div class="symbol monospace"><span class="token keyword">class </span><a href="index.html">BannerUserJavascriptInterface</a><span class="token punctuation">(</span><span class="parameters "><span class="parameter "><span class="token keyword">val </span>context<span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/android/content/Context.html">Context</a></span></span><span class="token punctuation">)</span> : <a href="../../com.braze.ui/-user-javascript-interface-base/index.html">UserJavascriptInterfaceBase</a></div><p class="paragraph">JavaScript bridge interface exposed to Banner HTML WebViews. Delegates user-level operations (attribute setting, event logging, etc.) to <a href="../../com.braze.ui/-user-javascript-interface-base/index.html">UserJavascriptInterfaceBase</a>.</p><h4 class="tableheader">Parameters</h4><div class="table"><div class="table-row table-row_content" data-filterable-current=":android-sdk-ui/release" data-filterable-set=":android-sdk-ui/release"><div class="main-subrow keyValue "><div class=""><span class="inline-flex"><div><u><span><span>context</span></span></u></div></span></div><div><div class="title"><p class="paragraph">The Android <a href="https://developer.android.com/reference/kotlin/android/content/Context.html">Context</a> for Braze SDK access.</p></div></div></div></div></div></div></div>
   </div>
   <div class="tabbedcontent">
     <div class="tabs-section" tabs-section="tabs-section"><button class="section-tab" data-active="" data-togglable="CONSTRUCTOR,TYPE,PROPERTY,FUNCTION">Members</button></div>
     <div class="tabs-section-body">
       <div data-togglable="CONSTRUCTOR">
         <h2 class="tableheader">Constructors</h2>
-        <div class="table"><a data-name="-560408956%2FConstructors%2F1102423332" anchor-label="BannerUserJavascriptInterface" id="-560408956%2FConstructors%2F1102423332" data-filterable-set=":android-sdk-ui/main"></a>
-          <div class="table-row table-row_content" data-togglable="CONSTRUCTOR" data-filterable-current=":android-sdk-ui/main" data-filterable-set=":android-sdk-ui/main">
+        <div class="table"><a data-name="-560408956%2FConstructors%2F-1369171853" anchor-label="BannerUserJavascriptInterface" id="-560408956%2FConstructors%2F-1369171853" data-filterable-set=":android-sdk-ui/release"></a>
+          <div class="table-row table-row_content" data-togglable="CONSTRUCTOR" data-filterable-current=":android-sdk-ui/release" data-filterable-set=":android-sdk-ui/release">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="-banner-user-javascript-interface.html"><span>Banner</span><wbr></wbr><span>User</span><wbr></wbr><span>Javascript</span><wbr></wbr><span><span>Interface</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-560408956%2FConstructors%2F1102423332"></span>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-560408956%2FConstructors%2F-1369171853"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted  with-platform-tabs" data-platform-hinted="data-platform-hinted">
-                    <div class="platform-bookmarks-row" data-toggle-list="data-toggle-list"><button class="platform-bookmark" data-filterable-current=":android-sdk-ui/main" data-filterable-set=":android-sdk-ui/main" data-active="" data-toggle=":android-sdk-ui/main">androidJvm</button></div>
-<div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui/main"><div class="symbol monospace"><span class="token keyword">constructor</span><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">context<span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/android/content/Context.html">Context</a></span></span><span class="token punctuation">)</span></div></div>                  </div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui/release"><div class="symbol monospace"><span class="token keyword">constructor</span><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">context<span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/android/content/Context.html">Context</a></span></span><span class="token punctuation">)</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div data-togglable="PROPERTY">
+        <h2 class="tableheader">Properties</h2>
+        <div class="table"><a data-name="1490838314%2FProperties%2F-1369171853" anchor-label="context" id="1490838314%2FProperties%2F-1369171853" data-filterable-set=":android-sdk-ui/release"></a>
+          <div class="table-row table-row_content" data-filterable-current=":android-sdk-ui/release" data-filterable-set=":android-sdk-ui/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="../../com.braze.ui/-user-javascript-interface-base/context.html"><span><span>context</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1490838314%2FProperties%2F-1369171853"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui/release"><div class="symbol monospace"><span class="token keyword">private </span><span class="token keyword">val </span><a href="../../com.braze.ui/-user-javascript-interface-base/context.html">context</a><span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/android/content/Context.html">Context</a></div><div class="symbol monospace"><span class="token keyword">private </span><span class="token keyword">val </span><a href="context.html">context</a><span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/android/content/Context.html">Context</a></div></div></div>
                 </div>
               </div>
             </div>
@@ -138,478 +152,422 @@
       </div>
       <div data-togglable="FUNCTION">
         <h2 class="tableheader">Functions</h2>
-        <div class="table"><a data-name="-1788276780%2FFunctions%2F1102423332" anchor-label="addAlias" id="-1788276780%2FFunctions%2F1102423332" data-filterable-set=":android-sdk-ui/main"></a>
-          <div class="table-row table-row_content" data-filterable-current=":android-sdk-ui/main" data-filterable-set=":android-sdk-ui/main">
+        <div class="table"><a data-name="-1788276780%2FFunctions%2F-1369171853" anchor-label="addAlias" id="-1788276780%2FFunctions%2F-1369171853" data-filterable-set=":android-sdk-ui/release"></a>
+          <div class="table-row table-row_content" data-filterable-current=":android-sdk-ui/release" data-filterable-set=":android-sdk-ui/release">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="../../com.braze.ui/-user-javascript-interface-base/add-alias.html"><span>add</span><wbr></wbr><span><span>Alias</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1788276780%2FFunctions%2F1102423332"></span>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1788276780%2FFunctions%2F-1369171853"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted  with-platform-tabs" data-platform-hinted="data-platform-hinted">
-                    <div class="platform-bookmarks-row" data-toggle-list="data-toggle-list"><button class="platform-bookmark" data-filterable-current=":android-sdk-ui/main" data-filterable-set=":android-sdk-ui/main" data-active="" data-toggle=":android-sdk-ui/main">androidJvm</button></div>
-<div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="../../com.braze.ui/-user-javascript-interface-base/add-alias.html"><span class="token function">addAlias</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">alias<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span></span><span class="parameter ">label<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></span></span><span class="token punctuation">)</span></div></div>                  </div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui/release"><div class="symbol monospace"><span class="token keyword">fun </span><a href="../../com.braze.ui/-user-javascript-interface-base/add-alias.html"><span class="token function">addAlias</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">alias<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span></span><span class="parameter ">label<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></span></span><span class="token punctuation">)</span></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="-1878779107%2FFunctions%2F1102423332" anchor-label="addToCustomAttributeArray" id="-1878779107%2FFunctions%2F1102423332" data-filterable-set=":android-sdk-ui/main"></a>
-          <div class="table-row table-row_content" data-filterable-current=":android-sdk-ui/main" data-filterable-set=":android-sdk-ui/main">
+<a data-name="-1878779107%2FFunctions%2F-1369171853" anchor-label="addToCustomAttributeArray" id="-1878779107%2FFunctions%2F-1369171853" data-filterable-set=":android-sdk-ui/release"></a>
+          <div class="table-row table-row_content" data-filterable-current=":android-sdk-ui/release" data-filterable-set=":android-sdk-ui/release">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="../../com.braze.ui/-user-javascript-interface-base/add-to-custom-attribute-array.html"><span>add</span><wbr></wbr><span>To</span><wbr></wbr><span>Custom</span><wbr></wbr><span>Attribute</span><wbr></wbr><span><span>Array</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1878779107%2FFunctions%2F1102423332"></span>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1878779107%2FFunctions%2F-1369171853"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted  with-platform-tabs" data-platform-hinted="data-platform-hinted">
-                    <div class="platform-bookmarks-row" data-toggle-list="data-toggle-list"><button class="platform-bookmark" data-filterable-current=":android-sdk-ui/main" data-filterable-set=":android-sdk-ui/main" data-active="" data-toggle=":android-sdk-ui/main">androidJvm</button></div>
-<div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="../../com.braze.ui/-user-javascript-interface-base/add-to-custom-attribute-array.html"><span class="token function">addToCustomAttributeArray</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">key<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span></span><span class="parameter ">value<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></span></span><span class="token punctuation">)</span></div></div>                  </div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui/release"><div class="symbol monospace"><span class="token keyword">fun </span><a href="../../com.braze.ui/-user-javascript-interface-base/add-to-custom-attribute-array.html"><span class="token function">addToCustomAttributeArray</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">key<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span></span><span class="parameter ">value<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></span></span><span class="token punctuation">)</span></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="834697670%2FFunctions%2F1102423332" anchor-label="addToSubscriptionGroup" id="834697670%2FFunctions%2F1102423332" data-filterable-set=":android-sdk-ui/main"></a>
-          <div class="table-row table-row_content" data-filterable-current=":android-sdk-ui/main" data-filterable-set=":android-sdk-ui/main">
+<a data-name="834697670%2FFunctions%2F-1369171853" anchor-label="addToSubscriptionGroup" id="834697670%2FFunctions%2F-1369171853" data-filterable-set=":android-sdk-ui/release"></a>
+          <div class="table-row table-row_content" data-filterable-current=":android-sdk-ui/release" data-filterable-set=":android-sdk-ui/release">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="../../com.braze.ui/-user-javascript-interface-base/add-to-subscription-group.html"><span>add</span><wbr></wbr><span>To</span><wbr></wbr><span>Subscription</span><wbr></wbr><span><span>Group</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="834697670%2FFunctions%2F1102423332"></span>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="834697670%2FFunctions%2F-1369171853"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted  with-platform-tabs" data-platform-hinted="data-platform-hinted">
-                    <div class="platform-bookmarks-row" data-toggle-list="data-toggle-list"><button class="platform-bookmark" data-filterable-current=":android-sdk-ui/main" data-filterable-set=":android-sdk-ui/main" data-active="" data-toggle=":android-sdk-ui/main">androidJvm</button></div>
-<div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="../../com.braze.ui/-user-javascript-interface-base/add-to-subscription-group.html"><span class="token function">addToSubscriptionGroup</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">subscriptionGroupId<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></span></span><span class="token punctuation">)</span></div></div>                  </div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui/release"><div class="symbol monospace"><span class="token keyword">fun </span><a href="../../com.braze.ui/-user-javascript-interface-base/add-to-subscription-group.html"><span class="token function">addToSubscriptionGroup</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">subscriptionGroupId<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></span></span><span class="token punctuation">)</span></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="-782349994%2FFunctions%2F1102423332" anchor-label="incrementCustomUserAttribute" id="-782349994%2FFunctions%2F1102423332" data-filterable-set=":android-sdk-ui/main"></a>
-          <div class="table-row table-row_content" data-filterable-current=":android-sdk-ui/main" data-filterable-set=":android-sdk-ui/main">
+<a data-name="-782349994%2FFunctions%2F-1369171853" anchor-label="incrementCustomUserAttribute" id="-782349994%2FFunctions%2F-1369171853" data-filterable-set=":android-sdk-ui/release"></a>
+          <div class="table-row table-row_content" data-filterable-current=":android-sdk-ui/release" data-filterable-set=":android-sdk-ui/release">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="../../com.braze.ui/-user-javascript-interface-base/increment-custom-user-attribute.html"><span>increment</span><wbr></wbr><span>Custom</span><wbr></wbr><span>User</span><wbr></wbr><span><span>Attribute</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-782349994%2FFunctions%2F1102423332"></span>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-782349994%2FFunctions%2F-1369171853"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted  with-platform-tabs" data-platform-hinted="data-platform-hinted">
-                    <div class="platform-bookmarks-row" data-toggle-list="data-toggle-list"><button class="platform-bookmark" data-filterable-current=":android-sdk-ui/main" data-filterable-set=":android-sdk-ui/main" data-active="" data-toggle=":android-sdk-ui/main">androidJvm</button></div>
-<div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="../../com.braze.ui/-user-javascript-interface-base/increment-custom-user-attribute.html"><span class="token function">incrementCustomUserAttribute</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">attribute<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span></span><span class="parameter ">value<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></span></span><span class="token punctuation">)</span></div></div>                  </div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui/release"><div class="symbol monospace"><span class="token keyword">fun </span><a href="../../com.braze.ui/-user-javascript-interface-base/increment-custom-user-attribute.html"><span class="token function">incrementCustomUserAttribute</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">attribute<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span></span><span class="parameter ">value<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></span></span><span class="token punctuation">)</span></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="-189693115%2FFunctions%2F1102423332" anchor-label="monthFromInt" id="-189693115%2FFunctions%2F1102423332" data-filterable-set=":android-sdk-ui/main"></a>
-          <div class="table-row table-row_content" data-filterable-current=":android-sdk-ui/main" data-filterable-set=":android-sdk-ui/main">
+<a data-name="-189693115%2FFunctions%2F-1369171853" anchor-label="monthFromInt" id="-189693115%2FFunctions%2F-1369171853" data-filterable-set=":android-sdk-ui/release"></a>
+          <div class="table-row table-row_content" data-filterable-current=":android-sdk-ui/release" data-filterable-set=":android-sdk-ui/release">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="../../com.braze.ui/-user-javascript-interface-base/month-from-int.html"><span>month</span><wbr></wbr><span>From</span><wbr></wbr><span><span>Int</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-189693115%2FFunctions%2F1102423332"></span>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-189693115%2FFunctions%2F-1369171853"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted  with-platform-tabs" data-platform-hinted="data-platform-hinted">
-                    <div class="platform-bookmarks-row" data-toggle-list="data-toggle-list"><button class="platform-bookmark" data-filterable-current=":android-sdk-ui/main" data-filterable-set=":android-sdk-ui/main" data-active="" data-toggle=":android-sdk-ui/main">androidJvm</button></div>
-<div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui/main"><div class="symbol monospace"><div class="block"><div class="block"><span class="token annotation builtin">@</span><a href="https://developer.android.com/reference/kotlin/androidx/annotation/VisibleForTesting.html"><span class="token annotation builtin">VisibleForTesting</span></a></div></div><span class="token keyword">fun </span><a href="../../com.braze.ui/-user-javascript-interface-base/month-from-int.html"><span class="token function">monthFromInt</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">month<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><span data-unresolved-link="com.braze.enums/Month///PointingToDeclaration/">Month</span><span class="token operator">?</span></div><div class="brief "><p class="paragraph">Converts a string of a number to a <span data-unresolved-link="com.braze.enums/Month///PointingToDeclaration/">Month</span> enum.</p></div></div>                  </div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui/release"><div class="symbol monospace"><div class="block"><div class="block"><span class="token annotation builtin">@</span><a href="https://developer.android.com/reference/kotlin/androidx/annotation/VisibleForTesting.html"><span class="token annotation builtin">VisibleForTesting</span></a></div></div><span class="token keyword">fun </span><a href="../../com.braze.ui/-user-javascript-interface-base/month-from-int.html"><span class="token function">monthFromInt</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">month<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../../com.braze.enums/-month/index.html">Month</a><span class="token operator">?</span></div><div class="brief "><p class="paragraph">Converts a string of a number to a <a href="../../com.braze.enums/-month/index.html">Month</a> enum.</p></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="2046126874%2FFunctions%2F1102423332" anchor-label="parseArrayFromJsonString" id="2046126874%2FFunctions%2F1102423332" data-filterable-set=":android-sdk-ui/main"></a>
-          <div class="table-row table-row_content" data-filterable-current=":android-sdk-ui/main" data-filterable-set=":android-sdk-ui/main">
+<a data-name="2046126874%2FFunctions%2F-1369171853" anchor-label="parseArrayFromJsonString" id="2046126874%2FFunctions%2F-1369171853" data-filterable-set=":android-sdk-ui/release"></a>
+          <div class="table-row table-row_content" data-filterable-current=":android-sdk-ui/release" data-filterable-set=":android-sdk-ui/release">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="../../com.braze.ui/-user-javascript-interface-base/parse-array-from-json-string.html"><span>parse</span><wbr></wbr><span>Array</span><wbr></wbr><span>From</span><wbr></wbr><span>Json</span><wbr></wbr><span><span>String</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="2046126874%2FFunctions%2F1102423332"></span>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="2046126874%2FFunctions%2F-1369171853"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted  with-platform-tabs" data-platform-hinted="data-platform-hinted">
-                    <div class="platform-bookmarks-row" data-toggle-list="data-toggle-list"><button class="platform-bookmark" data-filterable-current=":android-sdk-ui/main" data-filterable-set=":android-sdk-ui/main" data-active="" data-toggle=":android-sdk-ui/main">androidJvm</button></div>
-<div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui/main"><div class="symbol monospace"><div class="block"><div class="block"><span class="token annotation builtin">@</span><a href="https://developer.android.com/reference/kotlin/androidx/annotation/VisibleForTesting.html"><span class="token annotation builtin">VisibleForTesting</span></a></div></div><span class="token keyword">fun </span><a href="../../com.braze.ui/-user-javascript-interface-base/parse-array-from-json-string.html"><span class="token function">parseArrayFromJsonString</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">jsonArrayString<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token operator">?</span></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/org/json/JSONArray.html">JSONArray</a><span class="token operator">?</span></div></div>                  </div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui/release"><div class="symbol monospace"><div class="block"><div class="block"><span class="token annotation builtin">@</span><a href="https://developer.android.com/reference/kotlin/androidx/annotation/VisibleForTesting.html"><span class="token annotation builtin">VisibleForTesting</span></a></div></div><span class="token keyword">fun </span><a href="../../com.braze.ui/-user-javascript-interface-base/parse-array-from-json-string.html"><span class="token function">parseArrayFromJsonString</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">jsonArrayString<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token operator">?</span></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/org/json/JSONArray.html">JSONArray</a><span class="token operator">?</span></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="466878530%2FFunctions%2F1102423332" anchor-label="parseGender" id="466878530%2FFunctions%2F1102423332" data-filterable-set=":android-sdk-ui/main"></a>
-          <div class="table-row table-row_content" data-filterable-current=":android-sdk-ui/main" data-filterable-set=":android-sdk-ui/main">
+<a data-name="466878530%2FFunctions%2F-1369171853" anchor-label="parseGender" id="466878530%2FFunctions%2F-1369171853" data-filterable-set=":android-sdk-ui/release"></a>
+          <div class="table-row table-row_content" data-filterable-current=":android-sdk-ui/release" data-filterable-set=":android-sdk-ui/release">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="../../com.braze.ui/-user-javascript-interface-base/parse-gender.html"><span>parse</span><wbr></wbr><span><span>Gender</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="466878530%2FFunctions%2F1102423332"></span>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="466878530%2FFunctions%2F-1369171853"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted  with-platform-tabs" data-platform-hinted="data-platform-hinted">
-                    <div class="platform-bookmarks-row" data-toggle-list="data-toggle-list"><button class="platform-bookmark" data-filterable-current=":android-sdk-ui/main" data-filterable-set=":android-sdk-ui/main" data-active="" data-toggle=":android-sdk-ui/main">androidJvm</button></div>
-<div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui/main"><div class="symbol monospace"><div class="block"><div class="block"><span class="token annotation builtin">@</span><a href="https://developer.android.com/reference/kotlin/androidx/annotation/VisibleForTesting.html"><span class="token annotation builtin">VisibleForTesting</span></a></div></div><span class="token keyword">fun </span><a href="../../com.braze.ui/-user-javascript-interface-base/parse-gender.html"><span class="token function">parseGender</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">genderString<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><span data-unresolved-link="com.braze.enums/Gender///PointingToDeclaration/">Gender</span><span class="token operator">?</span></div></div>                  </div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui/release"><div class="symbol monospace"><div class="block"><div class="block"><span class="token annotation builtin">@</span><a href="https://developer.android.com/reference/kotlin/androidx/annotation/VisibleForTesting.html"><span class="token annotation builtin">VisibleForTesting</span></a></div></div><span class="token keyword">fun </span><a href="../../com.braze.ui/-user-javascript-interface-base/parse-gender.html"><span class="token function">parseGender</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">genderString<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../../com.braze.enums/-gender/index.html">Gender</a><span class="token operator">?</span></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="-267823989%2FFunctions%2F1102423332" anchor-label="parseStringArrayFromJsonString" id="-267823989%2FFunctions%2F1102423332" data-filterable-set=":android-sdk-ui/main"></a>
-          <div class="table-row table-row_content" data-filterable-current=":android-sdk-ui/main" data-filterable-set=":android-sdk-ui/main">
+<a data-name="-267823989%2FFunctions%2F-1369171853" anchor-label="parseStringArrayFromJsonString" id="-267823989%2FFunctions%2F-1369171853" data-filterable-set=":android-sdk-ui/release"></a>
+          <div class="table-row table-row_content" data-filterable-current=":android-sdk-ui/release" data-filterable-set=":android-sdk-ui/release">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="../../com.braze.ui/-user-javascript-interface-base/parse-string-array-from-json-string.html"><span>parse</span><wbr></wbr><span>String</span><wbr></wbr><span>Array</span><wbr></wbr><span>From</span><wbr></wbr><span>Json</span><wbr></wbr><span><span>String</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-267823989%2FFunctions%2F1102423332"></span>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-267823989%2FFunctions%2F-1369171853"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted  with-platform-tabs" data-platform-hinted="data-platform-hinted">
-                    <div class="platform-bookmarks-row" data-toggle-list="data-toggle-list"><button class="platform-bookmark" data-filterable-current=":android-sdk-ui/main" data-filterable-set=":android-sdk-ui/main" data-active="" data-toggle=":android-sdk-ui/main">androidJvm</button></div>
-<div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui/main"><div class="symbol monospace"><div class="block"><div class="block"><span class="token annotation builtin">@</span><a href="https://developer.android.com/reference/kotlin/androidx/annotation/VisibleForTesting.html"><span class="token annotation builtin">VisibleForTesting</span></a></div></div><span class="token keyword">fun </span><a href="../../com.braze.ui/-user-javascript-interface-base/parse-string-array-from-json-string.html"><span class="token function">parseStringArrayFromJsonString</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">jsonArrayString<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token operator">?</span></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-array/index.html">Array</a><span class="token operator">&lt;</span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token operator">?</span><span class="token operator">&gt;</span><span class="token operator">?</span></div></div>                  </div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui/release"><div class="symbol monospace"><div class="block"><div class="block"><span class="token annotation builtin">@</span><a href="https://developer.android.com/reference/kotlin/androidx/annotation/VisibleForTesting.html"><span class="token annotation builtin">VisibleForTesting</span></a></div></div><span class="token keyword">fun </span><a href="../../com.braze.ui/-user-javascript-interface-base/parse-string-array-from-json-string.html"><span class="token function">parseStringArrayFromJsonString</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">jsonArrayString<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token operator">?</span></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-array/index.html">Array</a><span class="token operator">&lt;</span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token operator">?</span><span class="token operator">&gt;</span><span class="token operator">?</span></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="-1561523519%2FFunctions%2F1102423332" anchor-label="removeFromCustomAttributeArray" id="-1561523519%2FFunctions%2F1102423332" data-filterable-set=":android-sdk-ui/main"></a>
-          <div class="table-row table-row_content" data-filterable-current=":android-sdk-ui/main" data-filterable-set=":android-sdk-ui/main">
+<a data-name="-1561523519%2FFunctions%2F-1369171853" anchor-label="removeFromCustomAttributeArray" id="-1561523519%2FFunctions%2F-1369171853" data-filterable-set=":android-sdk-ui/release"></a>
+          <div class="table-row table-row_content" data-filterable-current=":android-sdk-ui/release" data-filterable-set=":android-sdk-ui/release">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="../../com.braze.ui/-user-javascript-interface-base/remove-from-custom-attribute-array.html"><span>remove</span><wbr></wbr><span>From</span><wbr></wbr><span>Custom</span><wbr></wbr><span>Attribute</span><wbr></wbr><span><span>Array</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1561523519%2FFunctions%2F1102423332"></span>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1561523519%2FFunctions%2F-1369171853"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted  with-platform-tabs" data-platform-hinted="data-platform-hinted">
-                    <div class="platform-bookmarks-row" data-toggle-list="data-toggle-list"><button class="platform-bookmark" data-filterable-current=":android-sdk-ui/main" data-filterable-set=":android-sdk-ui/main" data-active="" data-toggle=":android-sdk-ui/main">androidJvm</button></div>
-<div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="../../com.braze.ui/-user-javascript-interface-base/remove-from-custom-attribute-array.html"><span class="token function">removeFromCustomAttributeArray</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">key<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span></span><span class="parameter ">value<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></span></span><span class="token punctuation">)</span></div></div>                  </div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui/release"><div class="symbol monospace"><span class="token keyword">fun </span><a href="../../com.braze.ui/-user-javascript-interface-base/remove-from-custom-attribute-array.html"><span class="token function">removeFromCustomAttributeArray</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">key<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span></span><span class="parameter ">value<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></span></span><span class="token punctuation">)</span></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="869547426%2FFunctions%2F1102423332" anchor-label="removeFromSubscriptionGroup" id="869547426%2FFunctions%2F1102423332" data-filterable-set=":android-sdk-ui/main"></a>
-          <div class="table-row table-row_content" data-filterable-current=":android-sdk-ui/main" data-filterable-set=":android-sdk-ui/main">
+<a data-name="869547426%2FFunctions%2F-1369171853" anchor-label="removeFromSubscriptionGroup" id="869547426%2FFunctions%2F-1369171853" data-filterable-set=":android-sdk-ui/release"></a>
+          <div class="table-row table-row_content" data-filterable-current=":android-sdk-ui/release" data-filterable-set=":android-sdk-ui/release">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="../../com.braze.ui/-user-javascript-interface-base/remove-from-subscription-group.html"><span>remove</span><wbr></wbr><span>From</span><wbr></wbr><span>Subscription</span><wbr></wbr><span><span>Group</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="869547426%2FFunctions%2F1102423332"></span>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="869547426%2FFunctions%2F-1369171853"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted  with-platform-tabs" data-platform-hinted="data-platform-hinted">
-                    <div class="platform-bookmarks-row" data-toggle-list="data-toggle-list"><button class="platform-bookmark" data-filterable-current=":android-sdk-ui/main" data-filterable-set=":android-sdk-ui/main" data-active="" data-toggle=":android-sdk-ui/main">androidJvm</button></div>
-<div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="../../com.braze.ui/-user-javascript-interface-base/remove-from-subscription-group.html"><span class="token function">removeFromSubscriptionGroup</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">subscriptionGroupId<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></span></span><span class="token punctuation">)</span></div></div>                  </div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui/release"><div class="symbol monospace"><span class="token keyword">fun </span><a href="../../com.braze.ui/-user-javascript-interface-base/remove-from-subscription-group.html"><span class="token function">removeFromSubscriptionGroup</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">subscriptionGroupId<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></span></span><span class="token punctuation">)</span></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="-1079598193%2FFunctions%2F1102423332" anchor-label="setCountry" id="-1079598193%2FFunctions%2F1102423332" data-filterable-set=":android-sdk-ui/main"></a>
-          <div class="table-row table-row_content" data-filterable-current=":android-sdk-ui/main" data-filterable-set=":android-sdk-ui/main">
+<a data-name="-1079598193%2FFunctions%2F-1369171853" anchor-label="setCountry" id="-1079598193%2FFunctions%2F-1369171853" data-filterable-set=":android-sdk-ui/release"></a>
+          <div class="table-row table-row_content" data-filterable-current=":android-sdk-ui/release" data-filterable-set=":android-sdk-ui/release">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="../../com.braze.ui/-user-javascript-interface-base/set-country.html"><span>set</span><wbr></wbr><span><span>Country</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1079598193%2FFunctions%2F1102423332"></span>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1079598193%2FFunctions%2F-1369171853"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted  with-platform-tabs" data-platform-hinted="data-platform-hinted">
-                    <div class="platform-bookmarks-row" data-toggle-list="data-toggle-list"><button class="platform-bookmark" data-filterable-current=":android-sdk-ui/main" data-filterable-set=":android-sdk-ui/main" data-active="" data-toggle=":android-sdk-ui/main">androidJvm</button></div>
-<div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="../../com.braze.ui/-user-javascript-interface-base/set-country.html"><span class="token function">setCountry</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">country<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token operator">?</span></span></span><span class="token punctuation">)</span></div></div>                  </div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui/release"><div class="symbol monospace"><span class="token keyword">fun </span><a href="../../com.braze.ui/-user-javascript-interface-base/set-country.html"><span class="token function">setCountry</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">country<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token operator">?</span></span></span><span class="token punctuation">)</span></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="-2024743397%2FFunctions%2F1102423332" anchor-label="setCustomAttribute" id="-2024743397%2FFunctions%2F1102423332" data-filterable-set=":android-sdk-ui/main"></a>
-          <div class="table-row table-row_content" data-filterable-current=":android-sdk-ui/main" data-filterable-set=":android-sdk-ui/main">
+<a data-name="-2024743397%2FFunctions%2F-1369171853" anchor-label="setCustomAttribute" id="-2024743397%2FFunctions%2F-1369171853" data-filterable-set=":android-sdk-ui/release"></a>
+          <div class="table-row table-row_content" data-filterable-current=":android-sdk-ui/release" data-filterable-set=":android-sdk-ui/release">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="../../com.braze.ui/-user-javascript-interface-base/set-custom-attribute.html"><span>set</span><wbr></wbr><span>Custom</span><wbr></wbr><span><span>Attribute</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-2024743397%2FFunctions%2F1102423332"></span>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-2024743397%2FFunctions%2F-1369171853"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted  with-platform-tabs" data-platform-hinted="data-platform-hinted">
-                    <div class="platform-bookmarks-row" data-toggle-list="data-toggle-list"><button class="platform-bookmark" data-filterable-current=":android-sdk-ui/main" data-filterable-set=":android-sdk-ui/main" data-active="" data-toggle=":android-sdk-ui/main">androidJvm</button></div>
-<div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui/main"><div class="symbol monospace"><div class="block"><div class="block"><span class="token annotation builtin">@</span><a href="https://developer.android.com/reference/kotlin/androidx/annotation/VisibleForTesting.html"><span class="token annotation builtin">VisibleForTesting</span></a></div></div><span class="token keyword">fun </span><a href="../../com.braze.ui/-user-javascript-interface-base/set-custom-attribute.html"><span class="token function">setCustomAttribute</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">user<span class="token operator">: </span><span data-unresolved-link="com.braze/BrazeUser///PointingToDeclaration/">BrazeUser</span><span class="token punctuation">, </span></span><span class="parameter ">key<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span></span><span class="parameter ">jsonStringValue<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span></span><span class="parameter ">merge<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a></span></span><span class="token punctuation">)</span></div></div>                  </div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui/release"><div class="symbol monospace"><div class="block"><div class="block"><span class="token annotation builtin">@</span><a href="https://developer.android.com/reference/kotlin/androidx/annotation/VisibleForTesting.html"><span class="token annotation builtin">VisibleForTesting</span></a></div></div><span class="token keyword">fun </span><a href="../../com.braze.ui/-user-javascript-interface-base/set-custom-attribute.html"><span class="token function">setCustomAttribute</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">user<span class="token operator">: </span><a href="../../com.braze/-braze-user/index.html">BrazeUser</a><span class="token punctuation">, </span></span><span class="parameter ">key<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span></span><span class="parameter ">jsonStringValue<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span></span><span class="parameter ">merge<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a></span></span><span class="token punctuation">)</span></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="2021548606%2FFunctions%2F1102423332" anchor-label="setCustomLocationAttribute" id="2021548606%2FFunctions%2F1102423332" data-filterable-set=":android-sdk-ui/main"></a>
-          <div class="table-row table-row_content" data-filterable-current=":android-sdk-ui/main" data-filterable-set=":android-sdk-ui/main">
+<a data-name="2021548606%2FFunctions%2F-1369171853" anchor-label="setCustomLocationAttribute" id="2021548606%2FFunctions%2F-1369171853" data-filterable-set=":android-sdk-ui/release"></a>
+          <div class="table-row table-row_content" data-filterable-current=":android-sdk-ui/release" data-filterable-set=":android-sdk-ui/release">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="../../com.braze.ui/-user-javascript-interface-base/set-custom-location-attribute.html"><span>set</span><wbr></wbr><span>Custom</span><wbr></wbr><span>Location</span><wbr></wbr><span><span>Attribute</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="2021548606%2FFunctions%2F1102423332"></span>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="2021548606%2FFunctions%2F-1369171853"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted  with-platform-tabs" data-platform-hinted="data-platform-hinted">
-                    <div class="platform-bookmarks-row" data-toggle-list="data-toggle-list"><button class="platform-bookmark" data-filterable-current=":android-sdk-ui/main" data-filterable-set=":android-sdk-ui/main" data-active="" data-toggle=":android-sdk-ui/main">androidJvm</button></div>
-<div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="../../com.braze.ui/-user-javascript-interface-base/set-custom-location-attribute.html"><span class="token function">setCustomLocationAttribute</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">attribute<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span></span><span class="parameter ">latitude<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span></span><span class="parameter ">longitude<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></span></span><span class="token punctuation">)</span></div></div>                  </div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui/release"><div class="symbol monospace"><span class="token keyword">fun </span><a href="../../com.braze.ui/-user-javascript-interface-base/set-custom-location-attribute.html"><span class="token function">setCustomLocationAttribute</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">attribute<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span></span><span class="parameter ">latitude<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span></span><span class="parameter ">longitude<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></span></span><span class="token punctuation">)</span></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="420552757%2FFunctions%2F1102423332" anchor-label="setCustomUserAttributeArray" id="420552757%2FFunctions%2F1102423332" data-filterable-set=":android-sdk-ui/main"></a>
-          <div class="table-row table-row_content" data-filterable-current=":android-sdk-ui/main" data-filterable-set=":android-sdk-ui/main">
+<a data-name="420552757%2FFunctions%2F-1369171853" anchor-label="setCustomUserAttributeArray" id="420552757%2FFunctions%2F-1369171853" data-filterable-set=":android-sdk-ui/release"></a>
+          <div class="table-row table-row_content" data-filterable-current=":android-sdk-ui/release" data-filterable-set=":android-sdk-ui/release">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="../../com.braze.ui/-user-javascript-interface-base/set-custom-user-attribute-array.html"><span>set</span><wbr></wbr><span>Custom</span><wbr></wbr><span>User</span><wbr></wbr><span>Attribute</span><wbr></wbr><span><span>Array</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="420552757%2FFunctions%2F1102423332"></span>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="420552757%2FFunctions%2F-1369171853"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted  with-platform-tabs" data-platform-hinted="data-platform-hinted">
-                    <div class="platform-bookmarks-row" data-toggle-list="data-toggle-list"><button class="platform-bookmark" data-filterable-current=":android-sdk-ui/main" data-filterable-set=":android-sdk-ui/main" data-active="" data-toggle=":android-sdk-ui/main">androidJvm</button></div>
-<div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="../../com.braze.ui/-user-javascript-interface-base/set-custom-user-attribute-array.html"><span class="token function">setCustomUserAttributeArray</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">key<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span></span><span class="parameter ">jsonArrayString<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token operator">?</span></span></span><span class="token punctuation">)</span></div></div>                  </div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui/release"><div class="symbol monospace"><span class="token keyword">fun </span><a href="../../com.braze.ui/-user-javascript-interface-base/set-custom-user-attribute-array.html"><span class="token function">setCustomUserAttributeArray</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">key<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span></span><span class="parameter ">jsonArrayString<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token operator">?</span></span></span><span class="token punctuation">)</span></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="2044787449%2FFunctions%2F1102423332" anchor-label="setCustomUserAttributeJSON" id="2044787449%2FFunctions%2F1102423332" data-filterable-set=":android-sdk-ui/main"></a>
-          <div class="table-row table-row_content" data-filterable-current=":android-sdk-ui/main" data-filterable-set=":android-sdk-ui/main">
+<a data-name="2044787449%2FFunctions%2F-1369171853" anchor-label="setCustomUserAttributeJSON" id="2044787449%2FFunctions%2F-1369171853" data-filterable-set=":android-sdk-ui/release"></a>
+          <div class="table-row table-row_content" data-filterable-current=":android-sdk-ui/release" data-filterable-set=":android-sdk-ui/release">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="../../com.braze.ui/-user-javascript-interface-base/set-custom-user-attribute-j-s-o-n.html"><span>set</span><wbr></wbr><span>Custom</span><wbr></wbr><span>User</span><wbr></wbr><span>Attribute</span><wbr></wbr><span><span>JSON</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="2044787449%2FFunctions%2F1102423332"></span>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="2044787449%2FFunctions%2F-1369171853"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted  with-platform-tabs" data-platform-hinted="data-platform-hinted">
-                    <div class="platform-bookmarks-row" data-toggle-list="data-toggle-list"><button class="platform-bookmark" data-filterable-current=":android-sdk-ui/main" data-filterable-set=":android-sdk-ui/main" data-active="" data-toggle=":android-sdk-ui/main">androidJvm</button></div>
-<div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="../../com.braze.ui/-user-javascript-interface-base/set-custom-user-attribute-j-s-o-n.html"><span class="token function">setCustomUserAttributeJSON</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">key<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span></span><span class="parameter ">jsonStringValue<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span></span><span class="parameter ">merge<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a></span></span><span class="token punctuation">)</span></div></div>                  </div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui/release"><div class="symbol monospace"><span class="token keyword">fun </span><a href="../../com.braze.ui/-user-javascript-interface-base/set-custom-user-attribute-j-s-o-n.html"><span class="token function">setCustomUserAttributeJSON</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">key<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span></span><span class="parameter ">jsonStringValue<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span></span><span class="parameter ">merge<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a></span></span><span class="token punctuation">)</span></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="-380305507%2FFunctions%2F1102423332" anchor-label="setCustomUserAttributeJSONArray" id="-380305507%2FFunctions%2F1102423332" data-filterable-set=":android-sdk-ui/main"></a>
-          <div class="table-row table-row_content" data-filterable-current=":android-sdk-ui/main" data-filterable-set=":android-sdk-ui/main">
+<a data-name="-380305507%2FFunctions%2F-1369171853" anchor-label="setCustomUserAttributeJSONArray" id="-380305507%2FFunctions%2F-1369171853" data-filterable-set=":android-sdk-ui/release"></a>
+          <div class="table-row table-row_content" data-filterable-current=":android-sdk-ui/release" data-filterable-set=":android-sdk-ui/release">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="../../com.braze.ui/-user-javascript-interface-base/set-custom-user-attribute-j-s-o-n-array.html"><span>set</span><wbr></wbr><span>Custom</span><wbr></wbr><span>User</span><wbr></wbr><span>Attribute</span><wbr></wbr><span><span>JSONArray</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-380305507%2FFunctions%2F1102423332"></span>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-380305507%2FFunctions%2F-1369171853"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted  with-platform-tabs" data-platform-hinted="data-platform-hinted">
-                    <div class="platform-bookmarks-row" data-toggle-list="data-toggle-list"><button class="platform-bookmark" data-filterable-current=":android-sdk-ui/main" data-filterable-set=":android-sdk-ui/main" data-active="" data-toggle=":android-sdk-ui/main">androidJvm</button></div>
-<div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="../../com.braze.ui/-user-javascript-interface-base/set-custom-user-attribute-j-s-o-n-array.html"><span class="token function">setCustomUserAttributeJSONArray</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">key<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span></span><span class="parameter ">jsonArrayString<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token operator">?</span></span></span><span class="token punctuation">)</span></div></div>                  </div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui/release"><div class="symbol monospace"><span class="token keyword">fun </span><a href="../../com.braze.ui/-user-javascript-interface-base/set-custom-user-attribute-j-s-o-n-array.html"><span class="token function">setCustomUserAttributeJSONArray</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">key<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span></span><span class="parameter ">jsonArrayString<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token operator">?</span></span></span><span class="token punctuation">)</span></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="-1293822366%2FFunctions%2F1102423332" anchor-label="setDateOfBirth" id="-1293822366%2FFunctions%2F1102423332" data-filterable-set=":android-sdk-ui/main"></a>
-          <div class="table-row table-row_content" data-filterable-current=":android-sdk-ui/main" data-filterable-set=":android-sdk-ui/main">
+<a data-name="-1293822366%2FFunctions%2F-1369171853" anchor-label="setDateOfBirth" id="-1293822366%2FFunctions%2F-1369171853" data-filterable-set=":android-sdk-ui/release"></a>
+          <div class="table-row table-row_content" data-filterable-current=":android-sdk-ui/release" data-filterable-set=":android-sdk-ui/release">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="../../com.braze.ui/-user-javascript-interface-base/set-date-of-birth.html"><span>set</span><wbr></wbr><span>Date</span><wbr></wbr><span>Of</span><wbr></wbr><span><span>Birth</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1293822366%2FFunctions%2F1102423332"></span>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1293822366%2FFunctions%2F-1369171853"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted  with-platform-tabs" data-platform-hinted="data-platform-hinted">
-                    <div class="platform-bookmarks-row" data-toggle-list="data-toggle-list"><button class="platform-bookmark" data-filterable-current=":android-sdk-ui/main" data-filterable-set=":android-sdk-ui/main" data-active="" data-toggle=":android-sdk-ui/main">androidJvm</button></div>
-<div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="../../com.braze.ui/-user-javascript-interface-base/set-date-of-birth.html"><span class="token function">setDateOfBirth</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">year<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span></span><span class="parameter ">month<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span></span><span class="parameter ">day<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></span></span><span class="token punctuation">)</span></div></div>                  </div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui/release"><div class="symbol monospace"><span class="token keyword">fun </span><a href="../../com.braze.ui/-user-javascript-interface-base/set-date-of-birth.html"><span class="token function">setDateOfBirth</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">year<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span></span><span class="parameter ">month<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span></span><span class="parameter ">day<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></span></span><span class="token punctuation">)</span></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="1538024201%2FFunctions%2F1102423332" anchor-label="setEmail" id="1538024201%2FFunctions%2F1102423332" data-filterable-set=":android-sdk-ui/main"></a>
-          <div class="table-row table-row_content" data-filterable-current=":android-sdk-ui/main" data-filterable-set=":android-sdk-ui/main">
+<a data-name="1538024201%2FFunctions%2F-1369171853" anchor-label="setEmail" id="1538024201%2FFunctions%2F-1369171853" data-filterable-set=":android-sdk-ui/release"></a>
+          <div class="table-row table-row_content" data-filterable-current=":android-sdk-ui/release" data-filterable-set=":android-sdk-ui/release">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="../../com.braze.ui/-user-javascript-interface-base/set-email.html"><span>set</span><wbr></wbr><span><span>Email</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1538024201%2FFunctions%2F1102423332"></span>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1538024201%2FFunctions%2F-1369171853"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted  with-platform-tabs" data-platform-hinted="data-platform-hinted">
-                    <div class="platform-bookmarks-row" data-toggle-list="data-toggle-list"><button class="platform-bookmark" data-filterable-current=":android-sdk-ui/main" data-filterable-set=":android-sdk-ui/main" data-active="" data-toggle=":android-sdk-ui/main">androidJvm</button></div>
-<div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="../../com.braze.ui/-user-javascript-interface-base/set-email.html"><span class="token function">setEmail</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">email<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token operator">?</span></span></span><span class="token punctuation">)</span></div></div>                  </div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui/release"><div class="symbol monospace"><span class="token keyword">fun </span><a href="../../com.braze.ui/-user-javascript-interface-base/set-email.html"><span class="token function">setEmail</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">email<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token operator">?</span></span></span><span class="token punctuation">)</span></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="-783375300%2FFunctions%2F1102423332" anchor-label="setEmailNotificationSubscriptionType" id="-783375300%2FFunctions%2F1102423332" data-filterable-set=":android-sdk-ui/main"></a>
-          <div class="table-row table-row_content" data-filterable-current=":android-sdk-ui/main" data-filterable-set=":android-sdk-ui/main">
+<a data-name="-783375300%2FFunctions%2F-1369171853" anchor-label="setEmailNotificationSubscriptionType" id="-783375300%2FFunctions%2F-1369171853" data-filterable-set=":android-sdk-ui/release"></a>
+          <div class="table-row table-row_content" data-filterable-current=":android-sdk-ui/release" data-filterable-set=":android-sdk-ui/release">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="../../com.braze.ui/-user-javascript-interface-base/set-email-notification-subscription-type.html"><span>set</span><wbr></wbr><span>Email</span><wbr></wbr><span>Notification</span><wbr></wbr><span>Subscription</span><wbr></wbr><span><span>Type</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-783375300%2FFunctions%2F1102423332"></span>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-783375300%2FFunctions%2F-1369171853"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted  with-platform-tabs" data-platform-hinted="data-platform-hinted">
-                    <div class="platform-bookmarks-row" data-toggle-list="data-toggle-list"><button class="platform-bookmark" data-filterable-current=":android-sdk-ui/main" data-filterable-set=":android-sdk-ui/main" data-active="" data-toggle=":android-sdk-ui/main">androidJvm</button></div>
-<div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="../../com.braze.ui/-user-javascript-interface-base/set-email-notification-subscription-type.html"><span class="token function">setEmailNotificationSubscriptionType</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">subscriptionType<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></span></span><span class="token punctuation">)</span></div></div>                  </div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui/release"><div class="symbol monospace"><span class="token keyword">fun </span><a href="../../com.braze.ui/-user-javascript-interface-base/set-email-notification-subscription-type.html"><span class="token function">setEmailNotificationSubscriptionType</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">subscriptionType<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></span></span><span class="token punctuation">)</span></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="-1527820310%2FFunctions%2F1102423332" anchor-label="setFirstName" id="-1527820310%2FFunctions%2F1102423332" data-filterable-set=":android-sdk-ui/main"></a>
-          <div class="table-row table-row_content" data-filterable-current=":android-sdk-ui/main" data-filterable-set=":android-sdk-ui/main">
+<a data-name="-1527820310%2FFunctions%2F-1369171853" anchor-label="setFirstName" id="-1527820310%2FFunctions%2F-1369171853" data-filterable-set=":android-sdk-ui/release"></a>
+          <div class="table-row table-row_content" data-filterable-current=":android-sdk-ui/release" data-filterable-set=":android-sdk-ui/release">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="../../com.braze.ui/-user-javascript-interface-base/set-first-name.html"><span>set</span><wbr></wbr><span>First</span><wbr></wbr><span><span>Name</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1527820310%2FFunctions%2F1102423332"></span>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1527820310%2FFunctions%2F-1369171853"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted  with-platform-tabs" data-platform-hinted="data-platform-hinted">
-                    <div class="platform-bookmarks-row" data-toggle-list="data-toggle-list"><button class="platform-bookmark" data-filterable-current=":android-sdk-ui/main" data-filterable-set=":android-sdk-ui/main" data-active="" data-toggle=":android-sdk-ui/main">androidJvm</button></div>
-<div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="../../com.braze.ui/-user-javascript-interface-base/set-first-name.html"><span class="token function">setFirstName</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">firstName<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token operator">?</span></span></span><span class="token punctuation">)</span></div></div>                  </div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui/release"><div class="symbol monospace"><span class="token keyword">fun </span><a href="../../com.braze.ui/-user-javascript-interface-base/set-first-name.html"><span class="token function">setFirstName</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">firstName<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token operator">?</span></span></span><span class="token punctuation">)</span></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="682708273%2FFunctions%2F1102423332" anchor-label="setGender" id="682708273%2FFunctions%2F1102423332" data-filterable-set=":android-sdk-ui/main"></a>
-          <div class="table-row table-row_content" data-filterable-current=":android-sdk-ui/main" data-filterable-set=":android-sdk-ui/main">
+<a data-name="682708273%2FFunctions%2F-1369171853" anchor-label="setGender" id="682708273%2FFunctions%2F-1369171853" data-filterable-set=":android-sdk-ui/release"></a>
+          <div class="table-row table-row_content" data-filterable-current=":android-sdk-ui/release" data-filterable-set=":android-sdk-ui/release">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="../../com.braze.ui/-user-javascript-interface-base/set-gender.html"><span>set</span><wbr></wbr><span><span>Gender</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="682708273%2FFunctions%2F1102423332"></span>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="682708273%2FFunctions%2F-1369171853"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted  with-platform-tabs" data-platform-hinted="data-platform-hinted">
-                    <div class="platform-bookmarks-row" data-toggle-list="data-toggle-list"><button class="platform-bookmark" data-filterable-current=":android-sdk-ui/main" data-filterable-set=":android-sdk-ui/main" data-active="" data-toggle=":android-sdk-ui/main">androidJvm</button></div>
-<div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="../../com.braze.ui/-user-javascript-interface-base/set-gender.html"><span class="token function">setGender</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">genderString<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></span></span><span class="token punctuation">)</span></div></div>                  </div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui/release"><div class="symbol monospace"><span class="token keyword">fun </span><a href="../../com.braze.ui/-user-javascript-interface-base/set-gender.html"><span class="token function">setGender</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">genderString<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></span></span><span class="token punctuation">)</span></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="-1675476535%2FFunctions%2F1102423332" anchor-label="setHomeCity" id="-1675476535%2FFunctions%2F1102423332" data-filterable-set=":android-sdk-ui/main"></a>
-          <div class="table-row table-row_content" data-filterable-current=":android-sdk-ui/main" data-filterable-set=":android-sdk-ui/main">
+<a data-name="-1675476535%2FFunctions%2F-1369171853" anchor-label="setHomeCity" id="-1675476535%2FFunctions%2F-1369171853" data-filterable-set=":android-sdk-ui/release"></a>
+          <div class="table-row table-row_content" data-filterable-current=":android-sdk-ui/release" data-filterable-set=":android-sdk-ui/release">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="../../com.braze.ui/-user-javascript-interface-base/set-home-city.html"><span>set</span><wbr></wbr><span>Home</span><wbr></wbr><span><span>City</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1675476535%2FFunctions%2F1102423332"></span>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1675476535%2FFunctions%2F-1369171853"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted  with-platform-tabs" data-platform-hinted="data-platform-hinted">
-                    <div class="platform-bookmarks-row" data-toggle-list="data-toggle-list"><button class="platform-bookmark" data-filterable-current=":android-sdk-ui/main" data-filterable-set=":android-sdk-ui/main" data-active="" data-toggle=":android-sdk-ui/main">androidJvm</button></div>
-<div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="../../com.braze.ui/-user-javascript-interface-base/set-home-city.html"><span class="token function">setHomeCity</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">homeCity<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token operator">?</span></span></span><span class="token punctuation">)</span></div></div>                  </div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui/release"><div class="symbol monospace"><span class="token keyword">fun </span><a href="../../com.braze.ui/-user-javascript-interface-base/set-home-city.html"><span class="token function">setHomeCity</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">homeCity<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token operator">?</span></span></span><span class="token punctuation">)</span></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="119515547%2FFunctions%2F1102423332" anchor-label="setLanguage" id="119515547%2FFunctions%2F1102423332" data-filterable-set=":android-sdk-ui/main"></a>
-          <div class="table-row table-row_content" data-filterable-current=":android-sdk-ui/main" data-filterable-set=":android-sdk-ui/main">
+<a data-name="119515547%2FFunctions%2F-1369171853" anchor-label="setLanguage" id="119515547%2FFunctions%2F-1369171853" data-filterable-set=":android-sdk-ui/release"></a>
+          <div class="table-row table-row_content" data-filterable-current=":android-sdk-ui/release" data-filterable-set=":android-sdk-ui/release">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="../../com.braze.ui/-user-javascript-interface-base/set-language.html"><span>set</span><wbr></wbr><span><span>Language</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="119515547%2FFunctions%2F1102423332"></span>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="119515547%2FFunctions%2F-1369171853"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted  with-platform-tabs" data-platform-hinted="data-platform-hinted">
-                    <div class="platform-bookmarks-row" data-toggle-list="data-toggle-list"><button class="platform-bookmark" data-filterable-current=":android-sdk-ui/main" data-filterable-set=":android-sdk-ui/main" data-active="" data-toggle=":android-sdk-ui/main">androidJvm</button></div>
-<div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="../../com.braze.ui/-user-javascript-interface-base/set-language.html"><span class="token function">setLanguage</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">language<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token operator">?</span></span></span><span class="token punctuation">)</span></div></div>                  </div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui/release"><div class="symbol monospace"><span class="token keyword">fun </span><a href="../../com.braze.ui/-user-javascript-interface-base/set-language.html"><span class="token function">setLanguage</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">language<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token operator">?</span></span></span><span class="token punctuation">)</span></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="1359868562%2FFunctions%2F1102423332" anchor-label="setLastName" id="1359868562%2FFunctions%2F1102423332" data-filterable-set=":android-sdk-ui/main"></a>
-          <div class="table-row table-row_content" data-filterable-current=":android-sdk-ui/main" data-filterable-set=":android-sdk-ui/main">
+<a data-name="1359868562%2FFunctions%2F-1369171853" anchor-label="setLastName" id="1359868562%2FFunctions%2F-1369171853" data-filterable-set=":android-sdk-ui/release"></a>
+          <div class="table-row table-row_content" data-filterable-current=":android-sdk-ui/release" data-filterable-set=":android-sdk-ui/release">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="../../com.braze.ui/-user-javascript-interface-base/set-last-name.html"><span>set</span><wbr></wbr><span>Last</span><wbr></wbr><span><span>Name</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1359868562%2FFunctions%2F1102423332"></span>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1359868562%2FFunctions%2F-1369171853"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted  with-platform-tabs" data-platform-hinted="data-platform-hinted">
-                    <div class="platform-bookmarks-row" data-toggle-list="data-toggle-list"><button class="platform-bookmark" data-filterable-current=":android-sdk-ui/main" data-filterable-set=":android-sdk-ui/main" data-active="" data-toggle=":android-sdk-ui/main">androidJvm</button></div>
-<div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="../../com.braze.ui/-user-javascript-interface-base/set-last-name.html"><span class="token function">setLastName</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">lastName<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token operator">?</span></span></span><span class="token punctuation">)</span></div></div>                  </div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui/release"><div class="symbol monospace"><span class="token keyword">fun </span><a href="../../com.braze.ui/-user-javascript-interface-base/set-last-name.html"><span class="token function">setLastName</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">lastName<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token operator">?</span></span></span><span class="token punctuation">)</span></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="504641188%2FFunctions%2F1102423332" anchor-label="setLineId" id="504641188%2FFunctions%2F1102423332" data-filterable-set=":android-sdk-ui/main"></a>
-          <div class="table-row table-row_content" data-filterable-current=":android-sdk-ui/main" data-filterable-set=":android-sdk-ui/main">
+<a data-name="504641188%2FFunctions%2F-1369171853" anchor-label="setLineId" id="504641188%2FFunctions%2F-1369171853" data-filterable-set=":android-sdk-ui/release"></a>
+          <div class="table-row table-row_content" data-filterable-current=":android-sdk-ui/release" data-filterable-set=":android-sdk-ui/release">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="../../com.braze.ui/-user-javascript-interface-base/set-line-id.html"><span>set</span><wbr></wbr><span>Line</span><wbr></wbr><span><span>Id</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="504641188%2FFunctions%2F1102423332"></span>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="504641188%2FFunctions%2F-1369171853"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted  with-platform-tabs" data-platform-hinted="data-platform-hinted">
-                    <div class="platform-bookmarks-row" data-toggle-list="data-toggle-list"><button class="platform-bookmark" data-filterable-current=":android-sdk-ui/main" data-filterable-set=":android-sdk-ui/main" data-active="" data-toggle=":android-sdk-ui/main">androidJvm</button></div>
-<div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="../../com.braze.ui/-user-javascript-interface-base/set-line-id.html"><span class="token function">setLineId</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">lineId<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token operator">?</span></span></span><span class="token punctuation">)</span></div></div>                  </div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui/release"><div class="symbol monospace"><span class="token keyword">fun </span><a href="../../com.braze.ui/-user-javascript-interface-base/set-line-id.html"><span class="token function">setLineId</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">lineId<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token operator">?</span></span></span><span class="token punctuation">)</span></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="1246637358%2FFunctions%2F1102423332" anchor-label="setPhoneNumber" id="1246637358%2FFunctions%2F1102423332" data-filterable-set=":android-sdk-ui/main"></a>
-          <div class="table-row table-row_content" data-filterable-current=":android-sdk-ui/main" data-filterable-set=":android-sdk-ui/main">
+<a data-name="1246637358%2FFunctions%2F-1369171853" anchor-label="setPhoneNumber" id="1246637358%2FFunctions%2F-1369171853" data-filterable-set=":android-sdk-ui/release"></a>
+          <div class="table-row table-row_content" data-filterable-current=":android-sdk-ui/release" data-filterable-set=":android-sdk-ui/release">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="../../com.braze.ui/-user-javascript-interface-base/set-phone-number.html"><span>set</span><wbr></wbr><span>Phone</span><wbr></wbr><span><span>Number</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1246637358%2FFunctions%2F1102423332"></span>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1246637358%2FFunctions%2F-1369171853"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted  with-platform-tabs" data-platform-hinted="data-platform-hinted">
-                    <div class="platform-bookmarks-row" data-toggle-list="data-toggle-list"><button class="platform-bookmark" data-filterable-current=":android-sdk-ui/main" data-filterable-set=":android-sdk-ui/main" data-active="" data-toggle=":android-sdk-ui/main">androidJvm</button></div>
-<div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="../../com.braze.ui/-user-javascript-interface-base/set-phone-number.html"><span class="token function">setPhoneNumber</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">phoneNumber<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token operator">?</span></span></span><span class="token punctuation">)</span></div></div>                  </div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui/release"><div class="symbol monospace"><span class="token keyword">fun </span><a href="../../com.braze.ui/-user-javascript-interface-base/set-phone-number.html"><span class="token function">setPhoneNumber</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">phoneNumber<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token operator">?</span></span></span><span class="token punctuation">)</span></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="840622636%2FFunctions%2F1102423332" anchor-label="setPushNotificationSubscriptionType" id="840622636%2FFunctions%2F1102423332" data-filterable-set=":android-sdk-ui/main"></a>
-          <div class="table-row table-row_content" data-filterable-current=":android-sdk-ui/main" data-filterable-set=":android-sdk-ui/main">
+<a data-name="840622636%2FFunctions%2F-1369171853" anchor-label="setPushNotificationSubscriptionType" id="840622636%2FFunctions%2F-1369171853" data-filterable-set=":android-sdk-ui/release"></a>
+          <div class="table-row table-row_content" data-filterable-current=":android-sdk-ui/release" data-filterable-set=":android-sdk-ui/release">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="../../com.braze.ui/-user-javascript-interface-base/set-push-notification-subscription-type.html"><span>set</span><wbr></wbr><span>Push</span><wbr></wbr><span>Notification</span><wbr></wbr><span>Subscription</span><wbr></wbr><span><span>Type</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="840622636%2FFunctions%2F1102423332"></span>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="840622636%2FFunctions%2F-1369171853"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted  with-platform-tabs" data-platform-hinted="data-platform-hinted">
-                    <div class="platform-bookmarks-row" data-toggle-list="data-toggle-list"><button class="platform-bookmark" data-filterable-current=":android-sdk-ui/main" data-filterable-set=":android-sdk-ui/main" data-active="" data-toggle=":android-sdk-ui/main">androidJvm</button></div>
-<div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="../../com.braze.ui/-user-javascript-interface-base/set-push-notification-subscription-type.html"><span class="token function">setPushNotificationSubscriptionType</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">subscriptionType<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></span></span><span class="token punctuation">)</span></div></div>                  </div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui/release"><div class="symbol monospace"><span class="token keyword">fun </span><a href="../../com.braze.ui/-user-javascript-interface-base/set-push-notification-subscription-type.html"><span class="token function">setPushNotificationSubscriptionType</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">subscriptionType<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></span></span><span class="token punctuation">)</span></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="1249634052%2FFunctions%2F1102423332" anchor-label="subscriptionTypeFromJavascriptString" id="1249634052%2FFunctions%2F1102423332" data-filterable-set=":android-sdk-ui/main"></a>
-          <div class="table-row table-row_content" data-filterable-current=":android-sdk-ui/main" data-filterable-set=":android-sdk-ui/main">
+<a data-name="1249634052%2FFunctions%2F-1369171853" anchor-label="subscriptionTypeFromJavascriptString" id="1249634052%2FFunctions%2F-1369171853" data-filterable-set=":android-sdk-ui/release"></a>
+          <div class="table-row table-row_content" data-filterable-current=":android-sdk-ui/release" data-filterable-set=":android-sdk-ui/release">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="../../com.braze.ui/-user-javascript-interface-base/subscription-type-from-javascript-string.html"><span>subscription</span><wbr></wbr><span>Type</span><wbr></wbr><span>From</span><wbr></wbr><span>Javascript</span><wbr></wbr><span><span>String</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1249634052%2FFunctions%2F1102423332"></span>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1249634052%2FFunctions%2F-1369171853"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted  with-platform-tabs" data-platform-hinted="data-platform-hinted">
-                    <div class="platform-bookmarks-row" data-toggle-list="data-toggle-list"><button class="platform-bookmark" data-filterable-current=":android-sdk-ui/main" data-filterable-set=":android-sdk-ui/main" data-active="" data-toggle=":android-sdk-ui/main">androidJvm</button></div>
-<div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui/main"><div class="symbol monospace"><div class="block"><div class="block"><span class="token annotation builtin">@</span><a href="https://developer.android.com/reference/kotlin/androidx/annotation/VisibleForTesting.html"><span class="token annotation builtin">VisibleForTesting</span></a></div></div><span class="token keyword">fun </span><a href="../../com.braze.ui/-user-javascript-interface-base/subscription-type-from-javascript-string.html"><span class="token function">subscriptionTypeFromJavascriptString</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">subscriptionType<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token operator">?</span></span></span><span class="token punctuation">)</span><span class="token operator">: </span><span data-unresolved-link="com.braze.enums/NotificationSubscriptionType///PointingToDeclaration/">NotificationSubscriptionType</span><span class="token operator">?</span></div></div>                  </div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui/release"><div class="symbol monospace"><div class="block"><div class="block"><span class="token annotation builtin">@</span><a href="https://developer.android.com/reference/kotlin/androidx/annotation/VisibleForTesting.html"><span class="token annotation builtin">VisibleForTesting</span></a></div></div><span class="token keyword">fun </span><a href="../../com.braze.ui/-user-javascript-interface-base/subscription-type-from-javascript-string.html"><span class="token function">subscriptionTypeFromJavascriptString</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">subscriptionType<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token operator">?</span></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../../com.braze.enums/-notification-subscription-type/index.html">NotificationSubscriptionType</a><span class="token operator">?</span></div></div></div>
                 </div>
               </div>
             </div>

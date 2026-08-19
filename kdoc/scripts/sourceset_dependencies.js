@@ -1,1 +1,1 @@
-sourceset_dependencies='{":android-sdk-ui/main":[],":android-sdk-ui/release":[]}'
+sourceset_dependencies='{":android-sdk-ui/release":[]}'

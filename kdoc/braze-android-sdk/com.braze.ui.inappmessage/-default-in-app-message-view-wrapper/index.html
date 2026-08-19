@@ -19,7 +19,6 @@
         }
       }
     </script>
-<script type="text/javascript" src="https://unpkg.com/kotlin-playground@1/dist/playground.min.js" async="async"></script>
 <script type="text/javascript" src="../../../scripts/sourceset_dependencies.js" async="async"></script>
 <link href="../../../styles/style.css" rel="Stylesheet">
 <link href="../../../styles/main.css" rel="Stylesheet">
@@ -44,11 +43,11 @@
         </button>
         <div class="navigation-controls--break ui-kit_mobile-only"></div>
         <div class="library-version" id="library-version">
-43.0.0        </div>
+43.1.0        </div>
         <div class="navigation-controls">
         <ul class="filter-section filter-section_loading" id="filter-section" aria-label="Target filter">
                 <button class="platform-tag platform-selector jvm-like" data-active="" aria-pressed="true"
-                        data-filter=":android-sdk-ui/main">androidJvm</button>
+                        data-filter=":android-sdk-ui/release">release</button>
             <div class="dropdown filter-section--dropdown" data-role="dropdown" id="filter-section-dropdown">
                 <button class="button button_dropdown filter-section--dropdown-toggle" role="combobox"
                         data-role="dropdown-toggle"
@@ -65,10 +64,10 @@
                     </div>
                         <li role="option" class="dropdown--option platform-selector-option jvm-like" tabindex="0">
                             <label class="checkbox">
-                                <input type="checkbox" class="checkbox--input" id=":android-sdk-ui/main"
-                                       data-filter=":android-sdk-ui/main"/>
+                                <input type="checkbox" class="checkbox--input" id=":android-sdk-ui/release"
+                                       data-filter=":android-sdk-ui/release"/>
                                 <span class="checkbox--icon"></span>
-                                androidJvm
+                                release
                             </label>
                         </li>
                 </ul>
@@ -104,32 +103,28 @@
         </nav>
         <div id="resizer" class="resizer" data-item-type="BAR"></div>
         <div id="main" data-item-type="SECTION" role="main">
-<div class="main-content" data-page-type="classlike" id="content" pageIds="braze-android-sdk::com.braze.ui.inappmessage/DefaultInAppMessageViewWrapper///PointingToDeclaration//1102423332">
+<div class="main-content" data-page-type="classlike" id="content" pageIds="braze-android-sdk::com.braze.ui.inappmessage/DefaultInAppMessageViewWrapper///PointingToDeclaration//-1369171853">
   <div class="breadcrumbs"><a href="../../../index.html">braze-android-sdk</a><span class="delimiter">/</span><a href="../index.html">com.braze.ui.inappmessage</a><span class="delimiter">/</span><span class="current">DefaultInAppMessageViewWrapper</span></div>
   <div class="cover ">
     <h1 class="cover"><span>Default</span><wbr></wbr><span>In</span><wbr></wbr><span>App</span><wbr></wbr><span>Message</span><wbr></wbr><span>View</span><wbr></wbr><span><span>Wrapper</span></span></h1>
-    <div class="platform-hinted  with-platform-tabs" data-platform-hinted="data-platform-hinted">
-      <div class="platform-bookmarks-row" data-toggle-list="data-toggle-list"><button class="platform-bookmark" data-filterable-current=":android-sdk-ui/main" data-filterable-set=":android-sdk-ui/main" data-active="" data-toggle=":android-sdk-ui/main">androidJvm</button></div>
-<div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui/main"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">class </span><a href="index.html">DefaultInAppMessageViewWrapper</a> <span><span class="token annotation builtin">@</span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.jvm/-jvm-overloads/index.html"><span class="token annotation builtin">JvmOverloads</span></a> </span><span class="token keyword">constructor</span><span class="token punctuation">(</span><span class="parameters "><span class="parameter "><span class="token keyword">val </span>inAppMessageView<span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/android/view/View.html">View</a><span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>inAppMessage<span class="token operator">: </span><span data-unresolved-link="com.braze.models.inappmessage/IInAppMessage///PointingToDeclaration/">IInAppMessage</span><span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>inAppMessageViewLifecycleListener<span class="token operator">: </span><a href="../../com.braze.ui.inappmessage.listeners/-i-in-app-message-view-lifecycle-listener/index.html">IInAppMessageViewLifecycleListener</a><span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>configurationProvider<span class="token operator">: </span><span data-unresolved-link="com.braze.configuration/BrazeConfigurationProvider///PointingToDeclaration/">BrazeConfigurationProvider</span><span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>openingAnimation<span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/android/view/animation/Animation.html">Animation</a><span class="token operator">?</span><span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>closingAnimation<span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/android/view/animation/Animation.html">Animation</a><span class="token operator">?</span><span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">var </span>clickableInAppMessageView<span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/android/view/View.html">View</a><span class="token operator">?</span><span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">var </span>buttonViews<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-list/index.html">List</a><span class="token operator">&lt;</span><a href="https://developer.android.com/reference/kotlin/android/view/View.html">View</a><span class="token operator">&gt;</span><span class="token operator">?</span><span class="token operator"> = </span>null<span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">var </span>closeButton<span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/android/view/View.html">View</a><span class="token operator">?</span><span class="token operator"> = </span>null</span></span><span class="token punctuation">)</span> : <a href="../-i-in-app-message-view-wrapper/index.html">IInAppMessageViewWrapper</a></div><p class="paragraph">Constructor for base and slideup view wrappers. Adds click listeners to the in-app message view and adds swipe functionality to slideup in-app messages.</p><h4 class="tableheader">Parameters</h4><div class="table"><div class="table-row table-row_content" data-filterable-current=":android-sdk-ui/main" data-filterable-set=":android-sdk-ui/main"><div class="main-subrow keyValue "><div class=""><span class="inline-flex"><div><u><span>in</span><wbr></wbr><span>App</span><wbr></wbr><span>Message</span><wbr></wbr><span><span>View</span></span></u></div></span></div><div><div class="title"><p class="paragraph">In-app message top level view.</p></div></div></div></div><div class="table-row table-row_content" data-filterable-current=":android-sdk-ui/main" data-filterable-set=":android-sdk-ui/main"><div class="main-subrow keyValue "><div class=""><span class="inline-flex"><div><u><span>in</span><wbr></wbr><span>App</span><wbr></wbr><span><span>Message</span></span></u></div></span></div><div><div class="title"><p class="paragraph">In-app message model.</p></div></div></div></div><div class="table-row table-row_content" data-filterable-current=":android-sdk-ui/main" data-filterable-set=":android-sdk-ui/main"><div class="main-subrow keyValue "><div class=""><span class="inline-flex"><div><u><span>in</span><wbr></wbr><span>App</span><wbr></wbr><span>Message</span><wbr></wbr><span>View</span><wbr></wbr><span>Lifecycle</span><wbr></wbr><span><span>Listener</span></span></u></div></span></div><div><div class="title"><p class="paragraph">In-app message lifecycle listener.</p></div></div></div></div><div class="table-row table-row_content" data-filterable-current=":android-sdk-ui/main" data-filterable-set=":android-sdk-ui/main"><div class="main-subrow keyValue "><div class=""><span class="inline-flex"><div><u><span>configuration</span><wbr></wbr><span><span>Provider</span></span></u></div></span></div><div><div class="title"><p class="paragraph">Configuration provider.</p></div></div></div></div><div class="table-row table-row_content" data-filterable-current=":android-sdk-ui/main" data-filterable-set=":android-sdk-ui/main"><div class="main-subrow keyValue "><div class=""><span class="inline-flex"><div><u><span>opening</span><wbr></wbr><span><span>Animation</span></span></u></div></span></div><div><div class="title"><p class="paragraph">Animation to run when the in-app message opens.</p></div></div></div></div><div class="table-row table-row_content" data-filterable-current=":android-sdk-ui/main" data-filterable-set=":android-sdk-ui/main"><div class="main-subrow keyValue "><div class=""><span class="inline-flex"><div><u><span>closing</span><wbr></wbr><span><span>Animation</span></span></u></div></span></div><div><div class="title"><p class="paragraph">Animation to run when the in-app message closes.</p></div></div></div></div><div class="table-row table-row_content" data-filterable-current=":android-sdk-ui/main" data-filterable-set=":android-sdk-ui/main"><div class="main-subrow keyValue "><div class=""><span class="inline-flex"><div><u><span>clickable</span><wbr></wbr><span>In</span><wbr></wbr><span>App</span><wbr></wbr><span>Message</span><wbr></wbr><span><span>View</span></span></u></div></span></div><div><div class="title"><p class="paragraph">View for which click actions apply.</p></div></div></div></div><div class="table-row table-row_content" data-filterable-current=":android-sdk-ui/main" data-filterable-set=":android-sdk-ui/main"><div class="main-subrow keyValue "><div class=""><span class="inline-flex"><div><u><span>button</span><wbr></wbr><span><span>Views</span></span></u></div></span></div><div><div class="title"><p class="paragraph">List of views corresponding to MessageButton objects stored in the in-app message model object. These views should map one to one with the MessageButton objects.</p></div></div></div></div><div class="table-row table-row_content" data-filterable-current=":android-sdk-ui/main" data-filterable-set=":android-sdk-ui/main"><div class="main-subrow keyValue "><div class=""><span class="inline-flex"><div><u><span>close</span><wbr></wbr><span><span>Button</span></span></u></div></span></div><div><div class="title"><p class="paragraph">The <a href="https://developer.android.com/reference/kotlin/android/view/View.html">View</a> responsible for closing the in-app message.</p></div></div></div></div></div></div>    </div>
+    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui/release"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">class </span><a href="index.html">DefaultInAppMessageViewWrapper</a> <span><span class="token annotation builtin">@</span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.jvm/-jvm-overloads/index.html"><span class="token annotation builtin">JvmOverloads</span></a> </span><span class="token keyword">constructor</span><span class="token punctuation">(</span><span class="parameters "><span class="parameter "><span class="token keyword">val </span>inAppMessageView<span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/android/view/View.html">View</a><span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>inAppMessage<span class="token operator">: </span><a href="../../com.braze.models.inappmessage/-i-in-app-message/index.html">IInAppMessage</a><span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>inAppMessageViewLifecycleListener<span class="token operator">: </span><a href="../../com.braze.ui.inappmessage.listeners/-i-in-app-message-view-lifecycle-listener/index.html">IInAppMessageViewLifecycleListener</a><span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>configurationProvider<span class="token operator">: </span><a href="../../com.braze.configuration/-braze-configuration-provider/index.html">BrazeConfigurationProvider</a><span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>openingAnimation<span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/android/view/animation/Animation.html">Animation</a><span class="token operator">?</span><span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>closingAnimation<span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/android/view/animation/Animation.html">Animation</a><span class="token operator">?</span><span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">var </span>clickableInAppMessageView<span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/android/view/View.html">View</a><span class="token operator">?</span><span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">var </span>buttonViews<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-list/index.html">List</a><span class="token operator">&lt;</span><a href="https://developer.android.com/reference/kotlin/android/view/View.html">View</a><span class="token operator">&gt;</span><span class="token operator">?</span><span class="token operator"> = </span>null<span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">var </span>closeButton<span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/android/view/View.html">View</a><span class="token operator">?</span><span class="token operator"> = </span>null</span></span><span class="token punctuation">)</span> : <a href="../-i-in-app-message-view-wrapper/index.html">IInAppMessageViewWrapper</a></div><p class="paragraph">Constructor for base and slideup view wrappers. Adds click listeners to the in-app message view and adds swipe functionality to slideup in-app messages.</p><h4 class="tableheader">Parameters</h4><div class="table"><div class="table-row table-row_content" data-filterable-current=":android-sdk-ui/release" data-filterable-set=":android-sdk-ui/release"><div class="main-subrow keyValue "><div class=""><span class="inline-flex"><div><u><span>in</span><wbr></wbr><span>App</span><wbr></wbr><span>Message</span><wbr></wbr><span><span>View</span></span></u></div></span></div><div><div class="title"><p class="paragraph">In-app message top level view.</p></div></div></div></div><div class="table-row table-row_content" data-filterable-current=":android-sdk-ui/release" data-filterable-set=":android-sdk-ui/release"><div class="main-subrow keyValue "><div class=""><span class="inline-flex"><div><u><span>in</span><wbr></wbr><span>App</span><wbr></wbr><span><span>Message</span></span></u></div></span></div><div><div class="title"><p class="paragraph">In-app message model.</p></div></div></div></div><div class="table-row table-row_content" data-filterable-current=":android-sdk-ui/release" data-filterable-set=":android-sdk-ui/release"><div class="main-subrow keyValue "><div class=""><span class="inline-flex"><div><u><span>in</span><wbr></wbr><span>App</span><wbr></wbr><span>Message</span><wbr></wbr><span>View</span><wbr></wbr><span>Lifecycle</span><wbr></wbr><span><span>Listener</span></span></u></div></span></div><div><div class="title"><p class="paragraph">In-app message lifecycle listener.</p></div></div></div></div><div class="table-row table-row_content" data-filterable-current=":android-sdk-ui/release" data-filterable-set=":android-sdk-ui/release"><div class="main-subrow keyValue "><div class=""><span class="inline-flex"><div><u><span>configuration</span><wbr></wbr><span><span>Provider</span></span></u></div></span></div><div><div class="title"><p class="paragraph">Configuration provider.</p></div></div></div></div><div class="table-row table-row_content" data-filterable-current=":android-sdk-ui/release" data-filterable-set=":android-sdk-ui/release"><div class="main-subrow keyValue "><div class=""><span class="inline-flex"><div><u><span>opening</span><wbr></wbr><span><span>Animation</span></span></u></div></span></div><div><div class="title"><p class="paragraph">Animation to run when the in-app message opens.</p></div></div></div></div><div class="table-row table-row_content" data-filterable-current=":android-sdk-ui/release" data-filterable-set=":android-sdk-ui/release"><div class="main-subrow keyValue "><div class=""><span class="inline-flex"><div><u><span>closing</span><wbr></wbr><span><span>Animation</span></span></u></div></span></div><div><div class="title"><p class="paragraph">Animation to run when the in-app message closes.</p></div></div></div></div><div class="table-row table-row_content" data-filterable-current=":android-sdk-ui/release" data-filterable-set=":android-sdk-ui/release"><div class="main-subrow keyValue "><div class=""><span class="inline-flex"><div><u><span>clickable</span><wbr></wbr><span>In</span><wbr></wbr><span>App</span><wbr></wbr><span>Message</span><wbr></wbr><span><span>View</span></span></u></div></span></div><div><div class="title"><p class="paragraph">View for which click actions apply.</p></div></div></div></div><div class="table-row table-row_content" data-filterable-current=":android-sdk-ui/release" data-filterable-set=":android-sdk-ui/release"><div class="main-subrow keyValue "><div class=""><span class="inline-flex"><div><u><span>button</span><wbr></wbr><span><span>Views</span></span></u></div></span></div><div><div class="title"><p class="paragraph">List of views corresponding to MessageButton objects stored in the in-app message model object. These views should map one to one with the MessageButton objects.</p></div></div></div></div><div class="table-row table-row_content" data-filterable-current=":android-sdk-ui/release" data-filterable-set=":android-sdk-ui/release"><div class="main-subrow keyValue "><div class=""><span class="inline-flex"><div><u><span>close</span><wbr></wbr><span><span>Button</span></span></u></div></span></div><div><div class="title"><p class="paragraph">The <a href="https://developer.android.com/reference/kotlin/android/view/View.html">View</a> responsible for closing the in-app message.</p></div></div></div></div></div></div></div>
   </div>
   <div class="tabbedcontent">
     <div class="tabs-section" tabs-section="tabs-section"><button class="section-tab" data-active="" data-togglable="CONSTRUCTOR,TYPE,PROPERTY,FUNCTION">Members</button></div>
     <div class="tabs-section-body">
       <div data-togglable="CONSTRUCTOR">
         <h2 class="tableheader">Constructors</h2>
-        <div class="table"><a data-name="-1135258590%2FConstructors%2F1102423332" anchor-label="DefaultInAppMessageViewWrapper" id="-1135258590%2FConstructors%2F1102423332" data-filterable-set=":android-sdk-ui/main"></a>
-          <div class="table-row table-row_content" data-togglable="CONSTRUCTOR" data-filterable-current=":android-sdk-ui/main" data-filterable-set=":android-sdk-ui/main">
+        <div class="table"><a data-name="-1135258590%2FConstructors%2F-1369171853" anchor-label="DefaultInAppMessageViewWrapper" id="-1135258590%2FConstructors%2F-1369171853" data-filterable-set=":android-sdk-ui/release"></a>
+          <div class="table-row table-row_content" data-togglable="CONSTRUCTOR" data-filterable-current=":android-sdk-ui/release" data-filterable-set=":android-sdk-ui/release">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="-default-in-app-message-view-wrapper.html"><span>Default</span><wbr></wbr><span>In</span><wbr></wbr><span>App</span><wbr></wbr><span>Message</span><wbr></wbr><span>View</span><wbr></wbr><span><span>Wrapper</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1135258590%2FConstructors%2F1102423332"></span>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1135258590%2FConstructors%2F-1369171853"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted  with-platform-tabs" data-platform-hinted="data-platform-hinted">
-                    <div class="platform-bookmarks-row" data-toggle-list="data-toggle-list"><button class="platform-bookmark" data-filterable-current=":android-sdk-ui/main" data-filterable-set=":android-sdk-ui/main" data-active="" data-toggle=":android-sdk-ui/main">androidJvm</button></div>
-<div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui/main"><div class="symbol monospace"><div class="block"><div class="block"><span class="token annotation builtin">@</span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.jvm/-jvm-overloads/index.html"><span class="token annotation builtin">JvmOverloads</span></a></div></div><span class="token keyword">constructor</span><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">inAppMessageView<span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/android/view/View.html">View</a><span class="token punctuation">, </span></span><span class="parameter ">inAppMessage<span class="token operator">: </span><span data-unresolved-link="com.braze.models.inappmessage/IInAppMessage///PointingToDeclaration/">IInAppMessage</span><span class="token punctuation">, </span></span><span class="parameter ">inAppMessageViewLifecycleListener<span class="token operator">: </span><a href="../../com.braze.ui.inappmessage.listeners/-i-in-app-message-view-lifecycle-listener/index.html">IInAppMessageViewLifecycleListener</a><span class="token punctuation">, </span></span><span class="parameter ">configurationProvider<span class="token operator">: </span><span data-unresolved-link="com.braze.configuration/BrazeConfigurationProvider///PointingToDeclaration/">BrazeConfigurationProvider</span><span class="token punctuation">, </span></span><span class="parameter ">openingAnimation<span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/android/view/animation/Animation.html">Animation</a><span class="token operator">?</span><span class="token punctuation">, </span></span><span class="parameter ">closingAnimation<span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/android/view/animation/Animation.html">Animation</a><span class="token operator">?</span><span class="token punctuation">, </span></span><span class="parameter ">clickableInAppMessageView<span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/android/view/View.html">View</a><span class="token operator">?</span><span class="token punctuation">, </span></span><span class="parameter ">buttonViews<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-list/index.html">List</a><span class="token operator">&lt;</span><a href="https://developer.android.com/reference/kotlin/android/view/View.html">View</a><span class="token operator">&gt;</span><span class="token operator">?</span><span class="token operator"> = </span>null<span class="token punctuation">, </span></span><span class="parameter ">closeButton<span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/android/view/View.html">View</a><span class="token operator">?</span><span class="token operator"> = </span>null</span></span><span class="token punctuation">)</span></div></div>                  </div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui/release"><div class="symbol monospace"><div class="block"><div class="block"><span class="token annotation builtin">@</span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.jvm/-jvm-overloads/index.html"><span class="token annotation builtin">JvmOverloads</span></a></div></div><span class="token keyword">constructor</span><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">inAppMessageView<span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/android/view/View.html">View</a><span class="token punctuation">, </span></span><span class="parameter ">inAppMessage<span class="token operator">: </span><a href="../../com.braze.models.inappmessage/-i-in-app-message/index.html">IInAppMessage</a><span class="token punctuation">, </span></span><span class="parameter ">inAppMessageViewLifecycleListener<span class="token operator">: </span><a href="../../com.braze.ui.inappmessage.listeners/-i-in-app-message-view-lifecycle-listener/index.html">IInAppMessageViewLifecycleListener</a><span class="token punctuation">, </span></span><span class="parameter ">configurationProvider<span class="token operator">: </span><a href="../../com.braze.configuration/-braze-configuration-provider/index.html">BrazeConfigurationProvider</a><span class="token punctuation">, </span></span><span class="parameter ">openingAnimation<span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/android/view/animation/Animation.html">Animation</a><span class="token operator">?</span><span class="token punctuation">, </span></span><span class="parameter ">closingAnimation<span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/android/view/animation/Animation.html">Animation</a><span class="token operator">?</span><span class="token punctuation">, </span></span><span class="parameter ">clickableInAppMessageView<span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/android/view/View.html">View</a><span class="token operator">?</span><span class="token punctuation">, </span></span><span class="parameter ">buttonViews<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-list/index.html">List</a><span class="token operator">&lt;</span><a href="https://developer.android.com/reference/kotlin/android/view/View.html">View</a><span class="token operator">&gt;</span><span class="token operator">?</span><span class="token operator"> = </span>null<span class="token punctuation">, </span></span><span class="parameter ">closeButton<span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/android/view/View.html">View</a><span class="token operator">?</span><span class="token operator"> = </span>null</span></span><span class="token punctuation">)</span></div></div></div>
                 </div>
               </div>
             </div>
@@ -138,19 +133,17 @@
       </div>
       <div data-togglable="TYPE">
         <h2 class="tableheader">Types</h2>
-        <div class="table"><a data-name="-422536344%2FClasslikes%2F1102423332" anchor-label="Companion" id="-422536344%2FClasslikes%2F1102423332" data-filterable-set=":android-sdk-ui/main"></a>
-          <div class="table-row table-row_content" data-filterable-current=":android-sdk-ui/main" data-filterable-set=":android-sdk-ui/main">
+        <div class="table"><a data-name="-422536344%2FClasslikes%2F-1369171853" anchor-label="Companion" id="-422536344%2FClasslikes%2F-1369171853" data-filterable-set=":android-sdk-ui/release"></a>
+          <div class="table-row table-row_content" data-filterable-current=":android-sdk-ui/release" data-filterable-set=":android-sdk-ui/release">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="-companion/index.html"><span><span>Companion</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-422536344%2FClasslikes%2F1102423332"></span>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-422536344%2FClasslikes%2F-1369171853"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted  with-platform-tabs" data-platform-hinted="data-platform-hinted">
-                    <div class="platform-bookmarks-row" data-toggle-list="data-toggle-list"><button class="platform-bookmark" data-filterable-current=":android-sdk-ui/main" data-filterable-set=":android-sdk-ui/main" data-active="" data-toggle=":android-sdk-ui/main">androidJvm</button></div>
-<div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui/main"><div class="symbol monospace"><span class="token keyword">object </span><a href="-companion/index.html">Companion</a></div></div>                  </div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui/release"><div class="symbol monospace"><span class="token keyword">object </span><a href="-companion/index.html">Companion</a></div></div></div>
                 </div>
               </div>
             </div>
@@ -159,257 +152,257 @@
       </div>
       <div data-togglable="PROPERTY">
         <h2 class="tableheader">Properties</h2>
-        <div class="table"><a data-name="432811589%2FProperties%2F1102423332" anchor-label="buttonViews" id="432811589%2FProperties%2F1102423332" data-filterable-set=":android-sdk-ui/main"></a>
-          <div class="table-row table-row_content" data-filterable-current=":android-sdk-ui/main" data-filterable-set=":android-sdk-ui/main">
+        <div class="table"><a data-name="432811589%2FProperties%2F-1369171853" anchor-label="buttonViews" id="432811589%2FProperties%2F-1369171853" data-filterable-set=":android-sdk-ui/release"></a>
+          <div class="table-row table-row_content" data-filterable-current=":android-sdk-ui/release" data-filterable-set=":android-sdk-ui/release">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="button-views.html"><span>button</span><wbr></wbr><span><span>Views</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="432811589%2FProperties%2F1102423332"></span>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="432811589%2FProperties%2F-1369171853"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted  with-platform-tabs" data-platform-hinted="data-platform-hinted">
-                    <div class="platform-bookmarks-row" data-toggle-list="data-toggle-list"><button class="platform-bookmark" data-filterable-current=":android-sdk-ui/main" data-filterable-set=":android-sdk-ui/main" data-active="" data-toggle=":android-sdk-ui/main">androidJvm</button></div>
-<div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui/main"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">var </span><a href="button-views.html">buttonViews</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-list/index.html">List</a><span class="token operator">&lt;</span><a href="https://developer.android.com/reference/kotlin/android/view/View.html">View</a><span class="token operator">&gt;</span><span class="token operator">?</span></div></div>                  </div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui/release"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">var </span><a href="button-views.html">buttonViews</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-list/index.html">List</a><span class="token operator">&lt;</span><a href="https://developer.android.com/reference/kotlin/android/view/View.html">View</a><span class="token operator">&gt;</span><span class="token operator">?</span></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="272832623%2FProperties%2F1102423332" anchor-label="clickableInAppMessageView" id="272832623%2FProperties%2F1102423332" data-filterable-set=":android-sdk-ui/main"></a>
-          <div class="table-row table-row_content" data-filterable-current=":android-sdk-ui/main" data-filterable-set=":android-sdk-ui/main">
+<a data-name="272832623%2FProperties%2F-1369171853" anchor-label="clickableInAppMessageView" id="272832623%2FProperties%2F-1369171853" data-filterable-set=":android-sdk-ui/release"></a>
+          <div class="table-row table-row_content" data-filterable-current=":android-sdk-ui/release" data-filterable-set=":android-sdk-ui/release">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="clickable-in-app-message-view.html"><span>clickable</span><wbr></wbr><span>In</span><wbr></wbr><span>App</span><wbr></wbr><span>Message</span><wbr></wbr><span><span>View</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="272832623%2FProperties%2F1102423332"></span>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="272832623%2FProperties%2F-1369171853"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted  with-platform-tabs" data-platform-hinted="data-platform-hinted">
-                    <div class="platform-bookmarks-row" data-toggle-list="data-toggle-list"><button class="platform-bookmark" data-filterable-current=":android-sdk-ui/main" data-filterable-set=":android-sdk-ui/main" data-active="" data-toggle=":android-sdk-ui/main">androidJvm</button></div>
-<div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui/main"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">var </span><a href="clickable-in-app-message-view.html">clickableInAppMessageView</a><span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/android/view/View.html">View</a><span class="token operator">?</span></div></div>                  </div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui/release"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">var </span><a href="clickable-in-app-message-view.html">clickableInAppMessageView</a><span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/android/view/View.html">View</a><span class="token operator">?</span></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="2061570327%2FProperties%2F1102423332" anchor-label="closeButton" id="2061570327%2FProperties%2F1102423332" data-filterable-set=":android-sdk-ui/main"></a>
-          <div class="table-row table-row_content" data-filterable-current=":android-sdk-ui/main" data-filterable-set=":android-sdk-ui/main">
+<a data-name="2061570327%2FProperties%2F-1369171853" anchor-label="closeButton" id="2061570327%2FProperties%2F-1369171853" data-filterable-set=":android-sdk-ui/release"></a>
+          <div class="table-row table-row_content" data-filterable-current=":android-sdk-ui/release" data-filterable-set=":android-sdk-ui/release">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="close-button.html"><span>close</span><wbr></wbr><span><span>Button</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="2061570327%2FProperties%2F1102423332"></span>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="2061570327%2FProperties%2F-1369171853"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted  with-platform-tabs" data-platform-hinted="data-platform-hinted">
-                    <div class="platform-bookmarks-row" data-toggle-list="data-toggle-list"><button class="platform-bookmark" data-filterable-current=":android-sdk-ui/main" data-filterable-set=":android-sdk-ui/main" data-active="" data-toggle=":android-sdk-ui/main">androidJvm</button></div>
-<div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui/main"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">var </span><a href="close-button.html">closeButton</a><span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/android/view/View.html">View</a><span class="token operator">?</span></div></div>                  </div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui/release"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">var </span><a href="close-button.html">closeButton</a><span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/android/view/View.html">View</a><span class="token operator">?</span></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="-933703318%2FProperties%2F1102423332" anchor-label="closingAnimation" id="-933703318%2FProperties%2F1102423332" data-filterable-set=":android-sdk-ui/main"></a>
-          <div class="table-row table-row_content" data-filterable-current=":android-sdk-ui/main" data-filterable-set=":android-sdk-ui/main">
+<a data-name="-933703318%2FProperties%2F-1369171853" anchor-label="closingAnimation" id="-933703318%2FProperties%2F-1369171853" data-filterable-set=":android-sdk-ui/release"></a>
+          <div class="table-row table-row_content" data-filterable-current=":android-sdk-ui/release" data-filterable-set=":android-sdk-ui/release">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="closing-animation.html"><span>closing</span><wbr></wbr><span><span>Animation</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-933703318%2FProperties%2F1102423332"></span>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-933703318%2FProperties%2F-1369171853"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted  with-platform-tabs" data-platform-hinted="data-platform-hinted">
-                    <div class="platform-bookmarks-row" data-toggle-list="data-toggle-list"><button class="platform-bookmark" data-filterable-current=":android-sdk-ui/main" data-filterable-set=":android-sdk-ui/main" data-active="" data-toggle=":android-sdk-ui/main">androidJvm</button></div>
-<div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui/main"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">val </span><a href="closing-animation.html">closingAnimation</a><span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/android/view/animation/Animation.html">Animation</a><span class="token operator">?</span></div></div>                  </div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui/release"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">val </span><a href="closing-animation.html">closingAnimation</a><span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/android/view/animation/Animation.html">Animation</a><span class="token operator">?</span></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="262549754%2FProperties%2F1102423332" anchor-label="configurationProvider" id="262549754%2FProperties%2F1102423332" data-filterable-set=":android-sdk-ui/main"></a>
-          <div class="table-row table-row_content" data-filterable-current=":android-sdk-ui/main" data-filterable-set=":android-sdk-ui/main">
+<a data-name="262549754%2FProperties%2F-1369171853" anchor-label="configurationProvider" id="262549754%2FProperties%2F-1369171853" data-filterable-set=":android-sdk-ui/release"></a>
+          <div class="table-row table-row_content" data-filterable-current=":android-sdk-ui/release" data-filterable-set=":android-sdk-ui/release">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="configuration-provider.html"><span>configuration</span><wbr></wbr><span><span>Provider</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="262549754%2FProperties%2F1102423332"></span>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="262549754%2FProperties%2F-1369171853"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted  with-platform-tabs" data-platform-hinted="data-platform-hinted">
-                    <div class="platform-bookmarks-row" data-toggle-list="data-toggle-list"><button class="platform-bookmark" data-filterable-current=":android-sdk-ui/main" data-filterable-set=":android-sdk-ui/main" data-active="" data-toggle=":android-sdk-ui/main">androidJvm</button></div>
-<div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui/main"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">val </span><a href="configuration-provider.html">configurationProvider</a><span class="token operator">: </span><span data-unresolved-link="com.braze.configuration/BrazeConfigurationProvider///PointingToDeclaration/">BrazeConfigurationProvider</span></div></div>                  </div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui/release"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">val </span><a href="configuration-provider.html">configurationProvider</a><span class="token operator">: </span><a href="../../com.braze.configuration/-braze-configuration-provider/index.html">BrazeConfigurationProvider</a></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="-1911228668%2FProperties%2F1102423332" anchor-label="contentViewGroupParentLayout" id="-1911228668%2FProperties%2F1102423332" data-filterable-set=":android-sdk-ui/main"></a>
-          <div class="table-row table-row_content" data-filterable-current=":android-sdk-ui/main" data-filterable-set=":android-sdk-ui/main">
+<a data-name="-1911228668%2FProperties%2F-1369171853" anchor-label="contentViewGroupParentLayout" id="-1911228668%2FProperties%2F-1369171853" data-filterable-set=":android-sdk-ui/release"></a>
+          <div class="table-row table-row_content" data-filterable-current=":android-sdk-ui/release" data-filterable-set=":android-sdk-ui/release">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="content-view-group-parent-layout.html"><span>content</span><wbr></wbr><span>View</span><wbr></wbr><span>Group</span><wbr></wbr><span>Parent</span><wbr></wbr><span><span>Layout</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1911228668%2FProperties%2F1102423332"></span>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1911228668%2FProperties%2F-1369171853"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted  with-platform-tabs" data-platform-hinted="data-platform-hinted">
-                    <div class="platform-bookmarks-row" data-toggle-list="data-toggle-list"><button class="platform-bookmark" data-filterable-current=":android-sdk-ui/main" data-filterable-set=":android-sdk-ui/main" data-active="" data-toggle=":android-sdk-ui/main">androidJvm</button></div>
-<div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui/main"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">var </span><a href="content-view-group-parent-layout.html">contentViewGroupParentLayout</a><span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/android/view/ViewGroup.html">ViewGroup</a><span class="token operator">?</span></div><div class="brief "><p class="paragraph">The <a href="https://developer.android.com/reference/kotlin/android/view/ViewGroup.html">ViewGroup</a> parent of the in-app message.</p></div></div>                  </div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui/release"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">var </span><a href="content-view-group-parent-layout.html">contentViewGroupParentLayout</a><span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/android/view/ViewGroup.html">ViewGroup</a><span class="token operator">?</span></div><div class="brief "><p class="paragraph">The <a href="https://developer.android.com/reference/kotlin/android/view/ViewGroup.html">ViewGroup</a> parent of the in-app message.</p></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="1642278202%2FProperties%2F1102423332" anchor-label="dismissRunnable" id="1642278202%2FProperties%2F1102423332" data-filterable-set=":android-sdk-ui/main"></a>
-          <div class="table-row table-row_content" data-filterable-current=":android-sdk-ui/main" data-filterable-set=":android-sdk-ui/main">
+<a data-name="1642278202%2FProperties%2F-1369171853" anchor-label="dismissRunnable" id="1642278202%2FProperties%2F-1369171853" data-filterable-set=":android-sdk-ui/release"></a>
+          <div class="table-row table-row_content" data-filterable-current=":android-sdk-ui/release" data-filterable-set=":android-sdk-ui/release">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="dismiss-runnable.html"><span>dismiss</span><wbr></wbr><span><span>Runnable</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1642278202%2FProperties%2F1102423332"></span>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1642278202%2FProperties%2F-1369171853"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted  with-platform-tabs" data-platform-hinted="data-platform-hinted">
-                    <div class="platform-bookmarks-row" data-toggle-list="data-toggle-list"><button class="platform-bookmark" data-filterable-current=":android-sdk-ui/main" data-filterable-set=":android-sdk-ui/main" data-active="" data-toggle=":android-sdk-ui/main">androidJvm</button></div>
-<div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui/main"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">var </span><a href="dismiss-runnable.html">dismissRunnable</a><span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/java/lang/Runnable.html">Runnable</a><span class="token operator">?</span></div></div>                  </div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui/release"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">var </span><a href="dismiss-runnable.html">dismissRunnable</a><span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/java/lang/Runnable.html">Runnable</a><span class="token operator">?</span></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="1576940430%2FProperties%2F1102423332" anchor-label="inAppMessage" id="1576940430%2FProperties%2F1102423332" data-filterable-set=":android-sdk-ui/main"></a>
-          <div class="table-row table-row_content" data-filterable-current=":android-sdk-ui/main" data-filterable-set=":android-sdk-ui/main">
+<a data-name="1576940430%2FProperties%2F-1369171853" anchor-label="inAppMessage" id="1576940430%2FProperties%2F-1369171853" data-filterable-set=":android-sdk-ui/release"></a>
+          <div class="table-row table-row_content" data-filterable-current=":android-sdk-ui/release" data-filterable-set=":android-sdk-ui/release">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="in-app-message.html"><span>in</span><wbr></wbr><span>App</span><wbr></wbr><span><span>Message</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1576940430%2FProperties%2F1102423332"></span>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1576940430%2FProperties%2F-1369171853"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted  with-platform-tabs" data-platform-hinted="data-platform-hinted">
-                    <div class="platform-bookmarks-row" data-toggle-list="data-toggle-list"><button class="platform-bookmark" data-filterable-current=":android-sdk-ui/main" data-filterable-set=":android-sdk-ui/main" data-active="" data-toggle=":android-sdk-ui/main">androidJvm</button></div>
-<div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui/main"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">val </span><a href="in-app-message.html">inAppMessage</a><span class="token operator">: </span><span data-unresolved-link="com.braze.models.inappmessage/IInAppMessage///PointingToDeclaration/">IInAppMessage</span></div></div>                  </div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui/release"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">val </span><a href="in-app-message.html">inAppMessage</a><span class="token operator">: </span><a href="../../com.braze.models.inappmessage/-i-in-app-message/index.html">IInAppMessage</a></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="-449582103%2FProperties%2F1102423332" anchor-label="inAppMessageView" id="-449582103%2FProperties%2F1102423332" data-filterable-set=":android-sdk-ui/main"></a>
-          <div class="table-row table-row_content" data-filterable-current=":android-sdk-ui/main" data-filterable-set=":android-sdk-ui/main">
+<a data-name="-449582103%2FProperties%2F-1369171853" anchor-label="inAppMessageView" id="-449582103%2FProperties%2F-1369171853" data-filterable-set=":android-sdk-ui/release"></a>
+          <div class="table-row table-row_content" data-filterable-current=":android-sdk-ui/release" data-filterable-set=":android-sdk-ui/release">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="in-app-message-view.html"><span>in</span><wbr></wbr><span>App</span><wbr></wbr><span>Message</span><wbr></wbr><span><span>View</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-449582103%2FProperties%2F1102423332"></span>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-449582103%2FProperties%2F-1369171853"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted  with-platform-tabs" data-platform-hinted="data-platform-hinted">
-                    <div class="platform-bookmarks-row" data-toggle-list="data-toggle-list"><button class="platform-bookmark" data-filterable-current=":android-sdk-ui/main" data-filterable-set=":android-sdk-ui/main" data-active="" data-toggle=":android-sdk-ui/main">androidJvm</button></div>
-<div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui/main"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">val </span><a href="in-app-message-view.html">inAppMessageView</a><span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/android/view/View.html">View</a></div></div>                  </div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui/release"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">val </span><a href="in-app-message-view.html">inAppMessageView</a><span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/android/view/View.html">View</a></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="-1188794189%2FProperties%2F1102423332" anchor-label="inAppMessageViewLifecycleListener" id="-1188794189%2FProperties%2F1102423332" data-filterable-set=":android-sdk-ui/main"></a>
-          <div class="table-row table-row_content" data-filterable-current=":android-sdk-ui/main" data-filterable-set=":android-sdk-ui/main">
+<a data-name="-1188794189%2FProperties%2F-1369171853" anchor-label="inAppMessageViewLifecycleListener" id="-1188794189%2FProperties%2F-1369171853" data-filterable-set=":android-sdk-ui/release"></a>
+          <div class="table-row table-row_content" data-filterable-current=":android-sdk-ui/release" data-filterable-set=":android-sdk-ui/release">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="in-app-message-view-lifecycle-listener.html"><span>in</span><wbr></wbr><span>App</span><wbr></wbr><span>Message</span><wbr></wbr><span>View</span><wbr></wbr><span>Lifecycle</span><wbr></wbr><span><span>Listener</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1188794189%2FProperties%2F1102423332"></span>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1188794189%2FProperties%2F-1369171853"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted  with-platform-tabs" data-platform-hinted="data-platform-hinted">
-                    <div class="platform-bookmarks-row" data-toggle-list="data-toggle-list"><button class="platform-bookmark" data-filterable-current=":android-sdk-ui/main" data-filterable-set=":android-sdk-ui/main" data-active="" data-toggle=":android-sdk-ui/main">androidJvm</button></div>
-<div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui/main"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">val </span><a href="in-app-message-view-lifecycle-listener.html">inAppMessageViewLifecycleListener</a><span class="token operator">: </span><a href="../../com.braze.ui.inappmessage.listeners/-i-in-app-message-view-lifecycle-listener/index.html">IInAppMessageViewLifecycleListener</a></div></div>                  </div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui/release"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">val </span><a href="in-app-message-view-lifecycle-listener.html">inAppMessageViewLifecycleListener</a><span class="token operator">: </span><a href="../../com.braze.ui.inappmessage.listeners/-i-in-app-message-view-lifecycle-listener/index.html">IInAppMessageViewLifecycleListener</a></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="-1842123691%2FProperties%2F1102423332" anchor-label="isAnimatingClose" id="-1842123691%2FProperties%2F1102423332" data-filterable-set=":android-sdk-ui/main"></a>
-          <div class="table-row table-row_content" data-filterable-current=":android-sdk-ui/main" data-filterable-set=":android-sdk-ui/main">
+<a data-name="-1842123691%2FProperties%2F-1369171853" anchor-label="isAnimatingClose" id="-1842123691%2FProperties%2F-1369171853" data-filterable-set=":android-sdk-ui/release"></a>
+          <div class="table-row table-row_content" data-filterable-current=":android-sdk-ui/release" data-filterable-set=":android-sdk-ui/release">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="is-animating-close.html"><span>is</span><wbr></wbr><span>Animating</span><wbr></wbr><span><span>Close</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1842123691%2FProperties%2F1102423332"></span>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1842123691%2FProperties%2F-1369171853"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted  with-platform-tabs" data-platform-hinted="data-platform-hinted">
-                    <div class="platform-bookmarks-row" data-toggle-list="data-toggle-list"><button class="platform-bookmark" data-filterable-current=":android-sdk-ui/main" data-filterable-set=":android-sdk-ui/main" data-active="" data-toggle=":android-sdk-ui/main">androidJvm</button></div>
-<div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui/main"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">var </span><a href="is-animating-close.html">isAnimatingClose</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a></div></div>                  </div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui/release"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">var </span><a href="is-animating-close.html">isAnimatingClose</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="119563126%2FProperties%2F1102423332" anchor-label="onBackInvokedCallback" id="119563126%2FProperties%2F1102423332" data-filterable-set=":android-sdk-ui/main"></a>
-          <div class="table-row table-row_content" data-filterable-current=":android-sdk-ui/main" data-filterable-set=":android-sdk-ui/main">
+<a data-name="119563126%2FProperties%2F-1369171853" anchor-label="onBackInvokedCallback" id="119563126%2FProperties%2F-1369171853" data-filterable-set=":android-sdk-ui/release"></a>
+          <div class="table-row table-row_content" data-filterable-current=":android-sdk-ui/release" data-filterable-set=":android-sdk-ui/release">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="on-back-invoked-callback.html"><span>on</span><wbr></wbr><span>Back</span><wbr></wbr><span>Invoked</span><wbr></wbr><span><span>Callback</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="119563126%2FProperties%2F1102423332"></span>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="119563126%2FProperties%2F-1369171853"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted  with-platform-tabs" data-platform-hinted="data-platform-hinted">
-                    <div class="platform-bookmarks-row" data-toggle-list="data-toggle-list"><button class="platform-bookmark" data-filterable-current=":android-sdk-ui/main" data-filterable-set=":android-sdk-ui/main" data-active="" data-toggle=":android-sdk-ui/main">androidJvm</button></div>
-<div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui/main"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">var </span><a href="on-back-invoked-callback.html">onBackInvokedCallback</a><span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/android/window/OnBackInvokedCallback.html">OnBackInvokedCallback</a><span class="token operator">?</span></div><div class="brief "><p class="paragraph">The <a href="https://developer.android.com/reference/kotlin/android/window/OnBackInvokedCallback.html">OnBackInvokedCallback</a> that is registered to close the in-app message when the back button is pressed.</p></div></div>                  </div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui/release"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">var </span><a href="on-back-invoked-callback.html">onBackInvokedCallback</a><span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/android/window/OnBackInvokedCallback.html">OnBackInvokedCallback</a><span class="token operator">?</span></div><div class="brief "><p class="paragraph">The <a href="https://developer.android.com/reference/kotlin/android/window/OnBackInvokedCallback.html">OnBackInvokedCallback</a> that is registered to close the in-app message when the back button is pressed.</p></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="-72621747%2FProperties%2F1102423332" anchor-label="openingAnimation" id="-72621747%2FProperties%2F1102423332" data-filterable-set=":android-sdk-ui/main"></a>
-          <div class="table-row table-row_content" data-filterable-current=":android-sdk-ui/main" data-filterable-set=":android-sdk-ui/main">
+<a data-name="692846935%2FProperties%2F-1369171853" anchor-label="onBackPressedDispatcherFallbackCallback" id="692846935%2FProperties%2F-1369171853" data-filterable-set=":android-sdk-ui/release"></a>
+          <div class="table-row table-row_content" data-filterable-current=":android-sdk-ui/release" data-filterable-set=":android-sdk-ui/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="on-back-pressed-dispatcher-fallback-callback.html"><span>on</span><wbr></wbr><span>Back</span><wbr></wbr><span>Pressed</span><wbr></wbr><span>Dispatcher</span><wbr></wbr><span>Fallback</span><wbr></wbr><span><span>Callback</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="692846935%2FProperties%2F-1369171853"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui/release"><div class="symbol monospace"><span class="token keyword">private </span><span class="token keyword">var </span><a href="on-back-pressed-dispatcher-fallback-callback.html">onBackPressedDispatcherFallbackCallback</a><span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/androidx/activity/OnBackPressedCallback.html">OnBackPressedCallback</a><span class="token operator">?</span></div><div class="brief "><p class="paragraph">Fallback <a href="https://developer.android.com/reference/kotlin/androidx/activity/OnBackPressedCallback.html">OnBackPressedCallback</a> used to close the in-app message when the back button is pressed.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-72621747%2FProperties%2F-1369171853" anchor-label="openingAnimation" id="-72621747%2FProperties%2F-1369171853" data-filterable-set=":android-sdk-ui/release"></a>
+          <div class="table-row table-row_content" data-filterable-current=":android-sdk-ui/release" data-filterable-set=":android-sdk-ui/release">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="opening-animation.html"><span>opening</span><wbr></wbr><span><span>Animation</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-72621747%2FProperties%2F1102423332"></span>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-72621747%2FProperties%2F-1369171853"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted  with-platform-tabs" data-platform-hinted="data-platform-hinted">
-                    <div class="platform-bookmarks-row" data-toggle-list="data-toggle-list"><button class="platform-bookmark" data-filterable-current=":android-sdk-ui/main" data-filterable-set=":android-sdk-ui/main" data-active="" data-toggle=":android-sdk-ui/main">androidJvm</button></div>
-<div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui/main"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">val </span><a href="opening-animation.html">openingAnimation</a><span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/android/view/animation/Animation.html">Animation</a><span class="token operator">?</span></div></div>                  </div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui/release"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">val </span><a href="opening-animation.html">openingAnimation</a><span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/android/view/animation/Animation.html">Animation</a><span class="token operator">?</span></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="-2051128887%2FProperties%2F1102423332" anchor-label="previouslyFocusedView" id="-2051128887%2FProperties%2F1102423332" data-filterable-set=":android-sdk-ui/main"></a>
-          <div class="table-row table-row_content" data-filterable-current=":android-sdk-ui/main" data-filterable-set=":android-sdk-ui/main">
+<a data-name="-2051128887%2FProperties%2F-1369171853" anchor-label="previouslyFocusedView" id="-2051128887%2FProperties%2F-1369171853" data-filterable-set=":android-sdk-ui/release"></a>
+          <div class="table-row table-row_content" data-filterable-current=":android-sdk-ui/release" data-filterable-set=":android-sdk-ui/release">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="previously-focused-view.html"><span>previously</span><wbr></wbr><span>Focused</span><wbr></wbr><span><span>View</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-2051128887%2FProperties%2F1102423332"></span>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-2051128887%2FProperties%2F-1369171853"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted  with-platform-tabs" data-platform-hinted="data-platform-hinted">
-                    <div class="platform-bookmarks-row" data-toggle-list="data-toggle-list"><button class="platform-bookmark" data-filterable-current=":android-sdk-ui/main" data-filterable-set=":android-sdk-ui/main" data-active="" data-toggle=":android-sdk-ui/main">androidJvm</button></div>
-<div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui/main"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">var </span><a href="previously-focused-view.html">previouslyFocusedView</a><span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/android/view/View.html">View</a><span class="token operator">?</span></div><div class="brief "><p class="paragraph">The <a href="https://developer.android.com/reference/kotlin/android/view/View.html">View</a> that previously held focus before a message is displayed as given via <a href="https://developer.android.com/reference/kotlin/android/app/Activity.html#getcurrentfocus">Activity.getCurrentFocus</a>.</p></div></div>                  </div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui/release"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">var </span><a href="previously-focused-view.html">previouslyFocusedView</a><span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/android/view/View.html">View</a><span class="token operator">?</span></div><div class="brief "><p class="paragraph">The <a href="https://developer.android.com/reference/kotlin/android/view/View.html">View</a> that previously held focus before a message is displayed as given via <a href="https://developer.android.com/reference/kotlin/android/app/Activity.html#getcurrentfocus">Activity.getCurrentFocus</a>.</p></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="-1000323246%2FProperties%2F1102423332" anchor-label="viewAccessibilityFlagMap" id="-1000323246%2FProperties%2F1102423332" data-filterable-set=":android-sdk-ui/main"></a>
-          <div class="table-row table-row_content" data-filterable-current=":android-sdk-ui/main" data-filterable-set=":android-sdk-ui/main">
+<a data-name="-1463193883%2FProperties%2F-1369171853" anchor-label="shouldIgnoreOpenAndCloseLifecycleCallbacks" id="-1463193883%2FProperties%2F-1369171853" data-filterable-set=":android-sdk-ui/release"></a>
+          <div class="table-row table-row_content" data-filterable-current=":android-sdk-ui/release" data-filterable-set=":android-sdk-ui/release">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
-                  <div><a href="view-accessibility-flag-map.html"><span>view</span><wbr></wbr><span>Accessibility</span><wbr></wbr><span>Flag</span><wbr></wbr><span><span>Map</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1000323246%2FProperties%2F1102423332"></span>
+                  <div><a href="should-ignore-open-and-close-lifecycle-callbacks.html"><span>should</span><wbr></wbr><span>Ignore</span><wbr></wbr><span>Open</span><wbr></wbr><span>And</span><wbr></wbr><span>Close</span><wbr></wbr><span>Lifecycle</span><wbr></wbr><span><span>Callbacks</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1463193883%2FProperties%2F-1369171853"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted  with-platform-tabs" data-platform-hinted="data-platform-hinted">
-                    <div class="platform-bookmarks-row" data-toggle-list="data-toggle-list"><button class="platform-bookmark" data-filterable-current=":android-sdk-ui/main" data-filterable-set=":android-sdk-ui/main" data-active="" data-toggle=":android-sdk-ui/main">androidJvm</button></div>
-<div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui/main"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">var </span><a href="view-accessibility-flag-map.html">viewAccessibilityFlagMap</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-hash-map/index.html">HashMap</a><span class="token operator">&lt;</span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a><span class="token punctuation">, </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a><span class="token operator">&gt;</span></div><div class="brief "><p class="paragraph">A mapping of the view accessibility flags of views before overriding them. Used in conjunction with <span data-unresolved-link="com.braze.configuration/BrazeConfig.Builder/setIsInAppMessageAccessibilityExclusiveModeEnabled/#kotlin.Boolean/PointingToDeclaration/">com.braze.configuration.BrazeConfig.Builder.setIsInAppMessageAccessibilityExclusiveModeEnabled</span></p></div></div>                  </div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui/release"><div class="symbol monospace"><span class="token keyword">private </span><span class="token keyword">var </span><a href="should-ignore-open-and-close-lifecycle-callbacks.html">shouldIgnoreOpenAndCloseLifecycleCallbacks</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a></div><div class="brief "><p class="paragraph">When true, <a href="prepare-for-activity-transition-carryover.html">prepareForActivityTransitionCarryover</a> ran and delayed open/close callbacks must be ignored.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1000323246%2FProperties%2F-1369171853" anchor-label="viewAccessibilityFlagMap" id="-1000323246%2FProperties%2F-1369171853" data-filterable-set=":android-sdk-ui/release"></a>
+          <div class="table-row table-row_content" data-filterable-current=":android-sdk-ui/release" data-filterable-set=":android-sdk-ui/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="view-accessibility-flag-map.html"><span>view</span><wbr></wbr><span>Accessibility</span><wbr></wbr><span>Flag</span><wbr></wbr><span><span>Map</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1000323246%2FProperties%2F-1369171853"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui/release"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">var </span><a href="view-accessibility-flag-map.html">viewAccessibilityFlagMap</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-hash-map/index.html">HashMap</a><span class="token operator">&lt;</span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a><span class="token punctuation">, </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a><span class="token operator">&gt;</span></div><div class="brief "><p class="paragraph">A mapping of the view accessibility flags of views before overriding them. Used in conjunction with <a href="../../com.braze.configuration/-braze-config/-builder/set-is-in-app-message-accessibility-exclusive-mode-enabled.html">com.braze.configuration.BrazeConfig.Builder.setIsInAppMessageAccessibilityExclusiveModeEnabled</a></p></div></div></div>
                 </div>
               </div>
             </div>
@@ -418,274 +411,272 @@
       </div>
       <div data-togglable="FUNCTION">
         <h2 class="tableheader">Functions</h2>
-        <div class="table"><a data-name="1246860211%2FFunctions%2F1102423332" anchor-label="addDismissRunnable" id="1246860211%2FFunctions%2F1102423332" data-filterable-set=":android-sdk-ui/main"></a>
-          <div class="table-row table-row_content" data-filterable-current=":android-sdk-ui/main" data-filterable-set=":android-sdk-ui/main">
+        <div class="table"><a data-name="1246860211%2FFunctions%2F-1369171853" anchor-label="addDismissRunnable" id="1246860211%2FFunctions%2F-1369171853" data-filterable-set=":android-sdk-ui/release"></a>
+          <div class="table-row table-row_content" data-filterable-current=":android-sdk-ui/release" data-filterable-set=":android-sdk-ui/release">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="add-dismiss-runnable.html"><span>add</span><wbr></wbr><span>Dismiss</span><wbr></wbr><span><span>Runnable</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1246860211%2FFunctions%2F1102423332"></span>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1246860211%2FFunctions%2F-1369171853"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted  with-platform-tabs" data-platform-hinted="data-platform-hinted">
-                    <div class="platform-bookmarks-row" data-toggle-list="data-toggle-list"><button class="platform-bookmark" data-filterable-current=":android-sdk-ui/main" data-filterable-set=":android-sdk-ui/main" data-active="" data-toggle=":android-sdk-ui/main">androidJvm</button></div>
-<div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui/main"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">fun </span><a href="add-dismiss-runnable.html"><span class="token function">addDismissRunnable</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span></div></div>                  </div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui/release"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">fun </span><a href="add-dismiss-runnable.html"><span class="token function">addDismissRunnable</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="-532514137%2FFunctions%2F1102423332" anchor-label="addInAppMessageViewToViewGroup" id="-532514137%2FFunctions%2F1102423332" data-filterable-set=":android-sdk-ui/main"></a>
-          <div class="table-row table-row_content" data-filterable-current=":android-sdk-ui/main" data-filterable-set=":android-sdk-ui/main">
+<a data-name="-532514137%2FFunctions%2F-1369171853" anchor-label="addInAppMessageViewToViewGroup" id="-532514137%2FFunctions%2F-1369171853" data-filterable-set=":android-sdk-ui/release"></a>
+          <div class="table-row table-row_content" data-filterable-current=":android-sdk-ui/release" data-filterable-set=":android-sdk-ui/release">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="add-in-app-message-view-to-view-group.html"><span>add</span><wbr></wbr><span>In</span><wbr></wbr><span>App</span><wbr></wbr><span>Message</span><wbr></wbr><span>View</span><wbr></wbr><span>To</span><wbr></wbr><span>View</span><wbr></wbr><span><span>Group</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-532514137%2FFunctions%2F1102423332"></span>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-532514137%2FFunctions%2F-1369171853"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted  with-platform-tabs" data-platform-hinted="data-platform-hinted">
-                    <div class="platform-bookmarks-row" data-toggle-list="data-toggle-list"><button class="platform-bookmark" data-filterable-current=":android-sdk-ui/main" data-filterable-set=":android-sdk-ui/main" data-active="" data-toggle=":android-sdk-ui/main">androidJvm</button></div>
-<div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui/main"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">fun </span><a href="add-in-app-message-view-to-view-group.html"><span class="token function">addInAppMessageViewToViewGroup</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">parentViewGroup<span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/android/view/ViewGroup.html">ViewGroup</a><span class="token punctuation">, </span></span><span class="parameter ">inAppMessage<span class="token operator">: </span><span data-unresolved-link="com.braze.models.inappmessage/IInAppMessage///PointingToDeclaration/">IInAppMessage</span><span class="token punctuation">, </span></span><span class="parameter ">inAppMessageView<span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/android/view/View.html">View</a><span class="token punctuation">, </span></span><span class="parameter ">inAppMessageViewLifecycleListener<span class="token operator">: </span><a href="../../com.braze.ui.inappmessage.listeners/-i-in-app-message-view-lifecycle-listener/index.html">IInAppMessageViewLifecycleListener</a></span></span><span class="token punctuation">)</span></div><div class="brief "><p class="paragraph">Adds the <a href="../../com.braze.ui.inappmessage.views/-i-in-app-message-view/index.html">IInAppMessageView</a> to the parent <a href="https://developer.android.com/reference/kotlin/android/view/ViewGroup.html">ViewGroup</a>. Also calls <a href="../../com.braze.ui.inappmessage.listeners/-i-in-app-message-view-lifecycle-listener/before-opened.html">IInAppMessageViewLifecycleListener.beforeOpened</a> and <a href="../../com.braze.ui.inappmessage.listeners/-i-in-app-message-view-lifecycle-listener/after-opened.html">IInAppMessageViewLifecycleListener.afterOpened</a>.</p></div></div>                  </div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui/release"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">fun </span><a href="add-in-app-message-view-to-view-group.html"><span class="token function">addInAppMessageViewToViewGroup</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">parentViewGroup<span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/android/view/ViewGroup.html">ViewGroup</a><span class="token punctuation">, </span></span><span class="parameter ">inAppMessage<span class="token operator">: </span><a href="../../com.braze.models.inappmessage/-i-in-app-message/index.html">IInAppMessage</a><span class="token punctuation">, </span></span><span class="parameter ">inAppMessageView<span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/android/view/View.html">View</a><span class="token punctuation">, </span></span><span class="parameter ">inAppMessageViewLifecycleListener<span class="token operator">: </span><a href="../../com.braze.ui.inappmessage.listeners/-i-in-app-message-view-lifecycle-listener/index.html">IInAppMessageViewLifecycleListener</a></span></span><span class="token punctuation">)</span></div><div class="brief "><p class="paragraph">Adds the <a href="../../com.braze.ui.inappmessage.views/-i-in-app-message-view/index.html">IInAppMessageView</a> to the parent <a href="https://developer.android.com/reference/kotlin/android/view/ViewGroup.html">ViewGroup</a>. Also calls <a href="../../com.braze.ui.inappmessage.listeners/-i-in-app-message-view-lifecycle-listener/before-opened.html">IInAppMessageViewLifecycleListener.beforeOpened</a> and <a href="../../com.braze.ui.inappmessage.listeners/-i-in-app-message-view-lifecycle-listener/after-opened.html">IInAppMessageViewLifecycleListener.afterOpened</a>.</p></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="-766253783%2FFunctions%2F1102423332" anchor-label="close" id="-766253783%2FFunctions%2F1102423332" data-filterable-set=":android-sdk-ui/main"></a>
-          <div class="table-row table-row_content" data-filterable-current=":android-sdk-ui/main" data-filterable-set=":android-sdk-ui/main">
+<a data-name="-766253783%2FFunctions%2F-1369171853" anchor-label="close" id="-766253783%2FFunctions%2F-1369171853" data-filterable-set=":android-sdk-ui/release"></a>
+          <div class="table-row table-row_content" data-filterable-current=":android-sdk-ui/release" data-filterable-set=":android-sdk-ui/release">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="close.html"><span><span>close</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-766253783%2FFunctions%2F1102423332"></span>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-766253783%2FFunctions%2F-1369171853"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted  with-platform-tabs" data-platform-hinted="data-platform-hinted">
-                    <div class="platform-bookmarks-row" data-toggle-list="data-toggle-list"><button class="platform-bookmark" data-filterable-current=":android-sdk-ui/main" data-filterable-set=":android-sdk-ui/main" data-active="" data-toggle=":android-sdk-ui/main">androidJvm</button></div>
-<div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui/main"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="close.html"><span class="token function">close</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span></div><div class="brief "><p class="paragraph">Closes an <span data-unresolved-link="com.braze.models.inappmessage/IInAppMessage///PointingToDeclaration/">IInAppMessage</span>. As a result of this call, it is expected that an <span data-unresolved-link="com.braze.models.inappmessage/IInAppMessage///PointingToDeclaration/">IInAppMessage</span> is no longer visible and not interactable by the user.</p></div></div>                  </div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui/release"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="close.html"><span class="token function">close</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span></div><div class="brief "><p class="paragraph">Closes an <a href="../../com.braze.models.inappmessage/-i-in-app-message/index.html">IInAppMessage</a>. As a result of this call, it is expected that an <a href="../../com.braze.models.inappmessage/-i-in-app-message/index.html">IInAppMessage</a> is no longer visible and not interactable by the user.</p></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="839898137%2FFunctions%2F1102423332" anchor-label="closeInAppMessageView" id="839898137%2FFunctions%2F1102423332" data-filterable-set=":android-sdk-ui/main"></a>
-          <div class="table-row table-row_content" data-filterable-current=":android-sdk-ui/main" data-filterable-set=":android-sdk-ui/main">
+<a data-name="839898137%2FFunctions%2F-1369171853" anchor-label="closeInAppMessageView" id="839898137%2FFunctions%2F-1369171853" data-filterable-set=":android-sdk-ui/release"></a>
+          <div class="table-row table-row_content" data-filterable-current=":android-sdk-ui/release" data-filterable-set=":android-sdk-ui/release">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="close-in-app-message-view.html"><span>close</span><wbr></wbr><span>In</span><wbr></wbr><span>App</span><wbr></wbr><span>Message</span><wbr></wbr><span><span>View</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="839898137%2FFunctions%2F1102423332"></span>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="839898137%2FFunctions%2F-1369171853"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted  with-platform-tabs" data-platform-hinted="data-platform-hinted">
-                    <div class="platform-bookmarks-row" data-toggle-list="data-toggle-list"><button class="platform-bookmark" data-filterable-current=":android-sdk-ui/main" data-filterable-set=":android-sdk-ui/main" data-active="" data-toggle=":android-sdk-ui/main">androidJvm</button></div>
-<div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui/main"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">fun </span><a href="close-in-app-message-view.html"><span class="token function">closeInAppMessageView</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span></div><div class="brief "><p class="paragraph">Closes the in-app message view. In this order, the following actions are performed:</p></div></div>                  </div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui/release"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">fun </span><a href="close-in-app-message-view.html"><span class="token function">closeInAppMessageView</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span></div><div class="brief "><p class="paragraph">Closes the in-app message view. In this order, the following actions are performed:</p></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="1001558634%2FFunctions%2F1102423332" anchor-label="createAnimationListener" id="1001558634%2FFunctions%2F1102423332" data-filterable-set=":android-sdk-ui/main"></a>
-          <div class="table-row table-row_content" data-filterable-current=":android-sdk-ui/main" data-filterable-set=":android-sdk-ui/main">
+<a data-name="1001558634%2FFunctions%2F-1369171853" anchor-label="createAnimationListener" id="1001558634%2FFunctions%2F-1369171853" data-filterable-set=":android-sdk-ui/release"></a>
+          <div class="table-row table-row_content" data-filterable-current=":android-sdk-ui/release" data-filterable-set=":android-sdk-ui/release">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="create-animation-listener.html"><span>create</span><wbr></wbr><span>Animation</span><wbr></wbr><span><span>Listener</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1001558634%2FFunctions%2F1102423332"></span>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1001558634%2FFunctions%2F-1369171853"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted  with-platform-tabs" data-platform-hinted="data-platform-hinted">
-                    <div class="platform-bookmarks-row" data-toggle-list="data-toggle-list"><button class="platform-bookmark" data-filterable-current=":android-sdk-ui/main" data-filterable-set=":android-sdk-ui/main" data-active="" data-toggle=":android-sdk-ui/main">androidJvm</button></div>
-<div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui/main"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">fun </span><a href="create-animation-listener.html"><span class="token function">createAnimationListener</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">opening<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/android/view/animation/Animation.AnimationListener.html">Animation.AnimationListener</a></div></div>                  </div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui/release"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">fun </span><a href="create-animation-listener.html"><span class="token function">createAnimationListener</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">opening<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/android/view/animation/Animation.AnimationListener.html">Animation.AnimationListener</a></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="-967186188%2FFunctions%2F1102423332" anchor-label="createButtonClickListeners" id="-967186188%2FFunctions%2F1102423332" data-filterable-set=":android-sdk-ui/main"></a>
-          <div class="table-row table-row_content" data-filterable-current=":android-sdk-ui/main" data-filterable-set=":android-sdk-ui/main">
+<a data-name="-967186188%2FFunctions%2F-1369171853" anchor-label="createButtonClickListeners" id="-967186188%2FFunctions%2F-1369171853" data-filterable-set=":android-sdk-ui/release"></a>
+          <div class="table-row table-row_content" data-filterable-current=":android-sdk-ui/release" data-filterable-set=":android-sdk-ui/release">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="create-button-click-listeners.html"><span>create</span><wbr></wbr><span>Button</span><wbr></wbr><span>Click</span><wbr></wbr><span><span>Listeners</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-967186188%2FFunctions%2F1102423332"></span>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-967186188%2FFunctions%2F-1369171853"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted  with-platform-tabs" data-platform-hinted="data-platform-hinted">
-                    <div class="platform-bookmarks-row" data-toggle-list="data-toggle-list"><button class="platform-bookmark" data-filterable-current=":android-sdk-ui/main" data-filterable-set=":android-sdk-ui/main" data-active="" data-toggle=":android-sdk-ui/main">androidJvm</button></div>
-<div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui/main"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">fun </span><a href="create-button-click-listeners.html"><span class="token function">createButtonClickListeners</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span></div><div class="brief "><p class="paragraph">Sets <a href="../../com.braze.ui.inappmessage.listeners/-i-in-app-message-view-lifecycle-listener/on-button-clicked.html">IInAppMessageViewLifecycleListener.onButtonClicked</a> click listeners for all message buttons on this in-app message.</p></div></div>                  </div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui/release"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">fun </span><a href="create-button-click-listeners.html"><span class="token function">createButtonClickListeners</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span></div><div class="brief "><p class="paragraph">Sets <a href="../../com.braze.ui.inappmessage.listeners/-i-in-app-message-view-lifecycle-listener/on-button-clicked.html">IInAppMessageViewLifecycleListener.onButtonClicked</a> click listeners for all message buttons on this in-app message.</p></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="1720010337%2FFunctions%2F1102423332" anchor-label="createClickListener" id="1720010337%2FFunctions%2F1102423332" data-filterable-set=":android-sdk-ui/main"></a>
-          <div class="table-row table-row_content" data-filterable-current=":android-sdk-ui/main" data-filterable-set=":android-sdk-ui/main">
+<a data-name="1720010337%2FFunctions%2F-1369171853" anchor-label="createClickListener" id="1720010337%2FFunctions%2F-1369171853" data-filterable-set=":android-sdk-ui/release"></a>
+          <div class="table-row table-row_content" data-filterable-current=":android-sdk-ui/release" data-filterable-set=":android-sdk-ui/release">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="create-click-listener.html"><span>create</span><wbr></wbr><span>Click</span><wbr></wbr><span><span>Listener</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1720010337%2FFunctions%2F1102423332"></span>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1720010337%2FFunctions%2F-1369171853"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted  with-platform-tabs" data-platform-hinted="data-platform-hinted">
-                    <div class="platform-bookmarks-row" data-toggle-list="data-toggle-list"><button class="platform-bookmark" data-filterable-current=":android-sdk-ui/main" data-filterable-set=":android-sdk-ui/main" data-active="" data-toggle=":android-sdk-ui/main">androidJvm</button></div>
-<div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui/main"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">fun </span><a href="create-click-listener.html"><span class="token function">createClickListener</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/android/view/View.OnClickListener.html">View.OnClickListener</a></div><div class="brief "><p class="paragraph">Creates a <a href="https://developer.android.com/reference/kotlin/android/view/View.OnClickListener.html">View.OnClickListener</a> that calls <a href="../../com.braze.ui.inappmessage.listeners/-i-in-app-message-view-lifecycle-listener/on-clicked.html">IInAppMessageViewLifecycleListener.onClicked</a>.</p></div></div>                  </div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui/release"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">fun </span><a href="create-click-listener.html"><span class="token function">createClickListener</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/android/view/View.OnClickListener.html">View.OnClickListener</a></div><div class="brief "><p class="paragraph">Creates a <a href="https://developer.android.com/reference/kotlin/android/view/View.OnClickListener.html">View.OnClickListener</a> that calls <a href="../../com.braze.ui.inappmessage.listeners/-i-in-app-message-view-lifecycle-listener/on-clicked.html">IInAppMessageViewLifecycleListener.onClicked</a>.</p></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="1420249348%2FFunctions%2F1102423332" anchor-label="createCloseInAppMessageClickListener" id="1420249348%2FFunctions%2F1102423332" data-filterable-set=":android-sdk-ui/main"></a>
-          <div class="table-row table-row_content" data-filterable-current=":android-sdk-ui/main" data-filterable-set=":android-sdk-ui/main">
+<a data-name="1420249348%2FFunctions%2F-1369171853" anchor-label="createCloseInAppMessageClickListener" id="1420249348%2FFunctions%2F-1369171853" data-filterable-set=":android-sdk-ui/release"></a>
+          <div class="table-row table-row_content" data-filterable-current=":android-sdk-ui/release" data-filterable-set=":android-sdk-ui/release">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="create-close-in-app-message-click-listener.html"><span>create</span><wbr></wbr><span>Close</span><wbr></wbr><span>In</span><wbr></wbr><span>App</span><wbr></wbr><span>Message</span><wbr></wbr><span>Click</span><wbr></wbr><span><span>Listener</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1420249348%2FFunctions%2F1102423332"></span>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1420249348%2FFunctions%2F-1369171853"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted  with-platform-tabs" data-platform-hinted="data-platform-hinted">
-                    <div class="platform-bookmarks-row" data-toggle-list="data-toggle-list"><button class="platform-bookmark" data-filterable-current=":android-sdk-ui/main" data-filterable-set=":android-sdk-ui/main" data-active="" data-toggle=":android-sdk-ui/main">androidJvm</button></div>
-<div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui/main"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">fun </span><a href="create-close-in-app-message-click-listener.html"><span class="token function">createCloseInAppMessageClickListener</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/android/view/View.OnClickListener.html">View.OnClickListener</a></div></div>                  </div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui/release"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">fun </span><a href="create-close-in-app-message-click-listener.html"><span class="token function">createCloseInAppMessageClickListener</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/android/view/View.OnClickListener.html">View.OnClickListener</a></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="2044285273%2FFunctions%2F1102423332" anchor-label="createDismissCallbacks" id="2044285273%2FFunctions%2F1102423332" data-filterable-set=":android-sdk-ui/main"></a>
-          <div class="table-row table-row_content" data-filterable-current=":android-sdk-ui/main" data-filterable-set=":android-sdk-ui/main">
+<a data-name="2044285273%2FFunctions%2F-1369171853" anchor-label="createDismissCallbacks" id="2044285273%2FFunctions%2F-1369171853" data-filterable-set=":android-sdk-ui/release"></a>
+          <div class="table-row table-row_content" data-filterable-current=":android-sdk-ui/release" data-filterable-set=":android-sdk-ui/release">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="create-dismiss-callbacks.html"><span>create</span><wbr></wbr><span>Dismiss</span><wbr></wbr><span><span>Callbacks</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="2044285273%2FFunctions%2F1102423332"></span>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="2044285273%2FFunctions%2F-1369171853"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted  with-platform-tabs" data-platform-hinted="data-platform-hinted">
-                    <div class="platform-bookmarks-row" data-toggle-list="data-toggle-list"><button class="platform-bookmark" data-filterable-current=":android-sdk-ui/main" data-filterable-set=":android-sdk-ui/main" data-active="" data-toggle=":android-sdk-ui/main">androidJvm</button></div>
-<div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui/main"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">fun </span><a href="create-dismiss-callbacks.html"><span class="token function">createDismissCallbacks</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../../com.braze.ui.inappmessage.listeners/-swipe-dismiss-touch-listener/-dismiss-callbacks/index.html">SwipeDismissTouchListener.DismissCallbacks</a></div></div>                  </div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui/release"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">fun </span><a href="create-dismiss-callbacks.html"><span class="token function">createDismissCallbacks</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../../com.braze.ui.inappmessage.listeners/-swipe-dismiss-touch-listener/-dismiss-callbacks/index.html">SwipeDismissTouchListener.DismissCallbacks</a></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="1142424938%2FFunctions%2F1102423332" anchor-label="createTouchAwareListener" id="1142424938%2FFunctions%2F1102423332" data-filterable-set=":android-sdk-ui/main"></a>
-          <div class="table-row table-row_content" data-filterable-current=":android-sdk-ui/main" data-filterable-set=":android-sdk-ui/main">
+<a data-name="1142424938%2FFunctions%2F-1369171853" anchor-label="createTouchAwareListener" id="1142424938%2FFunctions%2F-1369171853" data-filterable-set=":android-sdk-ui/release"></a>
+          <div class="table-row table-row_content" data-filterable-current=":android-sdk-ui/release" data-filterable-set=":android-sdk-ui/release">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="create-touch-aware-listener.html"><span>create</span><wbr></wbr><span>Touch</span><wbr></wbr><span>Aware</span><wbr></wbr><span><span>Listener</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1142424938%2FFunctions%2F1102423332"></span>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1142424938%2FFunctions%2F-1369171853"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted  with-platform-tabs" data-platform-hinted="data-platform-hinted">
-                    <div class="platform-bookmarks-row" data-toggle-list="data-toggle-list"><button class="platform-bookmark" data-filterable-current=":android-sdk-ui/main" data-filterable-set=":android-sdk-ui/main" data-active="" data-toggle=":android-sdk-ui/main">androidJvm</button></div>
-<div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui/main"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">fun </span><a href="create-touch-aware-listener.html"><span class="token function">createTouchAwareListener</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../../com.braze.ui.inappmessage.listeners/-touch-aware-swipe-dismiss-touch-listener/-i-touch-listener/index.html">TouchAwareSwipeDismissTouchListener.ITouchListener</a></div></div>                  </div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui/release"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">fun </span><a href="create-touch-aware-listener.html"><span class="token function">createTouchAwareListener</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../../com.braze.ui.inappmessage.listeners/-touch-aware-swipe-dismiss-touch-listener/-i-touch-listener/index.html">TouchAwareSwipeDismissTouchListener.ITouchListener</a></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="1475690788%2FFunctions%2F1102423332" anchor-label="finalizeViewBeforeDisplay" id="1475690788%2FFunctions%2F1102423332" data-filterable-set=":android-sdk-ui/main"></a>
-          <div class="table-row table-row_content" data-filterable-current=":android-sdk-ui/main" data-filterable-set=":android-sdk-ui/main">
+<a data-name="1475690788%2FFunctions%2F-1369171853" anchor-label="finalizeViewBeforeDisplay" id="1475690788%2FFunctions%2F-1369171853" data-filterable-set=":android-sdk-ui/release"></a>
+          <div class="table-row table-row_content" data-filterable-current=":android-sdk-ui/release" data-filterable-set=":android-sdk-ui/release">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="finalize-view-before-display.html"><span>finalize</span><wbr></wbr><span>View</span><wbr></wbr><span>Before</span><wbr></wbr><span><span>Display</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1475690788%2FFunctions%2F1102423332"></span>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1475690788%2FFunctions%2F-1369171853"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted  with-platform-tabs" data-platform-hinted="data-platform-hinted">
-                    <div class="platform-bookmarks-row" data-toggle-list="data-toggle-list"><button class="platform-bookmark" data-filterable-current=":android-sdk-ui/main" data-filterable-set=":android-sdk-ui/main" data-active="" data-toggle=":android-sdk-ui/main">androidJvm</button></div>
-<div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui/main"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">fun </span><a href="finalize-view-before-display.html"><span class="token function">finalizeViewBeforeDisplay</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">inAppMessage<span class="token operator">: </span><span data-unresolved-link="com.braze.models.inappmessage/IInAppMessage///PointingToDeclaration/">IInAppMessage</span><span class="token punctuation">, </span></span><span class="parameter ">inAppMessageView<span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/android/view/View.html">View</a><span class="token punctuation">, </span></span><span class="parameter ">inAppMessageViewLifecycleListener<span class="token operator">: </span><a href="../../com.braze.ui.inappmessage.listeners/-i-in-app-message-view-lifecycle-listener/index.html">IInAppMessageViewLifecycleListener</a></span></span><span class="token punctuation">)</span></div><div class="brief "><p class="paragraph">Performs any last actions before calling <a href="../../com.braze.ui.inappmessage.listeners/-i-in-app-message-view-lifecycle-listener/before-opened.html">IInAppMessageViewLifecycleListener.beforeOpened</a>.</p></div></div>                  </div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui/release"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">fun </span><a href="finalize-view-before-display.html"><span class="token function">finalizeViewBeforeDisplay</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">inAppMessage<span class="token operator">: </span><a href="../../com.braze.models.inappmessage/-i-in-app-message/index.html">IInAppMessage</a><span class="token punctuation">, </span></span><span class="parameter ">inAppMessageView<span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/android/view/View.html">View</a><span class="token punctuation">, </span></span><span class="parameter ">inAppMessageViewLifecycleListener<span class="token operator">: </span><a href="../../com.braze.ui.inappmessage.listeners/-i-in-app-message-view-lifecycle-listener/index.html">IInAppMessageViewLifecycleListener</a></span></span><span class="token punctuation">)</span></div><div class="brief "><p class="paragraph">Performs any last actions before calling <a href="../../com.braze.ui.inappmessage.listeners/-i-in-app-message-view-lifecycle-listener/before-opened.html">IInAppMessageViewLifecycleListener.beforeOpened</a>.</p></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="342642098%2FFunctions%2F1102423332" anchor-label="getLayoutParams" id="342642098%2FFunctions%2F1102423332" data-filterable-set=":android-sdk-ui/main"></a>
-          <div class="table-row table-row_content" data-filterable-current=":android-sdk-ui/main" data-filterable-set=":android-sdk-ui/main">
+<a data-name="342642098%2FFunctions%2F-1369171853" anchor-label="getLayoutParams" id="342642098%2FFunctions%2F-1369171853" data-filterable-set=":android-sdk-ui/release"></a>
+          <div class="table-row table-row_content" data-filterable-current=":android-sdk-ui/release" data-filterable-set=":android-sdk-ui/release">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="get-layout-params.html"><span>get</span><wbr></wbr><span>Layout</span><wbr></wbr><span><span>Params</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="342642098%2FFunctions%2F1102423332"></span>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="342642098%2FFunctions%2F-1369171853"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted  with-platform-tabs" data-platform-hinted="data-platform-hinted">
-                    <div class="platform-bookmarks-row" data-toggle-list="data-toggle-list"><button class="platform-bookmark" data-filterable-current=":android-sdk-ui/main" data-filterable-set=":android-sdk-ui/main" data-active="" data-toggle=":android-sdk-ui/main">androidJvm</button></div>
-<div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui/main"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">fun </span><a href="get-layout-params.html"><span class="token function">getLayoutParams</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">inAppMessage<span class="token operator">: </span><span data-unresolved-link="com.braze.models.inappmessage/IInAppMessage///PointingToDeclaration/">IInAppMessage</span><span class="token operator">?</span></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/android/view/ViewGroup.LayoutParams.html">ViewGroup.LayoutParams</a></div><div class="brief "><p class="paragraph">Creates the <a href="https://developer.android.com/reference/kotlin/android/view/ViewGroup.LayoutParams.html">ViewGroup.LayoutParams</a> used for adding the <a href="../../com.braze.ui.inappmessage.views/-i-in-app-message-view/index.html">IInAppMessageView</a> to the <a href="https://developer.android.com/reference/kotlin/android/view/ViewGroup.html">ViewGroup</a> returned by <a href="get-parent-view-group.html">DefaultInAppMessageViewWrapper.getParentViewGroup</a>.</p></div></div>                  </div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui/release"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">fun </span><a href="get-layout-params.html"><span class="token function">getLayoutParams</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">inAppMessage<span class="token operator">: </span><a href="../../com.braze.models.inappmessage/-i-in-app-message/index.html">IInAppMessage</a><span class="token operator">?</span></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/android/view/ViewGroup.LayoutParams.html">ViewGroup.LayoutParams</a></div><div class="brief "><p class="paragraph">Creates the <a href="https://developer.android.com/reference/kotlin/android/view/ViewGroup.LayoutParams.html">ViewGroup.LayoutParams</a> used for adding the <a href="../../com.braze.ui.inappmessage.views/-i-in-app-message-view/index.html">IInAppMessageView</a> to the <a href="https://developer.android.com/reference/kotlin/android/view/ViewGroup.html">ViewGroup</a> returned by <a href="get-parent-view-group.html">DefaultInAppMessageViewWrapper.getParentViewGroup</a>.</p></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="150898980%2FFunctions%2F1102423332" anchor-label="getParentViewGroup" id="150898980%2FFunctions%2F1102423332" data-filterable-set=":android-sdk-ui/main"></a>
-          <div class="table-row table-row_content" data-filterable-current=":android-sdk-ui/main" data-filterable-set=":android-sdk-ui/main">
+<a data-name="150898980%2FFunctions%2F-1369171853" anchor-label="getParentViewGroup" id="150898980%2FFunctions%2F-1369171853" data-filterable-set=":android-sdk-ui/release"></a>
+          <div class="table-row table-row_content" data-filterable-current=":android-sdk-ui/release" data-filterable-set=":android-sdk-ui/release">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="get-parent-view-group.html"><span>get</span><wbr></wbr><span>Parent</span><wbr></wbr><span>View</span><wbr></wbr><span><span>Group</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="150898980%2FFunctions%2F1102423332"></span>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="150898980%2FFunctions%2F-1369171853"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted  with-platform-tabs" data-platform-hinted="data-platform-hinted">
-                    <div class="platform-bookmarks-row" data-toggle-list="data-toggle-list"><button class="platform-bookmark" data-filterable-current=":android-sdk-ui/main" data-filterable-set=":android-sdk-ui/main" data-active="" data-toggle=":android-sdk-ui/main">androidJvm</button></div>
-<div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui/main"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">fun </span><a href="get-parent-view-group.html"><span class="token function">getParentViewGroup</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">activity<span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/android/app/Activity.html">Activity</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/android/view/ViewGroup.html">ViewGroup</a></div><div class="brief "><p class="paragraph">Gets the <a href="https://developer.android.com/reference/kotlin/android/view/ViewGroup.html">ViewGroup</a> which will display the in-app message. Note that if this implementation is overridden, then <a href="get-layout-params.html">DefaultInAppMessageViewWrapper.getLayoutParams</a> should also most likely be overridden to match the <a href="https://developer.android.com/reference/kotlin/android/view/ViewGroup.html">ViewGroup</a> subclass returned here.</p></div></div>                  </div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui/release"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">fun </span><a href="get-parent-view-group.html"><span class="token function">getParentViewGroup</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">activity<span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/android/app/Activity.html">Activity</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/android/view/ViewGroup.html">ViewGroup</a></div><div class="brief "><p class="paragraph">Gets the <a href="https://developer.android.com/reference/kotlin/android/view/ViewGroup.html">ViewGroup</a> which will display the in-app message. Note that if this implementation is overridden, then <a href="get-layout-params.html">DefaultInAppMessageViewWrapper.getLayoutParams</a> should also most likely be overridden to match the <a href="https://developer.android.com/reference/kotlin/android/view/ViewGroup.html">ViewGroup</a> subclass returned here.</p></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="2010293492%2FFunctions%2F1102423332" anchor-label="open" id="2010293492%2FFunctions%2F1102423332" data-filterable-set=":android-sdk-ui/main"></a>
-          <div class="table-row table-row_content" data-filterable-current=":android-sdk-ui/main" data-filterable-set=":android-sdk-ui/main">
+<a data-name="2010293492%2FFunctions%2F-1369171853" anchor-label="open" id="2010293492%2FFunctions%2F-1369171853" data-filterable-set=":android-sdk-ui/release"></a>
+          <div class="table-row table-row_content" data-filterable-current=":android-sdk-ui/release" data-filterable-set=":android-sdk-ui/release">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="open.html"><span><span>open</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="2010293492%2FFunctions%2F1102423332"></span>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="2010293492%2FFunctions%2F-1369171853"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted  with-platform-tabs" data-platform-hinted="data-platform-hinted">
-                    <div class="platform-bookmarks-row" data-toggle-list="data-toggle-list"><button class="platform-bookmark" data-filterable-current=":android-sdk-ui/main" data-filterable-set=":android-sdk-ui/main" data-active="" data-toggle=":android-sdk-ui/main">androidJvm</button></div>
-<div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui/main"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="open.html"><span class="token function">open</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">activity<span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/android/app/Activity.html">Activity</a></span></span><span class="token punctuation">)</span></div><div class="brief "><p class="paragraph">Opens an <span data-unresolved-link="com.braze.models.inappmessage/IInAppMessage///PointingToDeclaration/">IInAppMessage</span> on the <a href="https://developer.android.com/reference/kotlin/android/app/Activity.html">Activity</a>. As a result of this call, it is expected that an <span data-unresolved-link="com.braze.models.inappmessage/IInAppMessage///PointingToDeclaration/">IInAppMessage</span> is visible and interactable by the user.</p></div></div>                  </div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui/release"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="open.html"><span class="token function">open</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">activity<span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/android/app/Activity.html">Activity</a></span></span><span class="token punctuation">)</span></div><div class="brief "><p class="paragraph">Opens an <a href="../../com.braze.models.inappmessage/-i-in-app-message/index.html">IInAppMessage</a> on the <a href="https://developer.android.com/reference/kotlin/android/app/Activity.html">Activity</a>. As a result of this call, it is expected that an <a href="../../com.braze.models.inappmessage/-i-in-app-message/index.html">IInAppMessage</a> is visible and interactable by the user.</p></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="-1369602856%2FFunctions%2F1102423332" anchor-label="prepareForActivityTransitionCarryover" id="-1369602856%2FFunctions%2F1102423332" data-filterable-set=":android-sdk-ui/main"></a>
-          <div class="table-row table-row_content" data-filterable-current=":android-sdk-ui/main" data-filterable-set=":android-sdk-ui/main">
+<a data-name="-1369602856%2FFunctions%2F-1369171853" anchor-label="prepareForActivityTransitionCarryover" id="-1369602856%2FFunctions%2F-1369171853" data-filterable-set=":android-sdk-ui/release"></a>
+          <div class="table-row table-row_content" data-filterable-current=":android-sdk-ui/release" data-filterable-set=":android-sdk-ui/release">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="prepare-for-activity-transition-carryover.html"><span>prepare</span><wbr></wbr><span>For</span><wbr></wbr><span>Activity</span><wbr></wbr><span>Transition</span><wbr></wbr><span><span>Carryover</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1369602856%2FFunctions%2F1102423332"></span>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1369602856%2FFunctions%2F-1369171853"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted  with-platform-tabs" data-platform-hinted="data-platform-hinted">
-                    <div class="platform-bookmarks-row" data-toggle-list="data-toggle-list"><button class="platform-bookmark" data-filterable-current=":android-sdk-ui/main" data-filterable-set=":android-sdk-ui/main" data-active="" data-toggle=":android-sdk-ui/main">androidJvm</button></div>
-<div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui/main"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="prepare-for-activity-transition-carryover.html"><span class="token function">prepareForActivityTransitionCarryover</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span></div><div class="brief "><p class="paragraph">Prepares this wrapper when its message is saved for display on the next <a href="https://developer.android.com/reference/kotlin/android/app/Activity.html">Activity</a> during an <a href="../-braze-in-app-message-manager/unregister-in-app-message-manager.html">BrazeInAppMessageManager.unregisterInAppMessageManager</a> transition.</p></div></div>                  </div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui/release"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="prepare-for-activity-transition-carryover.html"><span class="token function">prepareForActivityTransitionCarryover</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span></div><div class="brief "><p class="paragraph">Prepares this wrapper when its message is saved for display on the next <a href="https://developer.android.com/reference/kotlin/android/app/Activity.html">Activity</a> during an <a href="../-braze-in-app-message-manager/unregister-in-app-message-manager.html">BrazeInAppMessageManager.unregisterInAppMessageManager</a> transition.</p></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="-2101926969%2FFunctions%2F1102423332" anchor-label="setAndStartAnimation" id="-2101926969%2FFunctions%2F1102423332" data-filterable-set=":android-sdk-ui/main"></a>
-          <div class="table-row table-row_content" data-filterable-current=":android-sdk-ui/main" data-filterable-set=":android-sdk-ui/main">
+<a data-name="-1467174248%2FFunctions%2F-1369171853" anchor-label="resolveWindowInsetsForInAppMessage" id="-1467174248%2FFunctions%2F-1369171853" data-filterable-set=":android-sdk-ui/release"></a>
+          <div class="table-row table-row_content" data-filterable-current=":android-sdk-ui/release" data-filterable-set=":android-sdk-ui/release">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
-                  <div><a href="set-and-start-animation.html"><span>set</span><wbr></wbr><span>And</span><wbr></wbr><span>Start</span><wbr></wbr><span><span>Animation</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-2101926969%2FFunctions%2F1102423332"></span>
+                  <div><a href="resolve-window-insets-for-in-app-message.html"><span>resolve</span><wbr></wbr><span>Window</span><wbr></wbr><span>Insets</span><wbr></wbr><span>For</span><wbr></wbr><span>In</span><wbr></wbr><span>App</span><wbr></wbr><span><span>Message</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1467174248%2FFunctions%2F-1369171853"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted  with-platform-tabs" data-platform-hinted="data-platform-hinted">
-                    <div class="platform-bookmarks-row" data-toggle-list="data-toggle-list"><button class="platform-bookmark" data-filterable-current=":android-sdk-ui/main" data-filterable-set=":android-sdk-ui/main" data-active="" data-toggle=":android-sdk-ui/main">androidJvm</button></div>
-<div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui/main"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">fun </span><a href="set-and-start-animation.html"><span class="token function">setAndStartAnimation</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">opening<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a></span></span><span class="token punctuation">)</span></div><div class="brief "><p class="paragraph">Instantiates and executes the correct animation for the current in-app message. Slideup-type messages slide in from the top or bottom of the view. Other in-app messages fade in and out of view.</p></div></div>                  </div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui/release"><div class="symbol monospace"><span class="token keyword">protected </span><span class="token keyword">open </span><span class="token keyword">fun </span><a href="resolve-window-insets-for-in-app-message.html"><span class="token function">resolveWindowInsetsForInAppMessage</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">inAppMessageView<span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/android/view/View.html">View</a><span class="token punctuation">, </span></span><span class="parameter ">insets<span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/androidx/core/view/WindowInsetsCompat.html">WindowInsetsCompat</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/androidx/core/view/WindowInsetsCompat.html">WindowInsetsCompat</a></div><div class="brief "><p class="paragraph">Transforms window insets before they are passed to <a href="../../com.braze.ui.inappmessage.views/-i-in-app-message-view/apply-window-insets.html">IInAppMessageView.applyWindowInsets</a>. Subclasses can override to adjust inset values for demo or host-specific behavior.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-2101926969%2FFunctions%2F-1369171853" anchor-label="setAndStartAnimation" id="-2101926969%2FFunctions%2F-1369171853" data-filterable-set=":android-sdk-ui/release"></a>
+          <div class="table-row table-row_content" data-filterable-current=":android-sdk-ui/release" data-filterable-set=":android-sdk-ui/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="set-and-start-animation.html"><span>set</span><wbr></wbr><span>And</span><wbr></wbr><span>Start</span><wbr></wbr><span><span>Animation</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-2101926969%2FFunctions%2F-1369171853"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui/release"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">fun </span><a href="set-and-start-animation.html"><span class="token function">setAndStartAnimation</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">opening<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a></span></span><span class="token punctuation">)</span></div><div class="brief "><p class="paragraph">Instantiates and executes the correct animation for the current in-app message. Slideup-type messages slide in from the top or bottom of the view. Other in-app messages fade in and out of view.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1372698184%2FFunctions%2F-1369171853" anchor-label="unregisterBackButtonCallbacks" id="1372698184%2FFunctions%2F-1369171853" data-filterable-set=":android-sdk-ui/release"></a>
+          <div class="table-row table-row_content" data-filterable-current=":android-sdk-ui/release" data-filterable-set=":android-sdk-ui/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="unregister-back-button-callbacks.html"><span>unregister</span><wbr></wbr><span>Back</span><wbr></wbr><span>Button</span><wbr></wbr><span><span>Callbacks</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1372698184%2FFunctions%2F-1369171853"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui/release"><div class="symbol monospace"><span class="token keyword">private </span><span class="token keyword">fun </span><a href="unregister-back-button-callbacks.html"><span class="token function">unregisterBackButtonCallbacks</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span></div><div class="brief "><p class="paragraph">Unregisters platform and AndroidX Back callbacks registered in <a href="open.html">open</a>.</p></div></div></div>
                 </div>
               </div>
             </div>
