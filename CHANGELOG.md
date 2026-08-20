@@ -1,3 +1,10 @@
+## 43.1.1
+
+[Release Date](https://github.com/braze-inc/braze-android-sdk/releases/tag/v43.1.1)
+
+##### Fixed
+- Fixed published AAR metadata requiring consuming apps to compile against API 37. Consuming projects may use compileSdk 21 or later.
+
 ## 43.1.0
 
 [Release Date](https://github.com/braze-inc/braze-android-sdk/releases/tag/v43.1.0)

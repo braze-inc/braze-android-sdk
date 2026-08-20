@@ -12,6 +12,9 @@ android {
     compileSdk rootProject.ext.compileSdkVersion
     minSdkVersion rootProject.ext.minSdkVersion
     consumerProguardFiles 'braze-consumer-proguard-rules.pro'
+    aarMetadata {
+      minCompileSdk rootProject.ext.minSdkVersion
+    }
   }
 
   compileOptions {

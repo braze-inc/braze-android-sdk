@@ -11,6 +11,9 @@ android {
   defaultConfig {
     compileSdk rootProject.ext.compileSdkVersion
     minSdkVersion rootProject.ext.minSdkVersion
+    aarMetadata {
+      minCompileSdk rootProject.ext.minSdkVersion
+    }
   }
 
   compileOptions {
