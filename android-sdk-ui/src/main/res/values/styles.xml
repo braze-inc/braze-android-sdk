@@ -386,6 +386,7 @@
   <style name="Braze.ContentCardsDisplay"/>
   <style name="Braze.ContentCardsDisplay.Recycler">
     <item name="android:background">@color/com_braze_content_cards_display_background_color</item>
+    <item name="android:clipToPadding">true</item>
     <item name="android:divider">@android:color/transparent</item>
     <item name="android:scrollbarStyle">outsideInset</item>
     <item name="android:scrollbars">vertical</item>

@@ -1,3 +1,18 @@
+## 43.2.0
+
+[Release Date](https://github.com/braze-inc/braze-android-sdk/releases/tag/v43.2.0)
+
+##### Fixed
+- Fixed an issue where calling `wipeData()`, `disableSdk()`, or `logout()` while the SDK was still initializing could crash the host app with an uncaught `CancellationException`.
+- Fixed an issue where the Content Cards feed rendered underneath the status bar and navigation bar on apps targeting API 35 and higher, where the system enforces edge-to-edge display. `ContentCardsFragment` now applies the system bar and display cutout insets as padding on its `RecyclerView` and offsets the pull-to-refresh indicator by the same top inset.
+  - Cards are clipped at the padding edge by default. To let cards scroll behind the system bars instead, override `Braze.ContentCardsDisplay.Recycler` in your xml and set `<item name="android:clipToPadding">false</item>`.
+  - Hosts whose view hierarchy consumes the insets before the feed, such as an ancestor with `android:fitsSystemWindows="true"`, are unaffected, because the feed then receives zero insets.
+  - Hosts that inset the feed themselves without consuming the insets would otherwise get a double safe-area gap. Those hosts should set `ContentCardsFragment.isWindowInsetsHandlingEnabled` to false. Setting it after the Fragment view exists applies or removes the safe area immediately. Defaults to true.
+
+##### Changed
+- `Braze.unregisterPush` now completes successfully when this SDK instance holds no locally cached push token, instead of throwing. No `push/unregister` request is sent in that case.
+- `Braze.refreshFeatureFlags()` no longer applies a client-side Feature Flag refresh cooldown. Refresh volume is governed by global and per-endpoint rate limits.
+
 ## 43.1.1
 
 [Release Date](https://github.com/braze-inc/braze-android-sdk/releases/tag/v43.1.1)

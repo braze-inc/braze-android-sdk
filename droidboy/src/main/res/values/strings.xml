@@ -145,6 +145,7 @@
   <string name="blue">Blue</string>
   <string name="inappmessage_tester_tab_title">IAMs</string>
   <string name="edge_to_edge_html_iam_title">Edge-to-Edge HTML IAM</string>
+  <string name="content_cards_activity_title">Content Cards Activity</string>
   <string name="create_and_add_inappmessage">Create and Add In-App Message</string>
   <string name="display_next_inappmessage">Display Next In-App Message</string>
   <string name="hide_current_inappmessage">Hide Current In-App Message</string>

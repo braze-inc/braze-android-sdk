@@ -6,6 +6,7 @@ import android.os.Parcelable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.ViewCompat
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -57,6 +58,28 @@ open class ContentCardsFragment :
     @JvmField
     var cardAdapter: ContentCardAdapter? = null
 
+    /**
+     * Whether the system bar and display cutout insets are applied to the feed as padding, which
+     * apps targeting API 35 and higher need because the system draws them edge-to-edge.
+     *
+     * Set this to false when the host already insets the feed without consuming the insets, which
+     * would otherwise produce a double safe-area gap. Setting it after the Fragment view exists
+     * applies or removes the safe area immediately. The value is retained across configuration
+     * changes.
+     *
+     * Defaults to true.
+     */
+    var isWindowInsetsHandlingEnabled: Boolean = true
+        set(value) {
+            if (field == value) return
+            field = value
+
+            brazelog(V) { "isWindowInsetsHandlingEnabled set to $value" }
+            contentCardsRecyclerView?.let { updateWindowInsetsHandling(it) }
+        }
+
+    private var windowInsetsApplier: ContentCardsWindowInsetsApplier? = null
+
     protected var defaultEmptyContentCardsAdapter: EmptyContentCardsAdapter = EmptyContentCardsAdapter()
     protected var contentCardsSwipeLayout: SwipeRefreshLayout? = null
 
@@ -75,9 +98,6 @@ open class ContentCardsFragment :
     protected val emptyCardsAdapter: RecyclerView.Adapter<*>
         get() = defaultEmptyContentCardsAdapter
 
-    // Since the get always returns non-null, but we want to allow passing null into the setter to
-    // clear the instance, we split this out into a custom getter and setter rather than using a var
-
     /**
      * @return the [IContentCardsUpdateHandler] for this [ContentCardsFragment].
      */
@@ -91,9 +111,6 @@ open class ContentCardsFragment :
     fun setContentCardUpdateHandler(value: IContentCardsUpdateHandler?) {
         customContentCardUpdateHandler = value
     }
-
-    // Since the get always returns non-null, but we want to allow passing null into the setter to
-    // clear the instance, we split this out into a custom getter and setter rather than using a var
 
     /**
      * @return the [IContentCardsViewBindingHandler] responsible for rendering each [Card] in the [RecyclerView].
@@ -114,6 +131,13 @@ open class ContentCardsFragment :
         container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View? {
+        if (savedInstanceState != null) {
+            isWindowInsetsHandlingEnabled =
+                savedInstanceState.getBoolean(
+                    WINDOW_INSETS_HANDLING_SAVED_INSTANCE_STATE_KEY,
+                    isWindowInsetsHandlingEnabled,
+                )
+        }
         val rootView = inflater.inflate(R.layout.com_braze_content_cards, container, false)
         contentCardsRecyclerView = rootView.findViewById(R.id.com_braze_content_cards_recycler)
         contentCardsSwipeLayout = rootView.findViewById(R.id.braze_content_cards_swipe_container)
@@ -124,7 +148,46 @@ open class ContentCardsFragment :
             R.color.com_braze_content_cards_swipe_refresh_color_3,
             R.color.com_braze_content_cards_swipe_refresh_color_4,
         )
+        contentCardsRecyclerView?.let {
+            windowInsetsApplier = ContentCardsWindowInsetsApplier(it, contentCardsSwipeLayout)
+            updateWindowInsetsHandling(it)
+        }
         return rootView
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        windowInsetsApplier = null
+    }
+
+    /**
+     * Starts or stops offsetting the feed by the system bar and display cutout insets, following
+     * [isWindowInsetsHandlingEnabled]. Apps targeting API 35 and higher need the offset, because
+     * the system draws them edge-to-edge.
+     *
+     * Whether cards are clipped at the padding edge or scroll behind the system bars is controlled
+     * by `android:clipToPadding` in the `Braze.ContentCardsDisplay.Recycler` style, which
+     * integrators can override.
+     *
+     * The insets are returned unconsumed, so a host that consumes them first, for example an
+     * ancestor with `android:fitsSystemWindows`, leaves zero insets here. A host that insets the
+     * feed itself without consuming the insets must set [isWindowInsetsHandlingEnabled] to false,
+     * otherwise the safe area is applied twice.
+     */
+    private fun updateWindowInsetsHandling(recyclerView: RecyclerView) {
+        brazelog(V) { "updateWindowInsetsHandling called with isWindowInsetsHandlingEnabled: $isWindowInsetsHandlingEnabled" }
+        val applier = windowInsetsApplier ?: return
+        if (!isWindowInsetsHandlingEnabled) {
+            brazelog { "Content Cards window inset handling is disabled. Removing any applied window insets." }
+            ViewCompat.setOnApplyWindowInsetsListener(recyclerView, null)
+            applier.reset()
+            return
+        }
+        ViewCompat.setOnApplyWindowInsetsListener(recyclerView) { _, windowInsets ->
+            applier.applyWindowInsets(windowInsets)
+            windowInsets
+        }
+        ViewCompat.requestApplyInsets(recyclerView)
     }
 
     /**
@@ -171,6 +234,7 @@ open class ContentCardsFragment :
 
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
+        outState.putBoolean(WINDOW_INSETS_HANDLING_SAVED_INSTANCE_STATE_KEY, isWindowInsetsHandlingEnabled)
         contentCardsRecyclerView?.layoutManager?.let {
             outState.putParcelable(LAYOUT_MANAGER_SAVED_INSTANCE_STATE_KEY, it.onSaveInstanceState())
         }
@@ -378,5 +442,6 @@ open class ContentCardsFragment :
         private const val KNOWN_CARD_IMPRESSIONS_SAVED_INSTANCE_STATE_KEY = "KNOWN_CARD_IMPRESSIONS_SAVED_INSTANCE_STATE_KEY"
         private const val VIEW_BINDING_HANDLER_SAVED_INSTANCE_STATE_KEY = "VIEW_BINDING_HANDLER_SAVED_INSTANCE_STATE_KEY"
         private const val UPDATE_HANDLER_SAVED_INSTANCE_STATE_KEY = "UPDATE_HANDLER_SAVED_INSTANCE_STATE_KEY"
+        private const val WINDOW_INSETS_HANDLING_SAVED_INSTANCE_STATE_KEY = "WINDOW_INSETS_HANDLING_SAVED_INSTANCE_STATE_KEY"
     }
 }

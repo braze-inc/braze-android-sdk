@@ -9,7 +9,6 @@ import com.braze.models.inappmessage.IInAppMessage
 import com.braze.models.inappmessage.IInAppMessageHtml
 import com.braze.models.inappmessage.IInAppMessageImmersive
 import com.braze.models.inappmessage.MessageButton
-import com.braze.support.BrazeFunctionNotImplemented
 import com.braze.support.BrazeLogger.Priority.W
 import com.braze.support.BrazeLogger.brazelog
 import com.braze.support.WebContentUtils.getHtmlInAppMessageAssetCacheDirectory
@@ -82,7 +81,6 @@ open class DefaultInAppMessageViewLifecycleListener : IInAppMessageViewLifecycle
         // To modify the default in-app message clicked behavior, mutate the necessary in-app message members. As
         // an example, if the in-app message were to navigate to a deeplink when it was clicked, the
         // behavior can be cancelled by setting the click action to NONE.
-        @Suppress("SwallowedException")
         val wasHandled = inAppMessageManager.inAppMessageManagerListener.onInAppMessageClicked(inAppMessage)
         if (!wasHandled) {
             // Perform the default (or modified) in-app message clicked behavior.
@@ -96,19 +94,11 @@ open class DefaultInAppMessageViewLifecycleListener : IInAppMessageViewLifecycle
     ) {
         brazelog { "IInAppMessageViewLifecycleListener.onButtonClicked called." }
         inAppMessageImmersive.logButtonClick(messageButton)
-        @Suppress("SwallowedException")
         val wasHandled =
-            try {
-                inAppMessageManager.inAppMessageManagerListener.onInAppMessageButtonClicked(
-                    inAppMessageImmersive,
-                    messageButton,
-                )
-            } catch (e: BrazeFunctionNotImplemented) {
-                inAppMessageManager.inAppMessageManagerListener.onInAppMessageButtonClicked(
-                    inAppMessageImmersive,
-                    messageButton,
-                )
-            }
+            inAppMessageManager.inAppMessageManagerListener.onInAppMessageButtonClicked(
+                inAppMessageImmersive,
+                messageButton,
+            )
         if (!wasHandled) {
             // Perform the default (or modified) in-app message button clicked behavior.
             performInAppMessageButtonClicked(messageButton, inAppMessageImmersive)

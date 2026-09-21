@@ -81,7 +81,7 @@ class DroidboyApplication : Application() {
         BrazeLogger.logLevel = applicationContext.readPrefsInt(DroidboyPreferenceKeys.CURRENT_LOG_LEVEL, Log.VERBOSE)
 
         Braze.configure(this, null)
-        val brazeConfigBuilder = BrazeConfig.Builder().setShouldUseWindowFlagSecureInActivities(true)
+        val brazeConfigBuilder = BrazeConfig.Builder().setShouldUseWindowFlagSecureInActivities(false)
         brazeConfigBuilder.setSdkMetadata(EnumSet.of(BrazeSdkMetadata.MANUAL))
         setOverrideApiKeyIfConfigured(brazeConfigBuilder)
         setOverrideEndpointIfConfigured(brazeConfigBuilder)

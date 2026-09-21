@@ -276,8 +276,7 @@ object BrazeNotificationUtils {
     }
 
     /**
-     * Refreshes a feature flags refresh from Braze if appropriate based on the payload of the push notification.
-     * The SDK will respect the rate limit for feature flag refreshes.
+     * Refreshes Feature Flags from Braze when the payload requests it.
      *
      * @return True iff a feature flags refresh was requested from Braze.
      */

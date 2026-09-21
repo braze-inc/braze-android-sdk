@@ -74,7 +74,6 @@ dependencies {
     implementation(libs.kotlin.coroutines.android)
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.lifecycle.runtime.compose.android)
-    implementation(libs.androidx.multidex)
 
     implementation(libs.androidx.activity.compose)
     implementation(platform(libs.androidx.compose.bom))

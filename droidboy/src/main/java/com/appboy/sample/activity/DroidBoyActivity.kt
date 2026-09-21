@@ -50,6 +50,7 @@ import com.braze.support.BrazeLogger.Priority.E
 import com.braze.support.BrazeLogger.Priority.I
 import com.braze.support.BrazeLogger.brazelog
 import com.braze.support.hasPermission
+import com.braze.ui.activities.ContentCardsActivity
 import com.braze.ui.contentcards.ContentCardsFragment
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
@@ -292,9 +293,10 @@ class DroidBoyActivity : AppCompatActivity() {
                 drawerLayout?.closeDrawers()
                 startActivity(Intent(applicationContext, GeofencesMapActivity::class.java))
             }
-            R.id.iam_sandbox -> startActivity(Intent(applicationContext, InAppMessageSandboxActivity::class.java))
+            R.id.content_cards_activity -> startActivity(Intent(this, ContentCardsActivity::class.java))
+            R.id.iam_sandbox -> startActivity(Intent(this, InAppMessageSandboxActivity::class.java))
             R.id.edge_to_edge_html_iam ->
-                startActivity(Intent(applicationContext, EdgeToEdgeHtmlIamActivity::class.java))
+                startActivity(Intent(this, EdgeToEdgeHtmlIamActivity::class.java))
             R.id.action_network_console ->
                 NetworkConsoleDialogFragment().show(
                     supportFragmentManager,
