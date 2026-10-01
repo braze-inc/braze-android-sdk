@@ -2,6 +2,9 @@
 
 [Release Date](https://github.com/braze-inc/braze-android-sdk/releases/tag/v44.0.0)
 
+#### Breaking
+- `requestBannersRefresh` now merges into the existing banner cache instead of replacing it entirely. Only the requested placement IDs are affected; other cached banners are untouched, and a requested placement with no banner in the response is removed from the cache.
+
 ##### Fixed
 - Fixed a crash involving the Firebase Performance Monitoring Gradle plugin on Android 11 (API 30) and higher where manual connection disconnects could cause a host app crash. The SDK now handles such failures when it closes the connection and when it processes network connectivity callbacks.
 - Fixed an issue where refreshing banners while a test send was displayed could evict unrelated cached banners.
