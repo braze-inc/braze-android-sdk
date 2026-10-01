@@ -60,6 +60,7 @@ class FeatureFlagFragment :
         // Listen for new Feature Flag updates after retrieving the current set
         Braze.getInstance(requireContext()).let {
             handleFeatureFlagUpdate(it.getAllFeatureFlags())
+            @Suppress("DEPRECATION")
             it.subscribeToFeatureFlagsUpdates(updateListener)
             it.refreshFeatureFlags()
         }

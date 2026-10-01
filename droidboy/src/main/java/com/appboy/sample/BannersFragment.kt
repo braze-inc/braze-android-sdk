@@ -179,10 +179,10 @@ class BannersFragment : Fragment() {
                         if (combined.isNotEmpty()) {
                             renderSlotsForPlacements(combined)
                         }
-                        refreshSlotBannerViews()
                     }
                 }
             bannerUpdateSubscriber?.let {
+                @Suppress("DEPRECATION")
                 Braze.getInstance(requireContext()).subscribeToBannersUpdates(it)
             }
         }
@@ -209,8 +209,8 @@ class BannersFragment : Fragment() {
 
     /**
      * Builds one [BannerView] per supplied placement ID inside [bannersMultiContainer].
-     * Reuses existing slot views when the placement set is unchanged in order, only rebuilding
-     * when the slot list changes.
+     * Reuses existing [BannerView]s for placements that remain so unchanged banners are not
+     * torn down (and do not flicker) when a refresh adds another placement.
      */
     private fun renderSlotsForPlacements(placementIds: List<String>) {
         if (placementIds == slotPlacementIds && slotBannerViews.size == placementIds.size) {
@@ -220,39 +220,75 @@ class BannersFragment : Fragment() {
             refreshSlotSpinner()
             return
         }
+        if (canAppendSlots(placementIds)) {
+            appendSlots(placementIds.drop(slotPlacementIds.size))
+            refreshSlotSpinner()
+            return
+        }
+        rebuildSlotsReusingViews(placementIds)
+        refreshSlotSpinner()
+    }
+
+    private fun canAppendSlots(placementIds: List<String>): Boolean =
+        placementIds.size > slotPlacementIds.size &&
+            slotBannerViews.size == slotPlacementIds.size &&
+            placementIds.take(slotPlacementIds.size) == slotPlacementIds
+
+    private fun appendSlots(newPlacementIds: List<String>) {
+        newPlacementIds.forEach { placementId ->
+            addSlotViews(slotPlacementIds.size, placementId, bannerView = null)
+            slotPlacementIds.add(placementId)
+        }
+    }
+
+    private fun rebuildSlotsReusingViews(placementIds: List<String>) {
+        val reusedViews = linkedMapOf<String, BannerView>()
+        slotPlacementIds.forEachIndexed { index, placementId ->
+            if (placementId.isNotBlank() && index < slotBannerViews.size && placementId !in reusedViews) {
+                reusedViews[placementId] = slotBannerViews[index]
+            }
+        }
         bannersMultiContainer.removeAllViews()
         slotBannerViews.clear()
         slotPlacementIds.clear()
-        slotPlacementIds.addAll(placementIds)
+        placementIds.forEachIndexed { index, placementId ->
+            val reused = reusedViews.remove(placementId)
+            addSlotViews(index, placementId, reused)
+            slotPlacementIds.add(placementId)
+        }
+    }
 
+    private fun addSlotViews(
+        index: Int,
+        placementId: String,
+        bannerView: BannerView?,
+    ) {
         val labelTopMarginPx = (8 * resources.displayMetrics.density).toInt()
+        val slotLabel =
+            TextView(requireContext()).apply {
+                text = formatSlotLabel(index, placementId)
+                setPadding(0, if (index == 0) 0 else labelTopMarginPx, 0, 0)
+            }
+        bannersMultiContainer.addView(slotLabel)
+        val view = bannerView ?: createSlotBannerView(placementId)
+        bannersMultiContainer.addView(view)
+        slotBannerViews.add(view)
+    }
+
+    private fun createSlotBannerView(placementId: String): BannerView {
         val bottomMarginPx = (16 * resources.displayMetrics.density).toInt()
         val minHeightPx = (100 * resources.displayMetrics.density).toInt()
-
-        placementIds.forEachIndexed { index, placementId ->
-            val slotLabel =
-                TextView(requireContext()).apply {
-                    text = formatSlotLabel(index, placementId)
-                    setPadding(0, if (index == 0) 0 else labelTopMarginPx, 0, 0)
-                }
-            bannersMultiContainer.addView(slotLabel)
-
-            val bannerView =
-                BannerView(requireContext(), null).apply {
-                    layoutParams =
-                        LinearLayout
-                            .LayoutParams(
-                                LinearLayout.LayoutParams.MATCH_PARENT,
-                                LinearLayout.LayoutParams.WRAP_CONTENT,
-                            ).apply { bottomMargin = bottomMarginPx }
-                    setBackgroundResource(android.R.color.darker_gray)
-                    minimumHeight = minHeightPx
-                    this.placementId = placementId
-                }
-            bannersMultiContainer.addView(bannerView)
-            slotBannerViews.add(bannerView)
+        return BannerView(requireContext(), null).apply {
+            layoutParams =
+                LinearLayout
+                    .LayoutParams(
+                        LinearLayout.LayoutParams.MATCH_PARENT,
+                        LinearLayout.LayoutParams.WRAP_CONTENT,
+                    ).apply { bottomMargin = bottomMarginPx }
+            setBackgroundResource(android.R.color.darker_gray)
+            minimumHeight = minHeightPx
+            this.placementId = placementId
         }
-        refreshSlotSpinner()
     }
 
     private fun refreshSlotLabels() {

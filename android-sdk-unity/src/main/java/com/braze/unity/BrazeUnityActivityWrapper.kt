@@ -42,11 +42,13 @@ class BrazeUnityActivityWrapper {
                 config,
             ),
         )
+        @Suppress("DEPRECATION")
         braze.subscribeToContentCardsUpdates(
             EventSubscriberFactory.createContentCardsEventSubscriber(
                 config,
             ),
         )
+        @Suppress("DEPRECATION")
         braze.subscribeToFeatureFlagsUpdates(
             EventSubscriberFactory.createFeatureFlagsEventSubscriber(
                 config,

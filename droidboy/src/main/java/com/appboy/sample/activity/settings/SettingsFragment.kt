@@ -315,7 +315,9 @@ class SettingsFragment : PreferenceFragmentCompat() {
     }
 
     private fun setGdprPrefs(context: Context) {
-        setClickPreference("wipe_data_preference_key") { Braze.wipeData(context) }
+        setClickPreference("wipe_data_preference_key") {
+            Braze.wipeData(context)
+        }
         val sdkEnabledPref = findPreference<SwitchPreferenceCompat>("sdk_enabled")
         sdkEnabledPref?.setOnPreferenceChangeListener { _, newValue ->
             if (newValue as Boolean) {

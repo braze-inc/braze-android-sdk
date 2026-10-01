@@ -31,6 +31,7 @@ import com.appboy.sample.MainFragment
 import com.appboy.sample.PushTesterFragment
 import com.appboy.sample.PushUnregisterFragment
 import com.appboy.sample.R
+import com.appboy.sample.channelevents.ChannelEventsFragment
 import com.appboy.sample.ecommerce.EcommerceFragment
 import com.appboy.sample.featureflag.view.FeatureFlagFragment
 import com.appboy.sample.networkconsole.NetworkConsoleDialogFragment
@@ -434,6 +435,10 @@ class DroidBoyActivity : AppCompatActivity() {
                 FragmentInfo(
                     { BannersFragment() },
                     context.getString(R.string.tab_banners),
+                ),
+                FragmentInfo(
+                    { ChannelEventsFragment() },
+                    context.getString(R.string.tab_events),
                 ),
                 FragmentInfo(
                     { EcommerceFragment() },

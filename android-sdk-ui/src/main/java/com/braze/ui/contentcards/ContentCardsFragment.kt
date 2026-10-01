@@ -208,6 +208,7 @@ open class ContentCardsFragment :
             contentCardsUpdatedSubscriber = IEventSubscriber { event: ContentCardsUpdatedEvent -> handleContentCardsUpdatedEvent(event) }
         }
         contentCardsUpdatedSubscriber?.let {
+            @Suppress("DEPRECATION")
             Braze.getInstance(requireContext()).subscribeToContentCardsUpdates(it)
         }
         Braze.getInstance(requireContext()).requestContentCardsRefreshFromCache()

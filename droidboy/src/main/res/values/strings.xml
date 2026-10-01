@@ -6,6 +6,7 @@
   <string name="tab_push">Push</string>
   <string name="tab_flags">Flags</string>
   <string name="tab_banners">Banners</string>
+  <string name="tab_events">Events</string>
   <string name="tab_ecommerce">eCommerce</string>
   <string name="tab_push_unregister">Logout</string>
 
@@ -69,6 +70,25 @@
   <string name="banners_properties_header">Banner Properties</string>
   <string name="banners_properties_filter_label">Filter properties by type:</string>
   <string name="banners_properties_filter_hint">Filter Properties by Type</string>
+
+  <!-- Channel events fragment -->
+  <string name="channel_events_chip_all">All</string>
+  <string name="channel_events_chip_content_cards">Content Cards</string>
+  <string name="channel_events_chip_banners">Banners</string>
+  <string name="channel_events_chip_feature_flags">Feature Flags</string>
+  <string name="channel_events_other_tabs_hint">Events triggered on the Content Cards, Banners, and Feature Flags tabs also appear here.</string>
+  <string name="channel_events_refresh">Refresh</string>
+  <string name="channel_events_resubscribe">Resubscribe</string>
+  <string name="channel_events_http_response">HTTP response</string>
+  <string name="channel_events_http_real">Real response</string>
+  <string name="channel_events_http_500">HTTP 500</string>
+  <string name="channel_events_http_no_response">No response</string>
+  <string name="channel_events_http_400">HTTP 400</string>
+  <string name="channel_events_http_invalid_json">Invalid JSON</string>
+  <string name="channel_events_http_429">HTTP 429</string>
+  <string name="channel_events_clear">Clear</string>
+  <string name="channel_events_add_local_fixtures">Add local test card</string>
+  <string name="channel_events_local_fixtures_added">Added Content Card %1$s. The click stays in the app.</string>
   <string name="inappmessage">In-App Messages</string>
   <string name="settings">Settings</string>
   <string name="network_control_title">Network Controls</string>

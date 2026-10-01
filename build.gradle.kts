@@ -8,7 +8,7 @@ plugins {
 extra["compileSdkVersion"] = 37
 extra["minSdkVersion"] = 21
 extra["targetSdkVersion"] = 37
-extra["appVersionName"] = "43.2.0"
+extra["appVersionName"] = "44.0.0"
 
 subprojects {
     repositories {
@@ -19,5 +19,5 @@ subprojects {
     }
 
     group = "com.braze"
-    version = "43.2.0"
+    version = "44.0.0"
 }

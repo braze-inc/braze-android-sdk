@@ -40,5 +40,4 @@ android {
 
 dependencies {
     implementation(project(":android-sdk-ui"))
-    implementation(libs.androidx.concurrent.futures)
 }

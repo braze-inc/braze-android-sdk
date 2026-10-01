@@ -357,6 +357,7 @@ class DroidboyApplication : Application() {
      * Listens for any important Feature Flag updates to this application.
      */
     private fun listenForSpecialTabFeatureFlag() {
+        @Suppress("DEPRECATION")
         Braze.getInstance(applicationContext).subscribeToFeatureFlagsUpdates {
             val specialTabFeatureFlagId = "helpful_office_tool_droidboy_tab"
             val specialTabFlag = Braze.getInstance(applicationContext).getFeatureFlag(specialTabFeatureFlagId)
