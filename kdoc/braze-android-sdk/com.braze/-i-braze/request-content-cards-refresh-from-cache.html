@@ -43,7 +43,7 @@
         </button>
         <div class="navigation-controls--break ui-kit_mobile-only"></div>
         <div class="library-version" id="library-version">
-43.2.0        </div>
+44.0.0        </div>
         <div class="navigation-controls">
         <ul class="filter-section filter-section_loading" id="filter-section" aria-label="Target filter">
                 <button class="platform-tag platform-selector jvm-like" data-active="" aria-pressed="true"
@@ -108,7 +108,7 @@
   <div class="cover ">
     <h1 class="cover"><span>request</span><wbr></wbr><span>Content</span><wbr></wbr><span>Cards</span><wbr></wbr><span>Refresh</span><wbr></wbr><span>From</span><wbr></wbr><span><span>Cache</span></span></h1>
   </div>
-  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui/release"><div class="symbol monospace"><span class="token keyword">abstract </span><span class="token keyword">fun </span><a href="request-content-cards-refresh-from-cache.html"><span class="token function">requestContentCardsRefreshFromCache</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span></div><p class="paragraph">Requests an immediate refresh of Content Cards from offline storage. Note that this method does not make a network request to Braze servers.</p><p class="paragraph">The result of this refresh call is reported asynchronously via events. Events can be subscribed to using <a href="subscribe-to-content-cards-updates.html">IBraze.subscribeToContentCardsUpdates</a>.</p></div></div>
+  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui/release"><div class="symbol monospace"><span class="token keyword">abstract </span><span class="token keyword">fun </span><a href="request-content-cards-refresh-from-cache.html"><span class="token function">requestContentCardsRefreshFromCache</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span></div><p class="paragraph">Requests an immediate refresh of Content Cards from offline storage. Note that this method does not make a network request to Braze servers.</p><p class="paragraph">The result of this refresh call is reported asynchronously via events. Events can be subscribed to using <a href="subscribe-to-content-cards-events.html">IBraze.subscribeToContentCardsEvents</a>. When the SDK is disabled, publishes <a href="../../com.braze.events/-content-cards-event/-error-event/index.html">ContentCardsEvent.ErrorEvent</a> with SdkDisabled. When Content Cards are disabled, publishes FeatureDisabled instead of a cache snapshot. <a href="subscribe-to-content-cards-updates.html">IBraze.subscribeToContentCardsUpdates</a> is deprecated.</p></div></div>
 </div>
     <div class="footer">
         <div class="footer--container">

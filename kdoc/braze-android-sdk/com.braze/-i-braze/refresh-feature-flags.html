@@ -43,7 +43,7 @@
         </button>
         <div class="navigation-controls--break ui-kit_mobile-only"></div>
         <div class="library-version" id="library-version">
-43.2.0        </div>
+44.0.0        </div>
         <div class="navigation-controls">
         <ul class="filter-section filter-section_loading" id="filter-section" aria-label="Target filter">
                 <button class="platform-tag platform-selector jvm-like" data-active="" aria-pressed="true"
@@ -108,7 +108,7 @@
   <div class="cover ">
     <h1 class="cover"><span>refresh</span><wbr></wbr><span>Feature</span><wbr></wbr><span><span>Flags</span></span></h1>
   </div>
-  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui/release"><div class="symbol monospace"><span class="token keyword">abstract </span><span class="token keyword">fun </span><a href="refresh-feature-flags.html"><span class="token function">refreshFeatureFlags</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span></div><p class="paragraph">Requests a refresh of Feature Flags from the Braze server.</p></div></div>
+  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui/release"><div class="symbol monospace"><span class="token keyword">abstract </span><span class="token keyword">fun </span><a href="refresh-feature-flags.html"><span class="token function">refreshFeatureFlags</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span></div><p class="paragraph">Requests a refresh of Feature Flags from the Braze server.</p><p class="paragraph">When the SDK is disabled, publishes <a href="../../com.braze.events/-feature-flags-event/-error-event/index.html">FeatureFlagsEvent.ErrorEvent</a> with SdkDisabled. When Feature Flags are disabled, publishes FeatureDisabled.</p></div></div>
 </div>
     <div class="footer">
         <div class="footer--container">
