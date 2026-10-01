@@ -4,6 +4,10 @@
 
 #### Breaking
 - `requestBannersRefresh` now merges into the existing banner cache instead of replacing it entirely. Only the requested placement IDs are affected; other cached banners are untouched, and a requested placement with no banner in the response is removed from the cache.
+- `requestBannersRefresh` now merges into the existing banner cache instead of replacing it entirely. Only the requested placement IDs are affected; other cached banners are untouched, and a requested placement with no banner in the response is removed from the cache.
+- After a banners refresh, `BannerView`s re-init only for placements whose cached content changed. Unchanged displayed banners are left as-is.
+- `subscribeToBannersEvents` `DataUpdated` snapshots now follow banner cache merge: placements that were not requested remain, and a requested placement with no banner in the response is absent. A completed refresh still emits `DataUpdated` when the payload is identical to the current cache.
+- Banner storage supports a server-configurable content cache limit (default 50 MB). When enabled, over-cap refreshes evict the largest existing banners first and log an internal error event with banner id and placement id. Config changes apply on the next refresh or cache load.
 
 ##### Fixed
 - Fixed a crash involving the Firebase Performance Monitoring Gradle plugin on Android 11 (API 30) and higher where manual connection disconnects could cause a host app crash. The SDK now handles such failures when it closes the connection and when it processes network connectivity callbacks.
@@ -15,10 +19,6 @@
 
 ##### Changed
 - `subscribeToContentCardsEvents`, `subscribeToBannersEvents`, and `subscribeToFeatureFlagsEvents` now emit analytics `FLUSHED` after a successful data-sync of the matching impression, click, or dismiss, matching iOS. Failed enqueue and failed data-sync do not emit `FLUSHED`.
-- `requestBannersRefresh` now merges into the existing banner cache instead of replacing it entirely. Only the requested placement IDs are affected; other cached banners are untouched, and a requested placement with no banner in the response is removed from the cache.
-- After a banners refresh, `BannerView`s re-init only for placements whose cached content changed. Unchanged displayed banners are left as-is.
-- `subscribeToBannersEvents` `DataUpdated` snapshots now follow banner cache merge: placements that were not requested remain, and a requested placement with no banner in the response is absent. A completed refresh still emits `DataUpdated` when the payload is identical to the current cache.
-- Banner storage supports a server-configurable content cache limit (default 50 MB). When enabled, over-cap refreshes evict the largest existing banners first and log an internal error event with banner id and placement id. Config changes apply on the next refresh or cache load.
 - Deprecated `subscribeToContentCardsUpdates`, `subscribeToFeatureFlagsUpdates`, `subscribeToBannersUpdates`, and `subscribeToBannersErrors` in favor of `subscribeTo*Events`. Unsubscribe still uses the legacy event class. Removal targeted for 46.0.0.
 
 ## 43.2.0
