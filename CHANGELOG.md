@@ -4,7 +4,6 @@
 
 #### Breaking
 - `requestBannersRefresh` now merges into the existing banner cache instead of replacing it entirely. Only the requested placement IDs are affected; other cached banners are untouched, and a requested placement with no banner in the response is removed from the cache.
-- `requestBannersRefresh` now merges into the existing banner cache instead of replacing it entirely. Only the requested placement IDs are affected; other cached banners are untouched, and a requested placement with no banner in the response is removed from the cache.
 - After a banners refresh, `BannerView`s re-init only for placements whose cached content changed. Unchanged displayed banners are left as-is.
 - `subscribeToBannersEvents` `DataUpdated` snapshots now follow banner cache merge: placements that were not requested remain, and a requested placement with no banner in the response is absent. A completed refresh still emits `DataUpdated` when the payload is identical to the current cache.
 - Banner storage supports a server-configurable content cache limit (default 50 MB). When enabled, over-cap refreshes evict the largest existing banners first and log an internal error event with banner id and placement id. Config changes apply on the next refresh or cache load.
