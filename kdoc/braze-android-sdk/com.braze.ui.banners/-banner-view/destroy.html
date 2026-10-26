@@ -43,7 +43,7 @@
         </button>
         <div class="navigation-controls--break ui-kit_mobile-only"></div>
         <div class="library-version" id="library-version">
-44.0.0        </div>
+45.0.0        </div>
         <div class="navigation-controls">
         <ul class="filter-section filter-section_loading" id="filter-section" aria-label="Target filter">
                 <button class="platform-tag platform-selector jvm-like" data-active="" aria-pressed="true"
@@ -108,7 +108,7 @@
   <div class="cover ">
     <h1 class="cover"><span><span>destroy</span></span></h1>
   </div>
-  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui/release"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="destroy.html"><span class="token function">destroy</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span></div><p class="paragraph">Tears down banner resources for embedders that destroy the underlying <a href="https://developer.android.com/reference/kotlin/android/webkit/WebView.html">WebView</a>. Unregisters from banner monitoring and ensures pending async HTML loads no-op safely. Idempotent — safe to call more than once.</p></div></div>
+  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":android-sdk-ui/release"><div class="symbol monospace"><span class="token keyword">fun </span><a href="destroy.html"><span class="token function">destroy</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span></div><p class="paragraph">Tears down banner resources for embedders that destroy the underlying <a href="https://developer.android.com/reference/kotlin/android/webkit/WebView.html">WebView</a>. Unregisters from banner monitoring and ensures pending async HTML loads no-op safely. Idempotent — safe to call more than once, including when WebView creation failed. Removes the hosted <a href="https://developer.android.com/reference/kotlin/android/webkit/WebView.html">WebView</a> so a later measure or layout pass does not call it.</p></div></div>
 </div>
     <div class="footer">
         <div class="footer--container">
