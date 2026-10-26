@@ -10,6 +10,7 @@ import android.view.WindowManager
 import android.webkit.ConsoleMessage
 import android.webkit.RenderProcessGoneDetail
 import android.webkit.WebChromeClient
+import android.webkit.WebResourceError
 import android.webkit.WebResourceRequest
 import android.webkit.WebSettings
 import android.webkit.WebView
@@ -29,16 +30,26 @@ import com.braze.ui.actions.IAction
 import com.braze.ui.support.isDeviceInNightMode
 
 /**
- * Note that this Activity is not and should not be exported by default in
- * the AndroidManifest so external applications are not able to pass
- * arbitrary URLs via this intent.
+ * Opens http and https content in a [WebView].
  *
- * From https://developer.android.com/guide/topics/manifest/activity-element#exported ->
- * "If "false", the activity can be launched only by components of the same
- * application or applications with the same user ID."
+ * A centered indeterminate spinner ([R.id.com_braze_webview_activity_progress_bar])
+ * is shown while the main frame loads and hidden when that load finishes or fails.
+ * Host apps that replace [R.layout.com_braze_webview_activity] should keep a view
+ * with that id. Host apps that override [createWebViewClient] and return a different
+ * client leave the spinner hidden unless they call [onMainFrameLoadStarted] and
+ * [hideWebViewLoadingIndicator].
  */
 @SuppressLint("SetJavaScriptEnabled")
 open class BrazeWebViewActivity : FragmentActivity() {
+    private var webViewLoadingIndicator: View? = null
+    private var isMainFrameLoading = false
+    private var hasRealMainFrameStarted = false
+
+    /**
+     * Marks the default [WebViewClient] that shows and hides the loading spinner.
+     */
+    private interface LoadingIndicatorWebViewClient
+
     public override fun onCreate(savedInstanceState: Bundle?) {
         try {
             super.onCreate(savedInstanceState)
@@ -58,6 +69,7 @@ open class BrazeWebViewActivity : FragmentActivity() {
             }
             setContentView(R.layout.com_braze_webview_activity)
             val webView = findViewById<WebView>(R.id.com_braze_webview_activity_webview)
+            webViewLoadingIndicator = findViewById(R.id.com_braze_webview_activity_progress_bar)
             webView.setLayerType(View.LAYER_TYPE_HARDWARE, null)
             val webSettings = webView.settings
             webSettings.allowFileAccess = false
@@ -76,10 +88,15 @@ open class BrazeWebViewActivity : FragmentActivity() {
                 }
             }
             webView.webChromeClient = createWebChromeClient()
-            webView.webViewClient = createWebViewClient()
+            val webViewClient = createWebViewClient()
+            webView.webViewClient = webViewClient
+            webViewLoadingIndicator?.bringToFront()
 
             // Opens the URL passed as an intent extra (if one exists).
             intent.extras?.getString(Constants.BRAZE_WEBVIEW_URL_EXTRA)?.let { url ->
+                if (webViewClient is LoadingIndicatorWebViewClient) {
+                    onMainFrameLoadStarted(url)
+                }
                 webView.loadUrl(url)
             }
         } catch (e: Exception) {
@@ -112,9 +129,13 @@ open class BrazeWebViewActivity : FragmentActivity() {
     /**
      * Creates the [WebViewClient] for the WebView. Override to customize URL
      * interception, navigation, or render crash handling.
+     *
+     * The default client shows and hides [R.id.com_braze_webview_activity_progress_bar]
+     * for main-frame loads. An override that returns a different client leaves the spinner
+     * hidden unless it calls [onMainFrameLoadStarted] and [hideWebViewLoadingIndicator].
      */
     open fun createWebViewClient(): WebViewClient {
-        return object : WebViewClient() {
+        return object : WebViewClient(), LoadingIndicatorWebViewClient {
             override fun shouldOverrideUrlLoading(
                 view: WebView,
                 request: WebResourceRequest,
@@ -168,15 +189,107 @@ open class BrazeWebViewActivity : FragmentActivity() {
                 return null
             }
 
+            override fun onPageStarted(
+                view: WebView,
+                url: String,
+                favicon: Bitmap?,
+            ) {
+                if (url != ABOUT_BLANK_URL) {
+                    hasRealMainFrameStarted = true
+                }
+                onMainFrameLoadStarted(url)
+            }
+
+            override fun onPageFinished(
+                view: WebView,
+                url: String,
+            ) {
+                onMainFrameLoadEnded(url)
+            }
+
+            override fun onReceivedError(
+                view: WebView,
+                request: WebResourceRequest,
+                error: WebResourceError,
+            ) {
+                if (!request.isForMainFrame) {
+                    return
+                }
+                brazelog(I) {
+                    "WebView main frame failed to load ${request.url}. Hiding the loading indicator. $error"
+                }
+                hideWebViewLoadingIndicator()
+            }
+
+            /**
+             * API 21 and 22 report load failures here. API 23 and higher use the
+             * [WebResourceRequest] overload, which ignores subresource failures.
+             */
+            @Deprecated("Deprecated in API 23")
+            @Suppress("deprecation", "OVERRIDE_DEPRECATION")
+            override fun onReceivedError(
+                view: WebView?,
+                errorCode: Int,
+                description: String?,
+                failingUrl: String?,
+            ) {
+                brazelog(I) {
+                    "WebView failed to load $failingUrl. Hiding the loading indicator. $description"
+                }
+                hideWebViewLoadingIndicator()
+            }
+
             override fun onRenderProcessGone(
                 view: WebView,
                 detail: RenderProcessGoneDetail,
             ): Boolean {
                 brazelog(I) { "The webview rendering process crashed, returning true" }
+                hideWebViewLoadingIndicator()
 
                 // The app crashes after detecting the renderer crashed. Returning true to avoid app crash.
                 return true
             }
         }
+    }
+
+    /**
+     * Shows the spinner for a main-frame navigation.
+     *
+     * `about:blank` is the WebView's empty document, not a page the user is waiting on.
+     * Overrides should call through to this implementation.
+     */
+    protected open fun onMainFrameLoadStarted(url: String?) {
+        if (url.isNullOrEmpty() || url == ABOUT_BLANK_URL) {
+            return
+        }
+        isMainFrameLoading = true
+        webViewLoadingIndicator?.visibility = View.VISIBLE
+    }
+
+    /**
+     * Hides the spinner after [url] finishes.
+     *
+     * `about:blank` before the real main frame starts is the WebView's empty document.
+     * `about:blank` after that start is a failed load, and the spinner is hidden.
+     * Overrides should call through to this implementation.
+     */
+    protected open fun onMainFrameLoadEnded(url: String?) {
+        if (url == ABOUT_BLANK_URL && isMainFrameLoading && !hasRealMainFrameStarted) {
+            return
+        }
+        hideWebViewLoadingIndicator()
+    }
+
+    /**
+     * Hides the loading spinner and clears main-frame load state.
+     */
+    protected open fun hideWebViewLoadingIndicator() {
+        isMainFrameLoading = false
+        hasRealMainFrameStarted = false
+        webViewLoadingIndicator?.visibility = View.GONE
+    }
+
+    internal companion object {
+        const val ABOUT_BLANK_URL = "about:blank"
     }
 }

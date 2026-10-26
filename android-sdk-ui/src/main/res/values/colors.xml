@@ -47,4 +47,7 @@
   <color name="com_braze_content_cards_description">#666565</color>
 
   <color name="com_braze_content_cards_display_background_color">#EEE</color>
+
+  <!-- Indeterminate spinner drawn over the WebView while BrazeWebViewActivity loads. -->
+  <color name="com_braze_webview_activity_progress_bar">#1676D0</color>
 </resources>

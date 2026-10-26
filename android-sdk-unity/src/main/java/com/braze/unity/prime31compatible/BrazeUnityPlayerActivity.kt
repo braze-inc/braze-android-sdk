@@ -62,4 +62,9 @@ open class BrazeUnityPlayerActivity : UnityPlayerActivity() {
     fun setInAppMessageListener() {
         brazeUnityActivityWrapper.setInAppMessageListener()
     }
+
+    /** Requests that the next queued in-app message be displayed immediately. */
+    fun requestDisplayInAppMessage() {
+        brazeUnityActivityWrapper.requestInAppMessageDisplay()
+    }
 }

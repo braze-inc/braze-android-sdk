@@ -1,3 +1,37 @@
+## 45.0.0
+
+[Release Date](https://github.com/braze-inc/braze-android-sdk/releases/tag/v45.0.0)
+
+#### Breaking
+- `BannerView` is no longer a `WebView`. It hosts one. `WebView` methods called on `BannerView` no longer compile. `placementId`, `heightCallback`, `onDismissCallback`, and `destroy()` are unchanged.
+- Jetpack Compose `ContentCardsList` behavior changed when `cards` isn't provided:
+  - `cardUpdateHandler` is now also called when the list resumes, when cached cards load at session start, and after a card is dismissed. Make sure your handler is safe to call repeatedly with the same cards.
+  - Cards are shown once the host lifecycle reaches `RESUMED`, instead of on first composition.
+- `com.braze:android-sdk-jetpack-compose` no longer depends on `androidx.compose.material:material` (Material 2) and now depends on `androidx.compose.material3:material3`. If your app imports `androidx.compose.material` and relied on the SDK to provide it, add `androidx.compose.material:material` to your own dependencies.
+
+##### Fixed
+- Fixed an issue where `BrazeWebViewActivity` showed a blank screen while web content loaded. An indeterminate spinner is now shown until the page finishes loading or the main frame fails. Host apps that override the `com_braze_webview_activity` layout should include a `ProgressBar` with id `com_braze_webview_activity_progress_bar` to keep the spinner. Subclasses can show and hide that spinner with `onMainFrameLoadStarted`, `onMainFrameLoadEnded`, and `hideWebViewLoadingIndicator`. See [#117](https://github.com/braze-inc/braze-android-sdk/issues/117).
+- Fixed `BrazeLogger.e()` so it is written at Android log priority ERROR instead of DEBUG, and error logs with no exception so they are written at ERROR instead of WARN.
+- Fixed a host-app crash on Android 16 when creating `BannerView`, including inside a Jetpack Compose `AndroidView`. System WebView provider setup can throw `AndroidRuntimeException` (`Resources$NotFoundException: failed to redirect ResourcesImpl`). `BannerView` now catches that failure, logs it, and shows nothing.
+- Fixed an issue where a large backlog of custom events could exhaust memory. Events queued by earlier SDK versions are kept on upgrade and are sent.
+- Fixed an issue where custom events logged in quick succession could be dropped before being saved to disk, causing them to never be sent.
+- Fixed `getDeviceIdAsync()` never invoking its callback when SDK startup blocked the serial work queue, including background cold starts. The device ID is read off that queue, and either `onSuccess` or `onError` is invoked. See [#115](https://github.com/braze-inc/braze-android-sdk/issues/115).
+- Fixed an issue where a banner the user dismissed could reappear when a banner refresh finished at the same time.
+- Fixed `DisplayNextInAppMessage()` not working for Unity integrations that use the Prime31-compatible `BrazeUnityPlayerActivity`.
+- Fixed a crash in `BrazeInAppMessageManager` on devices that don't provide the `android.R.integer.config_shortAnimTime` system resource, seen on some Honor devices. `DefaultInAppMessageAnimationFactory` now falls back to a 200ms animation duration.
+- Fixed Jetpack Compose `ContentCardsList` logging a leading control card's impression on every card update. It's now logged once per list, so reported control impressions may decrease.
+
+##### Added
+- Added Kotlin `Flow` versions of the event subscriptions: `IBraze.contentCardsEventsFlow()`, `IBraze.featureFlagsEventsFlow()`, `IBraze.bannersEventsFlow()`, and `IBraze.changeUserEventsFlow()`. Each Flow subscribes when collection starts, unsubscribes when collection is cancelled, and buffers events so none are dropped. Each Flow emits the same events, in the same order, as the matching `subscribeTo*Events` method.
+  - To migrate from the deprecated `subscribeToContentCardsUpdates`, `subscribeToFeatureFlagsUpdates`, `subscribeToBannersUpdates`, and `subscribeToBannersErrors`, collect the matching Flow. Each Flow emits `ContentCardsEvent`, `FeatureFlagsEvent`, or `BannersEvent` instead of the old `*UpdatedEvent`. Data events carry a `cacheSnapshot`, and `BannersEvent.ErrorEvent` replaces `subscribeToBannersErrors`.
+
+##### Changed
+- Jetpack Compose `ContentCardsList` now hides the pull-to-refresh indicator as soon as a sync fails, instead of after a 5-second timeout.
+- Migrated Jetpack Compose `ContentCardsList` from Material 2 (`androidx.compose.material`) to Material 3 (`androidx.compose.material3`). The pull-to-refresh indicator, swipe-to-dismiss, divider, and text now use Material 3.
+  - The pull-to-refresh indicator now follows your Material 3 `MaterialTheme`. Apps with only a Material 2 theme, or no theme, get the Material 3 default light colors.
+  - Text whose `TextStyle` has no color now takes its color from the Material 3 content color instead of the Material 2 one.
+  - Swipe-to-dismiss still dismisses at 50% of the card width. Material 3 can also dismiss a card on a fast fling that stops before that point.
+
 ## 44.0.0
 
 [Release Date](https://github.com/braze-inc/braze-android-sdk/releases/tag/v44.0.0)

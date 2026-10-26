@@ -10,6 +10,7 @@ import android.util.Base64
 import android.view.View
 import android.webkit.WebView
 import android.webkit.WebViewClient
+import android.widget.FrameLayout
 import androidx.annotation.MainThread
 import androidx.annotation.VisibleForTesting
 import androidx.core.content.withStyledAttributes
@@ -37,9 +38,20 @@ import java.util.concurrent.atomic.AtomicReference
 
 /**
  * An Android View that displays a Braze banner.
+ *
+ * Hosts a [WebView]. Creating that [WebView] can throw
+ * [android.util.AndroidRuntimeException] on Android 16 when the system WebView provider fails
+ * while redirecting resources (`Resources.NotFoundException: failed to redirect ResourcesImpl`).
+ * Construction catches that failure, logs it, and leaves this view empty so the host app does
+ * not crash. [heightCallback] is then invoked with `0.0` when assigned.
  */
-class BannerView :
-    WebView,
+class BannerView internal constructor(
+    context: Context,
+    attrs: AttributeSet?,
+    defStyle: Int,
+    explicitPlacementId: String?,
+    webViewFactory: (Context) -> WebView,
+) : FrameLayout(context, attrs, defStyle),
     IBannerView {
     private var _placementId: String? = null
     private var loadedHtml: String? = null
@@ -66,6 +78,13 @@ class BannerView :
      * @param snapshot [BannerDismissSnapshot] with placement, stable key, and tracking id.
      */
     var onDismissCallback: ((BannerDismissSnapshot) -> Unit)? = null
+
+    /**
+     * WebView that renders the banner, or null when provider setup failed during construction.
+     */
+    @VisibleForTesting
+    internal var hostedWebView: WebView? = null
+        private set
 
     private val dismissSubscriber =
         IEventSubscriber<BannerDismissedEvent> { event ->
@@ -102,41 +121,102 @@ class BannerView :
      * depending on the subsequent interface that will use the height.
      */
     var heightCallback: ((Double) -> Unit)? = null
+        set(value) {
+            field = value
+            if (hostedWebView == null) {
+                value?.invoke(0.0)
+            }
+        }
 
     // Make this a constant so the heightCallback can be set at anytime, not just during initialization.
     private val internalHeightCallback: (Double) -> Unit = { height ->
         heightCallback?.invoke(height)
     }
 
+    init {
+        hostedWebView = tryCreateWebView(webViewFactory)
+        _placementId = explicitPlacementId
+        if (hostedWebView != null) {
+            addOnAttachStateChangeListener(attachStateListener)
+        }
+        applyAttributes(attrs, defStyle)
+    }
+
     // This constructor is specifically for the Jetpack integration so the placement ID can be passed in immediately.
-    constructor(context: Context, placementId: String?) : super(context) {
-        _placementId = placementId
-        addOnAttachStateChangeListener(attachStateListener)
-        init(null, 0)
+    constructor(context: Context, placementId: String?) : this(
+        context,
+        null,
+        0,
+        placementId,
+        Companion::newWebView,
+    )
+
+    constructor(context: Context) : this(context, null, 0, null, Companion::newWebView)
+
+    constructor(context: Context, attrs: AttributeSet) : this(context, attrs, 0, null, Companion::newWebView)
+
+    constructor(context: Context, attrs: AttributeSet, defStyle: Int) : this(
+        context,
+        attrs,
+        defStyle,
+        null,
+        Companion::newWebView,
+    )
+
+    /**
+     * Measures as the hosted [WebView] so a `wrap_content` parent keeps that measured size
+     * until [heightCallback] reports a height.
+     */
+    override fun onMeasure(
+        widthMeasureSpec: Int,
+        heightMeasureSpec: Int,
+    ) {
+        val webView = hostedWebView
+        if (webView == null || isDestroyed.get()) {
+            setMeasuredDimension(0, 0)
+            return
+        }
+        webView.measure(widthMeasureSpec, heightMeasureSpec)
+        setMeasuredDimension(
+            resolveSize(maxOf(webView.measuredWidth, suggestedMinimumWidth), widthMeasureSpec),
+            resolveSize(maxOf(webView.measuredHeight, suggestedMinimumHeight), heightMeasureSpec),
+        )
     }
 
-    constructor(context: Context) : super(context) {
-        addOnAttachStateChangeListener(attachStateListener)
-        init(null, 0)
+    /**
+     * Positions the hosted [WebView] to fill this view.
+     */
+    override fun onLayout(
+        changed: Boolean,
+        left: Int,
+        top: Int,
+        right: Int,
+        bottom: Int,
+    ) {
+        if (isDestroyed.get()) return
+        hostedWebView?.layout(0, 0, right - left, bottom - top)
     }
 
-    constructor(context: Context, attrs: AttributeSet) : super(context, attrs) {
-        addOnAttachStateChangeListener(attachStateListener)
-        init(attrs, 0)
+    private fun tryCreateWebView(webViewFactory: (Context) -> WebView): WebView? {
+        val webView =
+            try {
+                webViewFactory(context)
+            } catch (e: Exception) {
+                brazelog(E, e) { "Error creating BannerView WebView. Banner will not display." }
+                visibility = GONE
+                return null
+            }
+        hostedWebView = webView
+        webView.setBackgroundColor(Color.TRANSPARENT)
+        addView(webView)
+        return webView
     }
 
-    constructor(context: Context, attrs: AttributeSet, defStyle: Int) : super(context, attrs, defStyle) {
-        addOnAttachStateChangeListener(attachStateListener)
-        init(attrs, defStyle)
-    }
-
-    private fun init(
+    private fun applyAttributes(
         attrs: AttributeSet?,
         defStyle: Int,
     ) {
         setBackgroundColor(Color.TRANSPARENT)
-
-        // Load attributes
         context.withStyledAttributes(
             attrs,
             R.styleable.BannerView,
@@ -150,26 +230,44 @@ class BannerView :
                     )
             }
         }
-
+        if (hostedWebView == null) return
         initBanner(placementId)
     }
 
     /**
      * Tears down banner resources for embedders that destroy the underlying [WebView].
      * Unregisters from banner monitoring and ensures pending async HTML loads no-op safely.
-     * Idempotent — safe to call more than once.
+     * Idempotent — safe to call more than once, including when WebView creation failed.
+     * Removes the hosted [WebView] so a later measure or layout pass does not call it.
      */
-    override fun destroy() {
+    fun destroy() {
         if (!isDestroyed.compareAndSet(false, true)) return
         cancelPendingInit()
         mainHandler.removeCallbacksAndMessages(null)
         if (Looper.myLooper() == Looper.getMainLooper()) {
             teardownForRelease()
-            super.destroy()
+            releaseHostedWebView()
         } else {
             mainHandler.post {
                 teardownForRelease()
-                super.destroy()
+                releaseHostedWebView()
+            }
+        }
+    }
+
+    /**
+     * Drops the hosted [WebView] before [WebView.destroy] so layout cannot reach it.
+     */
+    @MainThread
+    private fun releaseHostedWebView() {
+        val webView = hostedWebView ?: return
+        hostedWebView = null
+        removeView(webView)
+        try {
+            webView.destroy()
+        } catch (e: Exception) {
+            brazelog(E, e) {
+                "Banner release: error destroying WebView for placementId=$_placementId"
             }
         }
     }
@@ -182,9 +280,9 @@ class BannerView :
         heightCallback = null
         onDismissCallback = null
         try {
-            stopLoading()
+            hostedWebView?.stopLoading()
             removeJavascriptInterface(JS_BRIDGE_NAME)
-            webViewClient = WebViewClient()
+            hostedWebView?.webViewClient = WebViewClient()
         } catch (e: Exception) {
             brazelog(E, e) {
                 "Banner release: error during WebView teardown for placementId=$_placementId"
@@ -194,16 +292,17 @@ class BannerView :
 
     @MainThread
     private fun configureWebView(placementId: String) {
-        setWebViewSettings(settings, context)
+        val webView = hostedWebView ?: return
+        setWebViewSettings(webView.settings, context)
 
         // This enables hardware acceleration if the manifest also has it defined.
         // If not defined, then the layer type will fallback to software.
-        setLayerType(LAYER_TYPE_HARDWARE, null)
-        setBackgroundColor(Color.TRANSPARENT)
+        webView.setLayerType(LAYER_TYPE_HARDWARE, null)
+        webView.setBackgroundColor(Color.TRANSPARENT)
 
-        webViewClient = BannerWebViewClient(context, createBannerWebViewClientListener(placementId))
+        webView.webViewClient = BannerWebViewClient(context, createBannerWebViewClientListener(placementId))
 
-        addJavascriptInterface(
+        webView.addJavascriptInterface(
             BannerJavascriptInterface(
                 context = context,
                 placementId = placementId,
@@ -239,7 +338,7 @@ class BannerView :
      * can ANR; this method never invokes that path on the main thread.
      */
     override fun initBanner(placementId: String?) {
-        if (isDestroyed.get()) return
+        if (hostedWebView == null || isDestroyed.get()) return
         // BannersManager may call initBanner with a prior monitor placement after the view's
         // placementId has already changed. Ignore those so we do not cancel the newer resolve.
         if (placementId != _placementId) {
@@ -355,8 +454,8 @@ class BannerView :
     private fun loadHtmlData(placementId: String) {
         val wasDismissed = isDismissed.getAndSet(false)
         if (wasDismissed) {
-            onResume()
-            settings.javaScriptEnabled = true
+            hostedWebView?.onResume()
+            hostedWebView?.settings?.javaScriptEnabled = true
             visibility = VISIBLE
         }
         configureWebView(placementId)
@@ -366,7 +465,7 @@ class BannerView :
                 "text/html",
                 "base64",
             )
-            invalidate()
+            hostedWebView?.invalidate()
         }
     }
 
@@ -374,8 +473,28 @@ class BannerView :
     private fun setWebviewToEmpty() {
         loadedHtml = null
         loadData("", "text/html", "base64")
-        invalidate()
+        hostedWebView?.invalidate()
         internalHeightCallback(0.0)
+    }
+
+    /**
+     * Loads [data] into the hosted [WebView].
+     */
+    @VisibleForTesting
+    internal fun loadData(
+        data: String,
+        mimeType: String?,
+        encoding: String?,
+    ) {
+        hostedWebView?.loadData(data, mimeType, encoding)
+    }
+
+    /**
+     * Removes the JavaScript interface [name] from the hosted [WebView].
+     */
+    @VisibleForTesting
+    internal fun removeJavascriptInterface(name: String) {
+        hostedWebView?.removeJavascriptInterface(name)
     }
 
     /**
@@ -407,13 +526,13 @@ class BannerView :
     @MainThread
     private fun performDismissTeardown() {
         try {
-            stopLoading()
+            hostedWebView?.stopLoading()
             setWebviewToEmpty()
-            clearHistory()
-            settings.javaScriptEnabled = false
+            hostedWebView?.clearHistory()
+            hostedWebView?.settings?.javaScriptEnabled = false
             removeJavascriptInterface(JS_BRIDGE_NAME)
-            webViewClient = WebViewClient()
-            onPause()
+            hostedWebView?.webViewClient = WebViewClient()
+            hostedWebView?.onPause()
             visibility = GONE
             fireOnDismissCallback()
             brazelog(V) { "Banner dismiss completed. placementId=$_placementId" }
@@ -474,6 +593,8 @@ class BannerView :
 
     private companion object {
         private const val JS_BRIDGE_NAME = "brazeInternalBridge"
+
+        private fun newWebView(context: Context): WebView = WebView(context)
     }
 }
 

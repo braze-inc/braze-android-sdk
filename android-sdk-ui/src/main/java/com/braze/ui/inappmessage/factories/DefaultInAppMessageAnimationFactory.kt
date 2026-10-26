@@ -8,6 +8,7 @@ import com.braze.models.inappmessage.IInAppMessage
 import com.braze.models.inappmessage.InAppMessageSlideup
 import com.braze.ui.inappmessage.IInAppMessageAnimationFactory
 import com.braze.ui.support.createVerticalAnimation
+import com.braze.ui.support.getShortAnimationDurationMs
 import com.braze.ui.support.setAnimationParams
 
 /**
@@ -16,8 +17,9 @@ import com.braze.ui.support.setAnimationParams
  * [SlideFrom] direction; all other message types use an alpha fade.
  */
 open class DefaultInAppMessageAnimationFactory : IInAppMessageAnimationFactory {
-    private val shortAnimationDurationMs =
-        Resources.getSystem().getInteger(android.R.integer.config_shortAnimTime).toLong()
+    private val shortAnimationDurationMs by lazy {
+        getShortAnimationDurationMs(Resources.getSystem())
+    }
 
     override fun getOpeningAnimation(inAppMessage: IInAppMessage): Animation? =
         if (inAppMessage is InAppMessageSlideup) {

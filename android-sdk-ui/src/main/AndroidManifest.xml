@@ -6,6 +6,13 @@
   <uses-sdk tools:overrideLibrary="com.google.firebase.components,com.google.android.gms.common,com.google.firebase.messaging,com.google.firebase.installations,com.google.firebase,com.google.android.gms.cloudmessaging,com.google.android.gms.base,com.google.firebase.installations.interop,com.google.android.gms.tasks"/>
 
   <application>
+    <!--
+      This activity is not exported. External applications must not be able to pass
+      arbitrary URLs via this intent.
+      https://developer.android.com/guide/topics/manifest/activity-element#exported
+      If "false", the activity can be launched only by components of the same
+      application or applications with the same user ID.
+    -->
     <activity
       android:name="com.braze.ui.BrazeWebViewActivity"
       android:exported="false" />

@@ -11,21 +11,27 @@ import android.widget.Spinner
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.appboy.sample.DroidboyApplication
 import com.appboy.sample.R
 import com.braze.Braze
-import com.braze.events.BannersEvent
-import com.braze.events.BrazeUserChangeEvent
-import com.braze.events.ContentCardsEvent
-import com.braze.events.FeatureFlagsEvent
-import com.braze.events.IEventSubscriber
+import com.braze.bannersEventsFlow
+import com.braze.changeUserEventsFlow
+import com.braze.contentCardsEventsFlow
+import com.braze.featureFlagsEventsFlow
 import com.google.android.material.chip.ChipGroup
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.cancelAndJoin
+import kotlinx.coroutines.launch
 
 /**
  * Observer tab for the Content Cards, Banners, and Feature Flags event streams.
  * Product UI on the other tabs remains on the legacy APIs and still produces events here.
+ *
+ * Collects the Kotlin Flow APIs (for example [contentCardsEventsFlow]) in the view lifecycle scope. Cancelling a
+ * collection removes its subscription, so there are no manual `removeSingleSubscription` calls.
  */
 class ChannelEventsFragment : Fragment() {
     private lateinit var adapter: ChannelEventsAdapter
@@ -36,28 +42,14 @@ class ChannelEventsFragment : Fragment() {
     private var activeUserId: String? = null
 
     /**
-     * [Braze] instance these subscribers were registered on.
+     * [Braze] instance these collections were started on.
      * [Braze.wipeData] replaces that instance. Settings cannot see this fragment, so [onStart]
-     * compares this reference and subscribes again.
+     * compares this reference and collects again.
      */
     private var subscribedBraze: Braze? = null
 
-    private val contentCardsSubscriber =
-        IEventSubscriber<ContentCardsEvent> { event ->
-            appendRow(ChannelEventRowMapper.from(event, System.currentTimeMillis(), activeUserId))
-        }
-    private val bannersSubscriber =
-        IEventSubscriber<BannersEvent> { event ->
-            appendRow(ChannelEventRowMapper.from(event, System.currentTimeMillis(), activeUserId))
-        }
-    private val featureFlagsSubscriber =
-        IEventSubscriber<FeatureFlagsEvent> { event ->
-            appendRow(ChannelEventRowMapper.from(event, System.currentTimeMillis(), activeUserId))
-        }
-    private val userChangeSubscriber =
-        IEventSubscriber<BrazeUserChangeEvent> { event ->
-            activeUserId = event.currentUserId
-        }
+    private val channelCollections = mutableMapOf<EventsChannel, Job>()
+    private var userChangeCollection: Job? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -128,11 +120,11 @@ class ChannelEventsFragment : Fragment() {
     }
 
     /**
-     * Subscribes this page to the [Braze] instance created after [Braze.wipeData].
-     * The previous instance's messenger is stopped, so the existing subscriber objects are registered again.
+     * Collects this page's Flows from the [Braze] instance created after [Braze.wipeData].
+     * The previous instance's messenger is stopped, so every collection is restarted on the new instance.
      */
     internal fun resubscribeAfterInstanceReset() {
-        if (!isAdded) return
+        if (!isAdded || view == null) return
         val braze = Braze.getInstance(requireContext())
         activeUserId = braze.currentUser?.userId
         subscribeAll()
@@ -140,7 +132,6 @@ class ChannelEventsFragment : Fragment() {
 
     override fun onDestroyView() {
         ChannelSyncHttpConnector.install(ChannelSyncHttpResponse.REAL)
-        unsubscribeAll()
         super.onDestroyView()
     }
 
@@ -196,40 +187,50 @@ class ChannelEventsFragment : Fragment() {
         }
     }
 
+    /** Restarts one channel's collection so its subscribe handshake is delivered again. */
     private fun resubscribe(channel: EventsChannel) {
-        val braze = Braze.getInstance(requireContext())
-        when (channel) {
-            EventsChannel.CONTENT_CARDS -> {
-                braze.removeSingleSubscription(contentCardsSubscriber, ContentCardsEvent::class.java)
-                braze.subscribeToContentCardsEvents(contentCardsSubscriber)
-            }
-            EventsChannel.BANNERS -> {
-                braze.removeSingleSubscription(bannersSubscriber, BannersEvent::class.java)
-                braze.subscribeToBannersEvents(bannersSubscriber)
-            }
-            EventsChannel.FEATURE_FLAGS -> {
-                braze.removeSingleSubscription(featureFlagsSubscriber, FeatureFlagsEvent::class.java)
-                braze.subscribeToFeatureFlagsEvents(featureFlagsSubscriber)
-            }
-        }
+        collectChannel(Braze.getInstance(requireContext()), channel)
     }
 
     private fun subscribeAll() {
         val braze = Braze.getInstance(requireContext())
         subscribedBraze = braze
-        braze.subscribeToContentCardsEvents(contentCardsSubscriber)
-        braze.subscribeToBannersEvents(bannersSubscriber)
-        braze.subscribeToFeatureFlagsEvents(featureFlagsSubscriber)
-        braze.subscribeToChangeUserEvents(userChangeSubscriber)
+        EventsChannel.entries.forEach { collectChannel(braze, it) }
+        val previousUserChangeCollection = userChangeCollection
+        userChangeCollection =
+            viewLifecycleOwner.lifecycleScope.launch {
+                previousUserChangeCollection?.cancelAndJoin()
+                braze.changeUserEventsFlow().collect { activeUserId = it.currentUserId }
+            }
     }
 
-    private fun unsubscribeAll() {
-        val context = context ?: return
-        val braze = Braze.getInstance(context)
-        braze.removeSingleSubscription(contentCardsSubscriber, ContentCardsEvent::class.java)
-        braze.removeSingleSubscription(bannersSubscriber, BannersEvent::class.java)
-        braze.removeSingleSubscription(featureFlagsSubscriber, FeatureFlagsEvent::class.java)
-        braze.removeSingleSubscription(userChangeSubscriber, BrazeUserChangeEvent::class.java)
+    /**
+     * Replaces [channel]'s collection. The previous one is cancelled, which removes its subscription, before the new
+     * one subscribes. Collections run in the view lifecycle scope, so they also stop in [onDestroyView].
+     */
+    private fun collectChannel(
+        braze: Braze,
+        channel: EventsChannel,
+    ) {
+        val previousCollection = channelCollections[channel]
+        channelCollections[channel] =
+            viewLifecycleOwner.lifecycleScope.launch {
+                previousCollection?.cancelAndJoin()
+                when (channel) {
+                    EventsChannel.CONTENT_CARDS ->
+                        braze.contentCardsEventsFlow().collect {
+                            appendRow(ChannelEventRowMapper.from(it, System.currentTimeMillis(), activeUserId))
+                        }
+                    EventsChannel.BANNERS ->
+                        braze.bannersEventsFlow().collect {
+                            appendRow(ChannelEventRowMapper.from(it, System.currentTimeMillis(), activeUserId))
+                        }
+                    EventsChannel.FEATURE_FLAGS ->
+                        braze.featureFlagsEventsFlow().collect {
+                            appendRow(ChannelEventRowMapper.from(it, System.currentTimeMillis(), activeUserId))
+                        }
+                }
+            }
     }
 
     private fun appendRow(row: ChannelEventRow) {

@@ -44,7 +44,7 @@ dependencies {
   implementation libs.androidx.core
   implementation platform(libs.androidx.compose.bom)
   implementation "androidx.compose.foundation:foundation"
-  implementation "androidx.compose.material:material"
+  implementation "androidx.compose.material3:material3"
   implementation "androidx.compose.runtime:runtime"
   implementation libs.coil.core
   implementation libs.coil.compose

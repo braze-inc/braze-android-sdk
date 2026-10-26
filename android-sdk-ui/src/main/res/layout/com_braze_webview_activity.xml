@@ -10,4 +10,16 @@
     android:id="@+id/com_braze_webview_activity_webview"
     android:layout_centerVertical="true"
     android:layout_centerHorizontal="true"/>
+
+  <ProgressBar
+    android:id="@+id/com_braze_webview_activity_progress_bar"
+    style="@android:style/Widget.ProgressBar.Large"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_centerInParent="true"
+    android:elevation="8dp"
+    android:indeterminate="true"
+    android:indeterminateTint="@color/com_braze_webview_activity_progress_bar"
+    android:indeterminateTintMode="src_in"
+    android:visibility="gone"/>
 </RelativeLayout>

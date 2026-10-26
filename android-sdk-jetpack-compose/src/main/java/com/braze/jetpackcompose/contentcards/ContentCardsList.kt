@@ -9,20 +9,15 @@ import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
-import androidx.compose.material.DismissValue
-import androidx.compose.material.ExperimentalMaterialApi
-import androidx.compose.material.SwipeToDismiss
-import androidx.compose.material.Text
-import androidx.compose.material.pullrefresh.PullRefreshIndicator
-import androidx.compose.material.pullrefresh.pullRefresh
-import androidx.compose.material.pullrefresh.rememberPullRefreshState
-import androidx.compose.material.rememberDismissState
+import androidx.compose.material3.Text
+import androidx.compose.material3.pulltorefresh.PullToRefreshDefaults
+import androidx.compose.material3.pulltorefresh.pullToRefresh
+import androidx.compose.material3.pulltorefresh.rememberPullToRefreshState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableFloatStateOf
 import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -38,10 +33,13 @@ import androidx.compose.ui.unit.sp
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleEventObserver
 import androidx.lifecycle.compose.LocalLifecycleOwner
+import androidx.lifecycle.repeatOnLifecycle
 import com.braze.Braze
+import com.braze.contentCardsEventsFlow
 import com.braze.coroutine.BrazeCoroutineScope
 import com.braze.enums.CardType
-import com.braze.events.ContentCardsUpdatedEvent
+import com.braze.events.ChannelErrorReason
+import com.braze.events.ContentCardsEvent
 import com.braze.events.IEventSubscriber
 import com.braze.events.SdkDataWipeEvent
 import com.braze.jetpackcompose.LocalContentCardListStyling
@@ -72,6 +70,12 @@ private sealed interface CardListMutation {
     data class InitializeFromCache(
         val cachedCards: List<Card>,
     ) : CardListMutation
+
+    data class ShowCachedCards(
+        val cachedCards: List<Card>,
+    ) : CardListMutation
+
+    data object RefreshFailed : CardListMutation
 }
 
 /**
@@ -92,7 +96,6 @@ private sealed interface CardListMutation {
  * @param enablePullToRefresh If true, the user can pull down to refresh the list of content cards.
  */
 @Suppress("LongMethod", "ComplexMethod", "LongParameterList", "VariableNaming", "MagicNumber", "NestedBlockDepth")
-@OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun ContentCardsList(
     cards: List<Card>? = null,
@@ -107,7 +110,6 @@ fun ContentCardsList(
     enablePullToRefresh: Boolean = true,
 ) {
     val context = LocalContext.current
-    var contentCardsUpdatedSubscriber: IEventSubscriber<ContentCardsUpdatedEvent>? = null
     var sdkDataWipeEventSubscriber: IEventSubscriber<SdkDataWipeEvent>? = null
 
     var myCards by remember { mutableStateOf<List<Card>>(emptyList()) }
@@ -142,7 +144,7 @@ fun ContentCardsList(
             isRefreshing = false
         }
 
-    val refreshState = rememberPullRefreshState(isRefreshing, ::refresh)
+    val refreshState = rememberPullToRefreshState()
 
     val impressedCards =
         remember {
@@ -190,6 +192,16 @@ fun ContentCardsList(
         }
     }
 
+    fun logImpressionOnce(card: Card) {
+        if (impressedCards.contains(card.id)) {
+            brazelog(tag) { "Card ${card.id} already logged. Skipping." }
+        } else {
+            brazelog(tag) { "Logging impression for card ${card.id}" }
+            impressedCards.add(card.id)
+            card.logImpression()
+        }
+    }
+
     fun applyCardReplacement(newCards: List<Card>) {
         val processedCards = cardUpdateHandler?.invoke(newCards) ?: BrazeContentCardUtils.defaultCardHandling(newCards)
         val cardsToAdd = mutableListOf<Card>()
@@ -201,7 +213,7 @@ fun ContentCardsList(
                 val idCardPair = Pair(lastCardId, card)
                 if (lastCardId.isBlank()) {
                     brazelog(tag) { "Control card $card.id is at the front. Logging impression immediately" }
-                    card.logImpression()
+                    logImpressionOnce(card)
                 } else {
                     controlCardPairsToAdd.add(idCardPair)
                 }
@@ -249,37 +261,46 @@ fun ContentCardsList(
                     requestStaleRefreshIfNeeded()
                 }
             }
+            is CardListMutation.ShowCachedCards -> applyCardReplacement(mutation.cachedCards)
             is CardListMutation.DismissCard -> {
                 myCards = myCards.filterNot { it.id == mutation.card.id }
                 brazelog(tag) { "Removing card ${mutation.card.id}. Total size is now ${myCards.size}" }
                 mutation.card.isDismissed = true
                 onCardDismissed?.invoke(mutation.card)
             }
+            is CardListMutation.RefreshFailed -> {
+                networkUnavailableJob?.cancel()
+                networkUnavailable()
+            }
         }
     }
 
-    fun handleContentCardsUpdatedEvent(event: ContentCardsUpdatedEvent) {
-        brazelog(tag) { "Handling ContentCardsUpdatedEvent" }
-        replaceCards(event.allCards)
+    fun handleContentCardsEvent(event: ContentCardsEvent) {
+        brazelog(tag) { "Handling ${event::class.simpleName}" }
+        when (event) {
+            is ContentCardsEvent.CacheReplay ->
+                enqueueCardListMutation(CardListMutation.InitializeFromCache(event.cacheSnapshot.cards))
+            is ContentCardsEvent.CacheLoad ->
+                enqueueCardListMutation(CardListMutation.ShowCachedCards(event.cacheSnapshot.cards))
+            is ContentCardsEvent.DataUpdated -> replaceCards(event.cacheSnapshot.cards)
+            is ContentCardsEvent.ErrorEvent ->
+                if (event.reason == ChannelErrorReason.FeatureDisabled) {
+                    replaceCards(emptyList())
+                } else {
+                    enqueueCardListMutation(CardListMutation.RefreshFailed)
+                }
+            is ContentCardsEvent.ImpressionEvent,
+            is ContentCardsEvent.ClickEvent,
+            is ContentCardsEvent.DismissEvent,
+            -> Unit
+        }
     }
 
     fun logCardImpression(card: Card) {
-        if (impressedCards.contains(card.id)) {
-            brazelog(tag) { "Card ${card.id} already logged. Skipping." }
-        } else {
-            brazelog(tag) { "Logging impression for card ${card.id}" }
-            impressedCards.add(card.id)
-            card.logImpression()
-        }
+        logImpressionOnce(card)
         controlCardInference.filter { it.first == card.id }.forEach {
-            val controlCard = it.second
-            if (impressedCards.contains(controlCard.id)) {
-                brazelog(tag) { "Control Card ${controlCard.id} (via ${card.id}) already logged. Skipping." }
-            } else {
-                brazelog(tag) { "Logging impression for control card ${controlCard.id} (via ${card.id})" }
-                impressedCards.add(controlCard.id)
-                controlCard.logImpression()
-            }
+            brazelog(tag) { "Checking control card ${it.second.id} (via ${card.id})" }
+            logImpressionOnce(it.second)
         }
     }
 
@@ -296,47 +317,32 @@ fun ContentCardsList(
 
     if (cards == null) {
         val lifecycleOwner = LocalLifecycleOwner.current
+        LaunchedEffect(lifecycleOwner) {
+            lifecycleOwner.repeatOnLifecycle(Lifecycle.State.RESUMED) {
+                Braze.getInstance(context).contentCardsEventsFlow().collect { handleContentCardsEvent(it) }
+            }
+        }
         DisposableEffect(LocalLifecycleOwner.current) {
             val observer =
                 LifecycleEventObserver { _, event ->
                     when (event) {
                         Lifecycle.Event.ON_PAUSE -> {
                             brazelog { "OnPause called in BrazeContentCardList" }
-                            Braze.getInstance(context).removeSingleSubscription(
-                                contentCardsUpdatedSubscriber,
-                                ContentCardsUpdatedEvent::class.java,
-                            )
                             Braze
                                 .getInstance(context)
                                 .removeSingleSubscription(sdkDataWipeEventSubscriber, SdkDataWipeEvent::class.java)
                             networkUnavailableJob?.cancel()
                             networkUnavailableJob = null
+                            isRefreshing = false
                         }
 
                         Lifecycle.Event.ON_RESUME -> {
                             brazelog { "OnResume called in BrazeContentCardList" }
-                            // Remove the previous subscriber before rebuilding a new one with our new activity.
-                            Braze.getInstance(context).removeSingleSubscription(
-                                contentCardsUpdatedSubscriber,
-                                ContentCardsUpdatedEvent::class.java,
-                            )
-                            if (contentCardsUpdatedSubscriber == null) {
-                                contentCardsUpdatedSubscriber =
-                                    IEventSubscriber {
-                                        handleContentCardsUpdatedEvent(it)
-                                    }
-                            }
-                            contentCardsUpdatedSubscriber?.let {
-                                Braze
-                                    .getInstance(context)
-                                    .addSingleSynchronousSubscription(it, ContentCardsUpdatedEvent::class.java)
-                            }
-
                             if (sdkDataWipeEventSubscriber == null) {
                                 // If the SDK data is wiped, then we want to clear any cached Content Cards
                                 sdkDataWipeEventSubscriber =
                                     IEventSubscriber {
-                                        handleContentCardsUpdatedEvent(ContentCardsUpdatedEvent.emptyUpdate)
+                                        replaceCards(emptyList())
                                     }
                             }
                             sdkDataWipeEventSubscriber?.let {
@@ -353,18 +359,6 @@ fun ContentCardsList(
             onDispose {
                 lifecycleOwner.lifecycle.removeObserver(observer)
             }
-        }
-
-        if (!didInitialLoad) {
-            val cachedCards = Braze.getInstance(context).getCachedContentCards()
-            if (!cachedCards.isNullOrEmpty()) {
-                enqueueCardListMutation(CardListMutation.InitializeFromCache(cachedCards))
-            } else {
-                requestStaleRefreshIfNeeded()
-            }
-            didInitialLoad = true
-        } else {
-            brazelog(tag) { "Doing a recomposition, so skipping loading of cards from cache" }
         }
     } else {
         if (!didInitialLoad) {
@@ -413,7 +407,11 @@ fun ContentCardsList(
             .let {
                 // Don't enable pull-to-refresh if we were given a list of cards.
                 if (enablePullToRefresh && cards == null) {
-                    it.pullRefresh(refreshState)
+                    it.pullToRefresh(
+                        isRefreshing = isRefreshing,
+                        state = refreshState,
+                        onRefresh = { refresh() },
+                    )
                 } else {
                     it
                 }
@@ -442,42 +440,10 @@ fun ContentCardsList(
                     }
 
                     if (card.isDismissibleByUser) {
-                        val currentFraction = remember { mutableFloatStateOf(0f) }
-                        val dismissThreshold = 0.50f
-
-                        var hasCardBeenDismissed by remember { mutableStateOf(false) }
-                        val dismissState =
-                            rememberDismissState(
-                                confirmStateChange = {
-                                    // SwipeToDismiss handles flings very sensitively, so we do this to disable accidental dismisses
-                                    // https://stackoverflow.com/questions/72676541/compose-swipetodismiss-confirmstatechange-applies-only-threshold
-                                    var willDismiss = false
-                                    if (it == DismissValue.DismissedToStart || it == DismissValue.DismissedToEnd) {
-                                        if (currentFraction.floatValue >= dismissThreshold && currentFraction.floatValue < 1.0f) {
-                                            willDismiss = true
-                                            hasCardBeenDismissed = true
-                                        }
-                                    }
-                                    willDismiss
-                                },
-                            )
-
-                        if (hasCardBeenDismissed) {
-                            LaunchedEffect(Unit) {
-                                enqueueCardListMutation(CardListMutation.DismissCard(card))
-                            }
-                        }
-
-                        SwipeToDismiss(
+                        DismissibleContentCard(
                             modifier = Modifier.animateItem(),
-                            state = dismissState,
-                            dismissThresholds = {
-                                @Suppress("DEPRECATION")
-                                androidx.compose.material.FractionalThreshold(0.5f)
-                            },
-                            background = {},
+                            onDismissed = { enqueueCardListMutation(CardListMutation.DismissCard(card)) },
                         ) {
-                            currentFraction.floatValue = dismissState.progress.fraction
                             renderCard(card)
                         }
                     } else {
@@ -515,7 +481,11 @@ fun ContentCardsList(
             }
         }
         if (enablePullToRefresh && cards == null) {
-            PullRefreshIndicator(isRefreshing, refreshState, Modifier.align(Alignment.TopCenter))
+            PullToRefreshDefaults.Indicator(
+                state = refreshState,
+                isRefreshing = isRefreshing,
+                modifier = Modifier.align(Alignment.TopCenter),
+            )
         }
     }
 }
