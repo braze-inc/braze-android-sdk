@@ -7,6 +7,7 @@ import com.braze.coroutine.BrazeCoroutineScope
 import com.braze.support.BrazeLogger.Priority.I
 import com.braze.support.BrazeLogger.Priority.V
 import com.braze.support.BrazeLogger.brazelog
+import com.braze.support.logging.LogCategory
 import com.braze.support.requestPushPermissionPrompt
 import com.braze.ui.JavascriptInterfaceBase
 import com.braze.ui.inappmessage.BrazeInAppMessageManager
@@ -29,13 +30,13 @@ class BannerJavascriptInterface(
 
     @JavascriptInterface
     override fun logButtonClick(buttonId: String?) {
-        brazelog(I) { "Banner logButtonClick() called. Logging banner click with button ID." }
+        brazelog(LogCategory.BANNERS, I) { "Banner logButtonClick() called. Logging banner click with button ID." }
         Braze.getInstance(context).logBannerClick(placementId, buttonId)
     }
 
     @JavascriptInterface
     override fun logClick() {
-        brazelog(I) { "Banner logClick() called. Logging banner click without button ID." }
+        brazelog(LogCategory.BANNERS, I) { "Banner logClick() called. Logging banner click without button ID." }
         Braze.getInstance(context).logBannerClick(placementId, null)
     }
 
@@ -43,18 +44,18 @@ class BannerJavascriptInterface(
     fun setBannerHeight(height: Double) {
         // Height must be a finite number and not NaN
         if (height.isInfinite() || height.isNaN() || height < 0) {
-            brazelog {
+            brazelog(LogCategory.BANNERS) {
                 "Banner setBannerHeight($height) called with invalid height. Height must be a finite number, not NaN, and greater or equal to 0."
             }
             return
         }
-        brazelog(I) { "Banner setBannerHeight($height) called." }
+        brazelog(LogCategory.BANNERS, I) { "Banner setBannerHeight($height) called." }
         setHeightCallback(height)
     }
 
     @JavascriptInterface
     fun requestPushPermission() {
-        brazelog(V) { "Banner requestPushPermission() called. Requesting push permission now." }
+        brazelog(LogCategory.BANNERS, V) { "Banner requestPushPermission() called. Requesting push permission now." }
         BrazeCoroutineScope.launch {
             BrazeInAppMessageManager.getInstance().activity.requestPushPermissionPrompt()
         }
@@ -62,7 +63,9 @@ class BannerJavascriptInterface(
 
     @JavascriptInterface
     fun beforeMessageClosed() {
-        brazelog(V) { "Banner dismiss triggered from WebView bridge (beforeMessageClosed). placementId=$placementId" }
+        brazelog(LogCategory.BANNERS, V) {
+            "Banner dismiss triggered from WebView bridge (beforeMessageClosed). placementId=$placementId"
+        }
         Braze.getInstance(context).dismissBanner(placementId)
     }
 }

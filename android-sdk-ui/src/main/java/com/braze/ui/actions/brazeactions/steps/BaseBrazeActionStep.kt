@@ -4,6 +4,7 @@ import com.braze.Braze
 import com.braze.BrazeUser
 import com.braze.events.IValueCallback
 import com.braze.support.BrazeLogger.brazelog
+import com.braze.support.logging.LogCategory
 
 sealed class BaseBrazeActionStep : IBrazeActionStep {
     companion object {
@@ -15,7 +16,7 @@ sealed class BaseBrazeActionStep : IBrazeActionStep {
                     }
 
                     override fun onError() {
-                        brazelog { "Failed to run on Braze user object" }
+                        brazelog(LogCategory.BRAZE) { "Failed to run on Braze user object" }
                     }
                 },
             )

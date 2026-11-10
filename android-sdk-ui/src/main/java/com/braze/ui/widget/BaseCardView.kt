@@ -12,6 +12,7 @@ import com.braze.models.cards.Card
 import com.braze.support.BrazeLogger.Priority.V
 import com.braze.support.BrazeLogger.brazelog
 import com.braze.support.BrazeLogger.getBrazeLogTag
+import com.braze.support.logging.LogCategory
 import com.braze.ui.BrazeDeeplinkHandler.Companion.getInstance
 import com.braze.ui.R
 import com.braze.ui.actions.IAction
@@ -109,23 +110,23 @@ abstract class BaseCardView<T : Card>(
         card: Card,
         cardAction: IAction?,
     ) {
-        brazelog(V) { "Handling card click for card: $card" }
+        brazelog(LogCategory.CONTENT_CARDS, V) { "Handling card click for card: $card" }
         card.isIndicatorHighlighted = true
         if (!isClickHandled(context, card, cardAction)) {
             if (cardAction != null) {
                 card.logClick()
-                brazelog(V) { "Card action is non-null. Attempting to perform action on card: ${card.id}" }
+                brazelog(LogCategory.CONTENT_CARDS, V) { "Card action is non-null. Attempting to perform action on card: ${card.id}" }
                 if (cardAction is UriAction) {
                     getInstance().gotoUri(context, cardAction)
                 } else {
-                    brazelog { "Executing non uri action for click on card: ${card.id}" }
+                    brazelog(LogCategory.CONTENT_CARDS) { "Executing non uri action for click on card: ${card.id}" }
                     cardAction.execute(context)
                 }
             } else {
-                brazelog(V) { "Card action is null. Not performing any click action on card: ${card.id}" }
+                brazelog(LogCategory.CONTENT_CARDS, V) { "Card action is null. Not performing any click action on card: ${card.id}" }
             }
         } else {
-            brazelog { "Card click was handled by custom listener on card: ${card.id}" }
+            brazelog(LogCategory.CONTENT_CARDS) { "Card click was handled by custom listener on card: ${card.id}" }
             card.logClick()
         }
     }

@@ -1,3 +1,22 @@
+## 45.0.1
+
+[Release Date](https://github.com/braze-inc/braze-android-sdk/releases/tag/v45.0.1)
+
+#### Breaking
+- Updated Kotlin from 2.2.20 to 2.4.21.
+
+##### Fixed
+- Fixed a freeze when the SDK blocked the shared IO thread pool. Content Card `logImpression()` and `logClick()`, banner impression logging, banner loading, and SDK network requests that wait on storage now use their own threads, so a burst of that work cannot stall the app's other background work.
+- Fixed an issue where a slideup in-app message could stay on screen if it was dismissed without animation while its closing animation was running. See [#118](https://github.com/braze-inc/braze-android-sdk/issues/118).
+- Fixed an issue where automatic Firebase Cloud Messaging registration was skipped when Google Play services were installed but `com.google.android.gsf` was not, including fresh GrapheneOS installs on Android 15 and later. See [#119](https://github.com/braze-inc/braze-android-sdk/issues/119).
+
+##### Added
+- Added `BrazeLogger.redactSecrets`. When set to `true`, SDK logs redact the API key, SDK Authentication signatures, JWTs, cookies, push tokens, and exception messages.
+  - Defaults to `false`.
+##### Changed
+- `BrazeLogger.onLoggedCallback` now only receives logs at or above `BrazeLogger.logLevel`. Previously, some SDK logs below the log level, such as DEBUG and VERBOSE logs, were also delivered to the callback. To receive them, set `BrazeLogger.logLevel` to the level you need, for example `BrazeLogger.enableVerboseLogging()`.
+- Logs now use stable feature log tags (`User`, `Session`, `Events`, `Network`, `InAppMessages`, `ContentCards`, `Banners`, `FeatureFlags`, `Push`, `Location`, `Dust`, `Storage`, `EventBus`) instead of `Braze v<version> .<class>`. Logs that belong to no feature use the `Braze` tag. If you filter SDK logs by tag, update your filters.
+
 ## 45.0.0
 
 [Release Date](https://github.com/braze-inc/braze-android-sdk/releases/tag/v45.0.0)
@@ -22,6 +41,7 @@
 - Fixed Jetpack Compose `ContentCardsList` logging a leading control card's impression on every card update. It's now logged once per list, so reported control impressions may decrease.
 
 ##### Added
+- Added an optional `catalogName` parameter to `ProductViewedEvent`. It is sent as the top-level `catalog_name` property on `ecommerce.product_viewed` and tells Braze which catalog a back-in-stock or price-drop subscription belongs to. When omitted, Braze uses the workspace's fallback catalog.
 - Added Kotlin `Flow` versions of the event subscriptions: `IBraze.contentCardsEventsFlow()`, `IBraze.featureFlagsEventsFlow()`, `IBraze.bannersEventsFlow()`, and `IBraze.changeUserEventsFlow()`. Each Flow subscribes when collection starts, unsubscribes when collection is cancelled, and buffers events so none are dropped. Each Flow emits the same events, in the same order, as the matching `subscribeTo*Events` method.
   - To migrate from the deprecated `subscribeToContentCardsUpdates`, `subscribeToFeatureFlagsUpdates`, `subscribeToBannersUpdates`, and `subscribeToBannersErrors`, collect the matching Flow. Each Flow emits `ContentCardsEvent`, `FeatureFlagsEvent`, or `BannersEvent` instead of the old `*UpdatedEvent`. Data events carry a `cacheSnapshot`, and `BannersEvent.ErrorEvent` replaces `subscribeToBannersErrors`.
 

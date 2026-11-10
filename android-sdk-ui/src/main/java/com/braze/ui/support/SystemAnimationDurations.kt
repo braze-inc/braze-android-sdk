@@ -5,9 +5,7 @@ package com.braze.ui.support
 import android.content.res.Resources
 import com.braze.support.BrazeLogger.Priority.W
 import com.braze.support.BrazeLogger.brazelog
-import com.braze.support.BrazeLogger.getBrazeLogTag
-
-private val TAG = "SystemAnimationDurations".getBrazeLogTag()
+import com.braze.support.logging.LogCategory
 
 /**
  * AOSP default for `config_shortAnimTime`.
@@ -28,7 +26,7 @@ internal fun getShortAnimationDurationMs(resources: Resources): Long =
     try {
         resources.getInteger(android.R.integer.config_shortAnimTime).toLong()
     } catch (e: Resources.NotFoundException) {
-        brazelog(TAG, W, e) {
+        brazelog(LogCategory.BRAZE, W, e) {
             "config_shortAnimTime not found. Using default of ${DEFAULT_SHORT_ANIMATION_DURATION_MS}ms."
         }
         DEFAULT_SHORT_ANIMATION_DURATION_MS

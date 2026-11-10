@@ -12,6 +12,7 @@ import com.braze.push.NotificationTrampolineActivity
 import com.braze.support.BrazeLogger.Priority.E
 import com.braze.support.BrazeLogger.Priority.V
 import com.braze.support.BrazeLogger.brazelog
+import com.braze.support.logging.LogCategory
 import com.braze.ui.inappmessage.BrazeInAppMessageManager
 import kotlinx.coroutines.launch
 import java.lang.ref.WeakReference
@@ -56,10 +57,10 @@ open class BrazeActivityLifecycleCallbackListener @JvmOverloads constructor(
         this.inAppMessagingRegistrationBlocklist = inAppMessagingRegistrationBlocklist
             ?: emptySet<Class<*>>()
         this.sessionHandlingBlocklist = sessionHandlingBlocklist ?: emptySet<Class<*>>()
-        brazelog(V) {
+        brazelog(LogCategory.IN_APP_MESSAGES, V) {
             "BrazeActivityLifecycleCallbackListener using in-app messaging blocklist: ${this.inAppMessagingRegistrationBlocklist}"
         }
-        brazelog(V) {
+        brazelog(LogCategory.SESSION, V) {
             "BrazeActivityLifecycleCallbackListener using session handling blocklist: ${this.sessionHandlingBlocklist}"
         }
     }
@@ -83,7 +84,7 @@ open class BrazeActivityLifecycleCallbackListener @JvmOverloads constructor(
      * Sets the [Activity.getClass] blocklist for which in-app message registration will not occur.
      */
     fun setInAppMessagingRegistrationBlocklist(blocklist: Set<Class<*>?>) {
-        brazelog(V) { "setInAppMessagingRegistrationBlocklist called with blocklist: $blocklist" }
+        brazelog(LogCategory.IN_APP_MESSAGES, V) { "setInAppMessagingRegistrationBlocklist called with blocklist: $blocklist" }
         inAppMessagingRegistrationBlocklist = blocklist
     }
 
@@ -91,13 +92,13 @@ open class BrazeActivityLifecycleCallbackListener @JvmOverloads constructor(
      * Sets the [Activity.getClass] blocklist for which session handling will not occur.
      */
     fun setSessionHandlingBlocklist(blocklist: Set<Class<*>?>) {
-        brazelog(V) { "setSessionHandlingBlocklist called with blocklist: $blocklist" }
+        brazelog(LogCategory.SESSION, V) { "setSessionHandlingBlocklist called with blocklist: $blocklist" }
         sessionHandlingBlocklist = blocklist
     }
 
     override fun onActivityStarted(activity: Activity) {
         if (sessionHandlingEnabled && shouldHandleLifecycleMethodsInActivity(activity, true)) {
-            brazelog(V) {
+            brazelog(LogCategory.SESSION, V) {
                 "Automatically calling lifecycle method: openSession for class: ${activity.javaClass}"
             }
             Braze.getInstance(activity.applicationContext).openSession(activity)
@@ -106,7 +107,7 @@ open class BrazeActivityLifecycleCallbackListener @JvmOverloads constructor(
 
     override fun onActivityStopped(activity: Activity) {
         if (sessionHandlingEnabled && shouldHandleLifecycleMethodsInActivity(activity, true)) {
-            brazelog(V) {
+            brazelog(LogCategory.SESSION, V) {
                 "Automatically calling lifecycle method: closeSession for class: ${activity.javaClass}"
             }
             Braze.getInstance(activity.applicationContext).closeSession(activity)
@@ -123,7 +124,7 @@ open class BrazeActivityLifecycleCallbackListener @JvmOverloads constructor(
                     // The previous activity has been set AND
                     previousActivity != activity
                 ) {
-                    brazelog(V) {
+                    brazelog(LogCategory.IN_APP_MESSAGES, V) {
                         "Activity is different from previous activity. Unregistering in-app message manager"
                     }
                     BrazeInAppMessageManager.getInstance().unregisterInAppMessageManager(activity)
@@ -137,7 +138,7 @@ open class BrazeActivityLifecycleCallbackListener @JvmOverloads constructor(
                     // The previous activity is null (so this is the first activity) OR
                     previousActivity != activity
                 ) {
-                    brazelog(V) {
+                    brazelog(LogCategory.IN_APP_MESSAGES, V) {
                         "Automatically calling lifecycle method: registerInAppMessageManager for class: ${activity.javaClass}"
                     }
                     BrazeInAppMessageManager.getInstance().registerInAppMessageManager(activity)
@@ -164,13 +165,13 @@ open class BrazeActivityLifecycleCallbackListener @JvmOverloads constructor(
             // This is the safer default because persisting the webview is less disruptive than unregistering,
             // and matches the SDK's default configuration value of true.
             if (shouldPersistWebView == false) {
-                brazelog(V) {
+                brazelog(LogCategory.IN_APP_MESSAGES, V) {
                     "Automatically calling lifecycle method: unregisterInAppMessageManager for class: ${activity.javaClass}"
                 }
                 BrazeInAppMessageManager.getInstance().unregisterInAppMessageManager(activity)
             } else {
                 BrazeInAppMessageManager.getInstance().pauseWebviewIfNecessary()
-                brazelog(V) {
+                brazelog(LogCategory.IN_APP_MESSAGES, V) {
                     "Skipping unregisterInAppMessageManager in onActivityPaused. " +
                         "shouldPersistWebView=$shouldPersistWebView (null means async load incomplete, defaulting to persist)"
                 }
@@ -182,7 +183,7 @@ open class BrazeActivityLifecycleCallbackListener @JvmOverloads constructor(
         activity: Activity,
         bundle: Bundle?,
     ) {
-        brazelog(V) {
+        brazelog(LogCategory.IN_APP_MESSAGES, V) {
             "Automatically calling lifecycle method: ensureSubscribedToInAppMessageEvents for class: ${activity.javaClass}"
         }
         BrazeInAppMessageManager.getInstance().ensureSubscribedToInAppMessageEvents(activity.applicationContext)
@@ -199,11 +200,11 @@ open class BrazeActivityLifecycleCallbackListener @JvmOverloads constructor(
                     val configurationProvider = BrazeConfigurationProvider(context)
                     shouldPersistWebView = configurationProvider.shouldPersistWebViewWhenBackgroundingApp
                 } catch (e: Exception) {
-                    brazelog(priority = E, e) {
+                    brazelog(LogCategory.IN_APP_MESSAGES, priority = E, e) {
                         "Error while reading shouldPersistWebViewWhenBackgroundingApp from BrazeConfigurationProvider"
                     }
                 }
-                brazelog(V) { "Async load of shouldPersistWebView completed: $shouldPersistWebView" }
+                brazelog(LogCategory.IN_APP_MESSAGES, V) { "Async load of shouldPersistWebView completed: $shouldPersistWebView" }
             }
         }
     }
@@ -225,7 +226,9 @@ open class BrazeActivityLifecycleCallbackListener @JvmOverloads constructor(
     ): Boolean {
         val activityClass: Class<out Activity> = activity.javaClass
         if (activityClass == NotificationTrampolineActivity::class.java) {
-            brazelog(V) { "Skipping automatic registration for notification trampoline activity class." }
+            brazelog(LogCategory.IN_APP_MESSAGES, V) {
+                "Skipping automatic registration for notification trampoline activity class."
+            }
             // Always ignore
             return false
         }
@@ -248,7 +251,9 @@ open class BrazeActivityLifecycleCallbackListener @JvmOverloads constructor(
         try {
             (context.applicationContext as Application).registerActivityLifecycleCallbacks(this)
         } catch (e: Exception) {
-            brazelog(priority = E, e) { "Failed to register this lifecycle callback listener directly against application class" }
+            brazelog(LogCategory.IN_APP_MESSAGES, priority = E, e) {
+                "Failed to register this lifecycle callback listener directly against application class"
+            }
         }
     }
 }

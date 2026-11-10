@@ -33,6 +33,7 @@ import com.braze.support.formatDateNow
 import com.braze.support.getDensityDpi
 import com.braze.support.getDisplayWidthPixels
 import com.braze.support.getPixelsFromDensityAndDp
+import com.braze.support.logging.LogCategory
 import com.braze.ui.BrazeDeeplinkHandler.Companion.getInstance
 import com.braze.ui.R
 
@@ -75,7 +76,7 @@ open class BrazeNotificationStyleFactory {
         ) {
             val style = getNotificationStyle(notificationBuilder, payload)
             if (style !is NoOpSentinelStyle) {
-                brazelog { "Setting style for notification" }
+                brazelog(LogCategory.PUSH) { "Setting style for notification" }
                 notificationBuilder.setStyle(style)
             }
         }
@@ -90,25 +91,25 @@ open class BrazeNotificationStyleFactory {
         ): NotificationCompat.Style {
             var style: NotificationCompat.Style? = null
             if (payload.isPushStory && payload.context != null) {
-                brazelog { "Rendering push notification with DecoratedCustomViewStyle (Story)" }
+                brazelog(LogCategory.PUSH) { "Rendering push notification with DecoratedCustomViewStyle (Story)" }
                 style = getStoryStyle(notificationBuilder, payload)
             } else if (payload.isConversationalPush && Build.VERSION.SDK_INT >= Build.VERSION_CODES.N_MR1) {
-                brazelog { "Rendering conversational push" }
+                brazelog(LogCategory.PUSH) { "Rendering conversational push" }
                 style = getConversationalPushStyle(notificationBuilder, payload)
             } else if (payload.bigImageUrl != null) {
                 style =
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && payload.isInlineImagePush) {
-                        brazelog { "Rendering push notification with custom inline image style" }
+                        brazelog(LogCategory.PUSH) { "Rendering push notification with custom inline image style" }
                         getInlineImageStyle(payload, notificationBuilder)
                     } else {
-                        brazelog { "Rendering push notification with BigPictureStyle" }
+                        brazelog(LogCategory.PUSH) { "Rendering push notification with BigPictureStyle" }
                         getBigPictureNotificationStyle(payload)
                     }
             }
 
             // Default style is BigTextStyle.
             if (style == null) {
-                brazelog { "Rendering push notification with BigTextStyle" }
+                brazelog(LogCategory.PUSH) { "Rendering push notification with BigTextStyle" }
                 style = getBigTextNotificationStyle(payload)
             }
             return style
@@ -160,7 +161,7 @@ open class BrazeNotificationStyleFactory {
         ): NotificationCompat.DecoratedCustomViewStyle? {
             val context = payload.context
             if (context == null) {
-                brazelog { "Push story page cannot render without a context" }
+                brazelog(LogCategory.PUSH) { "Push story page cannot render without a context" }
                 return null
             }
             val pushStoryPages = payload.pushStoryPages
@@ -169,7 +170,7 @@ open class BrazeNotificationStyleFactory {
             val storyView =
                 RemoteViews(context.packageName, R.layout.com_braze_push_story_one_image)
             if (!populatePushStoryPage(storyView, payload, pushStoryPage)) {
-                brazelog(W) { "Push story page was not populated correctly. Not using DecoratedCustomViewStyle." }
+                brazelog(LogCategory.PUSH, W) { "Push story page was not populated correctly. Not using DecoratedCustomViewStyle." }
                 return null
             }
             val notificationExtras = payload.notificationExtras
@@ -218,12 +219,12 @@ open class BrazeNotificationStyleFactory {
         ): NotificationCompat.Style? {
             val context = payload.context
             if (context == null) {
-                brazelog { "Inline Image Push cannot render without a context" }
+                brazelog(LogCategory.PUSH) { "Inline Image Push cannot render without a context" }
                 return null
             }
             val imageUrl = payload.bigImageUrl
             if (imageUrl.isNullOrBlank()) {
-                brazelog { "Inline Image Push image url invalid" }
+                brazelog(LogCategory.PUSH) { "Inline Image Push image url invalid" }
                 return null
             }
             val notificationExtras = payload.notificationExtras
@@ -240,7 +241,7 @@ open class BrazeNotificationStyleFactory {
                         BrazeViewBounds.NOTIFICATION_INLINE_PUSH_IMAGE,
                     )
             if (largeNotificationBitmap == null) {
-                brazelog { "Inline Image Push failed to get image bitmap" }
+                brazelog(LogCategory.PUSH) { "Inline Image Push failed to get image bitmap" }
                 return null
             }
             val isNotificationSpaceConstrained =
@@ -281,7 +282,7 @@ open class BrazeNotificationStyleFactory {
                         packageManager.getApplicationInfo(context.packageName, 0)
                     }
                 } catch (e: PackageManager.NameNotFoundException) {
-                    brazelog(E, e) { "Inline Image Push application info was null" }
+                    brazelog(LogCategory.PUSH, E, e) { "Inline Image Push application info was null" }
                     return null
                 }
             val applicationName = packageManager.getApplicationLabel(applicationInfo) as String
@@ -356,7 +357,7 @@ open class BrazeNotificationStyleFactory {
                         BrazeViewBounds.NOTIFICATION_EXPANDED_IMAGE,
                     )
             if (imageBitmap == null) {
-                brazelog {
+                brazelog(LogCategory.PUSH) {
                     "Failed to download image bitmap for big picture notification style. Url: $imageUrl"
                 }
                 return null
@@ -382,7 +383,7 @@ open class BrazeNotificationStyleFactory {
                         imageBitmap =
                             imageBitmap.scale(bigPictureWidthPixels, bigPictureHeightPixels)
                     } catch (e: Exception) {
-                        brazelog(E, e) { "Failed to scale image bitmap, using original." }
+                        brazelog(LogCategory.PUSH, E, e) { "Failed to scale image bitmap, using original." }
                     }
                 }
                 val bigPictureNotificationStyle = NotificationCompat.BigPictureStyle()
@@ -390,7 +391,7 @@ open class BrazeNotificationStyleFactory {
                 setBigPictureSummaryAndTitle(bigPictureNotificationStyle, payload)
                 bigPictureNotificationStyle
             } catch (e: Exception) {
-                brazelog(E, e) { "Failed to create Big Picture Style." }
+                brazelog(LogCategory.PUSH, E, e) { "Failed to create Big Picture Style." }
                 null
             }
         }
@@ -411,14 +412,14 @@ open class BrazeNotificationStyleFactory {
                 val conversationPersonMap = payload.conversationPersonMap
                 val replyPerson = conversationPersonMap[payload.conversationReplyPersonId]
                 if (replyPerson == null) {
-                    brazelog { "Reply person does not exist in mapping. Not rendering a style" }
+                    brazelog(LogCategory.PUSH) { "Reply person does not exist in mapping. Not rendering a style" }
                     return null
                 }
                 val style = NotificationCompat.MessagingStyle(replyPerson.person)
                 for (message in payload.conversationMessages) {
                     val person = conversationPersonMap[message.personId]
                     if (person == null) {
-                        brazelog {
+                        brazelog(LogCategory.PUSH) {
                             "Message person does not exist in mapping. Not rendering a style. $message"
                         }
                         return null
@@ -429,7 +430,7 @@ open class BrazeNotificationStyleFactory {
                 notificationBuilder.setShortcutId(payload.conversationShortcutId)
                 style
             } catch (e: Exception) {
-                brazelog(E, e) { "Failed to create conversation push style. Returning null." }
+                brazelog(LogCategory.PUSH, E, e) { "Failed to create conversation push style. Returning null." }
                 null
             }
         }
@@ -501,17 +502,17 @@ open class BrazeNotificationStyleFactory {
         ): Boolean {
             val context = payload.context
             if (context == null) {
-                brazelog { "Push story page cannot render without a context" }
+                brazelog(LogCategory.PUSH) { "Push story page cannot render without a context" }
                 return false
             }
             val configurationProvider = payload.configurationProvider
             if (configurationProvider == null) {
-                brazelog { "Push story page cannot render without a configuration provider" }
+                brazelog(LogCategory.PUSH) { "Push story page cannot render without a configuration provider" }
                 return false
             }
             val bitmapUrl = pushStoryPage.bitmapUrl
             if (bitmapUrl.isNullOrBlank()) {
-                brazelog { "Push story page image url invalid" }
+                brazelog(LogCategory.PUSH) { "Push story page image url invalid" }
                 return false
             }
             val notificationExtras = payload.notificationExtras

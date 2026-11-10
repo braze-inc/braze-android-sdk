@@ -19,6 +19,7 @@ import com.braze.support.BrazeLogger.Priority.V
 import com.braze.support.BrazeLogger.brazelog
 import com.braze.support.IntentUtils
 import com.braze.support.hasPermission
+import com.braze.support.logging.LogCategory
 import com.braze.support.nowInMilliseconds
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.asExecutor
@@ -60,7 +61,10 @@ class BrazeInternalLocationApi : IBrazeLocationApi {
         val hasCoarsePermission = context.hasPermission(Manifest.permission.ACCESS_COARSE_LOCATION)
         if (!(hasCoarsePermission || hasFinePermission)) {
             // Nothing we can do here without any permissions
-            brazelog(I) { "Did not request single location update. Neither fine nor coarse location permissions found." }
+            brazelog(
+                LogCategory.LOCATION,
+                I,
+            ) { "Did not request single location update. Neither fine nor coarse location permissions found." }
             return false
         }
 
@@ -69,7 +73,7 @@ class BrazeInternalLocationApi : IBrazeLocationApi {
             val lastKnownGpsLocationIfValid =
                 getLastKnownGpsLocationIfValid(locationManager)
             if (lastKnownGpsLocationIfValid != null) {
-                brazelog { "Setting user location to last known GPS location: $lastKnownGpsLocationIfValid" }
+                brazelog(LogCategory.LOCATION) { "Setting user location to last known GPS location: $lastKnownGpsLocationIfValid" }
                 locationUpdateCallback.invoke(BrazeLocation(lastKnownGpsLocationIfValid))
                 return true
             }
@@ -82,10 +86,12 @@ class BrazeInternalLocationApi : IBrazeLocationApi {
                 hasCoarsePermission,
             )
         if (provider == null) {
-            brazelog { "Could not request single location update. Could not find suitable location provider." }
+            brazelog(LogCategory.LOCATION) {
+                "Could not request single location update. Could not find suitable location provider."
+            }
             return false
         }
-        brazelog { "Requesting single location update with provider: $provider" }
+        brazelog(LogCategory.LOCATION) { "Requesting single location update with provider: $provider" }
         return try {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
                 locationManager.getCurrentLocation(
@@ -93,7 +99,7 @@ class BrazeInternalLocationApi : IBrazeLocationApi {
                     null,
                     Dispatchers.IO.asExecutor(),
                 ) { location: Location? ->
-                    brazelog { "Location manager getCurrentLocation got location: $location" }
+                    brazelog(LogCategory.LOCATION) { "Location manager getCurrentLocation got location: $location" }
                     if (location != null) {
                         locationUpdateCallback.invoke(BrazeLocation(location))
                     }
@@ -103,12 +109,12 @@ class BrazeInternalLocationApi : IBrazeLocationApi {
             }
             true
         } catch (se: SecurityException) {
-            brazelog(E, se) {
+            brazelog(LogCategory.LOCATION, E, se) {
                 "Failed to request single location update due to security exception from insufficient permissions."
             }
             false
         } catch (e: Exception) {
-            brazelog(E, e) { "Failed to request single location update due to exception." }
+            brazelog(LogCategory.LOCATION, E, e) { "Failed to request single location update due to exception." }
             false
         }
     }
@@ -162,10 +168,10 @@ class BrazeInternalLocationApi : IBrazeLocationApi {
 
         val ageMs = nowInMilliseconds() - lastKnownGpsLocation.time
         if (ageMs > LAST_KNOWN_GPS_LOCATION_MAX_AGE_MS) {
-            brazelog(V) { "Last known GPS location is too old and will not be used. Age ms: $ageMs" }
+            brazelog(LogCategory.LOCATION, V) { "Last known GPS location is too old and will not be used. Age ms: $ageMs" }
             return null
         }
-        brazelog { "Using last known GPS location: $lastKnownGpsLocation" }
+        brazelog(LogCategory.LOCATION) { "Using last known GPS location: $lastKnownGpsLocation" }
         return lastKnownGpsLocation
     }
 

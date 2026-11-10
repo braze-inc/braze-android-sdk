@@ -20,6 +20,7 @@ import androidx.annotation.ColorInt
 import com.braze.enums.inappmessage.TextAlign
 import com.braze.support.BrazeLogger.Priority.E
 import com.braze.support.BrazeLogger.brazelog
+import com.braze.support.logging.LogCategory
 import com.braze.ui.inappmessage.BrazeInAppMessageManager
 
 /**
@@ -57,7 +58,7 @@ object InAppMessageViewUtils {
                 textView.typeface =
                     Typeface.createFromAsset(context.assets, "fontawesome-webfont.ttf")
             } catch (e: Exception) {
-                brazelog(E, e) { "Caught exception setting icon typeface. Not rendering icon." }
+                brazelog(LogCategory.IN_APP_MESSAGES, E, e) { "Caught exception setting icon typeface. Not rendering icon." }
                 return
             }
             textView.text = icon
@@ -116,7 +117,7 @@ object InAppMessageViewUtils {
             if (drawable.numberOfLayers > 0 && drawable.getDrawable(0) is GradientDrawable) {
                 setDrawableColor(drawable.getDrawable(0), color)
             } else {
-                brazelog {
+                brazelog(LogCategory.IN_APP_MESSAGES) {
                     "LayerDrawable for button background did not have the expected " +
                         "number of layers or the 0th layer was not a GradientDrawable."
                 }
@@ -146,7 +147,7 @@ object InAppMessageViewUtils {
 
     @JvmStatic
     fun closeInAppMessageOnKeycodeBack() {
-        brazelog { "Back button intercepted by in-app message view, closing in-app message." }
+        brazelog(LogCategory.IN_APP_MESSAGES) { "Back button intercepted by in-app message view, closing in-app message." }
         BrazeInAppMessageManager.getInstance().hideCurrentlyDisplayingInAppMessage(true)
     }
 

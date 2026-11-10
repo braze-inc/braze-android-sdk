@@ -27,6 +27,7 @@ import com.braze.support.BrazeLogger.Priority.V
 import com.braze.support.BrazeLogger.Priority.W
 import com.braze.support.BrazeLogger.brazelog
 import com.braze.support.getPrettyPrintedString
+import com.braze.support.logging.LogCategory
 import com.braze.support.nowInMilliseconds
 import com.braze.support.wouldPushPermissionPromptDisplay
 import com.braze.ui.actions.brazeactions.containsAnyPushPermissionBrazeActions
@@ -170,7 +171,7 @@ open class BrazeInAppMessageManager : InAppMessageManagerBase() {
      */
     open fun ensureSubscribedToInAppMessageEvents(context: Context) {
         if (inAppMessageEventSubscriber != null) {
-            brazelog {
+            brazelog(LogCategory.IN_APP_MESSAGES) {
                 "Removing existing in-app message event subscriber before subscribing a new one."
             }
             getInstance(context).removeSingleSubscription(
@@ -178,20 +179,22 @@ open class BrazeInAppMessageManager : InAppMessageManagerBase() {
                 InAppMessageEvent::class.java,
             )
         }
-        brazelog { "Subscribing in-app message event subscriber" }
+        brazelog(LogCategory.IN_APP_MESSAGES) { "Subscribing in-app message event subscriber" }
         inAppMessageEventSubscriber =
             createInAppMessageEventSubscriber().also {
                 getInstance(context).subscribeToNewInAppMessages(it)
             }
 
         if (sdkDataWipeEventSubscriber != null) {
-            brazelog(V) { "Removing existing sdk data wipe event subscriber before subscribing a new one." }
+            brazelog(LogCategory.IN_APP_MESSAGES, V) {
+                "Removing existing sdk data wipe event subscriber before subscribing a new one."
+            }
             getInstance(context).removeSingleSubscription(
                 sdkDataWipeEventSubscriber,
                 SdkDataWipeEvent::class.java,
             )
         }
-        brazelog(V) { "Subscribing sdk data wipe subscriber" }
+        brazelog(LogCategory.IN_APP_MESSAGES, V) { "Subscribing sdk data wipe subscriber" }
         sdkDataWipeEventSubscriber =
             IEventSubscriber<SdkDataWipeEvent> {
                 if (displayingInAppMessage.get()) {
@@ -208,7 +211,9 @@ open class BrazeInAppMessageManager : InAppMessageManagerBase() {
             }
 
         if (brazeUserChangeEventSubscriber != null) {
-            brazelog(V) { "Removing existing user change event subscriber before subscribing a new one." }
+            brazelog(LogCategory.IN_APP_MESSAGES, V) {
+                "Removing existing user change event subscriber before subscribing a new one."
+            }
             getInstance(context).removeSingleSubscription(
                 brazeUserChangeEventSubscriber,
                 BrazeUserChangeEvent::class.java,
@@ -237,10 +242,10 @@ open class BrazeInAppMessageManager : InAppMessageManagerBase() {
     open fun registerInAppMessageManager(activity: Activity?) {
         try {
             if (activity == null) {
-                brazelog(W) { "Null Activity passed to registerInAppMessageManager. Doing nothing" }
+                brazelog(LogCategory.IN_APP_MESSAGES, W) { "Null Activity passed to registerInAppMessageManager. Doing nothing" }
                 return
             } else {
-                brazelog(V) { "Registering InAppMessageManager with activity: ${activity.localClassName}" }
+                brazelog(LogCategory.IN_APP_MESSAGES, V) { "Registering InAppMessageManager with activity: ${activity.localClassName}" }
             }
 
             // We need the current Activity so that we can inflate or programmatically create the in-app message
@@ -252,7 +257,10 @@ open class BrazeInAppMessageManager : InAppMessageManagerBase() {
                 // from Braze initialization).
                 mApplicationContext = activity.applicationContext
                 if (mApplicationContext == null) {
-                    brazelog(W) { "Activity had null applicationContext in registerInAppMessageManager. Doing Nothing." }
+                    brazelog(
+                        LogCategory.IN_APP_MESSAGES,
+                        W,
+                    ) { "Activity had null applicationContext in registerInAppMessageManager. Doing Nothing." }
                     return
                 }
             }
@@ -264,7 +272,7 @@ open class BrazeInAppMessageManager : InAppMessageManagerBase() {
             // the same Activity during an orientation change) so that we can redisplay the in-app message.
             if (carryoverInAppMessage != null) {
                 carryoverInAppMessage?.let {
-                    brazelog { "Requesting display of carryover in-app message." }
+                    brazelog(LogCategory.IN_APP_MESSAGES) { "Requesting display of carryover in-app message." }
                     it.animateIn = false
                     BrazeCoroutineScope.launch(Dispatchers.Main) {
                         displayInAppMessage(it, true)
@@ -273,14 +281,14 @@ open class BrazeInAppMessageManager : InAppMessageManagerBase() {
                 carryoverInAppMessage = null
             } else {
                 unregisteredInAppMessage?.let {
-                    brazelog { "Adding previously unregistered in-app message." }
+                    brazelog(LogCategory.IN_APP_MESSAGES) { "Adding previously unregistered in-app message." }
                     addInAppMessage(it)
                     unregisteredInAppMessage = null
                 }
             }
             mApplicationContext?.let { ensureSubscribedToInAppMessageEvents(it) }
         } catch (e: Exception) {
-            brazelog(E, e) { "Error while calling attempting to register the InAppMessageManager" }
+            brazelog(LogCategory.IN_APP_MESSAGES, E, e) { "Error while calling attempting to register the InAppMessageManager" }
         }
     }
 
@@ -292,7 +300,7 @@ open class BrazeInAppMessageManager : InAppMessageManagerBase() {
     open fun unregisterInAppMessageManager(activity: Activity?) {
         try {
             if (shouldNextUnregisterBeSkipped) {
-                brazelog {
+                brazelog(LogCategory.IN_APP_MESSAGES) {
                     "Skipping unregistration due to " +
                         "setShouldNextUnregisterBeSkipped being true. Activity: ${activity?.localClassName}"
                 }
@@ -310,7 +318,7 @@ open class BrazeInAppMessageManager : InAppMessageManagerBase() {
             mActivity = null
             displayingInAppMessage.set(false)
         } catch (e: Exception) {
-            brazelog(E, e) { "Error while calling attempting to unregister the InAppMessageManager" }
+            brazelog(LogCategory.IN_APP_MESSAGES, E, e) { "Error while calling attempting to unregister the InAppMessageManager" }
         }
     }
 
@@ -352,14 +360,14 @@ open class BrazeInAppMessageManager : InAppMessageManagerBase() {
             val activity = mActivity?.get()
             if (activity == null) {
                 if (!inAppMessageStack.empty()) {
-                    brazelog(W) {
+                    brazelog(LogCategory.IN_APP_MESSAGES, W) {
                         "No activity is currently registered to receive in-app messages. Saving in-app " +
                             "message as unregistered in-app message. It will automatically be displayed " +
                             "when the next activity registers to receive in-app messages."
                     }
                     unregisteredInAppMessage = inAppMessageStack.pop()
                 } else {
-                    brazelog {
+                    brazelog(LogCategory.IN_APP_MESSAGES) {
                         "No activity is currently registered to receive in-app messages and the in-app " +
                             "message stack is empty. Doing nothing."
                     }
@@ -367,11 +375,13 @@ open class BrazeInAppMessageManager : InAppMessageManagerBase() {
                 return false
             }
             if (displayingInAppMessage.get()) {
-                brazelog { "A in-app message is currently being displayed. Ignoring request to display in-app message." }
+                brazelog(
+                    LogCategory.IN_APP_MESSAGES,
+                ) { "A in-app message is currently being displayed. Ignoring request to display in-app message." }
                 return false
             }
             if (inAppMessageStack.isEmpty()) {
-                brazelog { "The in-app message stack is empty. No in-app message will be displayed." }
+                brazelog(LogCategory.IN_APP_MESSAGES) { "The in-app message stack is empty. No in-app message will be displayed." }
                 return false
             }
             val inAppMessage = inAppMessageStack.pop()
@@ -379,18 +389,18 @@ open class BrazeInAppMessageManager : InAppMessageManagerBase() {
                 if (!inAppMessage.isControl) {
                     inAppMessageManagerListener.beforeInAppMessageDisplayed(inAppMessage)
                 } else {
-                    brazelog { "Using the control in-app message manager listener." }
+                    brazelog(LogCategory.IN_APP_MESSAGES) { "Using the control in-app message manager listener." }
                     controlInAppMessageManagerListener.beforeInAppMessageDisplayed(inAppMessage)
                 }
             when (inAppMessageOperation) {
                 InAppMessageOperation.DISPLAY_NOW ->
-                    brazelog {
+                    brazelog(LogCategory.IN_APP_MESSAGES) {
                         "The IInAppMessageManagerListener method beforeInAppMessageDisplayed returned DISPLAY_NOW. The " +
                             "in-app message will be displayed."
                     }
 
                 InAppMessageOperation.DISPLAY_LATER -> {
-                    brazelog {
+                    brazelog(LogCategory.IN_APP_MESSAGES) {
                         "The IInAppMessageManagerListener method beforeInAppMessageDisplayed returned DISPLAY_LATER. The " +
                             "in-app message will be pushed back onto the stack."
                     }
@@ -399,7 +409,7 @@ open class BrazeInAppMessageManager : InAppMessageManagerBase() {
                 }
 
                 InAppMessageOperation.DISCARD -> {
-                    brazelog {
+                    brazelog(LogCategory.IN_APP_MESSAGES) {
                         "The IInAppMessageManagerListener method beforeInAppMessageDisplayed returned DISCARD. The " +
                             "in-app message will not be displayed and will not be put back on the stack."
                     }
@@ -410,12 +420,12 @@ open class BrazeInAppMessageManager : InAppMessageManagerBase() {
                     val event = inAppMessageEventMap[inAppMessage]
                     if (event != null) {
                         BrazeInternal.reenqueueInAppMessage(activity.applicationContext, event)
-                        brazelog {
+                        brazelog(LogCategory.IN_APP_MESSAGES) {
                             "The IInAppMessageManagerListener method beforeInAppMessageDisplayed returned REENQUEUE. The " +
                                 "in-app message will not be displayed and will be marked as eligible for next time."
                         }
                     } else {
-                        brazelog {
+                        brazelog(LogCategory.IN_APP_MESSAGES) {
                             "An in-app message was requested to be re-enqueued, but it was not found. Discarding instead. " +
                                 "In-app message = $inAppMessage"
                         }
@@ -427,7 +437,7 @@ open class BrazeInAppMessageManager : InAppMessageManagerBase() {
             prepareInAppMessageForDisplay(inAppMessage)
             true
         } catch (e: Exception) {
-            brazelog(E, e) { "Error running requestDisplayInAppMessage" }
+            brazelog(LogCategory.IN_APP_MESSAGES, E, e) { "Error running requestDisplayInAppMessage" }
             false
         }
     }
@@ -478,12 +488,12 @@ open class BrazeInAppMessageManager : InAppMessageManagerBase() {
     @JvmOverloads
     open fun resetAfterInAppMessageClose(closedWrapper: IInAppMessageViewWrapper? = null): Boolean {
         if (closedWrapper != null && inAppMessageViewWrapper !== closedWrapper) {
-            brazelog {
+            brazelog(LogCategory.IN_APP_MESSAGES) {
                 "Skipping manager reset for stale in-app message wrapper close."
             }
             return false
         }
-        brazelog(V) { "Resetting after in-app message close." }
+        brazelog(LogCategory.IN_APP_MESSAGES, V) { "Resetting after in-app message close." }
         inAppMessagePendingDisplay = null
         currentBackEventHandler?.unregister()
         currentBackEventHandler = null
@@ -493,7 +503,7 @@ open class BrazeInAppMessageManager : InAppMessageManagerBase() {
         val origOrientation = originalOrientation
         displayingInAppMessage.set(false)
         if (activity != null && origOrientation != null) {
-            brazelog { "Setting requested orientation to original orientation $origOrientation" }
+            brazelog(LogCategory.IN_APP_MESSAGES) { "Setting requested orientation to original orientation $origOrientation" }
             activity.setActivityRequestedOrientation(origOrientation)
             originalOrientation = null
         }
@@ -515,7 +525,7 @@ open class BrazeInAppMessageManager : InAppMessageManagerBase() {
     // The TooGenericExceptionThrown is here because some clients may have written code that's dependent
     // on that very generic exception, so we want to stay backwards compatible.
     open suspend fun displayInAppMessage(inAppMessage: IInAppMessage, isCarryOver: Boolean) {
-        brazelog(V) {
+        brazelog(LogCategory.IN_APP_MESSAGES, V) {
             "Attempting to display in-app message with payload: ${inAppMessage.forJsonPut().getPrettyPrintedString()}"
         }
 
@@ -523,7 +533,7 @@ open class BrazeInAppMessageManager : InAppMessageManagerBase() {
         // anywhere but the at the end of this try/catch when we know whether we are successfully
         // displaying the in-app message or not.
         if (!displayingInAppMessage.compareAndSet(false, true)) {
-            brazelog {
+            brazelog(LogCategory.IN_APP_MESSAGES) {
                 "A in-app message is currently being displayed. Adding in-app message back on the stack."
             }
             inAppMessageStack.push(inAppMessage)
@@ -550,7 +560,7 @@ open class BrazeInAppMessageManager : InAppMessageManagerBase() {
                     )
                 }
             } else {
-                brazelog { "Expiration timestamp not defined. Continuing." }
+                brazelog(LogCategory.IN_APP_MESSAGES) { "Expiration timestamp not defined. Continuing." }
             }
 
             if (!verifyOrientationStatus(inAppMessage)) {
@@ -576,7 +586,7 @@ open class BrazeInAppMessageManager : InAppMessageManagerBase() {
             // At this point, the only factors that would inhibit in-app message display are view creation issues.
             // Since control in-app messages have no view, this is the end of execution for control in-app messages
             if (inAppMessage.isControl) {
-                brazelog {
+                brazelog(LogCategory.IN_APP_MESSAGES) {
                     "Not displaying control in-app message. Logging impression and ending display execution."
                 }
                 inAppMessage.logImpression()
@@ -585,9 +595,9 @@ open class BrazeInAppMessageManager : InAppMessageManagerBase() {
             }
             if (inAppMessage.containsInvalidBrazeAction()) {
                 val inAppMessageEvent = inAppMessageEventMap[inAppMessage]
-                brazelog(I) { "Cannot show message containing an invalid Braze Action." }
+                brazelog(LogCategory.IN_APP_MESSAGES, I) { "Cannot show message containing an invalid Braze Action." }
                 if (inAppMessageEvent != null) {
-                    brazelog(I) { "Attempting to perform any fallback actions." }
+                    brazelog(LogCategory.IN_APP_MESSAGES, I) { "Attempting to perform any fallback actions." }
                     retryInAppMessage(activity.applicationContext, inAppMessageEvent)
                 }
                 resetAfterInAppMessageClose()
@@ -597,12 +607,12 @@ open class BrazeInAppMessageManager : InAppMessageManagerBase() {
                 !activity.wouldPushPermissionPromptDisplay()
             ) {
                 val inAppMessageEvent = inAppMessageEventMap[inAppMessage]
-                brazelog(I) {
+                brazelog(LogCategory.IN_APP_MESSAGES, I) {
                     "Cannot show message containing a Push Prompt due to existing " +
                         "push prompt status, Android API version, or Target SDK level."
                 }
                 if (inAppMessageEvent != null) {
-                    brazelog(I) { "Attempting to perform any fallback actions." }
+                    brazelog(LogCategory.IN_APP_MESSAGES, I) { "Attempting to perform any fallback actions." }
                     retryInAppMessage(activity.applicationContext, inAppMessageEvent)
                 }
                 resetAfterInAppMessageClose()
@@ -637,7 +647,7 @@ open class BrazeInAppMessageManager : InAppMessageManagerBase() {
             inAppMessageViewWrapper =
                 when (inAppMessageView) {
                     is IInAppMessageImmersiveView -> {
-                        brazelog { "Creating view wrapper for immersive in-app message." }
+                        brazelog(LogCategory.IN_APP_MESSAGES) { "Creating view wrapper for immersive in-app message." }
                         val inAppMessageViewImmersive = inAppMessageView as IInAppMessageImmersiveView
                         val inAppMessageImmersiveBase = inAppMessage as InAppMessageImmersiveBase
                         val numButtons = inAppMessageImmersiveBase.messageButtons.size
@@ -655,7 +665,7 @@ open class BrazeInAppMessageManager : InAppMessageManagerBase() {
                     }
 
                     is IInAppMessageView -> {
-                        brazelog { "Creating view wrapper for base in-app message." }
+                        brazelog(LogCategory.IN_APP_MESSAGES) { "Creating view wrapper for base in-app message." }
                         val inAppMessageViewBase = inAppMessageView as IInAppMessageView
                         viewWrapperFactory.createInAppMessageViewWrapper(
                             inAppMessageView,
@@ -669,7 +679,7 @@ open class BrazeInAppMessageManager : InAppMessageManagerBase() {
                     }
 
                     else -> {
-                        brazelog { "Creating view wrapper for in-app message." }
+                        brazelog(LogCategory.IN_APP_MESSAGES) { "Creating view wrapper for in-app message." }
                         viewWrapperFactory.createInAppMessageViewWrapper(
                             inAppMessageView,
                             inAppMessage,
@@ -686,14 +696,14 @@ open class BrazeInAppMessageManager : InAppMessageManagerBase() {
 
             // If this message includes HTML, delay display until the content has finished loading
             if (inAppMessageView is InAppMessageHtmlBaseView) {
-                brazelog {
+                brazelog(LogCategory.IN_APP_MESSAGES) {
                     "In-app message view includes HTML. Delaying display until the content has finished loading."
                 }
                 inAppMessageView.setHtmlPageFinishedListener {
                     try {
                         if (viewWrapper != null) {
                             if (inAppMessageViewWrapper == null) {
-                                brazelog(W) {
+                                brazelog(LogCategory.IN_APP_MESSAGES, W) {
                                     "Re-attaching in-app message wrapper after HTML page load."
                                 }
                                 inAppMessageViewWrapper = viewWrapper
@@ -701,13 +711,13 @@ open class BrazeInAppMessageManager : InAppMessageManagerBase() {
                             if (!displayingInAppMessage.get()) {
                                 displayingInAppMessage.set(true)
                             }
-                            brazelog {
+                            brazelog(LogCategory.IN_APP_MESSAGES) {
                                 "Page has finished loading. Opening in-app message view wrapper."
                             }
                             viewWrapper.open(activity)
                         }
                     } catch (e: Exception) {
-                        brazelog(E, e) { "Failed to open view wrapper in page finished listener" }
+                        brazelog(LogCategory.IN_APP_MESSAGES, E, e) { "Failed to open view wrapper in page finished listener" }
                     }
                 }
             } else {
@@ -719,7 +729,7 @@ open class BrazeInAppMessageManager : InAppMessageManagerBase() {
                 currentBackEventHandler = InAppMessageBackEventHandler(activity, inAppMessageView)
             }
         } catch (e: Throwable) {
-            brazelog(E, e) {
+            brazelog(LogCategory.IN_APP_MESSAGES, E, e) {
                 "Could not display in-app message with payload: ${inAppMessage.forJsonPut().getPrettyPrintedString()}"
             }
             resetAfterInAppMessageClose()
@@ -737,9 +747,11 @@ open class BrazeInAppMessageManager : InAppMessageManagerBase() {
     internal fun createBrazeUserChangeEventSubscriber(): IEventSubscriber<BrazeUserChangeEvent> =
         IEventSubscriber { event: BrazeUserChangeEvent ->
             val eventUserId = event.currentUserId
-            brazelog(V) { "InAppMessage manager handling user change event. New user id: '$eventUserId'" }
+            brazelog(LogCategory.IN_APP_MESSAGES, V) {
+                "InAppMessage manager handling user change event. New user id: '$eventUserId'"
+            }
             if (eventUserId.isBlank()) {
-                brazelog(W) { "Ignoring user change event with blank user id." }
+                brazelog(LogCategory.IN_APP_MESSAGES, W) { "Ignoring user change event with blank user id." }
                 return@IEventSubscriber
             }
 
@@ -747,7 +759,9 @@ open class BrazeInAppMessageManager : InAppMessageManagerBase() {
             this.currentUserId = eventUserId
 
             if (previousUserId != null && previousUserId != eventUserId) {
-                brazelog { "User changed from '$previousUserId' to '$eventUserId'. Clearing in-app message state." }
+                brazelog(
+                    LogCategory.IN_APP_MESSAGES,
+                ) { "User changed from '$previousUserId' to '$eventUserId'. Clearing in-app message state." }
                 if (displayingInAppMessage.get()) {
                     hideCurrentlyDisplayingInAppMessage(false)
                 }
@@ -787,16 +801,18 @@ open class BrazeInAppMessageManager : InAppMessageManagerBase() {
         val preferredOrientation = inAppMessage.orientation
 
         if (activity == null) {
-            brazelog(W) { "Cannot verify orientation status with null Activity." }
+            brazelog(LogCategory.IN_APP_MESSAGES, W) { "Cannot verify orientation status with null Activity." }
         } else if (activity.isRunningOnTablet()) {
-            brazelog { "Running on tablet. In-app message can be displayed in any orientation." }
+            brazelog(LogCategory.IN_APP_MESSAGES) { "Running on tablet. In-app message can be displayed in any orientation." }
         } else if (preferredOrientation === Orientation.ANY) {
-            brazelog { "Any orientation specified. In-app message can be displayed in any orientation." }
+            brazelog(LogCategory.IN_APP_MESSAGES) {
+                "Any orientation specified. In-app message can be displayed in any orientation."
+            }
         } else {
             val currentScreenOrientation = activity.resources.configuration.orientation
             return if (isCurrentOrientationValid(currentScreenOrientation, preferredOrientation)) {
                 if (originalOrientation == null) {
-                    brazelog { "Requesting orientation lock." }
+                    brazelog(LogCategory.IN_APP_MESSAGES) { "Requesting orientation lock." }
                     originalOrientation = activity.requestedOrientation
                     // This constant was introduced in API 18, so for devices pre 18 this will be a no-op
                     activity.setActivityRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LOCKED)

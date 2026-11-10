@@ -22,6 +22,7 @@ import com.braze.events.SdkDataWipeEvent
 import com.braze.support.BrazeLogger.Priority.I
 import com.braze.support.BrazeLogger.Priority.V
 import com.braze.support.BrazeLogger.brazelog
+import com.braze.support.logging.LogCategory
 import com.braze.ui.R
 import com.braze.ui.contentcards.adapters.ContentCardAdapter
 import com.braze.ui.contentcards.adapters.EmptyContentCardsAdapter
@@ -74,7 +75,7 @@ open class ContentCardsFragment :
             if (field == value) return
             field = value
 
-            brazelog(V) { "isWindowInsetsHandlingEnabled set to $value" }
+            brazelog(LogCategory.CONTENT_CARDS, V) { "isWindowInsetsHandlingEnabled set to $value" }
             contentCardsRecyclerView?.let { updateWindowInsetsHandling(it) }
         }
 
@@ -175,10 +176,14 @@ open class ContentCardsFragment :
      * otherwise the safe area is applied twice.
      */
     private fun updateWindowInsetsHandling(recyclerView: RecyclerView) {
-        brazelog(V) { "updateWindowInsetsHandling called with isWindowInsetsHandlingEnabled: $isWindowInsetsHandlingEnabled" }
+        brazelog(LogCategory.CONTENT_CARDS, V) {
+            "updateWindowInsetsHandling called with isWindowInsetsHandlingEnabled: $isWindowInsetsHandlingEnabled"
+        }
         val applier = windowInsetsApplier ?: return
         if (!isWindowInsetsHandlingEnabled) {
-            brazelog { "Content Cards window inset handling is disabled. Removing any applied window insets." }
+            brazelog(LogCategory.CONTENT_CARDS) {
+                "Content Cards window inset handling is disabled. Removing any applied window insets."
+            }
             ViewCompat.setOnApplyWindowInsetsListener(recyclerView, null)
             applier.reset()
             return
@@ -224,7 +229,7 @@ open class ContentCardsFragment :
 
     override fun onPause() {
         super.onPause()
-        brazelog(V) { "Invoked com.braze.ui.contentcards.ContentCardsFragment.onPause()" }
+        brazelog(LogCategory.CONTENT_CARDS, V) { "Invoked com.braze.ui.contentcards.ContentCardsFragment.onPause()" }
         // If the view is going away, we don't care about updating it anymore. Remove the subscription immediately.
         Braze.getInstance(requireContext()).removeSingleSubscription(contentCardsUpdatedSubscriber, ContentCardsUpdatedEvent::class.java)
         Braze.getInstance(requireContext()).removeSingleSubscription(sdkDataWipeEventSubscriber, SdkDataWipeEvent::class.java)
@@ -349,7 +354,9 @@ open class ContentCardsFragment :
      * A main thread runnable to handle [ContentCardsUpdatedEvent] on the main thread.
      */
     protected suspend fun contentCardsUpdate(event: ContentCardsUpdatedEvent) {
-        brazelog(V) { "Updating Content Cards views in response to ContentCardsUpdatedEvent: $event" }
+        brazelog(LogCategory.CONTENT_CARDS, V) {
+            "Updating Content Cards views in response to ContentCardsUpdatedEvent: $event"
+        }
         // This list of cards could undergo filtering in the card update handler
         // and be a smaller list of cards compared to the original list
         // in the update event. Thus, any "empty feed" checks should be
@@ -361,7 +368,7 @@ open class ContentCardsFragment :
 
         // If the update came from storage and is stale, then request a refresh.
         if (event.isFromOfflineStorage && event.isTimestampOlderThan(MAX_CONTENT_CARDS_TTL_SECONDS.toLong())) {
-            brazelog(I) {
+            brazelog(LogCategory.CONTENT_CARDS, I) {
                 "ContentCards received was older than the max time to live of " +
                     "$MAX_CONTENT_CARDS_TTL_SECONDS seconds, displaying it for now, but " +
                     "requesting an updated view from the server."
@@ -374,7 +381,7 @@ open class ContentCardsFragment :
             if (cardsForRendering.isEmpty()) {
                 // Display a loading indicator
                 contentCardsSwipeLayout?.isRefreshing = true
-                brazelog {
+                brazelog(LogCategory.CONTENT_CARDS) {
                     "Old Content Cards was empty, putting up a network spinner and " +
                         "registering the network error message on a delay of " +
                         "$NETWORK_PROBLEM_WARNING_MS ms."
@@ -419,7 +426,7 @@ open class ContentCardsFragment :
      * Toast or Snackbar) should do so at the app layer using their own connectivity signals.
      */
     protected suspend fun networkUnavailable() {
-        brazelog(V) { "Network is unavailable." }
+        brazelog(LogCategory.CONTENT_CARDS, V) { "Network is unavailable." }
         swapRecyclerViewAdapter(emptyCardsAdapter)
         contentCardsSwipeLayout?.isRefreshing = false
     }

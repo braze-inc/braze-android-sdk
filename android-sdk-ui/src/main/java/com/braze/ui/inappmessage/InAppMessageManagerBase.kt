@@ -8,6 +8,7 @@ import com.braze.enums.inappmessage.MessageType
 import com.braze.models.inappmessage.IInAppMessage
 import com.braze.support.BrazeLogger.Priority.W
 import com.braze.support.BrazeLogger.brazelog
+import com.braze.support.logging.LogCategory
 import com.braze.ui.inappmessage.factories.DefaultInAppMessageAnimationFactory
 import com.braze.ui.inappmessage.factories.DefaultInAppMessageFullViewFactory
 import com.braze.ui.inappmessage.factories.DefaultInAppMessageHtmlFullViewFactory
@@ -36,7 +37,7 @@ open class InAppMessageManagerBase {
      */
     open var shouldNextUnregisterBeSkipped = false
         set(shouldSkip) {
-            brazelog { "Setting setShouldNextUnregisterBeSkipped to $shouldSkip" }
+            brazelog(LogCategory.IN_APP_MESSAGES) { "Setting setShouldNextUnregisterBeSkipped to $shouldSkip" }
             field = shouldSkip
         }
 
@@ -153,7 +154,7 @@ open class InAppMessageManagerBase {
             MessageType.HTML_FULL -> inAppMessageHtmlFullViewFactory
             MessageType.HTML -> inAppMessageHtmlViewFactory
             else -> {
-                brazelog(W) {
+                brazelog(LogCategory.IN_APP_MESSAGES, W) {
                     "Failed to find view factory for in-app message with type: ${inAppMessage.messageType}"
                 }
                 null
@@ -169,7 +170,9 @@ open class InAppMessageManagerBase {
      * [Activity.onKeyDown] method will be called).
      */
     open fun setBackButtonDismissesInAppMessageView(backButtonDismissesInAppMessageView: Boolean) {
-        brazelog { "In-App Message back button dismissal set to $backButtonDismissesInAppMessageView" }
+        brazelog(LogCategory.IN_APP_MESSAGES) {
+            "In-App Message back button dismissal set to $backButtonDismissesInAppMessageView"
+        }
         doesBackButtonDismissInAppMessageViewField = backButtonDismissesInAppMessageView
     }
 
@@ -178,7 +181,7 @@ open class InAppMessageManagerBase {
      * message. Defaults to false.
      */
     open fun setClickOutsideModalViewDismissInAppMessageView(doesDismiss: Boolean) {
-        brazelog { "Modal In-App Message outside tap dismissal set to $doesDismiss" }
+        brazelog(LogCategory.IN_APP_MESSAGES) { "Modal In-App Message outside tap dismissal set to $doesDismiss" }
         doesClickOutsideModalViewDismissInAppMessageViewField = doesDismiss
     }
 
@@ -193,7 +196,7 @@ open class InAppMessageManagerBase {
      * default [IInAppMessageManagerListener]).
      */
     open fun setCustomInAppMessageManagerListener(inAppMessageManagerListener: IInAppMessageManagerListener?) {
-        brazelog { "Custom InAppMessageManagerListener set" }
+        brazelog(LogCategory.IN_APP_MESSAGES) { "Custom InAppMessageManagerListener set" }
         customInAppMessageManagerListener = inAppMessageManagerListener
     }
 
@@ -205,7 +208,7 @@ open class InAppMessageManagerBase {
      * default [IInAppMessageManagerListener]).
      */
     open fun setCustomControlInAppMessageManagerListener(inAppMessageManagerListener: IInAppMessageManagerListener?) {
-        brazelog {
+        brazelog(LogCategory.IN_APP_MESSAGES) {
             "Custom ControlInAppMessageManagerListener set. This listener will only be used for control in-app messages."
         }
         customControlInAppMessageManagerListener = inAppMessageManagerListener
@@ -218,7 +221,7 @@ open class InAppMessageManagerBase {
      * default IHtmlInAppMessageActionListener).
      */
     open fun setCustomHtmlInAppMessageActionListener(htmlInAppMessageActionListener: IHtmlInAppMessageActionListener?) {
-        brazelog { "Custom htmlInAppMessageActionListener set" }
+        brazelog(LogCategory.IN_APP_MESSAGES) { "Custom htmlInAppMessageActionListener set" }
         customHtmlInAppMessageActionListener = htmlInAppMessageActionListener
     }
 
@@ -230,7 +233,7 @@ open class InAppMessageManagerBase {
      * IInAppMessageAnimationFactory).
      */
     open fun setCustomInAppMessageAnimationFactory(inAppMessageAnimationFactory: IInAppMessageAnimationFactory?) {
-        brazelog { "Custom InAppMessageAnimationFactory set" }
+        brazelog(LogCategory.IN_APP_MESSAGES) { "Custom InAppMessageAnimationFactory set" }
         customInAppMessageAnimationFactory = inAppMessageAnimationFactory
     }
 
@@ -242,7 +245,7 @@ open class InAppMessageManagerBase {
      * IInAppMessageViewFactory).
      */
     open fun setCustomInAppMessageViewFactory(inAppMessageViewFactory: IInAppMessageViewFactory?) {
-        brazelog { "Custom InAppMessageViewFactory set" }
+        brazelog(LogCategory.IN_APP_MESSAGES) { "Custom InAppMessageViewFactory set" }
         customInAppMessageViewFactory = inAppMessageViewFactory
     }
 
@@ -251,7 +254,7 @@ open class InAppMessageManagerBase {
      * display an [IInAppMessage] to the user.
      */
     open fun setCustomInAppMessageViewWrapperFactory(inAppMessageViewWrapperFactory: IInAppMessageViewWrapperFactory?) {
-        brazelog { "Custom IInAppMessageViewWrapperFactory set" }
+        brazelog(LogCategory.IN_APP_MESSAGES) { "Custom IInAppMessageViewWrapperFactory set" }
         customInAppMessageViewWrapperFactory = inAppMessageViewWrapperFactory
     }
 }

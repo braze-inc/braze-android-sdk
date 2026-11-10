@@ -8,9 +8,7 @@ import androidx.webkit.WebSettingsCompat
 import androidx.webkit.WebViewFeature
 import com.braze.support.BrazeLogger.Priority.E
 import com.braze.support.BrazeLogger.brazelog
-import com.braze.support.BrazeLogger.getBrazeLogTag
-
-private val TAG = "WebViewUtils".getBrazeLogTag()
+import com.braze.support.logging.LogCategory
 
 /**
  * Configures common [WebSettings] for Braze WebViews including JavaScript, DOM storage,
@@ -67,6 +65,6 @@ private fun applyNightModeDarkening(settings: WebSettings) {
             }
         }
     } catch (e: Throwable) {
-        brazelog(TAG, E, e) { "Failed to set dark mode WebView settings." }
+        brazelog(LogCategory.BRAZE, E, e) { "Failed to set dark mode WebView settings." }
     }
 }

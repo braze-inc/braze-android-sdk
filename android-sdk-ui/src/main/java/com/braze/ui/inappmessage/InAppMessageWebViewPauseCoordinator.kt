@@ -3,6 +3,7 @@ package com.braze.ui.inappmessage
 import android.webkit.WebView
 import com.braze.support.BrazeLogger.Priority.V
 import com.braze.support.BrazeLogger.brazelog
+import com.braze.support.logging.LogCategory
 import com.braze.ui.inappmessage.views.InAppMessageHtmlBaseView
 
 /**
@@ -25,7 +26,9 @@ internal class InAppMessageWebViewPauseCoordinator(
     private var pendingWebViewPauseTarget: WebView? = null
 
     fun pauseWebviewIfNecessary() {
-        brazelog(V) { "Scheduling deferred InAppMessage WebView pause via pendingWebViewPauseRunnable" }
+        brazelog(LogCategory.IN_APP_MESSAGES, V) {
+            "Scheduling deferred InAppMessage WebView pause via pendingWebViewPauseRunnable"
+        }
         val viewWrapper = viewWrapperProvider() ?: return
         val inAppMessageView = viewWrapper.inAppMessageView
         if (inAppMessageView !is InAppMessageHtmlBaseView) {
@@ -37,23 +40,23 @@ internal class InAppMessageWebViewPauseCoordinator(
 
         val pauseRunnable =
             Runnable {
-                brazelog(V) { "pendingWebViewPauseRunnable running" }
+                brazelog(LogCategory.IN_APP_MESSAGES, V) { "pendingWebViewPauseRunnable running" }
                 pendingWebViewPauseRunnable = null
                 pendingWebViewPauseTarget = null
                 val currentWrapper = viewWrapperProvider()
                 if (currentWrapper == null) {
-                    brazelog(V) {
+                    brazelog(LogCategory.IN_APP_MESSAGES, V) {
                         "pendingWebViewPauseRunnable finished without calling WebView.onPause: in-app message no longer displayed"
                     }
                     return@Runnable
                 }
                 val currentView = currentWrapper.inAppMessageView
                 if (currentView is InAppMessageHtmlBaseView && currentView.messageWebView === webView) {
-                    brazelog(V) { "pendingWebViewPauseRunnable calling WebView.onPause" }
+                    brazelog(LogCategory.IN_APP_MESSAGES, V) { "pendingWebViewPauseRunnable calling WebView.onPause" }
                     // Assumed blocking on a busy WebView; deferred via post() so onActivityPaused returns first.
                     webView.onPause()
                 } else {
-                    brazelog(V) {
+                    brazelog(LogCategory.IN_APP_MESSAGES, V) {
                         "pendingWebViewPauseRunnable finished without calling WebView.onPause: HTML WebView no longer matches"
                     }
                 }
@@ -64,7 +67,7 @@ internal class InAppMessageWebViewPauseCoordinator(
     }
 
     fun resumeWebviewIfNecessary() {
-        brazelog { "Resuming InAppMessage WebView" }
+        brazelog(LogCategory.IN_APP_MESSAGES) { "Resuming InAppMessage WebView" }
         cancelPendingWebViewPause()
         val inAppMessageViewWrapper = viewWrapperProvider() ?: return
         val inAppMessageView = inAppMessageViewWrapper.inAppMessageView
@@ -77,7 +80,7 @@ internal class InAppMessageWebViewPauseCoordinator(
         val pauseRunnable = pendingWebViewPauseRunnable
         val webView = pendingWebViewPauseTarget
         if (pauseRunnable != null && webView != null) {
-            brazelog(V) { "Cancelling pendingWebViewPauseRunnable before it runs WebView.onPause" }
+            brazelog(LogCategory.IN_APP_MESSAGES, V) { "Cancelling pendingWebViewPauseRunnable before it runs WebView.onPause" }
             webView.removeCallbacks(pauseRunnable)
         }
         pendingWebViewPauseRunnable = null

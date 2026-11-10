@@ -15,10 +15,8 @@ import com.braze.support.BrazeLogger.Priority.E
 import com.braze.support.BrazeLogger.Priority.V
 import com.braze.support.BrazeLogger.Priority.W
 import com.braze.support.BrazeLogger.brazelog
-import com.braze.support.BrazeLogger.getBrazeLogTag
+import com.braze.support.logging.LogCategory
 import com.braze.ui.BrazeDeeplinkHandler
-
-private val TAG = "UriUtils".getBrazeLogTag()
 
 /**
  * Parses the query part of the uri and returns a mapping of the query keys to the
@@ -28,7 +26,7 @@ fun Uri.getQueryParameters(): Map<String, String> {
     var uri = this
     val encodedQuery = uri.encodedQuery
     if (encodedQuery == null) {
-        brazelog(TAG, V) { "Encoded query is null for Uri: $uri Returning empty map for query parameters" }
+        brazelog(LogCategory.BRAZE, V) { "Encoded query is null for Uri: $uri Returning empty map for query parameters" }
         return emptyMap()
     }
     val parameterValues = mutableMapOf<String, String>()
@@ -51,7 +49,7 @@ fun Uri.getQueryParameters(): Map<String, String> {
             }
         }
     } catch (e: Exception) {
-        brazelog(TAG, E, e) { "Failed to map the query parameters of Uri: $uri" }
+        brazelog(LogCategory.BRAZE, E, e) { "Failed to map the query parameters of Uri: $uri" }
     }
     return parameterValues
 }
@@ -90,6 +88,6 @@ fun isActivityRegisteredInManifest(
         }
         true
     } catch (e: PackageManager.NameNotFoundException) {
-        brazelog(TAG, W, e) { "Could not find activity info for class with name: $className" }
+        brazelog(LogCategory.BRAZE, W, e) { "Could not find activity info for class with name: $className" }
         false
     }

@@ -6,6 +6,7 @@ import android.window.BackEvent
 import android.window.OnBackAnimationCallback
 import android.window.OnBackInvokedDispatcher
 import com.braze.support.BrazeLogger.brazelog
+import com.braze.support.logging.LogCategory
 import com.braze.ui.inappmessage.utils.InAppMessageViewUtils
 import com.braze.ui.inappmessage.views.IInAppMessageBackEventListener
 import java.lang.ref.WeakReference
@@ -33,24 +34,32 @@ open class InAppMessageBackEventHandler(
                 val inAppMessageBackAnimationCallback =
                     object : OnBackAnimationCallback {
                         override fun onBackInvoked() {
-                            brazelog { "Back button intercepted by in-app message back animation callback, closing in-app message." }
+                            brazelog(
+                                LogCategory.IN_APP_MESSAGES,
+                            ) { "Back button intercepted by in-app message back animation callback, closing in-app message." }
                             InAppMessageViewUtils.closeInAppMessageOnKeycodeBack()
                         }
 
                         override fun onBackStarted(backEvent: BackEvent) {
-                            brazelog { "Back button intercepted by in-app message back animation callback, back event started." }
+                            brazelog(
+                                LogCategory.IN_APP_MESSAGES,
+                            ) { "Back button intercepted by in-app message back animation callback, back event started." }
                             super.onBackStarted(backEvent)
                             inAppMessageView?.onBackStarted(backEvent)
                         }
 
                         override fun onBackProgressed(backEvent: BackEvent) {
-                            brazelog { "Back button intercepted by in-app message back animation callback, back event in progress." }
+                            brazelog(
+                                LogCategory.IN_APP_MESSAGES,
+                            ) { "Back button intercepted by in-app message back animation callback, back event in progress." }
                             super.onBackProgressed(backEvent)
                             inAppMessageView?.onBackProgressed(backEvent)
                         }
 
                         override fun onBackCancelled() {
-                            brazelog { "Back button intercepted by in-app message back animation callback, back event cancelled." }
+                            brazelog(
+                                LogCategory.IN_APP_MESSAGES,
+                            ) { "Back button intercepted by in-app message back animation callback, back event cancelled." }
                             super.onBackCancelled()
                             inAppMessageView?.onBackCancelled()
                         }

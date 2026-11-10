@@ -10,10 +10,12 @@ import com.braze.push.BrazeFirebaseMessagingService.Companion.FCM_SERVICE_OMR_ME
 import com.braze.support.BrazeLogger.Priority.I
 import com.braze.support.BrazeLogger.Priority.V
 import com.braze.support.BrazeLogger.brazelog
+import com.braze.support.LogSecretRedactor
 import com.braze.support.ReflectionUtils.constructObjectQuietly
 import com.braze.support.ReflectionUtils.getDeclaredMethodQuietly
 import com.braze.support.ReflectionUtils.getMethodQuietly
 import com.braze.support.ReflectionUtils.invokeMethodQuietly
+import com.braze.support.logging.LogCategory
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
 
@@ -31,13 +33,15 @@ open class BrazeFirebaseMessagingService : FirebaseMessagingService() {
     @Suppress("DEPRECATION")
     override fun onNewToken(newToken: String) {
         super.onNewToken(newToken)
-        brazelog { "Firebase Cloud Messaging token received via onNewToken: $newToken" }
+        LogSecretRedactor.registerPushToken(newToken)
+        brazelog(LogCategory.PUSH) { "Firebase Cloud Messaging token received via onNewToken: $newToken" }
         handleOnNewToken(this, newToken)
     }
 
     override fun onRegistered(installationId: String) {
         super.onRegistered(installationId)
-        brazelog { "Firebase Installation ID received via onRegistered: $installationId" }
+        LogSecretRedactor.registerPushToken(installationId)
+        brazelog(LogCategory.PUSH) { "Firebase Installation ID received via onRegistered: $installationId" }
         handleOnNewToken(this, installationId)
     }
 
@@ -66,20 +70,21 @@ open class BrazeFirebaseMessagingService : FirebaseMessagingService() {
             context: Context,
             newToken: String,
         ) {
+            LogSecretRedactor.registerPushToken(newToken)
             BrazeInternal.applyPendingRuntimeConfiguration(context)
             val configurationProvider = BrazeInternal.getConfigurationProvider(context)
             if (Braze.getConfiguredApiKey(configurationProvider).isNullOrEmpty()) {
-                brazelog(V) { "No configured API key, not registering token in handleOnNewToken. Token: $newToken" }
+                brazelog(LogCategory.PUSH, V) { "No configured API key, not registering token in handleOnNewToken. Token: $newToken" }
                 return
             }
             if (!configurationProvider.isFirebaseMessagingServiceOnNewTokenRegistrationEnabled) {
-                brazelog(V) {
+                brazelog(LogCategory.PUSH, V) {
                     "Automatic FirebaseMessagingService.onNewToken() registration" +
                         " disabled, not registering token: $newToken"
                 }
                 return
             }
-            brazelog(V) { "Registering Firebase push token in handleOnNewToken. Token: $newToken" }
+            brazelog(LogCategory.PUSH, V) { "Registering Firebase push token in handleOnNewToken. Token: $newToken" }
             Braze.getInstance(context).registeredPushToken = newToken
         }
 
@@ -98,7 +103,7 @@ open class BrazeFirebaseMessagingService : FirebaseMessagingService() {
             remoteMessage: RemoteMessage,
         ): Boolean {
             if (!isBrazePushNotification(remoteMessage)) {
-                brazelog(I) {
+                brazelog(LogCategory.PUSH, I) {
                     "Remote message did not originate from Braze. Not " +
                         "consuming remote message: $remoteMessage"
                 }
@@ -107,29 +112,29 @@ open class BrazeFirebaseMessagingService : FirebaseMessagingService() {
                 if (configurationProvider.isFallbackFirebaseMessagingServiceEnabled) {
                     val fallbackClassPath = configurationProvider.fallbackFirebaseMessagingServiceClasspath
                     if (fallbackClassPath != null) {
-                        brazelog(I) {
+                        brazelog(LogCategory.PUSH, I) {
                             "Fallback FCM service enabled. Attempting to use " +
                                 "fallback class at $fallbackClassPath"
                         }
                         invokeFallbackFirebaseService(fallbackClassPath, remoteMessage, context)
                     } else {
-                        brazelog {
+                        brazelog(LogCategory.PUSH) {
                             "Fallback FCM service enabled but classpath " +
                                 "is null. Not routing to any fallback service."
                         }
                     }
                 } else {
-                    brazelog { "FallbackFirebaseMessagingService is not enabled" }
+                    brazelog(LogCategory.PUSH) { "FallbackFirebaseMessagingService is not enabled" }
                 }
 
                 return false
             }
             val remoteMessageData = remoteMessage.data
-            brazelog(I) { "Got remote message from FCM: $remoteMessageData" }
+            brazelog(LogCategory.PUSH, I) { "Got remote message from FCM: $remoteMessageData" }
             val pushIntent = Intent(BrazePushReceiver.FIREBASE_MESSAGING_SERVICE_ROUTING_ACTION)
             val bundle = Bundle()
             for ((key, value) in remoteMessageData) {
-                brazelog(V) { "Adding bundle item from FCM remote data with key: $key and value: $value" }
+                brazelog(LogCategory.PUSH, V) { "Adding bundle item from FCM remote data with key: $key and value: $value" }
                 bundle.putString(key, value)
             }
             pushIntent.putExtras(bundle)
@@ -162,7 +167,7 @@ open class BrazeFirebaseMessagingService : FirebaseMessagingService() {
         ) {
             val fallbackObject = constructObjectQuietly(classpath)
             if (fallbackObject == null) {
-                brazelog {
+                brazelog(LogCategory.PUSH) {
                     "Fallback firebase messaging service $classpath could not be constructed. Not routing fallback RemoteMessage."
                 }
                 return
@@ -172,16 +177,16 @@ open class BrazeFirebaseMessagingService : FirebaseMessagingService() {
             if (attachMethod != null) {
                 // Since this is protected, we must make it accessible before calling it
                 attachMethod.isAccessible = true
-                brazelog { "Attempting to call $classpath $CONTEXT_ATTACH_METHOD" }
+                brazelog(LogCategory.PUSH) { "Attempting to call $classpath $CONTEXT_ATTACH_METHOD" }
                 val invokeReturn = invokeMethodQuietly(fallbackObject, attachMethod, context)
                 if (!invokeReturn.first) {
-                    brazelog {
+                    brazelog(LogCategory.PUSH) {
                         "Failure invoking $classpath.$CONTEXT_ATTACH_METHOD. Not doing anything."
                     }
                     return
                 }
             } else {
-                brazelog {
+                brazelog(LogCategory.PUSH) {
                     "Could not find $CONTEXT_ATTACH_METHOD. Not doing anything."
                 }
                 return
@@ -189,13 +194,15 @@ open class BrazeFirebaseMessagingService : FirebaseMessagingService() {
 
             val method = getMethodQuietly(classpath, FCM_SERVICE_OMR_METHOD, RemoteMessage::class.java)
             if (method == null) {
-                brazelog {
+                brazelog(LogCategory.PUSH) {
                     "Fallback firebase messaging service method $classpath.$FCM_SERVICE_OMR_METHOD " +
                         "could not be retrieved. Not routing fallback RemoteMessage."
                 }
                 return
             }
-            brazelog { "Attempting to invoke firebase messaging fallback service $classpath.$FCM_SERVICE_OMR_METHOD" }
+            brazelog(LogCategory.PUSH) {
+                "Attempting to invoke firebase messaging fallback service $classpath.$FCM_SERVICE_OMR_METHOD"
+            }
             val omrReturn = invokeMethodQuietly(fallbackObject, method, remoteMessage)
             if (!omrReturn.first) {
                 "Failure invoking $classpath.$FCM_SERVICE_OMR_METHOD."

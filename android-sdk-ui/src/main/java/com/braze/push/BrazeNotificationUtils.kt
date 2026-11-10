@@ -48,6 +48,7 @@ import com.braze.support.IntentUtils.getImmutablePendingIntentFlags
 import com.braze.support.IntentUtils.getRequestCode
 import com.braze.support.getOptionalString
 import com.braze.support.hasPermission
+import com.braze.support.logging.LogCategory
 import com.braze.support.parseJsonObjectIntoBundle
 import com.braze.ui.BrazeDeeplinkHandler.Companion.getInstance
 import com.braze.ui.support.getMainActivityIntent
@@ -107,10 +108,10 @@ object BrazeNotificationUtils {
             if (appConfigurationProvider.doesHandlePushDeepLinksAutomatically) {
                 routeUserWithNotificationOpenedIntent(context, intent)
             } else {
-                brazelog(I) { "Not handling deep links automatically, skipping deep link handling" }
+                brazelog(LogCategory.PUSH, I) { "Not handling deep links automatically, skipping deep link handling" }
             }
         } catch (e: Exception) {
-            brazelog(E, e) { "Exception occurred attempting to handle notification opened intent." }
+            brazelog(LogCategory.PUSH, E, e) { "Exception occurred attempting to handle notification opened intent." }
         }
     }
 
@@ -129,7 +130,7 @@ object BrazeNotificationUtils {
         intent: Intent,
     ) {
         try {
-            brazelog { "Sending notification deleted broadcast" }
+            brazelog(LogCategory.PUSH) { "Sending notification deleted broadcast" }
             val notificationExtras = intent.extras
             if (notificationExtras != null) {
                 val notificationPayload = BrazeNotificationPayload(notificationExtras, context = context)
@@ -138,7 +139,7 @@ object BrazeNotificationUtils {
                 sendPushActionIntent(context, BrazeNotificationBroadcastType.DELETED, notificationExtras)
             }
         } catch (e: Exception) {
-            brazelog(E, e) { "Exception occurred attempting to handle notification delete intent." }
+            brazelog(LogCategory.PUSH, E, e) { "Exception occurred attempting to handle notification delete intent." }
         }
     }
 
@@ -156,7 +157,7 @@ object BrazeNotificationUtils {
         context: Context,
         intent: Intent,
     ) {
-        brazelog { "routeUserWithNotificationOpenedIntent called with Intent" }
+        brazelog(LogCategory.PUSH) { "routeUserWithNotificationOpenedIntent called with Intent" }
         var extras = intent.getBundleExtra(Constants.BRAZE_PUSH_EXTRAS_KEY)
         if (extras == null) {
             extras = Bundle()
@@ -186,7 +187,7 @@ object BrazeNotificationUtils {
         context: Context,
         brazePush: BrazePushEvent,
     ) {
-        brazelog { "routeUserWithNotificationOpenedIntent called with BrazePushEvent" }
+        brazelog(LogCategory.PUSH) { "routeUserWithNotificationOpenedIntent called with BrazePushEvent" }
         val extras = brazePush.notificationPayload.brazeExtras
         extras.putString(
             Constants.BRAZE_PUSH_CAMPAIGN_ID_KEY,
@@ -215,15 +216,15 @@ object BrazeNotificationUtils {
             val mainActivityIntent = getMainActivityIntent(context, extras)
             context.startActivity(mainActivityIntent)
             if (Braze.isDelayedInitializationEnabled) {
-                brazelog { "Delayed initialization is enabled. Deep link:$deepLink will not be handled." }
+                brazelog(LogCategory.PUSH) { "Delayed initialization is enabled. Deep link:$deepLink will not be handled." }
             } else {
-                brazelog { "Push notification had no deep link. Opening main activity:$mainActivityIntent" }
+                brazelog(LogCategory.PUSH) { "Push notification had no deep link. Opening main activity:$mainActivityIntent" }
             }
             return
         }
         // If a deep link exists, start an ACTION_VIEW intent pointing at the deep link.
         // The intent returned from getStartActivityIntent() is placed on the back stack.
-        brazelog { "Found a deep link:$deepLink. Use webview set to:$useWebView" }
+        brazelog(LogCategory.PUSH) { "Found a deep link:$deepLink. Use webview set to:$useWebView" }
 
         // Pass deeplink and use webview values to target activity.
         extras.putString(Constants.BRAZE_PUSH_DEEP_LINK_KEY, deepLink)
@@ -271,7 +272,7 @@ object BrazeNotificationUtils {
         notificationExtras: Bundle,
         payload: BrazeNotificationPayload,
     ) {
-        brazelog { "Sending push message received broadcast" }
+        brazelog(LogCategory.PUSH) { "Sending push message received broadcast" }
         sendPushActionIntent(context, BrazeNotificationBroadcastType.RECEIVED, notificationExtras, payload)
     }
 
@@ -284,11 +285,14 @@ object BrazeNotificationUtils {
     fun refreshFeatureFlagsIfAppropriate(payload: BrazeNotificationPayload): Boolean {
         val context = payload.context
         return if (payload.shouldRefreshFeatureFlags && context != null) {
-            brazelog { "Feature flag refresh key was true. Refreshing feature flags." }
+            brazelog(LogCategory.PUSH) { "Feature flag refresh key was true. Refreshing feature flags." }
             refreshFeatureFlags(context)
             true
         } else {
-            brazelog(V) { "Feature flag refresh key not included in push payload or false. Not refreshing feature flags." }
+            brazelog(
+                LogCategory.PUSH,
+                V,
+            ) { "Feature flag refresh key not included in push payload or false. Not refreshing feature flags." }
             false
         }
     }
@@ -302,11 +306,11 @@ object BrazeNotificationUtils {
     fun refreshBannersIfAppropriate(payload: BrazeNotificationPayload): Boolean {
         val context = payload.context
         return if (payload.shouldRefreshBanners && context != null) {
-            brazelog { "Banners refresh key was true. Refreshing Banners." }
+            brazelog(LogCategory.PUSH) { "Banners refresh key was true. Refreshing Banners." }
             refreshBanners(context)
             true
         } else {
-            brazelog(V) { "Banners refresh key not included in push payload or false. Not refreshing banners." }
+            brazelog(LogCategory.PUSH, V) { "Banners refresh key not included in push payload or false. Not refreshing banners." }
             false
         }
     }
@@ -329,7 +333,7 @@ object BrazeNotificationUtils {
         val pendingIntent = PendingIntent.getBroadcast(context, 0, cancelIntent, flags)
         val alarmManager = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
         if (durationInMillis >= Constants.BRAZE_MINIMUM_NOTIFICATION_DURATION_MILLIS) {
-            brazelog { "Setting Notification duration alarm for $durationInMillis ms" }
+            brazelog(LogCategory.PUSH) { "Setting Notification duration alarm for $durationInMillis ms" }
             alarmManager[AlarmManager.ELAPSED_REALTIME, SystemClock.elapsedRealtime() + durationInMillis] = pendingIntent
         }
     }
@@ -344,7 +348,7 @@ object BrazeNotificationUtils {
     fun getNotificationId(payload: BrazeNotificationPayload): Int {
         val customNotificationId = payload.customNotificationId
         return if (customNotificationId != null) {
-            brazelog { "Using notification id provided in the message's extras bundle: $customNotificationId" }
+            brazelog(LogCategory.PUSH) { "Using notification id provided in the message's extras bundle: $customNotificationId" }
             customNotificationId
         } else {
             var messageKey: String? = ""
@@ -352,7 +356,7 @@ object BrazeNotificationUtils {
             payload.titleText?.let { messageKey += it }
             payload.contentText?.let { messageKey += it }
             val notificationId = messageKey.hashCode()
-            brazelog {
+            brazelog(LogCategory.PUSH) {
                 "Message without notification id provided in the extras bundle " +
                     "received. Using a hash of the message: $notificationId"
             }
@@ -374,7 +378,7 @@ object BrazeNotificationUtils {
             if (it in Notification.PRIORITY_MIN..Notification.PRIORITY_MAX) {
                 return it
             } else {
-                brazelog(W) { "Received invalid notification priority $notificationPriority" }
+                brazelog(LogCategory.PUSH, W) { "Received invalid notification priority $notificationPriority" }
             }
         }
         @Suppress("DEPRECATION")
@@ -419,11 +423,11 @@ object BrazeNotificationUtils {
             // Never wake a TV panel
             val uiModeManager = context.getSystemService(Context.UI_MODE_SERVICE) as UiModeManager
             if (uiModeManager.currentModeType == Configuration.UI_MODE_TYPE_TELEVISION) {
-                brazelog { "Not waking this TV UI mode device" }
+                brazelog(LogCategory.PUSH) { "Not waking this TV UI mode device" }
                 return false
             }
         } catch (e: Exception) {
-            brazelog(E, e) { "Failed to check for TV status during screen wake. Continuing." }
+            brazelog(LogCategory.PUSH, E, e) { "Failed to check for TV status during screen wake. Continuing." }
         }
 
         // Don't wake lock if this is a minimum priority/importance notification.
@@ -432,11 +436,13 @@ object BrazeNotificationUtils {
             val notificationManager = context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
             val notificationChannel = getValidNotificationChannel(notificationManager, notificationExtras)
             if (notificationChannel == null) {
-                brazelog { "Not waking screen on Android O+ device, could not find notification channel." }
+                brazelog(LogCategory.PUSH) { "Not waking screen on Android O+ device, could not find notification channel." }
                 return false
             }
             if (notificationChannel.importance == NotificationManager.IMPORTANCE_MIN) {
-                brazelog { "Not acquiring wake-lock for Android O+ notification with importance: ${notificationChannel.importance}" }
+                brazelog(
+                    LogCategory.PUSH,
+                ) { "Not acquiring wake-lock for Android O+ notification with importance: ${notificationChannel.importance}" }
                 return false
             }
         } else {
@@ -446,7 +452,7 @@ object BrazeNotificationUtils {
             }
         }
 
-        brazelog { "Waking screen for notification" }
+        brazelog(LogCategory.PUSH) { "Waking screen for notification" }
         val powerManager = context.getSystemService(Context.POWER_SERVICE) as PowerManager
 
         // Deprecation warning suppressed for PowerManager.FULL_WAKE_LOCK usage.
@@ -472,7 +478,7 @@ object BrazeNotificationUtils {
         payload.pushStoryPages
             .mapNotNull { it.bitmapUrl }
             .forEach {
-                brazelog(V) { "Pre-fetching bitmap at URL: $it" }
+                brazelog(LogCategory.PUSH, V) { "Pre-fetching bitmap at URL: $it" }
                 Braze
                     .getInstance(context)
                     .imageLoader
@@ -486,7 +492,7 @@ object BrazeNotificationUtils {
         notificationBuilder: NotificationCompat.Builder,
         payload: BrazeNotificationPayload,
     ) {
-        brazelog { "Setting title for notification" }
+        brazelog(LogCategory.PUSH) { "Setting title for notification" }
         val titleText = payload.titleText ?: return
         val configurationProvider = payload.configurationProvider ?: return
         notificationBuilder.setContentTitle(titleText.getHtmlSpannedTextIfEnabled(configurationProvider))
@@ -500,7 +506,7 @@ object BrazeNotificationUtils {
         notificationBuilder: NotificationCompat.Builder,
         payload: BrazeNotificationPayload,
     ) {
-        brazelog { "Setting content for notification" }
+        brazelog(LogCategory.PUSH) { "Setting content for notification" }
         val contentText = payload.contentText ?: return
         val configurationProvider = payload.configurationProvider ?: return
         notificationBuilder.setContentText(contentText.getHtmlSpannedTextIfEnabled(configurationProvider))
@@ -514,7 +520,7 @@ object BrazeNotificationUtils {
         notificationBuilder: NotificationCompat.Builder,
         payload: BrazeNotificationPayload,
     ) {
-        brazelog { "Setting ticker for notification" }
+        brazelog(LogCategory.PUSH) { "Setting ticker for notification" }
         val titleText = payload.titleText ?: return
         notificationBuilder.setTicker(titleText)
     }
@@ -534,7 +540,7 @@ object BrazeNotificationUtils {
                 getPushActionPendingIntent(context, Constants.BRAZE_PUSH_CLICKED_ACTION, notificationExtras)
             notificationBuilder.setContentIntent(pushOpenedPendingIntent)
         } catch (e: Exception) {
-            brazelog(E, e) { "Error setting content intent." }
+            brazelog(LogCategory.PUSH, E, e) { "Error setting content intent." }
         }
     }
 
@@ -553,7 +559,7 @@ object BrazeNotificationUtils {
             val pushDeletedPendingIntent = PendingIntent.getBroadcast(context, getRequestCode(), pushDeletedIntent, flags)
             notificationBuilder.setDeleteIntent(pushDeletedPendingIntent)
         } catch (e: Exception) {
-            brazelog(E, e) { "Error setting delete intent." }
+            brazelog(LogCategory.PUSH, E, e) { "Error setting delete intent." }
         }
     }
 
@@ -570,13 +576,13 @@ object BrazeNotificationUtils {
     ): Int {
         var smallNotificationIconResourceId = appConfigurationProvider.smallNotificationIconResourceId
         if (smallNotificationIconResourceId == 0) {
-            brazelog {
+            brazelog(LogCategory.PUSH) {
                 "Small notification icon resource was not found. " +
                     "Will use the app icon when displaying notifications."
             }
             smallNotificationIconResourceId = appConfigurationProvider.applicationIconResourceId
         } else {
-            brazelog { "Setting small icon for notification via resource id" }
+            brazelog(LogCategory.PUSH) { "Setting small icon for notification via resource id" }
         }
         notificationBuilder.setSmallIcon(smallNotificationIconResourceId)
         return smallNotificationIconResourceId
@@ -592,7 +598,7 @@ object BrazeNotificationUtils {
         payload: BrazeNotificationPayload,
     ) {
         if (payload.isPushStory) {
-            brazelog { "Set show when not supported in story push." }
+            brazelog(LogCategory.PUSH) { "Set show when not supported in story push." }
             notificationBuilder.setShowWhen(false)
         }
     }
@@ -611,14 +617,14 @@ object BrazeNotificationUtils {
         payload: BrazeNotificationPayload,
     ): Boolean {
         if (payload.isPushStory) {
-            brazelog { "Large icon not supported in story push." }
+            brazelog(LogCategory.PUSH) { "Large icon not supported in story push." }
             return false
         }
         val context = payload.context ?: return false
         val appConfigurationProvider = payload.configurationProvider ?: return false
 
         try {
-            brazelog { "Setting large icon for notification" }
+            brazelog(LogCategory.PUSH) { "Setting large icon for notification" }
             payload.largeIcon?.let { largeIconUrl ->
                 val largeNotificationBitmap =
                     Braze
@@ -634,10 +640,12 @@ object BrazeNotificationUtils {
                     notificationBuilder.setLargeIcon(largeNotificationBitmap)
                     return true
                 }
-                brazelog {
+                brazelog(LogCategory.PUSH) {
                     "Failed to download large icon from url. Falling back to resource id if present. Url: $largeIconUrl"
                 }
-            } ?: brazelog { "Large icon bitmap url not present in extras. Attempting to use resource id instead." }
+            } ?: brazelog(LogCategory.PUSH) {
+                "Large icon bitmap url not present in extras. Attempting to use resource id instead."
+            }
 
             val largeNotificationIconResourceId = appConfigurationProvider.largeNotificationIconResourceId
             if (largeNotificationIconResourceId != 0) {
@@ -646,14 +654,14 @@ object BrazeNotificationUtils {
                     notificationBuilder.setLargeIcon(largeNotificationBitmap)
                     return true
                 }
-                brazelog { "Large icon resource id present but bitmap could not be decoded" }
+                brazelog(LogCategory.PUSH) { "Large icon resource id present but bitmap could not be decoded" }
             } else {
-                brazelog { "Large icon resource id not present for notification" }
+                brazelog(LogCategory.PUSH) { "Large icon resource id not present for notification" }
             }
         } catch (e: Exception) {
-            brazelog(E, e) { "Error setting large notification icon" }
+            brazelog(LogCategory.PUSH, E, e) { "Error setting large notification icon" }
         }
-        brazelog { "Large icon not set for notification" }
+        brazelog(LogCategory.PUSH) { "Large icon not set for notification" }
         return false
     }
 
@@ -669,10 +677,10 @@ object BrazeNotificationUtils {
     ) {
         val soundUri = payload.notificationSound ?: return
         if (soundUri == Constants.BRAZE_PUSH_NOTIFICATION_SOUND_DEFAULT_VALUE) {
-            brazelog { "Setting default sound for notification." }
+            brazelog(LogCategory.PUSH) { "Setting default sound for notification." }
             notificationBuilder.setDefaults(Notification.DEFAULT_SOUND)
         } else {
-            brazelog { "Setting sound for notification via uri." }
+            brazelog(LogCategory.PUSH) { "Setting sound for notification via uri." }
             notificationBuilder.setSound(soundUri.toUri())
         }
     }
@@ -687,10 +695,10 @@ object BrazeNotificationUtils {
     ) {
         val summaryText = payload.summaryText
         if (summaryText != null) {
-            brazelog { "Setting summary text for notification" }
+            brazelog(LogCategory.PUSH) { "Setting summary text for notification" }
             notificationBuilder.setSubText(summaryText)
         } else {
-            brazelog { "Summary text not present. Not setting summary text for notification." }
+            brazelog(LogCategory.PUSH) { "Summary text not present. Not setting summary text for notification." }
         }
     }
 
@@ -704,7 +712,7 @@ object BrazeNotificationUtils {
         notificationBuilder: NotificationCompat.Builder,
         payload: BrazeNotificationPayload,
     ) {
-        brazelog { "Setting priority for notification" }
+        brazelog(LogCategory.PUSH) { "Setting priority for notification" }
         notificationBuilder.priority = getNotificationPriority(payload)
     }
 
@@ -720,11 +728,11 @@ object BrazeNotificationUtils {
     ) {
         val accentColor = payload.accentColor
         if (accentColor != null) {
-            brazelog { "Using accent color for notification from extras bundle" }
+            brazelog(LogCategory.PUSH) { "Using accent color for notification from extras bundle" }
             notificationBuilder.color = accentColor
         } else {
             payload.configurationProvider?.let {
-                brazelog { "Using default accent color for notification" }
+                brazelog(LogCategory.PUSH) { "Using default accent color for notification" }
                 notificationBuilder.color = it.defaultNotificationAccentColor
             }
         }
@@ -742,10 +750,10 @@ object BrazeNotificationUtils {
     ) {
         val notificationCategory = payload.notificationCategory
         if (notificationCategory != null) {
-            brazelog { "Setting category for notification" }
+            brazelog(LogCategory.PUSH) { "Setting category for notification" }
             notificationBuilder.setCategory(notificationCategory)
         } else {
-            brazelog { "Category not present in notification extras. Not setting category for notification." }
+            brazelog(LogCategory.PUSH) { "Category not present in notification extras. Not setting category for notification." }
         }
     }
 
@@ -768,10 +776,10 @@ object BrazeNotificationUtils {
         val visibility = payload.notificationVisibility
         if (visibility != null) {
             if (isValidNotificationVisibility(visibility)) {
-                brazelog { "Setting visibility for notification" }
+                brazelog(LogCategory.PUSH) { "Setting visibility for notification" }
                 notificationBuilder.setVisibility(visibility)
             } else {
-                brazelog(W) { "Received invalid notification visibility $visibility" }
+                brazelog(LogCategory.PUSH, W) { "Received invalid notification visibility $visibility" }
             }
         }
     }
@@ -804,7 +812,7 @@ object BrazeNotificationUtils {
             )
         val publicNotificationBuilder = NotificationCompat.Builder(context, notificationChannelId)
 
-        brazelog { "Setting public version of notification with payload: $publicPayload" }
+        brazelog(LogCategory.PUSH) { "Setting public version of notification with payload: $publicPayload" }
         setContentIfPresent(publicNotificationBuilder, publicPayload)
         setTitleIfPresent(publicNotificationBuilder, publicPayload)
         setSummaryTextIfPresentAndSupported(publicNotificationBuilder, publicPayload)
@@ -837,11 +845,11 @@ object BrazeNotificationUtils {
         customContentString: String?,
     ) {
         if (customContentString == null) {
-            brazelog(W) { "customContentString was null. Doing nothing." }
+            brazelog(LogCategory.PUSH, W) { "customContentString was null. Doing nothing." }
             return
         }
         if (context == null) {
-            brazelog(W) { "Cannot log baidu click with null context. Doing nothing." }
+            brazelog(LogCategory.PUSH, W) { "Cannot log baidu click with null context. Doing nothing." }
             return
         }
         try {
@@ -852,7 +860,7 @@ object BrazeNotificationUtils {
                 Braze.getInstance(context).logPushNotificationOpened(campaignId)
             }
         } catch (e: Exception) {
-            brazelog(E, e) { "Caught an exception processing customContentString: $customContentString" }
+            brazelog(LogCategory.PUSH, E, e) { "Caught an exception processing customContentString: $customContentString" }
         }
     }
 
@@ -876,12 +884,12 @@ object BrazeNotificationUtils {
         try {
             if (intent.hasExtra(Constants.BRAZE_PUSH_NOTIFICATION_ID)) {
                 val notificationId = intent.getIntExtra(Constants.BRAZE_PUSH_NOTIFICATION_ID, Constants.BRAZE_DEFAULT_NOTIFICATION_ID)
-                brazelog { "Cancelling notification action with id: $notificationId" }
+                brazelog(LogCategory.PUSH) { "Cancelling notification action with id: $notificationId" }
                 val notificationManager = context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
                 notificationManager.cancel(Constants.BRAZE_PUSH_NOTIFICATION_TAG, notificationId)
             }
         } catch (e: Exception) {
-            brazelog(E, e) { "Exception occurred handling cancel notification intent." }
+            brazelog(LogCategory.PUSH, E, e) { "Exception occurred handling cancel notification intent." }
         }
     }
 
@@ -899,13 +907,13 @@ object BrazeNotificationUtils {
         notificationId: Int,
     ) {
         try {
-            brazelog { "Cancelling notification action with id: $notificationId" }
+            brazelog(LogCategory.PUSH) { "Cancelling notification action with id: $notificationId" }
             val cancelNotificationIntent = Intent(Constants.BRAZE_CANCEL_NOTIFICATION_ACTION).setClass(context, notificationReceiverClass)
             cancelNotificationIntent.setPackage(context.packageName)
             cancelNotificationIntent.putExtra(Constants.BRAZE_PUSH_NOTIFICATION_ID, notificationId)
             addComponentAndSendBroadcast(context, cancelNotificationIntent)
         } catch (e: Exception) {
-            brazelog(E, e) { "Exception occurred attempting to cancel notification." }
+            brazelog(LogCategory.PUSH, E, e) { "Exception occurred attempting to cancel notification." }
         }
     }
 
@@ -932,7 +940,7 @@ object BrazeNotificationUtils {
                 return fcmExtras.containsKey(Constants.BRAZE_PUSH_UNINSTALL_TRACKING_KEY)
             }
         } catch (e: Exception) {
-            brazelog(E, e) { "Failed to determine if push is uninstall tracking. Returning false." }
+            brazelog(LogCategory.PUSH, E, e) { "Failed to determine if push is uninstall tracking. Returning false." }
         }
         return false
     }
@@ -966,17 +974,19 @@ object BrazeNotificationUtils {
         // First try to get the channel from the extras
         if (channelIdFromExtras != null) {
             if (notificationManager.getNotificationChannel(channelIdFromExtras) != null) {
-                brazelog { "Found notification channel in extras with id: $channelIdFromExtras" }
+                brazelog(LogCategory.PUSH) { "Found notification channel in extras with id: $channelIdFromExtras" }
                 return channelIdFromExtras
             } else {
-                brazelog { "Notification channel from extras is invalid. No channel found with id: $channelIdFromExtras" }
+                brazelog(LogCategory.PUSH) {
+                    "Notification channel from extras is invalid. No channel found with id: $channelIdFromExtras"
+                }
             }
         }
 
         // If we get here, we need to use the default channel
         if (notificationManager.getNotificationChannel(defaultChannelId) == null) {
             // If the default doesn't exist, create it now
-            brazelog { "Braze default notification channel does not exist on device. Creating default channel." }
+            brazelog(LogCategory.PUSH) { "Braze default notification channel does not exist on device. Creating default channel." }
             val channel =
                 NotificationChannel(
                     defaultChannelId,
@@ -999,7 +1009,7 @@ object BrazeNotificationUtils {
         payload: BrazeNotificationPayload,
     ) {
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.O) {
-            brazelog {
+            brazelog(LogCategory.PUSH) {
                 "Notification badge number not supported on this " +
                     "android version. Not setting badge number for notification."
             }
@@ -1055,10 +1065,10 @@ object BrazeNotificationUtils {
             if (appConfigurationProvider.doesHandlePushDeepLinksAutomatically) {
                 routeUserWithNotificationOpenedIntent(context, intent)
             } else {
-                brazelog(I) { "Not handling deep links automatically, skipping deep link handling for '$deepLink'" }
+                brazelog(LogCategory.PUSH, I) { "Not handling deep links automatically, skipping deep link handling for '$deepLink'" }
             }
         } catch (e: Exception) {
-            brazelog(E, e) { "Caught exception while handling story click." }
+            brazelog(LogCategory.PUSH, E, e) { "Caught exception while handling story click." }
         }
     }
 
@@ -1073,7 +1083,9 @@ object BrazeNotificationUtils {
         val contentCardDataUserId = payload.contentCardSyncUserId
         val context = payload.context
         if (contentCardData != null && context != null) {
-            brazelog { "Push contains associated Content Cards card. User id: $contentCardDataUserId Card data: $contentCardData" }
+            brazelog(
+                LogCategory.PUSH,
+            ) { "Push contains associated Content Cards card. User id: $contentCardDataUserId Card data: $contentCardData" }
             addSerializedContentCardToStorage(context, contentCardData, contentCardDataUserId)
         }
     }
@@ -1090,7 +1102,7 @@ object BrazeNotificationUtils {
         context: Context,
         intent: Intent,
     ) {
-        brazelog { "Sending notification opened broadcast" }
+        brazelog(LogCategory.PUSH) { "Sending notification opened broadcast" }
         val notificationExtras = intent.extras
         if (notificationExtras != null) {
             val notificationPayload = BrazeNotificationPayload(notificationExtras, context = context)
@@ -1119,24 +1131,26 @@ object BrazeNotificationUtils {
         notificationExtras: Bundle?,
     ): NotificationChannel? {
         if (notificationExtras == null) {
-            brazelog { "Notification extras bundle was null. Could not find a valid notification channel" }
+            brazelog(LogCategory.PUSH) { "Notification extras bundle was null. Could not find a valid notification channel" }
             return null
         }
         val channelIdFromExtras = notificationExtras.getString(Constants.BRAZE_PUSH_NOTIFICATION_CHANNEL_ID_KEY, null)
         if (!channelIdFromExtras.isNullOrBlank()) {
             val notificationChannel = notificationManager.getNotificationChannel(channelIdFromExtras)
             if (notificationChannel != null) {
-                brazelog { "Found notification channel in extras with id: $channelIdFromExtras" }
+                brazelog(LogCategory.PUSH) { "Found notification channel in extras with id: $channelIdFromExtras" }
                 return notificationChannel
             } else {
-                brazelog { "Notification channel from extras is invalid, no channel found with id: $channelIdFromExtras" }
+                brazelog(LogCategory.PUSH) {
+                    "Notification channel from extras is invalid, no channel found with id: $channelIdFromExtras"
+                }
             }
         }
         val defaultNotificationChannel = notificationManager.getNotificationChannel(Constants.BRAZE_PUSH_DEFAULT_NOTIFICATION_CHANNEL_ID)
         if (defaultNotificationChannel != null) {
             return defaultNotificationChannel
         } else {
-            brazelog { "Braze default notification channel does not exist on device." }
+            brazelog(LogCategory.PUSH) { "Braze default notification channel does not exist on device." }
         }
         return null
     }
@@ -1189,7 +1203,7 @@ object BrazeNotificationUtils {
                     Intent(Constants.BRAZE_PUSH_INTENT_NOTIFICATION_DELETED).setPackage(context.packageName)
                 }
             }
-        brazelog(V) { "Sending Braze broadcast receiver intent for $broadcastType" }
+        brazelog(LogCategory.PUSH, V) { "Sending Braze broadcast receiver intent for $broadcastType" }
         sendPushActionIntent(context, brazePushIntent, notificationExtras)
 
         if (payload != null) {
@@ -1203,7 +1217,7 @@ object BrazeNotificationUtils {
         pushIntent: Intent,
         notificationExtras: Bundle?,
     ) {
-        brazelog(V) { "Sending push action intent: $pushIntent" }
+        brazelog(LogCategory.PUSH, V) { "Sending push action intent: $pushIntent" }
         if (notificationExtras != null) {
             pushIntent.putExtras(notificationExtras)
         }

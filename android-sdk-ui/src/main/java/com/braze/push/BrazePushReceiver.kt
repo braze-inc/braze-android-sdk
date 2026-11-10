@@ -38,6 +38,8 @@ import com.braze.support.BrazeLogger.Priority.I
 import com.braze.support.BrazeLogger.Priority.V
 import com.braze.support.BrazeLogger.Priority.W
 import com.braze.support.BrazeLogger.brazelog
+import com.braze.support.LogSecretRedactor
+import com.braze.support.logging.LogCategory
 import com.braze.support.nowInMilliseconds
 import com.braze.ui.inappmessage.BrazeInAppMessageManager
 import kotlinx.coroutines.launch
@@ -92,9 +94,9 @@ open class BrazePushReceiver : BroadcastReceiver() {
             val action: String? = intent.action
 
             fun performWork() {
-                brazelog(I) { "Received broadcast message. Message: $intent" }
+                brazelog(LogCategory.PUSH, I) { "Received broadcast message. Message: $intent" }
                 if (action.isNullOrEmpty()) {
-                    brazelog(W) { "Push action is null. Not handling intent: $intent" }
+                    brazelog(LogCategory.PUSH, W) { "Push action is null. Not handling intent: $intent" }
                     return
                 }
                 applyPendingRuntimeConfiguration(applicationContext)
@@ -145,14 +147,14 @@ open class BrazePushReceiver : BroadcastReceiver() {
                             context,
                             intent,
                         )
-                    else -> brazelog(W) { "Received a message not sent from Braze. Ignoring the message." }
+                    else -> brazelog(LogCategory.PUSH, W) { "Received a message not sent from Braze. Ignoring the message." }
                 }
             }
 
             try {
                 performWork()
             } catch (e: Exception) {
-                brazelog(E, e) {
+                brazelog(LogCategory.PUSH, E, e) {
                     "Caught exception while performing the push notification handling work. " +
                         "Action: $action Intent: $intent"
                 }
@@ -200,15 +202,15 @@ open class BrazePushReceiver : BroadcastReceiver() {
             context: Context,
             intent: Intent,
         ): Boolean {
-            brazelog(I) { "Received ADM registration. Message: $intent" }
+            brazelog(LogCategory.PUSH, I) { "Received ADM registration. Message: $intent" }
             // Only handle ADM registration events if ADM registration handling is turned on in the
             // configuration file.
             if (isAmazonDevice && appConfigurationProvider.isAdmMessagingRegistrationEnabled) {
-                brazelog { "ADM enabled in braze.xml. Continuing to process ADM registration intent." }
+                brazelog(LogCategory.PUSH) { "ADM enabled in braze.xml. Continuing to process ADM registration intent." }
                 handleAdmRegistrationIntent(context, intent)
                 return true
             }
-            brazelog(W) {
+            brazelog(LogCategory.PUSH, W) {
                 "ADM not enabled in braze.xml. Ignoring ADM registration intent. Note: you must set " +
                     "com_braze_push_adm_messaging_registration_enabled to true in your braze.xml to enable ADM."
             }
@@ -231,19 +233,21 @@ open class BrazePushReceiver : BroadcastReceiver() {
             val errorDescription = intent.getStringExtra(ADM_ERROR_DESCRIPTION_KEY)
             val registrationId = intent.getStringExtra(ADM_REGISTRATION_ID_KEY)
             val unregistered = intent.getStringExtra(ADM_UNREGISTERED_KEY)
+            LogSecretRedactor.registerPushToken(registrationId)
+            LogSecretRedactor.registerPushToken(unregistered)
             when {
                 error != null -> {
-                    brazelog(W) { "Error during ADM registration: $error description: $errorDescription" }
+                    brazelog(LogCategory.PUSH, W) { "Error during ADM registration: $error description: $errorDescription" }
                 }
                 registrationId != null -> {
-                    brazelog(I) { "Registering for ADM messages with registrationId: $registrationId" }
+                    brazelog(LogCategory.PUSH, I) { "Registering for ADM messages with registrationId: $registrationId" }
                     Braze.getInstance(context).registeredPushToken = registrationId
                 }
                 unregistered != null -> {
-                    brazelog(W) { "The device was un-registered from ADM: $unregistered" }
+                    brazelog(LogCategory.PUSH, W) { "The device was un-registered from ADM: $unregistered" }
                 }
                 else -> {
-                    brazelog(W) {
+                    brazelog(LogCategory.PUSH, W) {
                         "The ADM registration intent is missing error information, registration id, and unregistration " +
                             "confirmation. Ignoring."
                     }
@@ -270,12 +274,12 @@ open class BrazePushReceiver : BroadcastReceiver() {
         ): Boolean {
             when {
                 !intent.isBrazePushMessage() -> {
-                    brazelog { "Not handling non-Braze push message." }
+                    brazelog(LogCategory.PUSH) { "Not handling non-Braze push message." }
                     return false
                 }
                 DELETED_MESSAGES_KEY == intent.getStringExtra(MESSAGE_TYPE_KEY) -> {
                     val totalDeleted = intent.getIntExtra(NUMBER_OF_MESSAGES_DELETED_KEY, -1)
-                    brazelog(I) { "Firebase messaging '$NUMBER_OF_MESSAGES_DELETED_KEY' reports $totalDeleted messages." }
+                    brazelog(LogCategory.PUSH, I) { "Firebase messaging '$NUMBER_OF_MESSAGES_DELETED_KEY' reports $totalDeleted messages." }
                     return false
                 }
             }
@@ -283,7 +287,7 @@ open class BrazePushReceiver : BroadcastReceiver() {
             // Since isBrazePushMessage returned true, extras is non-null. This just keeps the compiler happy.
             val notificationExtras = intent.extras ?: return false
 
-            brazelog(I) { "Push message payload received: $notificationExtras" }
+            brazelog(LogCategory.PUSH, I) { "Push message payload received: $notificationExtras" }
 
             // Convert the JSON in the extras key into a Bundle.
             val brazeExtras = getAttachedBrazeExtras(notificationExtras)
@@ -301,7 +305,7 @@ open class BrazePushReceiver : BroadcastReceiver() {
             if (payload.isUninstallTrackingPush) {
                 // Note that this re-implementation of uninstall tracking
                 // does not forward the notification to receivers.
-                brazelog(I) {
+                brazelog(LogCategory.PUSH, I) {
                     "Push message is uninstall tracking push. Doing nothing. Not forwarding this " +
                         "notification to broadcast receivers."
                 }
@@ -313,7 +317,10 @@ open class BrazePushReceiver : BroadcastReceiver() {
             if (intent.action != Constants.BRAZE_STORY_TRAVERSE_CLICKED_ACTION) {
                 payload.pushUniqueId?.let {
                     if (!BrazeInternal.validateAndStorePushId(context, it)) {
-                        brazelog(I) { "Push with identifier '$it' has already been seen. Not displaying or forwarding push." }
+                        brazelog(
+                            LogCategory.PUSH,
+                            I,
+                        ) { "Push with identifier '$it' has already been seen. Not displaying or forwarding push." }
                         return false
                     }
                 }
@@ -331,7 +338,7 @@ open class BrazePushReceiver : BroadcastReceiver() {
             ) {
                 // Pass this test in-app message along for
                 // eager display and bypass displaying a push
-                brazelog {
+                brazelog(LogCategory.PUSH) {
                     "Bypassing push display due to test in-app message presence and eager test " +
                         "in-app message display configuration setting."
                 }
@@ -340,18 +347,18 @@ open class BrazePushReceiver : BroadcastReceiver() {
             }
 
             if (isNotificationMessage(intent)) {
-                brazelog { "Received visible push notification" }
+                brazelog(LogCategory.PUSH) { "Received visible push notification" }
 
                 val notificationId = getNotificationId(payload)
                 notificationExtras.putInt(Constants.BRAZE_PUSH_NOTIFICATION_ID, notificationId)
                 if (payload.isPushStory) {
                     if (isAmazonDevice) {
-                        brazelog { "Push stories not supported on Amazon devices." }
+                        brazelog(LogCategory.PUSH) { "Push stories not supported on Amazon devices." }
                         // In case the backend does send these, handle them gracefully
                         return false
                     }
                     if (!notificationExtras.containsKey(Constants.BRAZE_PUSH_STORY_IS_NEWLY_RECEIVED)) {
-                        brazelog { "Received the initial Push Story notification." }
+                        brazelog(LogCategory.PUSH) { "Received the initial Push Story notification." }
                         notificationExtras.putBoolean(
                             Constants.BRAZE_PUSH_STORY_IS_NEWLY_RECEIVED,
                             true,
@@ -359,14 +366,14 @@ open class BrazePushReceiver : BroadcastReceiver() {
                     }
                 }
 
-                brazelog(V) { "Creating notification with payload:\n$payload" }
+                brazelog(LogCategory.PUSH, V) { "Creating notification with payload:\n$payload" }
                 val notification = activeNotificationFactory.createNotification(payload)
                 if (notification == null) {
-                    brazelog { "Notification created by notification factory was null. Not displaying notification." }
+                    brazelog(LogCategory.PUSH) { "Notification created by notification factory was null. Not displaying notification." }
                     return false
                 }
                 val notificationManager = NotificationManagerCompat.from(context)
-                brazelog {
+                brazelog(LogCategory.PUSH) {
                     "Value of notificationManager.areNotificationsEnabled() = ${notificationManager.areNotificationsEnabled()}"
                 }
                 if (ActivityCompat.checkSelfPermission(context, Manifest.permission.POST_NOTIFICATIONS) ==
@@ -378,7 +385,7 @@ open class BrazePushReceiver : BroadcastReceiver() {
                         notification,
                     )
                 } else {
-                    brazelog { "POST_NOTIFICATIONS permission has not been granted. Not posting notification." }
+                    brazelog(LogCategory.PUSH) { "POST_NOTIFICATIONS permission has not been granted. Not posting notification." }
                 }
                 sendPushMessageReceivedBroadcast(context, notificationExtras, payload)
                 wakeScreenIfAppropriate(context, appConfigurationProvider, notificationExtras)
@@ -397,7 +404,7 @@ open class BrazePushReceiver : BroadcastReceiver() {
 
                 return true
             } else {
-                brazelog { "Received silent push notification" }
+                brazelog(LogCategory.PUSH) { "Received silent push notification" }
                 sendPushMessageReceivedBroadcast(context, notificationExtras, payload)
                 return false
             }

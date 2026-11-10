@@ -16,6 +16,7 @@ import com.braze.enums.inappmessage.TextAlign
 import com.braze.models.inappmessage.IInAppMessageWithImage
 import com.braze.support.BrazeLogger.Priority.D
 import com.braze.support.BrazeLogger.brazelog
+import com.braze.support.logging.LogCategory
 import com.braze.ui.inappmessage.utils.InAppMessageViewUtils.setIcon
 import com.braze.ui.inappmessage.utils.InAppMessageViewUtils.setImage
 import com.braze.ui.inappmessage.utils.InAppMessageViewUtils.setTextAlignment
@@ -166,7 +167,7 @@ abstract class InAppMessageBaseView(
                 if (imageFile.exists()) {
                     return localImagePath
                 } else {
-                    brazelog(D) {
+                    brazelog(LogCategory.IN_APP_MESSAGES, D) {
                         "Local bitmap file does not exist. Using remote url instead. Local path: $localImagePath"
                     }
                 }

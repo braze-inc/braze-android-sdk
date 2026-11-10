@@ -26,6 +26,7 @@ import com.braze.support.BrazeLogger.Priority.E
 import com.braze.support.BrazeLogger.Priority.V
 import com.braze.support.BrazeLogger.Priority.W
 import com.braze.support.BrazeLogger.brazelog
+import com.braze.support.logging.LogCategory
 import com.braze.ui.inappmessage.listeners.IInAppMessageViewLifecycleListener
 import com.braze.ui.inappmessage.listeners.SwipeDismissTouchListener.DismissCallbacks
 import com.braze.ui.inappmessage.listeners.SwipeDismissTouchListener.VerticalDismissDirection
@@ -36,7 +37,7 @@ import com.braze.ui.inappmessage.views.IInAppMessageView
 import com.braze.ui.inappmessage.views.InAppMessageHtmlBaseView
 import com.braze.ui.support.getStatusBarHeight
 import com.braze.ui.support.isDeviceNotInTouchMode
-import com.braze.ui.support.removeViewFromParent
+import com.braze.ui.support.removeViewFromParentAfterCancelingAnimation
 import com.braze.ui.support.setFocusableInTouchModeAndRequestFocus
 
 /**
@@ -141,7 +142,7 @@ open class DefaultInAppMessageViewWrapper @JvmOverloads constructor(
     }
 
     override fun open(activity: Activity) {
-        brazelog(V) { "Opening in-app message view wrapper" }
+        brazelog(LogCategory.IN_APP_MESSAGES, V) { "Opening in-app message view wrapper" }
         // Retrieve the ViewGroup which will display the in-app message
         val parentViewGroup = getParentViewGroup(activity)
         val parentViewGroupHeight = parentViewGroup.height
@@ -172,7 +173,7 @@ open class DefaultInAppMessageViewWrapper @JvmOverloads constructor(
                         oldBottom: Int,
                     ) {
                         parentViewGroup.removeOnLayoutChangeListener(this)
-                        brazelog { "Detected (bottom - top) of ${bottom - top} in OnLayoutChangeListener" }
+                        brazelog(LogCategory.IN_APP_MESSAGES) { "Detected (bottom - top) of ${bottom - top} in OnLayoutChangeListener" }
                         parentViewGroup.removeView(inAppMessageView)
                         parentViewGroup.post {
                             addInAppMessageViewToViewGroup(
@@ -186,7 +187,7 @@ open class DefaultInAppMessageViewWrapper @JvmOverloads constructor(
                 },
             )
         } else {
-            brazelog { "Detected root view height of $parentViewGroupHeight" }
+            brazelog(LogCategory.IN_APP_MESSAGES) { "Detected root view height of $parentViewGroupHeight" }
             addInAppMessageViewToViewGroup(
                 parentViewGroup,
                 inAppMessage,
@@ -210,7 +211,7 @@ open class DefaultInAppMessageViewWrapper @JvmOverloads constructor(
                 val dismissInAppMessageCallback =
                     object : OnBackInvokedCallback {
                         override fun onBackInvoked() {
-                            brazelog { "Back button intercepted by in-app message default view wrapper" }
+                            brazelog(LogCategory.IN_APP_MESSAGES) { "Back button intercepted by in-app message default view wrapper" }
                             InAppMessageViewUtils.closeInAppMessageOnKeycodeBack()
                         }
                     }
@@ -232,7 +233,7 @@ open class DefaultInAppMessageViewWrapper @JvmOverloads constructor(
             val dismissInAppMessageCallbackFallback =
                 object : OnBackPressedCallback(true) {
                     override fun handleOnBackPressed() {
-                        brazelog { "Fallback Back button intercepted by in-app message" }
+                        brazelog(LogCategory.IN_APP_MESSAGES) { "Fallback Back button intercepted by in-app message" }
                         InAppMessageViewUtils.closeInAppMessageOnKeycodeBack()
                     }
                 }
@@ -242,7 +243,7 @@ open class DefaultInAppMessageViewWrapper @JvmOverloads constructor(
     }
 
     override fun prepareForActivityTransitionCarryover() {
-        brazelog(V) { "Preparing in-app message view wrapper for activity transition carryover" }
+        brazelog(LogCategory.IN_APP_MESSAGES, V) { "Preparing in-app message view wrapper for activity transition carryover" }
         shouldIgnoreOpenAndCloseLifecycleCallbacks = true
         // View is removed without close(); tear down back callbacks so they cannot
         // intercept system Back after the message is no longer visible.
@@ -253,10 +254,12 @@ open class DefaultInAppMessageViewWrapper @JvmOverloads constructor(
 
     override fun close() {
         if (shouldIgnoreOpenAndCloseLifecycleCallbacks) {
-            brazelog { "Ignoring close on in-app message wrapper prepared for activity transition carryover." }
+            brazelog(LogCategory.IN_APP_MESSAGES) {
+                "Ignoring close on in-app message wrapper prepared for activity transition carryover."
+            }
             return
         }
-        brazelog { "Closing in-app message view wrapper" }
+        brazelog(LogCategory.IN_APP_MESSAGES) { "Closing in-app message view wrapper" }
         if (configurationProvider.isInAppMessageAccessibilityExclusiveModeEnabled) {
             resetAllViewGroupChildrenToPreviousAccessibilityFlagOrAuto(
                 contentViewGroupParentLayout,
@@ -284,7 +287,7 @@ open class DefaultInAppMessageViewWrapper @JvmOverloads constructor(
     private fun unregisterBackButtonCallbacks() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
             onBackInvokedCallback?.let {
-                brazelog { "Unregistering iam back invoked callback" }
+                brazelog(LogCategory.IN_APP_MESSAGES) { "Unregistering iam back invoked callback" }
                 val registeredActivity =
                     BrazeInAppMessageManager.getInstance().activity
                         ?: inAppMessageView.context as? Activity
@@ -356,7 +359,7 @@ open class DefaultInAppMessageViewWrapper @JvmOverloads constructor(
         inAppMessageViewLifecycleListener: IInAppMessageViewLifecycleListener,
     ) {
         inAppMessageViewLifecycleListener.beforeOpened(inAppMessageView, inAppMessage)
-        brazelog { "Adding In-app message view to parent view group." }
+        brazelog(LogCategory.IN_APP_MESSAGES) { "Adding In-app message view to parent view group." }
         parentViewGroup.addView(inAppMessageView, getLayoutParams(inAppMessage))
         if (inAppMessageView is IInAppMessageView) {
             if (configurationProvider.shouldAddStatusBarPaddingToInAppMessages) {
@@ -368,33 +371,35 @@ open class DefaultInAppMessageViewWrapper @JvmOverloads constructor(
                             WindowInsetsCompat.Type.systemBars(),
                             Insets.of(0, statusBarHeight, 0, 0),
                         ).build()
-                brazelog { "Adding status bar height of $statusBarHeight padding to in-app message view." }
+                brazelog(LogCategory.IN_APP_MESSAGES) { "Adding status bar height of $statusBarHeight padding to in-app message view." }
                 inAppMessageView.applyWindowInsets(newInsets)
             } else {
                 ViewCompat.setOnApplyWindowInsetsListener(parentViewGroup) { _: View?, insets: WindowInsetsCompat? ->
-                    brazelog { "In-app message view received window insets." }
+                    brazelog(LogCategory.IN_APP_MESSAGES) { "In-app message view received window insets." }
                     if (insets == null) {
                         // No margin fixing can be done with a null window inset
-                        brazelog { "Window insets were null, so not applying window insets to in-app message view." }
+                        brazelog(
+                            LogCategory.IN_APP_MESSAGES,
+                        ) { "Window insets were null, so not applying window insets to in-app message view." }
                         return@setOnApplyWindowInsetsListener WindowInsetsCompat(insets)
                     }
                     val castInAppMessageView = inAppMessageView as IInAppMessageView
                     val resolvedInsets =
                         resolveWindowInsetsForInAppMessage(inAppMessageView, insets)
-                    brazelog(V) { "Calling applyWindowInsets on in-app message view." }
+                    brazelog(LogCategory.IN_APP_MESSAGES, V) { "Calling applyWindowInsets on in-app message view." }
                     castInAppMessageView.applyWindowInsets(resolvedInsets)
                     insets
                 }
-                brazelog { "Requesting to apply insets." }
+                brazelog(LogCategory.IN_APP_MESSAGES) { "Requesting to apply insets." }
                 ViewCompat.requestApplyInsets(parentViewGroup)
             }
         }
         if (inAppMessage.animateIn) {
-            brazelog { "In-app message view will animate into the visible area." }
+            brazelog(LogCategory.IN_APP_MESSAGES) { "In-app message view will animate into the visible area." }
             setAndStartAnimation(true)
             // The afterOpened lifecycle method gets called when the opening animation ends.
         } else {
-            brazelog { "In-app message view will be placed instantly into the visible area." }
+            brazelog(LogCategory.IN_APP_MESSAGES) { "In-app message view will be placed instantly into the visible area." }
             // There is no opening animation, so we call the afterOpened lifecycle method immediately.
             if (inAppMessage.dismissType === DismissType.AUTO_DISMISS) {
                 addDismissRunnable()
@@ -432,7 +437,7 @@ open class DefaultInAppMessageViewWrapper @JvmOverloads constructor(
         // The onClicked lifecycle method is called and it can be used to turn off the close animation.
         (inAppMessage as? IInAppMessageImmersive)?.let { immersiveMessage ->
             if (immersiveMessage.messageButtons.isEmpty()) {
-                brazelog {
+                brazelog(LogCategory.IN_APP_MESSAGES) {
                     "Cannot create button click listener since this in-app message does not have message buttons."
                 }
                 return
@@ -499,24 +504,24 @@ open class DefaultInAppMessageViewWrapper @JvmOverloads constructor(
      */
     open fun closeInAppMessageView() {
         if (shouldIgnoreOpenAndCloseLifecycleCallbacks) {
-            brazelog {
+            brazelog(LogCategory.IN_APP_MESSAGES) {
                 "Ignoring closeInAppMessageView on in-app message wrapper prepared for activity transition carryover."
             }
             return
         }
-        brazelog { "Closing in-app message view" }
-        inAppMessageView.removeViewFromParent()
+        brazelog(LogCategory.IN_APP_MESSAGES) { "Closing in-app message view" }
+        inAppMessageView.removeViewFromParentAfterCancelingAnimation()
         // In the case of HTML in-app messages, we need to make sure the
         // WebView stops once the in-app message is removed.
         (inAppMessageView as? InAppMessageHtmlBaseView)?.finishWebViewDisplay()
 
         // Return the focus before closing the message
         if (previouslyFocusedView != null) {
-            brazelog { "Returning focus to view after closing message. View: $previouslyFocusedView" }
+            brazelog(LogCategory.IN_APP_MESSAGES) { "Returning focus to view after closing message. View: $previouslyFocusedView" }
             try {
                 previouslyFocusedView?.requestFocus()
             } catch (e: Exception) {
-                brazelog(E, e) { "Failed to request focus on previous view" }
+                brazelog(LogCategory.IN_APP_MESSAGES, E, e) { "Failed to request focus on previous view" }
             }
         }
         if (BrazeInAppMessageManager.getInstance().resetAfterInAppMessageClose(this)) {
@@ -583,7 +588,7 @@ open class DefaultInAppMessageViewWrapper @JvmOverloads constructor(
                 // on occasion. Do not add any code that *MUST* be executed here.
                 override fun onAnimationEnd(animation: Animation?) {
                     if (shouldIgnoreOpenAndCloseLifecycleCallbacks) {
-                        brazelog {
+                        brazelog(LogCategory.IN_APP_MESSAGES) {
                             "Ignoring opening animation end for in-app message wrapper prepared for activity transition carryover."
                         }
                         return
@@ -591,7 +596,7 @@ open class DefaultInAppMessageViewWrapper @JvmOverloads constructor(
                     if (inAppMessage.dismissType === DismissType.AUTO_DISMISS) {
                         addDismissRunnable()
                     }
-                    brazelog { "In-app message animated into view." }
+                    brazelog(LogCategory.IN_APP_MESSAGES) { "In-app message animated into view." }
                     finalizeViewBeforeDisplay(
                         inAppMessage,
                         inAppMessageView,
@@ -625,7 +630,7 @@ open class DefaultInAppMessageViewWrapper @JvmOverloads constructor(
             viewAccessibilityFlagMap: MutableMap<Int, Int>,
         ) {
             if (viewGroup == null) {
-                brazelog(W) {
+                brazelog(LogCategory.IN_APP_MESSAGES, W) {
                     "In-app message ViewGroup was null. Not preparing in-app message accessibility for exclusive mode."
                 }
                 return
@@ -650,7 +655,7 @@ open class DefaultInAppMessageViewWrapper @JvmOverloads constructor(
             viewAccessibilityFlagMap: Map<Int, Int>,
         ) {
             if (viewGroup == null) {
-                brazelog(W) {
+                brazelog(LogCategory.IN_APP_MESSAGES, W) {
                     "In-app message ViewGroup was null. Not resetting in-app message accessibility for exclusive mode."
                 }
                 return

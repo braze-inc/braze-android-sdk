@@ -9,6 +9,7 @@ import com.braze.models.inappmessage.IInAppMessage
 import com.braze.models.inappmessage.InAppMessageModal
 import com.braze.support.BrazeLogger.Priority.I
 import com.braze.support.BrazeLogger.brazelog
+import com.braze.support.logging.LogCategory
 import com.braze.ui.R
 import com.braze.ui.inappmessage.BrazeInAppMessageManager
 import com.braze.ui.inappmessage.IInAppMessageViewFactory
@@ -48,7 +49,7 @@ open class DefaultInAppMessageModalViewFactory : IInAppMessageViewFactory {
         // Modal frame should only dismiss the message when configured.
         view.frameView?.setOnClickListener {
             if (BrazeInAppMessageManager.getInstance().doesClickOutsideModalViewDismissInAppMessageView) {
-                brazelog(I) { "Dismissing modal after frame click" }
+                brazelog(LogCategory.IN_APP_MESSAGES, I) { "Dismissing modal after frame click" }
                 BrazeInAppMessageManager.getInstance().hideCurrentlyDisplayingInAppMessage(true)
             }
         }

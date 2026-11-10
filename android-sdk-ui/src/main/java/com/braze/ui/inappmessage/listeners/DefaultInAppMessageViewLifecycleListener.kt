@@ -13,6 +13,7 @@ import com.braze.support.BrazeLogger.Priority.W
 import com.braze.support.BrazeLogger.brazelog
 import com.braze.support.WebContentUtils.getHtmlInAppMessageAssetCacheDirectory
 import com.braze.support.deleteFileOrDirectory
+import com.braze.support.logging.LogCategory
 import com.braze.support.toBundle
 import com.braze.ui.BrazeDeeplinkHandler
 import com.braze.ui.inappmessage.BrazeInAppMessageManager
@@ -33,7 +34,7 @@ open class DefaultInAppMessageViewLifecycleListener : IInAppMessageViewLifecycle
     ) {
         // Note that the client method must be called before any default processing below
         inAppMessageManager.inAppMessageManagerListener.beforeInAppMessageViewOpened(inAppMessageView, inAppMessage)
-        brazelog { "IInAppMessageViewLifecycleListener.beforeOpened called." }
+        brazelog(LogCategory.IN_APP_MESSAGES) { "IInAppMessageViewLifecycleListener.beforeOpened called." }
         inAppMessage.logImpression()
     }
 
@@ -41,7 +42,7 @@ open class DefaultInAppMessageViewLifecycleListener : IInAppMessageViewLifecycle
         inAppMessageView: View,
         inAppMessage: IInAppMessage,
     ) {
-        brazelog { "IInAppMessageViewLifecycleListener.afterOpened called." }
+        brazelog(LogCategory.IN_APP_MESSAGES) { "IInAppMessageViewLifecycleListener.afterOpened called." }
 
         // Note that the client method must be called after any default processing above
         inAppMessageManager.inAppMessageManagerListener.afterInAppMessageViewOpened(inAppMessageView, inAppMessage)
@@ -53,11 +54,11 @@ open class DefaultInAppMessageViewLifecycleListener : IInAppMessageViewLifecycle
     ) {
         // Note that the client method must be called before any default processing below
         inAppMessageManager.inAppMessageManagerListener.beforeInAppMessageViewClosed(inAppMessageView, inAppMessage)
-        brazelog { "IInAppMessageViewLifecycleListener.beforeClosed called." }
+        brazelog(LogCategory.IN_APP_MESSAGES) { "IInAppMessageViewLifecycleListener.beforeClosed called." }
     }
 
     override fun afterClosed(inAppMessage: IInAppMessage) {
-        brazelog { "IInAppMessageViewLifecycleListener.afterClosed called." }
+        brazelog(LogCategory.IN_APP_MESSAGES) { "IInAppMessageViewLifecycleListener.afterClosed called." }
         if (inAppMessage is IInAppMessageHtml) {
             startClearHtmlInAppMessageAssetsThread()
         }
@@ -71,7 +72,7 @@ open class DefaultInAppMessageViewLifecycleListener : IInAppMessageViewLifecycle
         inAppMessageView: View,
         inAppMessage: IInAppMessage,
     ) {
-        brazelog { "IInAppMessageViewLifecycleListener.onClicked called." }
+        brazelog(LogCategory.IN_APP_MESSAGES) { "IInAppMessageViewLifecycleListener.onClicked called." }
         inAppMessage.logClick()
 
         // Perform the in-app message clicked listener action from the host application first. This give
@@ -92,7 +93,7 @@ open class DefaultInAppMessageViewLifecycleListener : IInAppMessageViewLifecycle
         messageButton: MessageButton,
         inAppMessageImmersive: IInAppMessageImmersive,
     ) {
-        brazelog { "IInAppMessageViewLifecycleListener.onButtonClicked called." }
+        brazelog(LogCategory.IN_APP_MESSAGES) { "IInAppMessageViewLifecycleListener.onButtonClicked called." }
         inAppMessageImmersive.logButtonClick(messageButton)
         val wasHandled =
             inAppMessageManager.inAppMessageManagerListener.onInAppMessageButtonClicked(
@@ -109,7 +110,7 @@ open class DefaultInAppMessageViewLifecycleListener : IInAppMessageViewLifecycle
         inAppMessageView: View,
         inAppMessage: IInAppMessage,
     ) {
-        brazelog { "IInAppMessageViewLifecycleListener.onDismissed called." }
+        brazelog(LogCategory.IN_APP_MESSAGES) { "IInAppMessageViewLifecycleListener.onDismissed called." }
         inAppMessageManager.inAppMessageManagerListener.onInAppMessageDismissed(inAppMessage)
     }
 
@@ -142,7 +143,7 @@ open class DefaultInAppMessageViewLifecycleListener : IInAppMessageViewLifecycle
     ) {
         val activity = inAppMessageManager.activity
         if (activity == null) {
-            brazelog(W) { "Can't perform click action because the cached activity is null." }
+            brazelog(LogCategory.IN_APP_MESSAGES, W) { "Can't perform click action because the cached activity is null." }
             return
         }
         when (clickAction) {
@@ -150,7 +151,7 @@ open class DefaultInAppMessageViewLifecycleListener : IInAppMessageViewLifecycle
                 inAppMessage.animateOut = false
                 inAppMessageManager.hideCurrentlyDisplayingInAppMessage(false)
                 if (clickUri == null) {
-                    brazelog { "clickUri is null, not performing click action" }
+                    brazelog(LogCategory.IN_APP_MESSAGES) { "clickUri is null, not performing click action" }
                     return
                 }
                 val uriAction =
@@ -163,7 +164,7 @@ open class DefaultInAppMessageViewLifecycleListener : IInAppMessageViewLifecycle
 
                 val appContext = inAppMessageManager.applicationContext
                 if (appContext == null) {
-                    brazelog { "appContext is null, not performing click action" }
+                    brazelog(LogCategory.IN_APP_MESSAGES) { "appContext is null, not performing click action" }
                     return
                 } else {
                     BrazeDeeplinkHandler.getInstance().gotoUri(appContext, uriAction)

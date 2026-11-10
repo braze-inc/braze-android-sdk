@@ -9,6 +9,7 @@ import com.braze.support.BrazeLogger.Priority.I
 import com.braze.support.BrazeLogger.Priority.V
 import com.braze.support.BrazeLogger.brazelog
 import com.braze.support.getOptionalString
+import com.braze.support.logging.LogCategory
 import com.braze.ui.actions.brazeactions.steps.AddToCustomAttributeArrayStep
 import com.braze.ui.actions.brazeactions.steps.AddToSubscriptionGroupStep
 import com.braze.ui.actions.brazeactions.steps.ContainerStep
@@ -68,11 +69,11 @@ object BrazeActionParser {
         uri: Uri,
         channel: Channel = Channel.UNKNOWN,
     ) {
-        brazelog(V) { "Attempting to parse Braze Action with channel $channel and uri:\n'$uri'" }
+        brazelog(LogCategory.BRAZE, V) { "Attempting to parse Braze Action with channel $channel and uri:\n'$uri'" }
         try {
             val components = uri.getBrazeActionVersionAndJson()
             if (components == null) {
-                brazelog(I) {
+                brazelog(LogCategory.BRAZE, I) {
                     "Failed to decode Braze Action into both " +
                         "version and json components. Doing nothing."
                 }
@@ -81,7 +82,7 @@ object BrazeActionParser {
 
             val (version, json) = components
             if (version != BRAZE_ACTIONS_V1) {
-                brazelog {
+                brazelog(LogCategory.BRAZE) {
                     "Braze Actions version $version is " +
                         "unsupported. Version must be $BRAZE_ACTIONS_V1"
                 }
@@ -90,9 +91,9 @@ object BrazeActionParser {
 
             parse(context, StepData(json, channel))
         } catch (e: Exception) {
-            brazelog(E, e) { "Failed to parse uri as a Braze Action.\n'$uri'" }
+            brazelog(LogCategory.BRAZE, E, e) { "Failed to parse uri as a Braze Action.\n'$uri'" }
         }
-        brazelog(V) { "Done handling Braze uri\n'$uri'" }
+        brazelog(LogCategory.BRAZE, V) { "Done handling Braze uri\n'$uri'" }
     }
 
     /**
@@ -108,12 +109,12 @@ object BrazeActionParser {
             if (actionType == ActionType.INVALID) {
                 return
             }
-            brazelog(V) {
+            brazelog(LogCategory.BRAZE, V) {
                 "Performing Braze Action type $actionType with data $data"
             }
             actionType.impl.run(context, data)
         } catch (e: Exception) {
-            brazelog(E, e) { "Failed to run with data $data" }
+            brazelog(LogCategory.BRAZE, E, e) { "Failed to run with data $data" }
         }
     }
 
@@ -162,7 +163,7 @@ object BrazeActionParser {
         val encodedAction = this.lastPathSegment
 
         if (version == null || encodedAction == null) {
-            brazelog { "Failed to parse version and encoded action from uri: $this" }
+            brazelog(LogCategory.BRAZE) { "Failed to parse version and encoded action from uri: $this" }
             return null
         }
 
@@ -170,7 +171,7 @@ object BrazeActionParser {
             try {
                 parseEncodedActionToJson(encodedAction)
             } catch (e: Exception) {
-                brazelog(E, e) { "Failed to decode action into json. Action:\n'$encodedAction'" }
+                brazelog(LogCategory.BRAZE, E, e) { "Failed to decode action into json. Action:\n'$encodedAction'" }
                 null
             } ?: return null
 
@@ -188,7 +189,7 @@ object BrazeActionParser {
         val type = ActionType.fromValue(data.srcJson.getOptionalString(TYPE))
         val isValid = type.impl.isValid(data)
         if (!isValid) {
-            brazelog {
+            brazelog(LogCategory.BRAZE) {
                 "Cannot parse invalid action of " +
                     "type $type and data $data"
             }

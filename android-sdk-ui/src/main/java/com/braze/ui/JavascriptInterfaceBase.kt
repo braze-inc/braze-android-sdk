@@ -8,6 +8,7 @@ import com.braze.models.outgoing.BrazeProperties
 import com.braze.support.BrazeLogger.Priority.E
 import com.braze.support.BrazeLogger.Priority.W
 import com.braze.support.BrazeLogger.brazelog
+import com.braze.support.logging.LogCategory
 import org.json.JSONObject
 import java.math.BigDecimal
 
@@ -93,13 +94,13 @@ abstract class JavascriptInterfaceBase(
         val brazeProperties = parseProperties(propertiesJSON)
         val priceValue = price.toDoubleOrNull()
         if (priceValue == null) {
-            brazelog(W) { "Failed to parse logPurchaseWithJSON price value '$price'" }
+            brazelog(LogCategory.BRAZE, W) { "Failed to parse logPurchaseWithJSON price value '$price'" }
             return
         }
 
         val quantityValue = quantity.toIntOrNull()
         if (quantityValue == null) {
-            brazelog(W) { "Failed to parse logPurchaseWithJSON quantity value '$quantity'" }
+            brazelog(LogCategory.BRAZE, W) { "Failed to parse logPurchaseWithJSON quantity value '$quantity'" }
             return
         }
 
@@ -122,7 +123,7 @@ abstract class JavascriptInterfaceBase(
                 return BrazeProperties(JSONObject(propertiesJSON))
             }
         } catch (e: Exception) {
-            brazelog(E, e) { "Failed to parse properties JSON String: $propertiesJSON" }
+            brazelog(LogCategory.BRAZE, E, e) { "Failed to parse properties JSON String: $propertiesJSON" }
         }
         return null
     }

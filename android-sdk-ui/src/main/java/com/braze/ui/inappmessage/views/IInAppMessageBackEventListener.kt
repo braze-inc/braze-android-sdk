@@ -3,6 +3,7 @@ package com.braze.ui.inappmessage.views
 import android.window.BackEvent
 import com.braze.support.BrazeLogger.Priority.V
 import com.braze.support.BrazeLogger.brazelog
+import com.braze.support.logging.LogCategory
 
 /**
  * [IInAppMessageBackEventListener] allows in-app message views to listen to back animation
@@ -20,7 +21,7 @@ interface IInAppMessageBackEventListener {
      * @param backEvent The BackEvent containing information about the gesture.
      */
     fun onBackStarted(backEvent: BackEvent) {
-        brazelog(V) { "IInAppMessageBackEventListener: onBackStarted() called." }
+        brazelog(LogCategory.IN_APP_MESSAGES, V) { "IInAppMessageBackEventListener: onBackStarted() called." }
     }
 
     /**
@@ -34,13 +35,13 @@ interface IInAppMessageBackEventListener {
      * Called if the user cancels the back gesture or button.
      */
     fun onBackCancelled() {
-        brazelog(V) { "IInAppMessageBackEventListener: onBackCancelled() called." }
+        brazelog(LogCategory.IN_APP_MESSAGES, V) { "IInAppMessageBackEventListener: onBackCancelled() called." }
     }
 
     /**
      * Called when the back gesture or button is completed (the user lifts their finger).
      */
     fun onBackInvoked() {
-        brazelog(V) { "IInAppMessageBackEventListener: onBackInvoked() called." }
+        brazelog(LogCategory.IN_APP_MESSAGES, V) { "IInAppMessageBackEventListener: onBackInvoked() called." }
     }
 }

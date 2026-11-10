@@ -30,6 +30,7 @@ import com.braze.push.BrazeNotificationUtils.setVisibilityIfPresentAndSupported
 import com.braze.support.BrazeLogger.Priority.I
 import com.braze.support.BrazeLogger.Priority.V
 import com.braze.support.BrazeLogger.brazelog
+import com.braze.support.logging.LogCategory
 
 /**
  * Default [IBrazeNotificationFactory] that builds Android notifications from
@@ -49,7 +50,7 @@ open class BrazeNotificationFactory : IBrazeNotificationFactory {
         return if (builder != null) {
             builder.build()
         } else {
-            brazelog(I) { "Notification could not be built. Returning null as created notification" }
+            brazelog(LogCategory.PUSH, I) { "Notification could not be built. Returning null as created notification" }
             null
         }
     }
@@ -110,15 +111,15 @@ open class BrazeNotificationFactory : IBrazeNotificationFactory {
          */
         @JvmStatic
         fun populateNotificationBuilder(payload: BrazeNotificationPayload): NotificationCompat.Builder? {
-            brazelog(V) { "Using BrazeNotificationPayload: $payload" }
+            brazelog(LogCategory.PUSH, V) { "Using BrazeNotificationPayload: $payload" }
             val context = payload.context
             if (context == null) {
-                brazelog { "BrazeNotificationPayload has null context. Not creating notification" }
+                brazelog(LogCategory.PUSH) { "BrazeNotificationPayload has null context. Not creating notification" }
                 return null
             }
             val brazeConfigurationProvider = payload.configurationProvider
             if (brazeConfigurationProvider == null) {
-                brazelog { "BrazeNotificationPayload has null app configuration provider. Not creating notification" }
+                brazelog(LogCategory.PUSH) { "BrazeNotificationPayload has null app configuration provider. Not creating notification" }
                 return null
             }
             val notificationExtras = payload.notificationExtras

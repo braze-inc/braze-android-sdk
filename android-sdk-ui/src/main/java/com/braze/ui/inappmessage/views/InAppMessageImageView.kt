@@ -11,6 +11,7 @@ import android.widget.ImageView
 import com.braze.enums.inappmessage.CropType
 import com.braze.support.BrazeLogger.Priority.E
 import com.braze.support.BrazeLogger.brazelog
+import com.braze.support.logging.LogCategory
 import kotlin.math.min
 
 /**
@@ -143,7 +144,7 @@ open class InAppMessageImageView(
         heightPx: Int,
     ): Boolean {
         if (!this::inAppRadii.isInitialized) {
-            brazelog { "In-app message radii is uninitialized, not clipping path." }
+            brazelog(LogCategory.IN_APP_MESSAGES) { "In-app message radii is uninitialized, not clipping path." }
             return false
         }
         return try {
@@ -153,7 +154,7 @@ open class InAppMessageImageView(
             canvas.clipPath(clipPath)
             true
         } catch (e: Exception) {
-            brazelog(E, e) { "Encountered exception while trying to clip in-app message image" }
+            brazelog(LogCategory.IN_APP_MESSAGES, E, e) { "Encountered exception while trying to clip in-app message image" }
             false
         }
     }

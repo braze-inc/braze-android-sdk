@@ -9,6 +9,7 @@ import com.braze.support.BrazeLogger.Priority.V
 import com.braze.support.BrazeLogger.Priority.W
 import com.braze.support.BrazeLogger.brazelog
 import com.braze.support.isLocalUri
+import com.braze.support.logging.LogCategory
 import com.braze.ui.BrazeWebViewClient
 import com.braze.ui.BrazeDeeplinkHandler.Companion.getInstance as getDeeplinkHandlerInstance
 
@@ -36,7 +37,7 @@ open class DefaultBannerWebViewClientListener(
         url: String,
         queryBundle: Bundle,
     ) {
-        brazelog { "DefaultBannerWebViewClientListener.onCustomEventAction called." }
+        brazelog(LogCategory.BANNERS) { "DefaultBannerWebViewClientListener.onCustomEventAction called." }
 
         val customEventName = BrazeWebViewClient.parseCustomEventNameFromQueryBundle(queryBundle)
         if (customEventName.isNullOrBlank()) {
@@ -62,13 +63,13 @@ open class DefaultBannerWebViewClientListener(
                 Channel.BANNER,
             )
         if (uriAction == null) {
-            brazelog(W) { "UriAction is null. Not passing any URI to BrazeDeeplinkHandler. Url: $url." }
+            brazelog(LogCategory.BANNERS, W) { "UriAction is null. Not passing any URI to BrazeDeeplinkHandler. Url: $url." }
             return
         }
 
         val uri = uriAction.uri
         if (uri.isLocalUri()) {
-            brazelog(W) {
+            brazelog(LogCategory.BANNERS, W) {
                 "Not passing local uri to BrazeDeeplinkHandler. Got local uri: $uri for url: $url."
             }
             return
@@ -107,7 +108,7 @@ open class DefaultBannerWebViewClientListener(
             placementId: String,
             queryBundle: Bundle,
         ) {
-            brazelog(V) {
+            brazelog(LogCategory.BANNERS, V) {
                 "Banner URL click queryBundle for placementId=$placementId: " +
                     formatQueryBundleForLog(queryBundle)
             }

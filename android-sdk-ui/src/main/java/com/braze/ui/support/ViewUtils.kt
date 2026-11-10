@@ -13,27 +13,46 @@ import com.braze.enums.inappmessage.Orientation
 import com.braze.support.BrazeLogger.Priority.D
 import com.braze.support.BrazeLogger.Priority.E
 import com.braze.support.BrazeLogger.brazelog
-import com.braze.support.BrazeLogger.getBrazeLogTag
+import com.braze.support.logging.LogCategory
 import kotlin.math.max
 
-private val TAG = "ViewUtils".getBrazeLogTag()
 private const val TABLET_SMALLEST_WIDTH_DP = 600
 
 fun View?.removeViewFromParent() {
     try {
         if (this == null) {
-            brazelog(TAG, D) { "View passed in is null. Not removing from parent." }
+            brazelog(LogCategory.BRAZE, D) { "View passed in is null. Not removing from parent." }
         }
         if (this?.parent is ViewGroup) {
             val parent = this.parent as ViewGroup
             parent.removeView(this)
-            brazelog(TAG, D) { "Removed view: $this\nfrom parent: $parent" }
+            brazelog(LogCategory.BRAZE, D) { "Removed view: $this\nfrom parent: $parent" }
         }
     } catch (e: Exception) {
-        brazelog(TAG, E, e) {
+        brazelog(LogCategory.BRAZE, E, e) {
             "Caught exception while removing view from parent."
         }
     }
+}
+
+/**
+ * Cancels any [android.view.animation.Animation] attached to this [View] without notifying its
+ * [android.view.animation.Animation.AnimationListener], then removes the [View] from its parent.
+ *
+ * [ViewGroup.removeView] keeps a [View] with an attached animation as a disappearing child and only
+ * detaches it once that animation finishes drawing. If the animation is cleared before that happens
+ * (for example by an `onAnimationEnd` callback), the [View] is never detached and remains drawn.
+ */
+fun View?.removeViewFromParentAfterCancelingAnimation() {
+    try {
+        this?.animation?.setAnimationListener(null)
+        this?.clearAnimation()
+    } catch (e: Exception) {
+        brazelog(LogCategory.BRAZE, E, e) {
+            "Caught exception while canceling view animation before removing view from parent."
+        }
+    }
+    removeViewFromParent()
 }
 
 fun View.setFocusableInTouchModeAndRequestFocus() {
@@ -41,7 +60,7 @@ fun View.setFocusableInTouchModeAndRequestFocus() {
         this.isFocusableInTouchMode = true
         this.requestFocus()
     } catch (e: Exception) {
-        brazelog(TAG, E, e) {
+        brazelog(LogCategory.BRAZE, E, e) {
             "Caught exception while setting view to focusable in touch mode and requesting focus."
         }
     }
@@ -66,7 +85,7 @@ fun Activity.setActivityRequestedOrientation(requestedOrientation: Int) {
     try {
         this.requestedOrientation = requestedOrientation
     } catch (e: Exception) {
-        brazelog(TAG, E, e) {
+        brazelog(LogCategory.BRAZE, E, e) {
             "Failed to set requested orientation $requestedOrientation for activity class: ${this.localClassName}"
         }
     }
@@ -101,15 +120,15 @@ fun isCurrentOrientationValid(
     if (currentScreenOrientation == Configuration.ORIENTATION_LANDSCAPE &&
         preferredOrientation === Orientation.LANDSCAPE
     ) {
-        brazelog(TAG, D) { "Current and preferred orientation are landscape." }
+        brazelog(LogCategory.BRAZE, D) { "Current and preferred orientation are landscape." }
         true
     } else if (currentScreenOrientation == Configuration.ORIENTATION_PORTRAIT &&
         preferredOrientation === Orientation.PORTRAIT
     ) {
-        brazelog(TAG, D) { "Current and preferred orientation are portrait." }
+        brazelog(LogCategory.BRAZE, D) { "Current and preferred orientation are portrait." }
         true
     } else {
-        brazelog(TAG, D) {
+        brazelog(LogCategory.BRAZE, D) {
             "Current orientation $currentScreenOrientation" +
                 " and preferred orientation $preferredOrientation don't match"
         }

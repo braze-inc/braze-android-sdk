@@ -12,6 +12,7 @@ import com.braze.enums.inappmessage.TextAlign
 import com.braze.models.inappmessage.MessageButton
 import com.braze.support.BrazeLogger.Priority.W
 import com.braze.support.BrazeLogger.brazelog
+import com.braze.support.logging.LogCategory
 import com.braze.ui.R
 import com.braze.ui.inappmessage.BrazeInAppMessageManager
 import com.braze.ui.inappmessage.utils.InAppMessageButtonViewUtils.setButtons
@@ -60,7 +61,7 @@ abstract class InAppMessageImmersiveBaseView(
         val primaryId: Int?
         val secondaryId: Int?
         if (closeButtonId == null) {
-            brazelog(W) { "closeButtonId is null. Cannot continue setting up navigation." }
+            brazelog(LogCategory.IN_APP_MESSAGES, W) { "closeButtonId is null. Cannot continue setting up navigation." }
             return
         }
         when (numButtons) {
@@ -116,7 +117,7 @@ abstract class InAppMessageImmersiveBaseView(
                 closeButton.nextFocusLeftId = closeButtonId
             }
             else ->
-                brazelog(W) {
+                brazelog(LogCategory.IN_APP_MESSAGES, W) {
                     "Cannot setup directional navigation. Got unsupported number of buttons: $numButtons"
                 }
         }
@@ -229,7 +230,7 @@ abstract class InAppMessageImmersiveBaseView(
      */
     open fun setLargerCloseButtonClickArea(closeButtonView: View?) {
         if (closeButtonView == null || closeButtonView.parent == null) {
-            brazelog(W) { "Cannot increase click area for view if view and/or parent are null." }
+            brazelog(LogCategory.IN_APP_MESSAGES, W) { "Cannot increase click area for view if view and/or parent are null." }
             return
         }
         val parent = closeButtonView.parent

@@ -6,6 +6,7 @@ import com.braze.models.outgoing.BrazeProperties
 import com.braze.support.BrazeLogger.brazelog
 import com.braze.support.getPrettyPrintedString
 import com.braze.support.iterator
+import com.braze.support.logging.LogCategory
 import org.json.JSONObject
 
 /**
@@ -53,13 +54,13 @@ internal data class StepData(
     ): Boolean {
         if (fixedArgCount != -1) {
             if (args.size != fixedArgCount) {
-                brazelog { "Expected $fixedArgCount arguments. Got: $args" }
+                brazelog(LogCategory.BRAZE) { "Expected $fixedArgCount arguments. Got: $args" }
                 return false
             }
         }
         if (rangedArgCount != null) {
             if (args.size !in rangedArgCount) {
-                brazelog { "Expected $rangedArgCount arguments. Got: $args" }
+                brazelog(LogCategory.BRAZE) { "Expected $rangedArgCount arguments. Got: $args" }
                 return false
             }
         }
@@ -70,7 +71,7 @@ internal data class StepData(
         if (getArg(index) is String) {
             true
         } else {
-            brazelog { "Argument [$index] is not a String. Source: $srcJson" }
+            brazelog(LogCategory.BRAZE) { "Argument [$index] is not a String. Source: $srcJson" }
             false
         }
 
@@ -82,7 +83,7 @@ internal data class StepData(
         return if (arg == null || arg is JSONObject) {
             true
         } else {
-            brazelog { "Argument [$index] is not a JSONObject. Source: $srcJson" }
+            brazelog(LogCategory.BRAZE) { "Argument [$index] is not a JSONObject. Source: $srcJson" }
             false
         }
     }

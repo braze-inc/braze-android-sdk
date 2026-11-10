@@ -6,9 +6,7 @@ import android.os.Build
 import android.text.Html
 import com.braze.configuration.BrazeConfigurationProvider
 import com.braze.support.BrazeLogger.brazelog
-import com.braze.support.BrazeLogger.getBrazeLogTag
-
-private val TAG = "HtmlUtils".getBrazeLogTag()
+import com.braze.support.logging.LogCategory
 
 /**
  * Returns displayable styled text from the provided HTML
@@ -18,7 +16,7 @@ private val TAG = "HtmlUtils".getBrazeLogTag()
 @Suppress("deprecation")
 fun String.getHtmlSpannedTextIfEnabled(configurationProvider: BrazeConfigurationProvider): CharSequence {
     if (this.isBlank()) {
-        brazelog(TAG) { "Cannot create html spanned text on blank text. Returning blank string." }
+        brazelog(LogCategory.PUSH) { "Cannot create html spanned text on blank text. Returning blank string." }
         return this
     }
     return if (configurationProvider.isPushNotificationHtmlRenderingEnabled) {

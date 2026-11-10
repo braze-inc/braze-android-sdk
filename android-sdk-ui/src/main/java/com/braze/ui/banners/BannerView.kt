@@ -25,16 +25,34 @@ import com.braze.support.BrazeLogger.Priority.E
 import com.braze.support.BrazeLogger.Priority.V
 import com.braze.support.BrazeLogger.Priority.W
 import com.braze.support.BrazeLogger.brazelog
+import com.braze.support.logging.LogCategory
 import com.braze.ui.R
 import com.braze.ui.banners.jsinterface.BannerJavascriptInterface
 import com.braze.ui.banners.listeners.DefaultBannerWebViewClientListener
 import com.braze.ui.banners.utils.BannerWebViewClient
 import com.braze.ui.support.setWebViewSettings
 import kotlinx.coroutines.Job
+import kotlinx.coroutines.asCoroutineDispatcher
 import kotlinx.coroutines.isActive
 import kotlinx.coroutines.launch
+import java.util.concurrent.Executors
 import java.util.concurrent.atomic.AtomicBoolean
 import java.util.concurrent.atomic.AtomicReference
+
+/**
+ * [Braze.getBanner] blocks on storage from the calling thread. Resolving several banners
+ * on the shared IO pool can occupy that pool while storage waits for it. One thread keeps
+ * banner loads off the main thread and off that pool.
+ *
+ * The base module's blocking dispatchers are internal, so this executor stays here.
+ * Cancelling the load job does not interrupt a blocked [Braze.getBanner]. That call holds
+ * this thread until it returns, and later loads wait behind it.
+ */
+private val bannerLoadDispatcher =
+    Executors
+        .newSingleThreadExecutor { runnable ->
+            Thread(runnable, "braze-banner-load").apply { isDaemon = true }
+        }.asCoroutineDispatcher()
 
 /**
  * An Android View that displays a Braze banner.
@@ -202,7 +220,7 @@ class BannerView internal constructor(
             try {
                 webViewFactory(context)
             } catch (e: Exception) {
-                brazelog(E, e) { "Error creating BannerView WebView. Banner will not display." }
+                brazelog(LogCategory.BANNERS, E, e) { "Error creating BannerView WebView. Banner will not display." }
                 visibility = GONE
                 return null
             }
@@ -266,7 +284,7 @@ class BannerView internal constructor(
         try {
             webView.destroy()
         } catch (e: Exception) {
-            brazelog(E, e) {
+            brazelog(LogCategory.BANNERS, E, e) {
                 "Banner release: error destroying WebView for placementId=$_placementId"
             }
         }
@@ -284,7 +302,7 @@ class BannerView internal constructor(
             removeJavascriptInterface(JS_BRIDGE_NAME)
             hostedWebView?.webViewClient = WebViewClient()
         } catch (e: Exception) {
-            brazelog(E, e) {
+            brazelog(LogCategory.BANNERS, E, e) {
                 "Banner release: error during WebView teardown for placementId=$_placementId"
             }
         }
@@ -342,7 +360,7 @@ class BannerView internal constructor(
         // BannersManager may call initBanner with a prior monitor placement after the view's
         // placementId has already changed. Ignore those so we do not cancel the newer resolve.
         if (placementId != _placementId) {
-            brazelog(V) {
+            brazelog(LogCategory.BANNERS, V) {
                 "Ignoring initBanner for placementId=$placementId; current placementId=$_placementId"
             }
             return
@@ -356,25 +374,25 @@ class BannerView internal constructor(
         }
         synchronized(initJobLock) {
             initJob?.cancel()
-            brazelog(V) { "Resolving Banner off main thread for placementId=$placementId" }
+            brazelog(LogCategory.BANNERS, V) { "Resolving Banner off main thread for placementId=$placementId" }
             initJob =
-                BrazeCoroutineScope.launch {
+                BrazeCoroutineScope.launch(bannerLoadDispatcher) {
                     if (isDestroyed.get()) return@launch
                     val banner =
                         try {
                             resolveBanner(placementId)
                         } catch (e: Exception) {
-                            brazelog(E, e) {
+                            brazelog(LogCategory.BANNERS, E, e) {
                                 "Failed to resolve Banner for placementId=$placementId"
                             }
                             null
                         }
-                    brazelog(V) {
+                    brazelog(LogCategory.BANNERS, V) {
                         "Banner resolve finished for placementId=$placementId; " +
                             "found=${banner != null}"
                     }
                     if (!isActive || isDestroyed.get()) {
-                        brazelog(V) {
+                        brazelog(LogCategory.BANNERS, V) {
                             "Skipping Banner apply for placementId=$placementId; " +
                                 "init cancelled or view destroyed"
                         }
@@ -383,7 +401,7 @@ class BannerView internal constructor(
                     runOnMainThread {
                         // Drop stale results if placementId changed while resolving.
                         if (placementId != _placementId) {
-                            brazelog(V) {
+                            brazelog(LogCategory.BANNERS, V) {
                                 "Dropping stale Banner resolve for placementId=$placementId; " +
                                     "current placementId=$_placementId"
                             }
@@ -535,9 +553,9 @@ class BannerView internal constructor(
             hostedWebView?.onPause()
             visibility = GONE
             fireOnDismissCallback()
-            brazelog(V) { "Banner dismiss completed. placementId=$_placementId" }
+            brazelog(LogCategory.BANNERS, V) { "Banner dismiss completed. placementId=$_placementId" }
         } catch (e: Exception) {
-            brazelog(E, e) {
+            brazelog(LogCategory.BANNERS, E, e) {
                 "Banner dismiss: error during view teardown or onDismissCallback for placementId=$_placementId"
             }
         }
@@ -557,7 +575,7 @@ class BannerView internal constructor(
                 trackingId = trackingId,
             )
         if (snapshot == null) {
-            brazelog(W) {
+            brazelog(LogCategory.BANNERS, W) {
                 "Banner dismiss callback skipped because required snapshot fields were missing. " +
                     "placementId=$placementId stableKey=$stableKey trackingId=$trackingId"
             }

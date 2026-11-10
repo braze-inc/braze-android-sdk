@@ -22,6 +22,7 @@ import com.braze.support.BrazeLogger.Priority.W
 import com.braze.support.BrazeLogger.brazelog
 import com.braze.support.IntentUtils.getImmutablePendingIntentFlags
 import com.braze.support.IntentUtils.getRequestCode
+import com.braze.support.logging.LogCategory
 import com.braze.ui.BrazeDeeplinkHandler.Companion.getInstance
 
 object BrazeNotificationActionUtils {
@@ -34,16 +35,16 @@ object BrazeNotificationActionUtils {
         payload: BrazeNotificationPayload,
     ) {
         if (payload.context == null) {
-            brazelog { "Context cannot be null when adding notification buttons." }
+            brazelog(LogCategory.PUSH) { "Context cannot be null when adding notification buttons." }
             return
         }
         val actionButtons = payload.actionButtons
         if (actionButtons.isEmpty()) {
-            brazelog { "No action buttons present. Not adding notification actions" }
+            brazelog(LogCategory.PUSH) { "No action buttons present. Not adding notification actions" }
             return
         }
         for (actionButton in actionButtons) {
-            brazelog(V) { "Adding action button: $actionButton" }
+            brazelog(LogCategory.PUSH, V) { "Adding action button: $actionButton" }
             addNotificationAction(notificationBuilder, payload, actionButton)
         }
     }
@@ -65,7 +66,7 @@ object BrazeNotificationActionUtils {
         try {
             val actionType = intent.getStringExtra(Constants.BRAZE_ACTION_TYPE_KEY)
             if (actionType.isNullOrBlank()) {
-                brazelog(W) { "Notification action button type was blank or null. Doing nothing." }
+                brazelog(LogCategory.PUSH, W) { "Notification action button type was blank or null. Doing nothing." }
                 return
             }
             val notificationId =
@@ -102,15 +103,15 @@ object BrazeNotificationActionUtils {
                 if (appConfigurationProvider.doesHandlePushDeepLinksAutomatically) {
                     routeUserWithNotificationOpenedIntent(context, intent)
                 } else {
-                    brazelog(I) { "Not handling deep links automatically, skipping deep link handling" }
+                    brazelog(LogCategory.PUSH, I) { "Not handling deep links automatically, skipping deep link handling" }
                 }
             } else if (actionType == Constants.BRAZE_PUSH_ACTION_TYPE_NONE) {
                 cancelNotification(context, notificationId)
             } else {
-                brazelog(W) { "Unknown notification action button clicked. Doing nothing." }
+                brazelog(LogCategory.PUSH, W) { "Unknown notification action button clicked. Doing nothing." }
             }
         } catch (e: Exception) {
-            brazelog(E, e) { "Caught exception while handling notification action button click." }
+            brazelog(LogCategory.PUSH, E, e) { "Caught exception while handling notification action button click." }
         }
     }
 
@@ -128,7 +129,7 @@ object BrazeNotificationActionUtils {
     ) {
         val context = payload.context
         if (context == null) {
-            brazelog { "Cannot add notification action with null context from payload" }
+            brazelog(LogCategory.PUSH) { "Cannot add notification action with null context from payload" }
             return
         }
         val actionExtras = Bundle(payload.notificationExtras)
@@ -141,7 +142,7 @@ object BrazeNotificationActionUtils {
         if (Constants.BRAZE_PUSH_ACTION_TYPE_NONE == actionType) {
             // If no action is present, then we don't need the
             // trampoline to route us back to an Activity.
-            brazelog(V) {
+            brazelog(LogCategory.PUSH, V) {
                 "Adding notification action with type: $actionType" +
                     "Setting intent class to notification receiver: $notificationReceiverClass"
             }
@@ -162,7 +163,10 @@ object BrazeNotificationActionUtils {
             // However, if an action is present, then we need to
             // route to the trampoline to ensure the user is
             // prompted to open the app on the lockscreen.
-            brazelog(V) { "Adding notification action with type: $actionType Setting intent class to trampoline activity" }
+            brazelog(
+                LogCategory.PUSH,
+                V,
+            ) { "Adding notification action with type: $actionType Setting intent class to trampoline activity" }
             sendIntent =
                 Intent(Constants.BRAZE_ACTION_CLICKED_ACTION)
                     .setClass(context, NotificationTrampolineActivity::class.java)
@@ -181,7 +185,7 @@ object BrazeNotificationActionUtils {
             NotificationCompat.Action.Builder(0, actionButton.text, pendingSendIntent)
         notificationActionBuilder.addExtras(Bundle(actionExtras))
         notificationBuilder.addAction(notificationActionBuilder.build())
-        brazelog(V) { "Added action with bundle: $actionExtras" }
+        brazelog(LogCategory.PUSH, V) { "Added action with bundle: $actionExtras" }
     }
 
     /**

@@ -66,7 +66,7 @@ hamcrestLibrary = "1.3"
 jsonassert = "1.5.3"
 
 # Kotlin
-kotlin = "2.2.20"
+kotlin = "2.4.21"
 kotlinCoroutines = "1.11.0"
 kotlinLifecycleRuntimeKtx = "2.9.4"
 kotlinSerialization = "1.9.0"

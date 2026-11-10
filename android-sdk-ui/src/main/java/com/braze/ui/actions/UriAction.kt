@@ -21,6 +21,7 @@ import com.braze.support.BrazeLogger.Priority.W
 import com.braze.support.BrazeLogger.brazelog
 import com.braze.support.REMOTE_SCHEMES
 import com.braze.support.isLocalUri
+import com.braze.support.logging.LogCategory
 import com.braze.ui.BrazeDeeplinkHandler
 import com.braze.ui.BrazeWebViewActivity
 import com.braze.ui.actions.brazeactions.BrazeActionParser
@@ -79,14 +80,16 @@ open class UriAction : IAction {
      */
     override fun execute(context: Context) {
         if (uri.isLocalUri()) {
-            brazelog { "Not executing local Uri: $uri" }
+            brazelog(LogCategory.BRAZE) { "Not executing local Uri: $uri" }
             return
         }
         if (uri.isBrazeActionUri()) {
-            brazelog(V) { "Executing BrazeActions uri:\n'$uri'" }
+            brazelog(LogCategory.BRAZE, V) { "Executing BrazeActions uri:\n'$uri'" }
             BrazeActionParser.execute(context, uri, channel)
         } else {
-            brazelog { "Executing Uri action from channel $channel: $uri. UseWebView: $useWebView. Extras: $extras" }
+            brazelog(LogCategory.BRAZE) {
+                "Executing Uri action from channel $channel: $uri. UseWebView: $useWebView. Extras: $extras"
+            }
             if (useWebView && REMOTE_SCHEMES.contains(uri.scheme)) {
                 // If the scheme is not a remote scheme, we open it using an ACTION_VIEW intent.
                 if (channel == Channel.PUSH) {
@@ -120,7 +123,7 @@ open class UriAction : IAction {
         try {
             context.startActivity(intent)
         } catch (e: Exception) {
-            brazelog(E, e) { "BrazeWebViewActivity not opened successfully." }
+            brazelog(LogCategory.BRAZE, E, e) { "BrazeWebViewActivity not opened successfully." }
         }
     }
 
@@ -140,7 +143,7 @@ open class UriAction : IAction {
         try {
             context.startActivity(intent)
         } catch (e: Exception) {
-            brazelog(E, e) { "Failed to handle uri $uri with extras: $extras" }
+            brazelog(LogCategory.BRAZE, E, e) { "Failed to handle uri $uri with extras: $extras" }
         }
     }
 
@@ -166,7 +169,7 @@ open class UriAction : IAction {
                 ),
             )
         } catch (e: Exception) {
-            brazelog(E, e) { "Braze WebView Activity not opened successfully." }
+            brazelog(LogCategory.BRAZE, E, e) { "Braze WebView Activity not opened successfully." }
         }
     }
 
@@ -193,7 +196,7 @@ open class UriAction : IAction {
                 ),
             )
         } catch (e: ActivityNotFoundException) {
-            brazelog(W, e) { "Could not find appropriate activity to open for deep link $uri" }
+            brazelog(LogCategory.BRAZE, W, e) { "Could not find appropriate activity to open for deep link $uri" }
         }
     }
 
@@ -216,7 +219,7 @@ open class UriAction : IAction {
                     customWebViewActivityClassName,
                 )
             ) {
-                brazelog { "Launching custom WebView Activity with class name: $customWebViewActivityClassName" }
+                brazelog(LogCategory.BRAZE) { "Launching custom WebView Activity with class name: $customWebViewActivityClassName" }
                 Intent()
                     .setClassName(context, customWebViewActivityClassName)
             } else {
@@ -251,7 +254,7 @@ open class UriAction : IAction {
         if (resolveInfos.size > 1) {
             for (resolveInfo in resolveInfos) {
                 if (resolveInfo.activityInfo.packageName == context.packageName) {
-                    brazelog { "Setting deep link intent package to ${resolveInfo.activityInfo.packageName}." }
+                    brazelog(LogCategory.BRAZE) { "Setting deep link intent package to ${resolveInfo.activityInfo.packageName}." }
                     intent.setPackage(resolveInfo.activityInfo.packageName)
                     break
                 }
@@ -285,12 +288,12 @@ open class UriAction : IAction {
             // If a custom back stack class is defined, then set it
             val activityClass = configurationProvider.pushDeepLinkBackStackActivityClassName
             if (activityClass.isNullOrBlank()) {
-                brazelog(I) { "Adding main activity intent to back stack while opening uri from push" }
+                brazelog(LogCategory.BRAZE, I) { "Adding main activity intent to back stack while opening uri from push" }
                 rootIntent = getMainActivityIntent(context, extras)
             } else {
                 // Check if the activity is registered in the manifest. If not, then add nothing to the back stack
                 if (isActivityRegisteredInManifest(context, activityClass)) {
-                    brazelog(I) { "Adding custom back stack activity while opening uri from push: $activityClass" }
+                    brazelog(LogCategory.BRAZE, I) { "Adding custom back stack activity while opening uri from push: $activityClass" }
                     rootIntent =
                         extras?.let {
                             Intent()
@@ -302,11 +305,17 @@ open class UriAction : IAction {
                                 ).putExtras(it)
                         }
                 } else {
-                    brazelog(I) { "Not adding unregistered activity to the back stack while opening uri from push: $activityClass" }
+                    brazelog(
+                        LogCategory.BRAZE,
+                        I,
+                    ) { "Not adding unregistered activity to the back stack while opening uri from push: $activityClass" }
                 }
             }
         } else {
-            brazelog(I) { "Not adding back stack activity while opening uri from push due to disabled configuration setting." }
+            brazelog(
+                LogCategory.BRAZE,
+                I,
+            ) { "Not adding back stack activity while opening uri from push due to disabled configuration setting." }
         }
         return if (rootIntent == null) {
             // Calling startActivities() from outside of an Activity

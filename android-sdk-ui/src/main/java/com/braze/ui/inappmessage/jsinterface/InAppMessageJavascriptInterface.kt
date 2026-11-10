@@ -6,6 +6,7 @@ import com.braze.coroutine.BrazeCoroutineScope
 import com.braze.models.inappmessage.IInAppMessageHtml
 import com.braze.support.BrazeLogger.Priority.V
 import com.braze.support.BrazeLogger.brazelog
+import com.braze.support.logging.LogCategory
 import com.braze.support.requestPushPermissionPrompt
 import com.braze.ui.JavascriptInterfaceBase
 import com.braze.ui.inappmessage.BrazeInAppMessageManager
@@ -49,14 +50,14 @@ class InAppMessageJavascriptInterface(
         BrazeCoroutineScope.launchDelayed(PUSH_PROMPT_INITIAL_DELAY_MS) {
             if (wasCloseMessageCalled) {
                 withTimeout(PUSH_PROMPT_WAIT_FOR_DISPLAY_TIMEOUT_MS) {
-                    brazelog(V) { "Waiting for IAM to be fully closed before requesting push prompt" }
+                    brazelog(LogCategory.IN_APP_MESSAGES, V) { "Waiting for IAM to be fully closed before requesting push prompt" }
                     while (BrazeInAppMessageManager.getInstance().isCurrentlyDisplayingInAppMessage) {
                         delay(PUSH_PROMPT_WAIT_DELAY_TIMEOUT_MS)
                     }
                 }
             }
 
-            brazelog(V) { "Requesting push prompt from Braze bridge html interface" }
+            brazelog(LogCategory.IN_APP_MESSAGES, V) { "Requesting push prompt from Braze bridge html interface" }
             BrazeInAppMessageManager.getInstance().activity.requestPushPermissionPrompt()
         }
     }

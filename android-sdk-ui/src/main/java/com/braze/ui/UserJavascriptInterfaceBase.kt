@@ -13,6 +13,7 @@ import com.braze.enums.NotificationSubscriptionType.Companion.fromValue
 import com.braze.support.BrazeLogger.Priority.E
 import com.braze.support.BrazeLogger.Priority.W
 import com.braze.support.BrazeLogger.brazelog
+import com.braze.support.logging.LogCategory
 import org.json.JSONArray
 import org.json.JSONObject
 import java.util.Locale
@@ -46,7 +47,7 @@ open class UserJavascriptInterfaceBase(
     fun setGender(genderString: String) {
         val gender = parseGender(genderString)
         if (gender == null) {
-            brazelog(W) {
+            brazelog(LogCategory.USER, W) {
                 "Failed to parse gender in Braze HTML in-app message " +
                     "javascript interface with gender: $genderString"
             }
@@ -65,19 +66,19 @@ open class UserJavascriptInterfaceBase(
     ) {
         val yearValue = year.toIntOrNull()
         if (yearValue == null) {
-            brazelog(W) { "Failed to parse setDateOfBirth year value '$year'" }
+            brazelog(LogCategory.USER, W) { "Failed to parse setDateOfBirth year value '$year'" }
             return
         }
 
         val monthValue = monthFromInt(month)
         if (monthValue == null) {
-            brazelog(W) { "Failed to parse setDateOfBirth month for value $month" }
+            brazelog(LogCategory.USER, W) { "Failed to parse setDateOfBirth month for value $month" }
             return
         }
 
         val dayValue = day.toIntOrNull()
         if (dayValue == null) {
-            brazelog(W) { "Failed to parse setDateOfBirth day value '$day'" }
+            brazelog(LogCategory.USER, W) { "Failed to parse setDateOfBirth day value '$day'" }
             return
         }
 
@@ -111,7 +112,7 @@ open class UserJavascriptInterfaceBase(
     fun setEmailNotificationSubscriptionType(subscriptionType: String) {
         val subscriptionTypeEnum = subscriptionTypeFromJavascriptString(subscriptionType)
         if (subscriptionTypeEnum == null) {
-            brazelog(W) {
+            brazelog(LogCategory.USER, W) {
                 "Failed to parse email subscription type in Braze HTML in-app message " +
                     "javascript interface with subscription $subscriptionType"
             }
@@ -126,7 +127,7 @@ open class UserJavascriptInterfaceBase(
     fun setPushNotificationSubscriptionType(subscriptionType: String) {
         val subscriptionTypeEnum = subscriptionTypeFromJavascriptString(subscriptionType)
         if (subscriptionTypeEnum == null) {
-            brazelog(W) {
+            brazelog(LogCategory.USER, W) {
                 "Failed to parse push subscription type in Braze HTML in-app message " +
                     "javascript interface with subscription: $subscriptionType"
             }
@@ -169,7 +170,7 @@ open class UserJavascriptInterfaceBase(
     ) {
         val arrayValue = parseStringArrayFromJsonString(jsonArrayString)
         if (arrayValue == null) {
-            brazelog(W) { "Failed to set custom attribute array for key $key" }
+            brazelog(LogCategory.USER, W) { "Failed to set custom attribute array for key $key" }
             return
         }
         Braze.getInstance(context).runOnUser {
@@ -184,7 +185,7 @@ open class UserJavascriptInterfaceBase(
     ) {
         val jsonArray = parseArrayFromJsonString(jsonArrayString)
         if (jsonArray == null) {
-            brazelog(W) { "Failed to set custom attribute JSON array for key $key with value: $jsonArrayString" }
+            brazelog(LogCategory.USER, W) { "Failed to set custom attribute JSON array for key $key with value: $jsonArrayString" }
             return
         }
         Braze.getInstance(context).runOnUser {
@@ -219,7 +220,7 @@ open class UserJavascriptInterfaceBase(
     ) {
         val incValue = value.toIntOrNull()
         if (incValue == null) {
-            brazelog(W) { "Failed to parse incrementCustomUserAttribute increment value '$value'" }
+            brazelog(LogCategory.USER, W) { "Failed to parse incrementCustomUserAttribute increment value '$value'" }
             return
         }
         Braze.getInstance(context).runOnUser {
@@ -235,13 +236,13 @@ open class UserJavascriptInterfaceBase(
     ) {
         val latitudeValue = latitude.toDoubleOrNull()
         if (latitudeValue == null) {
-            brazelog(W) { "Failed to parse setCustomLocationAttribute latitude value '$latitude'" }
+            brazelog(LogCategory.USER, W) { "Failed to parse setCustomLocationAttribute latitude value '$latitude'" }
             return
         }
 
         val longitudeValue = longitude.toDoubleOrNull()
         if (longitudeValue == null) {
-            brazelog(W) { "Failed to parse setCustomLocationAttribute longitude value '$longitude'" }
+            brazelog(LogCategory.USER, W) { "Failed to parse setCustomLocationAttribute longitude value '$longitude'" }
             return
         }
 
@@ -327,14 +328,14 @@ open class UserJavascriptInterfaceBase(
                 }
 
                 else -> {
-                    brazelog(W) {
+                    brazelog(LogCategory.USER, W) {
                         "Failed to parse custom attribute type for key: $key" +
                             " and json string value: $jsonStringValue"
                     }
                 }
             }
         } catch (e: Exception) {
-            brazelog(E, e) {
+            brazelog(LogCategory.USER, E, e) {
                 "Failed to parse custom attribute type for key: $key" +
                     " and json string value: $jsonStringValue"
             }
@@ -347,7 +348,7 @@ open class UserJavascriptInterfaceBase(
             val parsedArray = JSONArray(jsonArrayString)
             return MutableList<String?>(parsedArray.length()) { i -> parsedArray.getString(i) }.toTypedArray()
         } catch (e: Exception) {
-            brazelog(E, e) { "Failed to parse custom attribute array" }
+            brazelog(LogCategory.USER, E, e) { "Failed to parse custom attribute array" }
         }
         return null
     }
@@ -357,7 +358,7 @@ open class UserJavascriptInterfaceBase(
         try {
             return JSONArray(jsonArrayString)
         } catch (e: Exception) {
-            brazelog(E, e) { "Failed to parse custom attribute array" }
+            brazelog(LogCategory.USER, E, e) { "Failed to parse custom attribute array" }
         }
         return null
     }

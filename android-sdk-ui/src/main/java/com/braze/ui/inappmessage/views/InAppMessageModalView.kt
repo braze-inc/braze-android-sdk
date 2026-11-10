@@ -11,6 +11,7 @@ import com.braze.enums.inappmessage.ImageStyle
 import com.braze.models.inappmessage.IInAppMessageImmersive
 import com.braze.models.inappmessage.InAppMessageModal
 import com.braze.support.BrazeLogger.brazelog
+import com.braze.support.logging.LogCategory
 import com.braze.ui.R
 import com.braze.ui.inappmessage.config.BrazeInAppMessageParams.modalizedImageRadiusDp
 import com.braze.ui.inappmessage.utils.InAppMessageViewUtils.setViewBackgroundColorFilter
@@ -61,7 +62,7 @@ open class InAppMessageModalView(
         // dismisses the in-app message.
         val scrollViewChild = findViewById<View>(R.id.com_braze_inappmessage_modal_text_layout)
         scrollViewChild?.setOnClickListener {
-            brazelog { "Passing scrollView click event to message clickable view." }
+            brazelog(LogCategory.IN_APP_MESSAGES) { "Passing scrollView click event to message clickable view." }
             messageClickableView?.performClick()
         }
     }

@@ -25,6 +25,7 @@ import com.braze.support.BrazeLogger.Priority.E
 import com.braze.support.BrazeLogger.Priority.I
 import com.braze.support.BrazeLogger.brazelog
 import com.braze.support.REMOTE_SCHEMES
+import com.braze.support.logging.LogCategory
 import com.braze.ui.BrazeDeeplinkHandler.Companion.getInstance
 import com.braze.ui.actions.IAction
 import com.braze.ui.support.isDeviceInNightMode
@@ -100,7 +101,7 @@ open class BrazeWebViewActivity : FragmentActivity() {
                 webView.loadUrl(url)
             }
         } catch (e: Exception) {
-            brazelog(E, e) { "Error creating BrazeWebViewActivity. Webview will not display." }
+            brazelog(LogCategory.BRAZE, E, e) { "Error creating BrazeWebViewActivity. Webview will not display." }
         }
     }
 
@@ -111,7 +112,7 @@ open class BrazeWebViewActivity : FragmentActivity() {
     open fun createWebChromeClient(): WebChromeClient {
         return object : WebChromeClient() {
             override fun onConsoleMessage(cm: ConsoleMessage): Boolean {
-                brazelog {
+                brazelog(LogCategory.BRAZE) {
                     "Braze WebView Activity log. Line: ${cm.lineNumber()}. SourceId: ${cm.sourceId()}. " +
                         "Log Level: ${cm.messageLevel()}. Message: ${cm.message()}"
                 }
@@ -184,7 +185,7 @@ open class BrazeWebViewActivity : FragmentActivity() {
                         false
                     }
                 } catch (e: Exception) {
-                    brazelog(E, e) { "Unexpected exception while processing url $url. Passing url back to WebView." }
+                    brazelog(LogCategory.BRAZE, E, e) { "Unexpected exception while processing url $url. Passing url back to WebView." }
                 }
                 return null
             }
@@ -215,7 +216,7 @@ open class BrazeWebViewActivity : FragmentActivity() {
                 if (!request.isForMainFrame) {
                     return
                 }
-                brazelog(I) {
+                brazelog(LogCategory.BRAZE, I) {
                     "WebView main frame failed to load ${request.url}. Hiding the loading indicator. $error"
                 }
                 hideWebViewLoadingIndicator()
@@ -233,7 +234,7 @@ open class BrazeWebViewActivity : FragmentActivity() {
                 description: String?,
                 failingUrl: String?,
             ) {
-                brazelog(I) {
+                brazelog(LogCategory.BRAZE, I) {
                     "WebView failed to load $failingUrl. Hiding the loading indicator. $description"
                 }
                 hideWebViewLoadingIndicator()
@@ -243,7 +244,7 @@ open class BrazeWebViewActivity : FragmentActivity() {
                 view: WebView,
                 detail: RenderProcessGoneDetail,
             ): Boolean {
-                brazelog(I) { "The webview rendering process crashed, returning true" }
+                brazelog(LogCategory.BRAZE, I) { "The webview rendering process crashed, returning true" }
                 hideWebViewLoadingIndicator()
 
                 // The app crashes after detecting the renderer crashed. Returning true to avoid app crash.

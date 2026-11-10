@@ -7,6 +7,7 @@ import com.braze.models.inappmessage.IInAppMessage
 import com.braze.models.inappmessage.InAppMessageHtml
 import com.braze.support.BrazeLogger.Priority.W
 import com.braze.support.BrazeLogger.brazelog
+import com.braze.support.logging.LogCategory
 import com.braze.ui.R
 import com.braze.ui.inappmessage.IInAppMessageViewFactory
 import com.braze.ui.inappmessage.jsinterface.InAppMessageJavascriptInterface
@@ -33,7 +34,7 @@ open class DefaultInAppMessageHtmlViewFactory(
                 .inflate(R.layout.com_braze_inappmessage_html, null) as InAppMessageHtmlView
         val config = BrazeInternal.getConfigurationProvider(context)
         if (config.isTouchModeRequiredForHtmlInAppMessages && isDeviceNotInTouchMode(view)) {
-            brazelog(W) {
+            brazelog(LogCategory.IN_APP_MESSAGES, W) {
                 "The device is not currently in touch mode. " +
                     "This message requires user touch interaction to display properly. Please set " +
                     "setIsTouchModeRequiredForHtmlInAppMessages to false to change this behavior."

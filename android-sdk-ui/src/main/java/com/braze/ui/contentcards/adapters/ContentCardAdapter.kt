@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.braze.models.cards.Card
 import com.braze.support.BrazeLogger.Priority.V
 import com.braze.support.BrazeLogger.brazelog
+import com.braze.support.logging.LogCategory
 import com.braze.ui.contentcards.handlers.IContentCardsViewBindingHandler
 import com.braze.ui.contentcards.managers.BrazeContentCardsManager
 import com.braze.ui.contentcards.recycler.ItemTouchHelperAdapter
@@ -65,7 +66,9 @@ open class ContentCardAdapter(
         // actually been removed. Additionally, we can only call the card action listener after the card removal
         // as per the onContentCardDismissed() specification.
         if (isInvalidIndex(position)) {
-            brazelog { "Cannot dismiss card at index: $position in cards list of size: ${cardData.size}" }
+            brazelog(LogCategory.CONTENT_CARDS) {
+                "Cannot dismiss card at index: $position in cards list of size: ${cardData.size}"
+            }
             return
         }
         val removedCard = cardData.removeAt(position)
@@ -96,7 +99,7 @@ open class ContentCardAdapter(
                 adapterPosition,
             )
         ) {
-            brazelog(V) {
+            brazelog(LogCategory.CONTENT_CARDS, V) {
                 "The card at position $adapterPosition isn't on screen or does not have a valid adapter position. Not logging impression."
             }
             return
@@ -125,7 +128,7 @@ open class ContentCardAdapter(
         if (adapterPosition == RecyclerView.NO_POSITION ||
             !isAdapterPositionOnScreen(adapterPosition)
         ) {
-            brazelog(V) {
+            brazelog(LogCategory.CONTENT_CARDS, V) {
                 "The card at position $adapterPosition isn't on screen or does not have a valid adapter position. Not marking as read."
             }
             return
@@ -164,7 +167,7 @@ open class ContentCardAdapter(
      */
     fun markOnScreenCardsAsRead() {
         if (cardData.isEmpty()) {
-            brazelog { "Card list is empty. Not marking on-screen cards as read." }
+            brazelog(LogCategory.CONTENT_CARDS) { "Card list is empty. Not marking on-screen cards as read." }
             return
         }
         val firstVisibleIndex = layoutManager.findFirstVisibleItemPosition()
@@ -173,7 +176,7 @@ open class ContentCardAdapter(
         // Either case could arise if there are no items in the adapter,
         // i.e. no cards are visible since none exist
         if (firstVisibleIndex < 0 || lastVisibleIndex < 0) {
-            brazelog {
+            brazelog(LogCategory.CONTENT_CARDS) {
                 "Not marking all on-screen cards as read. " +
                     "Either the first or last index is negative. First visible: " +
                     "$firstVisibleIndex . Last visible: $lastVisibleIndex"
@@ -210,7 +213,7 @@ open class ContentCardAdapter(
     @VisibleForTesting
     fun getCardAtIndex(index: Int): Card? {
         if (isInvalidIndex(index)) {
-            brazelog { "Cannot return card at index: $index in cards list of size: ${cardData.size}" }
+            brazelog(LogCategory.CONTENT_CARDS) { "Cannot return card at index: $index in cards list of size: ${cardData.size}" }
             return null
         }
         return cardData[index]
@@ -246,9 +249,9 @@ open class ContentCardAdapter(
         if (!impressedCardIdsInternal.contains(card.id)) {
             card.logImpression()
             impressedCardIdsInternal.add(card.id)
-            brazelog(V) { "Logged impression for card ${card.id}" }
+            brazelog(LogCategory.CONTENT_CARDS, V) { "Logged impression for card ${card.id}" }
         } else {
-            brazelog(V) { "Already counted impression for card ${card.id}" }
+            brazelog(LogCategory.CONTENT_CARDS, V) { "Already counted impression for card ${card.id}" }
         }
         if (!card.viewed) {
             card.viewed = true

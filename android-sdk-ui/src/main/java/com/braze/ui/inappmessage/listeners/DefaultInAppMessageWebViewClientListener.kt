@@ -11,6 +11,7 @@ import com.braze.support.BrazeLogger.Priority.V
 import com.braze.support.BrazeLogger.Priority.W
 import com.braze.support.BrazeLogger.brazelog
 import com.braze.support.isLocalUri
+import com.braze.support.logging.LogCategory
 import com.braze.support.toBundle
 import com.braze.ui.BrazeWebViewClient
 import com.braze.ui.inappmessage.BrazeInAppMessageManager
@@ -30,7 +31,7 @@ open class DefaultInAppMessageWebViewClientListener : IInAppMessageWebViewClient
         url: String,
         queryBundle: Bundle,
     ) {
-        brazelog { "IInAppMessageWebViewClientListener.onCloseAction called." }
+        brazelog(LogCategory.IN_APP_MESSAGES) { "IInAppMessageWebViewClientListener.onCloseAction called." }
         logHtmlInAppMessageClick(inAppMessage, queryBundle)
 
         // Dismiss the in-app message due to the close action
@@ -40,7 +41,7 @@ open class DefaultInAppMessageWebViewClientListener : IInAppMessageWebViewClient
             url,
             queryBundle,
         )
-        brazelog { "IInAppMessageWebViewClientListener.onCloseAction finished." }
+        brazelog(LogCategory.IN_APP_MESSAGES) { "IInAppMessageWebViewClientListener.onCloseAction finished." }
     }
 
     override fun onCustomEventAction(
@@ -48,9 +49,9 @@ open class DefaultInAppMessageWebViewClientListener : IInAppMessageWebViewClient
         url: String,
         queryBundle: Bundle,
     ) {
-        brazelog { "IInAppMessageWebViewClientListener.onCustomEventAction called." }
+        brazelog(LogCategory.IN_APP_MESSAGES) { "IInAppMessageWebViewClientListener.onCustomEventAction called." }
         if (inAppMessageManager.activity == null) {
-            brazelog(W) { "Can't perform custom event action because the activity is null." }
+            brazelog(LogCategory.IN_APP_MESSAGES, W) { "Can't perform custom event action because the activity is null." }
             return
         }
         val wasHandled =
@@ -81,9 +82,11 @@ open class DefaultInAppMessageWebViewClientListener : IInAppMessageWebViewClient
         url: String,
         queryBundle: Bundle,
     ) {
-        brazelog { "IInAppMessageWebViewClientListener.onOtherUrlAction called." }
+        brazelog(LogCategory.IN_APP_MESSAGES) { "IInAppMessageWebViewClientListener.onOtherUrlAction called." }
         if (inAppMessageManager.activity == null) {
-            brazelog(W) { "Can't perform other url action because the cached activity is null. Url: $url" }
+            brazelog(LogCategory.IN_APP_MESSAGES, W) {
+                "Can't perform other url action because the cached activity is null. Url: $url"
+            }
             return
         }
         // Log a click since the uri link was followed
@@ -95,7 +98,7 @@ open class DefaultInAppMessageWebViewClientListener : IInAppMessageWebViewClient
                 queryBundle,
             )
         if (wasHandled) {
-            brazelog(V) {
+            brazelog(LogCategory.IN_APP_MESSAGES, V) {
                 "HTML message action listener handled url in onOtherUrlAction. Doing nothing further. Url: $url"
             }
             return
@@ -113,14 +116,14 @@ open class DefaultInAppMessageWebViewClientListener : IInAppMessageWebViewClient
                 Channel.INAPP_MESSAGE,
             )
         if (uriAction == null) {
-            brazelog(W) { "UriAction is null. Not passing any URI to BrazeDeeplinkHandler. Url: $url" }
+            brazelog(LogCategory.IN_APP_MESSAGES, W) { "UriAction is null. Not passing any URI to BrazeDeeplinkHandler. Url: $url" }
             return
         }
 
         // If a local Uri is being handled here, then we want to keep the user in the Html in-app message and not hide the current in-app message.
         val uri = uriAction.uri
         if (uri.isLocalUri()) {
-            brazelog(W) {
+            brazelog(LogCategory.IN_APP_MESSAGES, W) {
                 "Not passing local uri to BrazeDeeplinkHandler. Got local uri: $uri for url: $url"
             }
             return

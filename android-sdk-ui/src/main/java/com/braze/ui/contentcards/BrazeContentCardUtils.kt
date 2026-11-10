@@ -6,6 +6,7 @@ import com.braze.enums.Channel
 import com.braze.models.cards.Card
 import com.braze.support.BrazeLogger.Priority.V
 import com.braze.support.BrazeLogger.brazelog
+import com.braze.support.logging.LogCategory
 import com.braze.ui.BrazeDeeplinkHandler
 import com.braze.ui.actions.UriAction
 import com.braze.ui.actions.brazeactions.containsInvalidBrazeAction
@@ -48,7 +49,7 @@ object BrazeContentCardUtils {
     fun getUriActionForCard(card: Card): UriAction? {
         val url = card.url
         if (url == null) {
-            brazelog(V) { "Card URL is null, returning null for getUriActionForCard" }
+            brazelog(LogCategory.CONTENT_CARDS, V) { "Card URL is null, returning null for getUriActionForCard" }
             return null
         }
         val extras = Bundle()
@@ -71,12 +72,12 @@ object BrazeContentCardUtils {
         card: Card,
         clickHandler: ((Card) -> Boolean)?,
     ) {
-        brazelog(V) { "Handling card click for card: $card" }
+        brazelog(LogCategory.CONTENT_CARDS, V) { "Handling card click for card: $card" }
         card.isIndicatorHighlighted = true
 
         var isCustomHandled = false
         if (clickHandler != null) {
-            brazelog { "Calling custom card click handler" }
+            brazelog(LogCategory.CONTENT_CARDS) { "Calling custom card click handler" }
             isCustomHandled = clickHandler.invoke(card)
         }
 
@@ -84,13 +85,13 @@ object BrazeContentCardUtils {
             val cardAction = getUriActionForCard(card)
             if (cardAction != null) {
                 card.logClick()
-                brazelog(V) { "Card action is non-null. Attempting to perform action on card: ${card.id}" }
+                brazelog(LogCategory.CONTENT_CARDS, V) { "Card action is non-null. Attempting to perform action on card: ${card.id}" }
                 BrazeDeeplinkHandler.getInstance().gotoUri(context, cardAction)
             } else {
-                brazelog(V) { "Card action is null. Not performing any click action on card: ${card.id}" }
+                brazelog(LogCategory.CONTENT_CARDS, V) { "Card action is null. Not performing any click action on card: ${card.id}" }
             }
         } else {
-            brazelog { "Card click was handled by custom listener on card: ${card.id}" }
+            brazelog(LogCategory.CONTENT_CARDS) { "Card click was handled by custom listener on card: ${card.id}" }
             card.logClick()
         }
     }

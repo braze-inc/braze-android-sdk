@@ -22,6 +22,7 @@ import com.braze.support.BrazeLogger.Priority.V
 import com.braze.support.BrazeLogger.brazelog
 import com.braze.support.WebContentUtils
 import com.braze.support.getAssetFileStringContents
+import com.braze.support.logging.LogCategory
 import com.braze.ui.banners.listeners.IBannerWebViewClientListener
 import com.braze.ui.inappmessage.BrazeInAppMessageManager
 import com.braze.ui.inappmessage.listeners.IInAppMessageWebViewClientListener
@@ -110,7 +111,7 @@ open class BrazeWebViewClient(
         appendBridgeJavascript(view)
         webViewClientStateListener?.let { stateListener ->
             if (hasCalledPageFinishedOnListener.compareAndSet(false, true)) {
-                brazelog(V) { "Page has finished loading. Calling onPageFinished on listener" }
+                brazelog(LogCategory.BRAZE, V) { "Page has finished loading. Calling onPageFinished on listener" }
                 stateListener.onPageFinished()
             }
         }
@@ -130,7 +131,7 @@ open class BrazeWebViewClient(
                 if (type == Type.IN_APP_MESSAGE) {
                     BrazeInAppMessageManager.getInstance().hideCurrentlyDisplayingInAppMessage(false)
                 }
-                brazelog(E, e) { "Failed to get HTML ${type.name} javascript additions" }
+                brazelog(LogCategory.BRAZE, E, e) { "Failed to get HTML ${type.name} javascript additions" }
                 return
             }
         view.loadUrl(JAVASCRIPT_PREFIX + javascriptString)
@@ -139,7 +140,7 @@ open class BrazeWebViewClient(
     private fun markPageFinished() {
         webViewClientStateListener?.let { stateListener ->
             if (hasCalledPageFinishedOnListener.compareAndSet(false, true)) {
-                brazelog(V) {
+                brazelog(LogCategory.BRAZE, V) {
                     "Page may not have finished loading, but max wait time has expired." +
                         " Calling onPageFinished on listener."
                 }
@@ -210,7 +211,7 @@ open class BrazeWebViewClient(
                 else -> null
             }
         logMessage?.let {
-            brazelog(I) { it }
+            brazelog(LogCategory.BRAZE, I) { it }
             return true
         }
         val uri = url.toUri()
@@ -219,7 +220,7 @@ open class BrazeWebViewClient(
             handleQueryAction(url, uri, queryBundle)
             return true
         } else {
-            brazelog { "Uri scheme was null or not an appboy url. Uri: $uri" }
+            brazelog(LogCategory.BRAZE) { "Uri scheme was null or not an appboy url. Uri: $uri" }
         }
         when (type) {
             Type.IN_APP_MESSAGE -> {
@@ -241,7 +242,7 @@ open class BrazeWebViewClient(
     ) {
         // Check the authority
         when (uri.authority) {
-            null -> brazelog { "Uri authority was null. Uri: $uri" }
+            null -> brazelog(LogCategory.BRAZE) { "Uri authority was null. Uri: $uri" }
             AUTHORITY_NAME_CLOSE ->
                 if (type == Type.IN_APP_MESSAGE) {
                     inAppMessage?.let {
@@ -274,7 +275,7 @@ open class BrazeWebViewClient(
         view: WebView,
         detail: RenderProcessGoneDetail,
     ): Boolean {
-        brazelog(I) { "The webview rendering process crashed, returning true" }
+        brazelog(LogCategory.BRAZE, I) { "The webview rendering process crashed, returning true" }
 
         // The app crashes after detecting the renderer crashed. Returning true to avoid app crash.
         return true

@@ -10,6 +10,7 @@ import com.braze.IBrazeDeeplinkHandler.IntentFlagPurpose
 import com.braze.enums.Channel
 import com.braze.support.BrazeLogger.Priority.E
 import com.braze.support.BrazeLogger.brazelog
+import com.braze.support.logging.LogCategory
 import com.braze.ui.actions.UriAction
 
 /**
@@ -53,11 +54,11 @@ open class BrazeDeeplinkHandler : IBrazeDeeplinkHandler {
                 val uri = url.toUri()
                 createUriActionFromUri(uri, extras, openInWebView, channel)
             } else {
-                brazelog(E) { "createUriActionFromUrlString url was null. Returning null." }
+                brazelog(LogCategory.BRAZE, E) { "createUriActionFromUrlString url was null. Returning null." }
                 null
             }
         } catch (e: Exception) {
-            brazelog(E, e) { "createUriActionFromUrlString failed. Returning null." }
+            brazelog(LogCategory.BRAZE, E, e) { "createUriActionFromUrlString failed. Returning null." }
             null
         }
 
@@ -89,7 +90,7 @@ open class BrazeDeeplinkHandler : IBrazeDeeplinkHandler {
          */
         @JvmStatic
         fun setBrazeDeeplinkHandler(brazeDeeplinkHandler: IBrazeDeeplinkHandler?) {
-            brazelog { "Custom IBrazeDeeplinkHandler ${if (brazeDeeplinkHandler == null) "cleared" else "set"}" }
+            brazelog(LogCategory.BRAZE) { "Custom IBrazeDeeplinkHandler ${if (brazeDeeplinkHandler == null) "cleared" else "set"}" }
             customHandler = brazeDeeplinkHandler
         }
     }

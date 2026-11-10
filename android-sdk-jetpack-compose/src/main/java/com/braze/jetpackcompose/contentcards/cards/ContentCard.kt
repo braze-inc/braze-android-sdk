@@ -47,6 +47,7 @@ import com.braze.models.cards.ImageOnlyCard
 import com.braze.models.cards.ShortNewsCard
 import com.braze.models.cards.TextAnnouncementCard
 import com.braze.support.BrazeLogger.brazelog
+import com.braze.support.logging.LogCategory
 import com.braze.ui.contentcards.BrazeContentCardUtils
 import java.util.Locale
 
@@ -66,8 +67,6 @@ fun ContentCard(
 ) {
     val context = LocalContext.current
 
-    val tag = "ContentCardComposable"
-
     // Track the unread with this so we can dynamically change it if needed
     var isUnread by remember { mutableStateOf(!card.isIndicatorHighlighted) }
 
@@ -81,13 +80,11 @@ fun ContentCard(
             val observer =
                 LifecycleEventObserver { _, event ->
                     if (event == Lifecycle.Event.ON_PAUSE) {
-                        brazelog(tag) { "OnPause called in ContentCardComposable" }
+                        brazelog(LogCategory.CONTENT_CARDS) { "OnPause called in ContentCardComposable" }
                         if (!card.isIndicatorHighlighted) {
                             card.isIndicatorHighlighted = true
                             isUnread = false
                         }
-                    } else {
-                        Unit
                     }
                 }
             lifecycleOwner.lifecycle.addObserver(observer)

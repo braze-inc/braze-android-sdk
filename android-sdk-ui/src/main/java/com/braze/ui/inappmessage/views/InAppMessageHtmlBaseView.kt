@@ -23,6 +23,7 @@ import com.braze.support.BrazeLogger.Priority.V
 import com.braze.support.BrazeLogger.Priority.W
 import com.braze.support.BrazeLogger.brazelog
 import com.braze.support.WebContentUtils.ASSET_LOADER_DUMMY_DOMAIN
+import com.braze.support.logging.LogCategory
 import com.braze.ui.inappmessage.BrazeInAppMessageManager
 import com.braze.ui.inappmessage.HtmlInAppMessageSafeAreaInjector
 import com.braze.ui.inappmessage.listeners.IWebViewClientStateListener
@@ -56,12 +57,12 @@ abstract class InAppMessageHtmlBaseView(
     open val messageWebView: WebView?
         get() {
             if (isFinished) {
-                brazelog(W) { "Cannot return the WebView for an already finished message" }
+                brazelog(LogCategory.IN_APP_MESSAGES, W) { "Cannot return the WebView for an already finished message" }
                 return null
             }
             val webViewViewId = getWebViewViewId()
             if (webViewViewId == 0) {
-                brazelog { "Cannot find WebView. getWebViewViewId() returned 0." }
+                brazelog(LogCategory.IN_APP_MESSAGES) { "Cannot find WebView. getWebViewViewId() returned 0." }
                 return null
             }
             if (configuredMessageWebView != null) {
@@ -69,7 +70,7 @@ abstract class InAppMessageHtmlBaseView(
             }
             val webView: WebView? = findViewById(webViewViewId)
             if (webView == null) {
-                brazelog { "findViewById for $webViewViewId returned null. Returning null for WebView." }
+                brazelog(LogCategory.IN_APP_MESSAGES) { "findViewById for $webViewViewId returned null. Returning null for WebView." }
                 return null
             }
             val webSettings = webView.settings
@@ -83,15 +84,15 @@ abstract class InAppMessageHtmlBaseView(
             val isLinkTargetSupported = BrazeConfigurationProvider(this.context).isHtmlInAppMessageHtmlLinkTargetEnabled
             if (isLinkTargetSupported) {
                 webView.settings.setSupportMultipleWindows(true)
-                brazelog(V) { "HtmlInAppMessageHtmlLinkTarget enabled" }
+                brazelog(LogCategory.IN_APP_MESSAGES, V) { "HtmlInAppMessageHtmlLinkTarget enabled" }
             } else {
-                brazelog(V) { "HtmlInAppMessageHtmlLinkTarget not enabled" }
+                brazelog(LogCategory.IN_APP_MESSAGES, V) { "HtmlInAppMessageHtmlLinkTarget not enabled" }
             }
             // Set the client for console logging. See https://developer.android.com/guide/webapps/debugging.html
             webView.webChromeClient =
                 object : WebChromeClient() {
                     override fun onConsoleMessage(cm: ConsoleMessage): Boolean {
-                        this@InAppMessageHtmlBaseView.brazelog {
+                        brazelog(LogCategory.IN_APP_MESSAGES) {
                             "Braze HTML In-app Message log. Line: " + cm.lineNumber() +
                                 ". SourceId: " + cm.sourceId() +
                                 ". Log Level: " + cm.messageLevel() +
@@ -107,14 +108,14 @@ abstract class InAppMessageHtmlBaseView(
                         resultMsg: Message?,
                     ): Boolean =
                         if (!isLinkTargetSupported) {
-                            brazelog(V) { "linkTargetSupport not enabled, passing to super.onCreateWindow()" }
+                            brazelog(LogCategory.IN_APP_MESSAGES, V) { "linkTargetSupport not enabled, passing to super.onCreateWindow()" }
                             super.onCreateWindow(view, isDialog, isUserGesture, resultMsg)
                         } else if (view == null) {
-                            brazelog(V) { "onCreateWindow webView is null, not opening link" }
+                            brazelog(LogCategory.IN_APP_MESSAGES, V) { "onCreateWindow webView is null, not opening link" }
                             false
                         } else {
                             val result = view.hitTestResult
-                            brazelog(V) { "onCreateWindow HitTestResult is $result" }
+                            brazelog(LogCategory.IN_APP_MESSAGES, V) { "onCreateWindow HitTestResult is $result" }
                             try {
                                 when (result.type) {
                                     HitTestResult.SRC_ANCHOR_TYPE -> {
@@ -136,14 +137,14 @@ abstract class InAppMessageHtmlBaseView(
                                     }
 
                                     else -> {
-                                        brazelog(V) {
+                                        brazelog(LogCategory.IN_APP_MESSAGES, V) {
                                             "onCreateWindow: hitTestResult type was ${result.type}. " +
                                                 "Not doing anything."
                                         }
                                     }
                                 }
                             } catch (e: Exception) {
-                                brazelog(E, e) { "Failed to open link in new window. $result" }
+                                brazelog(LogCategory.IN_APP_MESSAGES, E, e) { "Failed to open link in new window. $result" }
                             }
                             false
                         }
@@ -162,7 +163,7 @@ abstract class InAppMessageHtmlBaseView(
      * [messageWebView] will return null afterwards.
      */
     open fun finishWebViewDisplay() {
-        brazelog { "Finishing WebView display" }
+        brazelog(LogCategory.IN_APP_MESSAGES) { "Finishing WebView display" }
         // Note that WebView.destroy() is not called here since that
         // causes immense issues with the system's own closing of
         // the WebView after we're done with it.
@@ -198,7 +199,7 @@ abstract class InAppMessageHtmlBaseView(
                 null,
             )
         } else {
-            brazelog { "Cannot load WebView. htmlBody was null." }
+            brazelog(LogCategory.IN_APP_MESSAGES) { "Cannot load WebView. htmlBody was null." }
         }
     }
 

@@ -11,6 +11,7 @@ import androidx.core.view.WindowInsetsCompat
 import com.braze.enums.inappmessage.ImageStyle
 import com.braze.models.inappmessage.IInAppMessageImmersive
 import com.braze.support.BrazeLogger.brazelog
+import com.braze.support.logging.LogCategory
 import com.braze.ui.R
 import com.braze.ui.inappmessage.config.BrazeInAppMessageParams.modalizedImageRadiusDp
 import com.braze.ui.inappmessage.utils.InAppMessageViewUtils.setViewBackgroundColor
@@ -140,7 +141,7 @@ open class InAppMessageFullView(
             // dismisses the in-app message.
             val scrollViewChild = findViewById<View>(R.id.com_braze_inappmessage_full_text_layout)
             scrollViewChild.setOnClickListener {
-                brazelog { "Passing scrollView click event to message clickable view." }
+                brazelog(LogCategory.IN_APP_MESSAGES) { "Passing scrollView click event to message clickable view." }
                 msgClickableView.performClick()
             }
         }
@@ -213,7 +214,7 @@ open class InAppMessageFullView(
         closeButtonView: View,
     ) {
         if (closeButtonView.layoutParams == null || closeButtonView.layoutParams !is MarginLayoutParams) {
-            brazelog {
+            brazelog(LogCategory.IN_APP_MESSAGES) {
                 "Close button layout params are null or not of the expected class. Not applying window insets."
             }
             return
@@ -231,7 +232,7 @@ open class InAppMessageFullView(
         contentAreaView: View,
     ) {
         if (contentAreaView.layoutParams !is MarginLayoutParams) {
-            brazelog {
+            brazelog(LogCategory.IN_APP_MESSAGES) {
                 "Content area layout params are null or not of the expected class. Not applying window insets."
             }
             return

@@ -15,6 +15,7 @@ import com.braze.models.outgoing.BrazeLocation
 import com.braze.support.BrazeLogger.Priority.E
 import com.braze.support.BrazeLogger.Priority.W
 import com.braze.support.BrazeLogger.brazelog
+import com.braze.support.logging.LogCategory
 import com.google.android.gms.location.Geofence
 import com.google.android.gms.location.GeofencingEvent
 import kotlinx.coroutines.DelicateCoroutinesApi
@@ -34,10 +35,10 @@ class BrazeActionReceiver : BroadcastReceiver() {
         intent: Intent?,
     ) {
         if (intent == null) {
-            brazelog(W) { "BrazeActionReceiver received null intent. Doing nothing." }
+            brazelog(LogCategory.LOCATION, W) { "BrazeActionReceiver received null intent. Doing nothing." }
             return
         } else if (context == null) {
-            brazelog(W) { "BrazeActionReceiver received null context. Doing nothing." }
+            brazelog(LogCategory.LOCATION, W) { "BrazeActionReceiver received null context. Doing nothing." }
             return
         }
         val applicationContext = context.applicationContext
@@ -65,7 +66,7 @@ class BrazeActionReceiver : BroadcastReceiver() {
                 performWork()
             } catch (e: Exception) {
                 // If the action receiver encounters an error, we still have to mark the broadcast receiver's work as finished.
-                brazelog(E, e) {
+                brazelog(LogCategory.LOCATION, E, e) {
                     "Caught exception while performing the BrazeActionReceiver work. Action: $action Intent: $intent"
                 }
             }
@@ -78,17 +79,17 @@ class BrazeActionReceiver : BroadcastReceiver() {
          */
         @VisibleForTesting
         fun performWork() {
-            brazelog { "Received intent with action $action" }
+            brazelog(LogCategory.LOCATION) { "Received intent with action $action" }
             when (action) {
                 null -> {
-                    brazelog { "Received intent with null action. Doing nothing." }
+                    brazelog(LogCategory.LOCATION) { "Received intent with null action. Doing nothing." }
                 }
                 Constants.BRAZE_ACTION_RECEIVER_GEOFENCE_UPDATE_INTENT_ACTION -> {
-                    brazelog { "BrazeActionReceiver received intent with geofence transition: $action" }
+                    brazelog(LogCategory.LOCATION) { "BrazeActionReceiver received intent with geofence transition: $action" }
                     GeofencingEvent.fromIntent(intent)?.let { handleGeofenceEvent(applicationContext, it) }
                 }
                 Constants.BRAZE_ACTION_RECEIVER_SINGLE_LOCATION_UPDATE_INTENT_ACTION -> {
-                    brazelog { "BrazeActionReceiver received intent with single location update: $action" }
+                    brazelog(LogCategory.LOCATION) { "BrazeActionReceiver received intent with single location update: $action" }
                     val location =
                         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
                             intent.extras?.getParcelable(LocationManager.KEY_LOCATION_CHANGED, Location::class.java)
@@ -99,7 +100,7 @@ class BrazeActionReceiver : BroadcastReceiver() {
                     location?.let { handleSingleLocationUpdate(applicationContext, it) }
                 }
                 else -> {
-                    brazelog(W) { "Unknown intent received in BrazeActionReceiver with action: $action" }
+                    brazelog(LogCategory.LOCATION, W) { "Unknown intent received in BrazeActionReceiver with action: $action" }
                 }
             }
         }
@@ -112,7 +113,7 @@ class BrazeActionReceiver : BroadcastReceiver() {
                 try {
                     BrazeInternal.logLocationRecordedEvent(applicationContext, BrazeLocation(location))
                 } catch (e: Exception) {
-                    brazelog(E, e) { "Exception while processing single location update" }
+                    brazelog(LogCategory.LOCATION, E, e) { "Exception while processing single location update" }
                     return false
                 }
                 return true
@@ -132,7 +133,7 @@ class BrazeActionReceiver : BroadcastReceiver() {
             ): Boolean {
                 if (geofenceEvent.hasError()) {
                     val errorCode = geofenceEvent.errorCode
-                    brazelog(W) { "Location Services error: $errorCode" }
+                    brazelog(LogCategory.LOCATION, W) { "Location Services error: $errorCode" }
                     return false
                 }
 
@@ -160,7 +161,7 @@ class BrazeActionReceiver : BroadcastReceiver() {
                         true
                     }
                     else -> {
-                        brazelog(W) { "Unsupported transition type received: $transitionType" }
+                        brazelog(LogCategory.LOCATION, W) { "Unsupported transition type received: $transitionType" }
                         false
                     }
                 }

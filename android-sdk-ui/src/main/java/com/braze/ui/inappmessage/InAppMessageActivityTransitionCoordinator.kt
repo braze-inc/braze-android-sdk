@@ -6,8 +6,10 @@ import com.braze.models.inappmessage.IInAppMessage
 import com.braze.support.BrazeLogger.Priority.V
 import com.braze.support.BrazeLogger.Priority.W
 import com.braze.support.BrazeLogger.brazelog
+import com.braze.support.logging.LogCategory
 import com.braze.ui.inappmessage.views.InAppMessageHtmlBaseView
 import com.braze.ui.support.removeViewFromParent
+import com.braze.ui.support.removeViewFromParentAfterCancelingAnimation
 
 /**
  * Coordinates in-app message state across Activity [BrazeInAppMessageManager.registerInAppMessageManager]
@@ -29,9 +31,11 @@ internal class InAppMessageActivityTransitionCoordinator {
 
     fun logUnregisterActivity(activity: Activity?) {
         if (activity == null) {
-            brazelog(W) { "Null Activity passed to unregisterInAppMessageManager." }
+            brazelog(LogCategory.IN_APP_MESSAGES, W) { "Null Activity passed to unregisterInAppMessageManager." }
         } else {
-            brazelog(V) { "Unregistering InAppMessageManager from activity: ${activity.localClassName}" }
+            brazelog(LogCategory.IN_APP_MESSAGES, V) {
+                "Unregistering InAppMessageManager from activity: ${activity.localClassName}"
+            }
         }
     }
 
@@ -51,7 +55,7 @@ internal class InAppMessageActivityTransitionCoordinator {
         }
         val inAppMessageView = viewWrapper.inAppMessageView
         if (inAppMessageView is InAppMessageHtmlBaseView) {
-            brazelog { "In-app message view includes HTML. Removing the page finished listener." }
+            brazelog(LogCategory.IN_APP_MESSAGES) { "In-app message view includes HTML. Removing the page finished listener." }
             inAppMessageView.setHtmlPageFinishedListener(null)
         }
         val carryoverInAppMessage =
@@ -81,7 +85,10 @@ internal class InAppMessageActivityTransitionCoordinator {
         resetAfterClose: (IInAppMessageViewWrapper) -> Boolean,
         notifyAfterClosed: (IInAppMessage) -> Unit,
     ) {
-        inAppMessageView.removeViewFromParent()
+        // The canceled closing animation can no longer run its end callback, which is where the
+        // WebView of an HTML in-app message is normally finished.
+        inAppMessageView.removeViewFromParentAfterCancelingAnimation()
+        (inAppMessageView as? InAppMessageHtmlBaseView)?.finishWebViewDisplay()
         if (resetAfterClose(viewWrapper)) {
             notifyAfterClosed(viewWrapper.inAppMessage)
         }

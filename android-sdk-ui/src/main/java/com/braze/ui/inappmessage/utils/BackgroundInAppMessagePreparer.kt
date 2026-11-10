@@ -19,6 +19,7 @@ import com.braze.support.BrazeLogger.brazelog
 import com.braze.support.WebContentUtils.getHtmlInAppMessageAssetCacheDirectory
 import com.braze.support.WebContentUtils.getLocalHtmlUrlFromRemoteUrl
 import com.braze.support.WebContentUtils.replacePrefetchedUrlsWithLocalAssets
+import com.braze.support.logging.LogCategory
 import com.braze.ui.inappmessage.BrazeInAppMessageManager
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -35,31 +36,34 @@ object BackgroundInAppMessagePreparer {
             try {
                 val preparedInAppMessage = prepareInAppMessage(inAppMessageToPrepare)
                 if (preparedInAppMessage == null) {
-                    brazelog(W) {
+                    brazelog(LogCategory.IN_APP_MESSAGES, W) {
                         "Cannot display the in-app message because the in-app message was null."
                     }
                 } else {
                     displayPreparedInAppMessage(preparedInAppMessage)
                 }
             } catch (e: Exception) {
-                brazelog(E, e) { "Caught error while preparing in app message in background" }
+                brazelog(LogCategory.IN_APP_MESSAGES, E, e) { "Caught error while preparing in app message in background" }
             }
         }
     }
 
     private fun prepareInAppMessage(inAppMessageToPrepare: IInAppMessage): IInAppMessage? {
         if (inAppMessageToPrepare.isControl) {
-            brazelog { "Skipping in-app message preparation for control in-app message." }
+            brazelog(LogCategory.IN_APP_MESSAGES) { "Skipping in-app message preparation for control in-app message." }
             return inAppMessageToPrepare
         }
-        brazelog { "Starting asynchronous in-app message preparation for message." }
+        brazelog(LogCategory.IN_APP_MESSAGES) { "Starting asynchronous in-app message preparation for message." }
         when (inAppMessageToPrepare.messageType) {
             MessageType.HTML_FULL ->
                 if (!prepareInAppMessageWithZippedAssetHtml(
                         inAppMessageToPrepare as IInAppMessageZippedAssetHtml,
                     )
                 ) {
-                    brazelog(W) { "Html in-app message zip asset download failed. Cannot display in-app message." }
+                    brazelog(
+                        LogCategory.IN_APP_MESSAGES,
+                        W,
+                    ) { "Html in-app message zip asset download failed. Cannot display in-app message." }
                     return null
                 }
             MessageType.HTML -> prepareInAppMessageWithHtml(inAppMessageToPrepare as InAppMessageHtml)
@@ -67,7 +71,7 @@ object BackgroundInAppMessagePreparer {
                 val didImageDownloadSucceed =
                     prepareInAppMessageWithBitmapDownload(inAppMessageToPrepare)
                 if (!didImageDownloadSucceed) {
-                    brazelog(W) { "In-app message image download failed. Cannot display in-app message." }
+                    brazelog(LogCategory.IN_APP_MESSAGES, W) { "In-app message image download failed. Cannot display in-app message." }
                     return null
                 }
             }
@@ -87,7 +91,7 @@ object BackgroundInAppMessagePreparer {
         // If the local assets exist already, return right away.
         val localAssets = inAppMessageHtml.localAssetsDirectoryUrl
         if (!localAssets.isNullOrBlank() && File(localAssets).exists()) {
-            brazelog(I) {
+            brazelog(LogCategory.IN_APP_MESSAGES, I) {
                 "Local assets for html in-app message are already populated. " +
                     "Not downloading assets. Location = $localAssets"
             }
@@ -97,7 +101,7 @@ object BackgroundInAppMessagePreparer {
         val assetsZipRemoteUrl = inAppMessageHtml.assetsZipRemoteUrl
         // Otherwise, return if no remote asset zip location is specified.
         if (assetsZipRemoteUrl.isNullOrBlank()) {
-            brazelog(I) {
+            brazelog(LogCategory.IN_APP_MESSAGES, I) {
                 "Html in-app message has no remote asset zip. " +
                     "Continuing with in-app message preparation."
             }
@@ -106,7 +110,9 @@ object BackgroundInAppMessagePreparer {
         // Otherwise, download the asset zip.
         val applicationContext = BrazeInAppMessageManager.getInstance().applicationContext
         if (applicationContext == null) {
-            brazelog(W) { "BrazeInAppMessageManager applicationContext is null. Not downloading image." }
+            brazelog(LogCategory.IN_APP_MESSAGES, W) {
+                "BrazeInAppMessageManager applicationContext is null. Not downloading image."
+            }
             return false
         }
 
@@ -118,11 +124,11 @@ object BackgroundInAppMessagePreparer {
                 assetsZipRemoteUrl,
             )
         return if (!localWebContentUrl.isNullOrBlank()) {
-            brazelog { "Local url for html in-app message assets is $localWebContentUrl" }
+            brazelog(LogCategory.IN_APP_MESSAGES) { "Local url for html in-app message assets is $localWebContentUrl" }
             inAppMessageHtml.localAssetsDirectoryUrl = localWebContentUrl
             true
         } else {
-            brazelog(W) {
+            brazelog(LogCategory.IN_APP_MESSAGES, W) {
                 "Download of html content to local directory failed for remote url: " +
                     "${inAppMessageHtml.assetsZipRemoteUrl} . Returned local url is: $localWebContentUrl"
             }
@@ -142,19 +148,23 @@ object BackgroundInAppMessagePreparer {
     @Suppress("ReturnCount")
     fun prepareInAppMessageWithBitmapDownload(inAppMessage: IInAppMessage?): Boolean {
         if (inAppMessage !is IInAppMessageWithImage) {
-            brazelog { "Cannot prepare non IInAppMessageWithImage object with bitmap download." }
+            brazelog(LogCategory.IN_APP_MESSAGES) { "Cannot prepare non IInAppMessageWithImage object with bitmap download." }
             return false
         }
         val inAppMessageWithImage = inAppMessage as IInAppMessageWithImage
         if (inAppMessageWithImage.bitmap != null) {
-            brazelog(I) { "In-app message already contains image bitmap. Not downloading image from URL." }
+            brazelog(LogCategory.IN_APP_MESSAGES, I) {
+                "In-app message already contains image bitmap. Not downloading image from URL."
+            }
             inAppMessageWithImage.imageDownloadSuccessful = true
             return true
         }
         val viewBounds = getViewBoundsByType(inAppMessage)
         val applicationContext = BrazeInAppMessageManager.getInstance().applicationContext
         if (applicationContext == null) {
-            brazelog(W) { "BrazeInAppMessageManager applicationContext is null. Not downloading image." }
+            brazelog(LogCategory.IN_APP_MESSAGES, W) {
+                "BrazeInAppMessageManager applicationContext is null. Not downloading image."
+            }
             return false
         }
 
@@ -178,7 +188,9 @@ object BackgroundInAppMessagePreparer {
         // Try to load the remote url next
         val remoteImageUrl = inAppMessageWithImage.remoteImageUrl
         if (!remoteImageUrl.isNullOrBlank()) {
-            brazelog(I) { "In-app message has remote image url. Downloading image at url: $remoteImageUrl" }
+            brazelog(LogCategory.IN_APP_MESSAGES, I) {
+                "In-app message has remote image url. Downloading image at url: $remoteImageUrl"
+            }
             inAppMessageWithImage.bitmap =
                 imageLoader.getInAppMessageBitmapFromUrl(
                     applicationContext,
@@ -187,21 +199,30 @@ object BackgroundInAppMessagePreparer {
                     viewBounds,
                 )
         } else {
-            brazelog(W) { "In-app message has no remote image url. Not downloading image." }
-            if (inAppMessageWithImage is InAppMessageFull) {
-                brazelog(W) {
-                    "In-app message full has no remote image url yet is required to have an image. " +
-                        "Failing message display."
-                }
-                return false
-            }
-            return true
+            return canDisplayWithoutRemoteImageUrl(inAppMessageWithImage)
         }
         if (inAppMessageWithImage.bitmap != null) {
             inAppMessageWithImage.imageDownloadSuccessful = true
             return true
         }
         return false
+    }
+
+    /**
+     * Logs that the in-app message has no remote image URL.
+     *
+     * @return `false` if the message requires an image and must fail display, otherwise `true`.
+     */
+    private fun canDisplayWithoutRemoteImageUrl(inAppMessageWithImage: IInAppMessageWithImage): Boolean {
+        brazelog(LogCategory.IN_APP_MESSAGES, W) { "In-app message has no remote image url. Not downloading image." }
+        if (inAppMessageWithImage is InAppMessageFull) {
+            brazelog(LogCategory.IN_APP_MESSAGES, W) {
+                "In-app message full has no remote image url yet is required to have an image. " +
+                    "Failing message display."
+            }
+            return false
+        }
+        return true
     }
 
     /**
@@ -218,7 +239,7 @@ object BackgroundInAppMessagePreparer {
         inAppMessage: IInAppMessage,
         viewBounds: BrazeViewBounds,
     ): Boolean {
-        brazelog(I) { "Passing in-app message local image url to image loader: $localImageUrl" }
+        brazelog(LogCategory.IN_APP_MESSAGES, I) { "Passing in-app message local image url to image loader: $localImageUrl" }
         inAppMessageWithImage.bitmap =
             imageLoader.getInAppMessageBitmapFromUrl(
                 applicationContext,
@@ -232,7 +253,7 @@ object BackgroundInAppMessagePreparer {
             return true
         }
         // The local uri didn't work, unset it from the IAM
-        brazelog {
+        brazelog(LogCategory.IN_APP_MESSAGES) {
             "Removing local image url from IAM since it could not be loaded. URL: $localImageUrl"
         }
         inAppMessageWithImage.localImageUrl = null
@@ -246,7 +267,7 @@ object BackgroundInAppMessagePreparer {
     @VisibleForTesting
     fun prepareInAppMessageWithHtml(inAppMessage: InAppMessageHtml) {
         if (inAppMessage.getLocalPrefetchedAssetPaths().isEmpty()) {
-            brazelog {
+            brazelog(LogCategory.IN_APP_MESSAGES) {
                 "HTML in-app message does not have prefetched assets. " +
                     "Not performing any substitutions."
             }
@@ -254,7 +275,7 @@ object BackgroundInAppMessagePreparer {
         }
         val message = inAppMessage.message
         if (message == null) {
-            brazelog {
+            brazelog(LogCategory.IN_APP_MESSAGES) {
                 "HTML in-app message does not have message. Not performing any substitutions."
             }
             return
@@ -276,7 +297,7 @@ object BackgroundInAppMessagePreparer {
 
     private suspend fun displayPreparedInAppMessage(inAppMessage: IInAppMessage) {
         withContext(Dispatchers.Main) {
-            this@BackgroundInAppMessagePreparer.brazelog { "Displaying in-app message." }
+            brazelog(LogCategory.IN_APP_MESSAGES) { "Displaying in-app message." }
             BrazeInAppMessageManager.getInstance().displayInAppMessage(inAppMessage, false)
         }
     }

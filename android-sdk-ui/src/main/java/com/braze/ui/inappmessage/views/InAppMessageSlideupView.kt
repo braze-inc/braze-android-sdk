@@ -11,6 +11,7 @@ import androidx.core.view.WindowInsetsCompat
 import com.braze.enums.inappmessage.ClickAction
 import com.braze.models.inappmessage.IInAppMessage
 import com.braze.support.BrazeLogger.brazelog
+import com.braze.support.logging.LogCategory
 import com.braze.ui.R
 import com.braze.ui.inappmessage.utils.InAppMessageViewUtils.setViewBackgroundColorFilter
 import com.braze.ui.support.MarginBaseline
@@ -89,7 +90,9 @@ open class InAppMessageSlideupView(
     override fun applyWindowInsets(insets: WindowInsetsCompat) {
         super.applyWindowInsets(insets)
         if (layoutParams == null || layoutParams !is MarginLayoutParams) {
-            brazelog { "Close button view is null or not of the expected class. Not applying window insets." }
+            brazelog(LogCategory.IN_APP_MESSAGES) {
+                "Close button view is null or not of the expected class. Not applying window insets."
+            }
             return
         }
 

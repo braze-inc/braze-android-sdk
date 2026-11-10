@@ -3,12 +3,10 @@ package com.braze.ui.actions.brazeactions.steps
 import android.content.Context
 import com.braze.Braze
 import com.braze.enums.NotificationSubscriptionType
-import com.braze.support.BrazeLogger.brazeLogTag
 import com.braze.support.BrazeLogger.brazelog
+import com.braze.support.logging.LogCategory
 
 internal object SetPushNotificationSubscriptionStep : BaseBrazeActionStep() {
-    val TAG = SetPushNotificationSubscriptionStep.brazeLogTag()
-
     override fun isValid(data: StepData): Boolean =
         data.run {
             isArgCountInBounds(fixedArgCount = 1) &&
@@ -21,7 +19,7 @@ internal object SetPushNotificationSubscriptionStep : BaseBrazeActionStep() {
     ) {
         val subscriptionType = NotificationSubscriptionType.fromValue(data.firstArg.toString())
         if (subscriptionType == null) {
-            brazelog { "Could not parse subscription type from data $data" }
+            brazelog(LogCategory.BRAZE) { "Could not parse subscription type from data $data" }
             return
         }
         Braze.getInstance(context).runOnUser {
